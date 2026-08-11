@@ -78,6 +78,9 @@ dependencies {
   ksp libs.hilt.compiler
 
   testImplementation libs.junit
+  testImplementation libs.truth
+  testImplementation libs.mockwebserver
+  testImplementation libs.coroutinesTest
 
   coreLibraryDesugaring libs.android.desugar
 }

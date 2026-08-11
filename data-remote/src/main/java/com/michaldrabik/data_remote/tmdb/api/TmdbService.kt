@@ -1,12 +1,19 @@
 package com.michaldrabik.data_remote.tmdb.api
 
+import com.michaldrabik.data_remote.tmdb.model.TmdbFindResult
 import com.michaldrabik.data_remote.tmdb.model.TmdbImages
+import com.michaldrabik.data_remote.tmdb.model.TmdbMovie
+import com.michaldrabik.data_remote.tmdb.model.TmdbPage
 import com.michaldrabik.data_remote.tmdb.model.TmdbPeople
 import com.michaldrabik.data_remote.tmdb.model.TmdbPerson
+import com.michaldrabik.data_remote.tmdb.model.TmdbSearchItem
+import com.michaldrabik.data_remote.tmdb.model.TmdbSeason
+import com.michaldrabik.data_remote.tmdb.model.TmdbShow
 import com.michaldrabik.data_remote.tmdb.model.TmdbStreamings
 import com.michaldrabik.data_remote.tmdb.model.TmdbTranslationResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface TmdbService {
 
@@ -61,4 +68,84 @@ interface TmdbService {
   suspend fun fetchShowWatchProviders(
     @Path("tmdbId") tmdbId: Long,
   ): TmdbStreamings
+
+  // Catalog endpoints, replacing the Trakt equivalents.
+
+  @GET("tv/{tmdbId}?append_to_response=external_ids,content_ratings,videos")
+  suspend fun fetchShow(
+    @Path("tmdbId") tmdbId: Long,
+    @Query("language") language: String? = null,
+  ): TmdbShow
+
+  @GET("movie/{tmdbId}?append_to_response=external_ids,release_dates,videos")
+  suspend fun fetchMovie(
+    @Path("tmdbId") tmdbId: Long,
+    @Query("language") language: String? = null,
+  ): TmdbMovie
+
+  @GET("tv/{tmdbId}/season/{seasonNumber}")
+  suspend fun fetchSeason(
+    @Path("tmdbId") tmdbId: Long,
+    @Path("seasonNumber") seasonNumber: Int,
+  ): TmdbSeason
+
+  @GET("trending/tv/week")
+  suspend fun fetchTrendingShows(
+    @Query("page") page: Int,
+  ): TmdbPage<TmdbShow>
+
+  @GET("trending/movie/week")
+  suspend fun fetchTrendingMovies(
+    @Query("page") page: Int,
+  ): TmdbPage<TmdbMovie>
+
+  @GET("tv/popular")
+  suspend fun fetchPopularShows(
+    @Query("page") page: Int,
+  ): TmdbPage<TmdbShow>
+
+  @GET("movie/popular")
+  suspend fun fetchPopularMovies(
+    @Query("page") page: Int,
+  ): TmdbPage<TmdbMovie>
+
+  /**
+   * Trakt's "anticipated" list has no direct equivalent, so it is approximated
+   * with unreleased titles ordered by popularity.
+   */
+  @GET("discover/tv?sort_by=popularity.desc")
+  suspend fun fetchAnticipatedShows(
+    @Query("first_air_date.gte") fromDate: String,
+    @Query("page") page: Int,
+  ): TmdbPage<TmdbShow>
+
+  @GET("discover/movie?sort_by=popularity.desc")
+  suspend fun fetchAnticipatedMovies(
+    @Query("primary_release_date.gte") fromDate: String,
+    @Query("page") page: Int,
+  ): TmdbPage<TmdbMovie>
+
+  @GET("tv/{tmdbId}/recommendations")
+  suspend fun fetchRelatedShows(
+    @Path("tmdbId") tmdbId: Long,
+    @Query("page") page: Int,
+  ): TmdbPage<TmdbShow>
+
+  @GET("movie/{tmdbId}/recommendations")
+  suspend fun fetchRelatedMovies(
+    @Path("tmdbId") tmdbId: Long,
+    @Query("page") page: Int,
+  ): TmdbPage<TmdbMovie>
+
+  @GET("search/multi")
+  suspend fun fetchSearchResults(
+    @Query("query") query: String,
+    @Query("page") page: Int,
+  ): TmdbPage<TmdbSearchItem>
+
+  @GET("find/{externalId}")
+  suspend fun fetchByExternalId(
+    @Path("externalId") externalId: String,
+    @Query("external_source") source: String,
+  ): TmdbFindResult
 }

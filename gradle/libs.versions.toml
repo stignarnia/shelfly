@@ -88,6 +88,7 @@ overscrollDecor = { group = "io.github.everythingme", name = "overscroll-decor-a
 # Testing
 junit = { group = "org.junit.vintage", name = "junit-vintage-engine", version.ref = "junit" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "logging-interceptor" }
 truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 coroutinesTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
 android-test-core = { group = "androidx.arch.core", name = "core-testing", version.ref = "core-testing" }
