@@ -28,4 +28,7 @@
 
   <string name="textUpdateDownloaded" translatable="false">Update is now available.</string>
   <string name="textUpdateInstall" translatable="false">Install</string>
+
+  <string name="textOnboardingApiKeyTitle">TMDB API key required</string>
+  <string name="textOnboardingApiKeyMessage">This app uses your own TMDB key, so no key is shipped inside it and your usage is not shared with anyone else.\n\nCreate a free account at themoviedb.org, then copy the API key (v3 auth) from Settings → API and paste it below. You can change it later in Settings.</string>
 </resources>

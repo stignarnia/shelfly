@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color.TRANSPARENT
 import android.os.Bundle
+import android.text.InputType
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.view.animation.DecelerateInterpolator
+import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.activity.SystemBarStyle
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
@@ -26,6 +29,7 @@ import com.michaldrabik.common.Config
 import com.michaldrabik.common.Mode
 import com.michaldrabik.common.Mode.MOVIES
 import com.michaldrabik.common.Mode.SHOWS
+import com.michaldrabik.data_remote.apikey.ApiKeyProvider
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.showly2.R
 import com.michaldrabik.showly2.databinding.ActivityMainBinding
@@ -89,6 +93,7 @@ class MainActivity :
   private val navigationPadding by lazy { dimenToPx(R.dimen.spaceMedium) }
   private val decelerateInterpolator by lazy { DecelerateInterpolator(2F) }
 
+  @Inject lateinit var apiKeyProvider: ApiKeyProvider
   @Inject lateinit var workManager: WorkManager
   @Inject lateinit var eventsManager: EventsManager
   @Inject lateinit var deepLinkResolver: DeepLinkResolver
@@ -114,6 +119,45 @@ class MainActivity :
 
     restoreState(savedInstanceState)
     onNewIntent(intent)
+
+    showApiKeyDialogIfNeeded()
+  }
+
+  /**
+   * Without a TMDB key there is no catalog at all, so this blocks on first run
+   * until one is entered. The key can be changed later in Settings.
+   */
+  private fun showApiKeyDialogIfNeeded() {
+    if (apiKeyProvider.hasTmdbApiKey()) {
+      return
+    }
+
+    val input = EditText(this).apply {
+      inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+      setSingleLine()
+    }
+    val padding = resources.getDimensionPixelSize(R.dimen.spaceNormal)
+    val container = FrameLayout(this).apply {
+      setPadding(padding, padding / 2, padding, 0)
+      addView(input)
+    }
+
+    MaterialAlertDialogBuilder(this, R.style.AlertDialog)
+      .setCancelable(false)
+      .setTitle(R.string.textOnboardingApiKeyTitle)
+      .setMessage(R.string.textOnboardingApiKeyMessage)
+      .setView(container)
+      .setPositiveButton(R.string.textOk) { _, _ ->
+        val key = input.text
+          ?.toString()
+          .orEmpty()
+          .trim()
+        if (key.isBlank()) {
+          showApiKeyDialogIfNeeded()
+        } else {
+          apiKeyProvider.setTmdbApiKey(key)
+        }
+      }.show()
   }
 
   override fun onStart() {

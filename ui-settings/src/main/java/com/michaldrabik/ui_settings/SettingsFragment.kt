@@ -17,6 +17,7 @@ import com.michaldrabik.ui_base.utilities.viewBinding
 import com.michaldrabik.ui_settings.databinding.FragmentSettingsBinding
 import com.michaldrabik.ui_settings.sections.spoilers.SettingsSpoilersFragment
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter
+import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.API_KEYS
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.BACKUP
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.GENERAL
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.MISC
@@ -93,6 +94,7 @@ class SettingsFragment :
 
   private fun renderFiltered(filter: SettingsFilter?) {
     with(binding) {
+      settingsCategoryApiKeys.visibleIf(filter == API_KEYS || filter == null)
       settingsCategoryTrakt.visibleIf(filter == TRAKT || filter == null)
       settingsCategoryGeneral.visibleIf(filter == GENERAL || filter == null)
       settingsCategoryNotifications.visibleIf(filter == NOTIFICATIONS || filter == null)

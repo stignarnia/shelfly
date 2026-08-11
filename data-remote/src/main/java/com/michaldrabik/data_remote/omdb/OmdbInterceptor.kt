@@ -1,16 +1,19 @@
 package com.michaldrabik.data_remote.omdb
 
-import com.michaldrabik.data_remote.Config
+import com.michaldrabik.data_remote.apikey.ApiKeyProvider
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class OmdbInterceptor : Interceptor {
+class OmdbInterceptor(
+  private val apiKeyProvider: ApiKeyProvider,
+) : Interceptor {
+
   override fun intercept(chain: Interceptor.Chain): Response {
     val url = chain
       .request()
       .url
       .newBuilder()
-      .addQueryParameter("apikey", Config.OMDB_API_KEY)
+      .addQueryParameter("apikey", apiKeyProvider.getOmdbApiKey())
       .addQueryParameter("tomatoes", "true")
       .build()
     val request = chain

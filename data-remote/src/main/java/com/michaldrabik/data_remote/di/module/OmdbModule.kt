@@ -1,5 +1,6 @@
 package com.michaldrabik.data_remote.di.module
 
+import com.michaldrabik.data_remote.apikey.ApiKeyProvider
 import com.michaldrabik.data_remote.omdb.OmdbInterceptor
 import com.michaldrabik.data_remote.omdb.OmdbRemoteDataSource
 import com.michaldrabik.data_remote.omdb.api.OmdbApi
@@ -24,5 +25,5 @@ object OmdbModule {
 
   @Provides
   @Singleton
-  fun providesOmdbInterceptor() = OmdbInterceptor()
+  fun providesOmdbInterceptor(apiKeyProvider: ApiKeyProvider) = OmdbInterceptor(apiKeyProvider)
 }

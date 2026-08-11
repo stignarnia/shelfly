@@ -82,6 +82,17 @@ class PreferencesModule {
 
   @Provides
   @Singleton
+  @Named("apiKeyPreferences")
+  fun providesApiKeyPreferences(
+    @ApplicationContext context: Context,
+  ): SharedPreferences =
+    context.applicationContext.getSharedPreferences(
+      "PREFERENCES_API_KEYS",
+      Context.MODE_PRIVATE,
+    )
+
+  @Provides
+  @Singleton
   @Named("syncPreferences")
   fun providesSyncPreferences(
     @ApplicationContext context: Context,

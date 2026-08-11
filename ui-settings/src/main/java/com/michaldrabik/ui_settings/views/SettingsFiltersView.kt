@@ -10,6 +10,7 @@ import androidx.core.view.children
 import com.google.android.material.chip.Chip
 import com.michaldrabik.ui_base.utilities.extensions.onClick
 import com.michaldrabik.ui_settings.databinding.ViewSettingsFiltersBinding
+import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.API_KEYS
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.BACKUP
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.GENERAL
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.MISC
@@ -36,6 +37,10 @@ class SettingsFiltersView : FrameLayout {
 
   private fun initView() {
     with(binding) {
+      apiKeysChip.onClick(safe = false) {
+        selectedFilter = if (selectedFilter == API_KEYS) null else API_KEYS
+        onFilterClick?.invoke(selectedFilter)
+      }
       traktChip.onClick(safe = false) {
         selectedFilter = if (selectedFilter == TRAKT) null else TRAKT
         onFilterClick?.invoke(selectedFilter)
@@ -79,6 +84,7 @@ class SettingsFiltersView : FrameLayout {
   }
 
   enum class SettingsFilter {
+    API_KEYS,
     TRAKT,
     GENERAL,
     NOTIFICATIONS,

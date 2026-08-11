@@ -57,11 +57,25 @@
       android:clipToPadding="false"
       android:paddingStart="@dimen/spaceNormal"
       android:paddingEnd="@dimen/spaceNormal"
-      app:layout_constraintBottom_toTopOf="@id/settingsCategoryTrakt"
+      app:layout_constraintBottom_toTopOf="@id/settingsCategoryApiKeys"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsPremium"
       app:layout_goneMarginTop="0dp"
+      />
+
+    <androidx.fragment.app.FragmentContainerView
+      android:id="@+id/settingsCategoryApiKeys"
+      android:name="com.michaldrabik.ui_settings.sections.apikeys.SettingsApiKeysFragment"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/spaceTiny"
+      app:layout_constraintBottom_toTopOf="@id/settingsCategoryTrakt"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsFilters"
+      app:layout_goneMarginTop="0dp"
+      tools:layout="@layout/fragment_settings_api_keys"
       />
 
     <androidx.fragment.app.FragmentContainerView
@@ -73,7 +87,7 @@
       app:layout_constraintBottom_toTopOf="@id/settingsCategoryGeneral"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/settingsFilters"
+      app:layout_constraintTop_toBottomOf="@id/settingsCategoryApiKeys"
       app:layout_goneMarginTop="0dp"
       tools:layout="@layout/fragment_settings_trakt"
       />

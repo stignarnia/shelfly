@@ -25,6 +25,13 @@
       >
 
       <com.google.android.material.chip.Chip
+        android:id="@+id/apiKeysChip"
+        style="@style/ShowlyChip.Filter"
+        android:checkable="true"
+        android:text="@string/textSettingsApiKeys"
+        />
+
+      <com.google.android.material.chip.Chip
         android:id="@+id/traktChip"
         style="@style/ShowlyChip.Filter"
         android:checkable="true"
