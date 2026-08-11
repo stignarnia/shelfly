@@ -40,15 +40,22 @@ android {
   }
 
   signingConfigs {
+    // Both files are gitignored, so a fresh clone has neither. Only declare the
+    // release signing config when they are actually present - otherwise every
+    // task, debug builds and unit tests included, fails at configuration time.
     def keystorePropertiesFile = rootProject.file("app/keystore.properties")
-    def keystoreProperties = new Properties()
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    def keystoreFile = file("keystore")
 
-    release {
-      storeFile file("keystore")
-      storePassword keystoreProperties['storePassword']
-      keyAlias keystoreProperties['keyAlias']
-      keyPassword keystoreProperties['keyPassword']
+    if (keystorePropertiesFile.exists() && keystoreFile.exists()) {
+      def keystoreProperties = new Properties()
+      keystorePropertiesFile.withDataInputStream { keystoreProperties.load(it) }
+
+      release {
+        storeFile keystoreFile
+        storePassword keystoreProperties['storePassword']
+        keyAlias keystoreProperties['keyAlias']
+        keyPassword keystoreProperties['keyPassword']
+      }
     }
   }
 
@@ -65,7 +72,10 @@ android {
     }
     release {
       minifyEnabled true
-      signingConfig signingConfigs.release
+      // Absent when no keystore is configured; the APK then builds unsigned.
+      if (signingConfigs.findByName("release") != null) {
+        signingConfig signingConfigs.release
+      }
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
       manifestPlaceholders = [
           appIcon     : "@mipmap/ic_launcher",

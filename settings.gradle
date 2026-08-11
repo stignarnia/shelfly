@@ -1,3 +1,9 @@
+plugins {
+  // Lets Gradle download the JDK the toolchain asks for, so the build does not
+  // depend on which JDKs happen to be installed locally or on CI.
+  id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
 rootProject.name = 'Showly 2.0'
 include ':app'
 include ':common'

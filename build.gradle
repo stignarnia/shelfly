@@ -19,6 +19,8 @@ plugins {
   alias libs.plugins.devtools.ksp apply false
 }
 
+apply from: "./versions.gradle"
+
 allprojects {
   apply plugin: "com.google.devtools.ksp"
 
@@ -28,6 +30,25 @@ allprojects {
   }
 }
 
-task clean(type: Delete) {
-  delete rootProject.buildDir
+subprojects {
+  // Centralised so the SDK and bytecode level live in one place instead of
+  // being repeated in every module's android {} block.
+  plugins.withId("com.android.base") {
+    android {
+      compileSdk versions.compileSdk
+      buildToolsVersion versions.buildTools
+    }
+  }
+
+  // Gradle itself runs on whatever JDK is installed; compilation is pinned to
+  // the toolchain so the output does not change with the local JDK.
+  plugins.withId("org.jetbrains.kotlin.android") {
+    kotlin {
+      jvmToolchain(versions.jvmTarget)
+    }
+  }
+}
+
+tasks.register('clean', Delete) {
+  delete layout.buildDirectory
 }
