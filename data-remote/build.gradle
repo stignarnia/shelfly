@@ -27,13 +27,20 @@ android {
   }
 
   buildTypes.all {
+    // local.properties is gitignored and absent on a fresh clone and on CI.
+    // Missing keys fall back to empty strings rather than failing the build:
+    // release builds ship no key material anyway, and users supply their own
+    // at runtime.
     Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def localPropertiesFile = project.rootProject.file('local.properties')
+    if (localPropertiesFile.exists()) {
+      localPropertiesFile.withDataInputStream { properties.load(it) }
+    }
 
-    buildConfigField("String", "TRAKT_CLIENT_ID", properties.getProperty("traktClientId"))
-    buildConfigField("String", "TRAKT_CLIENT_SECRET", properties.getProperty("traktClientSecret"))
-    buildConfigField("String", "TMDB_API_KEY", properties.getProperty("tmdbApiKey"))
-    buildConfigField("String", "OMDB_API_KEY", properties.getProperty("omdbApiKey"))
+    buildConfigField("String", "TRAKT_CLIENT_ID", properties.getProperty("traktClientId", '""'))
+    buildConfigField("String", "TRAKT_CLIENT_SECRET", properties.getProperty("traktClientSecret", '""'))
+    buildConfigField("String", "TMDB_API_KEY", properties.getProperty("tmdbApiKey", '""'))
+    buildConfigField("String", "OMDB_API_KEY", properties.getProperty("omdbApiKey", '""'))
     buildConfigField("String", "VER_NAME", "\"${versions.versionName}\"")
     buildConfigField("int", "VER_CODE", "${versions.versionCode}")
   }
