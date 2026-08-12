@@ -10,7 +10,6 @@ import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Show
 import javax.inject.Inject
-import kotlin.math.min
 
 class RelatedShowsRepository @Inject constructor(
   private val remoteSource: RemoteDataSource,
@@ -33,8 +32,8 @@ class RelatedShowsRepository @Inject constructor(
         .map { mappers.show.fromDatabase(it) }
     }
 
-    val remoteShows = remoteSource.trakt
-      .fetchRelatedShows(show.tmdbId, min(hiddenCount, 10))
+    val remoteShows = remoteSource.tmdb
+      .fetchRelatedShows(show.tmdbId)
       .map { mappers.show.fromNetwork(it) }
 
     cacheRelatedShows(remoteShows, show.ids.tmdb)

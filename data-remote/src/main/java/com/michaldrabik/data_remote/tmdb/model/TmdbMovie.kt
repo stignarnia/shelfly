@@ -16,6 +16,7 @@ data class TmdbMovie(
   val vote_count: Long?,
   val original_language: String?,
   val genres: List<TmdbGenre>?,
+  val genre_ids: List<Int>?,
   val production_countries: List<TmdbCountry>?,
   val external_ids: TmdbExternalIds?,
   val release_dates: TmdbReleaseDates?,

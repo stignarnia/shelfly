@@ -5,10 +5,14 @@ import com.michaldrabik.data_remote.tmdb.model.TmdbImages
 import com.michaldrabik.data_remote.tmdb.model.TmdbPerson
 import com.michaldrabik.data_remote.tmdb.model.TmdbStreamingCountry
 import com.michaldrabik.data_remote.tmdb.model.TmdbTranslation
+import com.michaldrabik.data_remote.trakt.model.Episode
 import com.michaldrabik.data_remote.trakt.model.Movie
+import com.michaldrabik.data_remote.trakt.model.PersonCredit
 import com.michaldrabik.data_remote.trakt.model.SearchResult
 import com.michaldrabik.data_remote.trakt.model.Season
+import com.michaldrabik.data_remote.trakt.model.SeasonTranslation
 import com.michaldrabik.data_remote.trakt.model.Show
+import com.michaldrabik.data_remote.trakt.model.Translation
 
 /**
  * Fetch/post remote resources via TMDB API
@@ -60,17 +64,58 @@ interface TmdbRemoteDataSource {
 
   suspend fun fetchSeasons(tmdbId: Long): List<Season>
 
-  suspend fun fetchTrendingShows(limit: Int): List<Show>
+  suspend fun fetchTrendingShows(
+    genres: List<String>,
+    limit: Int,
+  ): List<Show>
 
-  suspend fun fetchTrendingMovies(limit: Int): List<Movie>
+  suspend fun fetchTrendingMovies(
+    genres: List<String>,
+    limit: Int,
+  ): List<Movie>
 
-  suspend fun fetchPopularShows(limit: Int): List<Show>
+  suspend fun fetchPopularShows(
+    genres: List<String>,
+    limit: Int,
+  ): List<Show>
 
-  suspend fun fetchPopularMovies(limit: Int): List<Movie>
+  suspend fun fetchPopularMovies(
+    genres: List<String>,
+    limit: Int,
+  ): List<Movie>
 
-  suspend fun fetchAnticipatedShows(limit: Int): List<Show>
+  suspend fun fetchAnticipatedShows(
+    genres: List<String>,
+    limit: Int,
+  ): List<Show>
 
-  suspend fun fetchAnticipatedMovies(limit: Int): List<Movie>
+  suspend fun fetchAnticipatedMovies(
+    genres: List<String>,
+    limit: Int,
+  ): List<Movie>
+
+  suspend fun fetchNextEpisode(tmdbId: Long): Episode?
+
+  suspend fun fetchPersonCredits(
+    tmdbId: Long,
+    type: TmdbPerson.Type,
+  ): List<PersonCredit>
+
+  suspend fun fetchShowTranslation(
+    tmdbId: Long,
+    language: String,
+  ): Translation?
+
+  suspend fun fetchMovieTranslation(
+    tmdbId: Long,
+    language: String,
+  ): Translation?
+
+  suspend fun fetchSeasonTranslations(
+    tmdbId: Long,
+    seasonNumber: Int,
+    language: String,
+  ): List<SeasonTranslation>
 
   suspend fun fetchRelatedShows(tmdbId: Long): List<Show>
 

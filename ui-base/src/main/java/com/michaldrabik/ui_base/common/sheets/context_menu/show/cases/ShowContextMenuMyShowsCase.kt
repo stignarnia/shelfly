@@ -44,7 +44,7 @@ class ShowContextMenuMyShowsCase @Inject constructor(
         async { showsRepository.hiddenShows.exists(tmdbId) },
       )
 
-      val seasons = remoteSource.trakt
+      val seasons = remoteSource.tmdb
         .fetchSeasons(tmdbId.id)
         .map { mappers.season.fromNetwork(it) }
         .filter { it.episodes.isNotEmpty() }

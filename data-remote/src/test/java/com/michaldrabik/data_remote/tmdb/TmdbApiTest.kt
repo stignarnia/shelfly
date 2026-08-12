@@ -110,7 +110,7 @@ class TmdbApiTest {
       server.enqueue(MockResponse().setBody(pageJson(page = 1, totalPages = 3, ids = listOf(1, 2))))
       server.enqueue(MockResponse().setBody(pageJson(page = 2, totalPages = 3, ids = listOf(3, 4))))
 
-      val shows = api.fetchTrendingShows(limit = 3)
+      val shows = api.fetchTrendingShows(genres = emptyList(), limit = 3)
 
       assertThat(shows).hasSize(3)
       assertThat(shows.map { it.ids?.tmdb }).containsExactly(1L, 2L, 3L).inOrder()
@@ -124,7 +124,7 @@ class TmdbApiTest {
       server.enqueue(MockResponse().setBody(pageJson(page = 1, totalPages = 3, ids = listOf(1, 2))))
       server.enqueue(MockResponse().setBody(pageJson(page = 2, totalPages = 3, ids = listOf(2, 3))))
 
-      val shows = api.fetchTrendingShows(limit = 3)
+      val shows = api.fetchTrendingShows(genres = emptyList(), limit = 3)
 
       assertThat(shows.map { it.ids?.tmdb }).containsExactly(1L, 2L, 3L).inOrder()
     }
@@ -134,7 +134,7 @@ class TmdbApiTest {
     runTest {
       server.enqueue(MockResponse().setBody(pageJson(page = 1, totalPages = 1, ids = listOf(1))))
 
-      val shows = api.fetchTrendingShows(limit = 50)
+      val shows = api.fetchTrendingShows(genres = emptyList(), limit = 50)
 
       assertThat(shows).hasSize(1)
       assertThat(server.requestCount).isEqualTo(1)

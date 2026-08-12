@@ -20,7 +20,6 @@ import com.michaldrabik.ui_model.Person
 import com.michaldrabik.ui_model.Person.Department
 import com.michaldrabik.ui_model.PersonCredit
 import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
 
@@ -100,10 +99,9 @@ class PeopleRepository @Inject constructor(
 
       // Return remote fetched data if available and cache it locally
       val type = if (person.department == Department.ACTING) Type.CAST else Type.CREW
-      val showsCreditsAsync = async { remoteSource.trakt.fetchPersonShowsCredits(idTmdb, type) }
-      val moviesCreditsAsync = async { remoteSource.trakt.fetchPersonMoviesCredits(idTmdb, type) }
-      val remoteCredits = awaitAll(showsCreditsAsync, moviesCreditsAsync)
-        .flatten()
+      // TMDB returns a person's show and movie credits from one endpoint.
+      val remoteCredits = remoteSource.tmdb
+        .fetchPersonCredits(idTmdb, type)
         .map {
           PersonCredit(
             show = it.show?.let { show -> mappers.show.fromNetwork(show) },

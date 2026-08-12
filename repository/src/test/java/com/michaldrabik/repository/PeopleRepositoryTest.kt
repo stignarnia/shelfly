@@ -12,7 +12,6 @@ import com.michaldrabik.data_local.database.dao.ShowsDao
 import com.michaldrabik.data_local.database.model.Movie
 import com.michaldrabik.data_local.database.model.Show
 import com.michaldrabik.data_remote.tmdb.TmdbRemoteDataSource
-import com.michaldrabik.data_remote.trakt.TraktRemoteDataSource
 import com.michaldrabik.data_remote.trakt.model.PersonCredit
 import com.michaldrabik.repository.common.BaseMockTest
 import com.michaldrabik.repository.settings.SettingsRepository
@@ -31,7 +30,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import com.michaldrabik.data_local.database.model.Person as PersonDb
-import com.michaldrabik.data_remote.trakt.model.Ids as IdsRemote
 
 class PeopleRepositoryTest : BaseMockTest() {
 
@@ -42,7 +40,6 @@ class PeopleRepositoryTest : BaseMockTest() {
   @RelaxedMockK lateinit var peopleCreditsDao: PeopleCreditsDao
   @RelaxedMockK lateinit var person: PersonDb
   @RelaxedMockK lateinit var tmdbApi: TmdbRemoteDataSource
-  @RelaxedMockK lateinit var traktApi: TraktRemoteDataSource
   @RelaxedMockK lateinit var settingsRepository: SettingsRepository
 
   private lateinit var SUT: PeopleRepository
@@ -57,7 +54,6 @@ class PeopleRepositoryTest : BaseMockTest() {
     coEvery { database.peopleCredits } returns peopleCreditsDao
     coEvery { database.peopleShowsMovies } returns peopleShowsMoviesDao
     coEvery { cloud.tmdb } returns tmdbApi
-    coEvery { cloud.trakt } returns traktApi
   }
 
   @After
@@ -186,13 +182,9 @@ class PeopleRepositoryTest : BaseMockTest() {
       val personDb = mockk<PersonDb>(relaxed = true) {
         coEvery { idTmdb } returns 1
       }
-      val ids = mockk<IdsRemote>(relaxed = true) {
-        coEvery { trakt } returns 1
-      }
       val show = mockk<Show>(relaxed = true)
       val movie = mockk<Movie>(relaxed = true)
       coEvery { peopleDao.getById(any()) } returns personDb
-      coEvery { traktApi.fetchPersonIds(any(), any()) } returns ids
       coEvery { peopleCreditsDao.getTimestampForPerson(any()) } returns nowUtcMillis() - 100
       coEvery { peopleCreditsDao.getAllShowsForPerson(any()) } returns listOf(show)
       coEvery { peopleCreditsDao.getAllMoviesForPerson(any()) } returns listOf(movie)
@@ -202,8 +194,7 @@ class PeopleRepositoryTest : BaseMockTest() {
       assertThat(result).hasSize(2)
       assertThat(result[0].show).isNotNull()
       assertThat(result[1].movie).isNotNull()
-      coVerify(exactly = 0) { traktApi.fetchPersonShowsCredits(any(), any()) }
-      coVerify(exactly = 0) { traktApi.fetchPersonMoviesCredits(any(), any()) }
+      coVerify(exactly = 0) { tmdbApi.fetchPersonCredits(any(), any()) }
     }
 
   @Test
@@ -213,15 +204,16 @@ class PeopleRepositoryTest : BaseMockTest() {
       val personDb = mockk<PersonDb>(relaxed = true) {
         coEvery { idTmdb } returns 1
       }
-      val ids = mockk<IdsRemote>(relaxed = true) {
-        coEvery { trakt } returns 1
+      val creditsShow = mockk<PersonCredit>(relaxed = true) {
+        coEvery { show } returns mockk(relaxed = true)
+        coEvery { movie } returns null
       }
-      val creditsShows = mockk<PersonCredit>(relaxed = true)
-      val creditsMovies = mockk<PersonCredit>(relaxed = true)
+      val creditsMovie = mockk<PersonCredit>(relaxed = true) {
+        coEvery { show } returns null
+        coEvery { movie } returns mockk(relaxed = true)
+      }
       coEvery { peopleDao.getById(any()) } returns personDb
-      coEvery { traktApi.fetchPersonIds(any(), any()) } returns ids
-      coEvery { traktApi.fetchPersonShowsCredits(any(), any()) } returns listOf(creditsShows)
-      coEvery { traktApi.fetchPersonMoviesCredits(any(), any()) } returns listOf(creditsMovies)
+      coEvery { tmdbApi.fetchPersonCredits(any(), any()) } returns listOf(creditsShow, creditsMovie)
 
       val result = SUT.loadCredits(person)
 

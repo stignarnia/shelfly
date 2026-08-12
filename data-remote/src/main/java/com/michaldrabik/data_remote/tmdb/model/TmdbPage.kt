@@ -41,6 +41,15 @@ data class TmdbSearchItem(
 }
 
 /**
+ * Everything a person has appeared in or worked on, from
+ * /person/{id}/combined_credits. Entries carry "media_type" like search results.
+ */
+data class TmdbPersonCredits(
+  val cast: List<TmdbSearchItem>?,
+  val crew: List<TmdbSearchItem>?,
+)
+
+/**
  * Result of /find/{external_id}, used to resolve an IMDb id into a TMDB one.
  */
 data class TmdbFindResult(

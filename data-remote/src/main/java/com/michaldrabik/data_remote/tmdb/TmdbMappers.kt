@@ -50,7 +50,8 @@ internal fun TmdbShow.toShow(): Show =
     rating = vote_average,
     votes = vote_count,
     comment_count = null,
-    genres = genres?.mapNotNull { it.name?.lowercase() },
+    genres = genres?.mapNotNull { it.name?.lowercase() }
+      ?: TmdbGenres.showSlugs(genre_ids.orEmpty()),
     aired_episodes = number_of_episodes,
   )
 
@@ -86,7 +87,8 @@ internal fun TmdbMovie.toMovie(): Movie =
     rating = vote_average,
     votes = vote_count,
     comment_count = null,
-    genres = genres?.mapNotNull { it.name?.lowercase() },
+    genres = genres?.mapNotNull { it.name?.lowercase() }
+      ?: TmdbGenres.movieSlugs(genre_ids.orEmpty()),
     language = original_language,
   )
 
@@ -151,7 +153,7 @@ internal fun TmdbSearchItem.toShow(): Show =
     rating = vote_average,
     votes = vote_count,
     comment_count = null,
-    genres = null,
+    genres = TmdbGenres.showSlugs(genre_ids.orEmpty()),
     aired_episodes = null,
   )
 
@@ -170,7 +172,7 @@ internal fun TmdbSearchItem.toMovie(): Movie =
     rating = vote_average,
     votes = vote_count,
     comment_count = null,
-    genres = null,
+    genres = TmdbGenres.movieSlugs(genre_ids.orEmpty()),
     language = null,
   )
 

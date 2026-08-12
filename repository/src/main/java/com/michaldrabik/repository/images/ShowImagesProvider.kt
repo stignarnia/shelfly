@@ -3,7 +3,6 @@ package com.michaldrabik.repository.images
 import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_remote.RemoteDataSource
-import com.michaldrabik.data_remote.aws.model.AwsImages
 import com.michaldrabik.data_remote.tmdb.model.TmdbImage
 import com.michaldrabik.data_remote.tmdb.model.TmdbImages
 import com.michaldrabik.repository.TranslationsRepository
@@ -12,7 +11,6 @@ import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.IdTvdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageFamily.SHOW
-import com.michaldrabik.ui_model.ImageSource.AWS
 import com.michaldrabik.ui_model.ImageSource.CUSTOM
 import com.michaldrabik.ui_model.ImageSource.TMDB
 import com.michaldrabik.ui_model.ImageStatus.AVAILABLE
@@ -36,7 +34,6 @@ class ShowImagesProvider @Inject constructor(
 ) {
 
   private val unavailableCache = mutableSetOf<IdTmdb>()
-  private var awsImagesCache: AwsImages? = null
 
   suspend fun findCachedImage(
     show: Show,
@@ -85,28 +82,12 @@ class ShowImagesProvider @Inject constructor(
       // If requested poster is unavailable try backing up to a fanart
       if (typeImages.isEmpty() && type == POSTER) {
         typeImages = images.backdrops ?: emptyList()
-        if (typeImages.isEmpty()) {
-          // Use custom uploaded S3 image as a final backup
-          loadAwsImagesCache()
-          awsImagesCache?.posters?.find { poster -> poster.idTmdb == tmdbId.id }?.let {
-            val path = "posters/${it.idTmdb}.${it.fileType}"
-            typeImages = listOf(TmdbImage(path, 0F, 0, "en"))
-            source = AWS
-          }
-        }
       }
 
-      // Use custom uploaded S3 image as a first backup for fanart.
       if (typeImages.isEmpty() && type in arrayOf(FANART, FANART_WIDE)) {
-        loadAwsImagesCache()
-        val awsImage = awsImagesCache?.fanarts?.find { fanart -> fanart.idTmdb == tmdbId.id }
-        if (awsImage != null) {
-          val path = "fanarts/${awsImage.idTmdb}.${awsImage.fileType}"
-          typeImages = listOf(TmdbImage(path, 0F, 0, "en"))
-          source = AWS
-        } else {
+        run {
           // If requested fanart is unavailable try backing up to an episode image
-          val seasons = remoteSource.trakt.fetchSeasons(show.tmdbId)
+          val seasons = remoteSource.tmdb.fetchSeasons(show.tmdbId)
           if (seasons.isNotEmpty()) {
             val episode = seasons[0].episodes?.firstOrNull()
             episode?.let { ep ->
@@ -176,13 +157,6 @@ class ShowImagesProvider @Inject constructor(
           Image.createAvailable(show.ids, type, SHOW, it.file_path, TMDB)
         }
     }
-
-  private suspend fun loadAwsImagesCache() {
-    if (awsImagesCache == null) {
-      val awsImages = remoteSource.aws.fetchImagesList()
-      awsImagesCache = awsImages.copy()
-    }
-  }
 
   private fun findBestImage(
     images: List<TmdbImage>,

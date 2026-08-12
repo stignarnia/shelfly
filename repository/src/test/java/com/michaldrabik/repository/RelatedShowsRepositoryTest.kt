@@ -5,7 +5,7 @@ import com.michaldrabik.common.extensions.nowUtcMillis
 import com.michaldrabik.data_local.database.dao.RelatedShowsDao
 import com.michaldrabik.data_local.database.dao.ShowsDao
 import com.michaldrabik.data_local.database.model.RelatedShow
-import com.michaldrabik.data_remote.trakt.TraktRemoteDataSource
+import com.michaldrabik.data_remote.tmdb.TmdbRemoteDataSource
 import com.michaldrabik.repository.common.BaseMockTest
 import com.michaldrabik.repository.shows.RelatedShowsRepository
 import io.mockk.Runs
@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit.HOURS
 class RelatedShowsRepositoryTest : BaseMockTest() {
 
   @MockK
-  lateinit var traktApi: TraktRemoteDataSource
+  lateinit var catalogApi: TmdbRemoteDataSource
 
   @RelaxedMockK
   lateinit var relatedShowsDao: RelatedShowsDao
@@ -41,7 +41,7 @@ class RelatedShowsRepositoryTest : BaseMockTest() {
     super.setUp()
     every { database.shows } returns showsDao
     every { database.relatedShows } returns relatedShowsDao
-    every { cloud.trakt } returns traktApi
+    every { cloud.tmdb } returns catalogApi
 
     SUT = RelatedShowsRepository(cloud, database, transactions, mappers)
   }
@@ -61,7 +61,7 @@ class RelatedShowsRepositoryTest : BaseMockTest() {
         relatedShowsDao.getAllById(any())
         showsDao.getAll(any())
       }
-      coVerify(exactly = 0) { traktApi.fetchRelatedShows(any(), 0) }
+      coVerify(exactly = 0) { catalogApi.fetchRelatedShows(any()) }
     }
   }
 
@@ -70,14 +70,14 @@ class RelatedShowsRepositoryTest : BaseMockTest() {
     runBlocking {
       coEvery { showsDao.getAll(any()) } returns emptyList()
       coEvery { showsDao.upsert(any()) } just Runs
-      coEvery { traktApi.fetchRelatedShows(any(), 0) } returns listOf(mockk(relaxed = true))
+      coEvery { catalogApi.fetchRelatedShows(any()) } returns listOf(mockk(relaxed = true))
       coEvery { relatedShowsDao.getAllById(any()) } returns listOf()
 
       SUT.loadAll(mockk(relaxed = true), 0)
 
       coVerifyOrder {
         relatedShowsDao.getAllById(any())
-        traktApi.fetchRelatedShows(any(), 0)
+        catalogApi.fetchRelatedShows(any())
       }
       coVerify(exactly = 0) { showsDao.getAll(any()) }
     }
@@ -91,14 +91,14 @@ class RelatedShowsRepositoryTest : BaseMockTest() {
       }
       coEvery { showsDao.getAll(any()) } returns emptyList()
       coEvery { showsDao.upsert(any()) } just Runs
-      coEvery { traktApi.fetchRelatedShows(any(), 0) } returns listOf(mockk(relaxed = true))
+      coEvery { catalogApi.fetchRelatedShows(any()) } returns listOf(mockk(relaxed = true))
       coEvery { relatedShowsDao.getAllById(any()) } returns listOf(showDb)
 
       SUT.loadAll(mockk(relaxed = true), 0)
 
       coVerifyOrder {
         relatedShowsDao.getAllById(any())
-        traktApi.fetchRelatedShows(any(), 0)
+        catalogApi.fetchRelatedShows(any())
       }
       coVerify(exactly = 0) { showsDao.getAll(any()) }
     }

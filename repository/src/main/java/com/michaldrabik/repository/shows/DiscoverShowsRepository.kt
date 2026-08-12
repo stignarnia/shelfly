@@ -63,8 +63,6 @@ class DiscoverShowsRepository @Inject constructor(
   ): List<Show> {
     return coroutineScope {
       val resultShows = mutableListOf<Show>()
-      val genresQuery = genres.joinToString(",") { it.slug }
-      val networksQuery = networks.joinToString(",") { it.channels.joinToString(",") }
 
       val limit =
         if (showCollection) {
@@ -74,15 +72,19 @@ class DiscoverShowsRepository @Inject constructor(
         }
 
       val trendingShowsAsync = async {
-        remoteSource.trakt
-          .fetchTrendingShows(genresQuery, networksQuery, limit)
-          .map { mappers.show.fromNetwork(it) }
+        remoteSource.tmdb
+          .fetchTrendingShows(
+            genres = genres.map { it.slug },
+            limit = limit,
+          ).map { mappers.show.fromNetwork(it) }
       }
 
       val anticipatedShowsAsync = async {
-        remoteSource.trakt
-          .fetchAnticipatedShows(genresQuery, networksQuery, TRAKT_ANTICIPATED_LIMIT)
-          .map { mappers.show.fromNetwork(it) }
+        remoteSource.tmdb
+          .fetchAnticipatedShows(
+            genres = genres.map { it.slug },
+            limit = TRAKT_ANTICIPATED_LIMIT,
+          ).map { mappers.show.fromNetwork(it) }
       }
 
       val trendingShows = trendingShowsAsync.await()
@@ -103,32 +105,22 @@ class DiscoverShowsRepository @Inject constructor(
   private suspend fun loadRemotePopular(
     genres: List<Genre>,
     networks: List<Network>,
-  ): List<Show> {
-    val genresQuery = genres.joinToString(",") { it.slug }
-    val networksQuery = networks.joinToString(",") { it.channels.joinToString(",") }
-
-    return remoteSource.trakt
+  ): List<Show> =
+    remoteSource.tmdb
       .fetchPopularShows(
-        genres = genresQuery,
-        networks = networksQuery,
+        genres = genres.map { it.slug },
         limit = TRAKT_DISCOVER_LIMIT,
       ).map { mappers.show.fromNetwork(it) }
-  }
 
   private suspend fun loadRemoteAnticipated(
     genres: List<Genre>,
     networks: List<Network>,
-  ): List<Show> {
-    val genresQuery = genres.joinToString(",") { it.slug }
-    val networksQuery = networks.joinToString(",") { it.channels.joinToString(",") }
-
-    return remoteSource.trakt
+  ): List<Show> =
+    remoteSource.tmdb
       .fetchAnticipatedShows(
-        genres = genresQuery,
-        networks = networksQuery,
+        genres = genres.map { it.slug },
         limit = TRAKT_DISCOVER_LIMIT,
       ).map { mappers.show.fromNetwork(it) }
-  }
 
   suspend fun cacheDiscoverShows(shows: List<Show>) {
     transactions.withTransaction {

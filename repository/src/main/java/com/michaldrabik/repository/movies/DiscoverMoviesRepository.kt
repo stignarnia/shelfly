@@ -60,7 +60,6 @@ class DiscoverMoviesRepository @Inject constructor(
   ): List<Movie> {
     return coroutineScope {
       val resultMovies = mutableListOf<Movie>()
-      val genresQuery = genres.joinToString(",") { it.slug }
 
       val limit =
         if (showCollection) {
@@ -70,14 +69,14 @@ class DiscoverMoviesRepository @Inject constructor(
         }
 
       val trendingMoviesAsync = async {
-        remoteSource.trakt
-          .fetchTrendingMovies(genresQuery, limit)
+        remoteSource.tmdb
+          .fetchTrendingMovies(genres.map { it.slug }, limit)
           .map { mappers.movie.fromNetwork(it) }
       }
 
       val anticipatedMoviesAsync = async {
-        remoteSource.trakt
-          .fetchAnticipatedMovies(genresQuery, TRAKT_ANTICIPATED_LIMIT)
+        remoteSource.tmdb
+          .fetchAnticipatedMovies(genres.map { it.slug }, TRAKT_ANTICIPATED_LIMIT)
           .map { mappers.movie.fromNetwork(it) }
       }
 
@@ -96,19 +95,15 @@ class DiscoverMoviesRepository @Inject constructor(
     }
   }
 
-  private suspend fun loadRemotePopular(genres: List<Genre>): List<Movie> {
-    val genresQuery = genres.joinToString(",") { it.slug }
-    return remoteSource.trakt
-      .fetchPopularMovies(genresQuery, TRAKT_DISCOVER_LIMIT)
+  private suspend fun loadRemotePopular(genres: List<Genre>): List<Movie> =
+    remoteSource.tmdb
+      .fetchPopularMovies(genres.map { it.slug }, TRAKT_DISCOVER_LIMIT)
       .map { mappers.movie.fromNetwork(it) }
-  }
 
-  private suspend fun loadRemoteAnticipated(genres: List<Genre>): List<Movie> {
-    val genresQuery = genres.joinToString(",") { it.slug }
-    return remoteSource.trakt
-      .fetchAnticipatedMovies(genresQuery, TRAKT_DISCOVER_LIMIT)
+  private suspend fun loadRemoteAnticipated(genres: List<Genre>): List<Movie> =
+    remoteSource.tmdb
+      .fetchAnticipatedMovies(genres.map { it.slug }, TRAKT_DISCOVER_LIMIT)
       .map { mappers.movie.fromNetwork(it) }
-  }
 
   suspend fun cacheDiscoverMovies(movies: List<Movie>) {
     transactions.withTransaction {

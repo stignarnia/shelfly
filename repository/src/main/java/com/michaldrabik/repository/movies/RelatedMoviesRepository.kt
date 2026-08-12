@@ -10,7 +10,6 @@ import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Movie
 import javax.inject.Inject
-import kotlin.math.min
 
 class RelatedMoviesRepository @Inject constructor(
   private val remoteSource: RemoteDataSource,
@@ -30,8 +29,8 @@ class RelatedMoviesRepository @Inject constructor(
         .map { mappers.movie.fromDatabase(it) }
     }
 
-    val remote = remoteSource.trakt
-      .fetchRelatedMovies(movie.ids.tmdb.id, min(0, 15))
+    val remote = remoteSource.tmdb
+      .fetchRelatedMovies(movie.ids.tmdb.id)
       .map { mappers.movie.fromNetwork(it) }
 
     cacheRelated(remote, movie.ids.tmdb)

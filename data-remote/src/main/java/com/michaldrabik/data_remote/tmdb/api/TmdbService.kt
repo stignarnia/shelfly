@@ -5,6 +5,7 @@ import com.michaldrabik.data_remote.tmdb.model.TmdbImages
 import com.michaldrabik.data_remote.tmdb.model.TmdbMovie
 import com.michaldrabik.data_remote.tmdb.model.TmdbPage
 import com.michaldrabik.data_remote.tmdb.model.TmdbPeople
+import com.michaldrabik.data_remote.tmdb.model.TmdbPersonCredits
 import com.michaldrabik.data_remote.tmdb.model.TmdbPerson
 import com.michaldrabik.data_remote.tmdb.model.TmdbSearchItem
 import com.michaldrabik.data_remote.tmdb.model.TmdbSeason
@@ -87,6 +88,7 @@ interface TmdbService {
   suspend fun fetchSeason(
     @Path("tmdbId") tmdbId: Long,
     @Path("seasonNumber") seasonNumber: Int,
+    @Query("language") language: String? = null,
   ): TmdbSeason
 
   @GET("trending/tv/week")
@@ -136,6 +138,27 @@ interface TmdbService {
     @Path("tmdbId") tmdbId: Long,
     @Query("page") page: Int,
   ): TmdbPage<TmdbMovie>
+
+  /**
+   * Used when a genre filter is active. Trending and popular do not accept
+   * filters, so a filtered request has to go through discover instead.
+   */
+  @GET("discover/tv?sort_by=popularity.desc")
+  suspend fun fetchDiscoverShows(
+    @Query("with_genres") genres: String?,
+    @Query("page") page: Int,
+  ): TmdbPage<TmdbShow>
+
+  @GET("discover/movie?sort_by=popularity.desc")
+  suspend fun fetchDiscoverMovies(
+    @Query("with_genres") genres: String?,
+    @Query("page") page: Int,
+  ): TmdbPage<TmdbMovie>
+
+  @GET("person/{tmdbId}/combined_credits")
+  suspend fun fetchPersonCredits(
+    @Path("tmdbId") tmdbId: Long,
+  ): TmdbPersonCredits
 
   @GET("search/multi")
   suspend fun fetchSearchResults(

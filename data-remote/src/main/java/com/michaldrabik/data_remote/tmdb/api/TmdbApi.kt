@@ -1,18 +1,25 @@
 package com.michaldrabik.data_remote.tmdb.api
 
+import com.michaldrabik.data_remote.tmdb.TmdbGenres
 import com.michaldrabik.data_remote.tmdb.TmdbRemoteDataSource
 import com.michaldrabik.data_remote.tmdb.model.TmdbImages
 import com.michaldrabik.data_remote.tmdb.model.TmdbPage
 import com.michaldrabik.data_remote.tmdb.model.TmdbPerson
 import com.michaldrabik.data_remote.tmdb.model.TmdbStreamingCountry
 import com.michaldrabik.data_remote.tmdb.model.TmdbTranslation
+import com.michaldrabik.data_remote.tmdb.toEpisode
 import com.michaldrabik.data_remote.tmdb.toMovie
 import com.michaldrabik.data_remote.tmdb.toSeason
 import com.michaldrabik.data_remote.tmdb.toShow
+import com.michaldrabik.data_remote.trakt.model.Episode
+import com.michaldrabik.data_remote.trakt.model.Ids
 import com.michaldrabik.data_remote.trakt.model.Movie
+import com.michaldrabik.data_remote.trakt.model.PersonCredit
 import com.michaldrabik.data_remote.trakt.model.SearchResult
 import com.michaldrabik.data_remote.trakt.model.Season
+import com.michaldrabik.data_remote.trakt.model.SeasonTranslation
 import com.michaldrabik.data_remote.trakt.model.Show
+import com.michaldrabik.data_remote.trakt.model.Translation
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -144,23 +151,152 @@ internal class TmdbApi(
         }.awaitAll()
     }
 
-  override suspend fun fetchTrendingShows(limit: Int): List<Show> =
-    fetchPaged(limit, { it.id }) { service.fetchTrendingShows(it) }.map { it.toShow() }
+  // Trending and popular accept no filters, so a genre filter routes the
+  // request through discover instead.
 
-  override suspend fun fetchTrendingMovies(limit: Int): List<Movie> =
-    fetchPaged(limit, { it.id }) { service.fetchTrendingMovies(it) }.map { it.toMovie() }
+  override suspend fun fetchTrendingShows(
+    genres: List<String>,
+    limit: Int,
+  ): List<Show> {
+    val query = TmdbGenres.showQuery(genres)
+    return fetchPaged(limit, { it.id }) {
+      if (query != null) service.fetchDiscoverShows(query, it) else service.fetchTrendingShows(it)
+    }.map { it.toShow() }
+  }
 
-  override suspend fun fetchPopularShows(limit: Int): List<Show> =
-    fetchPaged(limit, { it.id }) { service.fetchPopularShows(it) }.map { it.toShow() }
+  override suspend fun fetchTrendingMovies(
+    genres: List<String>,
+    limit: Int,
+  ): List<Movie> {
+    val query = TmdbGenres.movieQuery(genres)
+    return fetchPaged(limit, { it.id }) {
+      if (query != null) service.fetchDiscoverMovies(query, it) else service.fetchTrendingMovies(it)
+    }.map { it.toMovie() }
+  }
 
-  override suspend fun fetchPopularMovies(limit: Int): List<Movie> =
-    fetchPaged(limit, { it.id }) { service.fetchPopularMovies(it) }.map { it.toMovie() }
+  override suspend fun fetchPopularShows(
+    genres: List<String>,
+    limit: Int,
+  ): List<Show> {
+    val query = TmdbGenres.showQuery(genres)
+    return fetchPaged(limit, { it.id }) {
+      if (query != null) service.fetchDiscoverShows(query, it) else service.fetchPopularShows(it)
+    }.map { it.toShow() }
+  }
 
-  override suspend fun fetchAnticipatedShows(limit: Int): List<Show> =
-    fetchPaged(limit, { it.id }) { service.fetchAnticipatedShows(today(), it) }.map { it.toShow() }
+  override suspend fun fetchPopularMovies(
+    genres: List<String>,
+    limit: Int,
+  ): List<Movie> {
+    val query = TmdbGenres.movieQuery(genres)
+    return fetchPaged(limit, { it.id }) {
+      if (query != null) service.fetchDiscoverMovies(query, it) else service.fetchPopularMovies(it)
+    }.map { it.toMovie() }
+  }
 
-  override suspend fun fetchAnticipatedMovies(limit: Int): List<Movie> =
-    fetchPaged(limit, { it.id }) { service.fetchAnticipatedMovies(today(), it) }.map { it.toMovie() }
+  override suspend fun fetchAnticipatedShows(
+    genres: List<String>,
+    limit: Int,
+  ): List<Show> = fetchPaged(limit, { it.id }) { service.fetchAnticipatedShows(today(), it) }.map { it.toShow() }
+
+  override suspend fun fetchAnticipatedMovies(
+    genres: List<String>,
+    limit: Int,
+  ): List<Movie> = fetchPaged(limit, { it.id }) { service.fetchAnticipatedMovies(today(), it) }.map { it.toMovie() }
+
+  /**
+   * TMDB carries the next episode on the show payload rather than on a
+   * dedicated endpoint.
+   */
+  override suspend fun fetchNextEpisode(tmdbId: Long): Episode? =
+    service
+      .fetchShow(tmdbId, null)
+      .next_episode_to_air
+      ?.toEpisode()
+
+  override suspend fun fetchPersonCredits(
+    tmdbId: Long,
+    type: TmdbPerson.Type,
+  ): List<PersonCredit> {
+    val credits = service.fetchPersonCredits(tmdbId)
+    val items = when (type) {
+      TmdbPerson.Type.CAST -> credits.cast
+      TmdbPerson.Type.CREW -> credits.crew
+    }
+    return items
+      .orEmpty()
+      .filter { it.isShow() || it.isMovie() }
+      .map {
+        PersonCredit(
+          characters = null,
+          episode_count = null,
+          series_regular = null,
+          show = if (it.isShow()) it.toShow() else null,
+          movie = if (it.isMovie()) it.toMovie() else null,
+        )
+      }
+  }
+
+  /**
+   * TMDB serves localised text by asking for the resource in that language
+   * rather than through a separate translations endpoint. A title that comes
+   * back identical to the default is treated as untranslated.
+   */
+  override suspend fun fetchShowTranslation(
+    tmdbId: Long,
+    language: String,
+  ): Translation? {
+    val show = service.fetchShow(tmdbId, language)
+    return Translation(
+      title = show.name,
+      overview = show.overview,
+      language = language,
+      country = null,
+    )
+  }
+
+  override suspend fun fetchMovieTranslation(
+    tmdbId: Long,
+    language: String,
+  ): Translation? {
+    val movie = service.fetchMovie(tmdbId, language)
+    return Translation(
+      title = movie.title,
+      overview = movie.overview,
+      language = language,
+      country = null,
+    )
+  }
+
+  override suspend fun fetchSeasonTranslations(
+    tmdbId: Long,
+    seasonNumber: Int,
+    language: String,
+  ): List<SeasonTranslation> {
+    val season = service.fetchSeason(tmdbId, seasonNumber, language)
+    return season.episodes.orEmpty().map { episode ->
+      SeasonTranslation(
+        season = episode.season_number ?: seasonNumber,
+        number = episode.episode_number ?: -1,
+        ids = Ids(
+          trakt = null,
+          slug = null,
+          tvdb = null,
+          imdb = null,
+          tmdb = episode.id,
+          tvrage = null,
+        ),
+        translations = listOf(
+          Translation(
+            title = episode.name,
+            overview = episode.overview,
+            language = language,
+            country = null,
+          ),
+        ),
+      )
+    }
+  }
 
   override suspend fun fetchRelatedShows(tmdbId: Long): List<Show> =
     service

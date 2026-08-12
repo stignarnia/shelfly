@@ -17,6 +17,7 @@ data class TmdbShow(
   val vote_count: Long?,
   val number_of_episodes: Int?,
   val genres: List<TmdbGenre>?,
+  val genre_ids: List<Int>?,
   val networks: List<TmdbNetwork>?,
   val origin_country: List<String>?,
   val seasons: List<TmdbSeason>?,

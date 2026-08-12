@@ -317,7 +317,7 @@ internal class BackupImportShowsRunner @Inject constructor(
     backupShows: BackupShows,
   ): Pair<List<Season>, List<Episode>> =
     coroutineScope {
-      val remoteSeasons = remoteSource.trakt.fetchSeasons(showId)
+      val remoteSeasons = remoteSource.tmdb.fetchSeasons(showId)
 
       val localEpisodesAsync = async { localSource.episodes.getAllWatchedIdsForShows(listOf(showId)) }
       val localSeasonsAsync = async { localSource.seasons.getAllWatchedIdsForShows(listOf(showId)) }

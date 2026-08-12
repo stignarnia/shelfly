@@ -66,9 +66,8 @@ class TranslationsRepository @Inject constructor(
     }
 
     val remoteTranslation = try {
-      remoteSource.trakt
-        .fetchShowTranslations(show.tmdbId, language)
-        .firstOrNull { chineseLanguagePredicate(it) && frenchLanguagePredicate(it) }
+      remoteSource.tmdb
+        .fetchShowTranslation(show.tmdbId, language)
     } catch (error: Throwable) {
       null
     }
@@ -107,9 +106,8 @@ class TranslationsRepository @Inject constructor(
     }
 
     val remoteTranslation = try {
-      remoteSource.trakt
-        .fetchMovieTranslations(movie.tmdbId, language)
-        .firstOrNull { chineseLanguagePredicate(it) && frenchLanguagePredicate(it) }
+      remoteSource.tmdb
+        .fetchMovieTranslation(movie.tmdbId, language)
     } catch (error: Throwable) {
       null
     }
@@ -151,7 +149,7 @@ class TranslationsRepository @Inject constructor(
 
     if (onlyLocal) return null
 
-    val remoteTranslations = remoteSource.trakt
+    val remoteTranslations = remoteSource.tmdb
       .fetchSeasonTranslations(showId.id, episode.season, language)
       .map { mappers.translation.fromNetwork(it) }
 
@@ -205,7 +203,7 @@ class TranslationsRepository @Inject constructor(
       }
     }
 
-    val remoteTranslation = remoteSource.trakt
+    val remoteTranslation = remoteSource.tmdb
       .fetchSeasonTranslations(showId.id, season.number, language)
       .map { mappers.translation.fromNetwork(it) }
 

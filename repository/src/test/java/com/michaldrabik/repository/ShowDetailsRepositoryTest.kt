@@ -4,7 +4,7 @@ import com.google.common.truth.Truth.assertThat
 import com.michaldrabik.common.extensions.nowUtcMillis
 import com.michaldrabik.data_local.database.dao.ShowsDao
 import com.michaldrabik.data_local.database.model.Show
-import com.michaldrabik.data_remote.trakt.TraktRemoteDataSource
+import com.michaldrabik.data_remote.tmdb.TmdbRemoteDataSource
 import com.michaldrabik.repository.common.BaseMockTest
 import com.michaldrabik.repository.shows.ShowDetailsRepository
 import com.michaldrabik.ui_model.IdTmdb
@@ -24,7 +24,7 @@ import com.michaldrabik.data_remote.trakt.model.Show as ShowRemote
 
 class ShowDetailsRepositoryTest : BaseMockTest() {
 
-  @MockK lateinit var traktApi: TraktRemoteDataSource
+  @MockK lateinit var catalogApi: TmdbRemoteDataSource
   @MockK lateinit var showsDao: ShowsDao
 
   private lateinit var SUT: ShowDetailsRepository
@@ -33,7 +33,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
   override fun setUp() {
     super.setUp()
     every { database.shows } returns showsDao
-    every { cloud.trakt } returns traktApi
+    every { cloud.tmdb } returns catalogApi
 
     SUT = ShowDetailsRepository(cloud, database, transactions, mappers)
   }
@@ -51,7 +51,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
 
       assertThat(show.ids.tmdb).isEqualTo(IdTmdb(1))
       coVerify(exactly = 1) { showsDao.getById(any<Long>()) }
-      coVerify(exactly = 0) { traktApi.fetchShow(any<Long>()) }
+      coVerify(exactly = 0) { catalogApi.fetchShow(any<Long>()) }
     }
   }
 
@@ -63,7 +63,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
       }
       coEvery { showsDao.getById(any<Long>()) } returns null
       coEvery { showsDao.upsert(any()) } just Runs
-      coEvery { traktApi.fetchShow(any<Long>()) } returns showRemote
+      coEvery { catalogApi.fetchShow(any<Long>()) } returns showRemote
 
       val show = SUT.load(IdTmdb(1), true)
 
@@ -71,7 +71,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
 
       coVerifySequence {
         showsDao.getById(any<Long>())
-        traktApi.fetchShow(any<Long>())
+        catalogApi.fetchShow(any<Long>())
         showsDao.upsert(any())
       }
     }
@@ -85,7 +85,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
       }
       coEvery { showsDao.getById(any<Long>()) } returns null
       coEvery { showsDao.upsert(any()) } just Runs
-      coEvery { traktApi.fetchShow(any<Long>()) } returns showRemote
+      coEvery { catalogApi.fetchShow(any<Long>()) } returns showRemote
 
       val show = SUT.load(IdTmdb(1), false)
 
@@ -93,7 +93,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
 
       coVerifySequence {
         showsDao.getById(any<Long>())
-        traktApi.fetchShow(any<Long>())
+        catalogApi.fetchShow(any<Long>())
         showsDao.upsert(any())
       }
     }
@@ -111,7 +111,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
       }
       coEvery { showsDao.getById(any<Long>()) } returns showDb
       coEvery { showsDao.upsert(any()) } just Runs
-      coEvery { traktApi.fetchShow(any<Long>()) } returns showRemote
+      coEvery { catalogApi.fetchShow(any<Long>()) } returns showRemote
 
       val show = SUT.load(IdTmdb(1), false)
 
@@ -119,7 +119,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
 
       coVerifySequence {
         showsDao.getById(any<Long>())
-        traktApi.fetchShow(any<Long>())
+        catalogApi.fetchShow(any<Long>())
         showsDao.upsert(any())
       }
     }

@@ -5,6 +5,7 @@ import com.michaldrabik.data_remote.BuildConfig
 import com.michaldrabik.data_remote.Config
 import com.michaldrabik.data_remote.apikey.ApiKeyProvider
 import com.michaldrabik.data_remote.tmdb.api.TmdbApi
+import com.michaldrabik.data_remote.tmdb.model.TmdbPerson
 import com.michaldrabik.data_remote.tmdb.api.TmdbService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -104,10 +105,56 @@ class TmdbLiveApiTest {
   @Test
   fun `fetches real trending shows across pages`() =
     runTest {
-      val shows = api.fetchTrendingShows(limit = 30)
+      val shows = api.fetchTrendingShows(genres = emptyList(), limit = 30)
 
       assertThat(shows).hasSize(30)
       assertThat(shows.map { it.ids?.tmdb }.toSet()).hasSize(30)
+    }
+
+  @Test
+  fun `filters real discover results by genre`() =
+    runTest {
+      val shows = api.fetchTrendingShows(genres = listOf("animation"), limit = 20)
+
+      assertThat(shows).isNotEmpty()
+      // /discover returns full genre lists, so the filter is verifiable here.
+      assertThat(shows.all { it.genres?.contains("animation") == true }).isTrue()
+    }
+
+  @Test
+  fun `fetches a real person's combined credits`() =
+    runTest {
+      // Bryan Cranston, who has both show and movie credits.
+      val credits = api.fetchPersonCredits(17419, TmdbPerson.Type.CAST)
+
+      assertThat(credits).isNotEmpty()
+      assertThat(credits.any { it.show != null }).isTrue()
+      assertThat(credits.any { it.movie != null }).isTrue()
+    }
+
+  @Test
+  fun `fetches real localised text for a show`() =
+    runTest {
+      val translation = api.fetchShowTranslation(BREAKING_BAD_TMDB_ID, "it")
+
+      assertThat(translation?.overview).isNotEmpty()
+      assertThat(translation?.language).isEqualTo("it")
+    }
+
+  @Test
+  fun `fetches real localised episode titles for a season`() =
+    runTest {
+      val translations = api.fetchSeasonTranslations(BREAKING_BAD_TMDB_ID, 1, "it")
+
+      assertThat(translations).isNotEmpty()
+      assertThat(translations.first().number).isEqualTo(1)
+      assertThat(
+        translations
+          .first()
+          .translations
+          ?.first()
+          ?.title,
+      ).isNotEmpty()
     }
 
   @Test
