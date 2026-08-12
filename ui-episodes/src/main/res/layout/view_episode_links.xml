@@ -42,7 +42,7 @@
     app:layout_constraintTop_toTopOf="parent"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewEpisodeLinksImdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
     custom:text="IMDb"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewEpisodeLinksTmdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
     custom:text="TMDB"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewEpisodeLinksGoogle"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
     custom:text="Google"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewEpisodeLinksTvdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
     custom:text="TVDB"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewEpisodeLinksDuckDuck"
     android:layout_width="0dp"
     android:layout_height="wrap_content"

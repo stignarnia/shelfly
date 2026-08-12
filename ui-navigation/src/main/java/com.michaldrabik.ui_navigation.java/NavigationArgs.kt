@@ -1,4 +1,4 @@
-package com.michaldrabik.ui_navigation.java
+package xyz.stignarnia.ui_navigation.java
 
 object NavigationArgs {
   const val ARG_ID = "ARG_ID"

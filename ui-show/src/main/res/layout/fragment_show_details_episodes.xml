@@ -132,7 +132,7 @@
     tools:visibility="visible"
     />
 
-  <com.michaldrabik.ui_base.common.views.FoldableTextView
+  <xyz.stignarnia.ui_base.common.views.FoldableTextView
     android:id="@+id/episodesOverview"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

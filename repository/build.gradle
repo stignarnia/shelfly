@@ -27,7 +27,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.repository'
+  namespace 'xyz.stignarnia.repository'
 }
 
 dependencies {

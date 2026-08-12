@@ -149,7 +149,7 @@
         tools:text="Post Production"
         />
 
-      <com.michaldrabik.ui_movie.views.AddToMoviesButton
+      <xyz.stignarnia.ui_movie.views.AddToMoviesButton
         android:id="@+id/movieDetailsAddButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
         app:layout_constraintTop_toBottomOf="@id/movieDetailsManageListsLabel"
         />
 
-      <com.michaldrabik.ui_base.common.views.FoldableTextView
+      <xyz.stignarnia.ui_base.common.views.FoldableTextView
         android:id="@+id/movieDetailsDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -286,7 +286,7 @@
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/movieDetailsRatingsFragment"
-        android:name="com.michaldrabik.ui_movie.sections.ratings.MovieDetailsRatingsFragment"
+        android:name="xyz.stignarnia.ui_movie.sections.ratings.MovieDetailsRatingsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spaceNormal"
@@ -299,7 +299,7 @@
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/movieDetailsStreamingsFragment"
-        android:name="com.michaldrabik.ui_movie.sections.streamings.MovieDetailsStreamingsFragment"
+        android:name="xyz.stignarnia.ui_movie.sections.streamings.MovieDetailsStreamingsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -315,7 +315,7 @@
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/movieDetailsActorsFragment"
-        android:name="com.michaldrabik.ui_movie.sections.people.MovieDetailsPeopleFragment"
+        android:name="xyz.stignarnia.ui_movie.sections.people.MovieDetailsPeopleFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceBig"
@@ -329,7 +329,7 @@
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/movieDetailsCollectionsFragment"
-        android:name="com.michaldrabik.ui_movie.sections.collections.list.MovieDetailsCollectionsFragment"
+        android:name="xyz.stignarnia.ui_movie.sections.collections.list.MovieDetailsCollectionsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceBig"
@@ -345,7 +345,7 @@
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/movieDetailsRelatedFragment"
-        android:name="com.michaldrabik.ui_movie.sections.related.MovieDetailsRelatedFragment"
+        android:name="xyz.stignarnia.ui_movie.sections.related.MovieDetailsRelatedFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceBig"

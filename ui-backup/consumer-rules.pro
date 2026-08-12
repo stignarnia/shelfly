@@ -65,4 +65,4 @@
     public <methods>;
 }
 
--keep class com.michaldrabik.ui_backup.model.** { *; }
+-keep class xyz.stignarnia.ui_backup.model.** { *; }

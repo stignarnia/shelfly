@@ -169,7 +169,7 @@
     tools:visibility="visible"
     />
 
-  <com.michaldrabik.ui_base.common.views.FoldableTextView
+  <xyz.stignarnia.ui_base.common.views.FoldableTextView
     android:id="@+id/contextMenuItemDescription"
     style="@style/CollectionItem.Description"
     android:layout_width="0dp"

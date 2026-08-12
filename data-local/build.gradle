@@ -27,7 +27,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.data_local'
+  namespace 'xyz.stignarnia.data_local'
 }
 
 dependencies {

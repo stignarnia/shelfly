@@ -1,18 +1,18 @@
-import com.michaldrabik.ui_discover.recycler.DiscoverListItem
-import com.michaldrabik.ui_model.AirTime
-import com.michaldrabik.ui_model.IdImdb
-import com.michaldrabik.ui_model.IdSlug
-import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.IdTvRage
-import com.michaldrabik.ui_model.IdTvdb
-import com.michaldrabik.ui_model.Ids
-import com.michaldrabik.ui_model.Image
-import com.michaldrabik.ui_model.ImageFamily
-import com.michaldrabik.ui_model.ImageSource
-import com.michaldrabik.ui_model.ImageStatus
-import com.michaldrabik.ui_model.ImageType
-import com.michaldrabik.ui_model.Show
-import com.michaldrabik.ui_model.ShowStatus
+import xyz.stignarnia.ui_discover.recycler.DiscoverListItem
+import xyz.stignarnia.ui_model.AirTime
+import xyz.stignarnia.ui_model.IdImdb
+import xyz.stignarnia.ui_model.IdSlug
+import xyz.stignarnia.ui_model.IdTmdb
+import xyz.stignarnia.ui_model.IdTvRage
+import xyz.stignarnia.ui_model.IdTvdb
+import xyz.stignarnia.ui_model.Ids
+import xyz.stignarnia.ui_model.Image
+import xyz.stignarnia.ui_model.ImageFamily
+import xyz.stignarnia.ui_model.ImageSource
+import xyz.stignarnia.ui_model.ImageStatus
+import xyz.stignarnia.ui_model.ImageType
+import xyz.stignarnia.ui_model.Show
+import xyz.stignarnia.ui_model.ShowStatus
 
 object TestData {
 

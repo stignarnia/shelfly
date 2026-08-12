@@ -106,7 +106,7 @@
         app:layout_constraintTop_toTopOf="@+id/showDetailsImage"
         />
 
-      <com.michaldrabik.ui_base.common.views.tips.TipView
+      <xyz.stignarnia.ui_base.common.views.tips.TipView
         android:id="@+id/showDetailsTipGallery"
         android:layout_width="@dimen/tutorialTipSize"
         android:layout_height="@dimen/tutorialTipSize"
@@ -155,7 +155,7 @@
         tools:text="Returning Series"
         />
 
-      <com.michaldrabik.ui_show.views.AddToShowsButton
+      <xyz.stignarnia.ui_show.views.AddToShowsButton
         android:id="@+id/showDetailsAddButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -229,7 +229,7 @@
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsRatingsFragment"
-        android:name="com.michaldrabik.ui_show.sections.ratings.ShowDetailsRatingsFragment"
+        android:name="xyz.stignarnia.ui_show.sections.ratings.ShowDetailsRatingsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spaceTiny"
@@ -245,7 +245,7 @@
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsStreamingsFragment"
-        android:name="com.michaldrabik.ui_show.sections.streamings.ShowDetailsStreamingsFragment"
+        android:name="xyz.stignarnia.ui_show.sections.streamings.ShowDetailsStreamingsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceMicro"
@@ -258,7 +258,7 @@
         tools:visibility="visible"
         />
 
-      <com.michaldrabik.ui_base.common.views.FoldableTextView
+      <xyz.stignarnia.ui_base.common.views.FoldableTextView
         android:id="@+id/showDetailsDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -295,7 +295,7 @@
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsActorsFragment"
-        android:name="com.michaldrabik.ui_show.sections.people.ShowDetailsPeopleFragment"
+        android:name="xyz.stignarnia.ui_show.sections.people.ShowDetailsPeopleFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceNormal"
@@ -308,7 +308,7 @@
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsEpisodeFragment"
-        android:name="com.michaldrabik.ui_show.sections.nextepisode.ShowDetailsNextEpisodeFragment"
+        android:name="xyz.stignarnia.ui_show.sections.nextepisode.ShowDetailsNextEpisodeFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spaceNormal"
@@ -327,7 +327,7 @@
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsSeasonsFragment"
-        android:name="com.michaldrabik.ui_show.sections.seasons.ShowDetailsSeasonsFragment"
+        android:name="xyz.stignarnia.ui_show.sections.seasons.ShowDetailsSeasonsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -343,7 +343,7 @@
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsRelatedFragment"
-        android:name="com.michaldrabik.ui_show.sections.related.ShowDetailsRelatedFragment"
+        android:name="xyz.stignarnia.ui_show.sections.related.ShowDetailsRelatedFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceNormal"

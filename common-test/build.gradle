@@ -31,7 +31,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.test_base'
+  namespace 'xyz.stignarnia.test_base'
 }
 
 dependencies {

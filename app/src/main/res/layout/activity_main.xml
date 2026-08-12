@@ -52,7 +52,7 @@
       tools:visibility="visible"
       />
 
-    <com.michaldrabik.showly2.ui.views.BottomMenuView
+    <xyz.stignarnia.shelfly.ui.views.BottomMenuView
       android:id="@+id/bottomMenuView"
       android:layout_width="match_parent"
       android:layout_height="@dimen/bottomNavigationHeight"
@@ -75,7 +75,7 @@
     app:layout_constraintVertical_bias="0.0"
     />
 
-  <com.michaldrabik.ui_base.common.views.tips.TipView
+  <xyz.stignarnia.ui_base.common.views.tips.TipView
     android:id="@+id/tutorialTipModeMenu"
     android:layout_width="@dimen/tutorialTipSize"
     android:layout_height="@dimen/tutorialTipSize"
@@ -87,7 +87,7 @@
     app:layout_constraintStart_toStartOf="parent"
     />
 
-  <com.michaldrabik.ui_base.common.views.tips.TipView
+  <xyz.stignarnia.ui_base.common.views.tips.TipView
     android:id="@+id/tutorialTipDiscover"
     android:layout_width="@dimen/tutorialTipSize"
     android:layout_height="@dimen/tutorialTipSize"
@@ -99,7 +99,7 @@
     app:layout_constraintStart_toStartOf="parent"
     />
 
-  <com.michaldrabik.ui_base.common.views.tips.TipView
+  <xyz.stignarnia.ui_base.common.views.tips.TipView
     android:id="@+id/tutorialTipMyShows"
     android:layout_width="@dimen/tutorialTipSize"
     android:layout_height="@dimen/tutorialTipSize"
@@ -111,7 +111,7 @@
     app:layout_constraintStart_toStartOf="parent"
     />
 
-  <com.michaldrabik.ui_base.common.views.tips.TipOverlayView
+  <xyz.stignarnia.ui_base.common.views.tips.TipOverlayView
     android:id="@+id/tutorialView"
     android:layout_width="0dp"
     android:layout_height="0dp"
@@ -136,7 +136,7 @@
     tools:visibility="visible"
     />
 
-  <com.michaldrabik.showly2.ui.views.WelcomeNoteView
+  <xyz.stignarnia.shelfly.ui.views.WelcomeNoteView
     android:id="@+id/welcomeView"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
     tools:visibility="gone"
     />
 
-  <com.michaldrabik.showly2.ui.views.WelcomeLanguageView
+  <xyz.stignarnia.shelfly.ui.views.WelcomeLanguageView
     android:id="@+id/welcomeLanguageView"
     android:layout_width="0dp"
     android:layout_height="wrap_content"

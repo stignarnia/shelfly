@@ -13,7 +13,7 @@
     >
     <intent
       android:action="android.intent.action.VIEW"
-      android:targetClass="com.michaldrabik.showly2.ui.main.MainActivity"
+      android:targetClass="xyz.stignarnia.shelfly.ui.main.MainActivity"
       android:targetPackage="xyz.stignarnia.shelfly"
       >
       <extra
@@ -32,7 +32,7 @@
     >
     <intent
       android:action="android.intent.action.VIEW"
-      android:targetClass="com.michaldrabik.showly2.ui.main.MainActivity"
+      android:targetClass="xyz.stignarnia.shelfly.ui.main.MainActivity"
       android:targetPackage="xyz.stignarnia.shelfly"
       >
       <extra
@@ -51,7 +51,7 @@
     >
     <intent
       android:action="android.intent.action.VIEW"
-      android:targetClass="com.michaldrabik.showly2.ui.main.MainActivity"
+      android:targetClass="xyz.stignarnia.shelfly.ui.main.MainActivity"
       android:targetPackage="xyz.stignarnia.shelfly"
       >
       <extra
@@ -70,7 +70,7 @@
     >
     <intent
       android:action="android.intent.action.VIEW"
-      android:targetClass="com.michaldrabik.showly2.ui.main.MainActivity"
+      android:targetClass="xyz.stignarnia.shelfly.ui.main.MainActivity"
       android:targetPackage="xyz.stignarnia.shelfly"
       >
       <extra

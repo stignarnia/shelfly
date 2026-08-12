@@ -1,10 +1,10 @@
-package com.michaldrabik.ui_search.cases
+package xyz.stignarnia.ui_search.cases
 
 import com.google.common.truth.Truth.assertThat
-import com.michaldrabik.data_local.LocalDataSource
-import com.michaldrabik.data_local.database.dao.RecentSearchDao
-import com.michaldrabik.data_local.database.model.RecentSearch
-import com.michaldrabik.ui_search.BaseMockTest
+import xyz.stignarnia.data_local.LocalDataSource
+import xyz.stignarnia.data_local.database.dao.RecentSearchDao
+import xyz.stignarnia.data_local.database.model.RecentSearch
+import xyz.stignarnia.ui_search.BaseMockTest
 import io.mockk.Runs
 import io.mockk.clearAllMocks
 import io.mockk.coEvery

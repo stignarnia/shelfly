@@ -27,7 +27,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.ui_widgets'
+  namespace 'xyz.stignarnia.ui_widgets'
 }
 
 dependencies {

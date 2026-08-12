@@ -42,7 +42,7 @@
     app:layout_constraintTop_toTopOf="parent"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksWebsite"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
     custom:text="Website"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksImdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
     custom:text="IMDb"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksTmdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
     custom:text="TMDB"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksGoogle"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
     custom:text="Google"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksDuckDuck"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
     custom:text="DuckDuckGo"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksWiki"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
     custom:text="Wikipedia"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksYouTube"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
     custom:text="YouTube"
     />
 
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksTwitter"
     android:layout_width="0dp"
     android:layout_height="wrap_content"

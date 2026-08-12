@@ -1,11 +1,11 @@
-package com.michaldrabik.ui_search.cases
+package xyz.stignarnia.ui_search.cases
 
 import com.google.common.truth.Truth.assertThat
-import com.michaldrabik.common.Mode
-import com.michaldrabik.repository.settings.SettingsRepository
-import com.michaldrabik.ui_search.BaseMockTest
-import com.michaldrabik.ui_search.recycler.SearchListItem
-import com.michaldrabik.ui_search.utilities.SearchOptions
+import xyz.stignarnia.common.Mode
+import xyz.stignarnia.repository.settings.SettingsRepository
+import xyz.stignarnia.ui_search.BaseMockTest
+import xyz.stignarnia.ui_search.recycler.SearchListItem
+import xyz.stignarnia.ui_search.utilities.SearchOptions
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify

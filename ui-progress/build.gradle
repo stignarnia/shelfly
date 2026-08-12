@@ -31,7 +31,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.ui_progress'
+  namespace 'xyz.stignarnia.ui_progress'
 }
 
 dependencies {

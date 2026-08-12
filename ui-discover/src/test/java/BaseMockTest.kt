@@ -1,4 +1,4 @@
-import com.michaldrabik.common_test.MainDispatcherRule
+import xyz.stignarnia.common_test.MainDispatcherRule
 import io.mockk.MockKAnnotations
 import io.mockk.mockkStatic
 import org.junit.Before

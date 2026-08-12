@@ -31,7 +31,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.ui_statistics'
+  namespace 'xyz.stignarnia.ui_statistics'
 }
 
 dependencies {

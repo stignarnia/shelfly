@@ -1,0 +1,61 @@
+package xyz.stignarnia.ui_show.sections.seasons.cases
+
+import xyz.stignarnia.repository.EpisodesManager
+import xyz.stignarnia.repository.shows.ShowsRepository
+import xyz.stignarnia.ui_model.Episode
+import xyz.stignarnia.ui_model.EpisodeBundle
+import xyz.stignarnia.ui_model.SeasonBundle
+import xyz.stignarnia.ui_model.Show
+import xyz.stignarnia.ui_show.quicksetup.QuickSetupListItem
+import xyz.stignarnia.ui_show.sections.seasons.recycler.SeasonListItem
+import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import java.time.ZonedDateTime
+import javax.inject.Inject
+
+@ViewModelScoped
+class ShowDetailsQuickProgressCase @Inject constructor(
+  private val showsRepository: ShowsRepository,
+  private val episodesManager: EpisodesManager,
+) {
+
+  suspend fun setQuickProgress(
+    selectedItem: QuickSetupListItem,
+    seasonsItems: List<SeasonListItem>,
+    show: Show,
+    customDate: ZonedDateTime?,
+  ) = coroutineScope {
+    val isMyShows = async { showsRepository.myShows.exists(show.ids.tmdb) }
+    val isWatchlist = async { showsRepository.watchlistShows.exists(show.ids.tmdb) }
+    val isHidden = async { showsRepository.hiddenShows.exists(show.ids.tmdb) }
+
+    val isCollection = isMyShows.await() || isWatchlist.await() || isHidden.await()
+    val episodesAdded = mutableListOf<Episode>()
+
+    episodesManager.setAllUnwatched(show.ids.tmdb, skipSpecials = true)
+    val seasons = seasonsItems.map { it.season }
+    seasons
+      .filter { !it.isSpecial() && it.number < selectedItem.season.number }
+      .forEach { season ->
+        val bundle = SeasonBundle(season, show)
+        episodesManager.setSeasonWatched(bundle, customDate).apply {
+          episodesAdded.addAll(this)
+        }
+      }
+
+    val season = seasons.find { it.number == selectedItem.season.number }
+    season
+      ?.episodes
+      ?.filter { it.number <= selectedItem.episode.number }
+      ?.forEach { episode ->
+        val bundle = EpisodeBundle(episode, season, show)
+        episodesManager.setEpisodeWatched(bundle, customDate)
+        episodesAdded.add(episode)
+      }
+
+    if (isCollection) {
+      val episodesIds = episodesAdded.map { it.ids.tmdb.id }
+    }
+  }
+}

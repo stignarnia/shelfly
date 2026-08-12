@@ -13,7 +13,7 @@
   android:padding="@dimen/spaceNormal"
   >
 
-  <com.michaldrabik.ui_base.common.views.RateValueView
+  <xyz.stignarnia.ui_base.common.views.RateValueView
     android:id="@+id/viewRateSheetRating"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

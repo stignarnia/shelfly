@@ -33,7 +33,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.ui_base'
+  namespace 'xyz.stignarnia.ui_base'
 }
 
 dependencies {

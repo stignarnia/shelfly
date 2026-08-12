@@ -17,16 +17,16 @@
     android:overScrollMode="never"
     />
 
-  <com.michaldrabik.ui_base.common.views.ModeTabsView
+  <xyz.stignarnia.ui_base.common.views.ModeTabsView
     android:id="@+id/progressMoviesModeTabs"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/screenMarginHorizontal"
     android:layout_marginTop="@dimen/collectionTabsMargin"
-    app:layout_behavior="com.michaldrabik.ui_base.common.behaviour.ScrollableViewBehaviour"
+    app:layout_behavior="xyz.stignarnia.ui_base.common.behaviour.ScrollableViewBehaviour"
     />
 
-  <com.michaldrabik.ui_base.common.views.ScrollableTabLayout
+  <xyz.stignarnia.ui_base.common.views.ScrollableTabLayout
     android:id="@+id/progressMoviesTabs"
     style="@style/ScrollableTabsStyle"
     android:layout_width="wrap_content"
@@ -45,10 +45,10 @@
     android:layout_gravity="end"
     android:layout_marginTop="@dimen/progressMoviesSearchViewPadding"
     android:layout_marginEnd="@dimen/screenMarginHorizontal"
-    app:layout_behavior="com.michaldrabik.ui_base.common.behaviour.ScrollableViewBehaviour"
+    app:layout_behavior="xyz.stignarnia.ui_base.common.behaviour.ScrollableViewBehaviour"
     >
 
-    <com.michaldrabik.ui_base.common.views.ScrollableImageView
+    <xyz.stignarnia.ui_base.common.views.ScrollableImageView
       android:id="@+id/progressMoviesSearchIcon"
       android:layout_width="36dp"
       android:layout_height="36dp"
@@ -60,7 +60,7 @@
 
   </FrameLayout>
 
-  <com.michaldrabik.ui_base.common.views.SearchLocalView
+  <xyz.stignarnia.ui_base.common.views.SearchLocalView
     android:id="@+id/progressMoviesSearchLocalView"
     android:layout_width="match_parent"
     android:layout_height="@dimen/searchLocalViewHeight"
@@ -71,7 +71,7 @@
     tools:visibility="visible"
     />
 
-  <com.michaldrabik.ui_base.common.views.SearchView
+  <xyz.stignarnia.ui_base.common.views.SearchView
     android:id="@+id/progressMoviesSearchView"
     android:layout_width="match_parent"
     android:layout_height="@dimen/searchViewHeight"

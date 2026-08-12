@@ -58,7 +58,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.data_remote'
+  namespace 'xyz.stignarnia.data_remote'
 }
 
 dependencies {

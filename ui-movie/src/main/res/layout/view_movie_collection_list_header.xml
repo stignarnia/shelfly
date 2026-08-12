@@ -38,7 +38,7 @@
       tools:text="Marvel Movies Collection"
       />
 
-    <com.michaldrabik.ui_base.common.views.FoldableTextView
+    <xyz.stignarnia.ui_base.common.views.FoldableTextView
       android:id="@+id/subtitleText"
       android:layout_width="0dp"
       android:layout_height="wrap_content"

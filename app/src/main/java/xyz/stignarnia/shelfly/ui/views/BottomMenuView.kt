@@ -1,0 +1,154 @@
+package xyz.stignarnia.shelfly.ui.views
+
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.content.Context
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.MotionEvent.ACTION_CANCEL
+import android.view.MotionEvent.ACTION_DOWN
+import android.view.MotionEvent.ACTION_MOVE
+import android.view.MotionEvent.ACTION_UP
+import android.view.ViewGroup
+import android.view.ViewPropertyAnimator
+import android.widget.FrameLayout
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.children
+import androidx.core.view.forEach
+import androidx.core.view.updateLayoutParams
+import xyz.stignarnia.common.Mode
+import xyz.stignarnia.shelfly.R
+import xyz.stignarnia.shelfly.databinding.ViewBottomMenuBinding
+import xyz.stignarnia.ui_base.utilities.extensions.add
+import xyz.stignarnia.ui_base.utilities.extensions.colorFromAttr
+import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
+import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
+import xyz.stignarnia.ui_base.utilities.extensions.fadeIn
+import xyz.stignarnia.ui_base.utilities.extensions.fadeOut
+import xyz.stignarnia.ui_base.utilities.extensions.screenWidth
+import xyz.stignarnia.ui_base.utilities.extensions.visible
+import kotlin.math.abs
+
+class BottomMenuView : FrameLayout {
+
+  companion object {
+    private const val SWIPE_MIN_THRESHOLD = 150F
+    private const val FADE_DELAY = 150L
+  }
+
+  constructor(context: Context) : super(context)
+  constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+  val binding = ViewBottomMenuBinding.inflate(LayoutInflater.from(context), this)
+
+  var isModeMenuEnabled = true
+  var onModeSelected: ((Mode) -> Unit)? = null
+
+  private val screenWidth by lazy { screenWidth() }
+  private val itemIdleColor by lazy { context.colorFromAttr(R.attr.colorBottomMenuItem) }
+  private val itemSelectedColor by lazy { context.colorFromAttr(R.attr.colorBottomMenuItemChecked) }
+  private val animations = mutableListOf<ViewPropertyAnimator?>()
+
+  private var touchX = 0F
+  private var isModeMenu = false
+
+  init {
+    rootView.doOnApplyWindowInsets { _, insets, _, _ ->
+      val bottomInset = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom
+      binding.bottomNavigationView.updateLayoutParams<MarginLayoutParams> {
+        height = context.dimenToPx(R.dimen.bottomNavigationHeight) + bottomInset
+      }
+    }
+  }
+
+  override fun setEnabled(enabled: Boolean) {
+    super.setEnabled(enabled)
+    binding.bottomNavigationView.menu.forEach { it.isEnabled = enabled }
+  }
+
+  override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+    if (!isModeMenuEnabled || !isEnabled) {
+      return super.onInterceptTouchEvent(ev)
+    }
+
+    when (ev?.actionMasked) {
+      ACTION_DOWN -> {
+        touchX = ev.x
+        isModeMenu = false
+        disableTooltips()
+      }
+      ACTION_MOVE -> {
+        val delta = ev.x - touchX
+        if (!isModeMenu && abs(delta) > SWIPE_MIN_THRESHOLD) {
+          isModeMenu = true
+          showModeMenu()
+        }
+        with(binding) {
+          if (isModeMenu) {
+            if (ev.x > screenWidth / 2) {
+              bottomMenuModeShows.setTextColor(itemIdleColor)
+              bottomMenuModeMovies.setTextColor(itemSelectedColor)
+            } else {
+              bottomMenuModeShows.setTextColor(itemSelectedColor)
+              bottomMenuModeMovies.setTextColor(itemIdleColor)
+            }
+          }
+        }
+      }
+      ACTION_UP, ACTION_CANCEL -> {
+        if (isModeMenu) {
+          hideModeMenu()
+          isModeMenu = false
+          when {
+            ev.x > screenWidth / 2 -> onModeSelected?.invoke(Mode.MOVIES)
+            else -> onModeSelected?.invoke(Mode.SHOWS)
+          }
+        }
+      }
+    }
+
+    return super.onInterceptTouchEvent(ev)
+  }
+
+  private fun showModeMenu() {
+    with(binding) {
+      bottomMenuModeShows.setTextColor(itemIdleColor)
+      bottomMenuModeMovies.setTextColor(itemIdleColor)
+      bottomNavigationView.fadeOut(FADE_DELAY).add(animations)
+      bottomMenuModeLayout.fadeIn(FADE_DELAY).add(animations)
+    }
+  }
+
+  private fun hideModeMenu() {
+    with(binding) {
+      with(animations) {
+        forEach {
+          it?.setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationCancel(animation: Animator) {
+              bottomNavigationView.visible()
+              bottomNavigationView.alpha = 1F
+            }
+          })
+          it?.cancel()
+        }
+        clear()
+      }
+      bottomNavigationView.fadeIn(FADE_DELAY).add(animations)
+      bottomMenuModeLayout.fadeOut(FADE_DELAY).add(animations)
+    }
+  }
+
+  private fun disableTooltips() {
+    // The menu view's children are the item views. Clearing the listener on all
+    // of them avoids naming BottomNavigationItemView, which Material restricts
+    // to its own library group.
+    val content = binding.bottomNavigationView.getChildAt(0)
+    if (content is ViewGroup) {
+      content.children.forEach {
+        it.setOnLongClickListener(null)
+      }
+    }
+  }
+}

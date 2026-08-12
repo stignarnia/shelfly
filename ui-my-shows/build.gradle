@@ -31,7 +31,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.ui_my_shows'
+  namespace 'xyz.stignarnia.ui_my_shows'
 }
 
 dependencies {

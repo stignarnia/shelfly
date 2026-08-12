@@ -33,7 +33,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.ui_backup'
+  namespace 'xyz.stignarnia.ui_backup'
 
   testOptions {
     unitTests.all {

@@ -31,7 +31,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.ui_streamings'
+  namespace 'xyz.stignarnia.ui_streamings'
 }
 
 dependencies {

@@ -1,7 +1,7 @@
-package com.michaldrabik.ui_search
+package xyz.stignarnia.ui_search
 
-import com.michaldrabik.common_test.MainDispatcherRule
-import com.michaldrabik.common_test.UnconfinedCoroutineDispatchers
+import xyz.stignarnia.common_test.MainDispatcherRule
+import xyz.stignarnia.common_test.UnconfinedCoroutineDispatchers
 import io.mockk.MockKAnnotations
 import org.junit.Before
 import org.junit.Rule

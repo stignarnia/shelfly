@@ -26,7 +26,7 @@
     tools:visibility="visible"
     />
 
-  <com.michaldrabik.ui_base.common.views.tips.TipView
+  <xyz.stignarnia.ui_base.common.views.tips.TipView
     android:id="@+id/progressTipItem"
     android:layout_width="@dimen/tutorialTipSize"
     android:layout_height="@dimen/tutorialTipSize"
@@ -49,7 +49,7 @@
     tools:visibility="visible"
     />
 
-  <com.michaldrabik.ui_base.common.views.EmptySearchView
+  <xyz.stignarnia.ui_base.common.views.EmptySearchView
     android:id="@+id/progressEmptyFilterView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

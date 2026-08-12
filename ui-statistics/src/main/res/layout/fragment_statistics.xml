@@ -48,7 +48,7 @@
       tools:visibility="visible"
       >
 
-      <com.michaldrabik.ui_statistics.views.StatisticsTotalTimeSpentView
+      <xyz.stignarnia.ui_statistics.views.StatisticsTotalTimeSpentView
         android:id="@+id/statisticsTotalTimeSpent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
         app:layout_constraintVertical_chainStyle="packed"
         />
 
-      <com.michaldrabik.ui_statistics.views.StatisticsTotalEpisodesView
+      <xyz.stignarnia.ui_statistics.views.StatisticsTotalEpisodesView
         android:id="@+id/statisticsTotalEpisodes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@id/statisticsTotalTimeSpent"
         />
 
-      <com.michaldrabik.ui_statistics.views.StatisticsTopGenresView
+      <xyz.stignarnia.ui_statistics.views.StatisticsTopGenresView
         android:id="@+id/statisticsTopGenres"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@id/statisticsTotalEpisodes"
         />
 
-      <com.michaldrabik.ui_statistics.views.ratings.StatisticsRatingsView
+      <xyz.stignarnia.ui_statistics.views.ratings.StatisticsRatingsView
         android:id="@+id/statisticsRatings"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
         tools:visibility="visible"
         />
 
-      <com.michaldrabik.ui_statistics.views.mostWatched.StatisticsMostWatchedShowsView
+      <xyz.stignarnia.ui_statistics.views.mostWatched.StatisticsMostWatchedShowsView
         android:id="@+id/statisticsMostWatchedShows"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

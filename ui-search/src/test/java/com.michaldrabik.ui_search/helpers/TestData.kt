@@ -1,11 +1,11 @@
-package com.michaldrabik.ui_search.helpers
+package xyz.stignarnia.ui_search.helpers
 
-import com.michaldrabik.ui_model.Image
-import com.michaldrabik.ui_model.ImageType
-import com.michaldrabik.ui_model.Movie
-import com.michaldrabik.ui_model.Show
-import com.michaldrabik.ui_model.SpoilersSettings
-import com.michaldrabik.ui_search.recycler.SearchListItem
+import xyz.stignarnia.ui_model.Image
+import xyz.stignarnia.ui_model.ImageType
+import xyz.stignarnia.ui_model.Movie
+import xyz.stignarnia.ui_model.Show
+import xyz.stignarnia.ui_model.SpoilersSettings
+import xyz.stignarnia.ui_search.recycler.SearchListItem
 import java.util.UUID
 
 object TestData {

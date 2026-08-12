@@ -97,9 +97,9 @@
 -if interface * { @retrofit2.http.* <methods>; }
 -keep,allowobfuscation interface <1>
 
--keep class com.michaldrabik.data_remote.tmdb.model.** { *; }
--keep class com.michaldrabik.data_remote.omdb.model.** { *; }
--keep class com.michaldrabik.data_remote.catalog.model.** { *; }
+-keep class xyz.stignarnia.data_remote.tmdb.model.** { *; }
+-keep class xyz.stignarnia.data_remote.omdb.model.** { *; }
+-keep class xyz.stignarnia.data_remote.catalog.model.** { *; }
 
 ### OkHttp
 

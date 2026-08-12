@@ -8,7 +8,7 @@
   tools:parentTag="android.widget.FrameLayout"
   >
 
-  <com.michaldrabik.ui_base.common.views.FoldableTextView
+  <xyz.stignarnia.ui_base.common.views.FoldableTextView
     android:id="@+id/personBioText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

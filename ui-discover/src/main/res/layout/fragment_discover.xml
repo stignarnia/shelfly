@@ -36,16 +36,16 @@
 
   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-  <com.michaldrabik.ui_base.common.views.ModeTabsView
+  <xyz.stignarnia.ui_base.common.views.ModeTabsView
     android:id="@+id/discoverModeTabsView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/screenMarginHorizontal"
     android:layout_marginTop="@dimen/collectionTabsMargin"
-    app:layout_behavior="com.michaldrabik.ui_base.common.behaviour.ScrollableViewBehaviour"
+    app:layout_behavior="xyz.stignarnia.ui_base.common.behaviour.ScrollableViewBehaviour"
     />
 
-  <com.michaldrabik.ui_discover.filters.views.DiscoverFiltersView
+  <xyz.stignarnia.ui_discover.filters.views.DiscoverFiltersView
     android:id="@+id/discoverFiltersView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -55,10 +55,10 @@
     android:paddingStart="@dimen/screenMarginHorizontal"
     android:paddingEnd="@dimen/screenMarginHorizontal"
     android:visibility="gone"
-    app:layout_behavior="com.michaldrabik.ui_base.common.behaviour.ScrollableViewBehaviour"
+    app:layout_behavior="xyz.stignarnia.ui_base.common.behaviour.ScrollableViewBehaviour"
     />
 
-  <com.michaldrabik.ui_base.common.views.SearchView
+  <xyz.stignarnia.ui_base.common.views.SearchView
     android:id="@+id/discoverSearchView"
     android:layout_width="match_parent"
     android:layout_height="@dimen/searchViewHeight"

@@ -26,7 +26,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.ui_navigation'
+  namespace 'xyz.stignarnia.ui_navigation'
 }
 
 dependencies {

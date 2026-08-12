@@ -49,7 +49,7 @@
       tools:visibility="visible"
       >
 
-      <com.michaldrabik.ui_statistics_movies.views.StatisticsMoviesTotalTimeSpentView
+      <xyz.stignarnia.ui_statistics_movies.views.StatisticsMoviesTotalTimeSpentView
         android:id="@+id/statisticsMoviesTotalTimeSpent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-      <com.michaldrabik.ui_statistics_movies.views.StatisticsMoviesTotalMoviesView
+      <xyz.stignarnia.ui_statistics_movies.views.StatisticsMoviesTotalMoviesView
         android:id="@+id/statisticsMoviesTotalMovies"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
         app:layout_goneMarginEnd="@dimen/screenMarginHorizontal"
         />
 
-      <com.michaldrabik.ui_statistics_movies.views.StatisticsMoviesTopGenresView
+      <xyz.stignarnia.ui_statistics_movies.views.StatisticsMoviesTopGenresView
         android:id="@+id/statisticsMoviesTopGenres"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
         app:layout_constraintTop_toTopOf="@id/statisticsMoviesTotalTimeSpent"
         />
 
-      <com.michaldrabik.ui_statistics_movies.views.ratings.StatisticsMoviesRatingsView
+      <xyz.stignarnia.ui_statistics_movies.views.ratings.StatisticsMoviesRatingsView
         android:id="@+id/statisticsMoviesRatings"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

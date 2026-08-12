@@ -96,7 +96,7 @@ android {
     includeInBundle = false
   }
 
-  namespace 'com.michaldrabik.showly2'
+  namespace 'xyz.stignarnia.shelfly'
 }
 
 dependencies {

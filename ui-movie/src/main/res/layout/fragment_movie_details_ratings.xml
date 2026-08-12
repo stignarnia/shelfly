@@ -6,7 +6,7 @@
   android:clipToPadding="false"
   >
 
-  <com.michaldrabik.ui_base.common.views.RatingsStripView
+  <xyz.stignarnia.ui_base.common.views.RatingsStripView
     android:id="@+id/movieDetailsRatings"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

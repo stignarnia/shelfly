@@ -31,7 +31,7 @@ android {
     }
   }
 
-  namespace 'com.michaldrabik.ui_discover_movies'
+  namespace 'xyz.stignarnia.ui_discover_movies'
 }
 
 dependencies {

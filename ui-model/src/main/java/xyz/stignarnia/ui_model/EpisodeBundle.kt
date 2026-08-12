@@ -1,0 +1,7 @@
+package xyz.stignarnia.ui_model
+
+data class EpisodeBundle(
+  val episode: Episode,
+  val season: Season,
+  val show: Show,
+)
