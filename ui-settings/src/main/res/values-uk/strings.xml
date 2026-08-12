@@ -26,10 +26,6 @@
   <string name="textSettingsShowsNotificationsSummary">Отримувати сповіщення про нові фільми, серії, сезони, за якими ви стежите.</string>
   <string name="textSettingsShowsNotificationsRationale">Будь ласка, надайте додатку дозвіл на показ сповіщень.\n\nВи хотіли б зробити це зараз?</string>
   <string name="textSettingsMisc">Інше</string>
-  <string name="textSettingsContactDevsTitle">Зв\'язатися з розробниками</string>
-  <string name="textSettingsContactDevsSummary">Є проблема? Натисніть, щоб надіслати нам листа (showlyapp@gmail.com).</string>
-  <string name="textSettingsRateAppTitle">Залишити відгук</string>
-  <string name="textSettingsRateAppSummary">Подобається Showly? Залиште свій відгук у Play Store. Дякуємо!</string>
   <string name="textSettingsDeleteCacheTitle">Очистити кеш зображень</string>
   <string name="textSettingsDeleteCacheSummary">Натисніть, щоб очистити кеш локальних зображень. Це може допомогти, якщо зображення серіалів не завантажуються коректно.</string>
   <string name="textSettingsQuickSyncConfirmationTitle">Вимкнути автоматичну синхронізацію</string>

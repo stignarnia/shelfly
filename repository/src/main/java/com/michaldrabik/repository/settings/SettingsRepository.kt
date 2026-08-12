@@ -50,7 +50,6 @@ class SettingsRepository @Inject constructor(
     private const val DATE_FORMAT = "KEY_DATE_FORMAT"
     private const val MODE = "KEY_MOVIES_MODE"
     private const val MOVIES_ENABLED = "KEY_MOVIES_ENABLED"
-    private const val TWITTER_AD_ENABLED = "TWITTER_AD_ENABLED"
     private const val PROGRESS_PERCENT = "KEY_PROGRESS_PERCENT"
     private const val STREAMINGS_ENABLED = "KEY_STREAMINGS_ENABLED"
     private const val USER_ID = "KEY_USER_ID"
@@ -87,7 +86,6 @@ class SettingsRepository @Inject constructor(
   var installTimestamp by LongPreference(preferences, INSTALL_TIMESTAMP, 0L)
   var streamingsEnabled by BooleanPreference(preferences, STREAMINGS_ENABLED, true)
   var isMoviesEnabled by BooleanPreference(preferences, MOVIES_ENABLED, true)
-  var isTwitterAdEnabled by BooleanPreference(preferences, TWITTER_AD_ENABLED, true)
   var theme by IntPreference(preferences, THEME, AppCompatDelegate.MODE_NIGHT_YES)
   var language by StringPreference(preferences, LANGUAGE, DEFAULT_LANGUAGE)
   var country by StringPreference(preferences, COUNTRY, DEFAULT_COUNTRY)

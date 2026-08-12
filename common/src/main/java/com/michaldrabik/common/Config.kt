@@ -13,10 +13,6 @@ object Config {
   const val TMDB_IMAGE_BASE_ACTOR_URL = "${TMDB_IMAGE_BASE_URL}h632"
   const val TMDB_IMAGE_BASE_LOGO_URL = "${TMDB_IMAGE_BASE_URL}original"
 
-  const val DEVELOPER_MAIL = "showlyapp@gmail.com"
-  const val PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=com.michaldrabik.showly2"
-  const val TWITTER_URL = "https://twitter.com/AppShowly/"
-  const val INSTAGRAM_URL = "https://www.instagram.com/showlyapp/"
   const val JUST_WATCH_URL = "https://www.justwatch.com/"
   const val TMDB_URL = "https://www.themoviedb.org/"
 

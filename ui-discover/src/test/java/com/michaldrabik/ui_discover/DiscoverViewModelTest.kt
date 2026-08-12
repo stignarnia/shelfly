@@ -9,7 +9,6 @@ import com.michaldrabik.repository.images.ShowImagesProvider
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_discover.cases.DiscoverFiltersCase
 import com.michaldrabik.ui_discover.cases.DiscoverShowsCase
-import com.michaldrabik.ui_discover.cases.DiscoverTwitterCase
 import com.michaldrabik.ui_model.DiscoverFilters
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -33,7 +32,6 @@ class DiscoverViewModelTest : BaseMockTest() {
 
   @MockK internal lateinit var showsCase: DiscoverShowsCase
   @MockK lateinit var filtersCase: DiscoverFiltersCase
-  @MockK lateinit var twitterCase: DiscoverTwitterCase
   @MockK lateinit var imagesProvider: ShowImagesProvider
 
   private lateinit var SUT: DiscoverViewModel
@@ -46,7 +44,7 @@ class DiscoverViewModelTest : BaseMockTest() {
     coEvery { showsCase.loadCachedShows(any()) } returns emptyList()
     coEvery { showsCase.loadRemoteShows(any()) } returns emptyList()
 
-    SUT = DiscoverViewModel(showsCase, filtersCase, twitterCase, imagesProvider)
+    SUT = DiscoverViewModel(showsCase, filtersCase, imagesProvider)
   }
 
   @After

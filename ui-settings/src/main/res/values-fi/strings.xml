@@ -26,10 +26,6 @@
   <string name="textSettingsShowsNotificationsSummary">Vastaanota ilmoituksia uusista elokuvista sekä seuraamiesi sarjojen jaksoista ja tuotantokausista.</string>
   <string name="textSettingsShowsNotificationsRationale">Myönnä sovellukselle ilmoitusten näyttöoikeus.\n\nHaluatko tämän nyt?</string>
   <string name="textSettingsMisc">Sekalaiset</string>
-  <string name="textSettingsContactDevsTitle">Ota yhteyttä kehittäjiin</string>
-  <string name="textSettingsContactDevsSummary">Onko ongelmia? Lähetä meille sähköpostia napauttamalla (showlyapp@gmail.com).</string>
-  <string name="textSettingsRateAppTitle">Anna palautetta</string>
-  <string name="textSettingsRateAppSummary">Nautitko Showlysta? Arvostele se Play Kaupassa, kiitos!</string>
   <string name="textSettingsDeleteCacheTitle">Tyhjennä kuvavälimuisti</string>
   <string name="textSettingsDeleteCacheSummary">Tyhjennä paikallinen kuvavälimuisti napauttamalla. Tämä saattaa auttaa, jos sarjojen kuvat eivät lataudu oikein.</string>
   <string name="textSettingsQuickSyncConfirmationTitle">Poista automaattinen synkronointi käytöstä</string>

@@ -1,11 +1,9 @@
 package com.michaldrabik.ui_discover.cases
 
 import com.michaldrabik.common.Config
-import com.michaldrabik.common.ConfigVariant
 import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.common.extensions.isSameDayOrAfter
 import com.michaldrabik.common.extensions.nowUtc
-import com.michaldrabik.common.extensions.nowUtcMillis
 import com.michaldrabik.common.extensions.toUtcDateTime
 import com.michaldrabik.repository.TranslationsRepository
 import com.michaldrabik.repository.images.ShowImagesProvider
@@ -15,7 +13,6 @@ import com.michaldrabik.ui_discover.helpers.itemtype.ImageTypeProvider
 import com.michaldrabik.ui_discover.recycler.DiscoverListItem
 import com.michaldrabik.ui_model.DiscoverFeed
 import com.michaldrabik.ui_model.DiscoverFilters
-import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageType
 import com.michaldrabik.ui_model.Show
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -120,21 +117,7 @@ internal class DiscoverShowsCase @Inject constructor(
         }
       }.awaitAll()
       .toMutableList()
-      .apply { insertTwitterAdItem(this) }
       .toList()
-  }
-
-  private fun insertTwitterAdItem(items: MutableList<DiscoverListItem>) {
-    val isEnabled = settingsRepository.isTwitterAdEnabled
-    val isTimePassed = (nowUtcMillis() - settingsRepository.installTimestamp) > ConfigVariant.TWITTER_AD_DELAY
-    if (!isEnabled || !isTimePassed) return
-
-    val twitterAd = DiscoverListItem(Show.EMPTY, Image.createUnknown(ImageType.TWITTER))
-    if (items.size >= imageTypeProvider.twitterAdPosition) {
-      items.add(imageTypeProvider.twitterAdPosition, twitterAd)
-    } else {
-      items.add(twitterAd)
-    }
   }
 
   private suspend fun loadTranslation(
