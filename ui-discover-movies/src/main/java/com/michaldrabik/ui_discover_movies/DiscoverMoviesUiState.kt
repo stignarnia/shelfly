@@ -7,7 +7,6 @@ import com.michaldrabik.ui_model.DiscoverFilters
 data class DiscoverMoviesUiState(
   val items: List<DiscoverMovieListItem>? = null,
   val isLoading: Boolean? = null,
-  val isSyncing: Boolean? = null,
   var filters: DiscoverFilters? = null,
   var resetScroll: Event<Boolean>? = null,
 )

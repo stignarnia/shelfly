@@ -317,9 +317,6 @@ internal class DiscoverFragment :
           }
           discoverRecycler.fadeIn(200, withHardware = true)
         }
-        isSyncing?.let {
-          discoverSearchView.isEnabled = !it
-        }
         isLoading?.let {
           discoverSearchView.isEnabled = !it
           discoverSwipeRefresh.isRefreshing = it

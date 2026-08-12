@@ -2,7 +2,6 @@ package com.michaldrabik.ui_lists.lists
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.work.WorkManager
 import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.images.ShowImagesProvider
 import com.michaldrabik.ui_base.events.EventsManager
@@ -34,7 +33,6 @@ class ListsViewModel @Inject constructor(
   private val showImagesProvider: ShowImagesProvider,
   private val movieImagesProvider: MovieImagesProvider,
   private val eventsManager: EventsManager,
-  workManager: WorkManager,
 ) : ViewModel() {
 
   private var loadItemsJob: Job? = null
@@ -42,7 +40,6 @@ class ListsViewModel @Inject constructor(
   private val itemsState = MutableStateFlow<List<ListsItem>?>(null)
   private val scrollState = MutableStateFlow(Event(false))
   private val sortOrderState = MutableStateFlow<Pair<SortOrder, SortType>?>(null)
-  private val syncingState = MutableStateFlow(false)
 
   init {
     viewModelScope.launch {
@@ -117,13 +114,11 @@ class ListsViewModel @Inject constructor(
     itemsState,
     scrollState,
     sortOrderState,
-    syncingState,
-  ) { s1, s2, s3, s4 ->
+  ) { s1, s2, s3 ->
     ListsUiState(
       items = s1,
       resetScroll = s2,
       sortOrder = s3,
-      isSyncing = s4,
     )
   }.stateIn(
     scope = viewModelScope,

@@ -24,7 +24,6 @@ import com.michaldrabik.ui_base.utilities.extensions.fadeIn
 import com.michaldrabik.ui_base.utilities.extensions.fadeOut
 import com.michaldrabik.ui_base.utilities.extensions.gone
 import com.michaldrabik.ui_base.utilities.extensions.hideKeyboard
-import com.michaldrabik.ui_base.utilities.extensions.launchAndRepeatStarted
 import com.michaldrabik.ui_base.utilities.extensions.navigateToSafe
 import com.michaldrabik.ui_base.utilities.extensions.nextPage
 import com.michaldrabik.ui_base.utilities.extensions.onClick
@@ -78,10 +77,6 @@ class FollowedMoviesFragment :
     setupView()
     setupPager()
     setupInsets()
-
-    launchAndRepeatStarted(
-      { viewModel.uiState.collect { render(it) } },
-    )
   }
 
   override fun onSaveInstanceState(outState: Bundle) {
@@ -283,12 +278,6 @@ class FollowedMoviesFragment :
           .add(animations)
           ?.start()
       }
-    }
-  }
-
-  private fun render(uiState: FollowedMoviesUiState) {
-    uiState.isSyncing?.let {
-      binding.followedMoviesSearchView.isEnabled = !it
     }
   }
 

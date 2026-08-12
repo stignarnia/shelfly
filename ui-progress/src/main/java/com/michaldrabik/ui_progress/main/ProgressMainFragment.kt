@@ -371,7 +371,6 @@ class ProgressMainFragment :
 
   private fun render(uiState: ProgressMainUiState) {
     with(binding) {
-      progressMainSearchView.isEnabled = !uiState.isSyncing
     }
   }
 

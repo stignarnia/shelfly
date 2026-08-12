@@ -3,7 +3,6 @@ package com.michaldrabik.ui_discover
 import BaseMockTest
 import TestData
 import androidx.lifecycle.viewModelScope
-import androidx.work.WorkManager
 import com.google.common.truth.Truth.assertThat
 import com.michaldrabik.common.extensions.nowUtcMillis
 import com.michaldrabik.repository.images.ShowImagesProvider
@@ -15,7 +14,6 @@ import com.michaldrabik.ui_model.DiscoverFilters
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
-import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
@@ -37,7 +35,6 @@ class DiscoverViewModelTest : BaseMockTest() {
   @MockK lateinit var filtersCase: DiscoverFiltersCase
   @MockK lateinit var twitterCase: DiscoverTwitterCase
   @MockK lateinit var imagesProvider: ShowImagesProvider
-  @RelaxedMockK lateinit var workManager: WorkManager
 
   private lateinit var SUT: DiscoverViewModel
 
@@ -49,7 +46,7 @@ class DiscoverViewModelTest : BaseMockTest() {
     coEvery { showsCase.loadCachedShows(any()) } returns emptyList()
     coEvery { showsCase.loadRemoteShows(any()) } returns emptyList()
 
-    SUT = DiscoverViewModel(showsCase, filtersCase, twitterCase, imagesProvider, workManager)
+    SUT = DiscoverViewModel(showsCase, filtersCase, twitterCase, imagesProvider)
   }
 
   @After

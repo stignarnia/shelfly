@@ -321,9 +321,6 @@ class ListsFragment :
         sortOrder?.let {
           fragmentListsFilters.setSorting(it.first, it.second)
         }
-        isSyncing?.let {
-          fragmentListsSearchView.isEnabled = !it
-        }
       }
     }
   }

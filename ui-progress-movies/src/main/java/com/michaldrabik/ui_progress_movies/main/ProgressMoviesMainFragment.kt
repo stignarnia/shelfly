@@ -321,7 +321,6 @@ class ProgressMoviesMainFragment :
 
   private fun render(uiState: ProgressMoviesMainUiState) {
     with(binding) {
-      progressMoviesSearchView.isEnabled = !uiState.isSyncing
     }
   }
 

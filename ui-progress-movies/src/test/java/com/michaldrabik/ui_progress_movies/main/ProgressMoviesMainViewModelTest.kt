@@ -1,7 +1,6 @@
 package com.michaldrabik.ui_progress_movies.main
 
 import androidx.lifecycle.viewModelScope
-import androidx.work.WorkManager
 import com.google.common.truth.Truth.assertThat
 import com.michaldrabik.ui_base.events.EventsManager
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
@@ -13,7 +12,6 @@ import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
-import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.just
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
@@ -31,7 +29,6 @@ class ProgressMoviesMainViewModelTest : BaseMockTest() {
 
   @MockK lateinit var mainCase: ProgressMoviesMainCase
   @MockK lateinit var eventsManager: EventsManager
-  @RelaxedMockK lateinit var workManager: WorkManager
 
   private lateinit var SUT: ProgressMoviesMainViewModel
 
@@ -44,7 +41,7 @@ class ProgressMoviesMainViewModelTest : BaseMockTest() {
 
     coEvery { eventsManager.events } returns MutableSharedFlow()
 
-    SUT = ProgressMoviesMainViewModel(mainCase, eventsManager, workManager)
+    SUT = ProgressMoviesMainViewModel(mainCase, eventsManager)
   }
 
   @After

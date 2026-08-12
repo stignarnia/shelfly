@@ -2,7 +2,6 @@ package com.michaldrabik.ui_progress.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.work.WorkManager
 import com.michaldrabik.ui_base.events.EventsManager
 import com.michaldrabik.ui_base.events.ReloadData
 import com.michaldrabik.ui_base.utilities.events.Event
@@ -30,7 +29,6 @@ import com.michaldrabik.ui_base.events.Event as EventSync
 class ProgressMainViewModel @Inject constructor(
   private val episodesCase: ProgressMainEpisodesCase,
   private val eventsManager: EventsManager,
-  workManager: WorkManager,
 ) : ViewModel(),
   ChannelsDelegate by DefaultChannelsDelegate() {
 
@@ -38,7 +36,6 @@ class ProgressMainViewModel @Inject constructor(
   private val searchQueryState = MutableStateFlow<String?>(null)
   private val calendarModeState = MutableStateFlow<CalendarMode?>(null)
   private val scrollState = MutableStateFlow<Event<Boolean>?>(null)
-  private val syncingState = MutableStateFlow(false)
 
   private var calendarMode = CalendarMode.PRESENT_FUTURE
 
@@ -109,14 +106,12 @@ class ProgressMainViewModel @Inject constructor(
     searchQueryState,
     calendarModeState,
     scrollState,
-    syncingState,
-  ) { s1, s2, s3, s4, s5 ->
+  ) { s1, s2, s3, s4 ->
     ProgressMainUiState(
       timestamp = s1,
       searchQuery = s2,
       calendarMode = s3,
       resetScroll = s4,
-      isSyncing = s5,
     )
   }.stateIn(
     scope = viewModelScope,

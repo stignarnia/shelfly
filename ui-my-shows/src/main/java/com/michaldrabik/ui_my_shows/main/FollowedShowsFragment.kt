@@ -24,7 +24,6 @@ import com.michaldrabik.ui_base.utilities.extensions.fadeIn
 import com.michaldrabik.ui_base.utilities.extensions.fadeOut
 import com.michaldrabik.ui_base.utilities.extensions.gone
 import com.michaldrabik.ui_base.utilities.extensions.hideKeyboard
-import com.michaldrabik.ui_base.utilities.extensions.launchAndRepeatStarted
 import com.michaldrabik.ui_base.utilities.extensions.navigateToSafe
 import com.michaldrabik.ui_base.utilities.extensions.nextPage
 import com.michaldrabik.ui_base.utilities.extensions.onClick
@@ -79,10 +78,6 @@ class FollowedShowsFragment :
     setupView()
     setupPager()
     setupInsets()
-
-    launchAndRepeatStarted(
-      { viewModel.uiState.collect { render(it) } },
-    )
 
     setFragmentResultListener(REQUEST_MY_SHOWS_FILTERS) { _, _ ->
       viewModel.refreshData()
@@ -292,12 +287,6 @@ class FollowedShowsFragment :
           .add(animations)
           ?.start()
       }
-    }
-  }
-
-  private fun render(uiState: FollowedShowsUiState) {
-    uiState.isSyncing?.let {
-      binding.followedShowsSearchView.isEnabled = !it
     }
   }
 

@@ -2,14 +2,13 @@ package com.michaldrabik.ui_my_shows.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.work.WorkManager
 import com.michaldrabik.ui_base.events.EventsManager
 import com.michaldrabik.ui_base.events.ReloadData
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,14 +16,9 @@ import javax.inject.Inject
 @HiltViewModel
 class FollowedShowsViewModel @Inject constructor(
   private val eventsManager: EventsManager,
-  workManager: WorkManager,
 ) : ViewModel() {
 
   private val searchQueryState = MutableStateFlow<String?>(null)
-  private val syncingState = MutableStateFlow(false)
-
-  init {
-  }
 
   fun onSearchQuery(searchQuery: String?) {
     searchQueryState.value = searchQuery
@@ -36,17 +30,11 @@ class FollowedShowsViewModel @Inject constructor(
     }
   }
 
-  val uiState = combine(
-    searchQueryState,
-    syncingState,
-  ) { s1, s2 ->
-    FollowedShowsUiState(
-      searchQuery = s1,
-      isSyncing = s2,
+  val uiState = searchQueryState
+    .map { FollowedShowsUiState(searchQuery = it) }
+    .stateIn(
+      scope = viewModelScope,
+      started = SharingStarted.WhileSubscribed(SUBSCRIBE_STOP_TIMEOUT),
+      initialValue = FollowedShowsUiState(),
     )
-  }.stateIn(
-    scope = viewModelScope,
-    started = SharingStarted.WhileSubscribed(SUBSCRIBE_STOP_TIMEOUT),
-    initialValue = FollowedShowsUiState(),
-  )
 }

@@ -4,7 +4,6 @@ import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.Companion.PRIVATE
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.work.WorkManager
 import com.michaldrabik.common.Config
 import com.michaldrabik.common.extensions.nowUtcMillis
 import com.michaldrabik.repository.images.ShowImagesProvider
@@ -40,13 +39,11 @@ internal class DiscoverViewModel @Inject constructor(
   private val filtersCase: DiscoverFiltersCase,
   private val twitterCase: DiscoverTwitterCase,
   private val imagesProvider: ShowImagesProvider,
-  workManager: WorkManager,
 ) : ViewModel(),
   ChannelsDelegate by DefaultChannelsDelegate() {
 
   private val itemsState = MutableStateFlow<List<DiscoverListItem>?>(null)
   private val loadingState = MutableStateFlow(false)
-  private val syncingState = MutableStateFlow(false)
   private val filtersState = MutableStateFlow<DiscoverFilters?>(null)
   private val scrollState = MutableStateFlow(Event(false))
 
@@ -172,16 +169,14 @@ internal class DiscoverViewModel @Inject constructor(
   val uiState = combine(
     itemsState,
     loadingState,
-    syncingState,
     filtersState,
     scrollState,
-  ) { s1, s2, s3, s4, s5 ->
+  ) { s1, s2, s3, s4 ->
     DiscoverUiState(
       items = s1,
       isLoading = s2,
-      isSyncing = s3,
-      filters = s4,
-      resetScroll = s5,
+      filters = s3,
+      resetScroll = s4,
     )
   }.stateIn(
     scope = viewModelScope,
