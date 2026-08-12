@@ -9,7 +9,6 @@
   <string name="textShowQuickProgressDone">Dine fremskridt er blevet opdateret.</string>
   <string name="textEpisodeDate">Afsnit %1$d | %2$s</string>
   <string name="textEpisodeTitle">S.%02d A.%02d - \'%s\'</string>
-  <string name="textTraktSyncRemovedFromTrakt">Trakt.tv synkroniserede succesfuldt.</string>
   <string name="textActorsEmpty">Skuespillere er ikke tilgængelige</string>
   <string name="textSeasons">Sæsoner:</string>
   <string name="textSeasonsEmpty">Sæsoner er ikke tilgængelige.</string>

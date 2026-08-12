@@ -71,7 +71,7 @@ interface TmdbService {
     @Path("tmdbId") tmdbId: Long,
   ): TmdbStreamings
 
-  // Catalog endpoints, replacing the Trakt equivalents.
+  // Catalog endpoints.
 
   @GET("tv/{tmdbId}?append_to_response=external_ids,content_ratings,videos")
   suspend fun fetchShow(
@@ -113,8 +113,8 @@ interface TmdbService {
   ): TmdbPage<TmdbMovie>
 
   /**
-   * Trakt's "anticipated" list has no direct equivalent, so it is approximated
-   * with unreleased titles ordered by popularity.
+   * TMDB has no "anticipated" feed, so it is approximated with unreleased
+   * titles ordered by popularity.
    */
   @GET("discover/tv?sort_by=popularity.desc")
   suspend fun fetchAnticipatedShows(

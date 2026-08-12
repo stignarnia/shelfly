@@ -11,5 +11,4 @@
   <string name="textMovieCollections">Коллекция</string>
   <string name="textMovieManageLists">Управление списками</string>
   <string name="textMovieManageListsCount">Управление списками (%d)</string>
-  <string name="textTraktSyncMovieRemovedFromTrakt">Trakt.tv успешно синхронизирован.</string>
 </resources>

@@ -6,7 +6,6 @@
   <string name="textMoviesCalendarRecentsEmpty">There are no recently aired movies.</string>
 
   <string name="textDiscoverMovies">Discover Movies</string>
-  <string name="textMoviesTraktSynchronize">Import from Trakt.tv</string>
-  <string name="textMoviesProgressEmpty">Your <b>Progress</b> is currently empty.\n\nVisit <b>Discover</b> tab to add movies or import your Trakt.tv collection.</string>
+  <string name="textMoviesProgressEmpty">Your <b>Progress</b> is currently empty.\n\nVisit <b>Discover</b> tab to add movies or import your TMDB collection.</string>
 
 </resources>

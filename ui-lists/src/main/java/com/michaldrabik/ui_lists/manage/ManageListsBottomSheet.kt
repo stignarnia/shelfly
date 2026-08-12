@@ -17,12 +17,10 @@ import com.michaldrabik.common.Mode
 import com.michaldrabik.ui_base.BaseBottomSheetFragment
 import com.michaldrabik.ui_base.events.Event
 import com.michaldrabik.ui_base.events.EventsManager
-import com.michaldrabik.ui_base.events.TraktQuickSyncSuccess
 import com.michaldrabik.ui_base.utilities.extensions.launchAndRepeatStarted
 import com.michaldrabik.ui_base.utilities.extensions.onClick
 import com.michaldrabik.ui_base.utilities.extensions.requireLong
 import com.michaldrabik.ui_base.utilities.extensions.requireString
-import com.michaldrabik.ui_base.utilities.extensions.showInfoSnackbar
 import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.viewBinding
 import com.michaldrabik.ui_lists.R
@@ -115,12 +113,7 @@ class ManageListsBottomSheet : BaseBottomSheetFragment(R.layout.view_manage_list
     }
   }
 
-  private fun handleEvent(event: Event) {
-    if (event is TraktQuickSyncSuccess) {
-      val text = resources.getQuantityString(R.plurals.textTraktQuickSyncComplete, event.count, event.count)
-      binding.viewManageListsSnackHost.showInfoSnackbar(text)
-    }
-  }
+  private fun handleEvent(event: Event) = Unit
 
   override fun onDestroyView() {
     setFragmentResult(REQUEST_MANAGE_LISTS, bundleOf())

@@ -14,13 +14,8 @@ import com.michaldrabik.data_remote.catalog.model.Season
 import com.michaldrabik.data_remote.catalog.model.Show
 
 /**
- * Maps TMDB responses onto the data-remote DTOs the repository layer already
- * consumes, so switching data source does not ripple through the mappers in
- * :repository.
- *
- * These DTOs still live in the trakt.model package. They are plain data holders
- * with nothing Trakt-specific in them, and the package is renamed once the Trakt
- * source is deleted.
+ * Maps TMDB responses onto the shared catalog DTOs the repository layer
+ * consumes.
  */
 
 private const val CERTIFICATION_COUNTRY = "US"
@@ -57,7 +52,6 @@ internal fun TmdbShow.toShow(): Show =
 
 internal fun TmdbShow.toIds(): Ids =
   Ids(
-    trakt = null,
     slug = null,
     tvdb = external_ids?.tvdb_id,
     imdb = external_ids?.imdb_id,
@@ -68,7 +62,6 @@ internal fun TmdbShow.toIds(): Ids =
 internal fun TmdbMovie.toMovie(): Movie =
   Movie(
     ids = Ids(
-      trakt = null,
       slug = null,
       tvdb = null,
       imdb = external_ids?.imdb_id,
@@ -95,7 +88,6 @@ internal fun TmdbMovie.toMovie(): Movie =
 internal fun TmdbSeason.toSeason(): Season =
   Season(
     ids = Ids(
-      trakt = null,
       slug = null,
       tvdb = null,
       imdb = null,
@@ -118,7 +110,6 @@ internal fun TmdbEpisode.toEpisode(): Episode =
     number = episode_number,
     title = name,
     ids = Ids(
-      trakt = null,
       slug = null,
       tvdb = null,
       imdb = null,
@@ -137,7 +128,7 @@ internal fun TmdbEpisode.toEpisode(): Episode =
 
 internal fun TmdbSearchItem.toShow(): Show =
   Show(
-    ids = Ids(trakt = null, slug = null, tvdb = null, imdb = null, tmdb = id, tvrage = null),
+    ids = Ids(slug = null, tvdb = null, imdb = null, tmdb = id, tvrage = null),
     title = name,
     year = first_air_date.toYear(),
     overview = overview,
@@ -159,7 +150,7 @@ internal fun TmdbSearchItem.toShow(): Show =
 
 internal fun TmdbSearchItem.toMovie(): Movie =
   Movie(
-    ids = Ids(trakt = null, slug = null, tvdb = null, imdb = null, tmdb = id, tvrage = null),
+    ids = Ids(slug = null, tvdb = null, imdb = null, tmdb = id, tvrage = null),
     title = title,
     year = release_date.toYear(),
     overview = overview,
@@ -188,8 +179,8 @@ private fun String?.toYear(): Int? = this?.take(4)?.toIntOrNull()
 private fun String?.isAired(): Boolean = !this.isNullOrBlank()
 
 /**
- * TMDB returns plain dates ("2011-04-17") where Trakt returned full instants.
- * ZonedDateTime.parse rejects the former, so dates are widened to midnight UTC.
+ * TMDB returns plain dates ("2011-04-17") rather than full instants, and
+ * ZonedDateTime.parse rejects those, so dates are widened to midnight UTC.
  */
 private fun String?.toIsoInstant(): String? {
   if (this.isNullOrBlank()) {

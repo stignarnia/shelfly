@@ -11,5 +11,4 @@
   <string name="textMovieCollections">Koleksiyonlar</string>
   <string name="textMovieManageLists">Listeleri Yönet</string>
   <string name="textMovieManageListsCount">Listeleri Yönet (%d)</string>
-  <string name="textTraktSyncMovieRemovedFromTrakt">Trakt.tv eşitlemesi başarılı.</string>
 </resources>

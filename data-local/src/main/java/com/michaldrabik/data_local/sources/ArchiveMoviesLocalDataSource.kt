@@ -9,7 +9,7 @@ interface ArchiveMoviesLocalDataSource {
 
   suspend fun getAll(ids: List<Long>): List<Movie>
 
-  suspend fun getAllTraktIds(): List<Long>
+  suspend fun getAllTmdbIds(): List<Long>
 
   suspend fun getById(tmdbId: Long): Movie?
 

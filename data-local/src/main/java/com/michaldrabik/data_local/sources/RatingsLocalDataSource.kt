@@ -9,7 +9,7 @@ interface RatingsLocalDataSource {
   suspend fun getAllByType(type: String): List<Rating>
 
   suspend fun getAllByType(
-    idsTrakt: List<Long>,
+    idsTmdb: List<Long>,
     type: String,
   ): List<Rating>
 

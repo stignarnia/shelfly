@@ -19,7 +19,7 @@
   <string name="textManageLists">إدارة القوائم</string>
   <string name="textManageListsShows">إدارة قوائمك المتعلقة بهذا المسلسل.</string>
   <string name="textManageListsMovies">إدارة قوائمك المتعلقة بهذا الفيلم.</string>
-  <string name="errorCouldNotCreateList">تعذر إنشاء قائمة جديدة في حسابك على موقع Trakt.tv.\nالرجاء التأكد من اتصالك بالإنترنت وحاول مرة أخرى.</string>
-  <string name="errorCouldNotUpdateList">تعذر تحديث القائمة في حسابك على موقع Trakt.tv.\nالرجاء التأكد من اتصالك بالإنترنت وحاول مرة أخرى.</string>
-  <string name="errorCouldNotDeleteList">تعذر حذف القائمة من حسابك على موقع Trakt.tv.\nالرجاء التأكد من اتصالك بالإنترنت وحاول مرة أخرى.</string>
+  <string name="errorCouldNotCreateList">تعذر إنشاء قائمة جديدة في حسابك على موقع TMDB.\nالرجاء التأكد من اتصالك بالإنترنت وحاول مرة أخرى.</string>
+  <string name="errorCouldNotUpdateList">تعذر تحديث القائمة في حسابك على موقع TMDB.\nالرجاء التأكد من اتصالك بالإنترنت وحاول مرة أخرى.</string>
+  <string name="errorCouldNotDeleteList">تعذر حذف القائمة من حسابك على موقع TMDB.\nالرجاء التأكد من اتصالك بالإنترنت وحاول مرة أخرى.</string>
 </resources>

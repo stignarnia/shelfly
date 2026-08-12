@@ -79,11 +79,6 @@
         <item quantity="few">Se difuzează în %d minute</item>
         <item quantity="other">Se difuzează în %d minute</item>
     </plurals>
-    <plurals name="textTraktQuickSyncComplete">
-        <item quantity="one">Un element sincronizat cu succes.</item>
-        <item quantity="few">%d elemente sincronizate cu succes.</item>
-        <item quantity="other">%d elemente sincronizate cu succes.</item>
-    </plurals>
     <string name="textToday">Astăzi</string>
     <string name="textTomorrow">Mâine</string>
     <string name="textThisWeek">Săptămâna aceasta</string>
@@ -102,18 +97,6 @@
     <string name="textNewSeasonAvailable">Noul sezon este disponibil acum!</string>
     <string name="textNewSeasonAvailableSoon">Un Nou sezon va fi disponibil în curând!</string>
     <string name="textNewMovieAvailable">Filmul a fost lansat!</string>
-    <string name="textTraktSync">Sincronizare Trakt.tv</string>
-    <string name="textTraktSyncComplete">Sincronizarea s-a finalizat cu succes.</string>
-    <string name="textTraktSyncRunning">Rulează…</string>
-    <string name="textTraktSyncError">Sincronizarea Trakt.tv a eșuat.</string>
-    <string name="textTraktSyncErrorFull">Sincronizarea Trakt.tv a eșuat. Te rugăm să verifici conexiunea la internet și să încerci din nou sau să ne contactezi dacă acest lucru se întâmplă.</string>
-    <string name="textTraktQuickSyncError">Sincronizarea instantanee a eșuat.</string>
-    <string name="textTraktQuickSyncErrorFull">Sincronizarea instantanee a eșuat. Vom încerca din nou data viitoare când vei deschide aplicația. Te rugăm să verifici conexiunea la internet.</string>
-    <string name="textTraktNotificationsRationale">Te rugăm să acorzi aplicației permisiunea de a afișa informații despre progresul și rezultatele sincronizării.\n\nDorești să faci acest lucru acum?</string>
-    <string name="textRemoveFromTrakt">Elimină din Trakt.tv?</string>
-    <string name="textRemoveFromTraktHidden">Dorești să elimini acest element din contul Trakt.tv „Elemente ascunse”?</string>
-    <string name="textRemoveFromTraktWatchlist">Dorești să elimini acest element din lista „De urmărit” a contului Trakt.tv?</string>
-    <string name="textRemoveFromTraktProgress">Dorești să elimini acest element din contul Trakt.tv „Progres”?</string>
     <string name="textAddToMyShows">Adaugă la emisiunile mele</string>
     <string name="textAddToMyMovies">Adaugă la Istoric</string>
     <string name="textAddToWatchlist">Adaugă la lista de urmărire</string>
@@ -136,17 +119,14 @@
     <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Anulează fixarea de la „În așteptare”</string>
     <string name="errorGeneral">Oops… S-a produs o eroare.\nTe rugăm să ne contactezi dacă problema persistă.</string>
     <string name="errorAuthorization">Autorizarea a eșuat. Te rugăm să ne contactezi dacă problema persistă.</string>
-    <string name="errorTraktAuthorization">Autorizarea contului Trakt a eșuat.\nTe rugăm să ne contactezi dacă problema persistă.</string>
     <string name="errorSeasonsNotLoaded">Te rugăm să aștepți încărcarea datelor privind anotimpurile.</string>
     <string name="errorEpisodeNotAired">Acest episod nu a fost încă difuzat.</string>
     <string name="errorCouldNotLoadDiscover">Nu am putut încărca pagina Discover în acest moment.\nTe rugăm să ne contactezi dacă problema persistă.</string>
-    <string name="errorMalformedShow">Se pare că acest program nu mai există în baza de date Trakt.tv sau este un duplicat.\n\nApasă „OK” pentru a-l elimina din aplicație.</string>
-    <string name="errorMalformedMovie">Se pare că acest film nu mai există în baza de date Trakt.tv sau este un duplicat.\n\nApasă „OK” pentru a-l elimina din aplicație.</string>
+    <string name="errorMalformedShow">Se pare că acest program nu mai există în baza de date TMDB sau este un duplicat.\n\nApasă „OK” pentru a-l elimina din aplicație.</string>
+    <string name="errorMalformedMovie">Se pare că acest film nu mai există în baza de date TMDB sau este un duplicat.\n\nApasă „OK” pentru a-l elimina din aplicație.</string>
     <string name="errorCouldNotLoadShow">Nu am putut încărca detaliile acestui spectacol în acest moment.\nTe rugăm să ne contactezi dacă problema persistă.</string>
     <string name="errorCouldNotLoadMovie">Nu am putut încărca detaliile acestui film în acest moment.\nVă rugăm să ne contactați dacă această problemă persistă.</string>
     <string name="errorCouldNotLoadSearchResults">Nu am putut încărca rezultatele căutării în acest moment.\nVă rugăm să ne contactați dacă această problemă persistă.</string>
     <string name="errorNoInternetConnection">Nu există conexiune la Internet. Vă rugăm să verificați conexiunea.</string>
-    <string name="errorTraktSyncGeneral">Eroare de sincronizare Trakt.tv.\nVă rugăm să verificați conexiunea la internet și să încercați din nou.</string>
-    <string name="errorTraktLocked">Contul dvs. Trakt.tv este blocat în prezent.\nVă rugăm să contactați serviciul de asistență Trakt.tv la adresa https://support.trakt.tv/ pentru a vă debloca contul.</string>
     <string name="errorSubscriptionsNotAvailable">Abonamentele Google Play nu sunt disponibile pe acest dispozitiv.</string>
 </resources>

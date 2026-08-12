@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="textTraktLoginSuccess">Du er blevet autoriseret succesfuldt.</string>
-  <string name="textTraktLogoutSuccess">Du er blevet logget ud.</string>
   <string name="textImagesCacheCleared">Billede cachen er blevet ryddet.</string>
   <string name="textTurnOff">Slå Fra</string>
   <string name="textSettings">Indstillinger</string>
-  <string name="textSettingsTrakt">Trakt.tv</string>
-  <string name="textSettingsTraktAuthorizeTitle">Trakt.tv Autorisering</string>
-  <string name="textSettingsTraktAuthorizeSummarySignIn">Klik for at logge ind på din Trakt.tv konto.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOut">Logget ind. Klik for at logge ud.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOutUser">Logget ind som %1$s. Klik for at logge ud.</string>
-  <string name="textSettingsTraktSyncTitle">Trakt.tv Synkronisering</string>
-  <string name="textSettingsTraktSyncSummary">Synkroniser data mellem Trakt.tv og Showly.</string>
-  <string name="textSettingsTraktQuickSyncTitle">Trakt.tv Øjeblikkelig Upload</string>
-  <string name="textSettingsTraktQuickSyncSummary">Upload data øjeblikkeligt til Trakt.tv efter du tilføjer det i appen.</string>
-  <string name="textSettingsTraktQuickRemoveTitle">Trakt.tv Data Fjernelse</string>
-  <string name="textSettingsTraktQuickRemoveSummary">Tilbyd at fjerne data fra din Trakt.tv konto efter du fjerner det i appen.</string>
-  <string name="textSettingsTraktQuickRateTitle">Trakt.tv Hurtig Bedøm</string>
-  <string name="textSettingsTraktQuickRateSummary">Bedøm afsnit og film når du markerer dem som set i \'Fremskridt\' skærmen.</string>
   <string name="textSettingsGeneral">General &amp; UX</string>
   <string name="textSettingsRecentShowsTitle">Senest Tilføjet Antal</string>
   <string name="textSettingsRecentShowsSummary">Antallet af senest tilføjede elementer der vises i \'Samling\'.</string>
@@ -49,7 +34,7 @@
   <string name="textSettingsDeleteCacheSummary">Klik for at rydde den lokale cache for billeder. Dette kan hjælpe hvis billeder ikke bliver indlæst korrekt.</string>
   <string name="textSettingsQuickSyncConfirmationTitle">Deaktiver Automatisk Synkronisering</string>
   <string name="textSettingsQuickSyncConfirmationMessage">\nDet ser ud til, at Automatisk Synkronisering allerede er slået til.\n\nVil du gerne slå det fra før du aktiverer øjeblikkelig synkronisering (anbefalet)?\n</string>
-  <string name="textSettingsLogoutTitle">Trakt.tv Log Ud</string>
+  <string name="textSettingsLogoutTitle">TMDB Log Ud</string>
   <string name="textSettingsLogoutMessage">\nEr du sikker på, at du gerne vil logge ud?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Film</string>
   <string name="textSettingsMoviesEnabledSummary">Aktiver/deaktiver film support. Appen vil genstarte.</string>

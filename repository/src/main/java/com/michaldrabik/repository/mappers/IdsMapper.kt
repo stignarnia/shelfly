@@ -24,7 +24,6 @@ class IdsMapper @Inject constructor() {
 
   fun toNetwork(ids: Ids?) =
     IdsNetwork(
-      trakt = null,
       slug = ids?.slug?.id,
       tvdb = ids?.tvdb?.id,
       imdb = ids?.imdb?.id,

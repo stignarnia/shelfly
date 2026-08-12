@@ -19,7 +19,7 @@
   <string name="textManageLists">Listeleri yönet</string>
   <string name="textManageListsShows">Bu dizi için listelerinizi yönetin.</string>
   <string name="textManageListsMovies">Bu film için listelerinizi yönetin.</string>
-  <string name="errorCouldNotCreateList">Şu anda Trakt hesabınızda yeni liste oluşturamıyoruz.\nLütfen internet bağlantısını kontrol edin ve tekrar deneyin.</string>
-  <string name="errorCouldNotUpdateList">Şu anda Trakt hesabınızdaki bu listeyi güncelleyemiyoruz.\nLütfen internet bağlantısını kontrol edin ve tekrar deneyin.</string>
-  <string name="errorCouldNotDeleteList">Şu anda Trakt hesabınızdaki bu listeyi silemiyoruz.\nLütfen internet bağlantısını kontrol edin ve tekrar deneyin.</string>
+  <string name="errorCouldNotCreateList">Şu anda TMDB hesabınızda yeni liste oluşturamıyoruz.\nLütfen internet bağlantısını kontrol edin ve tekrar deneyin.</string>
+  <string name="errorCouldNotUpdateList">Şu anda TMDB hesabınızdaki bu listeyi güncelleyemiyoruz.\nLütfen internet bağlantısını kontrol edin ve tekrar deneyin.</string>
+  <string name="errorCouldNotDeleteList">Şu anda TMDB hesabınızdaki bu listeyi silemiyoruz.\nLütfen internet bağlantısını kontrol edin ve tekrar deneyin.</string>
 </resources>

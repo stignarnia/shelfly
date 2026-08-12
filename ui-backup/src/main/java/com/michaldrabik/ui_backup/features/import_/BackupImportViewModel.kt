@@ -77,9 +77,9 @@ class BackupImportViewModel @Inject constructor(
         .toInt()
 
       if (version < SCHEME_VERSION) {
-        // Older schemes identify entries by Trakt id, which this fork cannot
-        // resolve. Reading one is handled by an explicit migration, not by
-        // parsing it as the current scheme.
+        // Older schemes identify entries by ids from the previous catalog
+        // source, which this fork cannot resolve. Reading one is handled by an
+        // explicit migration, not by parsing it as the current scheme.
         errorState.update { Error("Backup scheme v$version is not supported yet.") }
         return null
       }

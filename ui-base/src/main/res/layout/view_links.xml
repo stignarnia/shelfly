@@ -57,20 +57,6 @@
     />
 
   <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
-    android:id="@+id/viewLinksTrakt"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/spaceNormal"
-    android:layout_marginTop="@dimen/spaceMedium"
-    android:layout_marginEnd="@dimen/spaceSmall"
-    app:layout_constraintEnd_toStartOf="@id/viewLinksGuideline"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/viewLinksWebsite"
-    custom:icon="@drawable/ic_trakt"
-    custom:text="Trakt.tv"
-    />
-
-  <com.michaldrabik.ui_base.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksImdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -79,7 +65,7 @@
     android:layout_marginEnd="@dimen/spaceSmall"
     app:layout_constraintEnd_toStartOf="@id/viewLinksGuideline"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/viewLinksTrakt"
+    app:layout_constraintTop_toBottomOf="@id/viewLinksWebsite"
     custom:icon="@drawable/ic_imdb"
     custom:text="IMDb"
     />

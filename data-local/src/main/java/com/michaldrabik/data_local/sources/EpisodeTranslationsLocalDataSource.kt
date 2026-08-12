@@ -5,14 +5,14 @@ import com.michaldrabik.data_local.database.model.EpisodeTranslation
 interface EpisodeTranslationsLocalDataSource {
 
   suspend fun getById(
-    traktEpisodeId: Long,
-    traktShowId: Long,
+    tmdbEpisodeId: Long,
+    tmdbShowId: Long,
     language: String,
   ): EpisodeTranslation?
 
   suspend fun getByIds(
-    traktEpisodeIds: List<Long>,
-    traktShowId: Long,
+    tmdbEpisodeIds: List<Long>,
+    tmdbShowId: Long,
     language: String,
   ): List<EpisodeTranslation>
 

@@ -73,10 +73,6 @@
     <item quantity="one">Şimdi yayında</item>
     <item quantity="other">%d dakika içinde yayında</item>
   </plurals>
-  <plurals name="textTraktQuickSyncComplete">
-    <item quantity="one">1 öge başarıyla eşitlendi.</item>
-    <item quantity="other">%d öge başarıyla senkronize edildi.</item>
-  </plurals>
   <string name="textToday">Bugün</string>
   <string name="textTomorrow">Yarın</string>
   <string name="textThisWeek">Bu Hafta</string>
@@ -95,18 +91,6 @@
   <string name="textNewSeasonAvailable">Yeni sezon yayınlandı!</string>
   <string name="textNewSeasonAvailableSoon">Yeni sezon yakında yayınlanacak!</string>
   <string name="textNewMovieAvailable">Film yayınlandı!</string>
-  <string name="textTraktSync">Trakt.tv Eşitlemesi</string>
-  <string name="textTraktSyncComplete">Eşitleme başarıyla tamamlandı.</string>
-  <string name="textTraktSyncRunning">Çalışıyor…</string>
-  <string name="textTraktSyncError">Trakt.tv eşitlemesi başarısız.</string>
-  <string name="textTraktSyncErrorFull">Trakt.tv eşitlemesi başarısız oldu. Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin veya bu sorun devam ederse bizimle iletişime geçin.</string>
-  <string name="textTraktQuickSyncError">Anlık Eşitleme başarısız.</string>
-  <string name="textTraktQuickSyncErrorFull">Anlık Eşitleme başarısız oldu. Uygulamayı bir sonraki başlattığınızda tekrar deneyeceğiz. Lütfen internet bağlantınızı kontrol edin.</string>
-  <string name="textTraktNotificationsRationale">Lütfen uygulamaya senkronizasyon ilerlemesi ve sonuçları hakkında bilgiler göstermesi için izin verin\n\nBunu şimdi yapmak ister misiniz?</string>
-  <string name="textRemoveFromTrakt">Trakt.tv\'den silinsin mi?</string>
-  <string name="textRemoveFromTraktHidden">Bu öğeyi Trakt.tv hesabınızdan \'Gizli\' kaldırmak ister misiniz?</string>
-  <string name="textRemoveFromTraktWatchlist">Bu öğeyi Trakt.tv hesabınızdaki \'Watchlist\' kaldırmak ister misiniz?</string>
-  <string name="textRemoveFromTraktProgress">Bu öğeyi Trakt.tv hesabınızdaki \'İlerleme\'den kaldırmak ister misiniz?</string>
   <string name="textAddToMyShows">Dizilerime Ekle</string>
   <string name="textAddToMyMovies">Geçmişe ekle</string>
   <string name="textAddToWatchlist">İzleme Listesine Ekle</string>
@@ -129,17 +113,14 @@
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">\"Beklemeye\" sabitlemeyi kaldır</string>
   <string name="errorGeneral">Hay aksi… Bir şeyler ters gitti.\nBu sorun devam ederse lütfen bizimle iletişime geçin.</string>
   <string name="errorAuthorization">Yetkilendirme başarısız oldu. Bu durum devam ederse lütfen bizimle iletişime geçin.</string>
-  <string name="errorTraktAuthorization">Trakt hesabı yetkilendirmesi başarısız oldu.\nLütfen giriş yapın ve tekrar deneyin.</string>
   <string name="errorSeasonsNotLoaded">Lütfen sezon verilerinin yüklenmesini bekleyin.</string>
   <string name="errorEpisodeNotAired">Bu bölüm henüz yayınlanmadı.</string>
   <string name="errorCouldNotLoadDiscover">Şu anda keşfet sayfasını yükleyemiyoruz.\nBu durum devam ederse lütfen bizimle iletişime geçin.</string>
-  <string name="errorMalformedShow">Bu dizi artık Trakt.tv veritabanında yok veya çift girilmiş gibi görünüyor.\n\nUygulamadan da silmek için \'Tamam\'a dokunun.</string>
-  <string name="errorMalformedMovie">Bu film artık Trakt.tv veritabanında yok veya çift girilmiş gibi görünüyor.\n\nUygulamadan da silmek için \'Tamam\'a dokunun.</string>
+  <string name="errorMalformedShow">Bu dizi artık TMDB veritabanında yok veya çift girilmiş gibi görünüyor.\n\nUygulamadan da silmek için \'Tamam\'a dokunun.</string>
+  <string name="errorMalformedMovie">Bu film artık TMDB veritabanında yok veya çift girilmiş gibi görünüyor.\n\nUygulamadan da silmek için \'Tamam\'a dokunun.</string>
   <string name="errorCouldNotLoadShow">Bu dizinin ayrıntılarını şu anda yükleyemiyoruz.\nBu durum devam ederse lütfen bizimle iletişime geçin.</string>
   <string name="errorCouldNotLoadMovie">Bu filmin ayrıntılarını şu anda yükleyemiyoruz.\nBu durum devam ederse lütfen bizimle iletişime geçin.</string>
   <string name="errorCouldNotLoadSearchResults">Şu anda arama sonuçlarını yükleyemiyoruz.\nBu durum devam ederse lütfen bizimle iletişime geçin.</string>
   <string name="errorNoInternetConnection">İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.</string>
-  <string name="errorTraktSyncGeneral">Trakt.tv eşitleme hatası.\nLütfen internet bağlantınızı kontrol edin ve tekrar deneyin.</string>
-  <string name="errorTraktLocked">Trakt.tv hesabınız şu anda kilitli.\nHesabınızın kilidini açmak için lütfen https://support.trakt.tv/ adresinden Trakt.tv destek ekibi ile iletişime geçin.</string>
   <string name="errorSubscriptionsNotAvailable">Google Play Abonelikleri bu cihazda kullanılamaz.</string>
 </resources>

@@ -23,39 +23,39 @@ interface EpisodesDao : EpisodesLocalDataSource {
     chunks.forEach { chunk -> upsert(chunk) }
   }
 
-  @Query("SELECT * FROM episodes WHERE id_show_tmdb = :showTraktId AND id_tmdb = :episodeTraktId")
+  @Query("SELECT * FROM episodes WHERE id_show_tmdb = :showTmdbId AND id_tmdb = :episodeTmdbId")
   override suspend fun getById(
-    showTraktId: Long,
-    episodeTraktId: Long,
+    showTmdbId: Long,
+    episodeTmdbId: Long,
   ): Episode?
 
   @Query(
-    "SELECT EXISTS(SELECT 1 FROM episodes WHERE id_show_tmdb = :showTraktId AND id_tmdb = :episodeTraktId AND is_watched = 1)",
+    "SELECT EXISTS(SELECT 1 FROM episodes WHERE id_show_tmdb = :showTmdbId AND id_tmdb = :episodeTmdbId AND is_watched = 1)",
   )
   override suspend fun isEpisodeWatched(
-    showTraktId: Long,
-    episodeTraktId: Long,
+    showTmdbId: Long,
+    episodeTmdbId: Long,
   ): Boolean
 
   @Query("SELECT * FROM episodes WHERE id_tmdb IN(:episodesIds)")
   override suspend fun getAll(episodesIds: List<Long>): List<Episode>
 
-  @Query("SELECT * FROM episodes WHERE id_season = :seasonTraktId")
-  override suspend fun getAllForSeason(seasonTraktId: Long): List<Episode>
+  @Query("SELECT * FROM episodes WHERE id_season = :seasonTmdbId")
+  override suspend fun getAllForSeason(seasonTmdbId: Long): List<Episode>
 
-  @Query("SELECT * FROM episodes WHERE id_show_tmdb = :showTraktId")
-  override suspend fun getAllByShowId(showTraktId: Long): List<Episode>
+  @Query("SELECT * FROM episodes WHERE id_show_tmdb = :showTmdbId")
+  override suspend fun getAllByShowId(showTmdbId: Long): List<Episode>
 
-  @Query("SELECT * FROM episodes WHERE id_show_tmdb = :showTraktId AND season_number = :seasonNumber")
+  @Query("SELECT * FROM episodes WHERE id_show_tmdb = :showTmdbId AND season_number = :seasonNumber")
   override suspend fun getAllByShowId(
-    showTraktId: Long,
+    showTmdbId: Long,
     seasonNumber: Int,
   ): List<Episode>
 
   @Transaction
-  override suspend fun getAllByShowsIds(showTraktIds: List<Long>): List<Episode> {
+  override suspend fun getAllByShowsIds(showTmdbIds: List<Long>): List<Episode> {
     val result = mutableListOf<Episode>()
-    val chunks = showTraktIds.chunked(50)
+    val chunks = showTmdbIds.chunked(50)
     chunks.forEach { chunk ->
       result += getAllByShowsIdsChunk(chunk)
     }
@@ -63,28 +63,28 @@ interface EpisodesDao : EpisodesLocalDataSource {
   }
 
   @Transaction
-  @Query("SELECT * FROM episodes WHERE id_show_tmdb IN (:showTraktIds)")
-  override suspend fun getAllByShowsIdsChunk(showTraktIds: List<Long>): List<Episode>
+  @Query("SELECT * FROM episodes WHERE id_show_tmdb IN (:showTmdbIds)")
+  override suspend fun getAllByShowsIdsChunk(showTmdbIds: List<Long>): List<Episode>
 
   @Query(
-    "SELECT * from episodes where id_show_tmdb = :showTraktId AND is_watched = 0 AND season_number != 0 AND first_aired <= :toTime ORDER BY season_number ASC, episode_number ASC LIMIT 1",
+    "SELECT * from episodes where id_show_tmdb = :showTmdbId AND is_watched = 0 AND season_number != 0 AND first_aired <= :toTime ORDER BY season_number ASC, episode_number ASC LIMIT 1",
   )
   override suspend fun getFirstUnwatched(
-    showTraktId: Long,
+    showTmdbId: Long,
     toTime: Long,
   ): Episode?
 
   @Query(
-    "SELECT * from episodes where id_show_tmdb = :showTraktId AND is_watched = 0 AND season_number != 0 AND first_aired > :fromTime AND first_aired <= :toTime ORDER BY season_number ASC, episode_number ASC LIMIT 1",
+    "SELECT * from episodes where id_show_tmdb = :showTmdbId AND is_watched = 0 AND season_number != 0 AND first_aired > :fromTime AND first_aired <= :toTime ORDER BY season_number ASC, episode_number ASC LIMIT 1",
   )
   override suspend fun getFirstUnwatched(
-    showTraktId: Long,
+    showTmdbId: Long,
     fromTime: Long,
     toTime: Long,
   ): Episode?
 
   @Query(
-    "SELECT * from episodes where id_show_tmdb = :showTraktId " +
+    "SELECT * from episodes where id_show_tmdb = :showTmdbId " +
       "AND is_watched = 0 " +
       "AND season_number != 0 " +
       "AND ((season_number * 10000) + episode_number) > ((:seasonNumber * 10000) + :episodeNumber) " +
@@ -92,40 +92,40 @@ interface EpisodesDao : EpisodesLocalDataSource {
       "ORDER BY season_number ASC, episode_number ASC LIMIT 1",
   )
   override suspend fun getFirstUnwatchedAfterEpisode(
-    showTraktId: Long,
+    showTmdbId: Long,
     seasonNumber: Int,
     episodeNumber: Int,
     toTime: Long,
   ): Episode?
 
   @Query(
-    "SELECT * from episodes where id_show_tmdb = :showTraktId AND is_watched = 1 AND season_number != 0 ORDER BY last_watched_at DESC LIMIT 1",
+    "SELECT * from episodes where id_show_tmdb = :showTmdbId AND is_watched = 1 AND season_number != 0 ORDER BY last_watched_at DESC LIMIT 1",
   )
-  override suspend fun getLastWatched(showTraktId: Long): Episode?
+  override suspend fun getLastWatched(showTmdbId: Long): Episode?
 
   @Query(
-    "SELECT COUNT(id_tmdb) FROM episodes WHERE id_show_tmdb = :showTraktId AND first_aired < :toTime AND season_number != 0",
+    "SELECT COUNT(id_tmdb) FROM episodes WHERE id_show_tmdb = :showTmdbId AND first_aired < :toTime AND season_number != 0",
   )
   override suspend fun getTotalCount(
-    showTraktId: Long,
+    showTmdbId: Long,
     toTime: Long,
   ): Int
 
-  @Query("SELECT COUNT(id_tmdb) FROM episodes WHERE id_show_tmdb = :showTraktId AND season_number != 0")
-  override suspend fun getTotalCount(showTraktId: Long): Int
+  @Query("SELECT COUNT(id_tmdb) FROM episodes WHERE id_show_tmdb = :showTmdbId AND season_number != 0")
+  override suspend fun getTotalCount(showTmdbId: Long): Int
 
   @Query(
-    "SELECT COUNT(id_tmdb) FROM episodes WHERE id_show_tmdb = :showTraktId AND is_watched = 1 AND first_aired < :toTime AND season_number != 0",
+    "SELECT COUNT(id_tmdb) FROM episodes WHERE id_show_tmdb = :showTmdbId AND is_watched = 1 AND first_aired < :toTime AND season_number != 0",
   )
   override suspend fun getWatchedCount(
-    showTraktId: Long,
+    showTmdbId: Long,
     toTime: Long,
   ): Int
 
   @Query(
-    "SELECT COUNT(id_tmdb) FROM episodes WHERE id_show_tmdb = :showTraktId AND is_watched = 1 AND season_number != 0",
+    "SELECT COUNT(id_tmdb) FROM episodes WHERE id_show_tmdb = :showTmdbId AND is_watched = 1 AND season_number != 0",
   )
-  override suspend fun getWatchedCount(showTraktId: Long): Int
+  override suspend fun getWatchedCount(showTmdbId: Long): Int
 
   @Query("SELECT * FROM episodes WHERE is_watched = 1")
   override suspend fun getAllWatched(): List<Episode>
@@ -161,11 +161,11 @@ interface EpisodesDao : EpisodesLocalDataSource {
     exportedAt: Long,
   )
 
-  @Query("DELETE FROM episodes WHERE id_show_tmdb = :showTraktId AND is_watched = 0")
-  override suspend fun deleteAllUnwatchedForShow(showTraktId: Long)
+  @Query("DELETE FROM episodes WHERE id_show_tmdb = :showTmdbId AND is_watched = 0")
+  override suspend fun deleteAllUnwatchedForShow(showTmdbId: Long)
 
-  @Query("DELETE FROM episodes WHERE id_show_tmdb = :showTraktId")
-  override suspend fun deleteAllForShow(showTraktId: Long)
+  @Query("DELETE FROM episodes WHERE id_show_tmdb = :showTmdbId")
+  override suspend fun deleteAllForShow(showTmdbId: Long)
 
   @Delete
   override suspend fun delete(items: List<Episode>)

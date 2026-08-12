@@ -9,7 +9,6 @@
   <string name="textShowQuickProgressDone">İlerlemeniz güncellendi.</string>
   <string name="textEpisodeDate">Bölüm %1$d | %2$s</string>
   <string name="textEpisodeTitle">S.%02d B.%02d - \'%s\'</string>
-  <string name="textTraktSyncRemovedFromTrakt">Trakt.tv eşitlemesi başarılı.</string>
   <string name="textActorsEmpty">Oyuncular mevcut değil</string>
   <string name="textSeasons">Sezonlar:</string>
   <string name="textSeasonsEmpty">Sezonlar mevcut değil.</string>

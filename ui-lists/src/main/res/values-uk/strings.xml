@@ -19,7 +19,7 @@
   <string name="textManageLists">Керування списками</string>
   <string name="textManageListsShows">Керування списками для цього серіалу.</string>
   <string name="textManageListsMovies">Керування списками для цього фільму.</string>
-  <string name="errorCouldNotCreateList">Не вдалося створити новий список у вашому обліковому записі Trakt.\nБудь ласка, перевірте підключення до Інтернету і спробуйте ще раз.</string>
-  <string name="errorCouldNotUpdateList">Не вдалося оновити цей список у вашому обліковому записі Trakt.\nБудь ласка, перевірте підключення до Інтернету і спробуйте ще раз.</string>
-  <string name="errorCouldNotDeleteList">Не вдалося видалити цей список з вашого облікового запису Trakt.\nБудь ласка, перевірте підключення до Інтернету і спробуйте ще раз.</string>
+  <string name="errorCouldNotCreateList">Не вдалося створити новий список у вашому обліковому записі TMDB.\nБудь ласка, перевірте підключення до Інтернету і спробуйте ще раз.</string>
+  <string name="errorCouldNotUpdateList">Не вдалося оновити цей список у вашому обліковому записі TMDB.\nБудь ласка, перевірте підключення до Інтернету і спробуйте ще раз.</string>
+  <string name="errorCouldNotDeleteList">Не вдалося видалити цей список з вашого облікового запису TMDB.\nБудь ласка, перевірте підключення до Інтернету і спробуйте ще раз.</string>
 </resources>

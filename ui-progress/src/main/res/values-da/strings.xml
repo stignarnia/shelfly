@@ -9,8 +9,7 @@
   <string name="textOnHold" comment="This is a header for Progress subsection. It will contain pending shows marked by user.">På Pause</string>
   <string name="textDiscoverShows">Opdag Serier</string>
   <string name="textEpisodeInfo">Detaljer</string>
-  <string name="textTraktSynchronize">Importer fra Trakt.tv</string>
-  <string name="textProgressEmpty">Dit <b>Fremskridt</b> er tomt i øjeblikket.\n\nBesøg <b>Opdag</b>-fanen for at tilføje serier eller importer din Trakt.tv samling.</string>
+  <string name="textProgressEmpty">Dit <b>Fremskridt</b> er tomt i øjeblikket.\n\nBesøg <b>Opdag</b>-fanen for at tilføje serier eller importer din TMDB samling.</string>
   <string name="textNewSeason">Sæson Præmiere</string>
   <string name="textPremieres">Premierer</string>
 </resources>

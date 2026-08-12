@@ -1,2 +1,0 @@
-* Updated internal data endpoints
-* Keep app awake if Trakt sync is running in the foreground

@@ -26,5 +26,5 @@ interface SeasonsLocalDataSource {
 
   suspend fun delete(items: List<Season>)
 
-  suspend fun deleteAllForShow(showTraktId: Long)
+  suspend fun deleteAllForShow(showTmdbId: Long)
 }

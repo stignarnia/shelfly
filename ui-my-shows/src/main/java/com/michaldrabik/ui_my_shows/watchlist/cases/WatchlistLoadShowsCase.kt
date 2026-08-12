@@ -11,7 +11,7 @@ import com.michaldrabik.ui_model.ImageType
 import com.michaldrabik.ui_model.Show
 import com.michaldrabik.ui_model.SortOrder
 import com.michaldrabik.ui_model.SpoilersSettings
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import com.michaldrabik.ui_model.Translation
 import com.michaldrabik.ui_my_shows.common.recycler.CollectionListItem
 import com.michaldrabik.ui_my_shows.watchlist.helpers.WatchlistItemFilter
@@ -96,7 +96,7 @@ class WatchlistLoadShowsCase @Inject constructor(
   private fun CoroutineScope.toListItemAsync(
     show: Show,
     translation: Translation?,
-    userRating: TraktRating?,
+    userRating: UserRating?,
     dateFormat: DateTimeFormatter,
     sortOrder: SortOrder,
     spoilers: SpoilersSettings,

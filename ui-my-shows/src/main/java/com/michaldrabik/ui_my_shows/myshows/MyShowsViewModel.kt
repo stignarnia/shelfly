@@ -8,9 +8,6 @@ import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_base.common.ListViewMode
 import com.michaldrabik.ui_base.events.EventsManager
 import com.michaldrabik.ui_base.events.ReloadData
-import com.michaldrabik.ui_base.events.TraktSyncAuthError
-import com.michaldrabik.ui_base.events.TraktSyncError
-import com.michaldrabik.ui_base.events.TraktSyncSuccess
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.findReplace
@@ -25,7 +22,7 @@ import com.michaldrabik.ui_model.Show
 import com.michaldrabik.ui_model.SortOrder
 import com.michaldrabik.ui_model.SortType
 import com.michaldrabik.ui_model.SpoilersSettings
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import com.michaldrabik.ui_my_shows.main.FollowedShowsUiState
 import com.michaldrabik.ui_my_shows.myshows.cases.MyShowsLoadShowsCase
 import com.michaldrabik.ui_my_shows.myshows.cases.MyShowsRatingsCase
@@ -203,7 +200,7 @@ class MyShowsViewModel @Inject constructor(
     itemType: Type,
     show: Show,
     type: ImageType = POSTER,
-    userRating: TraktRating?,
+    userRating: UserRating?,
     sortOrder: SortOrder?,
     spoilers: SpoilersSettings,
   ) = async {
@@ -229,9 +226,6 @@ class MyShowsViewModel @Inject constructor(
 
   private fun onEvent(event: EventSync) =
     when (event) {
-      is TraktSyncSuccess -> loadShows()
-      is TraktSyncError -> loadShows()
-      is TraktSyncAuthError -> loadShows()
       is ReloadData -> loadShows()
       else -> Unit
     }

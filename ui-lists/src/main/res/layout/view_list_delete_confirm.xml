@@ -7,16 +7,4 @@
   tools:parentTag="android.widget.FrameLayout"
   >
 
-  <com.google.android.material.checkbox.MaterialCheckBox
-    android:id="@+id/viewListDeleteConfirmCheckbox"
-    style="@style/ShowlyCheckbox"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/spaceNormal"
-    android:layout_marginEnd="@dimen/spaceNormal"
-    android:checked="true"
-    android:gravity="center"
-    android:text="@string/textRemoveFromTrakt"
-    />
-
 </merge>

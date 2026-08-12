@@ -1,7 +1,7 @@
 package com.michaldrabik.ui_model
 
 data class RatingState(
-  val userRating: TraktRating? = null,
+  val userRating: UserRating? = null,
   val rateLoading: Boolean? = null,
 ) {
 

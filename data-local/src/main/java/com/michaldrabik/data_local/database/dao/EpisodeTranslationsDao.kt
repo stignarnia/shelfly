@@ -14,21 +14,21 @@ interface EpisodeTranslationsDao :
 
   @Query(
     "SELECT * FROM episodes_translations " +
-      "WHERE id_tmdb == :traktEpisodeId AND id_tmdb_show == :traktShowId AND language == :language",
+      "WHERE id_tmdb == :tmdbEpisodeId AND id_tmdb_show == :tmdbShowId AND language == :language",
   )
   override suspend fun getById(
-    traktEpisodeId: Long,
-    traktShowId: Long,
+    tmdbEpisodeId: Long,
+    tmdbShowId: Long,
     language: String,
   ): EpisodeTranslation?
 
   @Query(
     "SELECT * FROM episodes_translations " +
-      "WHERE id_tmdb IN (:traktEpisodeIds) AND id_tmdb_show == :traktShowId AND language == :language",
+      "WHERE id_tmdb IN (:tmdbEpisodeIds) AND id_tmdb_show == :tmdbShowId AND language == :language",
   )
   override suspend fun getByIds(
-    traktEpisodeIds: List<Long>,
-    traktShowId: Long,
+    tmdbEpisodeIds: List<Long>,
+    tmdbShowId: Long,
     language: String,
   ): List<EpisodeTranslation>
 

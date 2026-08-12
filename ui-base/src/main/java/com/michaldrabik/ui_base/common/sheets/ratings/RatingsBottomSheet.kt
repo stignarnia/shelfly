@@ -21,7 +21,7 @@ import com.michaldrabik.ui_base.utilities.extensions.visible
 import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.viewBinding
 import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import com.michaldrabik.ui_navigation.java.NavigationArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
@@ -99,10 +99,10 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
         rating?.let {
           viewRateSheetSaveButton.isEnabled = true
           if (isLoading != true) {
-            viewRateSheetRemoveButton.visibleIf(it != TraktRating.EMPTY)
+            viewRateSheetRemoveButton.visibleIf(it != UserRating.EMPTY)
           }
           viewRateSheetStarsLayout.visible()
-          if (it != TraktRating.EMPTY && isLoading != true) {
+          if (it != UserRating.EMPTY && isLoading != true) {
             renderRating(it.rating)
           }
         }

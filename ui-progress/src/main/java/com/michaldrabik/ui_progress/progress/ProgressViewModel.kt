@@ -163,9 +163,6 @@ class ProgressViewModel @Inject constructor(
     loadItems()
   }
 
-  fun startTraktSync() {
-  }
-
   private fun updateItem(newItem: ProgressListItem) {
     itemsState.update { value ->
       value?.toMutableList()?.apply {

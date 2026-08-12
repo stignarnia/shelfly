@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="textTraktLoginSuccess">Başarılı bir şekilde yetkilendirdiniz.</string>
-  <string name="textTraktLogoutSuccess">Çıkış yaptınız.</string>
   <string name="textImagesCacheCleared">Görüntü önbelleği temizlendi.</string>
   <string name="textTurnOff">Kapat</string>
   <string name="textSettings">Ayarlar</string>
-  <string name="textSettingsTrakt">Trakt.tv</string>
-  <string name="textSettingsTraktAuthorizeTitle">Trakt.tv Yetkilendirmesi</string>
-  <string name="textSettingsTraktAuthorizeSummarySignIn">Trakt.tv hesabınızda oturum açmak için tıklayın.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOut">Giriş yapıldı. Çıkış yapmak için tıklayın.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOutUser">%1$s olarak giriş yapıldı.\nÇıkış yapmak için tıklayın.</string>
-  <string name="textSettingsTraktSyncTitle">Trakt.tv Eşitlemesi</string>
-  <string name="textSettingsTraktSyncSummary">Trakt.tv ve Showly arasında verileri eşitleyin.</string>
-  <string name="textSettingsTraktQuickSyncTitle">Trakt.tv Anlık Karşıya Yükleme</string>
-  <string name="textSettingsTraktQuickSyncSummary">Verileri, uygulamaya ekledikten sonra anında Trakt.tv hizmetine yükleyin.</string>
-  <string name="textSettingsTraktQuickRemoveTitle">Trakt.tv Verisini Sil</string>
-  <string name="textSettingsTraktQuickRemoveSummary">Verilerin ygulamadan silinince Trakt.tv hesabınızdan da silinmesini önerir.</string>
-  <string name="textSettingsTraktQuickRateTitle">Trakt.tv Hızlı Oy Verme</string>
-  <string name="textSettingsTraktQuickRateSummary">Bölümleri ve filmleri \"İlerleme\" ekranında izlendi olarak işaretlediğinizde oy verin.</string>
   <string name="textSettingsGeneral">Genel ve Deneyim</string>
   <string name="textSettingsRecentShowsTitle">Son Eklenenler Miktarı</string>
   <string name="textSettingsRecentShowsSummary">\'Koleksiyon\'da görüntülenecek en son ögeler sayısı.</string>
@@ -49,7 +34,7 @@
   <string name="textSettingsDeleteCacheSummary">Yerel görüntü önbelleğini temizlemek için dokunun. Bu, dizi görüntülerinin doğru yüklenmediğinde yardımcı olabilir.</string>
   <string name="textSettingsQuickSyncConfirmationTitle">Otomatik Eşitlemeyi Devre Dışı Bırak</string>
   <string name="textSettingsQuickSyncConfirmationMessage">\nOtomatik Eşitleme zaten açık gibi görünüyor.\n\nAnlık eşitlemeyi etkinleştirmeden önce bu özelliği kapatmak ister misiniz (önerilir)?\n</string>
-  <string name="textSettingsLogoutTitle">Trakt.tv Çıkış Yap</string>
+  <string name="textSettingsLogoutTitle">TMDB Çıkış Yap</string>
   <string name="textSettingsLogoutMessage">\nOturumu kapatmak istediğinizden emin misiniz?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Filmler</string>
   <string name="textSettingsMoviesEnabledSummary">Film desteğini etkinleştirin/devre dışı bırakın. Uygulama yeniden başlatılacaktır.</string>

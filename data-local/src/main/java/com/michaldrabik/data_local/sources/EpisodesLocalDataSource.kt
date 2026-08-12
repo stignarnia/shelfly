@@ -16,63 +16,63 @@ interface EpisodesLocalDataSource {
   )
 
   suspend fun isEpisodeWatched(
-    showTraktId: Long,
-    episodeTraktId: Long,
+    showTmdbId: Long,
+    episodeTmdbId: Long,
   ): Boolean
 
   suspend fun getById(
-    showTraktId: Long,
-    episodeTraktId: Long,
+    showTmdbId: Long,
+    episodeTmdbId: Long,
   ): Episode?
 
   suspend fun getAll(episodesIds: List<Long>): List<Episode>
 
-  suspend fun getAllForSeason(seasonTraktId: Long): List<Episode>
+  suspend fun getAllForSeason(seasonTmdbId: Long): List<Episode>
 
-  suspend fun getAllByShowId(showTraktId: Long): List<Episode>
+  suspend fun getAllByShowId(showTmdbId: Long): List<Episode>
 
   suspend fun getAllByShowId(
-    showTraktId: Long,
+    showTmdbId: Long,
     seasonNumber: Int,
   ): List<Episode>
 
-  suspend fun getAllByShowsIds(showTraktIds: List<Long>): List<Episode>
+  suspend fun getAllByShowsIds(showTmdbIds: List<Long>): List<Episode>
 
-  suspend fun getAllByShowsIdsChunk(showTraktIds: List<Long>): List<Episode>
+  suspend fun getAllByShowsIdsChunk(showTmdbIds: List<Long>): List<Episode>
 
   suspend fun getFirstUnwatched(
-    showTraktId: Long,
+    showTmdbId: Long,
     toTime: Long,
   ): Episode?
 
   suspend fun getFirstUnwatched(
-    showTraktId: Long,
+    showTmdbId: Long,
     fromTime: Long,
     toTime: Long,
   ): Episode?
 
   suspend fun getFirstUnwatchedAfterEpisode(
-    showTraktId: Long,
+    showTmdbId: Long,
     seasonNumber: Int,
     episodeNumber: Int,
     toTime: Long,
   ): Episode?
 
-  suspend fun getLastWatched(showTraktId: Long): Episode?
+  suspend fun getLastWatched(showTmdbId: Long): Episode?
 
   suspend fun getTotalCount(
-    showTraktId: Long,
+    showTmdbId: Long,
     toTime: Long,
   ): Int
 
-  suspend fun getTotalCount(showTraktId: Long): Int
+  suspend fun getTotalCount(showTmdbId: Long): Int
 
   suspend fun getWatchedCount(
-    showTraktId: Long,
+    showTmdbId: Long,
     toTime: Long,
   ): Int
 
-  suspend fun getWatchedCount(showTraktId: Long): Int
+  suspend fun getWatchedCount(showTmdbId: Long): Int
 
   suspend fun getAllWatched(): List<Episode>
 
@@ -86,9 +86,9 @@ interface EpisodesLocalDataSource {
 
   suspend fun getAllWatchedIdsForShows(showsIds: List<Long>): List<Long>
 
-  suspend fun deleteAllUnwatchedForShow(showTraktId: Long)
+  suspend fun deleteAllUnwatchedForShow(showTmdbId: Long)
 
-  suspend fun deleteAllForShow(showTraktId: Long)
+  suspend fun deleteAllForShow(showTmdbId: Long)
 
   suspend fun delete(items: List<Episode>)
 }

@@ -7,7 +7,7 @@ import com.michaldrabik.repository.RatingsRepository
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Movie
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -22,15 +22,15 @@ class RatingsMovieCase @Inject constructor(
     private val RATING_VALID_RANGE = 1..10
   }
 
-  suspend fun loadRating(idTmdb: IdTmdb): TraktRating =
+  suspend fun loadRating(idTmdb: IdTmdb): UserRating =
     withContext(dispatchers.IO) {
       val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = idTmdb))
       try {
         val rating = ratingsRepository.movies.loadRatings(listOf(movie))
-        rating.firstOrNull() ?: TraktRating.EMPTY
+        rating.firstOrNull() ?: UserRating.EMPTY
       } catch (error: Throwable) {
         handleError(error)
-        TraktRating.EMPTY
+        UserRating.EMPTY
       }
     }
 

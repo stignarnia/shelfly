@@ -17,7 +17,7 @@ import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
 import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -36,7 +36,7 @@ class RatingsSheetViewModel @Inject constructor(
   ChannelsDelegate by DefaultChannelsDelegate() {
 
   private val loadingState = MutableStateFlow(false)
-  private val ratingState = MutableStateFlow<TraktRating?>(null)
+  private val ratingState = MutableStateFlow<UserRating?>(null)
 
   fun loadRating(
     idTmdb: IdTmdb,
@@ -105,7 +105,7 @@ class RatingsSheetViewModel @Inject constructor(
   private suspend fun handleError(error: Throwable) {
     when (ErrorHelper.parse(error)) {
       is CoroutineCancellation -> throw error
-      is UnauthorizedError -> messageChannel.send(MessageEvent.Error(R.string.errorTraktAuthorization))
+      is UnauthorizedError -> messageChannel.send(MessageEvent.Error(R.string.errorGeneral))
       else -> messageChannel.send(MessageEvent.Error(R.string.errorGeneral))
     }
   }

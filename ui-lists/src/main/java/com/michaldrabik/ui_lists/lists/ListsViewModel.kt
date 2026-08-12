@@ -6,9 +6,7 @@ import androidx.work.WorkManager
 import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.images.ShowImagesProvider
 import com.michaldrabik.ui_base.events.EventsManager
-import com.michaldrabik.ui_base.events.TraktSyncAuthError
-import com.michaldrabik.ui_base.events.TraktSyncError
-import com.michaldrabik.ui_base.events.TraktSyncSuccess
+import com.michaldrabik.ui_base.events.ReloadData
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.findReplace
@@ -110,7 +108,7 @@ class ListsViewModel @Inject constructor(
   }
 
   private fun onEvent(event: EventSync) {
-    if (event in arrayOf(TraktSyncError, TraktSyncAuthError, TraktSyncSuccess)) {
+    if (event is ReloadData) {
       loadItems(resetScroll = true)
     }
   }

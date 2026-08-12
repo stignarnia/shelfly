@@ -5,6 +5,5 @@
     <string name="textMoviesCalendarEmpty">Nu urmează să apară filme noi.</string>
     <string name="textMoviesCalendarRecentsEmpty">Nu există filme difuzate recent.</string>
     <string name="textDiscoverMovies">Descoperă filme</string>
-    <string name="textMoviesTraktSynchronize">Import din Trakt.tv</string>
-    <string name="textMoviesProgressEmpty"><b>Progresul</b> este în prezent gol.\n\nVizitează <b>Descoperă</b> pentru a adăuga filme sau pentru a importa colecţia Trakt.tv.</string>
+    <string name="textMoviesProgressEmpty"><b>Progresul</b> este în prezent gol.\n\nVizitează <b>Descoperă</b> pentru a adăuga filme sau pentru a importa colecţia TMDB.</string>
 </resources>

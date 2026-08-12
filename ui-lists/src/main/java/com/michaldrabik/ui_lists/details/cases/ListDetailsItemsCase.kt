@@ -26,7 +26,7 @@ import com.michaldrabik.ui_model.Show
 import com.michaldrabik.ui_model.SortOrder
 import com.michaldrabik.ui_model.SortType
 import com.michaldrabik.ui_model.SpoilersSettings
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import com.michaldrabik.ui_model.Translation
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.async
@@ -171,7 +171,7 @@ class ListDetailsItemsCase @Inject constructor(
     movie: Movie,
     listItem: CustomListItem,
     translation: Translation?,
-    userRating: TraktRating?,
+    userRating: UserRating?,
     isRankSort: Boolean,
     listedAt: ZonedDateTime,
     moviesEnabled: Boolean,
@@ -204,7 +204,7 @@ class ListDetailsItemsCase @Inject constructor(
     show: Show,
     listItem: CustomListItem,
     translation: Translation?,
-    userRating: TraktRating?,
+    userRating: UserRating?,
     isRankSort: Boolean,
     listedAt: ZonedDateTime,
     sortOrder: SortOrder,
@@ -259,12 +259,9 @@ class ListDetailsItemsCase @Inject constructor(
 
   suspend fun deleteListItem(
     listId: Long,
-    itemTraktId: IdTmdb,
+    itemTmdbId: IdTmdb,
     itemType: Mode,
   ) = withContext(dispatchers.IO) {
-    listsRepository.removeFromList(listId, itemTraktId, itemType.type)
-    val isQuickRemoveEnabled = settingsRepository.load().traktQuickRemoveEnabled
-    if (isQuickRemoveEnabled) {
-    }
+    listsRepository.removeFromList(listId, itemTmdbId, itemType.type)
   }
 }

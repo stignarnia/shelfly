@@ -34,15 +34,15 @@ data class EpisodeTranslation(
 
   companion object {
     fun fromTmdbId(
-      traktEpisodeId: Long,
-      traktShowId: Long,
+      tmdbEpisodeId: Long,
+      tmdbShowId: Long,
       title: String,
       language: String,
       overview: String,
       createdAt: Long,
     ) = EpisodeTranslation(
-      idTmdb = traktEpisodeId,
-      idTmdbShow = traktShowId,
+      idTmdb = tmdbEpisodeId,
+      idTmdbShow = tmdbShowId,
       title = title,
       language = language,
       overview = overview,

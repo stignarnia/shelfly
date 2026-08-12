@@ -8,9 +8,9 @@ interface PeopleLocalDataSource {
 
   suspend fun getById(tmdbId: Long): Person?
 
-  suspend fun getAllForShow(showTraktId: Long): List<Person>
+  suspend fun getAllForShow(showTmdbId: Long): List<Person>
 
-  suspend fun getAllForMovie(movieTraktId: Long): List<Person>
+  suspend fun getAllForMovie(movieTmdbId: Long): List<Person>
 
   suspend fun getAll(): List<Person>
 

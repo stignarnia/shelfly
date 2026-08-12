@@ -366,9 +366,7 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
     val intent = Intent().apply {
       val text = "${show.title}:" +
         "\n" +
-        "https://www.imdb.com/title/${show.ids.imdb.id}" +
-        "\n" +
-        "https://trakt.tv/shows/${show.ids.slug.id}"
+        "https://www.imdb.com/title/${show.ids.imdb.id}"
       action = Intent.ACTION_SEND
       putExtra(Intent.EXTRA_TEXT, text)
       type = "text/plain"

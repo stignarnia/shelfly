@@ -14,7 +14,7 @@ import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.SortOrder
 import com.michaldrabik.ui_model.SortType
 import com.michaldrabik.ui_model.SpoilersSettings
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import com.michaldrabik.ui_model.Translation
 import com.michaldrabik.ui_model.UpcomingFilter
 import com.michaldrabik.ui_my_movies.common.helpers.CollectionItemSorter
@@ -131,7 +131,7 @@ class HiddenLoadMoviesCase @Inject constructor(
   private fun CoroutineScope.toListItemAsync(
     movie: Movie,
     translation: Translation?,
-    userRating: TraktRating?,
+    userRating: UserRating?,
     dateFormat: DateTimeFormatter,
     fullDateFormat: DateTimeFormatter,
     sortOrder: SortOrder,

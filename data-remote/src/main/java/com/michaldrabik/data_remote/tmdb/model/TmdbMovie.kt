@@ -54,8 +54,7 @@ data class TmdbCollectionRef(
 )
 
 /**
- * A franchise from /collection/{id}. TMDB places a movie in at most one, where
- * Trakt allowed several user-made lists.
+ * A franchise from /collection/{id}. TMDB places a movie in at most one.
  */
 data class TmdbCollection(
   val id: Long?,

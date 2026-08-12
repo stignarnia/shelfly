@@ -156,8 +156,8 @@ class TranslationsRepository @Inject constructor(
     remoteTranslations
       .forEach { item ->
         val dbItem = EpisodeTranslation.fromTmdbId(
-          traktEpisodeId = item.ids.tmdb.id,
-          traktShowId = showId.id,
+          tmdbEpisodeId = item.ids.tmdb.id,
+          tmdbShowId = showId.id,
           title = item.title,
           overview = item.overview,
           language = language,

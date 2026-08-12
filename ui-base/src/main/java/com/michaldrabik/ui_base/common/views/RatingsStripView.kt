@@ -45,10 +45,10 @@ class RatingsStripView : LinearLayout {
     with(binding) {
       bindValue(
         ratingsValue = ratings.tmdb,
-        layoutView = viewRatingsStripTrakt,
-        valueView = viewRatingsStripTraktValue,
-        progressView = viewRatingsStripTraktProgress,
-        linkView = viewRatingsStripTraktLinkIcon,
+        layoutView = viewRatingsStripTmdb,
+        valueView = viewRatingsStripTmdbValue,
+        progressView = viewRatingsStripTmdbProgress,
+        linkView = viewRatingsStripTmdbLinkIcon,
         isHidden = ratings.isHidden,
         isTapToReveal = ratings.isTapToReveal,
         callback = onTmdbClick,

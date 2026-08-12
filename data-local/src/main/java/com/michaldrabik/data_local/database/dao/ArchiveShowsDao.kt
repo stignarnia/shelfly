@@ -82,7 +82,7 @@ interface ArchiveShowsDao : ArchiveShowsLocalDataSource {
   override suspend fun getAll(ids: List<Long>): List<Show>
 
   @Query("SELECT shows.id_tmdb FROM shows INNER JOIN shows_archive USING(id_tmdb)")
-  override suspend fun getAllTraktIds(): List<Long>
+  override suspend fun getAllTmdbIds(): List<Long>
 
   @Query("SELECT shows.* FROM shows INNER JOIN shows_archive USING(id_tmdb) WHERE id_tmdb == :tmdbId")
   override suspend fun getById(tmdbId: Long): Show?

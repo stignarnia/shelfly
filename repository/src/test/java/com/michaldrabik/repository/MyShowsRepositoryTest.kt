@@ -53,7 +53,7 @@ class MyShowsRepositoryTest : BaseMockTest() {
   }
 
   @Test
-  fun `Should load and map single show by Trakt ID`() {
+  fun `Should load and map single show by TMDB ID`() {
     runBlocking {
       val show = Show.EMPTY.copy(title = "Test")
 
@@ -84,17 +84,17 @@ class MyShowsRepositoryTest : BaseMockTest() {
   @Test
   fun `Should load all shows ids`() {
     runBlocking {
-      coEvery { myShowsLocalSource.getAllTraktIds() } returns listOf(1L, 2L)
+      coEvery { myShowsLocalSource.getAllTmdbIds() } returns listOf(1L, 2L)
 
       val ids = SUT.loadAllIds()
 
       assertThat(ids).containsExactly(1L, 2L)
-      coVerify(exactly = 1) { myShowsLocalSource.getAllTraktIds() }
+      coVerify(exactly = 1) { myShowsLocalSource.getAllTmdbIds() }
     }
   }
 
   @Test
-  fun `Should load and map all shows by Trakt Ids`() {
+  fun `Should load and map all shows by TMDB Ids`() {
     runBlocking {
       coEvery { myShowsLocalSource.getAll(any()) } returns listOf(showDb, showDb)
       coEvery { mappers.show.fromDatabase(any()) } returns Show.EMPTY
@@ -122,7 +122,7 @@ class MyShowsRepositoryTest : BaseMockTest() {
   }
 
   @Test
-  fun `Should insert show into database using Trakt ID`() {
+  fun `Should insert show into database using TMDB ID`() {
     runBlocking {
       val slot = slot<List<MyShow>>()
       coJustRun { myShowsLocalSource.insert(capture(slot)) }
@@ -143,7 +143,7 @@ class MyShowsRepositoryTest : BaseMockTest() {
   }
 
   @Test
-  fun `Should delete show from database using Trakt ID`() {
+  fun `Should delete show from database using TMDB ID`() {
     runBlocking {
       val slot = slot<Long>()
       coJustRun { myShowsLocalSource.deleteById(capture(slot)) }

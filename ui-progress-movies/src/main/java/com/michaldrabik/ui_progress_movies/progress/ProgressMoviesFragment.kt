@@ -120,7 +120,6 @@ class ProgressMoviesFragment :
 
   private fun setupView() {
     with(binding) {
-      progressMoviesEmptyView.progressMoviesEmptyTraktButton.onClick { requireMainFragment().openTraktSync() }
       progressMoviesEmptyView.progressMoviesEmptyDiscoverButton.onClick {
         (requireActivity() as NavigationHost).navigateToDiscover()
       }
@@ -198,7 +197,6 @@ class ProgressMoviesFragment :
                   binding.progressMoviesOverscrollProgress.progress >= 100
                 ) {
                   overscrollEnabled = false
-                  viewModel.startTraktSync()
                 }
               }
             }

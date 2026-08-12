@@ -49,10 +49,10 @@ interface PeopleDao : BaseDao<Person>, PeopleLocalDataSource {
     people_shows_movies.episodes_count AS episodes_count
     FROM people
     INNER JOIN people_shows_movies ON people_shows_movies.id_tmdb_person = people.id_tmdb
-    WHERE people_shows_movies.id_tmdb_show = :showTraktId
+    WHERE people_shows_movies.id_tmdb_show = :showTmdbId
     """
   )
-  override suspend fun getAllForShow(showTraktId: Long): List<Person>
+  override suspend fun getAllForShow(showTmdbId: Long): List<Person>
 
   @Query(
     """
@@ -77,10 +77,10 @@ interface PeopleDao : BaseDao<Person>, PeopleLocalDataSource {
     people_shows_movies.episodes_count AS episodes_count
     FROM people
     INNER JOIN people_shows_movies ON people_shows_movies.id_tmdb_person = people.id_tmdb
-    WHERE people_shows_movies.id_tmdb_movie = :movieTraktId
+    WHERE people_shows_movies.id_tmdb_movie = :movieTmdbId
     """
   )
-  override suspend fun getAllForMovie(movieTraktId: Long): List<Person>
+  override suspend fun getAllForMovie(movieTmdbId: Long): List<Person>
 
   @Query("SELECT * FROM people")
   override suspend fun getAll(): List<Person>

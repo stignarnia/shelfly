@@ -63,7 +63,7 @@ data class ListDetailsItem(
     throw IllegalStateException()
   }
 
-  fun getTraktId(): IdTmdb {
+  fun getTmdbId(): IdTmdb {
     if (isShow()) return IdTmdb(requireShow().tmdbId)
     if (isMovie()) return IdTmdb(requireMovie().tmdbId)
     throw IllegalStateException()

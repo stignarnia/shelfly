@@ -82,18 +82,6 @@
         tools:visibility="visible"
         />
 
-      <ImageView
-        android:id="@+id/searchTraktIcon"
-        android:layout_width="40dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:layout_marginEnd="40dp"
-        android:padding="11dp"
-        android:visibility="gone"
-        app:srcCompat="@drawable/ic_trakt_mono"
-        app:tint="?attr/colorSearchViewControl"
-        tools:visibility="visible"
-        />
 
       <ImageView
         android:id="@+id/searchSettingsIcon"
@@ -106,33 +94,6 @@
         />
 
     </FrameLayout>
-
-  </LinearLayout>
-
-  <LinearLayout
-    android:id="@+id/searchViewTraktSync"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/spaceMedium"
-    android:layout_marginEnd="@dimen/spaceMicro"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:visibility="gone"
-    >
-
-    <ProgressBar
-      style="@style/ProgressBar.Accent"
-      android:layout_width="20dp"
-      android:layout_height="match_parent"
-      android:layout_marginEnd="@dimen/spaceSmall"
-      />
-
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/textTraktSync"
-      android:textColor="?attr/colorAccent"
-      />
 
   </LinearLayout>
 

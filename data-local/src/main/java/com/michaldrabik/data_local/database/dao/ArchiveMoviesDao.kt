@@ -68,7 +68,7 @@ interface ArchiveMoviesDao : ArchiveMoviesLocalDataSource {
   override suspend fun getAll(ids: List<Long>): List<Movie>
 
   @Query("SELECT movies.id_tmdb FROM movies INNER JOIN movies_archive USING(id_tmdb)")
-  override suspend fun getAllTraktIds(): List<Long>
+  override suspend fun getAllTmdbIds(): List<Long>
 
   @Query("SELECT movies.* FROM movies INNER JOIN movies_archive USING(id_tmdb) WHERE id_tmdb == :tmdbId")
   override suspend fun getById(tmdbId: Long): Movie?

@@ -49,18 +49,16 @@ class ListDetailsMainCase @Inject constructor(
       updateItems
     }
 
-  suspend fun deleteList(
-    listId: Long,
-    removeFromTrakt: Boolean,
-  ) = withContext(dispatchers.IO) {
-    val list = listsRepository.loadById(listId)
-    val listIdTmdb = list.idTmdb
+  suspend fun deleteList(listId: Long) =
+    withContext(dispatchers.IO) {
+      val list = listsRepository.loadById(listId)
+      val listIdTmdb = list.idTmdb
 
-    listsRepository.deleteList(listId)
-  }
+      listsRepository.deleteList(listId)
+    }
 
   suspend fun isQuickRemoveEnabled(list: CustomList) =
     withContext(dispatchers.IO) {
-      list.idTmdb != null && settingsRepository.load().traktQuickRemoveEnabled
+      false
     }
 }

@@ -50,7 +50,7 @@ interface TmdbRemoteDataSource {
 
   suspend fun fetchPersonImages(tmdbId: Long): TmdbImages
 
-  // Catalog access, replacing the Trakt equivalents. These return the shared
+  // Catalog access. These return the shared
   // data-remote DTOs so the repository layer is unaffected by the source swap.
 
   suspend fun fetchShow(

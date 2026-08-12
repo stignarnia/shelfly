@@ -27,11 +27,11 @@ data class RelatedMovie(
   companion object {
     fun fromTmdbId(
       tmdbId: Long,
-      relatedTraktId: Long,
+      relatedTmdbId: Long,
       nowUtcMillis: Long,
     ) = RelatedMovie(
       idTmdb = tmdbId,
-      idTmdbRelatedMovie = relatedTraktId,
+      idTmdbRelatedMovie = relatedTmdbId,
       updatedAt = nowUtcMillis,
     )
   }

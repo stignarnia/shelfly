@@ -59,15 +59,17 @@ The OSS version for Android available in this repo is completely free of all Goo
    storePassword=github
    ```
 
-4. Add your [Trakt.tv](https://trakt.tv/oauth/applications), [TMDB](https://developers.themoviedb.org/3/), [OMDB](http://www.omdbapi.com) API keys as
-   following properties into your `local.properties` file located in the root directory of the project:
+4. Optionally add API keys to `local.properties` in the root of the project. These
+   only prefill debug builds - release builds ship without keys and ask the user
+   for their own on first run:
 
    ```ini
-   traktClientId="your trakt client id"
-   traktClientSecret="your trakt client secret"
-   tmdbApiKey="your tmdb api key (v4)"
+   tmdbApiKey="your tmdb api key (v3 auth)"
    omdbApiKey="your omdb api key"
    ```
+
+   Get them from [TMDB](https://www.themoviedb.org/settings/api) and
+   [OMDB](https://www.omdbapi.com/apikey.aspx). Both are free.
 
 5. Rebuild and start the app.
 
@@ -122,9 +124,9 @@ Android:
 
 3. **The Show/Episode/Movie I'm looking for seems to be missing. What can I do?**
 
-   Showly uses [Trakt.tv](https://trakt.tv) as its main data source.
-   If something is missing please use "Import Show" / "Import Movie" option located at the bottom of Trakt.tv website.
-   It's also possible to contact Trakt.tv support about any related issue.
+   This fork uses [TMDB](https://www.themoviedb.org) as its only catalog source.
+   If something is missing you can add it directly to TMDB, and it will show up
+   here once their API picks it up.
 
 ## Contact
 

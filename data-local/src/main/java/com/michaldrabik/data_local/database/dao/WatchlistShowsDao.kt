@@ -48,7 +48,7 @@ interface WatchlistShowsDao : WatchlistShowsLocalDataSource {
   override suspend fun getAll(): List<Show>
 
   @Query("SELECT shows.id_tmdb FROM shows INNER JOIN shows_see_later USING(id_tmdb)")
-  override suspend fun getAllTraktIds(): List<Long>
+  override suspend fun getAllTmdbIds(): List<Long>
 
   @Query(
     "SELECT shows.* FROM shows INNER JOIN shows_see_later ON shows_see_later.id_tmdb == shows.id_tmdb WHERE shows.id_tmdb == :tmdbId",

@@ -9,7 +9,6 @@
   <string name="textShowQuickProgressDone">Votre progression a été mise à jour.</string>
   <string name="textEpisodeDate">Épisode %1$d | %2$s</string>
   <string name="textEpisodeTitle">S.%02d E.%02d - \'%s\'</string>
-  <string name="textTraktSyncRemovedFromTrakt">Succès de la synchronisation avec Track.tv.</string>
   <string name="textActorsEmpty">Acteurs non disponibles</string>
   <string name="textSeasons">Saisons :</string>
   <string name="textSeasonsEmpty">Saisons non disponibles.</string>

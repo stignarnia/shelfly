@@ -36,7 +36,7 @@ class ShowDetailsRatingsViewModel @Inject constructor(
     viewModelScope.launch {
       showState.value = show
 
-      val traktRatings = Ratings(
+      val externalRatings = Ratings(
         tmdb = Ratings.Value(String.format(Locale.ENGLISH, "%.1f", show.rating), false),
         imdb = Ratings.Value(null, true),
         metascore = Ratings.Value(null, true),
@@ -45,11 +45,11 @@ class ShowDetailsRatingsViewModel @Inject constructor(
 
       try {
         isRefreshingRatingsState.value = false
-        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, traktRatings)
+        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, externalRatings)
         val ratings = ratingsCase.loadExternalRatings(show)
         ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, ratings)
       } catch (error: Throwable) {
-        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, traktRatings)
+        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, externalRatings)
         rethrowCancellation(error)
       }
     }

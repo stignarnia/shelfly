@@ -11,5 +11,4 @@
   <string name="textMovieCollections">Coleções</string>
   <string name="textMovieManageLists">Gerenciar Listas</string>
   <string name="textMovieManageListsCount">Gerenciar Listas (%d)</string>
-  <string name="textTraktSyncMovieRemovedFromTrakt">Trakt.tv sincronizado com sucesso.</string>
 </resources>

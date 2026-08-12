@@ -207,7 +207,7 @@ class EpisodesManager @Inject constructor(
               it.seasonNumber == remoteEpisode.season
           }
           if (localEpisode == null) {
-            // Double check by Trakt ID as season/episode combination might be old.
+            // Double check by TMDB ID as season/episode combination might be old.
             localEpisode = localEpisodes.find {
               it.idTmdb == remoteEpisode.ids.tmdb.id
             }

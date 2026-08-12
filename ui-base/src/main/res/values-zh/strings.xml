@@ -69,9 +69,6 @@
   <plurals name="textMinutesToAir">
     <item quantity="other">%d 分钟后开播</item>
   </plurals>
-  <plurals name="textTraktQuickSyncComplete">
-    <item quantity="other">已成功同步 %d 条记录。</item>
-  </plurals>
   <string name="textToday">今日</string>
   <string name="textTomorrow">明日</string>
   <string name="textThisWeek">本周</string>
@@ -90,18 +87,6 @@
   <string name="textNewSeasonAvailable">新一季现已更新！</string>
   <string name="textNewSeasonAvailableSoon">新一季即将更新！</string>
   <string name="textNewMovieAvailable">电影已经上映！</string>
-  <string name="textTraktSync">Trakt.tv 同步</string>
-  <string name="textTraktSyncComplete">已成功同步。</string>
-  <string name="textTraktSyncRunning">运行中...</string>
-  <string name="textTraktSyncError">Trakt.tv 同步失败。</string>
-  <string name="textTraktSyncErrorFull">Trakt.tv 同步失败。请检查您的网络连接并重试，若该问题持续存在，请联系我们。</string>
-  <string name="textTraktQuickSyncError">即时同步失败。</string>
-  <string name="textTraktQuickSyncErrorFull">即时同步失败。下次打开应用时会自动重试。请检查您的网络连接。</string>
-  <string name="textTraktNotificationsRationale">请授予应用程序显示同步进度和结果信息的权限。\n\n现在要执行此操作吗？</string>
-  <string name="textRemoveFromTrakt">是否从 Trakt.tv 中移除？</string>
-  <string name="textRemoveFromTraktHidden">是否想要从您的 Trakt.tv「隐藏项目」中移除此项？</string>
-  <string name="textRemoveFromTraktWatchlist">是否想要从您的 Trakt.tv「观看列表」中移除此项？</string>
-  <string name="textRemoveFromTraktProgress">是否想要从您的 Trakt.tv「进行中」中移除此项？</string>
   <string name="textAddToMyShows">加入我的剧集</string>
   <string name="textAddToMyMovies">添加到观看历史</string>
   <string name="textAddToWatchlist">加入观看列表</string>
@@ -124,17 +109,14 @@
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">取消「暂缓」</string>
   <string name="errorGeneral">哎呀～ 出错了。\n如果这种情况持续发生，请联系我们。</string>
   <string name="errorAuthorization">授权失败。如果这种情况持续发生，请联系我们。</string>
-  <string name="errorTraktAuthorization">Trakt 账号授权失败。\n请登录并重试。</string>
   <string name="errorSeasonsNotLoaded">剧集数据加载中，请等待。</string>
   <string name="errorEpisodeNotAired">该集尚未播出。</string>
   <string name="errorCouldNotLoadDiscover">当前暂时无法加载发现页面。\n如果这种情况持续发生，请联系我们。</string>
-  <string name="errorMalformedShow">似乎 Trakt.tv 数据库中已不存在这部剧，或存在重复。\n\n点击 「确定」 将其移除。</string>
-  <string name="errorMalformedMovie">似乎在 Trakt.tv 数据库中该电影已不存在，或存在重复。\n\n点击 「确定」 移除。</string>
+  <string name="errorMalformedShow">似乎 TMDB 数据库中已不存在这部剧，或存在重复。\n\n点击 「确定」 将其移除。</string>
+  <string name="errorMalformedMovie">似乎在 TMDB 数据库中该电影已不存在，或存在重复。\n\n点击 「确定」 移除。</string>
   <string name="errorCouldNotLoadShow">当前暂时无法加载该剧详情。\n如果这种情况持续发生，请联系我们。</string>
   <string name="errorCouldNotLoadMovie">当前暂时无法加载该电影详情。\n如果这种情况持续发生，请联系我们。</string>
   <string name="errorCouldNotLoadSearchResults">当前暂时无法加载搜索结果。\n如果这种情况持续发生，请联系我们。</string>
   <string name="errorNoInternetConnection">无互联网连接。请检查您的网络。</string>
-  <string name="errorTraktSyncGeneral">Trakt.tv 同步错误。\n请检查您的网络连接后重试。</string>
-  <string name="errorTraktLocked">您的 Trakt.tv 账号目前已被锁定。\n请在 https://support.trakt.tv/ 联系 Trakt.tv 客服解锁。</string>
   <string name="errorSubscriptionsNotAvailable">Google Play 服务在此设备上无法使用。</string>
 </resources>

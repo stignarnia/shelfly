@@ -80,12 +80,6 @@
     <item quantity="many">Выходит через %d минут</item>
     <item quantity="other">Выходит через %d минут</item>
   </plurals>
-  <plurals name="textTraktQuickSyncComplete">
-    <item quantity="one">1 элемент успешно синхронизирован.</item>
-    <item quantity="few">%d элементов успешно синхронизировано.</item>
-    <item quantity="many">%d элементов успешно синхронизировано.</item>
-    <item quantity="other">%d элементов успешно синхронизировано.</item>
-  </plurals>
   <string name="textToday">Сегодня</string>
   <string name="textTomorrow">Завтра</string>
   <string name="textThisWeek">На этой неделе</string>
@@ -104,18 +98,6 @@
   <string name="textNewSeasonAvailable">Новый сезон уже доступен!</string>
   <string name="textNewSeasonAvailableSoon">Новый сезон скоро будет доступен!</string>
   <string name="textNewMovieAvailable">Фильм был выпущен!</string>
-  <string name="textTraktSync">Синхронизация Trakt.tv</string>
-  <string name="textTraktSyncComplete">Синхронизация успешно завершена.</string>
-  <string name="textTraktSyncRunning">Запуск…</string>
-  <string name="textTraktSyncError">Сбой синхронизации Trakt.tv.</string>
-  <string name="textTraktSyncErrorFull">Сбой синхронизации Trakt.tv. Пожалуйста, проверьте подключение к Интернету и повторите попытку или свяжитесь с нами, если это повторится.</string>
-  <string name="textTraktQuickSyncError">Ошибка мгновенной синхронизации.</string>
-  <string name="textTraktQuickSyncErrorFull">Ошибка мгновенной синхронизации. Попробуем снова при следующем запуске приложения. Пожалуйста, проверьте подключение к Интернету.</string>
-  <string name="textTraktNotificationsRationale">Пожалуйста, предоставьте приложению разрешение на отображение информации о ходе и результатах синхронизации.\n\n Хотели бы вы сделать это сейчас?</string>
-  <string name="textRemoveFromTrakt">Удалить из Trakt.tv?</string>
-  <string name="textRemoveFromTraktHidden">Вы хотите удалить этот предмет из вашего аккаунта Trakt.tv \'Скрытое\'?</string>
-  <string name="textRemoveFromTraktWatchlist">Вы хотите удалить этот предмет из вашего аккаунта Trakt.tv \'Буду смотреть\'?</string>
-  <string name="textRemoveFromTraktProgress">Вы хотите удалить этот предмет из вашего аккаунта Trakt.tv \'Прогресс\'?</string>
   <string name="textAddToMyShows">Добавить в Мои Сериалы</string>
   <string name="textAddToMyMovies">Добавить в историю просмотров</string>
   <string name="textAddToWatchlist">Добавить в Буду Смотреть</string>
@@ -138,17 +120,14 @@
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Открепить от \'На паузе\'</string>
   <string name="errorGeneral">Ой,… Что-то пошло не так.\nПожалуйста, свяжитесь с нами, если это повторится.</string>
   <string name="errorAuthorization">Авторизация не удалась. Пожалуйста, свяжитесь с нами, если это произойдет снова.</string>
-  <string name="errorTraktAuthorization">Ошибка авторизации учетной записи Trakt.\nПожалуйста, войдите в систему и повторите попытку.</string>
   <string name="errorSeasonsNotLoaded">Пожалуйста, дождитесь загрузки данных сезонов.</string>
   <string name="errorEpisodeNotAired">Этот эпизод еще не вышел.</string>
   <string name="errorCouldNotLoadDiscover">Мы не смогли загрузить Открытия данный момент.\nПожалуйста, свяжитесь с нами, если это произойдет снова.</string>
-  <string name="errorMalformedShow">Похоже, это шоу больше не существует в базе данных Trakt.tv или является дубликатом.\n\nНажмите \'OK\' для его удаления из приложения.</string>
-  <string name="errorMalformedMovie">Похоже, этот фильм больше не существует в базе данных Trakt.tv или является дубликатом.\n\nНажмите \'OK\' для его удаления из приложения.</string>
+  <string name="errorMalformedShow">Похоже, это шоу больше не существует в базе данных TMDB или является дубликатом.\n\nНажмите \'OK\' для его удаления из приложения.</string>
+  <string name="errorMalformedMovie">Похоже, этот фильм больше не существует в базе данных TMDB или является дубликатом.\n\nНажмите \'OK\' для его удаления из приложения.</string>
   <string name="errorCouldNotLoadShow">Мы не смогли загрузить детали этого сериала.\nПожалуйста, свяжитесь с нами, если это произойдет снова.</string>
   <string name="errorCouldNotLoadMovie">Мы не смогли загрузить детали этого фильма.\nПожалуйста, свяжитесь с нами, если это произойдет снова.</string>
   <string name="errorCouldNotLoadSearchResults">Мы не смогли загрузить результаты поиска.\nПожалуйста, свяжитесь с нами, если это произойдет снова.</string>
   <string name="errorNoInternetConnection">Нет интернет соединения. Проверьте своё подключение.</string>
-  <string name="errorTraktSyncGeneral">Ошибка синхронизации Trakt.tv. \nПроверьте доступ в Интернет и повторите попытку.</string>
-  <string name="errorTraktLocked">Ваша учетная запись Trakt.tv в настоящее время заблокирована.\nПожалуйста, свяжитесь со службой поддержки Trakt.tv по адресу https://support.trakt.tv/ для разблокировки вашей учетной записи.</string>
   <string name="errorSubscriptionsNotAvailable">Сервисы Google Play недоступны на этом устройстве.</string>
 </resources>

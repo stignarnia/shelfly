@@ -19,7 +19,7 @@
   <string name="textManageLists">Listen verwalten</string>
   <string name="textManageListsShows">Verwalte deine Listen für diese Serie.</string>
   <string name="textManageListsMovies">Verwalte deine Listen für diesen Film.</string>
-  <string name="errorCouldNotCreateList">Wir konnten derzeit keine neue Liste in deinem Trakt Konto erstellen.\nBitte überprüfe deine Internetverbindung und versuche es erneut.</string>
-  <string name="errorCouldNotUpdateList">Wir konnten diese Liste derzeit nicht in deinem Trakt Konto aktualisieren.\nBitte überprüfe deine Internetverbindung und versuche es erneut.</string>
-  <string name="errorCouldNotDeleteList">Wir konnten diese Liste momentan nicht von deinem Trakt Konto löschen.\nBitte überprüfe deine Internetverbindung und versuche es erneut.</string>
+  <string name="errorCouldNotCreateList">Wir konnten derzeit keine neue Liste in deinem TMDB Konto erstellen.\nBitte überprüfe deine Internetverbindung und versuche es erneut.</string>
+  <string name="errorCouldNotUpdateList">Wir konnten diese Liste derzeit nicht in deinem TMDB Konto aktualisieren.\nBitte überprüfe deine Internetverbindung und versuche es erneut.</string>
+  <string name="errorCouldNotDeleteList">Wir konnten diese Liste momentan nicht von deinem TMDB Konto löschen.\nBitte überprüfe deine Internetverbindung und versuche es erneut.</string>
 </resources>

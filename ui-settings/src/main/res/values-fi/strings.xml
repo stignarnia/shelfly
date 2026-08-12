@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="textTraktLoginSuccess">Olet tunnistautunut.</string>
-  <string name="textTraktLogoutSuccess">Olet kirjautunut ulos.</string>
   <string name="textImagesCacheCleared">Kuvavälimuisti tyhjennettiin.</string>
   <string name="textTurnOff">Poista käytöstä</string>
   <string name="textSettings">Asetukset</string>
-  <string name="textSettingsTrakt">Trakt.tv</string>
-  <string name="textSettingsTraktAuthorizeTitle">Trakt.tv-valtuutus</string>
-  <string name="textSettingsTraktAuthorizeSummarySignIn">Napauta kirjautuaksesi Trakt.tv-tilillesi.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOut">Kirjautuneena. Kirjaudu ulos napauttamalla.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOutUser">Kirjautuneena tunnuksella %1$s. Kirjaudu ulos napauttamalla.</string>
-  <string name="textSettingsTraktSyncTitle">Trakt.tv-synkronointi</string>
-  <string name="textSettingsTraktSyncSummary">Synkronoi tiedot Trakt.tv:n ja Showlyn välillä.</string>
-  <string name="textSettingsTraktQuickSyncTitle">Trakt.tv-pikalähetys</string>
-  <string name="textSettingsTraktQuickSyncSummary">Lähetä tiedot Trakt.tv-kokoelmaasi heti kun lisäät ne sovellukseen.</string>
-  <string name="textSettingsTraktQuickRemoveTitle">Poista tiedot Trakt.tv-tililtä</string>
-  <string name="textSettingsTraktQuickRemoveSummary">Tarjoa tietojen poistoa Trakt.tv-tililtäsi, kun olet poistanut ne sovelluksesta.</string>
-  <string name="textSettingsTraktQuickRateTitle">Trakt.tv-pika-arviointi</string>
-  <string name="textSettingsTraktQuickRateSummary">Arvioi jaksot ja elokuvat aina kun merkitset ne katsotuiksi Katselutila-osiossa.</string>
   <string name="textSettingsGeneral">Yleiset ja käyttölittymä</string>
   <string name="textSettingsRecentShowsTitle">Hiljattain lisättyjen määrä</string>
   <string name="textSettingsRecentShowsSummary">Kokoelmassa näytettävien, hiljattain lisättyjen kohteiden määrä.</string>
@@ -49,7 +34,7 @@
   <string name="textSettingsDeleteCacheSummary">Tyhjennä paikallinen kuvavälimuisti napauttamalla. Tämä saattaa auttaa, jos sarjojen kuvat eivät lataudu oikein.</string>
   <string name="textSettingsQuickSyncConfirmationTitle">Poista automaattinen synkronointi käytöstä</string>
   <string name="textSettingsQuickSyncConfirmationMessage">\nAutomaattinen synkronointi näyttäisi olevan jo käytössä.\n\nHaluatko poistaa sen käytöstä ennen pikasynkronoinnin käyttöönottoa (suositeltavaa)?\n</string>
-  <string name="textSettingsLogoutTitle">Trakt.tv-uloskirjaus</string>
+  <string name="textSettingsLogoutTitle">TMDB-uloskirjaus</string>
   <string name="textSettingsLogoutMessage">\nHaluatko varmasti kirjautua ulos?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Elokuvat</string>
   <string name="textSettingsMoviesEnabledSummary">Ota elokuvat käyttöön/poista ne käytöstä. Sovellus käynnistyy uudelleen.</string>

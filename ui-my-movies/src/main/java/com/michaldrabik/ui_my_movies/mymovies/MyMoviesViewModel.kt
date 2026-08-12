@@ -7,9 +7,6 @@ import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_base.common.ListViewMode
 import com.michaldrabik.ui_base.events.EventsManager
 import com.michaldrabik.ui_base.events.ReloadData
-import com.michaldrabik.ui_base.events.TraktSyncAuthError
-import com.michaldrabik.ui_base.events.TraktSyncError
-import com.michaldrabik.ui_base.events.TraktSyncSuccess
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.findReplace
@@ -24,7 +21,7 @@ import com.michaldrabik.ui_model.MyMoviesSection.RECENTS
 import com.michaldrabik.ui_model.SortOrder
 import com.michaldrabik.ui_model.SortType
 import com.michaldrabik.ui_model.SpoilersSettings
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import com.michaldrabik.ui_my_movies.main.FollowedMoviesUiState
 import com.michaldrabik.ui_my_movies.mymovies.cases.MyMoviesLoadCase
 import com.michaldrabik.ui_my_movies.mymovies.cases.MyMoviesRatingsCase
@@ -203,7 +200,7 @@ class MyMoviesViewModel @Inject constructor(
     movie: Movie,
     dateFormat: DateTimeFormatter,
     type: ImageType = POSTER,
-    userRating: TraktRating?,
+    userRating: UserRating?,
     sortOrder: SortOrder?,
     spoilers: SpoilersSettings,
   ) = async {
@@ -230,9 +227,6 @@ class MyMoviesViewModel @Inject constructor(
 
   private fun onEvent(event: EventSync) =
     when (event) {
-      is TraktSyncSuccess -> loadMovies()
-      is TraktSyncError -> loadMovies()
-      is TraktSyncAuthError -> loadMovies()
       is ReloadData -> loadMovies()
       else -> Unit
     }

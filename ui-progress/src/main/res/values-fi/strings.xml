@@ -9,8 +9,7 @@
   <string name="textOnHold" comment="This is a header for Progress subsection. It will contain pending shows marked by user.">Pidossa</string>
   <string name="textDiscoverShows">Etsi sarjoja</string>
   <string name="textEpisodeInfo">Tiedot</string>
-  <string name="textTraktSynchronize">Tuo Trakt.tv:sta</string>
-  <string name="textProgressEmpty"><b>Katselutila</b> on tyhjä.\n\nLisää sarjoja <b>Etsi</b>-osiosta tai tuo Trakt.tv-kokoelmasi.</string>
+  <string name="textProgressEmpty"><b>Katselutila</b> on tyhjä.\n\nLisää sarjoja <b>Etsi</b>-osiosta tai tuo TMDB-kokoelmasi.</string>
   <string name="textNewSeason">Kauden aloitus</string>
   <string name="textPremieres">Ensiesitykset</string>
 </resources>

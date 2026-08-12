@@ -5,7 +5,6 @@ import com.michaldrabik.ui_base.common.AppCountry
 
 enum class MovieLink {
   IMDB,
-  TRAKT,
   TMDB,
   METACRITIC,
   ROTTEN,
@@ -18,9 +17,6 @@ enum class MovieLink {
   ) = when (this) {
     IMDB -> {
       "https://www.imdb.com/title/$id"
-    }
-    TRAKT -> {
-      "https://trakt.tv/search/trakt/$id?id_type=movie"
     }
     TMDB -> {
       "https://www.themoviedb.org/movie/$id"

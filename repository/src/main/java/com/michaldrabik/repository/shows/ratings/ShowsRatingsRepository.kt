@@ -7,7 +7,7 @@ import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.Episode
 import com.michaldrabik.ui_model.Season
 import com.michaldrabik.ui_model.Show
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,7 +25,7 @@ class ShowsRatingsRepository @Inject constructor(
     private const val CHUNK_SIZE = 250
   }
 
-  suspend fun loadShowsRatings(): List<TraktRating> {
+  suspend fun loadShowsRatings(): List<UserRating> {
     val ratings = localSource.ratings.getAllByType(TYPE_SHOW)
     return ratings.map {
       mappers.userRatings.fromDatabase(it)
@@ -42,7 +42,7 @@ class ShowsRatingsRepository @Inject constructor(
     return ratings
   }
 
-  suspend fun loadRatings(shows: List<Show>): List<TraktRating> {
+  suspend fun loadRatings(shows: List<Show>): List<UserRating> {
     val ratings = mutableListOf<Rating>()
     shows.chunked(CHUNK_SIZE).forEach { chunk ->
       val items = localSource.ratings.getAllByType(chunk.map { it.tmdbId }, TYPE_SHOW)
@@ -53,7 +53,7 @@ class ShowsRatingsRepository @Inject constructor(
     }
   }
 
-  suspend fun loadRatingsSeasons(seasons: List<Season>): List<TraktRating> {
+  suspend fun loadRatingsSeasons(seasons: List<Season>): List<UserRating> {
     val ratings = mutableListOf<Rating>()
     seasons.chunked(CHUNK_SIZE).forEach { chunk ->
       val items = localSource.ratings.getAllByType(chunk.map { it.ids.tmdb.id }, TYPE_SEASON)
@@ -64,14 +64,14 @@ class ShowsRatingsRepository @Inject constructor(
     }
   }
 
-  suspend fun loadRating(episode: Episode): TraktRating? {
+  suspend fun loadRating(episode: Episode): UserRating? {
     val rating = localSource.ratings.getAllByType(listOf(episode.ids.tmdb.id), TYPE_EPISODE)
     return rating.firstOrNull()?.let {
       mappers.userRatings.fromDatabase(it)
     }
   }
 
-  suspend fun loadRating(season: Season): TraktRating? {
+  suspend fun loadRating(season: Season): UserRating? {
     val rating = localSource.ratings.getAllByType(listOf(season.ids.tmdb.id), TYPE_SEASON)
     return rating.firstOrNull()?.let {
       mappers.userRatings.fromDatabase(it)

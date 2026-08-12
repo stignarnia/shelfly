@@ -42,15 +42,5 @@
     app:strokeColor="?android:attr/textColorPrimary"
     />
 
-  <com.google.android.material.button.MaterialButton
-    android:id="@+id/progressMoviesEmptyTraktButton"
-    style="@style/RoundTextButton"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:text="@string/textMoviesTraktSynchronize"
-    android:textColor="?android:attr/textColorPrimary"
-    app:rippleColor="?android:attr/textColorPrimary"
-    />
 
 </LinearLayout>

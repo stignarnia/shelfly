@@ -83,10 +83,6 @@
     <item quantity="other">Airs in %d minutes</item>
   </plurals>
 
-  <plurals name="textTraktQuickSyncComplete">
-    <item quantity="one">1 item synced successfully.</item>
-    <item quantity="other">%d items synced successfully.</item>
-  </plurals>
 
   <string name="textToday">Today</string>
   <string name="textTomorrow">Tomorrow</string>
@@ -108,19 +104,7 @@
   <string name="textNewSeasonAvailableSoon">New season will be available soon!</string>
   <string name="textNewMovieAvailable">Movie has been released!</string>
 
-  <string name="textTraktSync">Trakt.tv Sync</string>
-  <string name="textTraktSyncComplete">Sync completed successfully.</string>
-  <string name="textTraktSyncRunning">Running…</string>
-  <string name="textTraktSyncError">Trakt.tv sync failed.</string>
-  <string name="textTraktSyncErrorFull">Trakt.tv sync failed. Please check your internet connection and try again or contact us if this keeps happening.</string>
-  <string name="textTraktQuickSyncError">Instant Sync failed.</string>
-  <string name="textTraktQuickSyncErrorFull">Instant Sync failed. We will try again next time you open the app. Please check your internet connection.</string>
-  <string name="textTraktNotificationsRationale">Please grant the application a permission to display information about synchronization progress and results.\n\nWould you like to do it now?</string>
 
-  <string name="textRemoveFromTrakt">Remove from Trakt.tv?</string>
-  <string name="textRemoveFromTraktHidden">Would you like to remove this item from your Trakt.tv account \'Hidden Items\'?</string>
-  <string name="textRemoveFromTraktWatchlist">Would you like to remove this item from your Trakt.tv account \'Watchlist\'?</string>
-  <string name="textRemoveFromTraktProgress">Would you like to remove this item from your Trakt.tv account \'Progress\'?</string>
 
   <string name="textAddToMyShows">Add to My Shows</string>
   <string name="textAddToMyMovies">Add to History</string>
@@ -148,21 +132,16 @@
 
   <string name="errorGeneral">Oops… Something went wrong.\nPlease contact us if this keeps happening.</string>
   <string name="errorAuthorization">Authorization failed. Please contact us if this keeps happening.</string>
-  <string name="errorTraktAuthorization">Trakt account authorization failed.\nPlease login and try again.</string>
   <string name="errorSeasonsNotLoaded">Please wait for seasons data to load.</string>
   <string name="errorEpisodeNotAired">This episode hasn\'t been aired yet.</string>
   <string name="errorCouldNotLoadDiscover">We could not load discover page at this moment.\nPlease contact us if this keeps happening.</string>
-  <string name="errorMalformedShow">It looks like this show no longer exists in Trakt.tv database or is a duplicate.\n\nTap \'OK\' to remove it from the app.</string>
-  <string name="errorMalformedMovie">It looks like this movie no longer exists in Trakt.tv database or is a duplicate.\n\nTap \'OK\' to remove it from the app.</string>
+  <string name="errorMalformedShow">It looks like this show no longer exists in TMDB database or is a duplicate.\n\nTap \'OK\' to remove it from the app.</string>
+  <string name="errorMalformedMovie">It looks like this movie no longer exists in TMDB database or is a duplicate.\n\nTap \'OK\' to remove it from the app.</string>
   <string name="errorCouldNotLoadShow">We could not load this show\'s details at this moment.\nPlease contact us if this keeps happening.</string>
   <string name="errorCouldNotLoadMovie">We could not load this movie\'s details at this moment.\nPlease contact us if this keeps happening.</string>
   <string name="errorCouldNotLoadSearchResults">We could not load search results at this moment.\nPlease contact us if this keeps happening.</string>
   <string name="errorNoInternetConnection">No Internet. Please check your connection.</string>
-  <string name="errorTraktSyncGeneral">Trakt.tv sync error.\nPlease check your internet connection and try again.</string>
-  <string name="errorTraktLocked">Your Trakt.tv account is currently locked.\nPlease contact Trakt.tv support at https://support.trakt.tv/ to unlock your account.</string>
   <string name="errorCouldNotFindApp" translatable="false">Sorry, we could not find app on this device that could handle this link.</string>
-  <string name="errorAccountListsLimitsReached" translatable="false">Sorry, you have reached your Trakt account limit for personal lists!\n\nPlease contact us if you need more assistance.</string>
-  <string name="errorTraktSyncListsLimitsReached" translatable="false">You have reached your Trakt account limit for personal lists! Not all of your personal lists were synchronized.</string>
-  <string name="errorTraktSyncWatchlistLimitsReached" translatable="false">You have reached your Trakt account limit for watchlist items! Please contact us if you need more assistance.</string>
+  <string name="errorAccountListsLimitsReached" translatable="false">Sorry, you have reached your TMDB account limit for personal lists!\n\nPlease contact us if you need more assistance.</string>
 
 </resources>

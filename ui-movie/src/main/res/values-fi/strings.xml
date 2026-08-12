@@ -11,5 +11,4 @@
   <string name="textMovieCollections">Kokoelmat</string>
   <string name="textMovieManageLists">Hallitse listoja</string>
   <string name="textMovieManageListsCount">Hallitse listoja (%d)</string>
-  <string name="textTraktSyncMovieRemovedFromTrakt">Trakt.tv synkronoitiin.</string>
 </resources>

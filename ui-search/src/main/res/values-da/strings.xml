@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="textSearchInitial1">Hvad leder du efter?</string>
-  <string name="textSearchInitial2">Søg drevet af Trakt.tv</string>
+  <string name="textSearchInitial2">Søg drevet af TMDB</string>
   <string name="textClear">Ryd seneste søgninger</string>
 </resources>

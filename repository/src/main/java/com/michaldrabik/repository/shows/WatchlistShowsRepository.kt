@@ -19,7 +19,7 @@ class WatchlistShowsRepository @Inject constructor(
       .getAll()
       .map { mappers.show.fromDatabase(it) }
 
-  suspend fun loadAllIds() = localSource.watchlistShows.getAllTraktIds()
+  suspend fun loadAllIds() = localSource.watchlistShows.getAllTmdbIds()
 
   suspend fun load(id: IdTmdb) =
     localSource.watchlistShows.getById(id.id)?.let {

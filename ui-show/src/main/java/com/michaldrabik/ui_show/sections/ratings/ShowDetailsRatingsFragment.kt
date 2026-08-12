@@ -46,7 +46,7 @@ class ShowDetailsRatingsFragment : BaseFragment<ShowDetailsRatingsViewModel>(R.l
           }
           showDetailsRatings.bind(ratings)
           show?.let {
-            showDetailsRatings.onTmdbClick = { openLink(ShowLink.TRAKT, show.tmdbId.toString()) }
+            showDetailsRatings.onTmdbClick = { openLink(ShowLink.TMDB, show.tmdbId.toString()) }
             showDetailsRatings.onImdbClick = { openLink(ShowLink.IMDB, show.ids.imdb.id) }
             showDetailsRatings.onMetaClick = { openLink(ShowLink.METACRITIC, show.title) }
             showDetailsRatings.onRottenClick = {

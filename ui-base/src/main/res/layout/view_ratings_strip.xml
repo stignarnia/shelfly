@@ -11,7 +11,7 @@
   >
 
   <LinearLayout
-    android:id="@+id/viewRatingsStripTrakt"
+    android:id="@+id/viewRatingsStripTmdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_weight="1"
@@ -27,7 +27,7 @@
       >
 
       <TextView
-        android:id="@+id/viewRatingsStripTraktValue"
+        android:id="@+id/viewRatingsStripTmdbValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
@@ -36,7 +36,7 @@
         />
 
       <ProgressBar
-        android:id="@+id/viewRatingsStripTraktProgress"
+        android:id="@+id/viewRatingsStripTmdbProgress"
         style="@style/ProgressBar.Dark"
         android:layout_width="16dp"
         android:layout_height="16dp"
@@ -45,7 +45,7 @@
 
 
       <ImageView
-        android:id="@+id/viewRatingsStripTraktLinkIcon"
+        android:id="@+id/viewRatingsStripTmdbLinkIcon"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_gravity="center"
@@ -57,7 +57,7 @@
     </FrameLayout>
 
     <TextView
-      android:id="@+id/viewRatingsStripTraktLabel"
+      android:id="@+id/viewRatingsStripTmdbLabel"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:gravity="center"

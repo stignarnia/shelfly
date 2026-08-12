@@ -282,7 +282,6 @@ internal class DiscoverMoviesFragment :
           discoverMoviesRecycler.fadeIn(200, withHardware = true)
         }
         isSyncing?.let {
-          discoverMoviesSearchView.setTraktProgress(it)
           discoverMoviesSearchView.isEnabled = !it
         }
         isLoading?.let {

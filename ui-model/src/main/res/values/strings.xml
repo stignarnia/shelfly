@@ -65,23 +65,14 @@
   <string name="textGenreWar">War</string>
   <string name="textGenreWestern">Western</string>
 
-  <string name="textTraktSyncSchedule">Schedule</string>
-  <string name="textTraktSyncOptionOff">Off</string>
-  <string name="textTraktSyncOption1Hour">Every Hour</string>
-  <string name="textTraktSyncOption3Hours">Every 3 Hours</string>
-  <string name="textTraktSyncOption6Hours">Every 6 Hours</string>
-  <string name="textTraktSyncOptionDaily">Every Day</string>
-  <string name="textTraktSyncOption3Day">Every 3 Days</string>
-  <string name="textTraktSyncOptionWeekly">Every Week</string>
-  <string name="textTraktSyncOptionOffMessage">Sync will not run automatically.</string>
-  <string name="textTraktSyncOptionConfirmMessage">Automatic sync has been scheduled.</string>
+  <string name="textTMDBSyncOption1Hour">Every Hour</string>
+  <string name="textTMDBSyncOption3Hours">Every 3 Hours</string>
+  <string name="textTMDBSyncOption6Hours">Every 6 Hours</string>
+  <string name="textTMDBSyncOption3Day">Every 3 Days</string>
 
-  <string name="textTraktSyncOptionHourButton">Scheduled to run every hour</string>
-  <string name="textTraktSyncOption3HoursButton">Scheduled to run every 3 hours</string>
-  <string name="textTraktSyncOption6HoursButton">Scheduled to run every 6 hours</string>
-  <string name="textTraktSyncOptionDailyButton">Scheduled to run every day</string>
-  <string name="textTraktSyncOption3DayButton">Scheduled to run every 3 days</string>
-  <string name="textTraktSyncOptionWeeklyButton">Scheduled to run every week</string>
+  <string name="textTMDBSyncOption3HoursButton">Scheduled to run every 3 hours</string>
+  <string name="textTMDBSyncOption6HoursButton">Scheduled to run every 6 hours</string>
+  <string name="textTMDBSyncOption3DayButton">Scheduled to run every 3 days</string>
 
   <string name="textShowStatusReturning">Returning Series</string>
   <string name="textShowStatusUpcoming">Upcoming</string>

@@ -9,7 +9,6 @@
     <string name="textShowQuickProgressDone">Progresul tău a fost actualizat.</string>
     <string name="textEpisodeDate">Episodul %1$d | %2$s</string>
     <string name="textEpisodeTitle">S.%02d E.%02d - \'%s\'</string>
-    <string name="textTraktSyncRemovedFromTrakt">Trakt.tv s-a sincronizat cu succes.</string>
     <string name="textActorsEmpty">Actorii nu sunt disponibili</string>
     <string name="textSeasons">Sezoane:</string>
     <string name="textSeasonsEmpty">Sezoane indisponibile.</string>

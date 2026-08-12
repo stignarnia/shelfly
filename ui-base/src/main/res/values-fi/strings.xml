@@ -72,10 +72,6 @@
     <item quantity="one">Esitetään nyt</item>
     <item quantity="other">Esitetään %d minuutin kuluttua</item>
   </plurals>
-  <plurals name="textTraktQuickSyncComplete">
-    <item quantity="one">1 kohde synkronoitiin.</item>
-    <item quantity="other">%d kohdetta synkronoitiin.</item>
-  </plurals>
   <string name="textToday">Tänään</string>
   <string name="textTomorrow">Huomenna</string>
   <string name="textThisWeek">Tällä viikolla</string>
@@ -94,18 +90,6 @@
   <string name="textNewSeasonAvailable">Uusi tuotantokausi on julkaistu!</string>
   <string name="textNewSeasonAvailableSoon">Uusi tuotantokausi julkaistaan pian!</string>
   <string name="textNewMovieAvailable">Elokuva on julkaistu!</string>
-  <string name="textTraktSync">Trakt.tv-synkronointi</string>
-  <string name="textTraktSyncComplete">Synkronointi suoritettiin.</string>
-  <string name="textTraktSyncRunning">Käynnissä…</string>
-  <string name="textTraktSyncError">Trakt.tv-synkronointi epäonnistui.</string>
-  <string name="textTraktSyncErrorFull">Trakt.tv-synkronointi epäonnistui. Tarkista Internet-yhteytesi ja yritä uudelleen tai ota meihin yhteyttä, jos tämä jatkuu.</string>
-  <string name="textTraktQuickSyncError">Pikasynkronointi epäonnistui.</string>
-  <string name="textTraktQuickSyncErrorFull">Pikasynkronointi epäonnistui. Yritämme uudelleen, kun avaat sovelluksen seuraavan kerran. Tarkista Internet-yhteytesi.</string>
-  <string name="textTraktNotificationsRationale">Myönnä sovellukselle tietojen synkronoinnin edistymisen ja tulosten näyttöoikeus.\n\nHaluatko tehdä tämän nyt?</string>
-  <string name="textRemoveFromTrakt">Poistetaanko Trakt.tv-kokoelmastasi?</string>
-  <string name="textRemoveFromTraktHidden">Haluatko poistaa kohteen Trakt.tv-tilisi \'Hidden Items\' (Piilotetut kohteet) -osiosta?</string>
-  <string name="textRemoveFromTraktWatchlist">Haluatko poistaa kohteen Trakt.tv-tilisi \'Watchlist\' (Katselulista) -osiosta?</string>
-  <string name="textRemoveFromTraktProgress">Haluatko poistaa kohteen Trakt.tv-tilisi \"Progress\" (Katselutila) -osiosta?</string>
   <string name="textAddToMyShows">Lisää omiin sarjoihin</string>
   <string name="textAddToMyMovies">Lisää historiaan</string>
   <string name="textAddToWatchlist">Lisää katselulistalle</string>
@@ -128,17 +112,14 @@
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Irrota pidosta</string>
   <string name="errorGeneral">Hups… Jotain meni pieleen.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorAuthorization">Valtuutus epäonnistui. Ota meihin yhteyttä, jos tämä jatkuu.</string>
-  <string name="errorTraktAuthorization">Trakt.tv-tilin valtuutus epäonnistui.\nKirjaudu sisään ja yritä uudelleen.</string>
   <string name="errorSeasonsNotLoaded">Odota kun tuotantokausien tiedot ladataan.</string>
   <string name="errorEpisodeNotAired">Jaksoa ei ole vielä esitetty.</string>
   <string name="errorCouldNotLoadDiscover">Etsintäosion lataus ei juuri nyt onnistunut.\nOta yhteyttä, jos tämä jatkuu.</string>
-  <string name="errorMalformedShow">Sarjaa ei näyttäisi enää olevan Trakt.tv:n tietokannassa tai se on kaksoiskappale.\n\nPoista se sovelluksesta napauttamalla \'OK\'.</string>
-  <string name="errorMalformedMovie">Näyttäisi siltä, ettei elokuvaa enää ole Trakt.tv:n tietokannassa tai se on kaksoiskappale.\n\nPoista se sovelluksesta napauttamalla \'OK\'.</string>
+  <string name="errorMalformedShow">Sarjaa ei näyttäisi enää olevan TMDB:n tietokannassa tai se on kaksoiskappale.\n\nPoista se sovelluksesta napauttamalla \'OK\'.</string>
+  <string name="errorMalformedMovie">Näyttäisi siltä, ettei elokuvaa enää ole TMDB:n tietokannassa tai se on kaksoiskappale.\n\nPoista se sovelluksesta napauttamalla \'OK\'.</string>
   <string name="errorCouldNotLoadShow">Sarjan tietoja ei voitu ladata.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorCouldNotLoadMovie">Elokuvan tietoja ei voitu ladata.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorCouldNotLoadSearchResults">Hakutuloksia ei voitu ladata.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorNoInternetConnection">Ei Internet-yhteyttä. Tarkista yhteys.</string>
-  <string name="errorTraktSyncGeneral">Trakt.tv-synkronointivirhe.\nTarkista Internet-yhteys ja yritä uudelleen.</string>
-  <string name="errorTraktLocked">Trakt.tv-tilisi on lukittu.\nOta yhteyttä Trakt.tv:n tukeen osoitteessa https://support.trakt.tv/ poistaaksesi lukituksen.</string>
   <string name="errorSubscriptionsNotAvailable">Google Play -tilaukset eivät ole käytettävissä tällä laitteella.</string>
 </resources>

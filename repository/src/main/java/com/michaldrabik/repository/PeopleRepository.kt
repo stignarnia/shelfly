@@ -64,7 +64,6 @@ class PeopleRepository @Inject constructor(
   suspend fun loadCredits(person: Person) =
     coroutineScope {
       // People are keyed by their TMDB id, so there is no id to resolve first.
-      // Previously this looked a person's Trakt id up from their TMDB one.
       val idTmdb = person.ids.tmdb.id
 
       // Return locally cached data if available

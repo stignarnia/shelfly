@@ -5,8 +5,8 @@ import com.squareup.moshi.Json
 /**
  * Backup scheme v3.
  *
- * The Trakt id fields that v2 wrote ("id" on entries, "sId" on children) are
- * gone: nothing in the app holds a Trakt id any more. Entries are identified by
+ * The legacy id fields that v2 wrote ("id" on entries, "sId" on children) are
+ * gone: they came from the previous catalog source. Entries are identified by
  * their TMDB id, and children by their parent show plus season/episode numbers.
  *
  * The JSON keys are otherwise unchanged from v2, so a v2 file still reads - see

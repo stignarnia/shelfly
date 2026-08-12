@@ -12,7 +12,7 @@ interface CustomListsLocalDataSource {
 
   suspend fun getById(id: Long): CustomList?
 
-  suspend fun updateTraktId(
+  suspend fun updateTmdbId(
     id: Long,
     idTmdb: Long,
     idSlug: String,

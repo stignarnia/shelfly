@@ -22,7 +22,7 @@ import com.michaldrabik.ui_model.ImageType.FANART
 import com.michaldrabik.ui_model.RatingState
 import com.michaldrabik.ui_model.Show
 import com.michaldrabik.ui_model.SpoilersSettings
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import com.michaldrabik.ui_model.Translation
 import com.michaldrabik.ui_show.ShowDetailsEvent.Finish
 import com.michaldrabik.ui_show.ShowDetailsUiState.FollowedState
@@ -123,7 +123,7 @@ class ShowDetailsViewModel @Inject constructor(
             rethrowCancellation(error)
           }
           is ResourceNotFoundError -> {
-            // Malformed Trakt data or duplicate show.
+            // Malformed catalog data or duplicate entry.
             messageChannel.send(MessageEvent.Info(R.string.errorMalformedShow))
             Logger.record(error, "ShowDetailsViewModel::loadDetails(${id.id})")
           }
@@ -173,7 +173,7 @@ class ShowDetailsViewModel @Inject constructor(
         ratingState.value = RatingState(rateLoading = true)
         val rating = ratingsCase.loadRating(show)
         ratingState.value =
-          RatingState(rateLoading = false, userRating = rating ?: TraktRating.EMPTY)
+          RatingState(rateLoading = false, userRating = rating ?: UserRating.EMPTY)
       } catch (error: Throwable) {
         ratingState.value = RatingState(rateLoading = false)
         rethrowCancellation(error)

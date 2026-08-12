@@ -139,8 +139,7 @@ internal class TmdbApi(
 
   /**
    * A show's episodes are only available per season, so this fans out over the
-   * season list from the show payload. Season 0 (specials) is included, matching
-   * what Trakt returned.
+   * season list from the show payload. Season 0 (specials) is included.
    */
   override suspend fun fetchSeasons(tmdbId: Long): List<Season> =
     coroutineScope {
@@ -280,7 +279,6 @@ internal class TmdbApi(
         season = episode.season_number ?: seasonNumber,
         number = episode.episode_number ?: -1,
         ids = Ids(
-          trakt = null,
           slug = null,
           tvdb = null,
           imdb = null,
@@ -300,15 +298,15 @@ internal class TmdbApi(
   }
 
   /**
-   * A movie belongs to at most one TMDB collection, so this returns zero or one
-   * entry where Trakt could return several.
+   * A movie belongs to at most one TMDB collection, so this returns zero or
+   * one entry even though the caller accepts a list.
    */
   override suspend fun fetchMovieCollections(tmdbId: Long): List<MovieCollection> {
     val reference = service.fetchMovie(tmdbId, null).belongs_to_collection ?: return emptyList()
     val collection = service.fetchCollection(reference.id ?: return emptyList())
     return listOf(
       MovieCollection(
-        ids = Ids(trakt = null, slug = null, tvdb = null, imdb = null, tmdb = collection.id, tvrage = null),
+        ids = Ids(slug = null, tvdb = null, imdb = null, tmdb = collection.id, tvrage = null),
         name = collection.name ?: "",
         description = collection.overview ?: "",
         privacy = "public",

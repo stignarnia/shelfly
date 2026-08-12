@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="textTraktLoginSuccess">Вы успешно авторизовались.</string>
-  <string name="textTraktLogoutSuccess">Вы вышли.</string>
   <string name="textImagesCacheCleared">Кэш изображений был очищен.</string>
   <string name="textTurnOff">Выключить</string>
   <string name="textSettings">Настройки</string>
-  <string name="textSettingsTrakt">Trakt.tv</string>
-  <string name="textSettingsTraktAuthorizeTitle">Авторизация Trakt.tv</string>
-  <string name="textSettingsTraktAuthorizeSummarySignIn">Нажмите, чтобы войти в свой аккаунт Trakt.tv.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOut">Вход выполнен. Нажмите, чтобы выйти.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOutUser">Вы вошли как %1$s. Нажмите, чтобы выйти.</string>
-  <string name="textSettingsTraktSyncTitle">Синхронизация Trakt.tv</string>
-  <string name="textSettingsTraktSyncSummary">Синхронизация данных между Trakt.tv и Showly.</string>
-  <string name="textSettingsTraktQuickSyncTitle">Мгновенная загрузка Trakt.tv</string>
-  <string name="textSettingsTraktQuickSyncSummary">Мгновенная загрузка данных в Trakt.tv после добавления их в приложении.</string>
-  <string name="textSettingsTraktQuickRemoveTitle">Удаление данных из Trakt.tv</string>
-  <string name="textSettingsTraktQuickRemoveSummary">Предложение удалить данные с вашего аккаунта Trakt.tv после удаления их в приложении.</string>
-  <string name="textSettingsTraktQuickRateTitle">Быстрый рейтинг Trakt.tv</string>
-  <string name="textSettingsTraktQuickRateSummary">Оцените эпизоды и фильмы, когда вы помечаете их как просмотренные на экране «Прогресс».</string>
   <string name="textSettingsGeneral">Общие &amp; UX</string>
   <string name="textSettingsRecentShowsTitle">Количество недавно добавленных</string>
   <string name="textSettingsRecentShowsSummary">Количество недавно добавленных для отображения в \'Коллекциях\'.</string>
@@ -49,7 +34,7 @@
   <string name="textSettingsDeleteCacheSummary">Нажмите, чтобы очистить кэш локальных изображений. Это может помочь, если изображения загружаются некорректно.</string>
   <string name="textSettingsQuickSyncConfirmationTitle">Отключить автоматическую синхронизацию</string>
   <string name="textSettingsQuickSyncConfirmationMessage">\nпохоже, автоматическая синхронизация уже включена.\n\nХотите отключить ее перед включением мгновенной синхронизации (рекомендуется)?\n</string>
-  <string name="textSettingsLogoutTitle">Выход из Trakt.tv</string>
+  <string name="textSettingsLogoutTitle">Выход из TMDB</string>
   <string name="textSettingsLogoutMessage">\nВы уверены, что хотите выйти?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Фильмы</string>
   <string name="textSettingsMoviesEnabledSummary">Включить/отключить поддержку фильмов. Приложение будет перезапущено.</string>

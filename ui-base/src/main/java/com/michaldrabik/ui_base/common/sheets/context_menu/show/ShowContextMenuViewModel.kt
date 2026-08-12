@@ -50,7 +50,6 @@ class ShowContextMenuViewModel @Inject constructor(
   ChannelsDelegate by DefaultChannelsDelegate() {
 
   private var showId by notNull<IdTmdb>()
-  private var isQuickRemoveEnabled by notNull<Boolean>()
 
   private val loadingState = MutableStateFlow(false)
   private val loadingSecondaryState = MutableStateFlow(false)
@@ -59,7 +58,6 @@ class ShowContextMenuViewModel @Inject constructor(
   fun loadShow(idTmdb: IdTmdb) {
     viewModelScope.launch {
       showId = idTmdb
-      isQuickRemoveEnabled = settingsRepository.load().traktQuickRemoveEnabled
 
       try {
         loadingState.value = true

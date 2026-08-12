@@ -5,7 +5,6 @@ enum class ImageSource(
 ) {
   TMDB("tmdb"),
   CUSTOM("custom"),
-  AWS("aws"),
   ;
 
   companion object {

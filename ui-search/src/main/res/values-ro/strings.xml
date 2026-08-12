@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="textSearchInitial1">Ce anume căutați?</string>
-    <string name="textSearchInitial2">Căutare realizată de Trakt.tv</string>
+    <string name="textSearchInitial2">Căutare realizată de TMDB</string>
     <string name="textClear">Șterge căutările recente</string>
 </resources>

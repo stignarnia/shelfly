@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="textTraktLoginSuccess">Ai fost autorizat cu succes.</string>
-    <string name="textTraktVipLoginSuccess">Ai fost autorizat cu succes. În calitate de VIP Trakt, poți folosi acum toate funcțiile Showly Premium gratuit!</string>
-    <string name="textTraktLogoutSuccess">Ai fost deconectat.</string>
     <string name="textImagesCacheCleared">Cache-ul imaginilor a fost șters.</string>
     <string name="textTurnOff">Dezactivare</string>
     <string name="textSettings">Setări</string>
-    <string name="textSettingsTrakt">Trakt.tv</string>
-    <string name="textSettingsTraktAuthorizeTitle">Autorizare Trakt.tv</string>
-    <string name="textSettingsTraktAuthorizeSummarySignIn">Clic pentru a te conecta la contul Trakt.tv.</string>
-    <string name="textSettingsTraktAuthorizeSummarySignOut">Conectat. Clic pentru a te deconecta.</string>
-    <string name="textSettingsTraktAuthorizeSummarySignOutUser">Conectat ca %1$s. Clic pentru a te deconecta.</string>
-    <string name="textSettingsTraktSyncTitle">Sincronizare Trakt.tv</string>
-    <string name="textSettingsTraktSyncSummary">Sincronizează datele între Trakt.tv și Showly.</string>
-    <string name="textSettingsTraktQuickSyncTitle">Încărcare instantanee Trakt.tv</string>
-    <string name="textSettingsTraktQuickSyncSummary">Încarcă instantaneu datele pe Trakt.tv după ce le adaugi în aplicație.</string>
-    <string name="textSettingsTraktQuickRemoveTitle">Eliminarea datelor Trakt.tv</string>
-    <string name="textSettingsTraktQuickRemoveSummary">Oferă ștergerea datelor din contul Trakt.tv după ce le ștergi din aplicație.</string>
-    <string name="textSettingsTraktQuickRateTitle">Trakt.tv Evaluare rapidă</string>
-    <string name="textSettingsTraktQuickRateSummary">Evaluează episoadele și filmele ori de câte ori le marchezi ca vizionate în ecranul „Progres”.</string>
     <string name="textSettingsGeneral">General &amp; UX</string>
     <string name="textSettingsRecentShowsTitle">Suma adăugată recent</string>
     <string name="textSettingsRecentShowsSummary">Numărul de articole recente care vor fi afișate în „Colecție”.</string>
@@ -50,7 +34,7 @@
     <string name="textSettingsDeleteCacheSummary">Selectează pentru a șterge memoria cache a imaginilor locale. Acest lucru poate fi util dacă imaginile nu se încarcă corect.</string>
     <string name="textSettingsQuickSyncConfirmationTitle">Dezactivează sincronizarea automată</string>
     <string name="textSettingsQuickSyncConfirmationMessage">\nSe pare că sincronizarea automată este deja activată.\n\nDorești să o dezactivezi înainte de a activa sincronizarea instantanee (recomandat)?\n</string>
-    <string name="textSettingsLogoutTitle">Deconectare Trakt.tv</string>
+    <string name="textSettingsLogoutTitle">Deconectare TMDB</string>
     <string name="textSettingsLogoutMessage">\nEști sigur că dorești să te deconectezi?\n</string>
     <string name="textSettingsMoviesEnabledTitle">Filme</string>
     <string name="textSettingsMoviesEnabledSummary">Activează/dezactivează suportul pentru filme. Aplicația se va reporni.</string>

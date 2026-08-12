@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="textTraktLoginSuccess">您已经授权成功。</string>
-  <string name="textTraktLogoutSuccess">您已经登出。</string>
   <string name="textImagesCacheCleared">图像缓存已清理。</string>
   <string name="textTurnOff">关闭</string>
   <string name="textSettings">设置</string>
-  <string name="textSettingsTrakt">Trakt.tv</string>
-  <string name="textSettingsTraktAuthorizeTitle">Trakt.tv 授权</string>
-  <string name="textSettingsTraktAuthorizeSummarySignIn">点击登录您的 Trakt.tv 账号。</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOut">已登录。点击登出。</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOutUser">已以用户： %1$s 登录，点击登出。</string>
-  <string name="textSettingsTraktSyncTitle">Trakt.tv 同步</string>
-  <string name="textSettingsTraktSyncSummary">双向同步 Trakt.tv 和 Showly 的数据。</string>
-  <string name="textSettingsTraktQuickSyncTitle">Trakt.tv 即时上传</string>
-  <string name="textSettingsTraktQuickSyncSummary">在此应用中添加数据后，立即上传同步到 Trakt.tv。</string>
-  <string name="textSettingsTraktQuickRemoveTitle">Trakt.tv 数据移除</string>
-  <string name="textSettingsTraktQuickRemoveSummary">提供在您移除应用的数据后，同步移除 Trakt.tv 账号中相应数据的功能。</string>
-  <string name="textSettingsTraktQuickRateTitle">Trakt.tv 快速评分</string>
-  <string name="textSettingsTraktQuickRateSummary">每当您在「进度」页面上标记剧集和电影为已看时，对它们进行评分。</string>
   <string name="textSettingsGeneral">常规 &amp; 用户体验</string>
   <string name="textSettingsRecentShowsTitle">最近添加的数量</string>
   <string name="textSettingsRecentShowsSummary">「合集」中最近添加项目的展示数量。</string>
@@ -49,7 +34,7 @@
   <string name="textSettingsDeleteCacheSummary">点击清除本地图片缓存。如果显示图片未正确加载，这可能会有帮助。</string>
   <string name="textSettingsQuickSyncConfirmationTitle">禁用自动同步</string>
   <string name="textSettingsQuickSyncConfirmationMessage">\n似乎自动同步已经开启。\n\n您想要在启用即时同步之前将其关闭吗（推荐）？\n</string>
-  <string name="textSettingsLogoutTitle">登出 Trakt.tv</string>
+  <string name="textSettingsLogoutTitle">登出 TMDB</string>
   <string name="textSettingsLogoutMessage">\n您确定要退出吗？\n</string>
   <string name="textSettingsMoviesEnabledTitle">电影</string>
   <string name="textSettingsMoviesEnabledSummary">启用/禁用电影模块。应用会重启。</string>

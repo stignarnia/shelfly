@@ -5,6 +5,5 @@
   <string name="textMoviesCalendarEmpty">Немає нових фільмів.</string>
   <string name="textMoviesCalendarRecentsEmpty">Немає нещодавно випущених фільмів.</string>
   <string name="textDiscoverMovies">Знайти фільми</string>
-  <string name="textMoviesTraktSynchronize">Імпорт з Trakt.tv</string>
-  <string name="textMoviesProgressEmpty">Ваш <b>Прогрес</b> зараз порожній.\n\nВідвідайте вкладку <b>Огляд</b>, щоб додати фільми або імпортуйте колекцію з Trakt.tv.</string>
+  <string name="textMoviesProgressEmpty">Ваш <b>Прогрес</b> зараз порожній.\n\nВідвідайте вкладку <b>Огляд</b>, щоб додати фільми або імпортуйте колекцію з TMDB.</string>
 </resources>

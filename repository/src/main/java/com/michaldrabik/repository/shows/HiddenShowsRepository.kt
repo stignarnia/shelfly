@@ -29,7 +29,7 @@ class HiddenShowsRepository @Inject constructor(
       mappers.show.fromDatabase(it)
     }
 
-  suspend fun loadAllIds() = localSource.archiveShows.getAllTraktIds()
+  suspend fun loadAllIds() = localSource.archiveShows.getAllTmdbIds()
 
   suspend fun insert(id: IdTmdb) {
     val dbShow = ArchiveShow.fromTmdbId(id.id, nowUtcMillis())

@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="textTraktLoginSuccess">Sei stato autorizzato correttamente.</string>
-  <string name="textTraktLogoutSuccess">Sei uscito.</string>
   <string name="textImagesCacheCleared">La cache delle immagini è stata pulita.</string>
   <string name="textTurnOff">Disattiva</string>
   <string name="textSettings">Impostazioni</string>
-  <string name="textSettingsTrakt">Trakt.tv</string>
-  <string name="textSettingsTraktAuthorizeTitle">Autorizzazione Trakt.tv</string>
-  <string name="textSettingsTraktAuthorizeSummarySignIn">Clicca qui per effettuare l\'accesso al tuo account Trakt.tv.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOut">Accesso effettuato. Clicca qui per uscire.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOutUser">Accesso effettuato come %1$s. Clicca qui per uscire.</string>
-  <string name="textSettingsTraktSyncTitle">Sincronizzazione Trakt.tv</string>
-  <string name="textSettingsTraktSyncSummary">Sincronizza dati fra Trakt.tv e Showly.</string>
-  <string name="textSettingsTraktQuickSyncTitle">Caricamento istantaneo su Trakt.tv</string>
-  <string name="textSettingsTraktQuickSyncSummary">Carica istantaneamente i dati su Trakt.tv dopo averli aggiunti all\'app.</string>
-  <string name="textSettingsTraktQuickRemoveTitle">Rimozione dati Trakt.tv</string>
-  <string name="textSettingsTraktQuickRemoveSummary">Rimuovere i dati dal tuo account Trakt.tv dopo averli rimossi dall\'app.</string>
-  <string name="textSettingsTraktQuickRateTitle">Valutazione rapida Trakt.tv</string>
-  <string name="textSettingsTraktQuickRateSummary">Valuta episodi e film quando li contrassegni come visti nella sezione \'Progressi\'.</string>
   <string name="textSettingsGeneral">Generale &amp; UX</string>
   <string name="textSettingsRecentShowsTitle">Aggiunti di recente</string>
   <string name="textSettingsRecentShowsSummary">Numero di elementi recenti da mostrare in \'Raccolta\'.</string>
@@ -49,7 +34,7 @@
   <string name="textSettingsDeleteCacheSummary">Clicca per pulire la cache delle immagini. Questo potrebbe aiutare nel caso le immagini degli show non venissero scaricate correttamente.</string>
   <string name="textSettingsQuickSyncConfirmationTitle">Disattiva la sincronizzazione automatica</string>
   <string name="textSettingsQuickSyncConfirmationMessage">\nSembra che la sincronizzazione automatica sia attiva.\n\nVuoi disattivarla prima di attivare la sincronizzazione istantanea (consigliato)?\n</string>
-  <string name="textSettingsLogoutTitle">Esci da Trakt.tv</string>
+  <string name="textSettingsLogoutTitle">Esci da TMDB</string>
   <string name="textSettingsLogoutMessage">\nSei sicuro di voler uscire?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Film</string>
   <string name="textSettingsMoviesEnabledSummary">Attiva/disattiva il supporto ai film. L\'app verrà riavviata.</string>

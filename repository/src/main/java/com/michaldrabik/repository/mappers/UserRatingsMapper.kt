@@ -7,14 +7,14 @@ import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Season
 import com.michaldrabik.ui_model.Show
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import java.time.ZonedDateTime
 import javax.inject.Inject
 
 class UserRatingsMapper @Inject constructor() {
 
   fun fromDatabase(entity: Rating) =
-    TraktRating(
+    UserRating(
       idTmdb = IdTmdb(entity.idTmdb),
       rating = entity.rating,
       ratedAt = entity.ratedAt,

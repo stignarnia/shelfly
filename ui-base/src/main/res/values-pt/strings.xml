@@ -73,10 +73,6 @@
     <item quantity="one">No ar agora</item>
     <item quantity="other">No ar em %d minutos</item>
   </plurals>
-  <plurals name="textTraktQuickSyncComplete">
-    <item quantity="one">1 item sincronizado com sucesso.</item>
-    <item quantity="other">%d itens sincronizados com sucesso.</item>
-  </plurals>
   <string name="textToday">Hoje</string>
   <string name="textTomorrow">Amanhã</string>
   <string name="textThisWeek">Esta semana</string>
@@ -95,18 +91,6 @@
   <string name="textNewSeasonAvailable">Nova temporada está disponível agora!</string>
   <string name="textNewSeasonAvailableSoon">Nova temporada estará disponível em breve!</string>
   <string name="textNewMovieAvailable">O filme foi lançado!</string>
-  <string name="textTraktSync">Sincronizar Trakt.tv</string>
-  <string name="textTraktSyncComplete">Sincronização concluída com sucesso.</string>
-  <string name="textTraktSyncRunning">Em andamento…</string>
-  <string name="textTraktSyncError">A sincronização Trakt.tv falhou.</string>
-  <string name="textTraktSyncErrorFull">A sincronização do Trakt.tv falhou. Por favor, verifique sua conexão com a internet e tente novamente ou entre em contato conosco se isso continuar acontecendo.</string>
-  <string name="textTraktQuickSyncError">Sincronização instantânea falhou.</string>
-  <string name="textTraktQuickSyncErrorFull">A sincronização instantânea falhou. Tentaremos de novo na próxima vez que você abrir o aplicativo. Por favor, verifique sua conexão com a internet.</string>
-  <string name="textTraktNotificationsRationale">Por favor, conceda à aplicação permissão para exibir informações sobre o progresso e os resultados da sincronização.\n\nGostaria de fazê-lo agora?</string>
-  <string name="textRemoveFromTrakt">Remover do Trakt.tv?</string>
-  <string name="textRemoveFromTraktHidden">Você gostaria de remover este item da sua conta Trakt.tv \'Oculto\'?</string>
-    <string name="textRemoveFromTraktWatchlist">Você gostaria de remover este item dos seus Favoritos da sua conta do Trakt.tv?</string>
-  <string name="textRemoveFromTraktProgress">Você gostaria de remover este item da sua conta do Trakt.tv \"Progresso\"?</string>
   <string name="textAddToMyShows">Adicionar às minhas séries</string>
     <string name="textAddToMyMovies">Adicionar ao Histórico</string>
     <string name="textAddToWatchlist">Adicionar a Favoritos</string>
@@ -129,17 +113,14 @@
     <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Desafixar de \'Em Espera\'</string>
   <string name="errorGeneral">Ops… Algo deu errado.\nEntre em contato conosco se isto continuar acontecendo.</string>
   <string name="errorAuthorization">A autorização falhou. Entre em contato conosco se isso continuar acontecendo.</string>
-  <string name="errorTraktAuthorization">Falha na autorização da conta Trakt.\nPor favor, faça o login e tente novamente.</string>
   <string name="errorSeasonsNotLoaded">Por favor, aguarde até que os dados da temporada sejam carregados.</string>
   <string name="errorEpisodeNotAired">Este episódio ainda não foi exibido.</string>
   <string name="errorCouldNotLoadDiscover">Não foi possível carregar a página descoberta no momento.\nEntre em contato conosco se isso continuar acontecendo.</string>
-  <string name="errorMalformedShow">Parece que esta série não existe mais no banco de dados do Trakt.tv ou é uma duplicação.\n\nToque em \'OK\' para removê-la do aplicativo.</string>
-  <string name="errorMalformedMovie">Parece que esse filme não existe mais no banco de dados do Trakt.tv ou é uma duplicação.\n\nToque em \'OK\' para removê-lo do aplicativo.</string>
+  <string name="errorMalformedShow">Parece que esta série não existe mais no banco de dados do TMDB ou é uma duplicação.\n\nToque em \'OK\' para removê-la do aplicativo.</string>
+  <string name="errorMalformedMovie">Parece que esse filme não existe mais no banco de dados do TMDB ou é uma duplicação.\n\nToque em \'OK\' para removê-lo do aplicativo.</string>
   <string name="errorCouldNotLoadShow">Não foi possível carregar os detalhes desta série no momento.\nPor favor, entre em contato conosco se isto continuar acontecendo.</string>
   <string name="errorCouldNotLoadMovie">Não foi possível carregar os detalhes deste filme no momento.\nPor favor, entre em contato conosco se isto continuar acontecendo.</string>
   <string name="errorCouldNotLoadSearchResults">Não foi possível carregar os resultados da pesquisa no momento.\nEntre em contato conosco se isso continuar acontecendo.</string>
   <string name="errorNoInternetConnection">Sem conexão com a internet. Por favor, verifique sua conexão.</string>
-  <string name="errorTraktSyncGeneral">Erro de sincronização Trakt.tv.\nPor favor, verifique sua conexão com a internet e tente novamente.</string>
-  <string name="errorTraktLocked">Sua conta Trakt.tv está bloqueada no momento.\nPor favor, entre em contato com o suporte de Trakt.tv em https://support.trakt.tv/ para desbloquear sua conta.</string>
   <string name="errorSubscriptionsNotAvailable">As assinaturas do Google Play não estão disponíveis neste dispositivo.</string>
 </resources>

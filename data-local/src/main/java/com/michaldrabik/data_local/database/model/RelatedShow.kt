@@ -27,12 +27,12 @@ data class RelatedShow(
   companion object {
     fun fromTmdbId(
       tmdbId: Long,
-      relatedShowTraktId: Long,
+      relatedShowTmdbId: Long,
       nowUtcMillis: Long,
     ): RelatedShow =
       RelatedShow(
         idTmdb = tmdbId,
-        idTmdbRelatedShow = relatedShowTraktId,
+        idTmdbRelatedShow = relatedShowTmdbId,
         updatedAt = nowUtcMillis,
       )
   }

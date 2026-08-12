@@ -36,7 +36,7 @@ class MovieDetailsRatingsViewModel @Inject constructor(
     viewModelScope.launch {
       movieState.value = movie
 
-      val traktRatings = Ratings(
+      val externalRatings = Ratings(
         tmdb = Ratings.Value(String.format(Locale.ENGLISH, "%.1f", movie.rating), false),
         imdb = Ratings.Value(null, true),
         metascore = Ratings.Value(null, true),
@@ -44,11 +44,11 @@ class MovieDetailsRatingsViewModel @Inject constructor(
       )
 
       try {
-        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(movie, traktRatings)
+        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(movie, externalRatings)
         val ratings = ratingsCase.loadExternalRatings(movie)
         ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(movie, ratings)
       } catch (error: Throwable) {
-        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(movie, traktRatings)
+        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(movie, externalRatings)
         rethrowCancellation(error)
       }
     }

@@ -38,7 +38,7 @@ class MyShowsRepository @Inject constructor(
       .getAllRecent(amount)
       .map { mappers.show.fromDatabase(it) }
 
-  suspend fun loadAllIds() = myShowsLocalSource.getAllTraktIds()
+  suspend fun loadAllIds() = myShowsLocalSource.getAllTmdbIds()
 
   suspend fun insert(
     id: IdTmdb,

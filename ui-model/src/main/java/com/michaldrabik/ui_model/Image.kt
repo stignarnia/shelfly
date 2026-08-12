@@ -1,11 +1,9 @@
 package com.michaldrabik.ui_model
 
-import com.michaldrabik.common.Config.AWS_IMAGE_BASE_URL
 import com.michaldrabik.common.Config.TMDB_IMAGE_BASE_FANART_URL
 import com.michaldrabik.common.Config.TMDB_IMAGE_BASE_POSTER_URL
 import com.michaldrabik.common.Config.TMDB_IMAGE_BASE_PROFILE_URL
 import com.michaldrabik.ui_model.ImageFamily.SHOW
-import com.michaldrabik.ui_model.ImageSource.AWS
 import com.michaldrabik.ui_model.ImageSource.CUSTOM
 import com.michaldrabik.ui_model.ImageSource.TMDB
 import com.michaldrabik.ui_model.ImageStatus.AVAILABLE
@@ -35,7 +33,6 @@ data class Image(
       PROFILE -> "${TMDB_IMAGE_BASE_PROFILE_URL}$fileUrl"
       else -> ""
     }
-    AWS -> "$AWS_IMAGE_BASE_URL$fileUrl"
     CUSTOM -> fileUrl
   }
 

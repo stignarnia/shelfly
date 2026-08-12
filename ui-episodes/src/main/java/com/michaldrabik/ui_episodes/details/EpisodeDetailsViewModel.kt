@@ -60,11 +60,11 @@ class EpisodeDetailsViewModel @Inject constructor(
   }
 
   fun loadLastWatchedAt(
-    showTraktId: IdTmdb,
+    showTmdbId: IdTmdb,
     episode: Episode,
   ) {
     viewModelScope.launch {
-      val lastWatchedAt = watchedCase.getLastWatchedAt(showTraktId, episode)
+      val lastWatchedAt = watchedCase.getLastWatchedAt(showTmdbId, episode)
       lastWatchedAtState.update { lastWatchedAt }
     }
   }
@@ -86,12 +86,12 @@ class EpisodeDetailsViewModel @Inject constructor(
   }
 
   fun loadSeason(
-    showTraktId: IdTmdb,
+    showTmdbId: IdTmdb,
     episode: Episode,
     seasonEpisodes: IntArray?,
   ) {
     viewModelScope.launch {
-      val episodes = seasonsCase.loadSeason(showTraktId, episode, seasonEpisodes)
+      val episodes = seasonsCase.loadSeason(showTmdbId, episode, seasonEpisodes)
       if (episodes.isNotEmpty()) {
         delay(100)
       }
@@ -100,7 +100,7 @@ class EpisodeDetailsViewModel @Inject constructor(
   }
 
   fun loadTranslation(
-    showTraktId: IdTmdb,
+    showTmdbId: IdTmdb,
     episode: Episode,
   ) {
     viewModelScope.launch {
@@ -109,7 +109,7 @@ class EpisodeDetailsViewModel @Inject constructor(
         if (language == Config.DEFAULT_LANGUAGE) {
           return@launch
         }
-        val translation = translationsRepository.loadTranslation(episode, showTraktId, language)
+        val translation = translationsRepository.loadTranslation(episode, showTmdbId, language)
         translation?.let {
           translationState.value = it
         }

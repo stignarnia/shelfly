@@ -48,7 +48,7 @@ class MyShowsDaoTest : BaseDaoTest() {
       database.myShowsDao().insert(listOf(myShow1))
       database.myShowsDao().insert(listOf(myShow2))
 
-      val result = database.myShowsDao().getAllTraktIds()
+      val result = database.myShowsDao().getAllTmdbIds()
       assertThat(result).containsExactlyElementsIn(listOf(shows[0].idTmdb, shows[1].idTmdb))
     }
   }

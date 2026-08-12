@@ -37,7 +37,6 @@ import com.michaldrabik.data_local.sources.ShowTranslationsLocalDataSource
 import com.michaldrabik.data_local.sources.ShowsLocalDataSource
 import com.michaldrabik.data_local.sources.TranslationsMoviesSyncLogLocalDataSource
 import com.michaldrabik.data_local.sources.TranslationsShowsSyncLogLocalDataSource
-import com.michaldrabik.data_local.sources.UserLocalDataSource
 import com.michaldrabik.data_local.sources.WatchlistMoviesLocalDataSource
 import com.michaldrabik.data_local.sources.WatchlistShowsLocalDataSource
 import dagger.Module
@@ -198,10 +197,6 @@ class SourcesModule {
   @Singleton
   internal fun providesTranslationsShows(database: AppDatabase): TranslationsShowsSyncLogLocalDataSource =
     database.translationsSyncLogDao()
-
-  @Provides
-  @Singleton
-  internal fun providesUser(database: AppDatabase): UserLocalDataSource = database.userDao()
 
   @Provides
   @Singleton

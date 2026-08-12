@@ -5,8 +5,8 @@ import com.michaldrabik.ui_base.dates.AppDateFormat.DEFAULT_12
 import com.michaldrabik.ui_base.dates.AppDateFormat.DEFAULT_24
 import com.michaldrabik.ui_base.dates.AppDateFormat.MISC_12
 import com.michaldrabik.ui_base.dates.AppDateFormat.MISC_24
-import com.michaldrabik.ui_base.dates.AppDateFormat.TRAKT_12
-import com.michaldrabik.ui_base.dates.AppDateFormat.TRAKT_24
+import com.michaldrabik.ui_base.dates.AppDateFormat.ALT_12
+import com.michaldrabik.ui_base.dates.AppDateFormat.ALT_24
 import com.michaldrabik.ui_base.dates.AppDateFormat.valueOf
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -38,8 +38,8 @@ class DateFormatProvider @Inject constructor(
       val pattern = when (format) {
         DEFAULT_12 -> DAY_HOUR_1
         DEFAULT_24 -> DAY_HOUR_2
-        TRAKT_12 -> DAY_HOUR_3
-        TRAKT_24 -> DAY_HOUR_4
+        ALT_12 -> DAY_HOUR_3
+        ALT_24 -> DAY_HOUR_4
         MISC_12 -> DAY_HOUR_5
         MISC_24 -> DAY_HOUR_6
       }
@@ -54,8 +54,8 @@ class DateFormatProvider @Inject constructor(
     val pattern = when (valueOf(settingsRepository.dateFormat)) {
       DEFAULT_12 -> DAY_1
       DEFAULT_24 -> DAY_1
-      TRAKT_12 -> DAY_2
-      TRAKT_24 -> DAY_2
+      ALT_12 -> DAY_2
+      ALT_24 -> DAY_2
       MISC_12 -> DAY_1
       MISC_24 -> DAY_1
     }
@@ -66,8 +66,8 @@ class DateFormatProvider @Inject constructor(
     val pattern = when (valueOf(settingsRepository.dateFormat)) {
       DEFAULT_12 -> DAY_3
       DEFAULT_24 -> DAY_3
-      TRAKT_12 -> DAY_4
-      TRAKT_24 -> DAY_4
+      ALT_12 -> DAY_4
+      ALT_24 -> DAY_4
       MISC_12 -> DAY_5
       MISC_24 -> DAY_5
     }
@@ -78,8 +78,8 @@ class DateFormatProvider @Inject constructor(
     val pattern = when (valueOf(settingsRepository.dateFormat)) {
       DEFAULT_12 -> DAY_HOUR_1
       DEFAULT_24 -> DAY_HOUR_2
-      TRAKT_12 -> DAY_HOUR_3
-      TRAKT_24 -> DAY_HOUR_4
+      ALT_12 -> DAY_HOUR_3
+      ALT_24 -> DAY_HOUR_4
       MISC_12 -> DAY_HOUR_5
       MISC_24 -> DAY_HOUR_6
     }

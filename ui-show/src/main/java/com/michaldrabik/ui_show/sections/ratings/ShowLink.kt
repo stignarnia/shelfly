@@ -5,7 +5,6 @@ import com.michaldrabik.ui_base.common.AppCountry
 
 enum class ShowLink {
   IMDB,
-  TRAKT,
   TVDB,
   TMDB,
   METACRITIC,
@@ -19,9 +18,6 @@ enum class ShowLink {
   ) = when (this) {
     IMDB -> {
       "https://www.imdb.com/title/$id"
-    }
-    TRAKT -> {
-      "https://trakt.tv/search/trakt/$id?id_type=show"
     }
     TVDB -> {
       "https://www.thetvdb.com/?id=$id&tab=series"

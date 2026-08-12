@@ -401,9 +401,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
     val intent = Intent().apply {
       val text = "${movie.title}:" +
         "\n" +
-        "https://www.imdb.com/title/${movie.ids.imdb.id}" +
-        "\n" +
-        "https://trakt.tv/movies/${movie.ids.slug.id}"
+        "https://www.imdb.com/title/${movie.ids.imdb.id}"
       action = Intent.ACTION_SEND
       putExtra(Intent.EXTRA_TEXT, text)
       type = "text/plain"

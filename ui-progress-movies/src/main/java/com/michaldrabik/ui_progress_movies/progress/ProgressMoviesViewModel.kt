@@ -139,9 +139,6 @@ class ProgressMoviesViewModel @Inject constructor(
     loadItems(resetScroll = item.isPinned)
   }
 
-  fun startTraktSync() {
-  }
-
   private fun updateItem(newItem: ProgressMovieListItem.MovieItem) {
     itemsState.update { value ->
       value?.toMutableList()?.apply {

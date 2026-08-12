@@ -288,7 +288,6 @@ class FollowedMoviesFragment :
 
   private fun render(uiState: FollowedMoviesUiState) {
     uiState.isSyncing?.let {
-      binding.followedMoviesSearchView.setTraktProgress(it)
       binding.followedMoviesSearchView.isEnabled = !it
     }
   }

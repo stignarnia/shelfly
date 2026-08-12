@@ -87,24 +87,10 @@
       android:adjustViewBounds="true"
       app:layout_constraintBottom_toTopOf="@id/settingsJustWatchDisclaimer"
       app:layout_constraintEnd_toStartOf="@id/settingsInstagramIcon"
-      app:layout_constraintStart_toEndOf="@id/settingsTraktIcon"
-      app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/ic_tmdb"
-      />
-
-    <ImageView
-      android:id="@+id/settingsTraktIcon"
-      android:layout_width="60dp"
-      android:layout_height="40dp"
-      android:layout_marginTop="@dimen/spaceNormal"
-      android:layout_marginEnd="@dimen/spaceTiny"
-      android:adjustViewBounds="true"
-      app:layout_constraintBottom_toTopOf="@id/settingsJustWatchDisclaimer"
-      app:layout_constraintEnd_toStartOf="@id/settingsTmdbIcon"
       app:layout_constraintHorizontal_chainStyle="packed"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/ic_trakt"
+      app:srcCompat="@drawable/ic_tmdb"
       />
 
     <ImageView
@@ -144,7 +130,7 @@
       app:layout_constraintEnd_toStartOf="@id/settingsJustWatchIcon"
       app:layout_constraintHorizontal_chainStyle="packed"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/settingsTraktIcon"
+      app:layout_constraintTop_toBottomOf="@id/settingsTmdbIcon"
       />
 
     <ImageView

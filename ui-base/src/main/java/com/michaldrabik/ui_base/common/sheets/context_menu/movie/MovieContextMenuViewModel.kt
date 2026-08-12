@@ -44,7 +44,6 @@ class MovieContextMenuViewModel @Inject constructor(
   ChannelsDelegate by DefaultChannelsDelegate() {
 
   private var movieId by notNull<IdTmdb>()
-  private var isQuickRemoveEnabled by notNull<Boolean>()
 
   private val loadingState = MutableStateFlow(false)
   private val itemState = MutableStateFlow<MovieContextItem?>(null)
@@ -52,7 +51,6 @@ class MovieContextMenuViewModel @Inject constructor(
   fun loadMovie(idTmdb: IdTmdb) {
     viewModelScope.launch {
       movieId = idTmdb
-      isQuickRemoveEnabled = settingsRepository.load().traktQuickRemoveEnabled
 
       try {
         loadingState.value = true

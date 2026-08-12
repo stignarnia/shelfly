@@ -7,7 +7,7 @@ interface WatchlistMoviesLocalDataSource {
 
   suspend fun getAll(): List<Movie>
 
-  suspend fun getAllTraktIds(): List<Long>
+  suspend fun getAllTmdbIds(): List<Long>
 
   suspend fun getById(tmdbId: Long): Movie?
 

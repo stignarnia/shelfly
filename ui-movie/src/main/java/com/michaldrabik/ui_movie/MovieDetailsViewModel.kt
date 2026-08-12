@@ -27,7 +27,7 @@ import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.ProgressDateSelectionType.ALWAYS_ASK
 import com.michaldrabik.ui_model.RatingState
 import com.michaldrabik.ui_model.SpoilersSettings
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import com.michaldrabik.ui_model.Translation
 import com.michaldrabik.ui_movie.MovieDetailsEvent.Finish
 import com.michaldrabik.ui_movie.MovieDetailsEvent.RequestWidgetsUpdate
@@ -132,7 +132,7 @@ class MovieDetailsViewModel @Inject constructor(
             rethrowCancellation(error)
           }
           is ResourceNotFoundError -> {
-            // Malformed Trakt data or duplicate show.
+            // Malformed catalog data or duplicate entry.
             messageChannel.send(MessageEvent.Info(R.string.errorMalformedMovie))
             Logger.record(error, "MovieDetailsViewModel::loadDetails(${id.id})")
           }
@@ -186,7 +186,7 @@ class MovieDetailsViewModel @Inject constructor(
         ratingState.value = RatingState(rateLoading = true)
         val rating = ratingsCase.loadRating(movie)
         ratingState.value =
-          RatingState(rateLoading = false, userRating = rating ?: TraktRating.EMPTY)
+          RatingState(rateLoading = false, userRating = rating ?: UserRating.EMPTY)
       } catch (error: Throwable) {
         ratingState.value = RatingState(rateLoading = false)
         rethrowCancellation(error)

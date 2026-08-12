@@ -9,7 +9,6 @@
   <string name="textShowQuickProgressDone">Katselutilasi päivitettiin.</string>
   <string name="textEpisodeDate">Jakso %1$d | %2$s</string>
   <string name="textEpisodeTitle">K.%02d J.%02d - \'%s\'</string>
-  <string name="textTraktSyncRemovedFromTrakt">Trakt.tv synkronoitiin.</string>
   <string name="textActorsEmpty">Näyttelijät eivät ole saatavilla</string>
   <string name="textSeasons">Kaudet:</string>
   <string name="textSeasonsEmpty">Tuotantokausia ei ole.</string>

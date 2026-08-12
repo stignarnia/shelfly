@@ -11,7 +11,7 @@ import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageType
 import com.michaldrabik.ui_model.Movie
-import com.michaldrabik.ui_model.TraktRating
+import com.michaldrabik.ui_model.UserRating
 import com.michaldrabik.ui_statistics_movies.cases.StatisticsMoviesLoadRatingsCase
 import com.michaldrabik.ui_statistics_movies.views.ratings.recycler.StatisticsMoviesRatingItem
 import io.mockk.coEvery
@@ -59,7 +59,7 @@ class StatisticsMoviesViewModelTest : BaseMockTest() {
   internal fun `Should load ratings`() =
     runTest {
       val movieItem =
-        StatisticsMoviesRatingItem(Movie.EMPTY, Image.createUnknown(ImageType.POSTER), false, TraktRating.EMPTY)
+        StatisticsMoviesRatingItem(Movie.EMPTY, Image.createUnknown(ImageType.POSTER), false, UserRating.EMPTY)
       coEvery { ratingsCase.loadRatings() } returns listOf(movieItem)
 
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }

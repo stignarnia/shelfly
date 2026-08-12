@@ -19,7 +19,7 @@
   <string name="textManageLists">管理列表</string>
   <string name="textManageListsShows">管理这部剧所在的列表。</string>
   <string name="textManageListsMovies">管理这部电影所在的列表。</string>
-  <string name="errorCouldNotCreateList">目前无法在您 Trakt 账号中创建新的列表。\n请检查网络连接并重试。</string>
-  <string name="errorCouldNotUpdateList">目前无法更新您 Trakt 账号中的此列表。\n请检查网络连接并重试。</string>
-  <string name="errorCouldNotDeleteList">目前无法删除您 Trakt 账号中的此列表。\n请检查网络连接并重试。</string>
+  <string name="errorCouldNotCreateList">目前无法在您 TMDB 账号中创建新的列表。\n请检查网络连接并重试。</string>
+  <string name="errorCouldNotUpdateList">目前无法更新您 TMDB 账号中的此列表。\n请检查网络连接并重试。</string>
+  <string name="errorCouldNotDeleteList">目前无法删除您 TMDB 账号中的此列表。\n请检查网络连接并重试。</string>
 </resources>

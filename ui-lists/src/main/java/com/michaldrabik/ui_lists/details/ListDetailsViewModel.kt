@@ -184,16 +184,10 @@ class ListDetailsViewModel @Inject constructor(
     }
   }
 
-  fun deleteList(
-    listId: Long,
-    removeFromTrakt: Boolean,
-  ) {
+  fun deleteList(listId: Long) {
     viewModelScope.launch {
       try {
-        if (removeFromTrakt) {
-          loadingState.value = true
-        }
-        mainCase.deleteList(listId, removeFromTrakt)
+        mainCase.deleteList(listId)
         loadingState.value = false
         listDeleteState.value = Event(true)
       } catch (error: Throwable) {
@@ -214,7 +208,7 @@ class ListDetailsViewModel @Inject constructor(
           item.isMovie() -> MOVIES
           else -> throw IllegalStateException()
         }
-      itemsCase.deleteListItem(listId, item.getTraktId(), type)
+      itemsCase.deleteListItem(listId, item.getTmdbId(), type)
       loadDetails(listId)
     }
   }

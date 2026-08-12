@@ -98,7 +98,6 @@ class LinksBottomSheet : BaseBottomSheetFragment(R.layout.view_links) {
       viewLinksButtonClose.onClick { closeSheet() }
     }
     setWebLink()
-    setTraktLink()
     setTvdbLink()
     setTmdbLink()
     setImdbLink()
@@ -111,17 +110,6 @@ class LinksBottomSheet : BaseBottomSheetFragment(R.layout.view_links) {
         isEnabled = false
       } else {
         onClick { openWebUrl(website) }
-      }
-    }
-  }
-
-  private fun setTraktLink() {
-    binding.viewLinksTrakt.run {
-      if (ids.tmdb.id == -1L) {
-        alpha = 0.5F
-        isEnabled = false
-      } else {
-        onClick { openWebUrl("https://trakt.tv/search/trakt/${ids.tmdb.id}?id_type=${type.type}") }
       }
     }
   }

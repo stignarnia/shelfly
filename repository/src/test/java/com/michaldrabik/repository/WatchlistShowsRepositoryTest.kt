@@ -61,7 +61,7 @@ class WatchlistShowsRepositoryTest : BaseMockTest() {
   }
 
   @Test
-  fun `Should load and map single SeeLater show by Trakt ID`() {
+  fun `Should load and map single SeeLater show by TMDB ID`() {
     runBlocking {
       val show = Show.EMPTY.copy(title = "Test")
 
@@ -77,7 +77,7 @@ class WatchlistShowsRepositoryTest : BaseMockTest() {
   }
 
   @Test
-  fun `Should insert show into database using Trakt ID`() {
+  fun `Should insert show into database using TMDB ID`() {
     runBlocking {
       coJustRun { myShowsDao.deleteById(any()) }
       coJustRun { archivedShowsDao.deleteById(any()) }
@@ -115,7 +115,7 @@ class WatchlistShowsRepositoryTest : BaseMockTest() {
   }
 
   @Test
-  fun `Should delete show from database using Trakt ID`() {
+  fun `Should delete show from database using TMDB ID`() {
     runBlocking {
       val slot = slot<Long>()
       coJustRun { seeLaterShowsDao.deleteById(capture(slot)) }
@@ -130,12 +130,12 @@ class WatchlistShowsRepositoryTest : BaseMockTest() {
   @Test
   fun `Should load all SeeLater shows ids`() {
     runBlocking {
-      coEvery { seeLaterShowsDao.getAllTraktIds() } returns listOf(1L, 2L)
+      coEvery { seeLaterShowsDao.getAllTmdbIds() } returns listOf(1L, 2L)
 
       val ids = SUT.loadAllIds()
 
       assertThat(ids).containsExactly(1L, 2L)
-      coVerify(exactly = 1) { seeLaterShowsDao.getAllTraktIds() }
+      coVerify(exactly = 1) { seeLaterShowsDao.getAllTmdbIds() }
     }
   }
 }

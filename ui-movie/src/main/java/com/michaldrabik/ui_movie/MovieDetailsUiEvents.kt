@@ -2,7 +2,6 @@
 
 package com.michaldrabik.ui_movie
 
-import androidx.annotation.IdRes
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.MovieCollection
@@ -33,10 +32,6 @@ sealed class MovieDetailsEvent<T>(
   data class OpenDateSelectionSheet(
     val movie: Movie,
   ) : MovieDetailsEvent<Movie>(movie)
-
-  data class RemoveFromTrakt(
-    @IdRes val navigationId: Int,
-  ) : MovieDetailsEvent<Int>(navigationId)
 
   object RequestWidgetsUpdate : MovieDetailsEvent<Unit>(Unit)
 

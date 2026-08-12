@@ -11,5 +11,4 @@
     <string name="textMovieCollections">Colecții</string>
     <string name="textMovieManageLists">Gestionare liste</string>
     <string name="textMovieManageListsCount">Gestionare liste (%d)</string>
-    <string name="textTraktSyncMovieRemovedFromTrakt">Trakt.tv s-a sincronizat cu succes.</string>
 </resources>

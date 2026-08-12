@@ -45,10 +45,10 @@ interface PeopleCreditsDao : BaseDao<PersonCredits>, PeopleCreditsLocalDataSourc
     people_credits.updated_at AS updated_at
     FROM shows
     INNER JOIN people_credits ON people_credits.id_tmdb_show = shows.id_tmdb
-    WHERE people_credits.id_tmdb_person = :personTraktId
+    WHERE people_credits.id_tmdb_person = :personTmdbId
     """
   )
-  override suspend fun getAllShowsForPerson(personTraktId: Long): List<Show>
+  override suspend fun getAllShowsForPerson(personTmdbId: Long): List<Show>
 
   @Query(
     """
@@ -75,23 +75,23 @@ interface PeopleCreditsDao : BaseDao<PersonCredits>, PeopleCreditsLocalDataSourc
     people_credits.created_at AS created_at
     FROM movies
     INNER JOIN people_credits ON people_credits.id_tmdb_movie = movies.id_tmdb
-    WHERE people_credits.id_tmdb_person = :personTraktId
+    WHERE people_credits.id_tmdb_person = :personTmdbId
     """
   )
-  override suspend fun getAllMoviesForPerson(personTraktId: Long): List<Movie>
+  override suspend fun getAllMoviesForPerson(personTmdbId: Long): List<Movie>
 
-  @Query("SELECT updated_at FROM people_credits WHERE id_tmdb_person = :personTraktId LIMIT 1")
-  override suspend fun getTimestampForPerson(personTraktId: Long): Long?
+  @Query("SELECT updated_at FROM people_credits WHERE id_tmdb_person = :personTmdbId LIMIT 1")
+  override suspend fun getTimestampForPerson(personTmdbId: Long): Long?
 
-  @Query("DELETE FROM people_credits WHERE id_tmdb_person == :personTraktId")
-  override suspend fun deleteAllForPerson(personTraktId: Long)
+  @Query("DELETE FROM people_credits WHERE id_tmdb_person == :personTmdbId")
+  override suspend fun deleteAllForPerson(personTmdbId: Long)
 
   @Transaction
   override suspend fun insertSingle(
-    personTraktId: Long,
+    personTmdbId: Long,
     credits: List<PersonCredits>
   ) {
-    deleteAllForPerson(personTraktId)
+    deleteAllForPerson(personTmdbId)
     insert(credits)
   }
 }

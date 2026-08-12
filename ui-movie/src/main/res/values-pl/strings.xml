@@ -11,5 +11,4 @@
   <string name="textMovieCollections">Kolekcje</string>
   <string name="textMovieManageLists">Zarządzaj listami</string>
   <string name="textMovieManageListsCount">Zarządzaj listami (%d)</string>
-  <string name="textTraktSyncMovieRemovedFromTrakt">Trakt.tv zostało zaktualizowane.</string>
 </resources>

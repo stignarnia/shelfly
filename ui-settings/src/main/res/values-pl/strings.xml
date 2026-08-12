@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="textTraktLoginSuccess">Zalogowano.</string>
-  <string name="textTraktLogoutSuccess">Wylogowano.</string>
   <string name="textImagesCacheCleared">Pamięć podręczna obrazków została wyczyszczona.</string>
   <string name="textTurnOff">Wyłącz</string>
   <string name="textSettings">Ustawienia</string>
-  <string name="textSettingsTrakt">Trakt.tv</string>
-  <string name="textSettingsTraktAuthorizeTitle">Autoryzacja Trakt.tv</string>
-  <string name="textSettingsTraktAuthorizeSummarySignIn">Kliknij aby zalogować się do konta Trakt.tv.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOut">Zalogowano. Kliknij aby wylogować.</string>
-  <string name="textSettingsTraktAuthorizeSummarySignOutUser">Zalogowano jako %1$s.\nKliknij aby wylogować.</string>
-  <string name="textSettingsTraktSyncTitle">Synchronizacja Trakt.tv</string>
-  <string name="textSettingsTraktSyncSummary">Synchronizuj dane między Trakt.tv i Showly</string>
-  <string name="textSettingsTraktQuickSyncTitle">Trakt.tv Szybki Upload</string>
-  <string name="textSettingsTraktQuickSyncSummary">Natychmiast wyślij odcinki i seriale \'Na Później\' do Trakt.tv po dodaniu w aplikacji.</string>
-  <string name="textSettingsTraktQuickRemoveTitle">Trakt.tv Usuwanie Danych</string>
-  <string name="textSettingsTraktQuickRemoveSummary">Podczas usuwania danych z aplikacji, proponuj również usunięcie ich z konta Trakt.tv.</string>
-  <string name="textSettingsTraktQuickRateTitle">Trakt.tv Szybkie Oceny</string>
-  <string name="textSettingsTraktQuickRateSummary">Oceń odcinki i filmy za każdym razem, gdy oznaczasz je jako obejrzane na ekranie \"Postępu\".</string>
   <string name="textSettingsGeneral">Ogólne</string>
   <string name="textSettingsRecentShowsTitle">Ilość Ostatnio Dodanych</string>
   <string name="textSettingsRecentShowsSummary">Liczba ostatnio dodanych elementów w zakładce \'Kolekcja\'.</string>
@@ -49,7 +34,7 @@
   <string name="textSettingsDeleteCacheSummary">Kliknij aby wyczyścić pamięć podręczną obrazków jeżeli występują problemy z ich ładowaniem.</string>
   <string name="textSettingsQuickSyncConfirmationTitle">Wyłącz Planowane Synchronizacje</string>
   <string name="textSettingsQuickSyncConfirmationMessage">\nPlanowane synchronizacje są obecnie włączone.\n\nWyłączyć przed włączeniem Szybkiej Synchronizacji (zalecane)?\n</string>
-  <string name="textSettingsLogoutTitle">Trakt.tv Wylogowanie</string>
+  <string name="textSettingsLogoutTitle">TMDB Wylogowanie</string>
   <string name="textSettingsLogoutMessage">\nCzy na pewno chcesz się wylogować?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Filmy</string>
   <string name="textSettingsMoviesEnabledSummary">Włącz/wyłącz filmy. Aplikacja zostanie ponownie uruchomiona.</string>

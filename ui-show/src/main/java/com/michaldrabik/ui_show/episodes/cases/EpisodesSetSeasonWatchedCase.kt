@@ -49,6 +49,5 @@ class EpisodesSetSeasonWatchedCase @Inject constructor(
 
   enum class Result {
     SUCCESS,
-    REMOVE_FROM_TRAKT,
   }
 }

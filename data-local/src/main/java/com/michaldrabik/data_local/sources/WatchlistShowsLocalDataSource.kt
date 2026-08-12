@@ -7,7 +7,7 @@ interface WatchlistShowsLocalDataSource {
 
   suspend fun getAll(): List<Show>
 
-  suspend fun getAllTraktIds(): List<Long>
+  suspend fun getAllTmdbIds(): List<Long>
 
   suspend fun getById(tmdbId: Long): Show?
 

@@ -5,9 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.work.WorkManager
 import com.michaldrabik.ui_base.events.Event
 import com.michaldrabik.ui_base.events.EventsManager
-import com.michaldrabik.ui_base.events.TraktSyncAuthError
-import com.michaldrabik.ui_base.events.TraktSyncError
-import com.michaldrabik.ui_base.events.TraktSyncSuccess
+import com.michaldrabik.ui_base.events.ReloadData
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_model.CalendarMode
 import com.michaldrabik.ui_model.Movie
@@ -71,7 +69,7 @@ class ProgressMoviesMainViewModel @Inject constructor(
   }
 
   private fun onEvent(event: Event) {
-    if (event in arrayOf(TraktSyncError, TraktSyncAuthError, TraktSyncSuccess)) {
+    if (event is ReloadData) {
       loadProgress()
     }
   }

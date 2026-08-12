@@ -77,8 +77,7 @@ class TmdbApiTest {
 
       val show = api.fetchShow(1396)
 
-      // Trakt returned full instants; TMDB returns "2008-01-20", which
-      // ZonedDateTime.parse rejects outright.
+      // TMDB returns "2008-01-20", which ZonedDateTime.parse rejects outright.
       assertThat(show.first_aired).isEqualTo("2008-01-20T00:00:00.000Z")
     }
 

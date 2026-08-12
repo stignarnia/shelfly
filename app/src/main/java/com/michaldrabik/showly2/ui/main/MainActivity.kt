@@ -44,8 +44,6 @@ import com.michaldrabik.ui_base.common.OnTabReselectedListener
 import com.michaldrabik.ui_base.events.Event
 import com.michaldrabik.ui_base.events.EventsManager
 import com.michaldrabik.ui_base.events.ShowsMoviesSyncComplete
-import com.michaldrabik.ui_base.events.TraktQuickSyncSuccess
-import com.michaldrabik.ui_base.events.TraktSyncAuthError
 import com.michaldrabik.ui_base.network.NetworkStatusProvider
 import com.michaldrabik.ui_base.sync.ShowsMoviesSyncWorker
 import com.michaldrabik.ui_base.utilities.ModeHost
@@ -59,8 +57,6 @@ import com.michaldrabik.ui_base.utilities.extensions.fadeOut
 import com.michaldrabik.ui_base.utilities.extensions.gone
 import com.michaldrabik.ui_base.utilities.extensions.onClick
 import com.michaldrabik.ui_base.utilities.extensions.openWebUrl
-import com.michaldrabik.ui_base.utilities.extensions.showErrorSnackbar
-import com.michaldrabik.ui_base.utilities.extensions.showInfoSnackbar
 import com.michaldrabik.ui_base.utilities.extensions.visible
 import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_settings.helpers.AppLanguage
@@ -448,13 +444,6 @@ class MainActivity :
           doForFragments { (it as? OnShowsMoviesSyncedListener)?.onShowsMoviesSyncFinished() }
         }
         viewModel.refreshAnnouncements()
-      }
-      is TraktQuickSyncSuccess -> {
-        val message = resources.getQuantityString(R.plurals.textTraktQuickSyncComplete, event.count, event.count)
-        provideSnackbarLayout().showInfoSnackbar(message)
-      }
-      is TraktSyncAuthError -> {
-        provideSnackbarLayout().showErrorSnackbar(getString(R.string.errorTraktAuthorization))
       }
       else -> {
         Timber.d("Event ignored. Noop.")

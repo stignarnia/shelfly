@@ -72,7 +72,7 @@ interface MyMoviesDao : MyMoviesLocalDataSource {
   override suspend fun getAllRecent(limit: Int): List<Movie>
 
   @Query("SELECT movies.id_tmdb FROM movies INNER JOIN movies_my_movies USING(id_tmdb)")
-  override suspend fun getAllTraktIds(): List<Long>
+  override suspend fun getAllTmdbIds(): List<Long>
 
   @Query(
     "SELECT " +

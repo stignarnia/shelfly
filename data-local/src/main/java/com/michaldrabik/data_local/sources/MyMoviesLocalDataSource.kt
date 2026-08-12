@@ -11,7 +11,7 @@ interface MyMoviesLocalDataSource {
 
   suspend fun getAllRecent(limit: Int): List<Movie>
 
-  suspend fun getAllTraktIds(): List<Long>
+  suspend fun getAllTmdbIds(): List<Long>
 
   suspend fun getById(tmdbId: Long): Movie?
 

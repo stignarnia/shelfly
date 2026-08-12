@@ -19,7 +19,7 @@
   <string name="textManageLists">Gestionar listas</string>
   <string name="textManageListsShows">Gestiona tus listas para esta serie.</string>
   <string name="textManageListsMovies">Gestiona tus listas para esta película.</string>
-  <string name="errorCouldNotCreateList">No pudimos crear una nueva lista en tu cuenta de Trakt en este momento.\nPor favor, comprueba la conexión a Internet e inténtalo de nuevo.</string>
-  <string name="errorCouldNotUpdateList">No pudimos actualizar esta lista en tu cuenta de Trakt en este momento.\nPor favor, comprueba la conexión a Internet e inténtalo de nuevo.</string>
-  <string name="errorCouldNotDeleteList">No pudimos eliminar esta lista de tu cuenta de Trakt en este momento.\nPor favor, comprueba la conexión a Internet e inténtalo de nuevo.</string>
+  <string name="errorCouldNotCreateList">No pudimos crear una nueva lista en tu cuenta de TMDB en este momento.\nPor favor, comprueba la conexión a Internet e inténtalo de nuevo.</string>
+  <string name="errorCouldNotUpdateList">No pudimos actualizar esta lista en tu cuenta de TMDB en este momento.\nPor favor, comprueba la conexión a Internet e inténtalo de nuevo.</string>
+  <string name="errorCouldNotDeleteList">No pudimos eliminar esta lista de tu cuenta de TMDB en este momento.\nPor favor, comprueba la conexión a Internet e inténtalo de nuevo.</string>
 </resources>

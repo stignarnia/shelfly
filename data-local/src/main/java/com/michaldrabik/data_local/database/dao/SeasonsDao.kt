@@ -65,6 +65,6 @@ interface SeasonsDao : SeasonsLocalDataSource {
     if (updateList.isNotEmpty()) update(updateList)
   }
 
-  @Query("DELETE FROM seasons WHERE id_show_tmdb = :showTraktId")
-  override suspend fun deleteAllForShow(showTraktId: Long)
+  @Query("DELETE FROM seasons WHERE id_show_tmdb = :showTmdbId")
+  override suspend fun deleteAllForShow(showTmdbId: Long)
 }

@@ -14,15 +14,15 @@ interface MovieCollectionsDao :
   @Query("SELECT * FROM movies_collections WHERE id_tmdb == :tmdbId")
   override suspend fun getById(tmdbId: Long): MovieCollection?
 
-  @Query("SELECT * FROM movies_collections WHERE id_tmdb_movie == :movieTraktId")
-  override suspend fun getByMovieId(movieTraktId: Long): List<MovieCollection>
+  @Query("SELECT * FROM movies_collections WHERE id_tmdb_movie == :movieTmdbId")
+  override suspend fun getByMovieId(movieTmdbId: Long): List<MovieCollection>
 
   @Transaction
   override suspend fun replaceByMovieId(
-    movieTraktId: Long,
+    movieTmdbId: Long,
     entities: List<MovieCollection>,
   ) {
-    val deleteCollections = getByMovieId(movieTraktId).map { it.idTmdb }
+    val deleteCollections = getByMovieId(movieTmdbId).map { it.idTmdb }
 
     deleteCollectionsItems(deleteCollections)
     deleteCollections(deleteCollections)

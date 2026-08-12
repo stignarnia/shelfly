@@ -40,9 +40,6 @@ class SettingsMapper @Inject constructor() {
         .filter {
           it.isNotBlank()
         }.map { Network.valueOf(it) },
-      traktSyncSchedule = enumValueOf(settings.traktSyncSchedule),
-      traktQuickSyncEnabled = settings.traktQuickSyncEnabled,
-      traktQuickRemoveEnabled = settings.traktQuickRemoveEnabled,
       progressSortOrder = enumValueOf(settings.watchlistSortBy),
       archiveIncludeStatistics = settings.archiveShowsIncludeStatistics,
       specialSeasonsEnabled = settings.specialSeasonsEnabled,
@@ -60,7 +57,7 @@ class SettingsMapper @Inject constructor() {
       showCollectionShows = settings.showCollectionShows,
       showCollectionMovies = settings.showCollectionMovies,
       widgetsShowLabel = settings.widgetsShowLabel,
-      traktQuickRateEnabled = settings.quickRateEnabled,
+      quickRateEnabled = settings.quickRateEnabled,
       listsSortBy = enumValueOf(settings.listsSortBy),
       progressUpcomingEnabled = settings.progressUpcomingEnabled,
     )
@@ -90,9 +87,6 @@ class SettingsMapper @Inject constructor() {
       discoverFilterFeed = settings.discoverFilterFeed.name,
       discoverFilterGenres = settings.discoverFilterGenres.joinToString(",") { it.name },
       discoverFilterNetworks = settings.discoverFilterNetworks.joinToString(",") { it.name },
-      traktSyncSchedule = settings.traktSyncSchedule.name,
-      traktQuickSyncEnabled = settings.traktQuickSyncEnabled,
-      traktQuickRemoveEnabled = settings.traktQuickRemoveEnabled,
       watchlistSortBy = settings.progressSortOrder.name,
       archiveShowsIncludeStatistics = settings.archiveIncludeStatistics,
       specialSeasonsEnabled = settings.specialSeasonsEnabled,
@@ -105,7 +99,7 @@ class SettingsMapper @Inject constructor() {
       showCollectionShows = settings.showCollectionShows,
       showCollectionMovies = settings.showCollectionMovies,
       widgetsShowLabel = settings.widgetsShowLabel,
-      quickRateEnabled = settings.traktQuickRateEnabled,
+      quickRateEnabled = settings.quickRateEnabled,
       listsSortBy = settings.listsSortBy.name,
       progressUpcomingEnabled = settings.progressUpcomingEnabled,
     )

@@ -17,9 +17,9 @@ interface RatingsDao :
   @Query("SELECT * FROM ratings WHERE type == :type ORDER BY rated_at DESC")
   override suspend fun getAllByType(type: String): List<Rating>
 
-  @Query("SELECT * FROM ratings WHERE id_tmdb IN (:idsTrakt) AND type == :type ORDER BY rated_at DESC")
+  @Query("SELECT * FROM ratings WHERE id_tmdb IN (:idsTmdb) AND type == :type ORDER BY rated_at DESC")
   override suspend fun getAllByType(
-    idsTrakt: List<Long>,
+    idsTmdb: List<Long>,
     type: String,
   ): List<Rating>
 

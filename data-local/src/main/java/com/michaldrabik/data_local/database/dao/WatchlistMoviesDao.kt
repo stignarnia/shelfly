@@ -39,7 +39,7 @@ interface WatchlistMoviesDao : WatchlistMoviesLocalDataSource {
   override suspend fun getAll(): List<Movie>
 
   @Query("SELECT movies.id_tmdb FROM movies INNER JOIN movies_see_later USING(id_tmdb)")
-  override suspend fun getAllTraktIds(): List<Long>
+  override suspend fun getAllTmdbIds(): List<Long>
 
   @Query(
     "SELECT movies.* FROM movies " +

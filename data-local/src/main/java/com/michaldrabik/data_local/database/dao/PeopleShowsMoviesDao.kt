@@ -11,33 +11,33 @@ interface PeopleShowsMoviesDao :
   BaseDao<PersonShowMovie>,
   PeopleShowsMoviesLocalDataSource {
 
-  @Query("SELECT updated_at FROM people_shows_movies WHERE id_tmdb_show == :showTraktId LIMIT 1")
-  override suspend fun getTimestampForShow(showTraktId: Long): Long?
+  @Query("SELECT updated_at FROM people_shows_movies WHERE id_tmdb_show == :showTmdbId LIMIT 1")
+  override suspend fun getTimestampForShow(showTmdbId: Long): Long?
 
-  @Query("SELECT updated_at FROM people_shows_movies WHERE id_tmdb_movie == :movieTraktId LIMIT 1")
-  override suspend fun getTimestampForMovie(movieTraktId: Long): Long?
+  @Query("SELECT updated_at FROM people_shows_movies WHERE id_tmdb_movie == :movieTmdbId LIMIT 1")
+  override suspend fun getTimestampForMovie(movieTmdbId: Long): Long?
 
-  @Query("DELETE FROM people_shows_movies WHERE id_tmdb_show == :showTraktId")
-  override suspend fun deleteAllForShow(showTraktId: Long)
+  @Query("DELETE FROM people_shows_movies WHERE id_tmdb_show == :showTmdbId")
+  override suspend fun deleteAllForShow(showTmdbId: Long)
 
-  @Query("DELETE FROM people_shows_movies WHERE id_tmdb_movie == :movieTraktId")
-  override suspend fun deleteAllForMovie(movieTraktId: Long)
+  @Query("DELETE FROM people_shows_movies WHERE id_tmdb_movie == :movieTmdbId")
+  override suspend fun deleteAllForMovie(movieTmdbId: Long)
 
   @Transaction
   override suspend fun insertForShow(
     people: List<PersonShowMovie>,
-    showTraktId: Long,
+    showTmdbId: Long,
   ) {
-    deleteAllForShow(showTraktId)
+    deleteAllForShow(showTmdbId)
     insert(people)
   }
 
   @Transaction
   override suspend fun insertForMovie(
     people: List<PersonShowMovie>,
-    movieTraktId: Long,
+    movieTmdbId: Long,
   ) {
-    deleteAllForMovie(movieTraktId)
+    deleteAllForMovie(movieTmdbId)
     insert(people)
   }
 }

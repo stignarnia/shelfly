@@ -24,7 +24,7 @@ interface CustomListsDao : CustomListsLocalDataSource {
   override suspend fun getById(id: Long): CustomList?
 
   @Query("UPDATE custom_lists SET id_tmdb = :idTmdb, id_slug = :idSlug, updated_at = :timestamp WHERE id == :id")
-  override suspend fun updateTraktId(
+  override suspend fun updateTmdbId(
     id: Long,
     idTmdb: Long,
     idSlug: String,

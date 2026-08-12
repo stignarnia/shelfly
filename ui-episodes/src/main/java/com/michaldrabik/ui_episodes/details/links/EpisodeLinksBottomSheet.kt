@@ -80,21 +80,9 @@ class EpisodeLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_li
       }
     }
 
-    setTraktLink()
     setTmdbLink()
     setTvdbLink()
     setImdbLink()
-  }
-
-  private fun setTraktLink() {
-    binding.viewEpisodeLinksTrakt.run {
-      if (ids.tmdb.id == -1L) {
-        alpha = 0.5F
-        isEnabled = false
-      } else {
-        onClick { openWebUrl("https://trakt.tv/shows/${showIds.tmdb.id}/seasons/$season/episodes/$episodeNumber") }
-      }
-    }
   }
 
   private fun setTmdbLink() {

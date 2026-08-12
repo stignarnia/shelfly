@@ -13,7 +13,7 @@ interface TranslationsMoviesSyncLogDao : TranslationsMoviesSyncLogLocalDataSourc
   @Query("SELECT * from sync_movies_translations_log")
   override suspend fun getAll(): List<TranslationsMoviesSyncLog>
 
-  @Query("SELECT * from sync_movies_translations_log WHERE id_movie_trakt == :idTmdb")
+  @Query("SELECT * from sync_movies_translations_log WHERE id_movie_tmdb == :idTmdb")
   override suspend fun getById(idTmdb: Long): TranslationsMoviesSyncLog?
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)

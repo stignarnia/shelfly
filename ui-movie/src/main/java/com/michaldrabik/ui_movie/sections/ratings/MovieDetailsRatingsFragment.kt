@@ -48,7 +48,7 @@ class MovieDetailsRatingsFragment :
           }
           movieDetailsRatings.bind(ratings)
           movie?.let {
-            movieDetailsRatings.onTmdbClick = { openMovieLink(MovieLink.TRAKT, movie.tmdbId.toString()) }
+            movieDetailsRatings.onTmdbClick = { openMovieLink(MovieLink.TMDB, movie.tmdbId.toString()) }
             movieDetailsRatings.onImdbClick = { openMovieLink(MovieLink.IMDB, movie.ids.imdb.id) }
             movieDetailsRatings.onMetaClick = { openMovieLink(MovieLink.METACRITIC, movie.title) }
             movieDetailsRatings.onRottenClick = {
