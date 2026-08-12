@@ -3,8 +3,8 @@ package com.michaldrabik.ui_search.cases
 import com.google.common.truth.Truth.assertThat
 import com.michaldrabik.data_remote.RemoteDataSource
 import com.michaldrabik.data_remote.tmdb.TmdbRemoteDataSource
-import com.michaldrabik.data_remote.trakt.model.SearchResult
-import com.michaldrabik.data_remote.trakt.model.Show
+import com.michaldrabik.data_remote.catalog.model.SearchResult
+import com.michaldrabik.data_remote.catalog.model.Show
 import com.michaldrabik.repository.TranslationsRepository
 import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.images.ShowImagesProvider

@@ -132,7 +132,6 @@ class MainViewModel @Inject constructor(
         val result = when (source) {
           is DeepLinkSource.ImdbSource -> linksCase.findById(source.id)
           is DeepLinkSource.TmdbSource -> linksCase.findById(source.id, source.type)
-          is DeepLinkSource.TraktSource -> linksCase.findById(source.id, source.type)
         }
         loadingState.value = false
         maskState.value = false

@@ -20,7 +20,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import java.util.concurrent.TimeUnit
-import com.michaldrabik.data_remote.trakt.model.Show as ShowRemote
+import com.michaldrabik.data_remote.catalog.model.Show as ShowRemote
 
 class ShowDetailsRepositoryTest : BaseMockTest() {
 

@@ -5,8 +5,8 @@ import com.michaldrabik.common.extensions.nowUtcMillis
 import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.database.model.DiscoverShow
 import com.michaldrabik.data_local.utilities.TransactionsProvider
-import com.michaldrabik.data_remote.Config.TRAKT_ANTICIPATED_LIMIT
-import com.michaldrabik.data_remote.Config.TRAKT_DISCOVER_LIMIT
+import com.michaldrabik.data_remote.Config.ANTICIPATED_LIMIT
+import com.michaldrabik.data_remote.Config.DISCOVER_LIMIT
 import com.michaldrabik.data_remote.RemoteDataSource
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.DiscoverFeed
@@ -66,9 +66,9 @@ class DiscoverShowsRepository @Inject constructor(
 
       val limit =
         if (showCollection) {
-          TRAKT_DISCOVER_LIMIT
+          DISCOVER_LIMIT
         } else {
-          TRAKT_DISCOVER_LIMIT + (collectionSize / 2)
+          DISCOVER_LIMIT + (collectionSize / 2)
         }
 
       val trendingShowsAsync = async {
@@ -83,7 +83,7 @@ class DiscoverShowsRepository @Inject constructor(
         remoteSource.tmdb
           .fetchAnticipatedShows(
             genres = genres.map { it.slug },
-            limit = TRAKT_ANTICIPATED_LIMIT,
+            limit = ANTICIPATED_LIMIT,
           ).map { mappers.show.fromNetwork(it) }
       }
 
@@ -109,7 +109,7 @@ class DiscoverShowsRepository @Inject constructor(
     remoteSource.tmdb
       .fetchPopularShows(
         genres = genres.map { it.slug },
-        limit = TRAKT_DISCOVER_LIMIT,
+        limit = DISCOVER_LIMIT,
       ).map { mappers.show.fromNetwork(it) }
 
   private suspend fun loadRemoteAnticipated(
@@ -119,7 +119,7 @@ class DiscoverShowsRepository @Inject constructor(
     remoteSource.tmdb
       .fetchAnticipatedShows(
         genres = genres.map { it.slug },
-        limit = TRAKT_DISCOVER_LIMIT,
+        limit = DISCOVER_LIMIT,
       ).map { mappers.show.fromNetwork(it) }
 
   suspend fun cacheDiscoverShows(shows: List<Show>) {

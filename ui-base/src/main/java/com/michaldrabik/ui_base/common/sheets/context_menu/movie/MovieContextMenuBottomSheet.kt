@@ -13,12 +13,10 @@ import com.michaldrabik.common.Config.SPOILERS_REGEX
 import com.michaldrabik.ui_base.R
 import com.michaldrabik.ui_base.common.sheets.context_menu.ContextMenuBottomSheet
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.FinishUiEvent
-import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.SelectDateUiEvent
 import com.michaldrabik.ui_base.common.sheets.context_menu.movie.helpers.MovieContextItem
 import com.michaldrabik.ui_base.common.sheets.date_selection.DateSelectionBottomSheet
 import com.michaldrabik.ui_base.common.sheets.date_selection.DateSelectionBottomSheet.Result
-import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet.Mode
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_base.utilities.extensions.capitalizeWords
 import com.michaldrabik.ui_base.utilities.extensions.launchAndRepeatStarted
@@ -195,18 +193,6 @@ class MovieContextMenuBottomSheet : ContextMenuBottomSheet() {
 
   private fun handleEvent(event: Event<*>) {
     when (val result = event.peek()) {
-      is RemoveTraktUiEvent -> when {
-        result.removeProgress -> openRemoveTraktSheet(
-          R.id.actionMovieItemContextDialogToRemoveTraktProgress,
-          Mode.MOVIE,
-        )
-        result.removeWatchlist -> openRemoveTraktSheet(
-          R.id.actionMovieItemContextDialogToRemoveTraktWatchlist,
-          Mode.MOVIE,
-        )
-        result.removeHidden -> openRemoveTraktSheet(R.id.actionMovieItemContextDialogToRemoveTraktHidden, Mode.MOVIE)
-        else -> close()
-      }
       is SelectDateUiEvent -> openDateSelection(result.movie)
       is FinishUiEvent -> if (result.isSuccess) close()
       else -> throw IllegalStateException()

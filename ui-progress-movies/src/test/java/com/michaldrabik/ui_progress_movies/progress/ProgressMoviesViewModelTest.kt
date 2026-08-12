@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.work.WorkManager
 import com.google.common.truth.Truth.assertThat
 import com.michaldrabik.repository.TranslationsRepository
-import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
@@ -39,7 +38,6 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
   @MockK lateinit var sortCase: ProgressMoviesSortCase
   @MockK lateinit var pinnedCase: ProgressMoviesPinnedCase
   @MockK lateinit var imagesProvider: MovieImagesProvider
-  @MockK lateinit var userTraktManager: UserTraktManager
   @MockK lateinit var workManager: WorkManager
   @MockK lateinit var settingsRepository: SettingsRepository
   @MockK lateinit var translationsRepository: TranslationsRepository
@@ -55,14 +53,12 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
     super.setUp()
 
     coEvery { translationsRepository.getLanguage() } returns "en"
-    coEvery { userTraktManager.isAuthorized() } returns false
 
     SUT = ProgressMoviesViewModel(
       itemsCase,
       sortCase,
       pinnedCase,
       imagesProvider,
-      userTraktManager,
       workManager,
       settingsRepository,
       translationsRepository,

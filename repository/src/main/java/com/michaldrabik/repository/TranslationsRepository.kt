@@ -23,7 +23,7 @@ import com.michaldrabik.ui_model.Translation
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
-import com.michaldrabik.data_remote.trakt.model.Translation as TranslationRemote
+import com.michaldrabik.data_remote.catalog.model.Translation as TranslationRemote
 
 @Singleton
 class TranslationsRepository @Inject constructor(

@@ -24,7 +24,7 @@ class RatingsStripView : LinearLayout {
 
   private val binding = ViewRatingsStripBinding.inflate(LayoutInflater.from(context), this)
 
-  var onTraktClick: ((Ratings) -> Unit)? = null
+  var onTmdbClick: ((Ratings) -> Unit)? = null
   var onImdbClick: ((Ratings) -> Unit)? = null
   var onMetaClick: ((Ratings) -> Unit)? = null
   var onRottenClick: ((Ratings) -> Unit)? = null
@@ -44,14 +44,14 @@ class RatingsStripView : LinearLayout {
     this.ratings = ratings
     with(binding) {
       bindValue(
-        ratingsValue = ratings.trakt,
+        ratingsValue = ratings.tmdb,
         layoutView = viewRatingsStripTrakt,
         valueView = viewRatingsStripTraktValue,
         progressView = viewRatingsStripTraktProgress,
         linkView = viewRatingsStripTraktLinkIcon,
         isHidden = ratings.isHidden,
         isTapToReveal = ratings.isTapToReveal,
-        callback = onTraktClick,
+        callback = onTmdbClick,
       )
       bindValue(
         ratingsValue = ratings.imdb,

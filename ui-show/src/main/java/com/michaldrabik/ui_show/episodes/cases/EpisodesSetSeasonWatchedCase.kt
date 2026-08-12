@@ -1,7 +1,6 @@
 package com.michaldrabik.ui_show.episodes.cases
 
 import com.michaldrabik.repository.EpisodesManager
-import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_model.Season
@@ -16,7 +15,6 @@ import javax.inject.Inject
 class EpisodesSetSeasonWatchedCase @Inject constructor(
   private val showsRepository: ShowsRepository,
   private val episodesManager: EpisodesManager,
-  private val userManager: UserTraktManager,
   private val seasonsCache: SeasonsCache,
   private val settingsRepository: SettingsRepository,
 ) {
@@ -44,13 +42,6 @@ class EpisodesSetSeasonWatchedCase @Inject constructor(
       else -> {
         episodesManager.setSeasonUnwatched(bundle)
 
-        val traktQuickRemoveEnabled = settingsRepository.load().traktQuickRemoveEnabled
-        val isSeasonLocal = seasonsCache.areSeasonsLocal(show.ids.tmdb)
-
-        val showRemoveTrakt = userManager.isAuthorized() && traktQuickRemoveEnabled && !isSeasonLocal && isCollection
-        if (showRemoveTrakt) {
-          return Result.REMOVE_FROM_TRAKT
-        }
         return Result.SUCCESS
       }
     }

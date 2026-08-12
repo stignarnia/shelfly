@@ -9,7 +9,6 @@ import com.michaldrabik.repository.PinnedItemsRepository
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
-import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
@@ -80,8 +79,6 @@ class ShowContextMenuMyShowsCase @Inject constructor(
 
       pinnedItemsRepository.removePinnedItem(show)
       announcementManager.refreshShowsAnnouncements()
-
-      RemoveTraktUiEvent(removeWatchlist = isWatchlist, removeHidden = isHidden)
     }
 
   suspend fun removeFromMyShows(

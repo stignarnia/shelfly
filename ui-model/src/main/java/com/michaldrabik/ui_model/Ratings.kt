@@ -1,7 +1,7 @@
 package com.michaldrabik.ui_model
 
 data class Ratings(
-  val trakt: Value? = null,
+  val tmdb: Value? = null,
   val imdb: Value? = null,
   val metascore: Value? = null,
   val rottenTomatoes: Value? = null,
@@ -11,7 +11,7 @@ data class Ratings(
 ) {
 
   fun isAnyLoading() =
-    trakt?.isLoading == true ||
+    tmdb?.isLoading == true ||
       imdb?.isLoading == true ||
       metascore?.isLoading == true ||
       rottenTomatoes?.isLoading == true

@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
-import androidx.annotation.IdRes
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
@@ -35,7 +34,6 @@ import com.michaldrabik.ui_base.common.sheets.links.LinksBottomSheet
 import com.michaldrabik.ui_base.common.sheets.ratings.RatingsBottomSheet
 import com.michaldrabik.ui_base.common.sheets.ratings.RatingsBottomSheet.Options.Operation
 import com.michaldrabik.ui_base.common.sheets.ratings.RatingsBottomSheet.Options.Type
-import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet
 import com.michaldrabik.ui_base.utilities.SnackbarHost
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
@@ -72,7 +70,6 @@ import com.michaldrabik.ui_model.SpoilersSettings
 import com.michaldrabik.ui_model.Translation
 import com.michaldrabik.ui_movie.MovieDetailsEvent.Finish
 import com.michaldrabik.ui_movie.MovieDetailsEvent.OpenDateSelectionSheet
-import com.michaldrabik.ui_movie.MovieDetailsEvent.RemoveFromTrakt
 import com.michaldrabik.ui_movie.MovieDetailsEvent.RequestWidgetsUpdate
 import com.michaldrabik.ui_movie.databinding.FragmentMovieDetailsBinding
 import com.michaldrabik.ui_movie.helpers.MovieDetailsMeta
@@ -382,24 +379,10 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
 
   private fun handleEvent(event: Event<*>) {
     when (event) {
-      is RemoveFromTrakt -> openRemoveTraktSheet(event.navigationId)
       is OpenDateSelectionSheet -> openDateSelectionSheet(event.movie)
       is RequestWidgetsUpdate -> (requireAppContext() as WidgetsProvider).requestMoviesWidgetsUpdate()
       is Finish -> requireActivity().onBackPressed()
     }
-  }
-
-  private fun openRemoveTraktSheet(
-    @IdRes action: Int,
-  ) {
-    setFragmentResultListener(NavigationArgs.REQUEST_REMOVE_TRAKT) { _, bundle ->
-      if (bundle.getBoolean(NavigationArgs.RESULT, false)) {
-        val text = resources.getString(R.string.textTraktSyncMovieRemovedFromTrakt)
-        (requireActivity() as SnackbarHost).provideSnackbarLayout().showInfoSnackbar(text)
-      }
-    }
-    val args = RemoveTraktBottomSheet.createBundle(movieId, RemoveTraktBottomSheet.Mode.MOVIE)
-    navigateToSafe(action, args)
   }
 
   private fun openDateSelectionSheet(movie: Movie) {

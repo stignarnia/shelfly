@@ -1,5 +1,6 @@
 package com.michaldrabik.data_remote.tmdb.api
 
+import com.michaldrabik.data_remote.tmdb.model.TmdbCollection
 import com.michaldrabik.data_remote.tmdb.model.TmdbFindResult
 import com.michaldrabik.data_remote.tmdb.model.TmdbImages
 import com.michaldrabik.data_remote.tmdb.model.TmdbMovie
@@ -159,6 +160,11 @@ interface TmdbService {
   suspend fun fetchPersonCredits(
     @Path("tmdbId") tmdbId: Long,
   ): TmdbPersonCredits
+
+  @GET("collection/{tmdbId}")
+  suspend fun fetchCollection(
+    @Path("tmdbId") tmdbId: Long,
+  ): TmdbCollection
 
   @GET("search/multi")
   suspend fun fetchSearchResults(

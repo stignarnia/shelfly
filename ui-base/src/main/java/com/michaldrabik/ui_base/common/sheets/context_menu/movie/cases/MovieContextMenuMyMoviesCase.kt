@@ -3,7 +3,6 @@ package com.michaldrabik.ui_base.common.sheets.context_menu.movie.cases
 import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.repository.PinnedItemsRepository
 import com.michaldrabik.repository.movies.MoviesRepository
-import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
@@ -37,8 +36,6 @@ class MovieContextMenuMyMoviesCase @Inject constructor(
     moviesRepository.myMovies.insert(tmdbId, customDate)
     pinnedItemsRepository.removePinnedItem(movie)
     announcementManager.refreshMoviesAnnouncements()
-
-    RemoveTraktUiEvent(removeWatchlist = isWatchlist, removeHidden = isHidden)
   }
 
   suspend fun removeFromMyMovies(tmdbId: IdTmdb) =

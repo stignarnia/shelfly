@@ -20,7 +20,7 @@ class RatingsMapper @Inject constructor() {
 
   fun fromDatabase(entity: MovieRatings) =
     Ratings(
-      trakt = Ratings.Value(entity.trakt, false),
+      tmdb = Ratings.Value(entity.tmdb, false),
       imdb = Ratings.Value(entity.imdb, false),
       rottenTomatoes = Ratings.Value(entity.rottenTomatoes, false),
       rottenTomatoesUrl = entity.rottenTomatoesUrl,
@@ -29,7 +29,7 @@ class RatingsMapper @Inject constructor() {
 
   fun fromDatabase(entity: ShowRatings) =
     Ratings(
-      trakt = Ratings.Value(entity.trakt, false),
+      tmdb = Ratings.Value(entity.tmdb, false),
       imdb = Ratings.Value(entity.imdb, false),
       rottenTomatoes = Ratings.Value(entity.rottenTomatoes, false),
       rottenTomatoesUrl = entity.rottenTomatoesUrl,
@@ -42,7 +42,7 @@ class RatingsMapper @Inject constructor() {
   ) = MovieRatings(
     id = 0,
     idTmdb = idTmdb.id,
-    trakt = ratings.trakt?.value,
+    tmdb = ratings.tmdb?.value,
     imdb = ratings.imdb?.value,
     metascore = ratings.metascore?.value,
     rottenTomatoes = ratings.rottenTomatoes?.value,
@@ -57,7 +57,7 @@ class RatingsMapper @Inject constructor() {
   ) = ShowRatings(
     id = 0,
     idTmdb = idTmdb.id,
-    trakt = ratings.trakt?.value,
+    tmdb = ratings.tmdb?.value,
     imdb = ratings.imdb?.value,
     metascore = ratings.metascore?.value,
     rottenTomatoes = ratings.rottenTomatoes?.value,

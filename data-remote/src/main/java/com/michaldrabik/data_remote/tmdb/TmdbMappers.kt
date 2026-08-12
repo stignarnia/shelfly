@@ -6,12 +6,12 @@ import com.michaldrabik.data_remote.tmdb.model.TmdbSearchItem
 import com.michaldrabik.data_remote.tmdb.model.TmdbSeason
 import com.michaldrabik.data_remote.tmdb.model.TmdbShow
 import com.michaldrabik.data_remote.tmdb.model.TmdbVideos
-import com.michaldrabik.data_remote.trakt.model.AirTime
-import com.michaldrabik.data_remote.trakt.model.Episode
-import com.michaldrabik.data_remote.trakt.model.Ids
-import com.michaldrabik.data_remote.trakt.model.Movie
-import com.michaldrabik.data_remote.trakt.model.Season
-import com.michaldrabik.data_remote.trakt.model.Show
+import com.michaldrabik.data_remote.catalog.model.AirTime
+import com.michaldrabik.data_remote.catalog.model.Episode
+import com.michaldrabik.data_remote.catalog.model.Ids
+import com.michaldrabik.data_remote.catalog.model.Movie
+import com.michaldrabik.data_remote.catalog.model.Season
+import com.michaldrabik.data_remote.catalog.model.Show
 
 /**
  * Maps TMDB responses onto the data-remote DTOs the repository layer already

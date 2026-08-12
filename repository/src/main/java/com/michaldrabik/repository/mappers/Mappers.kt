@@ -12,7 +12,6 @@ class Mappers @Inject constructor(
   val episode: EpisodeMapper,
   val season: SeasonMapper,
   val person: PersonMapper,
-  val comment: CommentMapper,
   val settings: SettingsMapper,
   val translation: TranslationMapper,
   val customList: CustomListMapper,

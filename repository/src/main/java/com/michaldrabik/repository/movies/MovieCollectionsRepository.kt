@@ -9,7 +9,7 @@ import com.michaldrabik.data_local.sources.MovieCollectionsItemsLocalDataSource
 import com.michaldrabik.data_local.sources.MovieCollectionsLocalDataSource
 import com.michaldrabik.data_local.sources.MoviesLocalDataSource
 import com.michaldrabik.data_local.utilities.TransactionsProvider
-import com.michaldrabik.data_remote.trakt.TraktRemoteDataSource
+import com.michaldrabik.data_remote.tmdb.TmdbRemoteDataSource
 import com.michaldrabik.repository.mappers.CollectionMapper
 import com.michaldrabik.repository.mappers.MovieMapper
 import com.michaldrabik.ui_model.IdTmdb
@@ -23,7 +23,7 @@ import javax.inject.Singleton
 @Singleton
 class MovieCollectionsRepository @Inject constructor(
   private val dispatchers: CoroutineDispatchers,
-  private val remoteSource: TraktRemoteDataSource,
+  private val remoteSource: TmdbRemoteDataSource,
   private val moviesLocalSource: MoviesLocalDataSource,
   private val movieCollectionsLocalSource: MovieCollectionsLocalDataSource,
   private val movieCollectionsItemsLocalSource: MovieCollectionsItemsLocalDataSource,

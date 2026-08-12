@@ -174,7 +174,6 @@ class MainActivity :
     super.onNewIntent(intent)
     handleAppShortcut(intent)
     handleNotification(intent?.extras) { hideNavigation(false) }
-    handleTraktAuthorization(intent?.data)
     handleDeepLink(intent)
   }
 

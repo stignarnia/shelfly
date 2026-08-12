@@ -14,8 +14,6 @@ import com.michaldrabik.ui_base.common.sheets.date_selection.DateSelectionBottom
 import com.michaldrabik.ui_base.common.sheets.date_selection.DateSelectionBottomSheet.Companion.REQUEST_DATE_SELECTION
 import com.michaldrabik.ui_base.common.sheets.date_selection.DateSelectionBottomSheet.Companion.RESULT_DATE_SELECTION
 import com.michaldrabik.ui_base.common.sheets.date_selection.DateSelectionBottomSheet.Result
-import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet
-import com.michaldrabik.ui_base.utilities.SnackbarHost
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_base.utilities.extensions.fadeIf
 import com.michaldrabik.ui_base.utilities.extensions.gone
@@ -23,12 +21,9 @@ import com.michaldrabik.ui_base.utilities.extensions.launchAndRepeatStarted
 import com.michaldrabik.ui_base.utilities.extensions.navigateToSafe
 import com.michaldrabik.ui_base.utilities.extensions.onClick
 import com.michaldrabik.ui_base.utilities.extensions.requireParcelable
-import com.michaldrabik.ui_base.utilities.extensions.showInfoSnackbar
 import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.viewBinding
 import com.michaldrabik.ui_model.Season
-import com.michaldrabik.ui_navigation.java.NavigationArgs.REQUEST_REMOVE_TRAKT
-import com.michaldrabik.ui_navigation.java.NavigationArgs.RESULT
 import com.michaldrabik.ui_show.R
 import com.michaldrabik.ui_show.ShowDetailsViewModel
 import com.michaldrabik.ui_show.databinding.FragmentShowDetailsSeasonsBinding
@@ -38,7 +33,6 @@ import com.michaldrabik.ui_show.quicksetup.QuickSetupView
 import com.michaldrabik.ui_show.sections.seasons.ShowDetailsSeasonsEvent.OpenQuickProgressDateSelection
 import com.michaldrabik.ui_show.sections.seasons.ShowDetailsSeasonsEvent.OpenSeasonDateSelection
 import com.michaldrabik.ui_show.sections.seasons.ShowDetailsSeasonsEvent.OpenSeasonEpisodes
-import com.michaldrabik.ui_show.sections.seasons.ShowDetailsSeasonsEvent.RemoveFromTrakt
 import com.michaldrabik.ui_show.sections.seasons.ShowDetailsSeasonsEvent.RequestWidgetsUpdate
 import com.michaldrabik.ui_show.sections.seasons.recycler.SeasonListItem
 import com.michaldrabik.ui_show.sections.seasons.recycler.SeasonsAdapter
@@ -150,9 +144,6 @@ class ShowDetailsSeasonsFragment : BaseFragment<ShowDetailsSeasonsViewModel>(R.l
 
   private fun handleEvent(event: ShowDetailsSeasonsEvent<*>) {
     when (event) {
-      is RemoveFromTrakt -> {
-        openRemoveTraktSheet(event)
-      }
       is OpenSeasonDateSelection -> {
         openDateSelectionDialog(event.season)
       }
@@ -180,21 +171,6 @@ class ShowDetailsSeasonsFragment : BaseFragment<ShowDetailsSeasonsViewModel>(R.l
       .setPositiveButton(R.string.textSelect) { _, _ -> viewModel.onQuickProgressSelected(view.getSelectedItem()) }
       .setNegativeButton(R.string.textCancel) { _, _ -> }
       .show()
-  }
-
-  private fun openRemoveTraktSheet(event: RemoveFromTrakt) {
-    requireParentFragment().setFragmentResultListener(REQUEST_REMOVE_TRAKT) { _, bundle ->
-      if (bundle.getBoolean(RESULT, false)) {
-        val text = resources.getString(R.string.textTraktSyncRemovedFromTrakt)
-        (requireActivity() as SnackbarHost).provideSnackbarLayout().showInfoSnackbar(text)
-
-        if (event.actionId == R.id.actionShowDetailsFragmentToRemoveTraktProgress) {
-          viewModel.refreshSeasons()
-        }
-      }
-    }
-    val args = RemoveTraktBottomSheet.createBundle(event.tmdbIds, event.mode)
-    navigateToSafe(event.actionId, args)
   }
 
   private fun openDateSelectionDialog(season: Season) {

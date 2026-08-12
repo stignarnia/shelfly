@@ -32,7 +32,6 @@ import com.michaldrabik.ui_base.common.sheets.ratings.RatingsBottomSheet
 import com.michaldrabik.ui_base.common.sheets.ratings.RatingsBottomSheet.Options.Operation.REMOVE
 import com.michaldrabik.ui_base.common.sheets.ratings.RatingsBottomSheet.Options.Operation.SAVE
 import com.michaldrabik.ui_base.common.sheets.ratings.RatingsBottomSheet.Options.Type
-import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet
 import com.michaldrabik.ui_base.utilities.SnackbarHost
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
@@ -72,9 +71,7 @@ import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_ID
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_SHOW_ID
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_TYPE
 import com.michaldrabik.ui_navigation.java.NavigationArgs.REQUEST_MANAGE_LISTS
-import com.michaldrabik.ui_navigation.java.NavigationArgs.REQUEST_REMOVE_TRAKT
 import com.michaldrabik.ui_show.ShowDetailsEvent.Finish
-import com.michaldrabik.ui_show.ShowDetailsEvent.RemoveFromTrakt
 import com.michaldrabik.ui_show.databinding.FragmentShowDetailsBinding
 import com.michaldrabik.ui_show.views.AddToShowsButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -180,7 +177,6 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
   private fun handleEvent(event: Event<*>) {
     when (event) {
       is Finish -> requireActivity().onBackPressed()
-      is RemoveFromTrakt -> openRemoveTraktSheet(event)
     }
   }
 
@@ -364,21 +360,6 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
       return
     }
     showSnack(event)
-  }
-
-  private fun openRemoveTraktSheet(event: RemoveFromTrakt) {
-    setFragmentResultListener(REQUEST_REMOVE_TRAKT) { _, bundle ->
-      if (bundle.getBoolean(NavigationArgs.RESULT, false)) {
-        val text = resources.getString(R.string.textTraktSyncRemovedFromTrakt)
-        (requireActivity() as SnackbarHost).provideSnackbarLayout().showInfoSnackbar(text)
-
-        if (event.actionId == R.id.actionShowDetailsFragmentToRemoveTraktProgress) {
-          viewModel.refreshSeasons()
-        }
-      }
-    }
-    val args = RemoveTraktBottomSheet.createBundle(event.tmdbIds, event.mode)
-    navigateToSafe(event.actionId, args)
   }
 
   private fun openShareSheet(show: Show) {

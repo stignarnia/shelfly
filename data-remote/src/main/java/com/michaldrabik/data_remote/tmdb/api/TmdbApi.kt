@@ -11,15 +11,16 @@ import com.michaldrabik.data_remote.tmdb.toEpisode
 import com.michaldrabik.data_remote.tmdb.toMovie
 import com.michaldrabik.data_remote.tmdb.toSeason
 import com.michaldrabik.data_remote.tmdb.toShow
-import com.michaldrabik.data_remote.trakt.model.Episode
-import com.michaldrabik.data_remote.trakt.model.Ids
-import com.michaldrabik.data_remote.trakt.model.Movie
-import com.michaldrabik.data_remote.trakt.model.PersonCredit
-import com.michaldrabik.data_remote.trakt.model.SearchResult
-import com.michaldrabik.data_remote.trakt.model.Season
-import com.michaldrabik.data_remote.trakt.model.SeasonTranslation
-import com.michaldrabik.data_remote.trakt.model.Show
-import com.michaldrabik.data_remote.trakt.model.Translation
+import com.michaldrabik.data_remote.catalog.model.Episode
+import com.michaldrabik.data_remote.catalog.model.Ids
+import com.michaldrabik.data_remote.catalog.model.Movie
+import com.michaldrabik.data_remote.catalog.model.MovieCollection
+import com.michaldrabik.data_remote.catalog.model.PersonCredit
+import com.michaldrabik.data_remote.catalog.model.SearchResult
+import com.michaldrabik.data_remote.catalog.model.Season
+import com.michaldrabik.data_remote.catalog.model.SeasonTranslation
+import com.michaldrabik.data_remote.catalog.model.Show
+import com.michaldrabik.data_remote.catalog.model.Translation
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -297,6 +298,32 @@ internal class TmdbApi(
       )
     }
   }
+
+  /**
+   * A movie belongs to at most one TMDB collection, so this returns zero or one
+   * entry where Trakt could return several.
+   */
+  override suspend fun fetchMovieCollections(tmdbId: Long): List<MovieCollection> {
+    val reference = service.fetchMovie(tmdbId, null).belongs_to_collection ?: return emptyList()
+    val collection = service.fetchCollection(reference.id ?: return emptyList())
+    return listOf(
+      MovieCollection(
+        ids = Ids(trakt = null, slug = null, tvdb = null, imdb = null, tmdb = collection.id, tvrage = null),
+        name = collection.name ?: "",
+        description = collection.overview ?: "",
+        privacy = "public",
+        item_count = collection.parts?.size ?: 0,
+        likes = 0,
+      ),
+    )
+  }
+
+  override suspend fun fetchMovieCollectionItems(collectionId: Long): List<Movie> =
+    service
+      .fetchCollection(collectionId)
+      .parts
+      ?.map { it.toMovie() }
+      ?: emptyList()
 
   override suspend fun fetchRelatedShows(tmdbId: Long): List<Show> =
     service

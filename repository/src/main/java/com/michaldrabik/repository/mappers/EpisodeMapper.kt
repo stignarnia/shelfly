@@ -10,7 +10,7 @@ import com.michaldrabik.ui_model.Season
 import java.time.ZonedDateTime
 import javax.inject.Inject
 import com.michaldrabik.data_local.database.model.Episode as EpisodeDb
-import com.michaldrabik.data_remote.trakt.model.Episode as EpisodeNetwork
+import com.michaldrabik.data_remote.catalog.model.Episode as EpisodeNetwork
 
 class EpisodeMapper @Inject constructor(
   private val idsMapper: IdsMapper,

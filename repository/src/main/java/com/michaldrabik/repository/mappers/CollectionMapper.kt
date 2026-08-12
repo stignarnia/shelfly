@@ -6,7 +6,7 @@ import com.michaldrabik.ui_model.MovieCollection
 import java.time.ZonedDateTime
 import javax.inject.Inject
 import com.michaldrabik.data_local.database.model.MovieCollection as MovieCollectionEntity
-import com.michaldrabik.data_remote.trakt.model.MovieCollection as MovieCollectionNetwork
+import com.michaldrabik.data_remote.catalog.model.MovieCollection as MovieCollectionNetwork
 
 class CollectionMapper @Inject constructor() {
 

@@ -2,12 +2,9 @@
 
 package com.michaldrabik.ui_show.episodes
 
-import androidx.annotation.IdRes
-import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_model.Episode
 import com.michaldrabik.ui_model.EpisodeBundle
-import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Season
 import com.michaldrabik.ui_show.sections.seasons.recycler.SeasonListItem
 
@@ -31,12 +28,6 @@ sealed class ShowDetailsEpisodesEvent<T>(
   data class OpenSeasonDateSelection(
     val season: SeasonListItem,
   ) : ShowDetailsEpisodesEvent<SeasonListItem>(season)
-
-  data class RemoveFromTrakt(
-    @IdRes val actionId: Int,
-    val mode: RemoveTraktBottomSheet.Mode,
-    val tmdbIds: List<IdTmdb>,
-  ) : ShowDetailsEpisodesEvent<Int>(actionId)
 
   object RequestWidgetsUpdate : ShowDetailsEpisodesEvent<Unit>(Unit)
 

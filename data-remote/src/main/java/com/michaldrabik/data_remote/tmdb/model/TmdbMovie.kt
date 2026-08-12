@@ -18,6 +18,7 @@ data class TmdbMovie(
   val genres: List<TmdbGenre>?,
   val genre_ids: List<Int>?,
   val production_countries: List<TmdbCountry>?,
+  val belongs_to_collection: TmdbCollectionRef?,
   val external_ids: TmdbExternalIds?,
   val release_dates: TmdbReleaseDates?,
   val videos: TmdbVideos?,
@@ -46,3 +47,19 @@ data class TmdbReleaseDates(
     val certification: String?,
   )
 }
+
+data class TmdbCollectionRef(
+  val id: Long?,
+  val name: String?,
+)
+
+/**
+ * A franchise from /collection/{id}. TMDB places a movie in at most one, where
+ * Trakt allowed several user-made lists.
+ */
+data class TmdbCollection(
+  val id: Long?,
+  val name: String?,
+  val overview: String?,
+  val parts: List<TmdbMovie>?,
+)

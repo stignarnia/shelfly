@@ -1,6 +1,5 @@
 package com.michaldrabik.ui_settings
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.WindowInsetsCompat
@@ -8,7 +7,6 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import com.michaldrabik.ui_base.BaseFragment
-import com.michaldrabik.ui_base.common.OnTraktAuthorizeListener
 import com.michaldrabik.ui_base.utilities.extensions.doOnApplyWindowInsets
 import com.michaldrabik.ui_base.utilities.extensions.launchAndRepeatStarted
 import com.michaldrabik.ui_base.utilities.extensions.onClick
@@ -27,9 +25,7 @@ import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.WID
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SettingsFragment :
-  BaseFragment<SettingsViewModel>(R.layout.fragment_settings),
-  OnTraktAuthorizeListener {
+class SettingsFragment : BaseFragment<SettingsViewModel>(R.layout.fragment_settings) {
 
   companion object {
     const val REQUEST_SETTINGS = "REQUEST_SETTINGS"
@@ -100,12 +96,6 @@ class SettingsFragment :
       settingsCategoryWidgets.visibleIf(filter == WIDGETS || filter == null)
       settingsCategoryBackup.visibleIf(filter == BACKUP || filter == null)
       settingsCategoryMisc.visibleIf(filter == MISC || filter == null)
-    }
-  }
-
-  override fun onAuthorizationResult(authData: Uri?) {
-    childFragmentManager.fragments.forEach {
-      (it as? OnTraktAuthorizeListener)?.onAuthorizationResult(authData)
     }
   }
 }

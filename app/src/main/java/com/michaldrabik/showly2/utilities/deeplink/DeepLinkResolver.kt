@@ -7,7 +7,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.michaldrabik.showly2.R
 import com.michaldrabik.showly2.utilities.deeplink.resolvers.ImdbSourceResolver
 import com.michaldrabik.showly2.utilities.deeplink.resolvers.TmdbSourceResolver
-import com.michaldrabik.showly2.utilities.deeplink.resolvers.TraktSourceResolver
 import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Show
@@ -21,13 +20,9 @@ class DeepLinkResolver @Inject constructor() {
   companion object {
     const val TMDB_TYPE_TV = "tv"
     const val TMDB_TYPE_MOVIE = "movie"
-
-    const val TRAKT_TYPE_TV = "shows"
-    const val TRAKT_TYPE_MOVIE = "movies"
   }
 
   private val sourceResolvers = setOf(
-    TraktSourceResolver(),
     ImdbSourceResolver(),
     TmdbSourceResolver(),
   )

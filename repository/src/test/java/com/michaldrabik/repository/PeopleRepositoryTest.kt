@@ -12,7 +12,7 @@ import com.michaldrabik.data_local.database.dao.ShowsDao
 import com.michaldrabik.data_local.database.model.Movie
 import com.michaldrabik.data_local.database.model.Show
 import com.michaldrabik.data_remote.tmdb.TmdbRemoteDataSource
-import com.michaldrabik.data_remote.trakt.model.PersonCredit
+import com.michaldrabik.data_remote.catalog.model.PersonCredit
 import com.michaldrabik.repository.common.BaseMockTest
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_model.IdTmdb

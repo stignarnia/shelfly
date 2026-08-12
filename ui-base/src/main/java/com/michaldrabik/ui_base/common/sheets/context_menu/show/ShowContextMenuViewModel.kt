@@ -7,7 +7,6 @@ import com.michaldrabik.repository.images.ShowImagesProvider
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_base.R
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.FinishUiEvent
-import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.common.sheets.context_menu.show.cases.ShowContextMenuHiddenCase
 import com.michaldrabik.ui_base.common.sheets.context_menu.show.cases.ShowContextMenuLoadItemCase
 import com.michaldrabik.ui_base.common.sheets.context_menu.show.cases.ShowContextMenuMyShowsCase
@@ -86,7 +85,7 @@ class ShowContextMenuViewModel @Inject constructor(
       try {
         val result = myShowsCase.moveToMyShows(showId)
         preloadImage()
-        checkQuickRemove(result)
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       } finally {
@@ -102,7 +101,7 @@ class ShowContextMenuViewModel @Inject constructor(
           tmdbId = showId,
           removeLocalData = networkProvider.isOnline(),
         )
-        checkQuickRemove(RemoveTraktUiEvent(removeProgress = true))
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       }
@@ -116,7 +115,7 @@ class ShowContextMenuViewModel @Inject constructor(
           tmdbId = showId,
           removeLocalData = networkProvider.isOnline(),
         )
-        checkQuickRemove(result)
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       }
@@ -127,7 +126,7 @@ class ShowContextMenuViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         watchlistCase.removeFromWatchlist(showId)
-        checkQuickRemove(RemoveTraktUiEvent(removeWatchlist = true))
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       }
@@ -141,7 +140,7 @@ class ShowContextMenuViewModel @Inject constructor(
           tmdbId = showId,
           removeLocalData = networkProvider.isOnline(),
         )
-        checkQuickRemove(result)
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       }
@@ -152,7 +151,7 @@ class ShowContextMenuViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         hiddenCase.removeFromHidden(showId)
-        checkQuickRemove(RemoveTraktUiEvent(removeHidden = true))
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       }
@@ -196,16 +195,6 @@ class ShowContextMenuViewModel @Inject constructor(
     } catch (error: Throwable) {
       Timber.e(error)
       rethrowCancellation(error)
-    }
-  }
-
-  private suspend fun checkQuickRemove(event: RemoveTraktUiEvent) {
-    if (isQuickRemoveEnabled) {
-      loadingState.value = false
-      loadingSecondaryState.value = false
-      eventChannel.send(Event(event))
-    } else {
-      eventChannel.send(Event(FinishUiEvent(true)))
     }
   }
 

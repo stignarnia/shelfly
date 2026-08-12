@@ -6,11 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.michaldrabik.common.errors.ErrorHelper
 import com.michaldrabik.common.errors.ShowlyError.CoroutineCancellation
 import com.michaldrabik.common.errors.ShowlyError.ResourceNotFoundError
-import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.images.ShowImagesProvider
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_base.Logger
-import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.combine
@@ -27,7 +25,6 @@ import com.michaldrabik.ui_model.SpoilersSettings
 import com.michaldrabik.ui_model.TraktRating
 import com.michaldrabik.ui_model.Translation
 import com.michaldrabik.ui_show.ShowDetailsEvent.Finish
-import com.michaldrabik.ui_show.ShowDetailsEvent.RemoveFromTrakt
 import com.michaldrabik.ui_show.ShowDetailsUiState.FollowedState
 import com.michaldrabik.ui_show.cases.ShowDetailsHiddenCase
 import com.michaldrabik.ui_show.cases.ShowDetailsListsCase
@@ -61,7 +58,6 @@ class ShowDetailsViewModel @Inject constructor(
   private val myShowsCase: ShowDetailsMyShowsCase,
   private val listsCase: ShowDetailsListsCase,
   private val settingsRepository: SettingsRepository,
-  private val userManager: UserTraktManager,
   private val seasonsCache: SeasonsCache,
   private val imagesProvider: ShowImagesProvider,
 ) : ViewModel(),
@@ -93,7 +89,7 @@ class ShowDetailsViewModel @Inject constructor(
       try {
         show = mainCase.loadDetails(id)
 
-        val isSignedIn = userManager.isAuthorized()
+        val isSignedIn = false
         val isMyShow = async { myShowsCase.isMyShows(show) }
         val isWatchLater = async { watchlistCase.isWatchlist(show) }
         val isArchived = async { hiddenCase.isHidden(show) }
@@ -232,30 +228,17 @@ class ShowDetailsViewModel @Inject constructor(
         isArchived -> hiddenCase.removeFromHidden(show)
       }
 
-      val traktQuickRemoveEnabled = settingsRepository.load().traktQuickRemoveEnabled
-      val showRemoveTrakt = userManager.isAuthorized() && traktQuickRemoveEnabled && !areSeasonsLocal
-
       val state = FollowedState.idle()
       val ids = listOf(show.ids.tmdb)
-      val mode = RemoveTraktBottomSheet.Mode.SHOW
       when {
         isMyShows -> {
           followedState.value = state
-          if (showRemoveTrakt) {
-            eventChannel.send(RemoveFromTrakt(R.id.actionShowDetailsFragmentToRemoveTraktProgress, mode, ids))
-          }
         }
         isWatchlist -> {
           followedState.value = state
-          if (showRemoveTrakt) {
-            eventChannel.send(RemoveFromTrakt(R.id.actionShowDetailsFragmentToRemoveTraktWatchlist, mode, ids))
-          }
         }
         isArchived -> {
           followedState.value = state
-          if (showRemoveTrakt) {
-            eventChannel.send(RemoveFromTrakt(R.id.actionShowDetailsFragmentToRemoveTraktHidden, mode, ids))
-          }
         }
         else -> {
           error("Unexpected show state.")

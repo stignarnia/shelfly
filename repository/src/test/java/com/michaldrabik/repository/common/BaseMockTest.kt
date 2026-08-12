@@ -5,7 +5,6 @@ import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.data_remote.RemoteDataSource
 import com.michaldrabik.repository.R
-import com.michaldrabik.repository.mappers.CommentMapper
 import com.michaldrabik.repository.mappers.CustomListMapper
 import com.michaldrabik.repository.mappers.EpisodeMapper
 import com.michaldrabik.repository.mappers.IdsMapper
@@ -48,7 +47,6 @@ abstract class BaseMockTest {
     episodeMappers,
     SeasonMapper(idsMapper, episodeMappers),
     PersonMapper(),
-    CommentMapper(),
     SettingsMapper(),
     TranslationMapper(idsMapper),
     CustomListMapper(),

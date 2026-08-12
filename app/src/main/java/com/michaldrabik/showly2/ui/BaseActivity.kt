@@ -1,7 +1,6 @@
 package com.michaldrabik.showly2.ui
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -9,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import com.michaldrabik.showly2.R
 import com.michaldrabik.showly2.fcm.FcmExtra
 import com.michaldrabik.ui_base.Logger
-import com.michaldrabik.ui_base.common.OnTraktAuthorizeListener
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_MOVIE_ID
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_SHOW_ID
 import com.michaldrabik.ui_widgets.BaseWidgetProvider.Companion.EXTRA_MOVIE_ID
@@ -68,17 +66,6 @@ abstract class BaseActivity : AppCompatActivity() {
         action()
       } catch (error: Throwable) {
         Logger.record(error, "BaseActivity::handleShowMovieExtra()")
-      }
-    }
-  }
-
-  protected fun handleTraktAuthorization(authData: Uri?) {
-    findNavHostFragment()?.findNavController()?.currentDestination?.id?.let {
-      val navHost = supportFragmentManager.findFragmentById(R.id.navigationHost)
-      navHost?.childFragmentManager?.primaryNavigationFragment?.let {
-        if (authData.toString().startsWith("showly2://trakt")) {
-          (it as? OnTraktAuthorizeListener)?.onAuthorizationResult(authData)
-        }
       }
     }
   }

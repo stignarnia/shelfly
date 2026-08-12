@@ -21,7 +21,7 @@ import androidx.room.PrimaryKey
 data class MovieRatings(
   @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
   @ColumnInfo(name = "id_tmdb") val idTmdb: Long,
-  @ColumnInfo(name = "trakt") val trakt: String?,
+  @ColumnInfo(name = "tmdb") val tmdb: String?,
   @ColumnInfo(name = "imdb") val imdb: String?,
   @ColumnInfo(name = "metascore") val metascore: String?,
   @ColumnInfo(name = "rotten_tomatoes") val rottenTomatoes: String?,

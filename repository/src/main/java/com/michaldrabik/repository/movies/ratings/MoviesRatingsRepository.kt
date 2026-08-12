@@ -1,52 +1,23 @@
 package com.michaldrabik.repository.movies.ratings
 
-import com.michaldrabik.common.extensions.dateIsoStringFromMillis
 import com.michaldrabik.common.extensions.nowUtc
-import com.michaldrabik.common.extensions.toMillis
-import com.michaldrabik.common.extensions.toUtcZone
 import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.database.model.Rating
-import com.michaldrabik.data_remote.trakt.AuthorizedTraktRemoteDataSource
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.TraktRating
-import java.time.temporal.ChronoUnit.SECONDS
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class MoviesRatingsRepository @Inject constructor(
   val external: MoviesExternalRatingsRepository,
-  private val remoteSource: AuthorizedTraktRemoteDataSource,
   private val localSource: LocalDataSource,
   private val mappers: Mappers,
 ) {
 
   companion object {
     private const val TYPE_MOVIE = "movie"
-  }
-
-  suspend fun preloadRatings() {
-    val remoteRatings = remoteSource.fetchMoviesRatings()
-    val localRatings = localSource.ratings
-      .getAllByType(TYPE_MOVIE)
-      .map { mappers.userRatings.fromDatabase(it) }
-
-    val entities = remoteRatings
-      .filter { it.rated_at != null && it.movie.ids.tmdb != null }
-      .map { mappers.userRatings.toDatabaseMovie(it) }
-      .filter { remoteRating ->
-        val localRating = localRatings.find { remoteRating.idTmdb == it.idTmdb.id }
-        if (localRating != null) {
-          return@filter localRating.ratedAt
-            .toUtcZone()
-            .truncatedTo(SECONDS)
-            .isBefore(remoteRating.ratedAt.toUtcZone().truncatedTo(SECONDS))
-        }
-        true
-      }
-
-    localSource.ratings.replaceAll(entities, TYPE_MOVIE)
   }
 
   suspend fun loadMoviesRatings(): List<TraktRating> {
@@ -70,29 +41,13 @@ class MoviesRatingsRepository @Inject constructor(
   suspend fun addRating(
     movie: Movie,
     rating: Int,
-    withSync: Boolean,
   ) {
     val ratedAt = nowUtc()
-    if (withSync) {
-      remoteSource.postRating(
-        mappers.movie.toNetwork(movie),
-        rating,
-        dateIsoStringFromMillis(ratedAt.toMillis()),
-      )
-    }
     val entity = mappers.userRatings.toDatabaseMovie(movie, rating, ratedAt)
     localSource.ratings.replace(entity)
   }
 
-  suspend fun deleteRating(
-    movie: Movie,
-    withSync: Boolean,
-  ) {
-    if (withSync) {
-      remoteSource.deleteRating(
-        mappers.movie.toNetwork(movie),
-      )
-    }
+  suspend fun deleteRating(movie: Movie) {
     localSource.ratings.deleteByType(movie.tmdbId, TYPE_MOVIE)
   }
 }

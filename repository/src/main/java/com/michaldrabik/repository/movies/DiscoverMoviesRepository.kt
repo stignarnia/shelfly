@@ -5,8 +5,8 @@ import com.michaldrabik.common.extensions.nowUtcMillis
 import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.database.model.DiscoverMovie
 import com.michaldrabik.data_local.utilities.TransactionsProvider
-import com.michaldrabik.data_remote.Config.TRAKT_ANTICIPATED_LIMIT
-import com.michaldrabik.data_remote.Config.TRAKT_DISCOVER_LIMIT
+import com.michaldrabik.data_remote.Config.ANTICIPATED_LIMIT
+import com.michaldrabik.data_remote.Config.DISCOVER_LIMIT
 import com.michaldrabik.data_remote.RemoteDataSource
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.DiscoverFeed
@@ -63,9 +63,9 @@ class DiscoverMoviesRepository @Inject constructor(
 
       val limit =
         if (showCollection) {
-          TRAKT_DISCOVER_LIMIT
+          DISCOVER_LIMIT
         } else {
-          TRAKT_DISCOVER_LIMIT + (collectionSize / 2)
+          DISCOVER_LIMIT + (collectionSize / 2)
         }
 
       val trendingMoviesAsync = async {
@@ -76,7 +76,7 @@ class DiscoverMoviesRepository @Inject constructor(
 
       val anticipatedMoviesAsync = async {
         remoteSource.tmdb
-          .fetchAnticipatedMovies(genres.map { it.slug }, TRAKT_ANTICIPATED_LIMIT)
+          .fetchAnticipatedMovies(genres.map { it.slug }, ANTICIPATED_LIMIT)
           .map { mappers.movie.fromNetwork(it) }
       }
 
@@ -97,12 +97,12 @@ class DiscoverMoviesRepository @Inject constructor(
 
   private suspend fun loadRemotePopular(genres: List<Genre>): List<Movie> =
     remoteSource.tmdb
-      .fetchPopularMovies(genres.map { it.slug }, TRAKT_DISCOVER_LIMIT)
+      .fetchPopularMovies(genres.map { it.slug }, DISCOVER_LIMIT)
       .map { mappers.movie.fromNetwork(it) }
 
   private suspend fun loadRemoteAnticipated(genres: List<Genre>): List<Movie> =
     remoteSource.tmdb
-      .fetchAnticipatedMovies(genres.map { it.slug }, TRAKT_DISCOVER_LIMIT)
+      .fetchAnticipatedMovies(genres.map { it.slug }, DISCOVER_LIMIT)
       .map { mappers.movie.fromNetwork(it) }
 
   suspend fun cacheDiscoverMovies(movies: List<Movie>) {

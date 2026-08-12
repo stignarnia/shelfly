@@ -6,7 +6,6 @@ import com.michaldrabik.data_local.database.model.Season
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.repository.PinnedItemsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
-import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
@@ -57,8 +56,6 @@ class ShowContextMenuHiddenCase @Inject constructor(
 
     pinnedItemsRepository.removePinnedItem(show)
     announcementManager.refreshShowsAnnouncements()
-
-    RemoveTraktUiEvent(removeProgress = isMyShow, removeWatchlist = isWatchlist)
   }
 
   suspend fun removeFromHidden(tmdbId: IdTmdb) =

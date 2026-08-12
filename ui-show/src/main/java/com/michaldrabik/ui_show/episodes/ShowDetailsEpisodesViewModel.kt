@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaldrabik.common.extensions.nowUtcMillis
 import com.michaldrabik.repository.settings.SettingsRepository
-import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.findReplace
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
@@ -18,16 +17,13 @@ import com.michaldrabik.ui_model.ProgressDateSelectionType.ALWAYS_ASK
 import com.michaldrabik.ui_model.Show
 import com.michaldrabik.ui_model.Translation
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_OPTIONS
-import com.michaldrabik.ui_show.R
 import com.michaldrabik.ui_show.episodes.ShowDetailsEpisodesFragment.Options
 import com.michaldrabik.ui_show.episodes.cases.EpisodesAnnouncementsCase
 import com.michaldrabik.ui_show.episodes.cases.EpisodesLoadShowCase
 import com.michaldrabik.ui_show.episodes.cases.EpisodesMarkWatchedCase
 import com.michaldrabik.ui_show.episodes.cases.EpisodesRatingCase
 import com.michaldrabik.ui_show.episodes.cases.EpisodesSetEpisodeWatchedCase
-import com.michaldrabik.ui_show.episodes.cases.EpisodesSetEpisodeWatchedCase.Result
 import com.michaldrabik.ui_show.episodes.cases.EpisodesSetSeasonWatchedCase
-import com.michaldrabik.ui_show.episodes.cases.EpisodesSetSeasonWatchedCase.Result.REMOVE_FROM_TRAKT
 import com.michaldrabik.ui_show.episodes.cases.EpisodesTranslationCase
 import com.michaldrabik.ui_show.episodes.recycler.EpisodeListItem
 import com.michaldrabik.ui_show.sections.seasons.helpers.SeasonsCache
@@ -197,14 +193,6 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
       seasonState.value?.let {
         val bundle = EpisodeBundle(episode, it.season, show)
         val result = episodeWatchedCase.setEpisodeWatched(bundle, isChecked, customDate)
-        if (result == Result.REMOVE_FROM_TRAKT) {
-          val event = ShowDetailsEpisodesEvent.RemoveFromTrakt(
-            actionId = R.id.actionEpisodesFragmentToRemoveTraktProgress,
-            mode = RemoveTraktBottomSheet.Mode.EPISODE,
-            tmdbIds = listOf(episode.ids.tmdb),
-          )
-          eventChannel.send(event)
-        }
         refreshWatchedEpisodes()
         announcementsCase.refreshAnnouncements(show.ids.tmdb)
       }
@@ -236,14 +224,6 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
   ) {
     viewModelScope.launch {
       val result = seasonWatchedCase.setSeasonWatched(show, season.season, isChecked, customDate)
-      if (result == REMOVE_FROM_TRAKT) {
-        val event = ShowDetailsEpisodesEvent.RemoveFromTrakt(
-          actionId = R.id.actionEpisodesFragmentToRemoveTraktProgress,
-          mode = RemoveTraktBottomSheet.Mode.EPISODE,
-          tmdbIds = season.season.episodes.map { it.ids.tmdb },
-        )
-        eventChannel.send(event)
-      }
       refreshWatchedEpisodes()
       announcementsCase.refreshAnnouncements(show.ids.tmdb)
     }

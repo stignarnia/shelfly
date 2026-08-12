@@ -2,8 +2,6 @@
 
 package com.michaldrabik.ui_show.sections.seasons
 
-import androidx.annotation.IdRes
-import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Season
@@ -25,12 +23,6 @@ sealed class ShowDetailsSeasonsEvent<T>(
   data class OpenQuickProgressDateSelection(
     val item: QuickSetupListItem,
   ) : ShowDetailsSeasonsEvent<QuickSetupListItem>(item)
-
-  data class RemoveFromTrakt(
-    @IdRes val actionId: Int,
-    val mode: RemoveTraktBottomSheet.Mode,
-    val tmdbIds: List<IdTmdb>,
-  ) : ShowDetailsSeasonsEvent<Int>(actionId)
 
   object RequestWidgetsUpdate : ShowDetailsSeasonsEvent<Unit>(Unit)
 }

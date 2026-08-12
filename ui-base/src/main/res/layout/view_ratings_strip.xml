@@ -62,7 +62,7 @@
       android:layout_height="wrap_content"
       android:gravity="center"
       android:lineSpacingExtra="2dp"
-      android:text="Trakt.tv"
+      android:text="TMDB"
       android:textColor="?android:attr/textColorSecondary"
       android:textSize="12sp"
       tools:ignore="HardcodedText"

@@ -3,7 +3,6 @@ package com.michaldrabik.ui_show.sections.seasons
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaldrabik.repository.settings.SettingsRepository
-import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet.Mode
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
@@ -19,7 +18,6 @@ import com.michaldrabik.ui_show.sections.seasons.ShowDetailsSeasonsEvent.Request
 import com.michaldrabik.ui_show.sections.seasons.cases.ShowDetailsLoadSeasonsCase
 import com.michaldrabik.ui_show.sections.seasons.cases.ShowDetailsQuickProgressCase
 import com.michaldrabik.ui_show.sections.seasons.cases.ShowDetailsWatchedSeasonCase
-import com.michaldrabik.ui_show.sections.seasons.cases.ShowDetailsWatchedSeasonCase.Result
 import com.michaldrabik.ui_show.sections.seasons.helpers.SeasonsCache
 import com.michaldrabik.ui_show.sections.seasons.recycler.SeasonListItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -102,15 +100,6 @@ class ShowDetailsSeasonsViewModel @Inject constructor(
         isLocal = areSeasonsLocal,
         customDate = customDate,
       )
-      if (result == Result.REMOVE_FROM_TRAKT) {
-        val ids = season.episodes.map { it.ids.tmdb }
-        val event = ShowDetailsSeasonsEvent.RemoveFromTrakt(
-          R.id.actionShowDetailsFragmentToRemoveTraktProgress,
-          Mode.EPISODE,
-          ids,
-        )
-        eventChannel.send(event)
-      }
       refreshSeasons()
     }
   }

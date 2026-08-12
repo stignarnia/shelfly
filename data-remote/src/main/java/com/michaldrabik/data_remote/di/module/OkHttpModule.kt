@@ -3,11 +3,6 @@ package com.michaldrabik.data_remote.di.module
 import com.michaldrabik.data_remote.BuildConfig
 import com.michaldrabik.data_remote.omdb.OmdbInterceptor
 import com.michaldrabik.data_remote.tmdb.TmdbInterceptor
-import com.michaldrabik.data_remote.trakt.interceptors.TraktAuthenticator
-import com.michaldrabik.data_remote.trakt.interceptors.TraktAuthorizationInterceptor
-import com.michaldrabik.data_remote.trakt.interceptors.TraktHeadersInterceptor
-import com.michaldrabik.data_remote.trakt.interceptors.TraktRefreshTokenInterceptor
-import com.michaldrabik.data_remote.trakt.interceptors.TraktRetryInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,40 +26,6 @@ object OkHttpModule {
 
   @Provides
   @Singleton
-  @Named("okHttpTrakt")
-  fun providesTraktOkHttp(
-    httpLoggingInterceptor: HttpLoggingInterceptor,
-    traktHeadersInterceptor: TraktHeadersInterceptor,
-    traktRetryInterceptor: TraktRetryInterceptor,
-  ): OkHttpClient =
-    createBaseOkHttpClient()
-      .addInterceptor(traktHeadersInterceptor)
-      .addInterceptor(traktRetryInterceptor)
-      .addInterceptor(httpLoggingInterceptor)
-      .build()
-
-  @Provides
-  @Singleton
-  @Named("okHttpAuthorizedTrakt")
-  fun providesAuthorizedTraktOkHttp(
-    httpLoggingInterceptor: HttpLoggingInterceptor,
-    traktAuthorizationInterceptor: TraktAuthorizationInterceptor,
-    traktHeadersInterceptor: TraktHeadersInterceptor,
-    traktRefreshTokenInterceptor: TraktRefreshTokenInterceptor,
-    traktRetryInterceptor: TraktRetryInterceptor,
-    traktAuthenticator: TraktAuthenticator,
-  ): OkHttpClient =
-    createBaseOkHttpClient()
-      .addInterceptor(traktHeadersInterceptor)
-      .addInterceptor(traktRefreshTokenInterceptor)
-      .addInterceptor(traktAuthorizationInterceptor)
-      .addInterceptor(traktRetryInterceptor)
-      .addInterceptor(httpLoggingInterceptor)
-      .authenticator(traktAuthenticator)
-      .build()
-
-  @Provides
-  @Singleton
   @Named("okHttpTmdb")
   fun providesTmdbOkHttp(
     httpLoggingInterceptor: HttpLoggingInterceptor,
@@ -84,14 +45,6 @@ object OkHttpModule {
     .addInterceptor(omdbInterceptor)
     .addInterceptor(httpLoggingInterceptor)
     .build()
-
-  @Provides
-  @Singleton
-  @Named("okHttpAws")
-  fun providesAwsOkHttp(httpLoggingInterceptor: HttpLoggingInterceptor) =
-    createBaseOkHttpClient()
-      .addInterceptor(httpLoggingInterceptor)
-      .build()
 
   @Provides
   @Singleton

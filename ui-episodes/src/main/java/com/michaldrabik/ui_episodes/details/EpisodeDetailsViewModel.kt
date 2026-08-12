@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.michaldrabik.common.Config
 import com.michaldrabik.repository.RatingsRepository
 import com.michaldrabik.repository.TranslationsRepository
-import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.images.EpisodeImagesProvider
 import com.michaldrabik.repository.settings.SettingsSpoilersRepository
 import com.michaldrabik.ui_base.dates.DateFormatProvider
@@ -42,7 +41,6 @@ class EpisodeDetailsViewModel @Inject constructor(
   private val dateFormatProvider: DateFormatProvider,
   private val ratingsRepository: RatingsRepository,
   private val translationsRepository: TranslationsRepository,
-  private val userTraktManager: UserTraktManager,
 ) : ViewModel(),
   ChannelsDelegate by DefaultChannelsDelegate() {
 

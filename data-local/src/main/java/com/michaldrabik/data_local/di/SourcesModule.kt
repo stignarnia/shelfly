@@ -35,8 +35,6 @@ import com.michaldrabik.data_local.sources.ShowRatingsLocalDataSource
 import com.michaldrabik.data_local.sources.ShowStreamingsLocalDataSource
 import com.michaldrabik.data_local.sources.ShowTranslationsLocalDataSource
 import com.michaldrabik.data_local.sources.ShowsLocalDataSource
-import com.michaldrabik.data_local.sources.TraktSyncLogLocalDataSource
-import com.michaldrabik.data_local.sources.TraktSyncQueueLocalDataSource
 import com.michaldrabik.data_local.sources.TranslationsMoviesSyncLogLocalDataSource
 import com.michaldrabik.data_local.sources.TranslationsShowsSyncLogLocalDataSource
 import com.michaldrabik.data_local.sources.UserLocalDataSource
@@ -190,15 +188,6 @@ class SourcesModule {
   @Singleton
   internal fun providesShowTranslations(database: AppDatabase): ShowTranslationsLocalDataSource =
     database.showTranslationsDao()
-
-  @Provides
-  @Singleton
-  internal fun providesTraktSyncLog(database: AppDatabase): TraktSyncLogLocalDataSource = database.traktSyncLogDao()
-
-  @Provides
-  @Singleton
-  internal fun providesTraktSyncQueue(database: AppDatabase): TraktSyncQueueLocalDataSource =
-    database.traktSyncQueueDao()
 
   @Provides
   @Singleton

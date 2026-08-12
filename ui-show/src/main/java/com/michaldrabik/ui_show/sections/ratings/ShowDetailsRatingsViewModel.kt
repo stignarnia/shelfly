@@ -37,7 +37,7 @@ class ShowDetailsRatingsViewModel @Inject constructor(
       showState.value = show
 
       val traktRatings = Ratings(
-        trakt = Ratings.Value(String.format(Locale.ENGLISH, "%.1f", show.rating), false),
+        tmdb = Ratings.Value(String.format(Locale.ENGLISH, "%.1f", show.rating), false),
         imdb = Ratings.Value(null, true),
         metascore = Ratings.Value(null, true),
         rottenTomatoes = Ratings.Value(null, true),

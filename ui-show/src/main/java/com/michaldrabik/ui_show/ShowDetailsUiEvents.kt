@@ -2,10 +2,7 @@
 
 package com.michaldrabik.ui_show
 
-import androidx.annotation.IdRes
-import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet
 import com.michaldrabik.ui_base.utilities.events.Event
-import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Person
 import com.michaldrabik.ui_model.Show
 import com.michaldrabik.ui_people.details.PersonDetailsArgs
@@ -25,12 +22,6 @@ sealed class ShowDetailsEvent<T>(
     val people: List<Person>,
     val department: Person.Department,
   ) : ShowDetailsEvent<Show>(show)
-
-  data class RemoveFromTrakt(
-    @IdRes val actionId: Int,
-    val mode: RemoveTraktBottomSheet.Mode,
-    val tmdbIds: List<IdTmdb>,
-  ) : ShowDetailsEvent<Int>(actionId)
 
   data object RefreshSeasons : ShowDetailsEvent<Unit>(Unit)
 

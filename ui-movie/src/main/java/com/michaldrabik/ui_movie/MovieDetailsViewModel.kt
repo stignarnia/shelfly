@@ -8,7 +8,6 @@ import com.michaldrabik.common.errors.ShowlyError.ResourceNotFoundError
 import com.michaldrabik.common.extensions.dateFromMillis
 import com.michaldrabik.common.extensions.nowUtc
 import com.michaldrabik.common.extensions.toUtcZone
-import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_base.Logger
@@ -31,7 +30,6 @@ import com.michaldrabik.ui_model.SpoilersSettings
 import com.michaldrabik.ui_model.TraktRating
 import com.michaldrabik.ui_model.Translation
 import com.michaldrabik.ui_movie.MovieDetailsEvent.Finish
-import com.michaldrabik.ui_movie.MovieDetailsEvent.RemoveFromTrakt
 import com.michaldrabik.ui_movie.MovieDetailsEvent.RequestWidgetsUpdate
 import com.michaldrabik.ui_movie.MovieDetailsUiState.FollowedState
 import com.michaldrabik.ui_movie.cases.MovieDetailsHiddenCase
@@ -64,7 +62,6 @@ class MovieDetailsViewModel @Inject constructor(
   private val hiddenCase: MovieDetailsHiddenCase,
   private val listsCase: MovieDetailsListsCase,
   private val settingsRepository: SettingsRepository,
-  private val userManager: UserTraktManager,
   private val imagesProvider: MovieImagesProvider,
   private val dateFormatProvider: DateFormatProvider,
   private val announcementManager: AnnouncementManager,
@@ -118,7 +115,7 @@ class MovieDetailsViewModel @Inject constructor(
           dateFormat = dateFormatProvider.loadShortDayFormat(),
           commentsDateFormat = dateFormatProvider.loadFullHourFormat(),
           watchedAtDateFormat = dateFormatProvider.loadFullHourFormat(),
-          isSignedIn = userManager.isAuthorized(),
+          isSignedIn = false,
         )
 
         loadBackgroundImage(movie)
@@ -242,28 +239,16 @@ class MovieDetailsViewModel @Inject constructor(
         isHidden -> hiddenCase.removeFromHidden(movie)
       }
 
-      val traktQuickRemoveEnabled = settingsRepository.load().traktQuickRemoveEnabled
-      val showRemoveTrakt = userManager.isAuthorized() && traktQuickRemoveEnabled
-
       val state = FollowedState.idle()
       when {
         isMyMovie -> {
           followedState.value = state
-          if (showRemoveTrakt) {
-            eventChannel.send(RemoveFromTrakt(R.id.actionMovieDetailsFragmentToRemoveTraktProgress))
-          }
         }
         isWatchlist -> {
           followedState.value = state
-          if (showRemoveTrakt) {
-            eventChannel.send(RemoveFromTrakt(R.id.actionMovieDetailsFragmentToRemoveTraktWatchlist))
-          }
         }
         isHidden -> {
           followedState.value = state
-          if (showRemoveTrakt) {
-            eventChannel.send(RemoveFromTrakt(R.id.actionMovieDetailsFragmentToRemoveTraktHidden))
-          }
         }
         else -> {
           error("Unexpected movie state.")

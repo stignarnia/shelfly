@@ -5,14 +5,15 @@ import com.michaldrabik.data_remote.tmdb.model.TmdbImages
 import com.michaldrabik.data_remote.tmdb.model.TmdbPerson
 import com.michaldrabik.data_remote.tmdb.model.TmdbStreamingCountry
 import com.michaldrabik.data_remote.tmdb.model.TmdbTranslation
-import com.michaldrabik.data_remote.trakt.model.Episode
-import com.michaldrabik.data_remote.trakt.model.Movie
-import com.michaldrabik.data_remote.trakt.model.PersonCredit
-import com.michaldrabik.data_remote.trakt.model.SearchResult
-import com.michaldrabik.data_remote.trakt.model.Season
-import com.michaldrabik.data_remote.trakt.model.SeasonTranslation
-import com.michaldrabik.data_remote.trakt.model.Show
-import com.michaldrabik.data_remote.trakt.model.Translation
+import com.michaldrabik.data_remote.catalog.model.Episode
+import com.michaldrabik.data_remote.catalog.model.Movie
+import com.michaldrabik.data_remote.catalog.model.MovieCollection
+import com.michaldrabik.data_remote.catalog.model.PersonCredit
+import com.michaldrabik.data_remote.catalog.model.SearchResult
+import com.michaldrabik.data_remote.catalog.model.Season
+import com.michaldrabik.data_remote.catalog.model.SeasonTranslation
+import com.michaldrabik.data_remote.catalog.model.Show
+import com.michaldrabik.data_remote.catalog.model.Translation
 
 /**
  * Fetch/post remote resources via TMDB API
@@ -116,6 +117,10 @@ interface TmdbRemoteDataSource {
     seasonNumber: Int,
     language: String,
   ): List<SeasonTranslation>
+
+  suspend fun fetchMovieCollections(tmdbId: Long): List<MovieCollection>
+
+  suspend fun fetchMovieCollectionItems(collectionId: Long): List<Movie>
 
   suspend fun fetchRelatedShows(tmdbId: Long): List<Show>
 

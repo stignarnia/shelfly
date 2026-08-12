@@ -50,18 +50,6 @@
         <category android:name="android.intent.category.BROWSABLE" />
 
         <data
-          android:host="trakt"
-          android:scheme="showly2"
-          />
-      </intent-filter>
-
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-
-        <data
           android:pathPrefix="/title/tt"
           android:scheme="https"
           />
@@ -85,21 +73,6 @@
 
         <data android:host="themoviedb.org" />
         <data android:host="www.themoviedb.org" />
-      </intent-filter>
-
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-
-        <data android:scheme="https" />
-
-        <data android:host="trakt.tv" />
-        <data android:host="www.trakt.tv" />
-
-        <data android:pathPrefix="/shows/" />
-        <data android:pathPrefix="/movies/" />
       </intent-filter>
 
       <meta-data

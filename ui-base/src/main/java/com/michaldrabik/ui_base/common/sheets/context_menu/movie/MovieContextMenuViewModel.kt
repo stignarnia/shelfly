@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_base.R
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.FinishUiEvent
-import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.SelectDateUiEvent
 import com.michaldrabik.ui_base.common.sheets.context_menu.movie.cases.MovieContextMenuHiddenCase
 import com.michaldrabik.ui_base.common.sheets.context_menu.movie.cases.MovieContextMenuLoadItemCase
@@ -79,8 +78,8 @@ class MovieContextMenuViewModel @Inject constructor(
           eventChannel.send(Event(SelectDateUiEvent(movie)))
           return@launch
         }
-        val result = myMoviesCase.moveToMyMovies(movieId, customDate)
-        checkQuickRemove(result)
+        myMoviesCase.moveToMyMovies(movieId, customDate)
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       }
@@ -91,7 +90,7 @@ class MovieContextMenuViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         myMoviesCase.removeFromMyMovies(movieId)
-        checkQuickRemove(RemoveTraktUiEvent(removeProgress = true))
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       }
@@ -101,8 +100,8 @@ class MovieContextMenuViewModel @Inject constructor(
   fun moveToWatchlist() {
     viewModelScope.launch {
       try {
-        val result = watchlistCase.moveToWatchlist(movieId)
-        checkQuickRemove(result)
+        watchlistCase.moveToWatchlist(movieId)
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       }
@@ -113,7 +112,7 @@ class MovieContextMenuViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         watchlistCase.removeFromWatchlist(movieId)
-        checkQuickRemove(RemoveTraktUiEvent(removeWatchlist = true))
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       }
@@ -123,8 +122,8 @@ class MovieContextMenuViewModel @Inject constructor(
   fun moveToHidden() {
     viewModelScope.launch {
       try {
-        val result = hiddenCase.moveToHidden(movieId)
-        checkQuickRemove(result)
+        hiddenCase.moveToHidden(movieId)
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       }
@@ -135,7 +134,7 @@ class MovieContextMenuViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         hiddenCase.removeFromHidden(movieId)
-        checkQuickRemove(RemoveTraktUiEvent(removeHidden = true))
+        eventChannel.send(Event(FinishUiEvent(true)))
       } catch (error: Throwable) {
         onError(error)
       }
@@ -152,15 +151,6 @@ class MovieContextMenuViewModel @Inject constructor(
   fun removeFromTopPinned() {
     viewModelScope.launch {
       pinnedCase.removeFromTopPinned(movieId)
-      eventChannel.send(Event(FinishUiEvent(true)))
-    }
-  }
-
-  private suspend fun checkQuickRemove(event: RemoveTraktUiEvent) {
-    if (isQuickRemoveEnabled) {
-      loadingState.value = false
-      eventChannel.send(Event(event))
-    } else {
       eventChannel.send(Event(FinishUiEvent(true)))
     }
   }

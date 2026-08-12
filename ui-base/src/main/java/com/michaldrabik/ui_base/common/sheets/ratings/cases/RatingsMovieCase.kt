@@ -4,7 +4,6 @@ import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.common.errors.ErrorHelper
 import com.michaldrabik.common.errors.ShowlyError
 import com.michaldrabik.repository.RatingsRepository
-import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Movie
@@ -16,7 +15,6 @@ import javax.inject.Inject
 @ViewModelScoped
 class RatingsMovieCase @Inject constructor(
   private val dispatchers: CoroutineDispatchers,
-  private val userTraktManager: UserTraktManager,
   private val ratingsRepository: RatingsRepository,
 ) {
 
@@ -47,7 +45,6 @@ class RatingsMovieCase @Inject constructor(
       ratingsRepository.movies.addRating(
         movie = movie,
         rating = rating,
-        withSync = userTraktManager.isAuthorized(),
       )
     } catch (error: Throwable) {
       handleError(error)
@@ -60,7 +57,6 @@ class RatingsMovieCase @Inject constructor(
       try {
         ratingsRepository.movies.deleteRating(
           movie = movie,
-          withSync = userTraktManager.isAuthorized(),
         )
       } catch (error: Throwable) {
         handleError(error)
@@ -70,7 +66,6 @@ class RatingsMovieCase @Inject constructor(
   private suspend fun handleError(error: Throwable) {
     val showlyError = ErrorHelper.parse(error)
     if (showlyError is ShowlyError.UnauthorizedError) {
-      userTraktManager.revokeToken()
     }
     throw error
   }
