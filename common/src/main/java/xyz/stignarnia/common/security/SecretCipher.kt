@@ -22,7 +22,7 @@ class SecretCipher @Inject constructor() {
 
   companion object {
     private const val KEYSTORE_TYPE = "AndroidKeyStore"
-    private const val KEY_ALIAS = "showly_secrets"
+    private const val KEY_ALIAS = "shelfly_secrets"
     private const val TRANSFORMATION = "AES/GCM/NoPadding"
     private const val TAG_LENGTH_BITS = 128
     private const val SEPARATOR = ":"

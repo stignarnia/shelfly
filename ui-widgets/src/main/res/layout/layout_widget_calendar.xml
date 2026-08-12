@@ -92,7 +92,7 @@
       android:layout_height="14dp"
       android:layout_marginStart="@dimen/spaceTiny"
       android:layout_marginEnd="@dimen/spaceTiny"
-      android:src="@drawable/ic_showly_round"
+      android:src="@drawable/ic_app_round"
       />
 
     <TextView

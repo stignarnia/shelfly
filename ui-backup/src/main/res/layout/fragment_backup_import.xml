@@ -73,7 +73,7 @@
       app:layout_constraintHorizontal_chainStyle="packed"
       app:layout_constraintStart_toEndOf="@id/arrowIcon"
       app:layout_constraintTop_toTopOf="@id/arrowIcon"
-      app:srcCompat="@drawable/ic_showly"
+      app:srcCompat="@drawable/ic_app"
       />
 
     <TextView

@@ -2,21 +2,27 @@
 
 > **Heads up:** this fork was built almost entirely by an AI coding agent, with a human directing it and reviewing the results. Read the code before you trust it with anything you care about, and keep your own backups.
 
-Shelfly is an offline-first TV shows and movies tracker for Android.
+Shelfly is a fork of [Showly](https://github.com/trakt/showly) (a TV shows and movies tracker for Android) that syncs to infrastructure you control.
 
-Everything you track lives on your own device. There is no account, no sync service, no analytics and no crash reporting: your collection, watch history, ratings and lists are yours, and the only way they leave the phone is a backup you ask for.
+## Why this exists
 
-The catalog comes from [TMDB](https://www.themoviedb.org), using an API key you supply yourself on first run. No keys are compiled into the APK.
+Showly kept your watch history on Trakt, but they now charge for API access, so downloading your history via an automatic script becomes paid. You can still do so manually via Showly's export feature but I didn't like the move and decided to fix it myself.
 
-## Privacy
+Shelfly replaces Trakt sync with **WebDAV backup to your own server**. Point it at a Nextcloud instance, a NAS, an online storage service or anything that speaks WebDAV, and the app backs your collection up there on a schedule and restores from it. There is no account, no subscription and no middleman: your history lives on your device and on hardware you already run.
 
-The app ships with no telemetry of any kind. There is no Firebase, no Google Play Services, no analytics SDK and no crash reporter anywhere in the dependency graph, and the app generates no device identifier. The only network calls it makes are to TMDB for the catalog, to OMDB if you supply an optional key for IMDb ratings, and to whatever WebDAV server you point it at.
+Showly could also do scheduled exports, but only via the Android Storage Framework, which means it could only reliably do so to the phone itself, not a network resource.
+
+The catalog comes from [TMDB](https://www.themoviedb.org) instead, using a free API key you supply yourself on first run. No keys are compiled into the APK.
+
+## Why not a Pull Request instead?
+
+I think there is little chance this gets merged upstream given the repository's acquisition by Trakt itself. If this gets traction and they are willing to merge the WebDAV backup feature I will probably go back to the original, as removing the Trakt dependency was more necessary for me to not have to buy VIP during development than for the user facing feature I wanted to add.[Showly](https://github.com/trakt/showly)
 
 ## Differences from upstream
 
-- Trakt is gone entirely. TMDB is the only catalog source and all tracking state is local.
-- Backups can go to your own WebDAV server on a schedule, in addition to a local folder.
-- API keys are supplied by the user at runtime rather than compiled into the build.
+- **Trakt is gone entirely.** TMDB is the only catalog source and all tracking state is local.
+- **WebDAV backup.** Scheduled backup and restore against your own server, alongside the existing local folder target.
+- **You supply the API keys**, at runtime, rather than the build shipping someone else's.
 - The paid tier has been removed.
 - Episode notifications fire on the air date rather than at the exact airtime. TMDB exposes a date but no time of day, so the precision is not available.
 - Discover has no network filter. TMDB's `with_networks` needs numeric ids that do not map from the channel names the app knows. Genre filtering works.

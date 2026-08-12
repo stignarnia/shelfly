@@ -3,7 +3,7 @@
 <full-backup-content>
   <include
     domain="database"
-    path="SHOWLY2_DB_2"
+    path="SHELFLY_DB"
     />
 
   <include
