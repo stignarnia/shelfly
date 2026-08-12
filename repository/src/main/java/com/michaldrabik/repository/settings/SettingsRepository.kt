@@ -1,6 +1,7 @@
 package com.michaldrabik.repository.settings
 
 import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import com.michaldrabik.common.Config.DEFAULT_COUNTRY
 import com.michaldrabik.common.Config.DEFAULT_DATE_FORMAT
@@ -12,6 +13,7 @@ import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.repository.utilities.BooleanPreference
 import com.michaldrabik.repository.utilities.EnumPreference
+import com.michaldrabik.repository.utilities.IntPreference
 import com.michaldrabik.repository.utilities.LongPreference
 import com.michaldrabik.repository.utilities.StringPreference
 import com.michaldrabik.ui_model.ProgressDateSelectionType
@@ -43,6 +45,7 @@ class SettingsRepository @Inject constructor(
 
   companion object Key {
     const val LANGUAGE = "KEY_LANGUAGE"
+    private const val THEME = "KEY_THEME"
     private const val COUNTRY = "KEY_COUNTRY"
     private const val DATE_FORMAT = "KEY_DATE_FORMAT"
     private const val MODE = "KEY_MOVIES_MODE"
@@ -85,6 +88,7 @@ class SettingsRepository @Inject constructor(
   var streamingsEnabled by BooleanPreference(preferences, STREAMINGS_ENABLED, true)
   var isMoviesEnabled by BooleanPreference(preferences, MOVIES_ENABLED, true)
   var isTwitterAdEnabled by BooleanPreference(preferences, TWITTER_AD_ENABLED, true)
+  var theme by IntPreference(preferences, THEME, AppCompatDelegate.MODE_NIGHT_YES)
   var language by StringPreference(preferences, LANGUAGE, DEFAULT_LANGUAGE)
   var country by StringPreference(preferences, COUNTRY, DEFAULT_COUNTRY)
   var dateFormat by StringPreference(preferences, DATE_FORMAT, DEFAULT_DATE_FORMAT)

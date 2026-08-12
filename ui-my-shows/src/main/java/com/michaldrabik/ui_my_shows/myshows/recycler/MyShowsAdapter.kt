@@ -19,7 +19,6 @@ class MyShowsAdapter(
   private val itemClickListener: (ListItem) -> Unit,
   private val itemLongClickListener: (ListItem) -> Unit,
   private val onSortOrderClickListener: (MyShowsSection, SortOrder, SortType) -> Unit,
-  private val onListViewModeClickListener: () -> Unit,
   private val onNetworksClickListener: () -> Unit,
   private val onGenresClickListener: () -> Unit,
   private val onTypeClickListener: () -> Unit,
@@ -85,7 +84,6 @@ class MyShowsAdapter(
           sortClickListener = onSortOrderClickListener,
           networksClickListener = onNetworksClickListener,
           genresClickListener = onGenresClickListener,
-          listModeClickListener = onListViewModeClickListener,
         )
       }
       VIEW_TYPE_RECENTS_SECTION -> {

@@ -123,7 +123,6 @@ dependencies {
   implementation project(':ui-settings')
   implementation project(':ui-progress')
   implementation project(':ui-progress-movies')
-  implementation project(':ui-premium')
   implementation project(':ui-widgets')
 
   implementation libs.hilt.android

@@ -105,7 +105,6 @@
   <string name="textWatchlist">Watchlist</string>
   <string name="textWatchlistIncoming">À venir</string>
   <string name="textNewAlwaysAtTop">Nouveaux épisodes en premier</string>
-  <string name="textPremiumAd">Devenez un supporteur et accédez à des fonctionnalités bonus ! Cliquez pour en savoir plus.</string>
   <string name="menuPin">Épingler en haut</string>
   <string name="menuUnpin">Désépingler du haut</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Épingler vers \"En attente\"</string>

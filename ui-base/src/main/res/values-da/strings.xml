@@ -108,7 +108,6 @@
   <string name="textWatchlist">Se Senere</string>
   <string name="textWatchlistIncoming">Kommende</string>
   <string name="textNewAlwaysAtTop">Nye afsnit altid først</string>
-  <string name="textPremiumAd">Bliv supporter og få adgang til bonusfunktioner! Klik for at se mere.</string>
   <string name="menuPin">Fastgør til toppen</string>
   <string name="menuUnpin">Frigør fra toppen</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Fastgør til \'på pause\'</string>

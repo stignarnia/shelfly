@@ -112,7 +112,6 @@
     <string name="textWatchlist">Lista de urmărire</string>
     <string name="textWatchlistIncoming">Urmează</string>
     <string name="textNewAlwaysAtTop">Episoadele noi întotdeauna primele</string>
-    <string name="textPremiumAd">Devino susținător și obține acces la funcții bonus! Click pentru a vedea mai multe.</string>
     <string name="menuPin">Fixează în partea de sus</string>
     <string name="menuUnpin">Anulează fixarea din partea de sus</string>
     <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Fixează la „În așteptare”</string>

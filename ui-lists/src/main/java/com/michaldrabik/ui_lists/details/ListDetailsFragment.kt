@@ -33,7 +33,6 @@ import com.michaldrabik.ui_base.utilities.extensions.enableUi
 import com.michaldrabik.ui_base.utilities.extensions.fadeIf
 import com.michaldrabik.ui_base.utilities.extensions.fadeOut
 import com.michaldrabik.ui_base.utilities.extensions.launchAndRepeatStarted
-import com.michaldrabik.ui_base.utilities.extensions.navigateToSafe
 import com.michaldrabik.ui_base.utilities.extensions.onClick
 import com.michaldrabik.ui_base.utilities.extensions.requireParcelable
 import com.michaldrabik.ui_base.utilities.extensions.visibleIf
@@ -50,7 +49,6 @@ import com.michaldrabik.ui_lists.details.recycler.ListDetailsItem
 import com.michaldrabik.ui_lists.details.recycler.helpers.ListDetailsLayoutManagerProvider
 import com.michaldrabik.ui_lists.details.recycler.helpers.ListDetailsListItemDecoration
 import com.michaldrabik.ui_model.CustomList
-import com.michaldrabik.ui_model.PremiumFeature
 import com.michaldrabik.ui_model.SortOrder
 import com.michaldrabik.ui_model.SortOrder.DATE_ADDED
 import com.michaldrabik.ui_model.SortOrder.NAME
@@ -61,7 +59,6 @@ import com.michaldrabik.ui_model.SortOrder.RATING
 import com.michaldrabik.ui_model.SortOrder.USER_RATING
 import com.michaldrabik.ui_model.SortType
 import com.michaldrabik.ui_navigation.java.NavigationArgs
-import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_ITEM
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_LIST
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_MOVIE_ID
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_SELECTED_SORT_ORDER
@@ -163,10 +160,6 @@ class ListDetailsFragment :
         translationY = headerTranslation
       }
       fragmentListDetailsManageButton.onClick { toggleReorderMode() }
-      fragmentListDetailsViewModeButton.onClick {
-        val args = bundleOf(ARG_ITEM to PremiumFeature.VIEW_TYPES)
-        navigateToSafe(R.id.actionListDetailsFragmentToPremium, args)
-      }
     }
   }
 
@@ -328,11 +321,6 @@ class ListDetailsFragment :
               recycler.layoutManager = layoutManager
               recycler.adapter = adapter
             }
-            fragmentListDetailsViewModeButton.setImageResource(
-              when (it) {
-                LIST_NORMAL -> R.drawable.ic_view_list
-              },
-            )
           }
         }
         listDetails?.let { details ->
@@ -345,7 +333,6 @@ class ListDetailsFragment :
           val isRealEmpty = it.isEmpty() && listDetails?.filterTypeLocal?.containsAll(Mode.getAll()) == true
           fragmentListDetailsEmptyView.root.fadeIf(it.isEmpty())
           fragmentListDetailsManageButton.visibleIf(!isRealEmpty)
-          fragmentListDetailsViewModeButton.visibleIf(!isRealEmpty)
 
           val scrollTop = resetScroll?.consume() == true
           view?.post {
@@ -367,7 +354,6 @@ class ListDetailsFragment :
 
           fragmentListDetailsManageButton.visibleIf(!isManageMode)
           fragmentListDetailsMoreButton.visibleIf(!isManageMode)
-          fragmentListDetailsViewModeButton.visibleIf(!isManageMode)
 
           if (isManageMode) {
             fragmentListDetailsToolbar.title = getString(R.string.textChangeRanks)

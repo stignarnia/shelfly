@@ -7,7 +7,6 @@ private const val BUFFER = 11
 internal class TabletImageTypeProvider : ImageTypeProvider {
 
   override val twitterAdPosition = 14
-  override val premiumAdPosition = 30
 
   override fun getImageType(position: Int): ImageType {
     if (position % BUFFER == 0) return ImageType.FANART_WIDE

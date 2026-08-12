@@ -12,6 +12,6 @@ enum class AppTheme(
   ;
 
   companion object {
-    fun fromCode(code: Int) = values().first { it.code == code }
+    fun fromCode(code: Int) = entries.firstOrNull { it.code == code } ?: DARK
   }
 }

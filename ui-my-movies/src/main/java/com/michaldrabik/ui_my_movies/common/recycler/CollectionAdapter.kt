@@ -20,7 +20,6 @@ class CollectionAdapter(
   private val sortChipClickListener: (SortOrder, SortType) -> Unit,
   private val upcomingChipClickListener: () -> Unit,
   private val genreChipClickListener: () -> Unit,
-  private val listViewChipClickListener: () -> Unit,
   private val missingImageListener: (CollectionListItem, Boolean) -> Unit,
   private val missingTranslationListener: (CollectionListItem) -> Unit,
   private val upcomingChipVisible: Boolean = true,
@@ -60,7 +59,6 @@ class CollectionAdapter(
         onSortChipClicked = this@CollectionAdapter.sortChipClickListener
         onFilterUpcomingClicked = this@CollectionAdapter.upcomingChipClickListener
         onGenreChipClicked = this@CollectionAdapter.genreChipClickListener
-        onListViewModeClicked = this@CollectionAdapter.listViewChipClickListener
         isUpcomingChipVisible = upcomingChipVisible
       },
     )

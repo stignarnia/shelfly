@@ -4,6 +4,7 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.os.Build
 import android.os.StrictMode
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import com.jakewharton.processphoenix.ProcessPhoenix
@@ -104,6 +105,7 @@ class App :
     }
 
     setupSettings()
+    AppCompatDelegate.setDefaultNightMode(settingsRepository.theme)
     setupStrictMode()
     setupNotificationChannels()
   }

@@ -96,7 +96,6 @@ class MyMoviesFragment :
       itemLongClickListener = { openMovieMenu(it.movie) },
       onSortOrderClickListener = ::openSortOrderDialog,
       onGenresClickListener = ::openGenresDialog,
-      onListViewModeClickListener = { (requireParentFragment() as? FollowedMoviesFragment)?.openPremium() },
       missingImageListener = { item, force -> viewModel.loadMissingImage(item, force) },
       missingTranslationListener = { viewModel.loadMissingTranslation(it) },
       listChangeListener = {

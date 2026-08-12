@@ -5,13 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_model.Settings
-import com.michaldrabik.ui_settings.helpers.AppTheme
-import com.michaldrabik.ui_settings.helpers.WidgetTransparency
 import com.michaldrabik.ui_settings.sections.widgets.cases.SettingsWidgetsMainCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,10 +20,6 @@ class SettingsWidgetsViewModel @Inject constructor(
 ) : ViewModel() {
 
   private val settingsState = MutableStateFlow<Settings?>(null)
-
-  private val widgetThemeState = MutableStateFlow(AppTheme.DARK)
-  private val widgetTransparencyState = MutableStateFlow(WidgetTransparency.SOLID)
-  private val premiumState = MutableStateFlow(false)
 
   fun loadSettings() {
     viewModelScope.launch {
@@ -47,21 +41,11 @@ class SettingsWidgetsViewModel @Inject constructor(
     settingsState.value = mainCase.getSettings()
   }
 
-  val uiState = combine(
-    settingsState,
-    premiumState,
-    widgetThemeState,
-    widgetTransparencyState,
-  ) { s1, s2, s3, s4 ->
-    SettingsWidgetsUiState(
-      settings = s1,
-      isPremium = s2,
-      themeWidgets = s3,
-      widgetsTransparency = s4,
+  val uiState = settingsState
+    .map { SettingsWidgetsUiState(settings = it) }
+    .stateIn(
+      scope = viewModelScope,
+      started = SharingStarted.WhileSubscribed(SUBSCRIBE_STOP_TIMEOUT),
+      initialValue = SettingsWidgetsUiState(),
     )
-  }.stateIn(
-    scope = viewModelScope,
-    started = SharingStarted.WhileSubscribed(SUBSCRIBE_STOP_TIMEOUT),
-    initialValue = SettingsWidgetsUiState(),
-  )
 }

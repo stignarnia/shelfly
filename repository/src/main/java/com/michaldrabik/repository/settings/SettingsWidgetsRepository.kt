@@ -58,9 +58,4 @@ class SettingsWidgetsRepository @Inject constructor(
     }
     preferences.edit(true) { putString("$key$widgetId", calendarMode.name) }
   }
-
-  fun revokePremium() {
-    widgetsTheme = UiModeManager.MODE_NIGHT_YES
-    widgetsTransparency = 100
-  }
 }

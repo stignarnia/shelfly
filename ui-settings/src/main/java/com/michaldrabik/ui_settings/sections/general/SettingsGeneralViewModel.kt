@@ -14,6 +14,7 @@ import com.michaldrabik.ui_model.ProgressDateSelectionType
 import com.michaldrabik.ui_model.ProgressNextEpisodeType
 import com.michaldrabik.ui_model.Settings
 import com.michaldrabik.ui_settings.helpers.AppLanguage
+import com.michaldrabik.ui_settings.helpers.AppTheme
 import com.michaldrabik.ui_settings.sections.general.cases.SettingsGeneralMainCase
 import com.michaldrabik.ui_settings.sections.general.cases.SettingsGeneralStreamingsCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,7 +37,7 @@ class SettingsGeneralViewModel @Inject constructor(
   private val dateFormatState = MutableStateFlow<AppDateFormat?>(null)
   private val moviesEnabledState = MutableStateFlow(true)
   private val streamingsEnabledState = MutableStateFlow(true)
-  private val premiumState = MutableStateFlow(false)
+  private val themeState = MutableStateFlow(AppTheme.DARK)
   private val restartAppState = MutableStateFlow(false)
   private val progressTypeState = MutableStateFlow<ProgressNextEpisodeType?>(null)
   private val progressDateSelectionState = MutableStateFlow<ProgressDateSelectionType?>(null)
@@ -52,6 +53,7 @@ class SettingsGeneralViewModel @Inject constructor(
   private suspend fun refreshSettings(restartApp: Boolean = false) {
     settingsState.value = mainCase.getSettings()
     languageState.value = mainCase.getLanguage()
+    themeState.value = mainCase.getTheme()
     countryState.value = mainCase.getCountry()
     dateFormatState.value = mainCase.getDateFormat()
     moviesEnabledState.value = mainCase.isMoviesEnabled()
@@ -97,6 +99,13 @@ class SettingsGeneralViewModel @Inject constructor(
       mainCase.setLanguage(language)
       val locales = LocaleListCompat.forLanguageTags(language.code)
       AppCompatDelegate.setApplicationLocales(locales)
+    }
+  }
+
+  fun setTheme(theme: AppTheme) {
+    viewModelScope.launch {
+      mainCase.setTheme(theme)
+      AppCompatDelegate.setDefaultNightMode(theme.code)
     }
   }
 
@@ -148,7 +157,7 @@ class SettingsGeneralViewModel @Inject constructor(
 
   val uiState = combine(
     settingsState,
-    premiumState,
+    themeState,
     languageState,
     countryState,
     dateFormatState,
@@ -162,7 +171,7 @@ class SettingsGeneralViewModel @Inject constructor(
   ) { s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 ->
     SettingsGeneralUiState(
       settings = s1,
-      isPremium = s2,
+      theme = s2,
       language = s3,
       country = s4,
       dateFormat = s5,

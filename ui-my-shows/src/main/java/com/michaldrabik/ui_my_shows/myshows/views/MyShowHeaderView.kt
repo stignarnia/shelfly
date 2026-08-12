@@ -8,7 +8,6 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import com.michaldrabik.ui_base.common.ListViewMode
-import com.michaldrabik.ui_base.common.ListViewMode.LIST_NORMAL
 import com.michaldrabik.ui_base.utilities.extensions.onClick
 import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_model.MyShowsSection
@@ -42,7 +41,6 @@ class MyShowHeaderView : FrameLayout {
     sortClickListener: ((MyShowsSection, SortOrder, SortType) -> Unit)?,
     networksClickListener: (() -> Unit)?,
     genresClickListener: (() -> Unit)?,
-    listModeClickListener: (() -> Unit)?,
   ) {
     bindLabel(item)
     with(binding) {
@@ -56,13 +54,6 @@ class MyShowHeaderView : FrameLayout {
         text = context.getString(item.section.displayString)
         visibleIf(item.section != RECENTS)
         onClick { typeClickListener?.invoke() }
-      }
-
-      with(myShowsSortListViewChip) {
-        when (viewMode) {
-          LIST_NORMAL -> setChipIconResource(R.drawable.ic_view_list)
-        }
-        onClick { listModeClickListener?.invoke() }
       }
 
       item.sortOrder?.let { sortOrder ->

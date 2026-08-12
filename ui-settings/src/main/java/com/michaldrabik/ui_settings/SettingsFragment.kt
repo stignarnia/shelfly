@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import com.michaldrabik.ui_base.BaseFragment
 import com.michaldrabik.ui_base.utilities.extensions.doOnApplyWindowInsets
 import com.michaldrabik.ui_base.utilities.extensions.launchAndRepeatStarted
-import com.michaldrabik.ui_base.utilities.extensions.onClick
 import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.viewBinding
 import com.michaldrabik.ui_settings.databinding.FragmentSettingsBinding
@@ -66,7 +65,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel>(R.layout.fragment_setti
   private fun setupView() {
     with(binding) {
       settingsToolbar.setOnClickListener { activity?.onBackPressed() }
-      settingsPremium.onClick { navigateTo(R.id.actionSettingsFragmentToPremium) }
       settingsFilters.onFilterClick = { viewModel.setFilter(it) }
     }
   }

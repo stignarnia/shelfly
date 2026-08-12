@@ -93,7 +93,6 @@ class HiddenFragment :
       genreChipClickListener = ::openGenresDialog,
       missingImageListener = viewModel::loadMissingImage,
       missingTranslationListener = viewModel::loadMissingTranslation,
-      listViewChipClickListener = { (requireParentFragment() as? FollowedMoviesFragment)?.openPremium() },
       upcomingChipVisible = false,
       upcomingChipClickListener = {},
       listChangeListener = {

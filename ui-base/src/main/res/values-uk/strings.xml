@@ -113,7 +113,6 @@
   <string name="textWatchlist">На потім</string>
   <string name="textWatchlistIncoming">Незабаром</string>
   <string name="textNewAlwaysAtTop">Спочатку нові серії</string>
-  <string name="textPremiumAd">Станьте підписником та отримуйте доступ до бонусних функцій! Натисніть, щоб побачити більше.</string>
   <string name="menuPin">Закріпити</string>
   <string name="menuUnpin">Відкріпити</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Закріпити в \'Призупинено\'</string>

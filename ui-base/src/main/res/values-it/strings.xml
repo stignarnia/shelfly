@@ -105,7 +105,6 @@
   <string name="textWatchlist">Da vedere</string>
   <string name="textWatchlistIncoming">In arrivo</string>
   <string name="textNewAlwaysAtTop">I nuovi episodi sempre per primi</string>
-  <string name="textPremiumAd">Diventa un sostenitore e ottieni l\'accesso alle funzionalità bonus! Clicca per saperne di più.</string>
   <string name="menuPin">Fissa in cima</string>
   <string name="menuUnpin">Rimuovi</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Aggiungi a \'In pausa\'</string>

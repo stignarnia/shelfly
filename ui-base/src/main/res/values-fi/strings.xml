@@ -105,7 +105,6 @@
   <string name="textWatchlist">Katselulista</string>
   <string name="textWatchlistIncoming">Tulossa</string>
   <string name="textNewAlwaysAtTop">Uudet jaksot aina ensin</string>
-  <string name="textPremiumAd">Ryhdy tukijaksi, niin saat käyttöösi lisäominaisuuksia! Napauta nähdäksesi lisää.</string>
   <string name="menuPin">Kiinnitä listan ylälaitaan</string>
   <string name="menuUnpin">Irrota listan ylälaidasta</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Kiinnitä pitoon</string>

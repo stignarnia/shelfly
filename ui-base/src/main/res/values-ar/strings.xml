@@ -121,7 +121,6 @@
   <string name="textWatchlist">قائمة المشاهدة</string>
   <string name="textWatchlistIncoming">يُعرض قريباً</string>
   <string name="textNewAlwaysAtTop">الحلقات الجديدة دائماً أولاً</string>
-  <string name="textPremiumAd">إدعم تطوير التطبيق واحصل على مميزات إضافية! انقر لرؤية المزيد.</string>
   <string name="menuPin">تثبيت في الأعلى</string>
   <string name="menuUnpin">إلغاء التثبيت من الأعلى</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">إضافة إلى \"المعلقة\"</string>

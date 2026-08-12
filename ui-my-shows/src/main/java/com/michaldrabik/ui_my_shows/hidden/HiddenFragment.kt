@@ -96,7 +96,6 @@ class HiddenFragment :
       sortChipClickListener = ::openSortOrderDialog,
       missingImageListener = viewModel::loadMissingImage,
       missingTranslationListener = viewModel::loadMissingTranslation,
-      listViewChipClickListener = { (requireParentFragment() as? FollowedShowsFragment)?.openPremium() },
       networksChipClickListener = ::openNetworksDialog,
       genresChipClickListener = ::openGenresDialog,
       upcomingChipClickListener = {},

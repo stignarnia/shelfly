@@ -21,7 +21,6 @@ class MyMoviesAdapter(
   private val missingTranslationListener: (MyMoviesItem) -> Unit,
   private val onSortOrderClickListener: (SortOrder, SortType) -> Unit,
   private val onGenresClickListener: () -> Unit,
-  private val onListViewModeClickListener: () -> Unit,
   listChangeListener: (() -> Unit),
 ) : BaseMovieAdapter<MyMoviesItem>(
     listChangeListener = listChangeListener,
@@ -75,7 +74,6 @@ class MyMoviesAdapter(
         listViewMode,
         onSortOrderClickListener,
         onGenresClickListener,
-        onListViewModeClickListener,
       )
       VIEW_TYPE_RECENTS_SECTION -> (holder.itemView as MyMoviesRecentsView).bind(
         item.recentsSection!!,

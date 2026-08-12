@@ -35,18 +35,6 @@
       app:title="@string/textSettings"
       />
 
-    <com.michaldrabik.ui_base.common.views.PremiumAdView
-      android:id="@+id/settingsPremium"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/settingsPremiumAdMargin"
-      android:layout_marginTop="@dimen/spaceTiny"
-      android:layout_marginEnd="@dimen/settingsPremiumAdMargin"
-      android:background="@drawable/bg_premium_ad"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/settingsToolbar"
-      />
 
     <com.michaldrabik.ui_settings.views.SettingsFiltersView
       android:id="@+id/settingsFilters"
@@ -60,7 +48,7 @@
       app:layout_constraintBottom_toTopOf="@id/settingsCategoryApiKeys"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/settingsPremium"
+      app:layout_constraintTop_toBottomOf="@id/settingsToolbar"
       app:layout_goneMarginTop="0dp"
       />
 

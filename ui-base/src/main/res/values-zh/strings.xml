@@ -102,7 +102,6 @@
   <string name="textWatchlist">待看列表</string>
   <string name="textWatchlistIncoming">即将到来</string>
   <string name="textNewAlwaysAtTop">始终置顶新剧集</string>
-  <string name="textPremiumAd">成为支持者并获得额外功能！点击查看更多信息。</string>
   <string name="menuPin">置顶</string>
   <string name="menuUnpin">取消置顶</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">设为「暂缓中」</string>
