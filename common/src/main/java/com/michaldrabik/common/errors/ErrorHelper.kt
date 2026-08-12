@@ -1,22 +1,22 @@
 package com.michaldrabik.common.errors
 
-import com.michaldrabik.common.errors.ShowlyError.AccountLimitsError
-import com.michaldrabik.common.errors.ShowlyError.AccountLockedError
-import com.michaldrabik.common.errors.ShowlyError.CoroutineCancellation
-import com.michaldrabik.common.errors.ShowlyError.ResourceConflictError
-import com.michaldrabik.common.errors.ShowlyError.ResourceNotFoundError
-import com.michaldrabik.common.errors.ShowlyError.UnauthorizedError
-import com.michaldrabik.common.errors.ShowlyError.UnknownError
-import com.michaldrabik.common.errors.ShowlyError.UnknownHttpError
-import com.michaldrabik.common.errors.ShowlyError.ValidationError
+import com.michaldrabik.common.errors.ShelflyError.AccountLimitsError
+import com.michaldrabik.common.errors.ShelflyError.AccountLockedError
+import com.michaldrabik.common.errors.ShelflyError.CoroutineCancellation
+import com.michaldrabik.common.errors.ShelflyError.ResourceConflictError
+import com.michaldrabik.common.errors.ShelflyError.ResourceNotFoundError
+import com.michaldrabik.common.errors.ShelflyError.UnauthorizedError
+import com.michaldrabik.common.errors.ShelflyError.UnknownError
+import com.michaldrabik.common.errors.ShelflyError.UnknownHttpError
+import com.michaldrabik.common.errors.ShelflyError.ValidationError
 import retrofit2.HttpException
 import kotlin.coroutines.cancellation.CancellationException
 
 object ErrorHelper {
 
-  fun parse(error: Throwable): ShowlyError =
+  fun parse(error: Throwable): ShelflyError =
     when (error) {
-      is ShowlyError -> {
+      is ShelflyError -> {
         error
       }
       is HttpException -> {

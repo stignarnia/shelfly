@@ -31,7 +31,6 @@ class SettingsMiscFragment : BaseFragment<SettingsMiscViewModel>(R.layout.fragme
     launchAndRepeatStarted(
       { viewModel.uiState.collect { render(it) } },
       { viewModel.messageFlow.collect { showSnack(it) } },
-      doAfterLaunch = { viewModel.loadSettings() },
     )
   }
 
@@ -48,7 +47,6 @@ class SettingsMiscFragment : BaseFragment<SettingsMiscViewModel>(R.layout.fragme
   private fun render(uiState: SettingsMiscUiState) {
     uiState.run {
       with(binding) {
-        userId.let { settingsUserId.text = it }
         settingsVersion.text = "v${BuildConfig.VER_NAME} (${BuildConfig.VER_CODE})"
       }
     }

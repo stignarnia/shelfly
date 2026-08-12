@@ -15,7 +15,7 @@
 
     <com.google.android.material.chip.Chip
       android:id="@+id/viewListsFilterSortChip"
-      style="@style/ShowlyChip.Sort"
+      style="@style/ShelflyChip.Sort"
       android:text="@string/textSortName"
       />
 

@@ -37,7 +37,6 @@ import com.michaldrabik.showly2.ui.main.delegates.MainTipsDelegate
 import com.michaldrabik.showly2.ui.main.delegates.TipsDelegate
 import com.michaldrabik.showly2.ui.views.WhatsNewView
 import com.michaldrabik.showly2.utilities.deeplink.DeepLinkResolver
-import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.common.OnShowsMoviesSyncedListener
 import com.michaldrabik.ui_base.common.OnTabReselectedListener
 import com.michaldrabik.ui_base.events.Event
@@ -495,7 +494,6 @@ class MainActivity :
         }
         bundle?.clear()
       } catch (error: Throwable) {
-        Logger.record(error, "BaseActivity::handleSearchWidgetClick()")
       }
     }
   }

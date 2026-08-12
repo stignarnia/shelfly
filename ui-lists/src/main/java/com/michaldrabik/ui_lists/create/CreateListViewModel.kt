@@ -3,7 +3,7 @@ package com.michaldrabik.ui_lists.create
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaldrabik.common.errors.ErrorHelper
-import com.michaldrabik.common.errors.ShowlyError.AccountLimitsError
+import com.michaldrabik.common.errors.ShelflyError.AccountLimitsError
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT

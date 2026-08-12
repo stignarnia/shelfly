@@ -53,14 +53,14 @@
 
         <com.google.android.material.chip.Chip
           android:id="@+id/myShowsTypeChip"
-          style="@style/ShowlyChip.Filter"
+          style="@style/ShelflyChip.Filter"
           android:checkable="false"
           android:text="@string/textHeaderAll"
           />
 
         <com.google.android.material.chip.Chip
           android:id="@+id/myShowsSortChip"
-          style="@style/ShowlyChip.Sort"
+          style="@style/ShelflyChip.Sort"
           android:text="@string/textSortName"
           android:visibility="gone"
           tools:visibility="visible"
@@ -68,7 +68,7 @@
 
         <com.google.android.material.chip.Chip
           android:id="@+id/myShowsNetworksChip"
-          style="@style/ShowlyChip.Filter"
+          style="@style/ShelflyChip.Filter"
           android:checkable="false"
           android:text="@string/textNetworks"
           android:visibility="gone"
@@ -77,7 +77,7 @@
 
         <com.google.android.material.chip.Chip
           android:id="@+id/myShowsGenresChip"
-          style="@style/ShowlyChip.Filter"
+          style="@style/ShelflyChip.Filter"
           android:checkable="false"
           android:text="@string/textGenres"
           android:visibility="gone"

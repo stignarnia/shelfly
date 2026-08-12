@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import javax.inject.Inject
-import com.michaldrabik.ui_base.fcm.NotificationChannel as AppNotificationChannel
+import com.michaldrabik.ui_base.notifications.NotificationChannel as AppNotificationChannel
 
 @HiltAndroidApp
 class App :

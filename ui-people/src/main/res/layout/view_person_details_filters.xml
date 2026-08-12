@@ -23,21 +23,21 @@
 
     <com.google.android.material.chip.Chip
       android:id="@+id/viewPersonDetailsFiltersShowsChip"
-      style="@style/ShowlyChip.Filter"
+      style="@style/ShelflyChip.Filter"
       android:text="@string/textShows"
       app:chipBackgroundColor="?colorSheetBackground"
       />
 
     <com.google.android.material.chip.Chip
       android:id="@+id/viewPersonDetailsFiltersMoviesChip"
-      style="@style/ShowlyChip.Filter"
+      style="@style/ShelflyChip.Filter"
       android:text="@string/textMovies"
       app:chipBackgroundColor="?colorSheetBackground"
       />
 
     <com.google.android.material.chip.Chip
       android:id="@+id/viewPersonDetailsFiltersCollectionChip"
-      style="@style/ShowlyChip.Filter"
+      style="@style/ShelflyChip.Filter"
       android:text="@string/menuCollection"
       app:chipBackgroundColor="?colorSheetBackground"
       tools:text="Collection"

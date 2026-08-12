@@ -113,7 +113,7 @@ class DateSelectionBottomSheet : BaseBottomSheetFragment(R.layout.view_date_sele
           .Builder()
           .setFirstDayOfWeek(Calendar.MONDAY)
           .build(),
-      ).setTheme(R.style.ShowlyDatePicker)
+      ).setTheme(R.style.ShelflyDatePicker)
       .setSelection(now.toMillis() + (now.offset.totalSeconds * 1000))
       .build()
     dialog.addOnPositiveButtonClickListener {
@@ -130,7 +130,7 @@ class DateSelectionBottomSheet : BaseBottomSheetFragment(R.layout.view_date_sele
 
     val dialog = MaterialTimePicker
       .Builder()
-      .setTheme(R.style.ShowlyTimePicker)
+      .setTheme(R.style.ShelflyTimePicker)
       .setTimeFormat(if (is24HourFormat) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H)
       .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
       .setHour(now.hour)

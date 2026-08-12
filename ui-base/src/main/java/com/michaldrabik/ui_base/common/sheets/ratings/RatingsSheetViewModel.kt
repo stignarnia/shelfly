@@ -3,8 +3,8 @@ package com.michaldrabik.ui_base.common.sheets.ratings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaldrabik.common.errors.ErrorHelper
-import com.michaldrabik.common.errors.ShowlyError.CoroutineCancellation
-import com.michaldrabik.common.errors.ShowlyError.UnauthorizedError
+import com.michaldrabik.common.errors.ShelflyError.CoroutineCancellation
+import com.michaldrabik.common.errors.ShelflyError.UnauthorizedError
 import com.michaldrabik.ui_base.R
 import com.michaldrabik.ui_base.common.sheets.ratings.RatingsBottomSheet.Options.Operation
 import com.michaldrabik.ui_base.common.sheets.ratings.RatingsBottomSheet.Options.Type

@@ -12,7 +12,6 @@ import com.michaldrabik.ui_backup.features.export.cases.CreateBackupSchemeFromJs
 import com.michaldrabik.ui_backup.features.export.model.BackupExportSchedule
 import com.michaldrabik.ui_backup.features.export.workers.BackupExportScheduleWorker
 import com.michaldrabik.ui_backup.model.BackupScheme
-import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.dates.DateFormatProvider
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.combine
@@ -69,7 +68,6 @@ class BackupExportViewModel @Inject constructor(
       } catch (error: Throwable) {
         rethrowCancellation(error) {
           errorState.update { error }
-          Logger.record(error, "BackupExportViewModel::runExport()")
         }
       } finally {
         loadingState.update { false }
@@ -96,7 +94,6 @@ class BackupExportViewModel @Inject constructor(
       onFailure = { exception ->
         rethrowCancellation(exception) {
           errorState.update { jsonError }
-          Logger.record(it, "BackupExportViewModel::validateExportData()")
         }
         return Result.failure(jsonError)
       },

@@ -3,14 +3,13 @@ package com.michaldrabik.ui_movie
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaldrabik.common.errors.ErrorHelper
-import com.michaldrabik.common.errors.ShowlyError.CoroutineCancellation
-import com.michaldrabik.common.errors.ShowlyError.ResourceNotFoundError
+import com.michaldrabik.common.errors.ShelflyError.CoroutineCancellation
+import com.michaldrabik.common.errors.ShelflyError.ResourceNotFoundError
 import com.michaldrabik.common.extensions.dateFromMillis
 import com.michaldrabik.common.extensions.nowUtc
 import com.michaldrabik.common.extensions.toUtcZone
 import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.settings.SettingsRepository
-import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.dates.DateFormatProvider
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
@@ -134,11 +133,9 @@ class MovieDetailsViewModel @Inject constructor(
           is ResourceNotFoundError -> {
             // Malformed catalog data or duplicate entry.
             messageChannel.send(MessageEvent.Info(R.string.errorMalformedMovie))
-            Logger.record(error, "MovieDetailsViewModel::loadDetails(${id.id})")
           }
           else -> {
             messageChannel.send(MessageEvent.Error(R.string.errorCouldNotLoadMovie))
-            Logger.record(error, "MovieDetailsViewModel::loadDetails(${id.id})")
           }
         }
       }

@@ -10,12 +10,11 @@ import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
 import com.michaldrabik.ui_settings.R
 import com.michaldrabik.ui_settings.sections.misc.cases.SettingsMiscCacheCase
-import com.michaldrabik.ui_settings.sections.misc.cases.SettingsMiscUserCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,19 +22,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsMiscViewModel @Inject constructor(
-  private val userCase: SettingsMiscUserCase,
   private val cacheCase: SettingsMiscCacheCase,
 ) : ViewModel(),
   ChannelsDelegate by DefaultChannelsDelegate() {
 
-  private val userIdState = MutableStateFlow("")
   private val loadingState = MutableStateFlow(false)
-
-  fun loadSettings() {
-    viewModelScope.launch {
-      userIdState.value = userCase.getUserId()
-    }
-  }
 
   fun deleteImagesCache(context: Context) {
     viewModelScope.launch {
@@ -46,16 +37,11 @@ class SettingsMiscViewModel @Inject constructor(
     }
   }
 
-  val uiState = combine(
-    userIdState,
-    loadingState,
-  ) { s1, _ ->
-    SettingsMiscUiState(
-      userId = s1,
+  val uiState = loadingState
+    .map { SettingsMiscUiState() }
+    .stateIn(
+      scope = viewModelScope,
+      started = SharingStarted.WhileSubscribed(SUBSCRIBE_STOP_TIMEOUT),
+      initialValue = SettingsMiscUiState(),
     )
-  }.stateIn(
-    scope = viewModelScope,
-    started = SharingStarted.WhileSubscribed(SUBSCRIBE_STOP_TIMEOUT),
-    initialValue = SettingsMiscUiState(),
-  )
 }

@@ -15,13 +15,13 @@
 
     <com.google.android.material.chip.Chip
       android:id="@+id/sortingChip"
-      style="@style/ShowlyChip.Sort"
+      style="@style/ShelflyChip.Sort"
       android:text="@string/textSortName"
       />
 
     <com.google.android.material.chip.Chip
       android:id="@+id/showsChip"
-      style="@style/ShowlyChip.Filter"
+      style="@style/ShelflyChip.Filter"
       android:checkable="false"
       android:text="@string/textShows"
       app:chipBackgroundColor="@color/selector_chip_background"
@@ -30,7 +30,7 @@
 
     <com.google.android.material.chip.Chip
       android:id="@+id/moviesChip"
-      style="@style/ShowlyChip.Filter"
+      style="@style/ShelflyChip.Filter"
       android:checkable="false"
       android:text="@string/textMovies"
       android:textColor="@color/selector_chip_text"

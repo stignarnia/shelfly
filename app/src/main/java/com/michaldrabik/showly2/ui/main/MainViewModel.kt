@@ -16,7 +16,6 @@ import com.michaldrabik.showly2.ui.main.cases.MainTipsCase
 import com.michaldrabik.showly2.ui.main.cases.deeplink.MainDeepLinksCase
 import com.michaldrabik.showly2.utilities.deeplink.DeepLinkBundle
 import com.michaldrabik.showly2.utilities.deeplink.DeepLinkSource
-import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.combine
@@ -137,7 +136,6 @@ class MainViewModel @Inject constructor(
         maskState.value = false
         openLinkEvent.value = Event(result)
       } catch (error: Throwable) {
-        Logger.record(error, "MainViewModel::openDeepLink:$source")
         rethrowCancellation(error)
       } finally {
         progressJob.cancelAndJoin()

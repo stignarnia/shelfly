@@ -27,7 +27,7 @@ android {
   compileSdkVersion versions.compileSdk
 
   defaultConfig {
-    applicationId "com.michaldrabik.showly2"
+    applicationId "xyz.stignarnia.shelfly"
     minSdkVersion versions.minSdk
     targetSdkVersion versions.targetSdk
     compileSdkVersion versions.compileSdk
@@ -88,7 +88,7 @@ android {
     checkReleaseBuilds false
   }
 
-  // https://github.com/michaldrabik/showly-2.0/issues/46#issuecomment-2324619155
+  // https://github.com/trakt/showly/issues/46#issuecomment-2324619155
   dependenciesInfo {
     // Disables dependency metadata when building APKs.
     includeInApk = false

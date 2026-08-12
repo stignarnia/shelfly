@@ -52,7 +52,7 @@
 
         <com.google.android.material.chip.Chip
           android:id="@+id/myMoviesSortChip"
-          style="@style/ShowlyChip.Sort"
+          style="@style/ShelflyChip.Sort"
           android:text="@string/textSortName"
           android:visibility="gone"
           tools:visibility="visible"
@@ -60,7 +60,7 @@
 
         <com.google.android.material.chip.Chip
           android:id="@+id/myMoviesGenresChip"
-          style="@style/ShowlyChip.Filter"
+          style="@style/ShelflyChip.Filter"
           android:checkable="false"
           android:text="@string/textGenres"
           />

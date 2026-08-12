@@ -9,7 +9,6 @@ import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Idle
 import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Initializing
 import com.michaldrabik.ui_backup.features.import_.workers.BackupImportWorker
 import com.michaldrabik.ui_backup.model.BackupScheme
-import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
 import com.squareup.moshi.Moshi
@@ -97,8 +96,7 @@ class BackupImportViewModel @Inject constructor(
       }
     } catch (error: Throwable) {
       rethrowCancellation(error) {
-        errorState.update { Error("Invalid Showly backup file.\n${error.localizedMessage}") }
-        Logger.record(error, "BackupImportViewModel::createImportData()")
+        errorState.update { Error("Invalid backup file.\n${error.localizedMessage}") }
       }
       return null
     }

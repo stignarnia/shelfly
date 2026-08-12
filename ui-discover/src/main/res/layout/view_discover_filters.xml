@@ -27,7 +27,7 @@
 
       <com.google.android.material.chip.Chip
         android:id="@+id/discoverFeedChip"
-        style="@style/ShowlyChip.Filter"
+        style="@style/ShelflyChip.Filter"
         android:checkable="false"
         android:text="@string/textFeedTrending"
         app:chipIcon="@drawable/ic_feed"
@@ -39,21 +39,21 @@
 
       <com.google.android.material.chip.Chip
         android:id="@+id/discoverNetworksChip"
-        style="@style/ShowlyChip.Filter"
+        style="@style/ShelflyChip.Filter"
         android:checkable="false"
         android:text="@string/textNetworks"
         />
 
       <com.google.android.material.chip.Chip
         android:id="@+id/discoverGenresChip"
-        style="@style/ShowlyChip.Filter"
+        style="@style/ShelflyChip.Filter"
         android:checkable="false"
         android:text="@string/textGenres"
         />
 
       <com.google.android.material.chip.Chip
         android:id="@+id/discoverCollectionChip"
-        style="@style/ShowlyChip.Filter"
+        style="@style/ShelflyChip.Filter"
         android:text="@string/textDiscoverFilterCollection"
         />
 

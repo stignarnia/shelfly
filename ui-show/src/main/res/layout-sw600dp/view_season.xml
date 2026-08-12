@@ -20,7 +20,7 @@
 
     <com.google.android.material.checkbox.MaterialCheckBox
       android:id="@+id/seasonViewCheckbox"
-      style="@style/ShowlyCheckbox"
+      style="@style/ShelflyCheckbox"
       android:layout_width="30dp"
       android:layout_height="0dp"
       android:gravity="center"

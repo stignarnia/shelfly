@@ -7,7 +7,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.michaldrabik.showly2.R
 import com.michaldrabik.showly2.utilities.deeplink.resolvers.ImdbSourceResolver
 import com.michaldrabik.showly2.utilities.deeplink.resolvers.TmdbSourceResolver
-import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Show
 import com.michaldrabik.ui_navigation.java.NavigationArgs
@@ -62,7 +61,6 @@ class DeepLinkResolver @Inject constructor() {
       }
       navController.navigate(actionId, navBundle)
     } catch (error: Throwable) {
-      Logger.record(error, "DeepLinkResolver::resolveDestination(show:${show.tmdbId})")
     }
   }
 
@@ -82,7 +80,6 @@ class DeepLinkResolver @Inject constructor() {
       }
       navController.navigate(actionId, navBundle)
     } catch (error: Throwable) {
-      Logger.record(error, "DeepLinkResolver::resolveDestination(movie:${movie.tmdbId})")
     }
   }
 

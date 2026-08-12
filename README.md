@@ -1,57 +1,32 @@
-![Version](https://img.shields.io/github/v/tag/michaldrabik/showly-2.0?label=version)
-![Build](https://img.shields.io/github/actions/workflow/status/michaldrabik/showly-2.0/android.yml?branch=master)
-[![RB Shield](https://shields.rbtlog.dev/simple/com.michaldrabik.showly2)](https://shields.rbtlog.dev/com.michaldrabik.showly2)
-[![Crowdin](https://badges.crowdin.net/showly-android-app/localized.svg)](https://crowdin.com/project/showly-android-app)
-[![Crowdin](https://badges.crowdin.net/showly-ios-app/localized.svg)](https://crowdin.com/project/showly-ios-app)
+# Shelfly
 
-[![Twitter](https://img.shields.io/twitter/follow/AppShowly?style=social)](https://twitter.com/AppShowly)
+> **Heads up:** this fork was built almost entirely by an AI coding agent, with a human directing it and reviewing the results. Read the code before you trust it with anything you care about, and keep your own backups.
 
-# Showly available on iOS 🍎
+Shelfly is an offline-first TV shows and movies tracker for Android.
 
-I am happy to announce that starting Jan 2025, Showly is available on iOS!
+Everything you track lives on your own device. There is no account, no sync service, no analytics and no crash reporting: your collection, watch history, ratings and lists are yours, and the only way they leave the phone is a backup you ask for.
 
-Check AppStore link below to jump straight into action.
+The catalog comes from [TMDB](https://www.themoviedb.org), using an API key you supply yourself on first run. No keys are compiled into the APK.
 
-# Showly
+## Privacy
 
-<img src="https://github.com/user-attachments/assets/b31c6ce6-7257-4c90-a13b-b12603e105a9" align="left" width="180" hspace="0" vspace="80" />
+The app ships with no telemetry of any kind. There is no Firebase, no Google Play Services, no analytics SDK and no crash reporter anywhere in the dependency graph, and the app generates no device identifier. The only network calls it makes are to TMDB for the catalog, to OMDB if you supply an optional key for IMDb ratings, and to whatever WebDAV server you point it at.
 
-Showly is a modern TV Shows and Movies tracking app.
+## Differences from upstream
 
-The OSS version for Android available in this repo is completely free of all Google services.
+- Trakt is gone entirely. TMDB is the only catalog source and all tracking state is local.
+- Backups can go to your own WebDAV server on a schedule, in addition to a local folder.
+- API keys are supplied by the user at runtime rather than compiled into the build.
+- The paid tier has been removed.
+- Episode notifications fire on the air date rather than at the exact airtime. TMDB exposes a date but no time of day, so the precision is not available.
+- Discover has no network filter. TMDB's `with_networks` needs numeric ids that do not map from the channel names the app knows. Genre filtering works.
+- The app is dark-only. The theme picker exists but offers a single option until a light palette is written.
+- The launcher icon and in-app logo are still upstream artwork, pending a replacement.
 
-<a href="https://play.google.com/store/apps/details?id=com.michaldrabik.showly2"><img
-    alt="Get it on Google Play"
-    height="80"
-    src="https://github.com/user-attachments/assets/3e49d1b3-1046-4e76-ad50-dfd859c23f3a"/></a>
-&nbsp;&nbsp;
-<a href="https://apt.izzysoft.de/packages/com.michaldrabik.showly2"><img
-    alt="Get it at IzzyOnDroid"
-    height="80"
-    src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"/></a>
-&nbsp;&nbsp;
-<a href="https://apps.apple.com/us/app/6739016219"><img
-    alt="Get it on App Store"
-    height="80"
-    src="https://github.com/user-attachments/assets/f43c7c55-01d8-4ac3-99dd-ca8e0f574283"/></a>
+## Project setup
 
-## Screenshots
-
-<div>
-   <img src="https://github.com/user-attachments/assets/84f00049-6593-4cb6-bbe3-9cff7ffd313f" width="160" alt="Screenshot 1">
-  &nbsp;&nbsp;
-   <img src="https://github.com/user-attachments/assets/81dcb5a1-0db0-40bd-bba4-0bb82fbc7a4e" width="160" alt="Screenshot 2">
-  &nbsp;&nbsp;
-   <img src="https://github.com/user-attachments/assets/a6959690-57d0-40c9-a2e3-f02216aacc71" width="160" alt="Screenshot 3">
-  &nbsp;&nbsp;
-  <img src="https://github.com/user-attachments/assets/255505c5-ddc4-4ae6-b130-1ef47057e9b8" width="160" alt="Screenshot 4">
-</div>
-
-## Project Setup
-
-1. Clone repository and open project in the latest version of Android Studio.
-2. Create a `keystore.properties` file and put it in the `/app` folder.
-3. Add the following properties into the `keystore.properties` file (values are not important at this moment):
+1. Clone the repository and open it in a recent Android Studio.
+2. Create `app/keystore.properties` with any values for a debug build:
 
    ```ini
    keyAlias=github
@@ -59,79 +34,49 @@ The OSS version for Android available in this repo is completely free of all Goo
    storePassword=github
    ```
 
-4. Optionally add API keys to `local.properties` in the root of the project. These
-   only prefill debug builds - release builds ship without keys and ask the user
-   for their own on first run:
+3. Optionally add API keys to `local.properties` in the project root. These only prefill debug builds; release builds ship without keys and ask the user for their own on first run:
 
    ```ini
    tmdbApiKey="your tmdb api key (v3 auth)"
    omdbApiKey="your omdb api key"
    ```
 
-   Get them from [TMDB](https://www.themoviedb.org/settings/api) and
-   [OMDB](https://www.omdbapi.com/apikey.aspx). Both are free.
+   Get them from [TMDB](https://www.themoviedb.org/settings/api) and [OMDB](https://www.omdbapi.com/apikey.aspx). Both are free. OMDB is optional and only supplies IMDb ratings.
 
-5. Rebuild and start the app.
+4. Build and run.
 
-## Issues & Contributions
+### Verifying a change
 
-Feel free to post problems with the app as Github [Issues](https://github.com/michaldrabik/showly-2.0/issues).
+```bash
+./gradlew :app:assembleDebug
+./gradlew :app:testDebugUnitTest :repository:testDebugUnitTest \
+  :ui-discover:testDebugUnitTest :ui-statistics:testDebugUnitTest \
+  :ui-statistics-movies:testDebugUnitTest :ui-search:testDebugUnitTest \
+  :ui-progress-movies:testDebugUnitTest :data-remote:testDebugUnitTest \
+  :ui-backup:testDebugUnitTest
+./ktlint
+```
 
-Features ideas should be posted as new GIthub [Discussion](https://github.com/michaldrabik/showly-2.0/discussions).
+Two suites are opt-in and self-skip, so a green run does not mean they ran. `TmdbLiveApiTest` in `:data-remote` hits the real TMDB API and skips when no key is compiled in. `BackupMigrationV2FileTest` in `:ui-backup` skips unless `SHELFLY_V2_BACKUP` points at a real Showly export.
 
-Pull requests are welcome. Remember about leaving a comment in the relevant issue if you are working on something.
+## Importing from Showly
 
-## Dev Notes
+Shelfly reads Showly's backup files. Export from Showly, then use Settings → Backup & Restore → Import data.
 
-The codebase has been around for a few years now and it grew a bit rusty.
-A few things surely could be addressed:
+Older backups are keyed by ids from a catalog source this fork no longer uses, so they are re-keyed onto TMDB ids on the way in. Anything that cannot be matched is dropped and counted, and the totals are shown when the import finishes — the numbers are never silently wrong.
 
-- Overall architecture should be simplified and refactored into a more strict feature-based one
-- The single responsibility principle is broken and should be refactored in a few places like some of the Use Cases
-- Retrofit could be replaced in favor of Ktor Client
-- Jetpack Compose migration (although there is no **_real_** benefit of it currently from end-user point of view)
-- Add more unit tests to complete the suite and increase coverage
+## Attribution
 
-## Translations
+This product uses the TMDB API but is not endorsed or certified by TMDB.
 
-Want to help translating Showly into your native language? Spotted a mistake?<br>
-Join the CrowdIn project which is used to manage translations:<br>
+Streaming availability data is provided by JustWatch.
 
-Android: https://crowdin.com/project/showly-android-app <br>
-iOS: https://crowdin.com/project/showly-ios-app <br>
+## Licence
 
-Translations status for 20 Jan 2025:
+Shelfly is a fork of [Showly](https://github.com/trakt/showly), created by Michał Drabik and now maintained by Trakt. It is used here under the GNU General Public License v3.0, and Shelfly remains GPL-3.0. See [LICENSE](LICENSE).
 
-iOS:
+Copyright (C) Michał Drabik and Trakt — original Showly work.
 
-![image](https://github.com/user-attachments/assets/e09f6a03-6c90-43fa-8f91-f17de80e1d84)
+Copyright (C) 2026 stignarnia — modifications in this fork.
 
-Android:
-
-![image](https://github.com/user-attachments/assets/24736105-a9be-49ef-864e-b4f2624671f6)
-
-## FAQ
-
-1. **Can I watch/stream/download shows and movies with the Showly app?**
-
-   No, that is not possible. Showly is a progress tracking type of app - not a streaming service.
-
-2. **I'm a user from India. I can't see any images and also encounter errors!**
-
-   There is a known issue with TMDB API being blocked by Indian gov.
-   For more details and a possible solution please see the thread here:
-   [https://www.themoviedb.org/talk/65d226e5c433ea0187b5b958#65d2dd5128d7fe017c34e9b5](https://www.themoviedb.org/talk/65d226e5c433ea0187b5b958#65d2dd5128d7fe017c34e9b5)
-
-3. **The Show/Episode/Movie I'm looking for seems to be missing. What can I do?**
-
-   This fork uses [TMDB](https://www.themoviedb.org) as its only catalog source.
-   If something is missing you can add it directly to TMDB, and it will show up
-   here once their API picks it up.
-
-## Contact
-
-Twitter: https://twitter.com/AppShowly
-
-Landing Page: www.showlyapp.com
-
-Email: showlyapp@gmail.com
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.

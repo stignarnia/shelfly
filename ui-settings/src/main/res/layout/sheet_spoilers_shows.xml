@@ -63,7 +63,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/notCollectedShowsSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"
@@ -88,7 +88,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/notCollectedShowsRatingsSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"
@@ -132,7 +132,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/myShowsSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"
@@ -157,7 +157,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/myShowsRatingsSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"
@@ -201,7 +201,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/watchlistShowsSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"
@@ -226,7 +226,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/watchlistShowsRatingsSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"
@@ -270,7 +270,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/hiddenShowsSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"
@@ -295,7 +295,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/hiddenShowsRatingsSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"

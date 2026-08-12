@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.JobIntentService
 import com.michaldrabik.repository.EpisodesManager
-import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.common.WidgetsProvider
 import com.michaldrabik.ui_model.IdTmdb
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,7 +56,6 @@ class ProgressWidgetEpisodeCheckService :
 
     if (episodeId == -1L || seasonId == -1L || showId == -1L) {
       val error = Throwable("Invalid ID.")
-      Logger.record(error, "ProgressWidgetEpisodeCheckService::onHandleWork()")
       return
     }
 

@@ -4,7 +4,7 @@ plugins {
   id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 
-rootProject.name = 'Showly 2.0'
+rootProject.name = 'Shelfly'
 include ':app'
 include ':common'
 include ':common-test'

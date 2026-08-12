@@ -53,8 +53,6 @@
     <string name="textSettingsPrivacy">Confidențialitate</string>
     <string name="textSettingsCrashesTitle">Rapoarte de eroare</string>
     <string name="textSettingsCrashesSummary">Permite rapoartele anonime de erori pentru a ajuta la crearea celei mai bune aplicații posibile.</string>
-    <string name="textSettingsAnalyticsTitle">Analitică</string>
-    <string name="textSettingsAnalyticsSummary">Permite utilizarea analizelor anonime pentru a crea cea mai bună aplicație posibilă.</string>
     <string name="textSettingsBackup">Copie de rezervă &amp; Restaurare</string>
     <string name="textSettingsBackupExportTitle">Export</string>
     <string name="textSettingsBackupExportDescription">Exportarea datelor pentru a crea o copie de rezervă sau pentru a le transfera pe un dispozitiv nou.</string>

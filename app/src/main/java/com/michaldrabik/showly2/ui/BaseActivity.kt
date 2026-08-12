@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.michaldrabik.showly2.R
-import com.michaldrabik.showly2.fcm.FcmExtra
-import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_MOVIE_ID
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_SHOW_ID
 import com.michaldrabik.ui_widgets.BaseWidgetProvider.Companion.EXTRA_MOVIE_ID
@@ -17,7 +15,6 @@ import com.michaldrabik.ui_widgets.search.SearchWidgetProvider
 abstract class BaseActivity : AppCompatActivity() {
 
   private val actionKeys = arrayOf(
-    FcmExtra.SHOW_ID.key,
     EXTRA_SHOW_ID,
     EXTRA_MOVIE_ID,
   )
@@ -56,7 +53,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     findNavHostFragment()?.findNavController()?.run {
       try {
-        val isShow = key in arrayOf(EXTRA_SHOW_ID, FcmExtra.SHOW_ID.key)
+        val isShow = key == EXTRA_SHOW_ID
         if (isShow) {
           navigate(R.id.actionNavigateShowDetailsFragment, bundle)
         } else {
@@ -65,7 +62,6 @@ abstract class BaseActivity : AppCompatActivity() {
         extras.clear()
         action()
       } catch (error: Throwable) {
-        Logger.record(error, "BaseActivity::handleShowMovieExtra()")
       }
     }
   }

@@ -11,13 +11,13 @@
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/bottomNavigationView"
-    style="@style/ShowlyBottomBar"
+    style="@style/ShelflyBottomBar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottomNavigationHeight"
     android:paddingStart="@dimen/spaceTiny"
     android:paddingEnd="@dimen/spaceTiny"
     app:backgroundTint="@color/colorTransparent"
-    app:itemActiveIndicatorStyle="@style/ShowlyBottomBar.Indicator"
+    app:itemActiveIndicatorStyle="@style/ShelflyBottomBar.Indicator"
     app:itemIconTint="@drawable/selector_bottom_menu"
     app:itemPaddingBottom="@dimen/spaceMedium"
     app:itemRippleColor="@null"

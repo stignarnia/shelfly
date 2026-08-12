@@ -6,7 +6,10 @@ import java.time.format.DateTimeFormatter
 
 object BackupFileName {
 
-  val prefix = "showly_export_"
+  val prefix = "shelfly_export_"
+
+  /** Backups written before the rename still carry the old prefix. */
+  val legacyPrefix = "showly_export_"
   val fileType = ".json"
   val dateTimePattern = "yyyyMMddHHmmss"
   val memeType = "application/json"

@@ -232,7 +232,7 @@
 
           <com.google.android.material.chip.Chip
             android:id="@+id/episodeDetailsRateButton"
-            style="@style/ShowlyChip.Button"
+            style="@style/ShelflyChip.Button"
             android:text="@string/textRate"
             app:chipBackgroundColor="?colorSheetBackground"
             app:chipIcon="@drawable/ic_star"
@@ -252,7 +252,7 @@
 
         <com.google.android.material.chip.Chip
           android:id="@+id/episodeDetailsLinksButton"
-          style="@style/ShowlyChip.Button"
+          style="@style/ShelflyChip.Button"
           android:layout_marginStart="@dimen/spaceSmall"
           android:text="@string/textLink"
           app:chipBackgroundColor="?colorSheetBackground"

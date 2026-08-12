@@ -30,7 +30,7 @@
 
       <com.google.android.material.chip.Chip
         android:id="@+id/modeChip"
-        style="@style/ShowlyChip.Filter"
+        style="@style/ShelflyChip.Filter"
         android:checkable="false"
         android:text="@string/textWatchlistIncoming"
         app:chipIcon="@drawable/ic_calendar"

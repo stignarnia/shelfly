@@ -55,27 +55,27 @@
 
         <com.google.android.material.chip.Chip
           android:id="@+id/followedShowsSortingChip"
-          style="@style/ShowlyChip.Sort"
+          style="@style/ShelflyChip.Sort"
           android:text="@string/textSortName"
           />
 
         <com.google.android.material.chip.Chip
           android:id="@+id/followedShowsNetworksChip"
-          style="@style/ShowlyChip.Filter"
+          style="@style/ShelflyChip.Filter"
           android:checkable="false"
           android:text="@string/textNetworks"
           />
 
         <com.google.android.material.chip.Chip
           android:id="@+id/followedShowsGenresChip"
-          style="@style/ShowlyChip.Filter"
+          style="@style/ShelflyChip.Filter"
           android:checkable="false"
           android:text="@string/textGenres"
           />
 
         <com.google.android.material.chip.Chip
           android:id="@+id/followedShowsUpcomingChip"
-          style="@style/ShowlyChip.Filter"
+          style="@style/ShelflyChip.Filter"
           android:text="@string/textWatchlistIncoming"
           android:visibility="gone"
           tools:visibility="visible"

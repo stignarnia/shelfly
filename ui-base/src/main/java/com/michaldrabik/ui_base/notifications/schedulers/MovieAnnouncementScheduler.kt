@@ -13,7 +13,7 @@ import com.michaldrabik.repository.TranslationsRepository
 import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_base.R
-import com.michaldrabik.ui_base.fcm.NotificationChannel
+import com.michaldrabik.ui_base.notifications.NotificationChannel
 import com.michaldrabik.ui_base.notifications.AnnouncementWorker
 import com.michaldrabik.ui_model.ImageStatus
 import com.michaldrabik.ui_model.ImageType

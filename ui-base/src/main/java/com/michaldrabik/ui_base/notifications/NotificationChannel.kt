@@ -1,4 +1,4 @@
-package com.michaldrabik.ui_base.fcm
+package com.michaldrabik.ui_base.notifications
 
 import androidx.core.app.NotificationManagerCompat
 

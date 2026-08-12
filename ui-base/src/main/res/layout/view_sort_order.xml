@@ -46,7 +46,7 @@
 
   <com.google.android.material.checkbox.MaterialCheckBox
     android:id="@+id/viewSortOrderNewCheckbox"
-    style="@style/ShowlyCheckbox.Secondary"
+    style="@style/ShelflyCheckbox.Secondary"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/spaceMedium"

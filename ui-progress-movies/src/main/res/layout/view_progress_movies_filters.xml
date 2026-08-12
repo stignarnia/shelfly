@@ -22,7 +22,7 @@
 
     <com.google.android.material.chip.Chip
       android:id="@+id/progressFiltersSortingChip"
-      style="@style/ShowlyChip.Sort"
+      style="@style/ShelflyChip.Sort"
       android:text="@string/textSortName"
       />
 

@@ -22,28 +22,28 @@
 
     <com.google.android.material.chip.Chip
       android:id="@+id/rateChip"
-      style="@style/ShowlyChip.Button"
+      style="@style/ShelflyChip.Button"
       android:text="@string/textMovieRate"
       app:chipIcon="@drawable/ic_star"
       />
 
     <com.google.android.material.chip.Chip
       android:id="@+id/trailerChip"
-      style="@style/ShowlyChip.Button"
+      style="@style/ShelflyChip.Button"
       android:text="@string/textMovieTrailer"
       app:chipIcon="@drawable/ic_play"
       />
 
     <com.google.android.material.chip.Chip
       android:id="@+id/linksChip"
-      style="@style/ShowlyChip.Button"
+      style="@style/ShelflyChip.Button"
       android:text="@string/textLink"
       app:chipIcon="@drawable/ic_link"
       />
 
     <com.google.android.material.chip.Chip
       android:id="@+id/shareChip"
-      style="@style/ShowlyChip.Button"
+      style="@style/ShelflyChip.Button"
       android:text="@string/textShare"
       app:chipIcon="@drawable/ic_share"
       />

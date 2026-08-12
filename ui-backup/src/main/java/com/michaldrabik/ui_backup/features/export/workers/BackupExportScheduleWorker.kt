@@ -21,7 +21,6 @@ import com.michaldrabik.ui_backup.features.export.cases.ReadBackupJsonFromFileUs
 import com.michaldrabik.ui_backup.features.export.cases.WriteBackupJsonToFileUseCase
 import com.michaldrabik.ui_backup.features.export.model.BackupExportSchedule
 import com.michaldrabik.ui_backup.features.export.workers.BackupExportScheduleWorker.Companion.MAX_BACKUPS
-import com.michaldrabik.ui_base.Logger
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import timber.log.Timber
@@ -120,7 +119,6 @@ class BackupExportScheduleWorker @AssistedInject constructor(
       Timber.i("Exporting automatic backup successful")
     } catch (exception: Exception) {
       Timber.w(exception, "Exporting automatic backup failed")
-      exception.log()
       return Result.failure()
     }
 
@@ -130,7 +128,6 @@ class BackupExportScheduleWorker @AssistedInject constructor(
       Timber.i("Cleaning up old backups successful")
     } catch (exception: Exception) {
       Timber.w("Cleaning up of old backups failed")
-      exception.log()
     }
 
     // Returning success and not checking whether cleanup of old backups failed or not as creating a backup is more important then cleaning up old backups.
@@ -208,7 +205,9 @@ class BackupExportScheduleWorker @AssistedInject constructor(
         val documentId = it.getString(it.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_DOCUMENT_ID))
         val documentName = it.getString(it.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_DISPLAY_NAME))
         val lastModified = it.getLong(it.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_LAST_MODIFIED))
-        if (documentName.startsWith(BackupFileName.prefix) && documentName.endsWith(BackupFileName.fileType)) {
+        val isBackup = documentName.startsWith(BackupFileName.prefix) ||
+          documentName.startsWith(BackupFileName.legacyPrefix)
+        if (isBackup && documentName.endsWith(BackupFileName.fileType)) {
           val documentUri = DocumentsContract.buildDocumentUriUsingTree(directoryUri, documentId)
           backupFiles.add(Triple(documentUri, documentName, lastModified))
         }
@@ -225,16 +224,8 @@ class BackupExportScheduleWorker @AssistedInject constructor(
           }
         } catch (exception: Exception) {
           Timber.e(exception, "Error deleting old backup: $name")
-          exception.log()
         }
       }
     }
-  }
-
-  /**
-   * Logs the error to Logger.
-   */
-  private fun Throwable.log() {
-    Logger.record(this, "ExportBackupScheduleWorker::doWork()")
   }
 }

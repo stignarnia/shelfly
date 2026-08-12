@@ -2,7 +2,7 @@ package com.michaldrabik.ui_base.common.sheets.ratings.cases
 
 import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.common.errors.ErrorHelper
-import com.michaldrabik.common.errors.ShowlyError
+import com.michaldrabik.common.errors.ShelflyError
 import com.michaldrabik.repository.RatingsRepository
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
@@ -64,8 +64,8 @@ class RatingsMovieCase @Inject constructor(
     }
 
   private suspend fun handleError(error: Throwable) {
-    val showlyError = ErrorHelper.parse(error)
-    if (showlyError is ShowlyError.UnauthorizedError) {
+    val parsedError = ErrorHelper.parse(error)
+    if (parsedError is ShelflyError.UnauthorizedError) {
     }
     throw error
   }

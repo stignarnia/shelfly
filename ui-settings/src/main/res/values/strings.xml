@@ -135,4 +135,5 @@
   <string name="textSettingsOmdbApiKeyTitle">OMDb API key</string>
   <string name="textSettingsOmdbApiKeyDescription">Optional. Adds IMDb ratings.</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">Request a free key at omdbapi.com/apikey.aspx and activate it from the confirmation email. Without it, IMDb ratings are simply hidden.</string>
+  <string name="textSettingsTmdbDisclaimer">This product uses the TMDB API but is not endorsed or certified by TMDB.</string>
 </resources>

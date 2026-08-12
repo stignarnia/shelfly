@@ -23,7 +23,7 @@
 
   <com.google.android.material.checkbox.MaterialCheckBox
     android:id="@+id/episodesCheckbox"
-    style="@style/ShowlyCheckbox"
+    style="@style/ShelflyCheckbox"
     android:layout_width="32dp"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/showDetailsMarginHorizontal"
@@ -86,7 +86,7 @@
 
   <com.google.android.material.chip.Chip
     android:id="@+id/episodesSeasonRateButton"
-    style="@style/ShowlyChip.Button"
+    style="@style/ShelflyChip.Button"
     android:layout_height="32dp"
     android:layout_marginEnd="@dimen/spaceMedium"
     android:text="@string/textRate"

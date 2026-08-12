@@ -30,7 +30,7 @@
 
       <com.google.android.material.chip.Chip
         android:id="@+id/datesRangeChip"
-        style="@style/ShowlyChip.Filter"
+        style="@style/ShelflyChip.Filter"
         android:checkable="false"
         android:text="@string/textPeriodLast30Days"
         />

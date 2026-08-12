@@ -64,7 +64,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/episodesHideTitleSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"
@@ -89,7 +89,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/episodesHideDescriptionSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"
@@ -114,7 +114,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/episodesHideRatingSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"
@@ -139,7 +139,7 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/episodesHideImagesSwitch"
-          style="@style/ShowlyCheckbox"
+          style="@style/ShelflyCheckbox"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:checked="false"

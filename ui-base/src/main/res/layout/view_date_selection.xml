@@ -176,7 +176,7 @@
 
   <com.google.android.material.chip.Chip
     android:id="@+id/defaultsTipOkButton"
-    style="@style/ShowlyChip.Button"
+    style="@style/ShelflyChip.Button"
     android:layout_height="32dp"
     android:text="@string/textOk"
     android:visibility="gone"

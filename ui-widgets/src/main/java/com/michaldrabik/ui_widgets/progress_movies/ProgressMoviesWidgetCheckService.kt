@@ -3,7 +3,6 @@ package com.michaldrabik.ui_widgets.progress_movies
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.JobIntentService
-import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.common.WidgetsProvider
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_progress_movies.main.cases.ProgressMoviesMainCase
@@ -48,7 +47,6 @@ class ProgressMoviesWidgetCheckService :
     val movieId = intent.getLongExtra(EXTRA_MOVIE_ID, -1)
     if (movieId == -1L) {
       val error = Throwable("Invalid ID.")
-      Logger.record(error, "ProgressMoviesWidgetCheckService::onHandleWork()")
       return
     }
 

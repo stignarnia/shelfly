@@ -31,21 +31,21 @@
 
       <com.google.android.material.chip.Chip
         android:id="@+id/progressFiltersSortingChip"
-        style="@style/ShowlyChip.Sort"
+        style="@style/ShelflyChip.Sort"
         android:checkable="false"
         android:text="@string/textSortName"
         />
 
       <com.google.android.material.chip.Chip
         android:id="@+id/progressFiltersUpcomingChip"
-        style="@style/ShowlyChip.Filter"
+        style="@style/ShelflyChip.Filter"
         android:checkable="false"
         android:text="@string/textWatchlistIncoming"
         />
 
       <com.google.android.material.chip.Chip
         android:id="@+id/progressFiltersOnHoldChip"
-        style="@style/ShowlyChip.Filter"
+        style="@style/ShelflyChip.Filter"
         android:checkable="false"
         android:text="@string/textOnHold"
         />

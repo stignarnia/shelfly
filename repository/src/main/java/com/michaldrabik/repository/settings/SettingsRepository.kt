@@ -23,7 +23,6 @@ import com.michaldrabik.ui_model.ProgressNextEpisodeType.LAST_WATCHED
 import com.michaldrabik.ui_model.ProgressType
 import com.michaldrabik.ui_model.Settings
 import kotlinx.coroutines.withContext
-import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -52,7 +51,6 @@ class SettingsRepository @Inject constructor(
     private const val MOVIES_ENABLED = "KEY_MOVIES_ENABLED"
     private const val PROGRESS_PERCENT = "KEY_PROGRESS_PERCENT"
     private const val STREAMINGS_ENABLED = "KEY_STREAMINGS_ENABLED"
-    private const val USER_ID = "KEY_USER_ID"
     private const val INSTALL_TIMESTAMP = "INSTALL_TIMESTAMP"
     private const val PROGRESS_UPCOMING_COLLAPSED = "PROGRESS_UPCOMING_COLLAPSED"
     private const val PROGRESS_UPCOMING_DAYS = "PROGRESS_UPCOMING_DAYS"
@@ -121,18 +119,6 @@ class SettingsRepository @Inject constructor(
       return ProgressType.valueOf(setting)
     }
     set(value) = preferences.edit(true) { putString(PROGRESS_PERCENT, value.name) }
-
-  val userId
-    get() = when (val id = preferences.getString(USER_ID, null)) {
-      null -> {
-        val uuid = UUID.randomUUID().toString().take(13)
-        preferences.edit().putString(USER_ID, uuid).apply()
-        uuid
-      }
-      else -> {
-        id
-      }
-    }
 
   suspend fun clearLanguageLogs() {
     with(localSource) {

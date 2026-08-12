@@ -4,11 +4,10 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaldrabik.common.errors.ErrorHelper
-import com.michaldrabik.common.errors.ShowlyError.CoroutineCancellation
-import com.michaldrabik.common.errors.ShowlyError.ResourceNotFoundError
+import com.michaldrabik.common.errors.ShelflyError.CoroutineCancellation
+import com.michaldrabik.common.errors.ShelflyError.ResourceNotFoundError
 import com.michaldrabik.repository.images.ShowImagesProvider
 import com.michaldrabik.repository.settings.SettingsRepository
-import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.combine
@@ -125,11 +124,9 @@ class ShowDetailsViewModel @Inject constructor(
           is ResourceNotFoundError -> {
             // Malformed catalog data or duplicate entry.
             messageChannel.send(MessageEvent.Info(R.string.errorMalformedShow))
-            Logger.record(error, "ShowDetailsViewModel::loadDetails(${id.id})")
           }
           else -> {
             messageChannel.send(MessageEvent.Error(R.string.errorCouldNotLoadShow))
-            Logger.record(error, "ShowDetailsViewModel::loadDetails(${id.id})")
           }
         }
       }

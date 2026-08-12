@@ -3,7 +3,6 @@ package com.michaldrabik.ui_show.sections.nextepisode
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaldrabik.repository.settings.SettingsSpoilersRepository
-import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.dates.DateFormatProvider
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
@@ -64,7 +63,6 @@ class ShowDetailsNextEpisodeViewModel @Inject constructor(
           }
         }
       } catch (error: Throwable) {
-        Logger.record(error, "ShowDetailsViewModel::loadNextEpisode()")
         rethrowCancellation(error)
       }
     }
