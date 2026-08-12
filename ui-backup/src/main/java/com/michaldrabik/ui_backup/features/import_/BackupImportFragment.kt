@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
+import androidx.annotation.StringRes
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
@@ -12,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.michaldrabik.ui_backup.R
 import com.michaldrabik.ui_backup.databinding.FragmentBackupImportBinding
 import com.michaldrabik.ui_backup.features.export.cases.ReadBackupJsonFromFileUseCase
+import com.michaldrabik.ui_backup.features.import_.migrations.BackupMigrationReport
 import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Idle
 import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Importing
 import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Initializing
@@ -95,12 +97,55 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
     )
   }
 
-  private fun showSuccessSnack() {
+  private fun showSuccessSnack(report: BackupMigrationReport?) {
     val host = (requireActivity() as SnackbarHost).provideSnackbarLayout()
-    snackbar = host.showInfoSnackbar(
-      message = getString(R.string.textBackupImportSuccess),
-    )
+    val skipped = report?.takeUnless { it.isEmpty }?.let { formatSkipped(it) }
+
+    snackbar = if (skipped == null) {
+      host.showInfoSnackbar(
+        message = getString(R.string.textBackupImportSuccess),
+      )
+    } else {
+      // Losses stay on screen until acknowledged, so the numbers are never
+      // silently wrong.
+      host.showInfoSnackbar(
+        message = getString(R.string.textBackupImportSuccess) +
+          "\n\n" + getString(R.string.textBackupImportSkipped) + "\n" + skipped,
+        length = Snackbar.LENGTH_INDEFINITE,
+        action = {},
+      )
+    }
   }
+
+  private fun formatSkipped(report: BackupMigrationReport): String =
+    buildList {
+      with(report) {
+        if (unmatchedShows.isNotEmpty()) {
+          add(getString(R.string.textBackupImportSkippedShows, unmatchedShows.size, unmatchedShows.preview()))
+        }
+        if (unmatchedMovies.isNotEmpty()) {
+          add(getString(R.string.textBackupImportSkippedMovies, unmatchedMovies.size, unmatchedMovies.preview()))
+        }
+        addCount(skippedSeasons, R.string.textBackupImportSkippedSeasons)
+        addCount(skippedEpisodes, R.string.textBackupImportSkippedEpisodes)
+        addCount(skippedShowRatings, R.string.textBackupImportSkippedShowRatings)
+        addCount(skippedSeasonRatings, R.string.textBackupImportSkippedSeasonRatings)
+        addCount(skippedEpisodeRatings, R.string.textBackupImportSkippedEpisodeRatings)
+        addCount(skippedMovieRatings, R.string.textBackupImportSkippedMovieRatings)
+        addCount(skippedListItems, R.string.textBackupImportSkippedListItems)
+      }
+    }.joinToString(separator = "\n") { "• $it" }
+
+  private fun MutableList<String>.addCount(
+    count: Int,
+    @StringRes label: Int,
+  ) {
+    if (count > 0) {
+      add(getString(label, count))
+    }
+  }
+
+  private fun List<String>.preview(limit: Int = 3) = take(limit).joinToString() + if (size > limit) ", …" else ""
 
   private fun showErrorSnack(error: Throwable) {
     if (error is CancellationException) {
@@ -133,7 +178,7 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
       renderImportStatus(uiState)
 
       if (isSuccess) {
-        showSuccessSnack()
+        showSuccessSnack(report)
         viewModel.clearState()
       }
 

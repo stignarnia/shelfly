@@ -2,6 +2,8 @@ package com.michaldrabik.ui_backup.di
 
 import com.michaldrabik.ui_backup.features.export.workers.BackupExportWorker
 import com.michaldrabik.ui_backup.features.export.workers.DefaultBackupExportWorker
+import com.michaldrabik.ui_backup.features.import_.migrations.CatalogIdResolver
+import com.michaldrabik.ui_backup.features.import_.migrations.TmdbCatalogIdResolver
 import com.michaldrabik.ui_backup.features.import_.workers.BackupImportWorker
 import com.michaldrabik.ui_backup.features.import_.workers.DefaultBackupImportWorker
 import dagger.Binds
@@ -18,4 +20,7 @@ internal abstract class BackupBindingModule {
 
   @Binds
   abstract fun bindImportWorker(worker: DefaultBackupImportWorker): BackupImportWorker
+
+  @Binds
+  abstract fun bindCatalogIdResolver(resolver: TmdbCatalogIdResolver): CatalogIdResolver
 }

@@ -13,6 +13,17 @@
 
   <string name="errorImportCancelled">Data import has been cancelled.</string>
 
+  <string name="textBackupImportSkipped">Some entries had no TMDB match and were skipped:</string>
+  <string name="textBackupImportSkippedShows">%1$d shows (%2$s)</string>
+  <string name="textBackupImportSkippedMovies">%1$d movies (%2$s)</string>
+  <string name="textBackupImportSkippedSeasons">%1$d seasons</string>
+  <string name="textBackupImportSkippedEpisodes">%1$d watched episodes</string>
+  <string name="textBackupImportSkippedShowRatings">%1$d show ratings</string>
+  <string name="textBackupImportSkippedSeasonRatings">%1$d season ratings</string>
+  <string name="textBackupImportSkippedEpisodeRatings">%1$d episode ratings</string>
+  <string name="textBackupImportSkippedMovieRatings">%1$d movie ratings</string>
+  <string name="textBackupImportSkippedListItems">%1$d list items</string>
+
   <string name="textBackupExportSchedule">Schedule</string>
   <string name="textBackupExportOptionOff">Off</string>
   <string name="textBackupExportOption6Hours">Every 6 Hours</string>

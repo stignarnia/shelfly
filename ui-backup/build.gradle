@@ -34,6 +34,14 @@ android {
   }
 
   namespace 'com.michaldrabik.ui_backup'
+
+  testOptions {
+    unitTests.all {
+      // BackupMigrationV2FileTest self-skips unless this points at a real v2
+      // export. Forwarded explicitly so it survives the Gradle daemon.
+      environment "SHELFLY_V2_BACKUP", System.getenv("SHELFLY_V2_BACKUP") ?: ""
+    }
+  }
 }
 
 dependencies {
@@ -53,6 +61,9 @@ dependencies {
   ksp libs.hilt.work.compiler
 
   api libs.phoenix
+
+  testImplementation project(':common-test')
+  testImplementation libs.bundles.testing
 
   coreLibraryDesugaring libs.android.desugar
 }

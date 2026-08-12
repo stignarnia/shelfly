@@ -3,6 +3,8 @@ package com.michaldrabik.ui_backup.features.import_
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaldrabik.ui_backup.BackupConfig.SCHEME_VERSION
+import com.michaldrabik.ui_backup.features.import_.migrations.BackupMigrationResult
+import com.michaldrabik.ui_backup.features.import_.migrations.BackupMigrationV2
 import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Idle
 import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Initializing
 import com.michaldrabik.ui_backup.features.import_.workers.BackupImportWorker
@@ -27,6 +29,7 @@ import kotlin.time.Duration.Companion.seconds
 @HiltViewModel
 class BackupImportViewModel @Inject constructor(
   private val backupImportWorker: BackupImportWorker,
+  private val backupMigrationV2: BackupMigrationV2,
 ) : ViewModel() {
 
   private val initialState = BackupImportUiState()
@@ -34,6 +37,7 @@ class BackupImportViewModel @Inject constructor(
   private val importingState = MutableStateFlow(initialState.isImporting)
   private val successState = MutableStateFlow(initialState.isSuccess)
   private val errorState = MutableStateFlow(initialState.isError)
+  private val reportState = MutableStateFlow(initialState.report)
 
   init {
     backupImportWorker.statusListener = { status ->
@@ -48,9 +52,10 @@ class BackupImportViewModel @Inject constructor(
       try {
         importingState.update { Initializing }
         delay(1.seconds)
-        val importScheme = createImportData(jsonInput)
-        if (importScheme != null) {
-          backupImportWorker.run(importScheme)
+        val importData = createImportData(jsonInput)
+        if (importData != null) {
+          backupImportWorker.run(importData.scheme)
+          reportState.update { importData.report }
           successState.update { true }
         }
       } catch (error: Throwable) {
@@ -63,12 +68,7 @@ class BackupImportViewModel @Inject constructor(
     }
   }
 
-  private fun createImportData(jsonInput: String): BackupScheme? {
-    val moshi = Moshi
-      .Builder()
-      .add(KotlinJsonAdapterFactory())
-      .build()
-
+  private suspend fun createImportData(jsonInput: String): BackupMigrationResult? {
     try {
       val version = jsonInput
         .substringAfter("version\":")
@@ -76,16 +76,25 @@ class BackupImportViewModel @Inject constructor(
         .trim()
         .toInt()
 
-      if (version < SCHEME_VERSION) {
+      return when (version) {
+        SCHEME_VERSION -> {
+          val moshi = Moshi
+            .Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+          val scheme = moshi.adapter(BackupScheme::class.java).fromJson(jsonInput)
+            ?: throw IllegalArgumentException("Backup file is empty.")
+          BackupMigrationResult(scheme)
+        }
         // Older schemes identify entries by ids from the previous catalog
-        // source, which this fork cannot resolve. Reading one is handled by an
-        // explicit migration, not by parsing it as the current scheme.
-        errorState.update { Error("Backup scheme v$version is not supported yet.") }
-        return null
+        // source, which this fork cannot resolve. Reading one goes through an
+        // explicit migration rather than being parsed as the current scheme.
+        BackupMigrationV2.VERSION -> backupMigrationV2.migrate(jsonInput)
+        else -> {
+          errorState.update { Error("Backup scheme v$version is not supported.") }
+          null
+        }
       }
-
-      val jsonAdapter = moshi.adapter(BackupScheme::class.java)
-      return jsonAdapter.fromJson(jsonInput)
     } catch (error: Throwable) {
       rethrowCancellation(error) {
         errorState.update { Error("Invalid Showly backup file.\n${error.localizedMessage}") }
@@ -99,17 +108,20 @@ class BackupImportViewModel @Inject constructor(
     importingState.update { Idle }
     successState.update { false }
     errorState.update { null }
+    reportState.update { null }
   }
 
   val uiState = combine(
     importingState,
     successState,
     errorState,
-  ) { s1, s2, s3 ->
+    reportState,
+  ) { s1, s2, s3, s4 ->
     BackupImportUiState(
       isImporting = s1,
       isSuccess = s2,
       isError = s3,
+      report = s4,
     )
   }.stateIn(
     scope = viewModelScope,
