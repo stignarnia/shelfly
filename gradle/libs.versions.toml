@@ -83,6 +83,7 @@ phoenix = { group = "com.jakewharton", name = "process-phoenix", version.ref = "
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 circleIndicator = { group = "me.relex", name = "circleindicator", version.ref = "circleindicator" }
 loggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging-interceptor" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "logging-interceptor" }
 overscrollDecor = { group = "io.github.everythingme", name = "overscroll-decor-android", version.ref = "overscroll-decor" }
 
 # Testing
