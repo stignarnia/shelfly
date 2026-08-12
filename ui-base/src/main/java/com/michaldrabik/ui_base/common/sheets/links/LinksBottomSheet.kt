@@ -117,11 +117,11 @@ class LinksBottomSheet : BaseBottomSheetFragment(R.layout.view_links) {
 
   private fun setTraktLink() {
     binding.viewLinksTrakt.run {
-      if (ids.trakt.id == -1L) {
+      if (ids.tmdb.id == -1L) {
         alpha = 0.5F
         isEnabled = false
       } else {
-        onClick { openWebUrl("https://trakt.tv/search/trakt/${ids.trakt.id}?id_type=${type.type}") }
+        onClick { openWebUrl("https://trakt.tv/search/trakt/${ids.tmdb.id}?id_type=${type.type}") }
       }
     }
   }

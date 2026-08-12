@@ -33,10 +33,10 @@ class MoviesRatingsRepository @Inject constructor(
       .map { mappers.userRatings.fromDatabase(it) }
 
     val entities = remoteRatings
-      .filter { it.rated_at != null && it.movie.ids.trakt != null }
+      .filter { it.rated_at != null && it.movie.ids.tmdb != null }
       .map { mappers.userRatings.toDatabaseMovie(it) }
       .filter { remoteRating ->
-        val localRating = localRatings.find { remoteRating.idTrakt == it.idTrakt.id }
+        val localRating = localRatings.find { remoteRating.idTmdb == it.idTmdb.id }
         if (localRating != null) {
           return@filter localRating.ratedAt
             .toUtcZone()
@@ -59,7 +59,7 @@ class MoviesRatingsRepository @Inject constructor(
   suspend fun loadRatings(movies: List<Movie>): List<TraktRating> {
     val ratings = mutableListOf<Rating>()
     movies.chunked(250).forEach { chunk ->
-      val items = localSource.ratings.getAllByType(chunk.map { it.traktId }, TYPE_MOVIE)
+      val items = localSource.ratings.getAllByType(chunk.map { it.tmdbId }, TYPE_MOVIE)
       ratings.addAll(items)
     }
     return ratings.map {
@@ -93,6 +93,6 @@ class MoviesRatingsRepository @Inject constructor(
         mappers.movie.toNetwork(movie),
       )
     }
-    localSource.ratings.deleteByType(movie.traktId, TYPE_MOVIE)
+    localSource.ratings.deleteByType(movie.tmdbId, TYPE_MOVIE)
   }
 }

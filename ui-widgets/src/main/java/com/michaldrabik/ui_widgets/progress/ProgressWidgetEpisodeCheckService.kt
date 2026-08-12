@@ -7,7 +7,7 @@ import com.michaldrabik.repository.EpisodesManager
 import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.common.WidgetsProvider
 import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +31,7 @@ class ProgressWidgetEpisodeCheckService :
       context: Context,
       episodeId: Long,
       seasonId: Long,
-      showId: IdTrakt,
+      showId: IdTmdb,
     ) {
       val intent = Intent().apply {
         putExtra(EXTRA_EPISODE_ID, episodeId)
@@ -64,7 +64,7 @@ class ProgressWidgetEpisodeCheckService :
     }
 
     runBlocking {
-      episodesManager.setEpisodeWatched(episodeId, seasonId, IdTrakt(showId), null)
+      episodesManager.setEpisodeWatched(episodeId, seasonId, IdTmdb(showId), null)
       quickSyncManager.scheduleEpisodes(
         showId = showId,
         episodesIds = listOf(episodeId),

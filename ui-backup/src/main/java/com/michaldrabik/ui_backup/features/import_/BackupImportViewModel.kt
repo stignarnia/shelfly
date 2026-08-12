@@ -6,9 +6,7 @@ import com.michaldrabik.ui_backup.BackupConfig.SCHEME_VERSION
 import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Idle
 import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Initializing
 import com.michaldrabik.ui_backup.features.import_.workers.BackupImportWorker
-import com.michaldrabik.ui_backup.migrations.BackupMigrationV1
 import com.michaldrabik.ui_backup.model.BackupScheme
-import com.michaldrabik.ui_backup.model.v1.BackupScheme1
 import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
@@ -79,9 +77,11 @@ class BackupImportViewModel @Inject constructor(
         .toInt()
 
       if (version < SCHEME_VERSION) {
-        val jsonAdapter = moshi.adapter(BackupScheme1::class.java)
-        val migrationScheme = jsonAdapter.fromJson(jsonInput)!!
-        return BackupMigrationV1.migrate(migrationScheme)
+        // Older schemes identify entries by Trakt id, which this fork cannot
+        // resolve. Reading one is handled by an explicit migration, not by
+        // parsing it as the current scheme.
+        errorState.update { Error("Backup scheme v$version is not supported yet.") }
+        return null
       }
 
       val jsonAdapter = moshi.adapter(BackupScheme::class.java)

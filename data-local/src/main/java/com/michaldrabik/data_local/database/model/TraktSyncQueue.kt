@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "trakt_sync_queue")
 data class TraktSyncQueue(
   @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long,
-  @ColumnInfo(name = "id_trakt") val idTrakt: Long,
+  @ColumnInfo(name = "id_tmdb") val idTmdb: Long,
   @ColumnInfo(name = "id_list") val idList: Long?,
   @ColumnInfo(name = "type") val type: String,
   @ColumnInfo(name = "operation") val operation: String,
@@ -28,52 +28,52 @@ data class TraktSyncQueue(
     }
 
     fun createShowWatchlist(
-      idTrakt: Long,
+      idTmdb: Long,
       createdAt: Long,
       updatedAt: Long,
-    ) = TraktSyncQueue(0, idTrakt, null, Type.SHOW_WATCHLIST.slug, Operation.ADD.slug, createdAt, updatedAt)
+    ) = TraktSyncQueue(0, idTmdb, null, Type.SHOW_WATCHLIST.slug, Operation.ADD.slug, createdAt, updatedAt)
 
     fun createMovie(
-      idTrakt: Long,
+      idTmdb: Long,
       createdAt: Long,
       updatedAt: Long,
-    ) = TraktSyncQueue(0, idTrakt, null, Type.MOVIE.slug, Operation.ADD.slug, createdAt, updatedAt)
+    ) = TraktSyncQueue(0, idTmdb, null, Type.MOVIE.slug, Operation.ADD.slug, createdAt, updatedAt)
 
     fun createMovieWatchlist(
-      idTrakt: Long,
+      idTmdb: Long,
       createdAt: Long,
       updatedAt: Long,
-    ) = TraktSyncQueue(0, idTrakt, null, Type.MOVIE_WATCHLIST.slug, Operation.ADD.slug, createdAt, updatedAt)
+    ) = TraktSyncQueue(0, idTmdb, null, Type.MOVIE_WATCHLIST.slug, Operation.ADD.slug, createdAt, updatedAt)
 
     fun createListShow(
-      idTrakt: Long,
+      idTmdb: Long,
       idList: Long,
       operation: Operation,
       createdAt: Long,
       updatedAt: Long,
-    ) = TraktSyncQueue(0, idTrakt, idList, Type.LIST_ITEM_SHOW.slug, operation.slug, createdAt, updatedAt)
+    ) = TraktSyncQueue(0, idTmdb, idList, Type.LIST_ITEM_SHOW.slug, operation.slug, createdAt, updatedAt)
 
     fun createListMovie(
-      idTrakt: Long,
+      idTmdb: Long,
       idList: Long,
       operation: Operation,
       createdAt: Long,
       updatedAt: Long,
-    ) = TraktSyncQueue(0, idTrakt, idList, Type.LIST_ITEM_MOVIE.slug, operation.slug, createdAt, updatedAt)
+    ) = TraktSyncQueue(0, idTmdb, idList, Type.LIST_ITEM_MOVIE.slug, operation.slug, createdAt, updatedAt)
 
     fun createHiddenShow(
-      idTrakt: Long,
+      idTmdb: Long,
       operation: Operation,
       createdAt: Long,
       updatedAt: Long,
-    ) = TraktSyncQueue(0, idTrakt, null, Type.HIDDEN_SHOW.slug, operation.slug, createdAt, updatedAt)
+    ) = TraktSyncQueue(0, idTmdb, null, Type.HIDDEN_SHOW.slug, operation.slug, createdAt, updatedAt)
 
     fun createHiddenMovie(
-      idTrakt: Long,
+      idTmdb: Long,
       operation: Operation,
       createdAt: Long,
       updatedAt: Long,
-    ) = TraktSyncQueue(0, idTrakt, null, Type.HIDDEN_MOVIE.slug, operation.slug, createdAt, updatedAt)
+    ) = TraktSyncQueue(0, idTmdb, null, Type.HIDDEN_MOVIE.slug, operation.slug, createdAt, updatedAt)
   }
 
   enum class Type(

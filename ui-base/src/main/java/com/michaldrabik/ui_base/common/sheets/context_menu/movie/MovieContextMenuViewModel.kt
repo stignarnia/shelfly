@@ -20,7 +20,7 @@ import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
 import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.ProgressDateSelectionType.ALWAYS_ASK
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,20 +44,20 @@ class MovieContextMenuViewModel @Inject constructor(
 ) : ViewModel(),
   ChannelsDelegate by DefaultChannelsDelegate() {
 
-  private var movieId by notNull<IdTrakt>()
+  private var movieId by notNull<IdTmdb>()
   private var isQuickRemoveEnabled by notNull<Boolean>()
 
   private val loadingState = MutableStateFlow(false)
   private val itemState = MutableStateFlow<MovieContextItem?>(null)
 
-  fun loadMovie(idTrakt: IdTrakt) {
+  fun loadMovie(idTmdb: IdTmdb) {
     viewModelScope.launch {
-      movieId = idTrakt
+      movieId = idTmdb
       isQuickRemoveEnabled = settingsRepository.load().traktQuickRemoveEnabled
 
       try {
         loadingState.value = true
-        val item = loadItemCase.loadItem(idTrakt)
+        val item = loadItemCase.loadItem(idTmdb)
         itemState.value = item
       } catch (error: Throwable) {
         messageChannel.send(MessageEvent.Error(R.string.errorGeneral))

@@ -7,7 +7,7 @@ import com.michaldrabik.data_local.sources.MyShowsLocalDataSource
 import com.michaldrabik.data_local.sources.WatchlistShowsLocalDataSource
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.repository.mappers.Mappers
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import javax.inject.Inject
 
 class MyShowsRepository @Inject constructor(
@@ -18,7 +18,7 @@ class MyShowsRepository @Inject constructor(
   private val mappers: Mappers,
 ) {
 
-  suspend fun load(id: IdTrakt) =
+  suspend fun load(id: IdTmdb) =
     myShowsLocalSource.getById(id.id)?.let {
       mappers.show.fromDatabase(it)
     }
@@ -28,7 +28,7 @@ class MyShowsRepository @Inject constructor(
       .getAll()
       .map { mappers.show.fromDatabase(it) }
 
-  suspend fun loadAll(ids: List<IdTrakt>) =
+  suspend fun loadAll(ids: List<IdTmdb>) =
     myShowsLocalSource
       .getAll(ids.map { it.id })
       .map { mappers.show.fromDatabase(it) }
@@ -41,12 +41,12 @@ class MyShowsRepository @Inject constructor(
   suspend fun loadAllIds() = myShowsLocalSource.getAllTraktIds()
 
   suspend fun insert(
-    id: IdTrakt,
+    id: IdTmdb,
     lastWatchedAt: Long,
   ) {
     val nowUtc = nowUtcMillis()
-    val dbShow = MyShow.fromTraktId(
-      traktId = id.id,
+    val dbShow = MyShow.fromTmdbId(
+      tmdbId = id.id,
       createdAt = nowUtc,
       updatedAt = nowUtc,
       watchedAt = lastWatchedAt,
@@ -58,16 +58,16 @@ class MyShowsRepository @Inject constructor(
     }
   }
 
-  suspend fun delete(id: IdTrakt) {
+  suspend fun delete(id: IdTmdb) {
     myShowsLocalSource.deleteById(id.id)
   }
 
-  suspend fun exists(id: IdTrakt) = myShowsLocalSource.checkExists(id.id)
+  suspend fun exists(id: IdTmdb) = myShowsLocalSource.checkExists(id.id)
 
   suspend fun updateWatchedAt(
-    idTrakt: Long,
+    idTmdb: Long,
     watchedAt: Long,
   ) {
-    myShowsLocalSource.updateWatchedAt(idTrakt, watchedAt)
+    myShowsLocalSource.updateWatchedAt(idTmdb, watchedAt)
   }
 }

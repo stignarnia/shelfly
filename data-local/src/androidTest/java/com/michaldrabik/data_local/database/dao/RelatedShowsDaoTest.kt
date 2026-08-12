@@ -16,7 +16,7 @@ class RelatedShowsDaoTest : BaseDaoTest() {
   @Test
   fun shouldInsertAndDeleteSingleEntity() {
     runBlocking {
-      val show = TestData.createShow().copy(idTrakt = 99)
+      val show = TestData.createShow().copy(idTmdb = 99)
       val relatedShow = RelatedShow(1, 1, 99, 999)
 
       database.showsDao().upsert(listOf(show))
@@ -35,9 +35,9 @@ class RelatedShowsDaoTest : BaseDaoTest() {
   @Test
   fun shouldReturnRelatedShowsForId() {
     runBlocking {
-      val show1 = TestData.createShow().copy(idTrakt = 1, updatedAt = 100)
-      val show2 = TestData.createShow().copy(idTrakt = 2, updatedAt = 100)
-      val show3 = TestData.createShow().copy(idTrakt = 3, updatedAt = 100)
+      val show1 = TestData.createShow().copy(idTmdb = 1, updatedAt = 100)
+      val show2 = TestData.createShow().copy(idTmdb = 2, updatedAt = 100)
+      val show3 = TestData.createShow().copy(idTmdb = 3, updatedAt = 100)
 
       val relatedShow1 = RelatedShow(1, 2, 1, 200)
       val relatedShow2 = RelatedShow(2, 3, 1, 200)

@@ -5,7 +5,7 @@ import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.images.ShowImagesProvider
 import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.repository.shows.ShowsRepository
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageFamily
 import com.michaldrabik.ui_model.ImageFamily.MOVIE
@@ -24,7 +24,7 @@ class ArtLoadImagesCase @Inject constructor(
 ) {
 
   suspend fun loadImages(
-    id: IdTrakt,
+    id: IdTmdb,
     family: ImageFamily,
     type: ImageType,
   ): List<Image> {
@@ -47,7 +47,7 @@ class ArtLoadImagesCase @Inject constructor(
   }
 
   private suspend fun loadInitialImage(
-    id: IdTrakt,
+    id: IdTmdb,
     family: ImageFamily,
     type: ImageType,
   ) = when (family) {

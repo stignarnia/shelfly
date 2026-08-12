@@ -5,7 +5,7 @@ import com.google.common.truth.Truth.assertThat
 import com.michaldrabik.repository.RatingsRepository
 import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.movies.MoviesRepository
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageType
@@ -44,17 +44,17 @@ class StatisticsMoviesLoadRatingsCaseTest : BaseMockTest() {
   fun `Should load sorted ratings properly`() =
     runTest {
       val ratings = listOf(
-        TraktRating.EMPTY.copy(IdTrakt(1), ratedAt = ZonedDateTime.of(2000, 3, 1, 1, 1, 1, 1, ZoneId.systemDefault())),
-        TraktRating.EMPTY.copy(IdTrakt(2), ratedAt = ZonedDateTime.of(2001, 3, 1, 1, 1, 1, 1, ZoneId.systemDefault())),
-        TraktRating.EMPTY.copy(IdTrakt(3), ratedAt = ZonedDateTime.of(2002, 3, 1, 1, 1, 1, 1, ZoneId.systemDefault())),
+        TraktRating.EMPTY.copy(IdTmdb(1), ratedAt = ZonedDateTime.of(2000, 3, 1, 1, 1, 1, 1, ZoneId.systemDefault())),
+        TraktRating.EMPTY.copy(IdTmdb(2), ratedAt = ZonedDateTime.of(2001, 3, 1, 1, 1, 1, 1, ZoneId.systemDefault())),
+        TraktRating.EMPTY.copy(IdTmdb(3), ratedAt = ZonedDateTime.of(2002, 3, 1, 1, 1, 1, 1, ZoneId.systemDefault())),
       )
 
       val movies = listOf(
-        Movie.EMPTY.copy(Ids.EMPTY.copy(trakt = IdTrakt(1))),
-        Movie.EMPTY.copy(Ids.EMPTY.copy(trakt = IdTrakt(2))),
-        Movie.EMPTY.copy(Ids.EMPTY.copy(trakt = IdTrakt(3))),
-        Movie.EMPTY.copy(Ids.EMPTY.copy(trakt = IdTrakt(4))),
-        Movie.EMPTY.copy(Ids.EMPTY.copy(trakt = IdTrakt(5))),
+        Movie.EMPTY.copy(Ids.EMPTY.copy(tmdb = IdTmdb(1))),
+        Movie.EMPTY.copy(Ids.EMPTY.copy(tmdb = IdTmdb(2))),
+        Movie.EMPTY.copy(Ids.EMPTY.copy(tmdb = IdTmdb(3))),
+        Movie.EMPTY.copy(Ids.EMPTY.copy(tmdb = IdTmdb(4))),
+        Movie.EMPTY.copy(Ids.EMPTY.copy(tmdb = IdTmdb(5))),
       )
 
       val image = Image.createUnknown(ImageType.POSTER)

@@ -48,19 +48,19 @@ class MoviesSyncRunner @Inject constructor(
     var syncCount = 0
     val syncLog = localSource.moviesSyncLog.getAll()
     moviesToSync.forEach { movie ->
-      val lastSync = syncLog.find { it.idTrakt == movie.ids.trakt.id }?.syncedAt ?: 0
+      val lastSync = syncLog.find { it.idTmdb == movie.ids.tmdb.id }?.syncedAt ?: 0
       if (nowUtcMillis() - lastSync < MOVIE_SYNC_COOLDOWN) {
         Timber.i("${movie.title} is on cooldown. No need to sync.")
         return@forEach
       }
 
       try {
-        Timber.i("Syncing ${movie.title}(${movie.ids.trakt}) details...")
-        moviesRepository.movieDetails.load(movie.ids.trakt, force = true)
+        Timber.i("Syncing ${movie.title}(${movie.ids.tmdb}) details...")
+        moviesRepository.movieDetails.load(movie.ids.tmdb, force = true)
         syncCount++
-        Timber.i("${movie.title}(${movie.ids.trakt}) movie synced.")
+        Timber.i("${movie.title}(${movie.ids.tmdb}) movie synced.")
       } catch (t: Throwable) {
-        Timber.e("${movie.title}(${movie.ids.trakt}) movie sync error. Skipping... \n$t")
+        Timber.e("${movie.title}(${movie.ids.tmdb}) movie sync error. Skipping... \n$t")
       } finally {
         delay(DELAY_MS)
       }

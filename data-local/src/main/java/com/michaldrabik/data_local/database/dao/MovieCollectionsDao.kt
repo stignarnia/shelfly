@@ -11,10 +11,10 @@ interface MovieCollectionsDao :
   BaseDao<MovieCollection>,
   MovieCollectionsLocalDataSource {
 
-  @Query("SELECT * FROM movies_collections WHERE id_trakt == :traktId")
-  override suspend fun getById(traktId: Long): MovieCollection?
+  @Query("SELECT * FROM movies_collections WHERE id_tmdb == :tmdbId")
+  override suspend fun getById(tmdbId: Long): MovieCollection?
 
-  @Query("SELECT * FROM movies_collections WHERE id_trakt_movie == :movieTraktId")
+  @Query("SELECT * FROM movies_collections WHERE id_tmdb_movie == :movieTraktId")
   override suspend fun getByMovieId(movieTraktId: Long): List<MovieCollection>
 
   @Transaction
@@ -22,7 +22,7 @@ interface MovieCollectionsDao :
     movieTraktId: Long,
     entities: List<MovieCollection>,
   ) {
-    val deleteCollections = getByMovieId(movieTraktId).map { it.idTrakt }
+    val deleteCollections = getByMovieId(movieTraktId).map { it.idTmdb }
 
     deleteCollectionsItems(deleteCollections)
     deleteCollections(deleteCollections)
@@ -34,9 +34,9 @@ interface MovieCollectionsDao :
     insert(items)
   }
 
-  @Query("DELETE FROM movies_collections WHERE id_trakt IN (:collectionIds)")
+  @Query("DELETE FROM movies_collections WHERE id_tmdb IN (:collectionIds)")
   suspend fun deleteCollections(collectionIds: List<Long>)
 
-  @Query("DELETE FROM movies_collections_items WHERE id_trakt_collection IN (:collectionIds)")
+  @Query("DELETE FROM movies_collections_items WHERE id_tmdb_collection IN (:collectionIds)")
   suspend fun deleteCollectionsItems(collectionIds: List<Long>)
 }

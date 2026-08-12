@@ -72,10 +72,10 @@ class DiscoverShowsRepositoryTest : BaseMockTest() {
   fun `Should load cached shows`() {
     runBlocking {
       val discoverShow = mockk<DiscoverShow> {
-        every { idTrakt } returns 10
+        every { idTmdb } returns 10
       }
       val showDb = mockk<ShowDb> {
-        every { idTrakt } returns 10
+        every { idTmdb } returns 10
       }
 
       coEvery { discoverShowsDao.getAll() } returns listOf(discoverShow)

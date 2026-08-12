@@ -64,7 +64,7 @@ class ShowDetailsRelatedFragment : BaseFragment<ShowDetailsRelatedViewModel>(R.l
   }
 
   private fun openDetails(item: RelatedListItem) {
-    val bundle = Bundle().apply { putLong(ARG_SHOW_ID, item.show.traktId) }
+    val bundle = Bundle().apply { putLong(ARG_SHOW_ID, item.show.tmdbId) }
     navigateToSafe(R.id.actionShowDetailsFragmentToSelf, bundle)
   }
 
@@ -77,7 +77,7 @@ class ShowDetailsRelatedFragment : BaseFragment<ShowDetailsRelatedViewModel>(R.l
         requireParentFragment().clearFragmentResultListener(REQUEST_ITEM_MENU)
       }
 
-    val bundle = ContextMenuBottomSheet.createBundle(item.show.ids.trakt)
+    val bundle = ContextMenuBottomSheet.createBundle(item.show.ids.tmdb)
     navigateToSafe(R.id.actionShowDetailsFragmentToContext, bundle)
   }
 

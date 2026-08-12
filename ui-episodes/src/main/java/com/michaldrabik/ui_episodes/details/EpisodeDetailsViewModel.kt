@@ -26,7 +26,6 @@ import com.michaldrabik.ui_episodes.details.cases.EpisodeDetailsWatchedCase
 import com.michaldrabik.ui_model.Comment
 import com.michaldrabik.ui_model.Episode
 import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.IdTrakt
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.RatingState
 import com.michaldrabik.ui_model.SpoilersSettings
@@ -76,7 +75,7 @@ class EpisodeDetailsViewModel @Inject constructor(
   }
 
   fun loadLastWatchedAt(
-    showTraktId: IdTrakt,
+    showTraktId: IdTmdb,
     episode: Episode,
   ) {
     viewModelScope.launch {
@@ -102,7 +101,7 @@ class EpisodeDetailsViewModel @Inject constructor(
   }
 
   fun loadSeason(
-    showTraktId: IdTrakt,
+    showTraktId: IdTmdb,
     episode: Episode,
     seasonEpisodes: IntArray?,
   ) {
@@ -116,7 +115,7 @@ class EpisodeDetailsViewModel @Inject constructor(
   }
 
   fun loadTranslation(
-    showTraktId: IdTrakt,
+    showTraktId: IdTmdb,
     episode: Episode,
   ) {
     viewModelScope.launch {
@@ -136,7 +135,7 @@ class EpisodeDetailsViewModel @Inject constructor(
   }
 
   fun loadComments(
-    idTrakt: IdTrakt,
+    idTmdb: IdTmdb,
     season: Int,
     episode: Int,
   ) {
@@ -150,7 +149,7 @@ class EpisodeDetailsViewModel @Inject constructor(
         val isSignedIn = userTraktManager.isAuthorized()
         val username = userTraktManager.getUsername()
         val comments = commentsRepository
-          .loadEpisodeComments(idTrakt, season, episode)
+          .loadEpisodeComments(idTmdb, season, episode)
           .map {
             it.copy(
               isMe = it.user.username == username,

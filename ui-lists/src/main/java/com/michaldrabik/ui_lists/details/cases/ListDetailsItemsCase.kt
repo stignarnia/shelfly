@@ -20,7 +20,7 @@ import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
 import com.michaldrabik.ui_lists.details.helpers.ListDetailsSorter
 import com.michaldrabik.ui_lists.details.recycler.ListDetailsItem
 import com.michaldrabik.ui_model.CustomList
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.ImageType
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Show
@@ -64,11 +64,11 @@ class ListDetailsItemsCase @Inject constructor(
       val spoilers = settingsRepository.spoilers.getAll()
 
       val showsAsync = async {
-        val ids = listItems.filter { it.type == SHOWS.type }.map { it.idTrakt }
+        val ids = listItems.filter { it.type == SHOWS.type }.map { it.idTmdb }
         localSource.shows.getAllChunked(ids)
       }
       val moviesAsync = async {
-        val ids = listItems.filter { it.type == MOVIES.type }.map { it.idTrakt }
+        val ids = listItems.filter { it.type == MOVIES.type }.map { it.idTmdb }
         localSource.movies.getAllChunked(ids)
       }
 
@@ -109,14 +109,14 @@ class ListDetailsItemsCase @Inject constructor(
             val listedAt = ZonedDateTime.ofInstant(Instant.ofEpochMilli(listItem.listedAt), ZoneId.of("UTC"))
             when (listItem.type) {
               SHOWS.type -> {
-                val listShow = shows.firstOrNull { it.idTrakt == listItem.idTrakt }
+                val listShow = shows.firstOrNull { it.idTmdb == listItem.idTmdb }
                 if (listShow == null) {
                   itemsToDelete.add(listItem)
                   return@async null
                 }
                 val show = mappers.show.fromDatabase(listShow)
-                val translation = showsTranslations[show.traktId]
-                val rating = showsRatings.find { it.idTrakt == show.ids.trakt }
+                val translation = showsTranslations[show.tmdbId]
+                val rating = showsRatings.find { it.idTmdb == show.ids.tmdb }
                 createListDetailsItem(
                   show = show,
                   listItem = listItem,
@@ -129,14 +129,14 @@ class ListDetailsItemsCase @Inject constructor(
                 )
               }
               MOVIES.type -> {
-                val listMovie = movies.firstOrNull { it.idTrakt == listItem.idTrakt }
+                val listMovie = movies.firstOrNull { it.idTmdb == listItem.idTmdb }
                 if (listMovie == null) {
                   itemsToDelete.add(listItem)
                   return@async null
                 }
                 val movie = mappers.movie.fromDatabase(listMovie)
-                val translation = moviesTranslations[movie.traktId]
-                val rating = moviesRatings.find { it.idTrakt == movie.ids.trakt }
+                val translation = moviesTranslations[movie.tmdbId]
+                val rating = moviesRatings.find { it.idTmdb == movie.ids.tmdb }
                 createListDetailsItem(
                   movie = movie,
                   listItem = listItem,
@@ -157,7 +157,7 @@ class ListDetailsItemsCase @Inject constructor(
         }.awaitAll()
 
       itemsToDelete.forEach {
-        listsRepository.removeFromList(list.id, IdTrakt(it.idTrakt), it.type)
+        listsRepository.removeFromList(list.id, IdTmdb(it.idTmdb), it.type)
       }
 
       val sortedItems = sortItems(
@@ -194,8 +194,8 @@ class ListDetailsItemsCase @Inject constructor(
       isRankDisplayed = isRankSort,
       isManageMode = false,
       isEnabled = moviesEnabled,
-      isWatched = moviesRepository.myMovies.exists(movie.ids.trakt),
-      isWatchlist = moviesRepository.watchlistMovies.exists(movie.ids.trakt),
+      isWatched = moviesRepository.myMovies.exists(movie.ids.tmdb),
+      isWatchlist = moviesRepository.watchlistMovies.exists(movie.ids.tmdb),
       listedAt = listedAt,
       sortOrder = sortOrder,
       spoilers = spoilers,
@@ -226,8 +226,8 @@ class ListDetailsItemsCase @Inject constructor(
       isRankDisplayed = isRankSort,
       isManageMode = false,
       isEnabled = true,
-      isWatched = showsRepository.myShows.exists(show.ids.trakt),
-      isWatchlist = showsRepository.watchlistShows.exists(show.ids.trakt),
+      isWatched = showsRepository.myShows.exists(show.ids.tmdb),
+      isWatchlist = showsRepository.watchlistShows.exists(show.ids.tmdb),
       listedAt = listedAt,
       sortOrder = sortOrder,
       spoilers = spoilers,
@@ -261,7 +261,7 @@ class ListDetailsItemsCase @Inject constructor(
 
   suspend fun deleteListItem(
     listId: Long,
-    itemTraktId: IdTrakt,
+    itemTraktId: IdTmdb,
     itemType: Mode,
   ) = withContext(dispatchers.IO) {
     listsRepository.removeFromList(listId, itemTraktId, itemType.type)

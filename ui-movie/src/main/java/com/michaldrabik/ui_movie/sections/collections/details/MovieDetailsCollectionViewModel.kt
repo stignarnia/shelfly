@@ -9,7 +9,7 @@ import com.michaldrabik.ui_base.utilities.extensions.findReplace
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
 import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_movie.sections.collections.details.cases.MovieDetailsCollectionDetailsCase
 import com.michaldrabik.ui_movie.sections.collections.details.cases.MovieDetailsCollectionImagesCase
 import com.michaldrabik.ui_movie.sections.collections.details.cases.MovieDetailsCollectionMoviesCase
@@ -42,7 +42,7 @@ class MovieDetailsCollectionViewModel @Inject constructor(
   private var imagesJobs = mutableMapOf<String, Boolean>()
   private var translationsJobs = mutableMapOf<String, Boolean>()
 
-  fun loadCollection(collectionId: IdTrakt) {
+  fun loadCollection(collectionId: IdTmdb) {
     viewModelScope.launch {
       try {
         val headerItem = collectionDetailsCase.loadCollection(collectionId)
@@ -55,7 +55,7 @@ class MovieDetailsCollectionViewModel @Inject constructor(
     }
   }
 
-  private fun loadCollectionMovies(collectionId: IdTrakt) {
+  private fun loadCollectionMovies(collectionId: IdTmdb) {
     viewModelScope.launch {
       val loadingJob = launch {
         delay(500)

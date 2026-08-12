@@ -44,10 +44,10 @@ class ShowsRatingsRepository @Inject constructor(
           .map { mappers.userRatings.fromDatabase(it) }
 
         val entities = remoteRatings
-          .filter { it.rated_at != null && it.show.ids.trakt != null }
+          .filter { it.rated_at != null && it.show.ids.tmdb != null }
           .map { mappers.userRatings.toDatabaseShow(it) }
           .filter { remoteRating ->
-            val localRating = localRatings.find { remoteRating.idTrakt == it.idTrakt.id }
+            val localRating = localRatings.find { remoteRating.idTmdb == it.idTmdb.id }
             if (localRating != null) {
               return@filter localRating.ratedAt
                 .toUtcZone()
@@ -67,10 +67,10 @@ class ShowsRatingsRepository @Inject constructor(
           .map { mappers.userRatings.fromDatabase(it) }
 
         val entities = remoteRatings
-          .filter { it.rated_at != null && it.episode.ids.trakt != null }
+          .filter { it.rated_at != null && it.episode.ids.tmdb != null }
           .map { mappers.userRatings.toDatabaseEpisode(it) }
           .filter { remoteRating ->
-            val localRating = localRatings.find { remoteRating.idTrakt == it.idTrakt.id }
+            val localRating = localRatings.find { remoteRating.idTmdb == it.idTmdb.id }
             if (localRating != null) {
               return@filter localRating.ratedAt
                 .toUtcZone()
@@ -90,10 +90,10 @@ class ShowsRatingsRepository @Inject constructor(
           .map { mappers.userRatings.fromDatabase(it) }
 
         val entities = remoteRatings
-          .filter { it.rated_at != null && it.season.ids.trakt != null }
+          .filter { it.rated_at != null && it.season.ids.tmdb != null }
           .map { mappers.userRatings.toDatabaseSeason(it) }
           .filter { remoteRating ->
-            val localRating = localRatings.find { remoteRating.idTrakt == it.idTrakt.id }
+            val localRating = localRatings.find { remoteRating.idTmdb == it.idTmdb.id }
             if (localRating != null) {
               return@filter localRating.ratedAt
                 .toUtcZone()
@@ -135,7 +135,7 @@ class ShowsRatingsRepository @Inject constructor(
   suspend fun loadRatings(shows: List<Show>): List<TraktRating> {
     val ratings = mutableListOf<Rating>()
     shows.chunked(CHUNK_SIZE).forEach { chunk ->
-      val items = localSource.ratings.getAllByType(chunk.map { it.traktId }, TYPE_SHOW)
+      val items = localSource.ratings.getAllByType(chunk.map { it.tmdbId }, TYPE_SHOW)
       ratings.addAll(items)
     }
     return ratings.map {
@@ -146,7 +146,7 @@ class ShowsRatingsRepository @Inject constructor(
   suspend fun loadRatingsSeasons(seasons: List<Season>): List<TraktRating> {
     val ratings = mutableListOf<Rating>()
     seasons.chunked(CHUNK_SIZE).forEach { chunk ->
-      val items = localSource.ratings.getAllByType(chunk.map { it.ids.trakt.id }, TYPE_SEASON)
+      val items = localSource.ratings.getAllByType(chunk.map { it.ids.tmdb.id }, TYPE_SEASON)
       ratings.addAll(items)
     }
     return ratings.map {
@@ -155,14 +155,14 @@ class ShowsRatingsRepository @Inject constructor(
   }
 
   suspend fun loadRating(episode: Episode): TraktRating? {
-    val rating = localSource.ratings.getAllByType(listOf(episode.ids.trakt.id), TYPE_EPISODE)
+    val rating = localSource.ratings.getAllByType(listOf(episode.ids.tmdb.id), TYPE_EPISODE)
     return rating.firstOrNull()?.let {
       mappers.userRatings.fromDatabase(it)
     }
   }
 
   suspend fun loadRating(season: Season): TraktRating? {
-    val rating = localSource.ratings.getAllByType(listOf(season.ids.trakt.id), TYPE_SEASON)
+    val rating = localSource.ratings.getAllByType(listOf(season.ids.tmdb.id), TYPE_SEASON)
     return rating.firstOrNull()?.let {
       mappers.userRatings.fromDatabase(it)
     }
@@ -228,7 +228,7 @@ class ShowsRatingsRepository @Inject constructor(
         mappers.show.toNetwork(show),
       )
     }
-    localSource.ratings.deleteByType(show.traktId, TYPE_SHOW)
+    localSource.ratings.deleteByType(show.tmdbId, TYPE_SHOW)
   }
 
   suspend fun deleteRating(
@@ -240,7 +240,7 @@ class ShowsRatingsRepository @Inject constructor(
         mappers.episode.toNetwork(episode),
       )
     }
-    localSource.ratings.deleteByType(episode.ids.trakt.id, TYPE_EPISODE)
+    localSource.ratings.deleteByType(episode.ids.tmdb.id, TYPE_EPISODE)
   }
 
   suspend fun deleteRating(
@@ -252,6 +252,6 @@ class ShowsRatingsRepository @Inject constructor(
         mappers.season.toNetwork(season),
       )
     }
-    localSource.ratings.deleteByType(season.ids.trakt.id, TYPE_SEASON)
+    localSource.ratings.deleteByType(season.ids.tmdb.id, TYPE_SEASON)
   }
 }

@@ -16,7 +16,7 @@ interface PeopleCreditsDao : BaseDao<PersonCredits>, PeopleCreditsLocalDataSourc
   @Query(
     """
     SELECT
-    shows.id_trakt,
+    shows.id_tmdb,
     shows.id_tvdb,
     shows.id_tmdb,
     shows.id_imdb,
@@ -44,8 +44,8 @@ interface PeopleCreditsDao : BaseDao<PersonCredits>, PeopleCreditsLocalDataSourc
     people_credits.created_at AS created_at,
     people_credits.updated_at AS updated_at
     FROM shows
-    INNER JOIN people_credits ON people_credits.id_trakt_show = shows.id_trakt
-    WHERE people_credits.id_trakt_person = :personTraktId
+    INNER JOIN people_credits ON people_credits.id_tmdb_show = shows.id_tmdb
+    WHERE people_credits.id_tmdb_person = :personTraktId
     """
   )
   override suspend fun getAllShowsForPerson(personTraktId: Long): List<Show>
@@ -53,7 +53,7 @@ interface PeopleCreditsDao : BaseDao<PersonCredits>, PeopleCreditsLocalDataSourc
   @Query(
     """
     SELECT
-    movies.id_trakt,
+    movies.id_tmdb,
     movies.id_tmdb,
     movies.id_imdb,
     movies.id_slug,
@@ -74,16 +74,16 @@ interface PeopleCreditsDao : BaseDao<PersonCredits>, PeopleCreditsLocalDataSourc
     people_credits.updated_at AS updated_at,
     people_credits.created_at AS created_at
     FROM movies
-    INNER JOIN people_credits ON people_credits.id_trakt_movie = movies.id_trakt
-    WHERE people_credits.id_trakt_person = :personTraktId
+    INNER JOIN people_credits ON people_credits.id_tmdb_movie = movies.id_tmdb
+    WHERE people_credits.id_tmdb_person = :personTraktId
     """
   )
   override suspend fun getAllMoviesForPerson(personTraktId: Long): List<Movie>
 
-  @Query("SELECT updated_at FROM people_credits WHERE id_trakt_person = :personTraktId LIMIT 1")
+  @Query("SELECT updated_at FROM people_credits WHERE id_tmdb_person = :personTraktId LIMIT 1")
   override suspend fun getTimestampForPerson(personTraktId: Long): Long?
 
-  @Query("DELETE FROM people_credits WHERE id_trakt_person == :personTraktId")
+  @Query("DELETE FROM people_credits WHERE id_tmdb_person == :personTraktId")
   override suspend fun deleteAllForPerson(personTraktId: Long)
 
   @Transaction

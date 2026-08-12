@@ -8,7 +8,6 @@ import com.michaldrabik.data_remote.tmdb.model.TmdbImages
 import com.michaldrabik.repository.TranslationsRepository
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.IdTrakt
 import com.michaldrabik.ui_model.IdTvdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageFamily.MOVIE
@@ -34,7 +33,7 @@ class MovieImagesProvider @Inject constructor(
   private var translationsRepository: TranslationsRepository,
 ) {
 
-  private val unavailableCache = mutableSetOf<IdTrakt>()
+  private val unavailableCache = mutableSetOf<IdTmdb>()
 
   suspend fun findCachedImage(
     movie: Movie,
@@ -44,7 +43,7 @@ class MovieImagesProvider @Inject constructor(
       val image = localSource.movieImages.getByMovieId(movie.ids.tmdb.id, type.key)
       when (image) {
         null -> {
-          if (unavailableCache.contains(movie.ids.trakt)) {
+          if (unavailableCache.contains(movie.ids.tmdb)) {
             Image.createUnavailable(type, MOVIE, TMDB)
           } else {
             Image.createUnknown(type, MOVIE, TMDB)
@@ -86,7 +85,7 @@ class MovieImagesProvider @Inject constructor(
 
       when (image.status) {
         UNAVAILABLE -> {
-          unavailableCache.add(movie.ids.trakt)
+          unavailableCache.add(movie.ids.tmdb)
           localSource.movieImages.deleteByMovieId(tmdbId.id, image.type.key)
         }
         else -> {

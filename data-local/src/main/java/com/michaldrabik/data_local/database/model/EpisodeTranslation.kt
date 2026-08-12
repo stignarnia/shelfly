@@ -9,22 +9,22 @@ import androidx.room.PrimaryKey
 @Entity(
   tableName = "episodes_translations",
   indices = [
-    Index(value = ["id_trakt"], unique = true),
-    Index(value = ["id_trakt_show"]),
+    Index(value = ["id_tmdb"], unique = true),
+    Index(value = ["id_tmdb_show"]),
   ],
   foreignKeys = [
     ForeignKey(
       entity = Show::class,
-      parentColumns = arrayOf("id_trakt"),
-      childColumns = arrayOf("id_trakt_show"),
+      parentColumns = arrayOf("id_tmdb"),
+      childColumns = arrayOf("id_tmdb_show"),
       onDelete = ForeignKey.CASCADE,
     ),
   ],
 )
 data class EpisodeTranslation(
   @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
-  @ColumnInfo(name = "id_trakt") val idTrakt: Long,
-  @ColumnInfo(name = "id_trakt_show") val idTraktShow: Long,
+  @ColumnInfo(name = "id_tmdb") val idTmdb: Long,
+  @ColumnInfo(name = "id_tmdb_show") val idTmdbShow: Long,
   @ColumnInfo(name = "title") val title: String,
   @ColumnInfo(name = "language") val language: String,
   @ColumnInfo(name = "overview") val overview: String,
@@ -33,7 +33,7 @@ data class EpisodeTranslation(
 ) {
 
   companion object {
-    fun fromTraktId(
+    fun fromTmdbId(
       traktEpisodeId: Long,
       traktShowId: Long,
       title: String,
@@ -41,8 +41,8 @@ data class EpisodeTranslation(
       overview: String,
       createdAt: Long,
     ) = EpisodeTranslation(
-      idTrakt = traktEpisodeId,
-      idTraktShow = traktShowId,
+      idTmdb = traktEpisodeId,
+      idTmdbShow = traktShowId,
       title = title,
       language = language,
       overview = overview,

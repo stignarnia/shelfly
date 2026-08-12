@@ -8,19 +8,19 @@ import androidx.room.PrimaryKey
 
 @Entity(
   tableName = "shows_ratings",
-  indices = [Index(value = ["id_trakt"], unique = true)],
+  indices = [Index(value = ["id_tmdb"], unique = true)],
   foreignKeys = [
     ForeignKey(
       entity = Show::class,
-      parentColumns = arrayOf("id_trakt"),
-      childColumns = arrayOf("id_trakt"),
+      parentColumns = arrayOf("id_tmdb"),
+      childColumns = arrayOf("id_tmdb"),
       onDelete = ForeignKey.CASCADE,
     ),
   ],
 )
 data class ShowRatings(
   @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
-  @ColumnInfo(name = "id_trakt") val idTrakt: Long,
+  @ColumnInfo(name = "id_tmdb") val idTmdb: Long,
   @ColumnInfo(name = "trakt") val trakt: String?,
   @ColumnInfo(name = "imdb") val imdb: String?,
   @ColumnInfo(name = "metascore") val metascore: String?,

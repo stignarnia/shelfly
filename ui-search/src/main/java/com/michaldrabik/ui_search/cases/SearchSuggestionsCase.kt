@@ -64,16 +64,16 @@ class SearchSuggestionsCase @Inject constructor(
           async {
             val isFollowed =
               if (it.isShow) {
-                showsRepository.myShows.exists(it.show.ids.trakt)
+                showsRepository.myShows.exists(it.show.ids.tmdb)
               } else {
-                moviesRepository.myMovies.exists(it.movie.ids.trakt)
+                moviesRepository.myMovies.exists(it.movie.ids.tmdb)
               }
 
             val isWatchlist =
               if (it.isShow) {
-                showsRepository.watchlistShows.exists(it.show.ids.trakt)
+                showsRepository.watchlistShows.exists(it.show.ids.tmdb)
               } else {
-                moviesRepository.watchlistMovies.exists(it.movie.ids.trakt)
+                moviesRepository.watchlistMovies.exists(it.movie.ids.tmdb)
               }
 
             val image =
@@ -132,9 +132,9 @@ class SearchSuggestionsCase @Inject constructor(
     val cachedIds = showsCache
       ?.filter {
         it.title.contains(query, true) ||
-          showTranslationsCache?.get(it.idTrakt)?.title?.contains(query, true) == true
+          showTranslationsCache?.get(it.idTmdb)?.title?.contains(query, true) == true
       }?.take(limit)
-      ?.map { it.idTrakt }
+      ?.map { it.idTmdb }
 
     return localSource.shows
       .getAll(cachedIds ?: emptyList())
@@ -152,9 +152,9 @@ class SearchSuggestionsCase @Inject constructor(
     val cachedIds = moviesCache
       ?.filter {
         it.title.contains(query, true) ||
-          movieTranslationsCache?.get(it.idTrakt)?.title?.contains(query, true) == true
+          movieTranslationsCache?.get(it.idTmdb)?.title?.contains(query, true) == true
       }?.take(limit)
-      ?.map { it.idTrakt }
+      ?.map { it.idTmdb }
 
     return localSource.movies
       .getAll(cachedIds ?: emptyList())

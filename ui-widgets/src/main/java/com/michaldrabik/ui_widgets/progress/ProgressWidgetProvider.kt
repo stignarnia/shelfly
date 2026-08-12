@@ -20,7 +20,7 @@ import android.widget.RemoteViews
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import com.michaldrabik.common.Config.HOST_ACTIVITY_NAME
 import com.michaldrabik.ui_base.utilities.extensions.dimenToPx
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_widgets.BaseWidgetProvider
 import com.michaldrabik.ui_widgets.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -126,7 +126,7 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
             context.applicationContext,
             episodeId,
             seasonId,
-            IdTrakt(showId),
+            IdTmdb(showId),
           )
         }
         intent.extras?.containsKey(EXTRA_SHOW_ID) == true -> {

@@ -17,7 +17,7 @@ interface MovieCollectionsItemsDao :
   @Query(
     """
     SELECT
-    movies.id_trakt,
+    movies.id_tmdb,
     movies.id_tmdb,
     movies.id_imdb,
     movies.id_slug,
@@ -37,8 +37,8 @@ interface MovieCollectionsItemsDao :
     movies.genres,
     movies_collections_items.updated_at AS updated_at,
     movies_collections_items.created_at AS created_at
-    FROM movies INNER JOIN movies_collections_items USING(id_trakt)
-    WHERE id_trakt_collection == :collectionId
+    FROM movies INNER JOIN movies_collections_items USING(id_tmdb)
+    WHERE id_tmdb_collection == :collectionId
     ORDER BY rank ASC""",
   )
   override suspend fun getById(collectionId: Long): List<Movie>
@@ -52,6 +52,6 @@ interface MovieCollectionsItemsDao :
     insert(items)
   }
 
-  @Query("DELETE FROM movies_collections_items WHERE id_trakt_collection == :collectionId")
+  @Query("DELETE FROM movies_collections_items WHERE id_tmdb_collection == :collectionId")
   override suspend fun deleteById(collectionId: Long)
 }

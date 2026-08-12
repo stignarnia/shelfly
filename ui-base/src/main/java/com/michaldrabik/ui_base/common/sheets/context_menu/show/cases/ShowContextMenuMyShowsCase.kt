@@ -11,7 +11,7 @@ import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Show
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -35,17 +35,17 @@ class ShowContextMenuMyShowsCase @Inject constructor(
   private val announcementManager: AnnouncementManager,
 ) {
 
-  suspend fun moveToMyShows(traktId: IdTrakt) =
+  suspend fun moveToMyShows(tmdbId: IdTmdb) =
     withContext(dispatchers.IO) {
-      val show = Show.EMPTY.copy(ids = Ids.EMPTY.copy(traktId))
+      val show = Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdbId))
 
       val (isWatchlist, isHidden) = awaitAll(
-        async { showsRepository.watchlistShows.exists(traktId) },
-        async { showsRepository.hiddenShows.exists(traktId) },
+        async { showsRepository.watchlistShows.exists(tmdbId) },
+        async { showsRepository.hiddenShows.exists(tmdbId) },
       )
 
       val seasons = remoteSource.trakt
-        .fetchSeasons(traktId.id)
+        .fetchSeasons(tmdbId.id)
         .map { mappers.season.fromNetwork(it) }
         .filter { it.episodes.isNotEmpty() }
         .filter { if (!showSpecials()) !it.isSpecial() else true }
@@ -53,24 +53,24 @@ class ShowContextMenuMyShowsCase @Inject constructor(
       val episodes = seasons.flatMap { it.episodes }
 
       transactions.withTransaction {
-        val localSeasons = localSource.seasons.getAllByShowId(traktId.id)
-        val localEpisodes = localSource.episodes.getAllByShowId(traktId.id)
+        val localSeasons = localSource.seasons.getAllByShowId(tmdbId.id)
+        val localEpisodes = localSource.episodes.getAllByShowId(tmdbId.id)
         val lastWatchedAt = localEpisodes.maxByOrNull { it.lastWatchedAt != null }?.lastWatchedAt?.toMillis() ?: 0L
 
-        showsRepository.myShows.insert(traktId, lastWatchedAt)
+        showsRepository.myShows.insert(tmdbId, lastWatchedAt)
 
         val seasonsToAdd = mutableListOf<SeasonDb>()
         val episodesToAdd = mutableListOf<EpisodeDb>()
 
         seasons.forEach { season ->
-          if (localSeasons.none { it.idTrakt == season.ids.trakt.id }) {
-            seasonsToAdd.add(mappers.season.toDatabase(season, traktId, false))
+          if (localSeasons.none { it.idTmdb == season.ids.tmdb.id }) {
+            seasonsToAdd.add(mappers.season.toDatabase(season, tmdbId, false))
           }
         }
         episodes.forEach { episode ->
-          if (localEpisodes.none { it.idTrakt == episode.ids.trakt.id }) {
+          if (localEpisodes.none { it.idTmdb == episode.ids.tmdb.id }) {
             val season = seasons.find { it.number == episode.season }!!
-            episodesToAdd.add(mappers.episode.toDatabase(episode, season, traktId, false, null, null))
+            episodesToAdd.add(mappers.episode.toDatabase(episode, season, tmdbId, false, null, null))
           }
         }
 
@@ -85,20 +85,20 @@ class ShowContextMenuMyShowsCase @Inject constructor(
     }
 
   suspend fun removeFromMyShows(
-    traktId: IdTrakt,
+    tmdbId: IdTmdb,
     removeLocalData: Boolean,
   ) = withContext(dispatchers.IO) {
-    val show = Show.EMPTY.copy(ids = Ids.EMPTY.copy(traktId))
+    val show = Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdbId))
     transactions.withTransaction {
-      showsRepository.myShows.delete(show.ids.trakt)
+      showsRepository.myShows.delete(show.ids.tmdb)
 
       if (removeLocalData) {
-        localSource.episodes.deleteAllUnwatchedForShow(show.traktId)
-        val seasons = localSource.seasons.getAllByShowId(show.traktId)
-        val episodes = localSource.episodes.getAllByShowId(show.traktId)
+        localSource.episodes.deleteAllUnwatchedForShow(show.tmdbId)
+        val seasons = localSource.seasons.getAllByShowId(show.tmdbId)
+        val episodes = localSource.episodes.getAllByShowId(show.tmdbId)
         val toDelete = mutableListOf<SeasonDb>()
         seasons.forEach { season ->
-          if (episodes.none { it.idSeason == season.idTrakt }) {
+          if (episodes.none { it.idSeason == season.idTmdb }) {
             toDelete.add(season)
           }
         }

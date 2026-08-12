@@ -81,7 +81,7 @@ class ShowDetailsPeopleFragment : BaseFragment<ShowDetailsPeopleViewModel>(R.lay
     personArgs: PersonDetailsArgs?,
   ) {
     handleSheetResult()
-    val bundle = PersonDetailsBottomSheet.createBundle(person, show.ids.trakt, personArgs)
+    val bundle = PersonDetailsBottomSheet.createBundle(person, show.ids.tmdb, personArgs)
     (requireParentFragment() as BaseFragment<*>)
       .navigateToSafe(R.id.actionShowDetailsFragmentToPerson, bundle)
   }
@@ -100,7 +100,7 @@ class ShowDetailsPeopleFragment : BaseFragment<ShowDetailsPeopleViewModel>(R.lay
     val title = (requireParentFragment() as ShowDetailsFragment)
       .binding.showDetailsTitle.text
       .toString()
-    val bundle = PeopleListBottomSheet.createBundle(show.ids.trakt, title, Mode.SHOWS, department)
+    val bundle = PeopleListBottomSheet.createBundle(show.ids.tmdb, title, Mode.SHOWS, department)
     navigateToSafe(R.id.actionShowDetailsFragmentToPeopleList, bundle)
   }
 

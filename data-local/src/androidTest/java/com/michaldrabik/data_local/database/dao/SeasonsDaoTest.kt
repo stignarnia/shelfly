@@ -26,8 +26,8 @@ class SeasonsDaoTest : BaseDaoTest() {
   @Test
   fun shouldInsertAndStoreMultipleEntities() {
     runBlocking {
-      val season1 = TestData.createSeason().copy(idTrakt = 1)
-      val season2 = TestData.createSeason().copy(idTrakt = 2)
+      val season1 = TestData.createSeason().copy(idTmdb = 1)
+      val season2 = TestData.createSeason().copy(idTmdb = 2)
 
       database.seasonsDao().upsert(listOf(season1, season2))
       val result = database.seasonsDao().getAllByShowId(1)
@@ -38,8 +38,8 @@ class SeasonsDaoTest : BaseDaoTest() {
   @Test
   fun shouldReturnEntityById() {
     runBlocking {
-      val season1 = TestData.createSeason().copy(idTrakt = 1)
-      val season2 = TestData.createSeason().copy(idTrakt = 2)
+      val season1 = TestData.createSeason().copy(idTmdb = 1)
+      val season2 = TestData.createSeason().copy(idTmdb = 2)
 
       database.seasonsDao().upsert(listOf(season1, season2))
       val result = database.seasonsDao().getById(2)
@@ -50,9 +50,9 @@ class SeasonsDaoTest : BaseDaoTest() {
   @Test
   fun shouldReturnEntitiesByIds() {
     runBlocking {
-      val season1 = TestData.createSeason().copy(idTrakt = 1)
-      val season2 = TestData.createSeason().copy(idTrakt = 2, idShowTrakt = 2)
-      val season3 = TestData.createSeason().copy(idTrakt = 3)
+      val season1 = TestData.createSeason().copy(idTmdb = 1)
+      val season2 = TestData.createSeason().copy(idTmdb = 2, idShowTmdb = 2)
+      val season3 = TestData.createSeason().copy(idTmdb = 3)
 
       database.seasonsDao().upsert(listOf(season1, season2, season3))
       val result = database.seasonsDao().getAllByShowId(1)
@@ -63,9 +63,9 @@ class SeasonsDaoTest : BaseDaoTest() {
   @Test
   fun shouldOnlyReturnWatchedSeasons() {
     runBlocking {
-      val season1 = TestData.createSeason().copy(idTrakt = 1)
-      val season2 = TestData.createSeason().copy(idTrakt = 2)
-      val season3 = TestData.createSeason().copy(idTrakt = 3, isWatched = true)
+      val season1 = TestData.createSeason().copy(idTmdb = 1)
+      val season2 = TestData.createSeason().copy(idTmdb = 2)
+      val season3 = TestData.createSeason().copy(idTmdb = 3, isWatched = true)
 
       database.seasonsDao().upsert(listOf(season1, season2, season3))
       val result = database.seasonsDao().getAllWatchedIdsForShows(listOf(1))

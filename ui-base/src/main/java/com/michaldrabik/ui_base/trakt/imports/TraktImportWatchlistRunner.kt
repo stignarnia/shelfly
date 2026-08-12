@@ -104,7 +104,7 @@ class TraktImportWatchlistRunner @Inject constructor(
     val syncResults = remoteSource
       .fetchSyncShowsWatchlist()
       .filter { it.show != null }
-      .distinctBy { it.show!!.ids?.trakt }
+      .distinctBy { it.show!!.ids?.tmdb }
 
     val localShowsIds =
       localSource.watchlistShows
@@ -119,13 +119,13 @@ class TraktImportWatchlistRunner @Inject constructor(
         val showUi = mappers.show.fromNetwork(result.show!!)
         progressListener?.invoke(showUi.title)
         try {
-          val showId = result.show!!.ids?.trakt ?: -1
+          val showId = result.show!!.ids?.tmdb ?: -1
           transactions.withTransaction {
             if (showId !in localShowsIds) {
               val show = mappers.show.fromNetwork(result.show!!)
               val showDb = mappers.show.toDatabase(show)
               localSource.shows.upsert(listOf(showDb))
-              localSource.watchlistShows.insert(WatchlistShow.fromTraktId(showId, result.lastListedMillis()))
+              localSource.watchlistShows.insert(WatchlistShow.fromTmdbId(showId, result.lastListedMillis()))
             }
           }
         } catch (error: Throwable) {
@@ -152,7 +152,7 @@ class TraktImportWatchlistRunner @Inject constructor(
     val syncResults = remoteSource
       .fetchSyncMoviesWatchlist()
       .filter { it.movie != null }
-      .distinctBy { it.movie!!.ids?.trakt }
+      .distinctBy { it.movie!!.ids?.tmdb }
 
     val localMoviesIds =
       localSource.watchlistMovies
@@ -167,13 +167,13 @@ class TraktImportWatchlistRunner @Inject constructor(
         val movieUi = mappers.movie.fromNetwork(result.movie!!)
         progressListener?.invoke(movieUi.title)
         try {
-          val movieId = result.movie!!.ids?.trakt ?: -1
+          val movieId = result.movie!!.ids?.tmdb ?: -1
           transactions.withTransaction {
             if (movieId !in localMoviesIds) {
               val movie = mappers.movie.fromNetwork(result.movie!!)
               val movieDb = mappers.movie.toDatabase(movie)
               localSource.movies.upsert(listOf(movieDb))
-              localSource.watchlistMovies.insert(WatchlistMovie.fromTraktId(movieId, result.lastListedMillis()))
+              localSource.watchlistMovies.insert(WatchlistMovie.fromTmdbId(movieId, result.lastListedMillis()))
             }
           }
         } catch (error: Throwable) {

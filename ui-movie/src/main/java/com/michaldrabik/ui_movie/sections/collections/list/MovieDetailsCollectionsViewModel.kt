@@ -7,7 +7,7 @@ import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
 import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.MovieCollection
 import com.michaldrabik.ui_movie.MovieDetailsEvent.OpenCollectionSheet
@@ -28,7 +28,7 @@ class MovieDetailsCollectionsViewModel @Inject constructor(
   ChannelsDelegate by DefaultChannelsDelegate() {
 
   private lateinit var movie: Movie
-  private var lastOpenedCollection: IdTrakt? = null
+  private var lastOpenedCollection: IdTmdb? = null
 
   private val loadingState = MutableStateFlow(true)
   private val movieCollectionState = MutableStateFlow<Pair<List<MovieCollection>, Source>?>(null)
@@ -68,7 +68,7 @@ class MovieDetailsCollectionsViewModel @Inject constructor(
     }
   }
 
-  fun saveLastOpenedCollection(collectionId: IdTrakt) {
+  fun saveLastOpenedCollection(collectionId: IdTmdb) {
     lastOpenedCollection = collectionId
   }
 

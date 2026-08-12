@@ -62,8 +62,8 @@ abstract class CalendarMoviesItemsCase constructor(
             CalendarMovieListItem.MovieItem(
               movie = movie,
               image = imagesProvider.findCachedImage(movie, ImageType.POSTER),
-              isWatched = myMovies.any { it.traktId == movie.traktId },
-              isWatchlist = watchlistMovies.any { it.traktId == movie.traktId },
+              isWatched = myMovies.any { it.tmdbId == movie.tmdbId },
+              isWatchlist = watchlistMovies.any { it.tmdbId == movie.tmdbId },
               dateFormat = dateFormat,
               translation = translation,
               spoilers = spoilers,

@@ -62,12 +62,12 @@ class ListDetailsMainCase @Inject constructor(
     val isAuthorized = userTraktManager.isAuthorized()
     val isQuickRemove = settingsRepository.load().traktQuickRemoveEnabled
     val list = listsRepository.loadById(listId)
-    val listIdTrakt = list.idTrakt
+    val listIdTmdb = list.idTmdb
 
-    if (isQuickRemove && isAuthorized && removeFromTrakt && listIdTrakt != null) {
+    if (isQuickRemove && isAuthorized && removeFromTrakt && listIdTmdb != null) {
       userTraktManager.checkAuthorization()
       try {
-        remoteSource.deleteList(listIdTrakt)
+        remoteSource.deleteList(listIdTmdb)
       } catch (error: Throwable) {
         when (ErrorHelper.parse(error)) {
           is ShowlyError.ResourceNotFoundError -> Unit // NOOP List does not exist in Trakt.
@@ -81,6 +81,6 @@ class ListDetailsMainCase @Inject constructor(
 
   suspend fun isQuickRemoveEnabled(list: CustomList) =
     withContext(dispatchers.IO) {
-      list.idTrakt != null && settingsRepository.load().traktQuickRemoveEnabled
+      list.idTmdb != null && settingsRepository.load().traktQuickRemoveEnabled
     }
 }

@@ -18,7 +18,7 @@ class ShowDetailsRelatedCase @Inject constructor(
       val archivedShowsIds = showsRepository.hiddenShows.loadAllIds()
       showsRepository.relatedShows
         .loadAll(show, archivedShowsIds.size)
-        .filter { it.traktId !in archivedShowsIds }
+        .filter { it.tmdbId !in archivedShowsIds }
         .sortedWith(compareBy({ it.votes }, { it.rating }))
         .reversed()
     }

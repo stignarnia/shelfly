@@ -10,7 +10,7 @@ import com.michaldrabik.ui_base.BaseBottomSheetFragment
 import com.michaldrabik.ui_base.R
 import com.michaldrabik.ui_base.utilities.extensions.requireLongArray
 import com.michaldrabik.ui_base.utilities.extensions.requireParcelable
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_navigation.java.NavigationArgs
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_ID
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_TYPE
@@ -22,7 +22,7 @@ abstract class RemoveTraktBottomSheet<T : ViewModel>(
 
   companion object {
     fun createBundle(
-      itemIds: List<IdTrakt>,
+      itemIds: List<IdTmdb>,
       mode: Mode,
     ) = bundleOf(
       ARG_ID to itemIds.map { it.id }.toLongArray(),
@@ -30,12 +30,12 @@ abstract class RemoveTraktBottomSheet<T : ViewModel>(
     )
 
     fun createBundle(
-      itemId: IdTrakt,
+      itemId: IdTmdb,
       mode: Mode,
     ) = createBundle(listOf(itemId), mode)
   }
 
-  protected val itemIds: List<IdTrakt> by lazy { requireLongArray(ARG_ID).map { IdTrakt(it) } }
+  protected val itemIds: List<IdTmdb> by lazy { requireLongArray(ARG_ID).map { IdTmdb(it) } }
   protected val itemType by lazy { requireParcelable<Mode>(ARG_TYPE) }
 
   override fun getTheme(): Int = R.style.CustomBottomSheetDialog

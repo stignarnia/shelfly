@@ -33,7 +33,7 @@ class MovieDetailsMyMoviesCase @Inject constructor(
 
   suspend fun getMyMovie(movie: Movie): Movie? =
     withContext(dispatchers.IO) {
-      moviesRepository.myMovies.load(movie.ids.trakt)
+      moviesRepository.myMovies.load(movie.ids.tmdb)
     }
 
   suspend fun addToMyMovies(
@@ -41,8 +41,8 @@ class MovieDetailsMyMoviesCase @Inject constructor(
     customDate: ZonedDateTime?,
   ) {
     withContext(dispatchers.IO) {
-      moviesRepository.myMovies.insert(movie.ids.trakt, customDate)
-      quickSyncManager.scheduleMovies(listOf(movie.traktId), customDate)
+      moviesRepository.myMovies.insert(movie.ids.tmdb, customDate)
+      quickSyncManager.scheduleMovies(listOf(movie.tmdbId), customDate)
       pinnedItemsRepository.removePinnedItem(movie)
       announcementManager.refreshMoviesAnnouncements()
     }
@@ -50,9 +50,9 @@ class MovieDetailsMyMoviesCase @Inject constructor(
 
   suspend fun removeFromMyMovies(movie: Movie) {
     withContext(dispatchers.IO) {
-      moviesRepository.myMovies.delete(movie.ids.trakt)
+      moviesRepository.myMovies.delete(movie.ids.tmdb)
       pinnedItemsRepository.removePinnedItem(movie)
-      quickSyncManager.clearMovies(listOf(movie.traktId))
+      quickSyncManager.clearMovies(listOf(movie.tmdbId))
     }
   }
 }

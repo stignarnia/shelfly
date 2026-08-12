@@ -27,8 +27,8 @@ class ShowsDaoTest : BaseDaoTest() {
   @Test
   fun shouldInsertAndStoreMultipleEntities() {
     runBlocking {
-      val show1 = TestData.createShow().copy(idTrakt = 1)
-      val show2 = TestData.createShow().copy(idTrakt = 2)
+      val show1 = TestData.createShow().copy(idTmdb = 1)
+      val show2 = TestData.createShow().copy(idTmdb = 2)
 
       database.showsDao().upsert(listOf(show1, show2))
       val result = database.showsDao().getAll()
@@ -41,8 +41,8 @@ class ShowsDaoTest : BaseDaoTest() {
   @Test
   fun shouldReturnEntityById() {
     runBlocking {
-      val show1 = TestData.createShow().copy(idTrakt = 1)
-      val show2 = TestData.createShow().copy(idTrakt = 2)
+      val show1 = TestData.createShow().copy(idTmdb = 1)
+      val show2 = TestData.createShow().copy(idTmdb = 2)
 
       database.showsDao().upsert(listOf(show1, show2))
       val result = database.showsDao().getById(2)
@@ -53,9 +53,9 @@ class ShowsDaoTest : BaseDaoTest() {
   @Test
   fun shouldReturnEntitiesByIds() {
     runBlocking {
-      val show1 = TestData.createShow().copy(idTrakt = 1)
-      val show2 = TestData.createShow().copy(idTrakt = 2)
-      val show3 = TestData.createShow().copy(idTrakt = 3)
+      val show1 = TestData.createShow().copy(idTmdb = 1)
+      val show2 = TestData.createShow().copy(idTmdb = 2)
+      val show3 = TestData.createShow().copy(idTmdb = 3)
 
       database.showsDao().upsert(listOf(show1, show2, show3))
       val result = database.showsDao().getAll(listOf(1, 3))

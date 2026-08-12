@@ -64,27 +64,17 @@ class PeopleRepository @Inject constructor(
 
   suspend fun loadCredits(person: Person) =
     coroutineScope {
+      // People are keyed by their TMDB id, so there is no id to resolve first.
+      // Previously this looked a person's Trakt id up from their TMDB one.
       val idTmdb = person.ids.tmdb.id
-      var idTrakt: Long?
-
-      val localPerson = localSource.people.getById(idTmdb)
-      idTrakt = localPerson?.idTrakt
-      if (idTrakt == null) {
-        val ids = remoteSource.trakt.fetchPersonIds("tmdb", idTmdb.toString())
-        ids?.trakt?.let {
-          idTrakt = it
-          localSource.people.updateTraktId(it, idTmdb)
-        }
-      }
-      if (idTrakt == null) return@coroutineScope emptyList()
 
       // Return locally cached data if available
-      val timestamp = localSource.peopleCredits.getTimestampForPerson(idTrakt!!)
+      val timestamp = localSource.peopleCredits.getTimestampForPerson(idTmdb)
       if (timestamp != null && nowUtcMillis() - timestamp < Config.PEOPLE_CREDITS_CACHE_DURATION) {
         val localCredits = mutableListOf<PersonCredit>()
 
-        val showsCreditsAsync = async { localSource.peopleCredits.getAllShowsForPerson(idTrakt!!) }
-        val moviesCreditsAsync = async { localSource.peopleCredits.getAllMoviesForPerson(idTrakt!!) }
+        val showsCreditsAsync = async { localSource.peopleCredits.getAllShowsForPerson(idTmdb) }
+        val moviesCreditsAsync = async { localSource.peopleCredits.getAllMoviesForPerson(idTmdb) }
         val shows = showsCreditsAsync.await()
         val movies = moviesCreditsAsync.await()
 
@@ -110,8 +100,8 @@ class PeopleRepository @Inject constructor(
 
       // Return remote fetched data if available and cache it locally
       val type = if (person.department == Department.ACTING) Type.CAST else Type.CREW
-      val showsCreditsAsync = async { remoteSource.trakt.fetchPersonShowsCredits(idTrakt!!, type) }
-      val moviesCreditsAsync = async { remoteSource.trakt.fetchPersonMoviesCredits(idTrakt!!, type) }
+      val showsCreditsAsync = async { remoteSource.trakt.fetchPersonShowsCredits(idTmdb, type) }
+      val moviesCreditsAsync = async { remoteSource.trakt.fetchPersonMoviesCredits(idTmdb, type) }
       val remoteCredits = awaitAll(showsCreditsAsync, moviesCreditsAsync)
         .flatten()
         .map {
@@ -126,9 +116,9 @@ class PeopleRepository @Inject constructor(
       val localCredits = remoteCredits.map {
         PersonCredits(
           id = 0,
-          idTraktPerson = idTrakt!!,
-          idTraktShow = it.show?.traktId,
-          idTraktMovie = it.movie?.traktId,
+          idTmdbPerson = idTmdb,
+          idTmdbShow = it.show?.tmdbId,
+          idTmdbMovie = it.movie?.tmdbId,
           type = if (it.show != null) Mode.SHOWS.type else Mode.MOVIES.type,
           createdAt = nowUtc(),
           updatedAt = nowUtc(),
@@ -142,7 +132,7 @@ class PeopleRepository @Inject constructor(
         transactions.withTransaction {
           shows.upsert(remoteShows.map { mappers.show.toDatabase(it) })
           movies.upsert(remoteMovies.map { mappers.movie.toDatabase(it) })
-          peopleCredits.insertSingle(idTrakt!!, localCredits)
+          peopleCredits.insertSingle(idTmdb, localCredits)
         }
       }
 
@@ -152,8 +142,8 @@ class PeopleRepository @Inject constructor(
   suspend fun loadAllForShow(showIds: Ids): Map<Department, List<Person>> {
     val timestamp = nowUtc()
 
-    val localTimestamp = localSource.peopleShowsMovies.getTimestampForShow(showIds.trakt.id) ?: 0
-    val local = localSource.people.getAllForShow(showIds.trakt.id)
+    val localTimestamp = localSource.peopleShowsMovies.getTimestampForShow(showIds.tmdb.id) ?: 0
+    val local = localSource.people.getAllForShow(showIds.tmdb.id)
     if (local.isNotEmpty() && localTimestamp + Config.ACTORS_CACHE_DURATION > timestamp.toMillis()) {
       return local
         .map { mappers.person.fromDatabase(it) }
@@ -209,8 +199,8 @@ class PeopleRepository @Inject constructor(
         character = it.characters.joinToString(","),
         job = it.jobs.joinToString(",") { job -> job.slug },
         episodesCount = it.episodesCount,
-        idTraktShow = showIds.trakt.id,
-        idTraktMovie = null,
+        idTmdbShow = showIds.tmdb.id,
+        idTmdbMovie = null,
         createdAt = timestamp,
         updatedAt = timestamp,
       )
@@ -225,8 +215,8 @@ class PeopleRepository @Inject constructor(
         character = it.characters.joinToString(","),
         job = it.jobs.joinToString(",") { job -> job.slug },
         episodesCount = it.episodesCount,
-        idTraktShow = showIds.trakt.id,
-        idTraktMovie = null,
+        idTmdbShow = showIds.tmdb.id,
+        idTmdbMovie = null,
         createdAt = timestamp,
         updatedAt = timestamp,
       )
@@ -238,7 +228,7 @@ class PeopleRepository @Inject constructor(
     with(localSource) {
       transactions.withTransaction {
         people.upsert(dbTmdbPeople)
-        peopleShowsMovies.insertForShow(dbTmdbCast + dbTmdbCrew, showIds.trakt.id)
+        peopleShowsMovies.insertForShow(dbTmdbCast + dbTmdbCrew, showIds.tmdb.id)
       }
     }
 
@@ -250,8 +240,8 @@ class PeopleRepository @Inject constructor(
   suspend fun loadAllForMovie(movieIds: Ids): Map<Department, List<Person>> {
     val timestamp = nowUtc()
 
-    val localTimestamp = localSource.peopleShowsMovies.getTimestampForMovie(movieIds.trakt.id) ?: 0
-    val local = localSource.people.getAllForMovie(movieIds.trakt.id)
+    val localTimestamp = localSource.peopleShowsMovies.getTimestampForMovie(movieIds.tmdb.id) ?: 0
+    val local = localSource.people.getAllForMovie(movieIds.tmdb.id)
     if (local.isNotEmpty() && localTimestamp + Config.ACTORS_CACHE_DURATION > timestamp.toMillis()) {
       return local
         .map { mappers.person.fromDatabase(it) }
@@ -307,8 +297,8 @@ class PeopleRepository @Inject constructor(
         character = it.characters.joinToString(","),
         job = it.jobs.joinToString(",") { job -> job.slug },
         episodesCount = it.episodesCount,
-        idTraktShow = null,
-        idTraktMovie = movieIds.trakt.id,
+        idTmdbShow = null,
+        idTmdbMovie = movieIds.tmdb.id,
         createdAt = timestamp,
         updatedAt = timestamp,
       )
@@ -323,8 +313,8 @@ class PeopleRepository @Inject constructor(
         character = it.characters.joinToString(","),
         job = it.jobs.joinToString(",") { job -> job.slug },
         episodesCount = it.episodesCount,
-        idTraktShow = null,
-        idTraktMovie = movieIds.trakt.id,
+        idTmdbShow = null,
+        idTmdbMovie = movieIds.tmdb.id,
         createdAt = timestamp,
         updatedAt = timestamp,
       )
@@ -336,7 +326,7 @@ class PeopleRepository @Inject constructor(
     with(localSource) {
       transactions.withTransaction {
         people.upsert(dbTmdbPeople)
-        peopleShowsMovies.insertForMovie(dbTmdbCast + dbTmdbCrew, movieIds.trakt.id)
+        peopleShowsMovies.insertForMovie(dbTmdbCast + dbTmdbCrew, movieIds.tmdb.id)
       }
     }
 

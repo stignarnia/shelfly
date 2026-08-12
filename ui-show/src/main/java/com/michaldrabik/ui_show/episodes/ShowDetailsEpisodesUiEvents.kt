@@ -7,7 +7,7 @@ import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomShee
 import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_model.Episode
 import com.michaldrabik.ui_model.EpisodeBundle
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Season
 import com.michaldrabik.ui_show.sections.seasons.recycler.SeasonListItem
 
@@ -35,7 +35,7 @@ sealed class ShowDetailsEpisodesEvent<T>(
   data class RemoveFromTrakt(
     @IdRes val actionId: Int,
     val mode: RemoveTraktBottomSheet.Mode,
-    val traktIds: List<IdTrakt>,
+    val tmdbIds: List<IdTmdb>,
   ) : ShowDetailsEpisodesEvent<Int>(actionId)
 
   object RequestWidgetsUpdate : ShowDetailsEpisodesEvent<Unit>(Unit)

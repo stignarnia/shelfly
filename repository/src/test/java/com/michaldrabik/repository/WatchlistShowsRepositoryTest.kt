@@ -7,7 +7,7 @@ import com.michaldrabik.data_local.database.dao.WatchlistShowsDao
 import com.michaldrabik.data_local.database.model.WatchlistShow
 import com.michaldrabik.repository.common.BaseMockTest
 import com.michaldrabik.repository.shows.WatchlistShowsRepository
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Show
 import io.mockk.coEvery
 import io.mockk.coJustRun
@@ -68,7 +68,7 @@ class WatchlistShowsRepositoryTest : BaseMockTest() {
       coEvery { seeLaterShowsDao.getById(any()) } returns showDb
       coEvery { mappers.show.fromDatabase(any()) } returns show
 
-      val testShow = SUT.load(IdTrakt(1L))
+      val testShow = SUT.load(IdTmdb(1L))
 
       assertThat(testShow?.title).isEqualTo(show.title)
       coVerify(exactly = 1) { seeLaterShowsDao.getById(any()) }
@@ -85,10 +85,10 @@ class WatchlistShowsRepositoryTest : BaseMockTest() {
       val slot = slot<WatchlistShow>()
       coJustRun { seeLaterShowsDao.insert(capture(slot)) }
 
-      SUT.insert(IdTrakt(1L))
+      SUT.insert(IdTmdb(1L))
 
       assertThat(slot.captured.id).isEqualTo(0)
-      assertThat(slot.captured.idTrakt).isEqualTo(1)
+      assertThat(slot.captured.idTmdb).isEqualTo(1)
 
       coVerify(exactly = 1) { seeLaterShowsDao.insert(any()) }
     }
@@ -103,10 +103,10 @@ class WatchlistShowsRepositoryTest : BaseMockTest() {
       val slot = slot<WatchlistShow>()
       coJustRun { seeLaterShowsDao.insert(capture(slot)) }
 
-      SUT.insert(IdTrakt(1L))
+      SUT.insert(IdTmdb(1L))
 
       assertThat(slot.captured.id).isEqualTo(0)
-      assertThat(slot.captured.idTrakt).isEqualTo(1)
+      assertThat(slot.captured.idTmdb).isEqualTo(1)
 
       coVerify(exactly = 1) { seeLaterShowsDao.insert(any()) }
       coVerify(exactly = 1) { myShowsDao.deleteById(1L) }
@@ -120,7 +120,7 @@ class WatchlistShowsRepositoryTest : BaseMockTest() {
       val slot = slot<Long>()
       coJustRun { seeLaterShowsDao.deleteById(capture(slot)) }
 
-      SUT.delete(IdTrakt(10L))
+      SUT.delete(IdTmdb(10L))
 
       assertThat(slot.captured).isEqualTo(10L)
       coVerify(exactly = 1) { seeLaterShowsDao.deleteById(10L) }

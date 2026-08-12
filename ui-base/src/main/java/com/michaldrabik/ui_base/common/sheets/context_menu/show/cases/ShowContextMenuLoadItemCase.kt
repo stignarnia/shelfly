@@ -9,7 +9,7 @@ import com.michaldrabik.repository.images.ShowImagesProvider
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_base.common.sheets.context_menu.show.helpers.ShowContextItem
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.ImageType
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.async
@@ -28,9 +28,9 @@ class ShowContextMenuLoadItemCase @Inject constructor(
   private val settingsRepository: SettingsRepository,
 ) {
 
-  suspend fun loadItem(traktId: IdTrakt) =
+  suspend fun loadItem(tmdbId: IdTmdb) =
     withContext(dispatchers.IO) {
-      val show = showsRepository.detailsShow.load(traktId)
+      val show = showsRepository.detailsShow.load(tmdbId)
       val language = translationsRepository.getLanguage()
       val spoilers = settingsRepository.spoilers.getAll()
 
@@ -39,9 +39,9 @@ class ShowContextMenuLoadItemCase @Inject constructor(
         async { translationsRepository.loadTranslation(show, language = language, onlyLocal = true) }
       val ratingAsync = async { ratingsRepository.shows.loadRatings(listOf(show)) }
 
-      val isMyShowAsync = async { showsRepository.myShows.exists(traktId) }
-      val isWatchlistAsync = async { showsRepository.watchlistShows.exists(traktId) }
-      val isHiddenAsync = async { showsRepository.hiddenShows.exists(traktId) }
+      val isMyShowAsync = async { showsRepository.myShows.exists(tmdbId) }
+      val isWatchlistAsync = async { showsRepository.watchlistShows.exists(tmdbId) }
+      val isHiddenAsync = async { showsRepository.hiddenShows.exists(tmdbId) }
 
       val isPinnedAsync = async { pinnedItemsRepository.isItemPinned(show) }
       val isOnHoldAsync = async { onHoldItemsRepository.isOnHold(show) }

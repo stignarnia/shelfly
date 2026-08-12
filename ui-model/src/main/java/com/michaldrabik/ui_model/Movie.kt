@@ -23,7 +23,7 @@ data class Movie(
   val createdAt: Long,
 ) {
 
-  val traktId = ids.trakt.id
+  val tmdbId = ids.tmdb.id
 
   val titleNoThe = title.removePrefix("The").trim()
 

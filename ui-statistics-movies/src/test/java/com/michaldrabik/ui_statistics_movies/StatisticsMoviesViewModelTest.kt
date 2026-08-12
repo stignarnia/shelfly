@@ -6,7 +6,7 @@ import com.google.common.truth.Truth.assertThat
 import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_model.Genre
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageType
@@ -90,9 +90,9 @@ class StatisticsMoviesViewModelTest : BaseMockTest() {
   internal fun `Should load statistics properly`() =
     runTest {
       val movies = listOf(
-        Movie.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(1)), runtime = 1, genres = listOf("war", "drama")),
-        Movie.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(2)), runtime = 2, genres = listOf("war", "animation")),
-        Movie.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(3)), runtime = 3, genres = listOf("war", "animation")),
+        Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(1)), runtime = 1, genres = listOf("war", "drama")),
+        Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(2)), runtime = 2, genres = listOf("war", "animation")),
+        Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(3)), runtime = 3, genres = listOf("war", "animation")),
       )
 
       coEvery { moviesRepository.myMovies.loadAll() } returns movies

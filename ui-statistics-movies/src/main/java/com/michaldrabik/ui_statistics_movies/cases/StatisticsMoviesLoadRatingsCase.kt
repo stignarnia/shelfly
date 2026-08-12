@@ -21,14 +21,14 @@ class StatisticsMoviesLoadRatingsCase @Inject constructor(
 
   suspend fun loadRatings(): List<StatisticsMoviesRatingItem> {
     val ratings = ratingsRepository.movies.loadMoviesRatings()
-    val ratingsIds = ratings.map { it.idTrakt }
-    val myMovies = moviesRepository.myMovies.loadAll(ratingsIds).distinctBy { it.traktId }
+    val ratingsIds = ratings.map { it.idTmdb }
+    val myMovies = moviesRepository.myMovies.loadAll(ratingsIds).distinctBy { it.tmdbId }
 
     return ratings
-      .filter { rating -> myMovies.any { it.traktId == rating.idTrakt.id } }
+      .filter { rating -> myMovies.any { it.tmdbId == rating.idTmdb.id } }
       .take(LIMIT)
       .map { rating ->
-        val movie = myMovies.first { it.traktId == rating.idTrakt.id }
+        val movie = myMovies.first { it.tmdbId == rating.idTmdb.id }
         StatisticsMoviesRatingItem(
           isLoading = false,
           movie = movie,

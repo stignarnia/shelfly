@@ -54,11 +54,11 @@ class StatisticsFragment : BaseFragment<StatisticsViewModel>(R.layout.fragment_s
       statisticsMostWatchedShows.run {
         onLoadMoreClickListener = { addLimit -> viewModel.loadData(addLimit) }
         onShowClickListener = {
-          openShowDetails(it.traktId)
+          openShowDetails(it.tmdbId)
         }
       }
       statisticsRatings.onShowClickListener = {
-        openShowDetails(it.show.traktId)
+        openShowDetails(it.show.tmdbId)
       }
     }
   }
@@ -91,8 +91,8 @@ class StatisticsFragment : BaseFragment<StatisticsViewModel>(R.layout.fragment_s
     }
   }
 
-  private fun openShowDetails(traktId: Long) {
-    val bundle = bundleOf(ARG_SHOW_ID to traktId)
+  private fun openShowDetails(tmdbId: Long) {
+    val bundle = bundleOf(ARG_SHOW_ID to tmdbId)
     navigateTo(R.id.actionStatisticsFragmentToShowDetailsFragment, bundle)
   }
 }

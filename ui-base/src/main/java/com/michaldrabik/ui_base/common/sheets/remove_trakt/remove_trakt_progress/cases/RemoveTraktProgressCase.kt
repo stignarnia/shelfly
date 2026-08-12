@@ -6,7 +6,7 @@ import com.michaldrabik.data_remote.trakt.model.SyncExportRequest
 import com.michaldrabik.repository.EpisodesManager
 import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet.Mode
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
@@ -18,11 +18,11 @@ class RemoveTraktProgressCase @Inject constructor(
 ) {
 
   suspend fun removeTraktProgress(
-    traktIds: List<IdTrakt>,
+    tmdbIds: List<IdTmdb>,
     mode: Mode,
   ) {
     userManager.checkAuthorization()
-    val items = traktIds.map { SyncExportItem.create(it.id) }
+    val items = tmdbIds.map { SyncExportItem.create(it.id) }
 
     val request = when (mode) {
       Mode.SHOW -> SyncExportRequest(shows = items)
@@ -31,8 +31,8 @@ class RemoveTraktProgressCase @Inject constructor(
     }
 
     remoteSource.postDeleteProgress(request)
-    if (mode == Mode.SHOW && traktIds.isNotEmpty()) {
-      episodesManager.setAllUnwatched(traktIds.first())
+    if (mode == Mode.SHOW && tmdbIds.isNotEmpty()) {
+      episodesManager.setAllUnwatched(tmdbIds.first())
     }
   }
 }

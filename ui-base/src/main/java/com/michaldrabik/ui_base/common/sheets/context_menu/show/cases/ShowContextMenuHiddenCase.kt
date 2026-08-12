@@ -11,7 +11,7 @@ import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
 import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Show
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -32,26 +32,26 @@ class ShowContextMenuHiddenCase @Inject constructor(
 ) {
 
   suspend fun moveToHidden(
-    traktId: IdTrakt,
+    tmdbId: IdTmdb,
     removeLocalData: Boolean,
   ) = withContext(dispatchers.IO) {
-    val show = Show.EMPTY.copy(ids = Ids.EMPTY.copy(traktId))
+    val show = Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdbId))
 
     val (isMyShow, isWatchlist) = awaitAll(
-      async { showsRepository.myShows.exists(traktId) },
-      async { showsRepository.watchlistShows.exists(traktId) },
+      async { showsRepository.myShows.exists(tmdbId) },
+      async { showsRepository.watchlistShows.exists(tmdbId) },
     )
 
     transactions.withTransaction {
-      showsRepository.hiddenShows.insert(show.ids.trakt)
+      showsRepository.hiddenShows.insert(show.ids.tmdb)
 
       if (removeLocalData && isMyShow) {
-        localSource.episodes.deleteAllUnwatchedForShow(traktId.id)
-        val seasons = localSource.seasons.getAllByShowId(traktId.id)
-        val episodes = localSource.episodes.getAllByShowId(traktId.id)
+        localSource.episodes.deleteAllUnwatchedForShow(tmdbId.id)
+        val seasons = localSource.seasons.getAllByShowId(tmdbId.id)
+        val episodes = localSource.episodes.getAllByShowId(tmdbId.id)
         val toDelete = mutableListOf<Season>()
         seasons.forEach { season ->
-          if (episodes.none { it.idSeason == season.idTrakt }) {
+          if (episodes.none { it.idSeason == season.idTmdb }) {
             toDelete.add(season)
           }
         }
@@ -62,17 +62,17 @@ class ShowContextMenuHiddenCase @Inject constructor(
     pinnedItemsRepository.removePinnedItem(show)
     announcementManager.refreshShowsAnnouncements()
     with(quickSyncManager) {
-      clearWatchlistShows(listOf(traktId.id))
-      scheduleHidden(traktId.id, Mode.SHOWS, TraktSyncQueue.Operation.ADD)
+      clearWatchlistShows(listOf(tmdbId.id))
+      scheduleHidden(tmdbId.id, Mode.SHOWS, TraktSyncQueue.Operation.ADD)
     }
 
     RemoveTraktUiEvent(removeProgress = isMyShow, removeWatchlist = isWatchlist)
   }
 
-  suspend fun removeFromHidden(traktId: IdTrakt) =
+  suspend fun removeFromHidden(tmdbId: IdTmdb) =
     withContext(dispatchers.IO) {
-      showsRepository.hiddenShows.delete(traktId)
+      showsRepository.hiddenShows.delete(tmdbId)
       announcementManager.refreshShowsAnnouncements()
-      quickSyncManager.clearHiddenShows(listOf(traktId.id))
+      quickSyncManager.clearHiddenShows(listOf(tmdbId.id))
     }
 }

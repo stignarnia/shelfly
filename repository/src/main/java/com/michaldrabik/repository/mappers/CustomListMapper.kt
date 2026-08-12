@@ -19,7 +19,7 @@ class CustomListMapper @Inject constructor() {
   fun fromNetwork(list: CustomListNetwork) =
     CustomList(
       id = 0,
-      idTrakt = list.ids.trakt,
+      idTmdb = list.ids.trakt,
       idSlug = list.ids.slug,
       name = list.name,
       description = list.description,
@@ -41,7 +41,7 @@ class CustomListMapper @Inject constructor() {
   fun fromDatabase(list: CustomListDb) =
     CustomList(
       id = list.id,
-      idTrakt = list.idTrakt,
+      idTmdb = list.idTmdb,
       idSlug = list.idSlug,
       name = list.name,
       description = list.description,
@@ -66,7 +66,7 @@ class CustomListMapper @Inject constructor() {
   fun toDatabase(list: CustomList) =
     CustomListDb(
       id = list.id,
-      idTrakt = list.idTrakt,
+      idTmdb = list.idTmdb,
       idSlug = list.idSlug,
       name = list.name,
       description = list.description,
@@ -88,7 +88,7 @@ class CustomListMapper @Inject constructor() {
   fun toNetwork(list: CustomList) =
     CustomListNetwork(
       ids = IdsList(
-        trakt = list.idTrakt ?: -1,
+        trakt = list.idTmdb ?: -1,
         slug = list.idSlug,
       ),
       name = list.name,

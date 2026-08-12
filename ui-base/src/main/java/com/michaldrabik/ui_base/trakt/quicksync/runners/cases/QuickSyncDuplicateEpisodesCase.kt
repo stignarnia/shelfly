@@ -37,9 +37,9 @@ class QuickSyncDuplicateEpisodesCase @Inject constructor(
       episodes.forEach { item ->
         val showId = item.idList
         showId?.let {
-          val localEpisode = localEpisodes.find { it.idTrakt == item.idTrakt }
+          val localEpisode = localEpisodes.find { it.idTmdb == item.idTmdb }
           if (localEpisode == null) {
-            duplicateEpisodesIds.add(item.idTrakt)
+            duplicateEpisodesIds.add(item.idTmdb)
           } else {
             if (remoteShows
                 .filter { it.getTraktId() == showId }
@@ -50,7 +50,7 @@ class QuickSyncDuplicateEpisodesCase @Inject constructor(
                     ?.any { it.number == localEpisode.episodeNumber } == true
                 }
             ) {
-              duplicateEpisodesIds.add(item.idTrakt)
+              duplicateEpisodesIds.add(item.idTmdb)
             }
           }
         }

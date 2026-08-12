@@ -6,5 +6,5 @@ interface ShowRatingsLocalDataSource {
 
   suspend fun upsert(entity: ShowRatings)
 
-  suspend fun getById(traktId: Long): ShowRatings?
+  suspend fun getById(tmdbId: Long): ShowRatings?
 }

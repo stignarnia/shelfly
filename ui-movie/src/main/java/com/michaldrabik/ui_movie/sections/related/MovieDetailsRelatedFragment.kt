@@ -67,7 +67,7 @@ class MovieDetailsRelatedFragment :
   }
 
   private fun openDetails(item: RelatedListItem) {
-    val bundle = Bundle().apply { putLong(ARG_MOVIE_ID, item.movie.traktId) }
+    val bundle = Bundle().apply { putLong(ARG_MOVIE_ID, item.movie.tmdbId) }
     navigateToSafe(R.id.actionMovieDetailsFragmentToSelf, bundle)
   }
 
@@ -80,7 +80,7 @@ class MovieDetailsRelatedFragment :
         requireParentFragment().clearFragmentResultListener(REQUEST_ITEM_MENU)
       }
 
-    val bundle = ContextMenuBottomSheet.createBundle(item.movie.ids.trakt)
+    val bundle = ContextMenuBottomSheet.createBundle(item.movie.ids.tmdb)
     navigateToSafe(R.id.actionMovieDetailsFragmentToContext, bundle)
   }
 

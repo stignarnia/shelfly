@@ -13,11 +13,11 @@ interface MyMoviesLocalDataSource {
 
   suspend fun getAllTraktIds(): List<Long>
 
-  suspend fun getById(traktId: Long): Movie?
+  suspend fun getById(tmdbId: Long): Movie?
 
   suspend fun insert(movies: List<MyMovie>)
 
-  suspend fun deleteById(traktId: Long)
+  suspend fun deleteById(tmdbId: Long)
 
-  suspend fun checkExists(traktId: Long): Boolean
+  suspend fun checkExists(tmdbId: Long): Boolean
 }

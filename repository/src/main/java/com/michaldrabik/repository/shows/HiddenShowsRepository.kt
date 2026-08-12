@@ -5,7 +5,7 @@ import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.database.model.ArchiveShow
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.repository.mappers.Mappers
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import javax.inject.Inject
 
 class HiddenShowsRepository @Inject constructor(
@@ -19,20 +19,20 @@ class HiddenShowsRepository @Inject constructor(
       .getAll()
       .map { mappers.show.fromDatabase(it) }
 
-  suspend fun loadAll(ids: List<IdTrakt>) =
+  suspend fun loadAll(ids: List<IdTmdb>) =
     localSource.archiveShows
       .getAll(ids.map { it.id })
       .map { mappers.show.fromDatabase(it) }
 
-  suspend fun load(id: IdTrakt) =
+  suspend fun load(id: IdTmdb) =
     localSource.archiveShows.getById(id.id)?.let {
       mappers.show.fromDatabase(it)
     }
 
   suspend fun loadAllIds() = localSource.archiveShows.getAllTraktIds()
 
-  suspend fun insert(id: IdTrakt) {
-    val dbShow = ArchiveShow.fromTraktId(id.id, nowUtcMillis())
+  suspend fun insert(id: IdTmdb) {
+    val dbShow = ArchiveShow.fromTmdbId(id.id, nowUtcMillis())
     with(localSource) {
       transactions.withTransaction {
         archiveShows.insert(dbShow)
@@ -42,7 +42,7 @@ class HiddenShowsRepository @Inject constructor(
     }
   }
 
-  suspend fun delete(id: IdTrakt) = localSource.archiveShows.deleteById(id.id)
+  suspend fun delete(id: IdTmdb) = localSource.archiveShows.deleteById(id.id)
 
-  suspend fun exists(id: IdTrakt) = localSource.archiveShows.getById(id.id) != null
+  suspend fun exists(id: IdTmdb) = localSource.archiveShows.getById(id.id) != null
 }

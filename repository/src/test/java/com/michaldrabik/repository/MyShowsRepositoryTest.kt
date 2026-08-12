@@ -7,7 +7,7 @@ import com.michaldrabik.data_local.sources.MyShowsLocalDataSource
 import com.michaldrabik.data_local.sources.WatchlistShowsLocalDataSource
 import com.michaldrabik.repository.common.BaseMockTest
 import com.michaldrabik.repository.shows.MyShowsRepository
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Show
 import io.mockk.coEvery
 import io.mockk.coJustRun
@@ -60,7 +60,7 @@ class MyShowsRepositoryTest : BaseMockTest() {
       coEvery { myShowsLocalSource.getById(any()) } returns showDb
       coEvery { mappers.show.fromDatabase(any()) } returns show
 
-      val testShow = SUT.load(IdTrakt(1L))
+      val testShow = SUT.load(IdTmdb(1L))
 
       assertThat(testShow?.title).isEqualTo(show.title)
       coVerify(exactly = 1) { myShowsLocalSource.getById(any()) }
@@ -99,7 +99,7 @@ class MyShowsRepositoryTest : BaseMockTest() {
       coEvery { myShowsLocalSource.getAll(any()) } returns listOf(showDb, showDb)
       coEvery { mappers.show.fromDatabase(any()) } returns Show.EMPTY
 
-      val shows = SUT.loadAll(listOf(IdTrakt(1), IdTrakt(2)))
+      val shows = SUT.loadAll(listOf(IdTmdb(1), IdTmdb(2)))
 
       assertThat(shows).hasSize(2)
       coVerify(exactly = 1) { myShowsLocalSource.getAll(listOf(1, 2)) }
@@ -127,11 +127,11 @@ class MyShowsRepositoryTest : BaseMockTest() {
       val slot = slot<List<MyShow>>()
       coJustRun { myShowsLocalSource.insert(capture(slot)) }
 
-      SUT.insert(IdTrakt(10L), 666)
+      SUT.insert(IdTmdb(10L), 666)
 
       slot.captured[0].run {
         assertThat(id).isEqualTo(0)
-        assertThat(idTrakt).isEqualTo(10)
+        assertThat(idTmdb).isEqualTo(10)
         assertThat(createdAt).isGreaterThan(0L)
         assertThat(updatedAt).isGreaterThan(0L)
         assertThat(lastWatchedAt).isEqualTo(666)
@@ -148,7 +148,7 @@ class MyShowsRepositoryTest : BaseMockTest() {
       val slot = slot<Long>()
       coJustRun { myShowsLocalSource.deleteById(capture(slot)) }
 
-      SUT.delete(IdTrakt(10L))
+      SUT.delete(IdTmdb(10L))
 
       assertThat(slot.captured).isEqualTo(10L)
       coVerify(exactly = 1) { myShowsLocalSource.deleteById(10L) }

@@ -56,7 +56,6 @@ internal class BackupExportMoviesRunner @Inject constructor(
 
       val collectionHistory = historyMovies.map {
         BackupMovie(
-          traktId = it.idTrakt,
           tmdbId = it.idTmdb,
           title = it.title,
           addedAt = dateIsoStringFromMillis(it.updatedAt),
@@ -64,7 +63,6 @@ internal class BackupExportMoviesRunner @Inject constructor(
       }
       val collectionWatchlist = watchlistMovies.map {
         BackupMovie(
-          traktId = it.idTrakt,
           tmdbId = it.idTmdb,
           title = it.title,
           addedAt = dateIsoStringFromMillis(it.createdAt),
@@ -72,7 +70,6 @@ internal class BackupExportMoviesRunner @Inject constructor(
       }
       val collectionHidden = hiddenMovies.map {
         BackupMovie(
-          traktId = it.idTrakt,
           tmdbId = it.idTmdb,
           title = it.title,
           addedAt = dateIsoStringFromMillis(it.createdAt),
@@ -100,13 +97,12 @@ internal class BackupExportMoviesRunner @Inject constructor(
     withContext(dispatchers.IO) {
       val ratings = ratingsRepository.loadMoviesRatings()
 
-      val moviesIds = ratings.map { it.idTrakt.id }
-      val moviesTmdbIds = localSource.movies.getAllTmdbIds(traktIds = moviesIds)
+      val moviesIds = ratings.map { it.idTmdb.id }
+      val moviesTmdbIds = localSource.movies.getAllTmdbIds(tmdbIds = moviesIds)
 
       val ratingsMovies = ratings.map {
         BackupMovieRating(
-          traktId = it.idTrakt.id,
-          tmdbId = moviesTmdbIds.getOrDefault(it.idTrakt.id, -1),
+          tmdbId = it.idTmdb.id,
           rating = it.rating,
           ratedAt = dateIsoStringFromMillis(it.ratedAt.toMillis()),
         )

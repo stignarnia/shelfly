@@ -11,7 +11,7 @@ import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_model.Genre
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageFamily
@@ -114,21 +114,21 @@ class StatisticsViewModelTest : BaseMockTest() {
   internal fun `Should load statistics properly`() =
     runTest {
       val shows = listOf(
-        Show.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(1)), runtime = 1, genres = listOf("war", "drama")),
-        Show.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(2)), runtime = 2, genres = listOf("war", "animation")),
-        Show.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(3)), runtime = 3, genres = listOf("war", "animation")),
+        Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(1)), runtime = 1, genres = listOf("war", "drama")),
+        Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(2)), runtime = 2, genres = listOf("war", "animation")),
+        Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(3)), runtime = 3, genres = listOf("war", "animation")),
       )
 
       val shows2 = listOf(
-        Show.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(4)), runtime = 1, genres = listOf("war", "drama")),
-        Show.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(5)), runtime = 2, genres = listOf("war", "animation")),
-        Show.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(6)), runtime = 3, genres = listOf("war", "animation")),
+        Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(4)), runtime = 1, genres = listOf("war", "drama")),
+        Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(5)), runtime = 2, genres = listOf("war", "animation")),
+        Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(6)), runtime = 3, genres = listOf("war", "animation")),
       )
 
       val shows3 = listOf(
-        Show.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(7)), runtime = 1, genres = listOf("war", "drama")),
-        Show.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(8)), runtime = 2, genres = listOf("war", "animation")),
-        Show.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = IdTrakt(9)), runtime = 3, genres = listOf("war", "animation")),
+        Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(7)), runtime = 1, genres = listOf("war", "drama")),
+        Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(8)), runtime = 2, genres = listOf("war", "animation")),
+        Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(9)), runtime = 3, genres = listOf("war", "animation")),
       )
 
       coEvery { showsRepository.myShows.loadAll() } returns shows
@@ -136,10 +136,10 @@ class StatisticsViewModelTest : BaseMockTest() {
       coEvery { showsRepository.hiddenShows.loadAll() } returns shows3
 
       coEvery { database.episodes.getAllWatchedForShows(any()) } returns listOf(
-        TestData.createEpisode().copy(idShowTrakt = 1, runtime = 5),
-        TestData.createEpisode().copy(idShowTrakt = 2, runtime = 6),
-        TestData.createEpisode().copy(idShowTrakt = 3, runtime = 7),
-        TestData.createEpisode().copy(idShowTrakt = 3, runtime = 7),
+        TestData.createEpisode().copy(idShowTmdb = 1, runtime = 5),
+        TestData.createEpisode().copy(idShowTmdb = 2, runtime = 6),
+        TestData.createEpisode().copy(idShowTmdb = 3, runtime = 7),
+        TestData.createEpisode().copy(idShowTmdb = 3, runtime = 7),
       )
 
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }

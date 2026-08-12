@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaldrabik.common.Mode
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Person
 import com.michaldrabik.ui_people.list.cases.PeopleListItemsCase
 import com.michaldrabik.ui_people.list.recycler.PeopleListItem
@@ -24,14 +24,14 @@ class PeopleListViewModel @Inject constructor(
   private val peopleListState = MutableStateFlow<List<PeopleListItem>?>(null)
 
   fun loadPeople(
-    idTrakt: IdTrakt,
+    idTmdb: IdTmdb,
     title: String,
     mode: Mode,
     department: Person.Department,
   ) {
     viewModelScope.launch {
       val header = PeopleListItem.HeaderItem(department, title)
-      val people = itemsCase.loadPeople(idTrakt, mode, department)
+      val people = itemsCase.loadPeople(idTmdb, mode, department)
       peopleListState.value = listOf(header) + people
     }
   }

@@ -11,9 +11,9 @@ interface ArchiveShowsLocalDataSource {
 
   suspend fun getAllTraktIds(): List<Long>
 
-  suspend fun getById(traktId: Long): Show?
+  suspend fun getById(tmdbId: Long): Show?
 
   suspend fun insert(show: ArchiveShow)
 
-  suspend fun deleteById(traktId: Long)
+  suspend fun deleteById(tmdbId: Long)
 }

@@ -71,8 +71,8 @@ abstract class CalendarItemsCase(
 
       val shows = myShows + watchlistShows
 
-      val showsIds = shows.map { it.traktId }.chunked(250)
-      val watchlistShowsIds = watchlistShows.map { it.traktId }
+      val showsIds = shows.map { it.tmdbId }.chunked(250)
+      val watchlistShowsIds = watchlistShows.map { it.tmdbId }
 
       val (episodes, seasons) = awaitAll(
         async {
@@ -103,9 +103,9 @@ abstract class CalendarItemsCase(
         .sortedWith(sortEpisodes())
         .map { episode ->
           async {
-            val show = shows.firstOrNull { it.traktId == episode.idShowTrakt }
+            val show = shows.firstOrNull { it.tmdbId == episode.idShowTmdb }
             val season = filteredSeasons.firstOrNull {
-              it.idShowTrakt == episode.idShowTrakt && it.seasonNumber == episode.seasonNumber
+              it.idShowTmdb == episode.idShowTmdb && it.seasonNumber == episode.seasonNumber
             }
 
             if (show == null || season == null) {
@@ -113,7 +113,7 @@ abstract class CalendarItemsCase(
             }
 
             val seasonEpisodes = episodes.filter {
-              it.idShowTrakt == season.idShowTrakt &&
+              it.idShowTmdb == season.idShowTmdb &&
                 it.seasonNumber == season.seasonNumber
             }
 
@@ -123,7 +123,7 @@ abstract class CalendarItemsCase(
             var translations: TranslationsBundle? = null
             if (language != Config.DEFAULT_LANGUAGE) {
               translations = TranslationsBundle(
-                episode = translationsRepository.loadTranslation(episodeUi, show.ids.trakt, language, onlyLocal = true),
+                episode = translationsRepository.loadTranslation(episodeUi, show.ids.tmdb, language, onlyLocal = true),
                 show = translationsRepository.loadTranslation(show, language, onlyLocal = true),
               )
             }
@@ -133,7 +133,7 @@ abstract class CalendarItemsCase(
               episode = episodeUi,
               season = seasonUi,
               isWatched = isWatched(episode),
-              isWatchlist = show.traktId in watchlistShowsIds,
+              isWatchlist = show.tmdbId in watchlistShowsIds,
               isSpoilerHidden = isSpoilerHidden(episode),
               dateFormat = dateFormat,
               translations = translations,

@@ -32,6 +32,11 @@ class StorageModule {
         DATABASE_NAME,
       ).apply {
         migrations.getAll().forEach { addMigrations(it) }
+        // Version 42 re-keys every table from Trakt ids onto TMDB ids. Rows
+        // written before it cannot be converted in place - a Trakt id can only
+        // be resolved by asking Trakt - so a pre-42 database is discarded and
+        // the user restores from a backup file instead.
+        fallbackToDestructiveMigrationFrom(dropAllTables = true, 41)
       }.build()
   }
 

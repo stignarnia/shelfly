@@ -46,7 +46,7 @@ sealed class PersonDetailsItem {
     val spoilers: SpoilersSettings,
     val isLoading: Boolean = false,
   ) : PersonDetailsItem() {
-    override fun getId() = "${show.traktId}show"
+    override fun getId() = "${show.tmdbId}show"
 
     override fun getReleaseDate() =
       if (show.firstAired.isNotBlank()) {
@@ -66,7 +66,7 @@ sealed class PersonDetailsItem {
     val moviesEnabled: Boolean,
     val isLoading: Boolean = false,
   ) : PersonDetailsItem() {
-    override fun getId() = "${movie.traktId}movie"
+    override fun getId() = "${movie.tmdbId}movie"
 
     override fun getReleaseDate() = movie.released
   }

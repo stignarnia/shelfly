@@ -11,11 +11,11 @@ interface MoviesLocalDataSource {
 
   suspend fun getAll(ids: List<Long>): List<Movie>
 
-  suspend fun getAllTmdbIds(traktIds: List<Long>): Map<Long, Long>
+  suspend fun getAllTmdbIds(tmdbIds: List<Long>): Map<Long, Long>
 
   suspend fun getAllChunked(ids: List<Long>): List<Movie>
 
-  suspend fun getById(traktId: Long): Movie?
+  suspend fun getById(tmdbId: Long): Movie?
 
   suspend fun getByTmdbId(tmdbId: Long): Movie?
 
@@ -23,7 +23,7 @@ interface MoviesLocalDataSource {
 
   suspend fun getById(imdbId: String): Movie?
 
-  suspend fun deleteById(traktId: Long)
+  suspend fun deleteById(tmdbId: Long)
 
   suspend fun upsert(movies: List<Movie>)
 }

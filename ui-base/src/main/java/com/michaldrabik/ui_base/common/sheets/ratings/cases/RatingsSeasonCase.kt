@@ -5,7 +5,7 @@ import com.michaldrabik.common.errors.ErrorHelper
 import com.michaldrabik.common.errors.ShowlyError
 import com.michaldrabik.repository.RatingsRepository
 import com.michaldrabik.repository.UserTraktManager
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Season
 import com.michaldrabik.ui_model.TraktRating
@@ -24,9 +24,9 @@ class RatingsSeasonCase @Inject constructor(
     private val RATING_VALID_RANGE = 1..10
   }
 
-  suspend fun loadRating(idTrakt: IdTrakt): TraktRating =
+  suspend fun loadRating(idTmdb: IdTmdb): TraktRating =
     withContext(dispatchers.IO) {
-      val season = Season.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = idTrakt))
+      val season = Season.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = idTmdb))
       try {
         val rating = ratingsRepository.shows.loadRatingsSeasons(listOf(season))
         rating.firstOrNull() ?: TraktRating.EMPTY
@@ -37,14 +37,14 @@ class RatingsSeasonCase @Inject constructor(
     }
 
   suspend fun saveRating(
-    idTrakt: IdTrakt,
+    idTmdb: IdTmdb,
     rating: Int,
     seasonNumber: Int,
   ) = withContext(dispatchers.IO) {
     check(rating in RATING_VALID_RANGE)
 
     val season = Season.EMPTY.copy(
-      ids = Ids.EMPTY.copy(trakt = idTrakt),
+      ids = Ids.EMPTY.copy(tmdb = idTmdb),
       number = seasonNumber,
     )
 
@@ -59,9 +59,9 @@ class RatingsSeasonCase @Inject constructor(
     }
   }
 
-  suspend fun deleteRating(idTrakt: IdTrakt) =
+  suspend fun deleteRating(idTmdb: IdTmdb) =
     withContext(dispatchers.IO) {
-      val season = Season.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = idTrakt))
+      val season = Season.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = idTmdb))
       try {
         ratingsRepository.shows.deleteRating(
           season = season,

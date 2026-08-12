@@ -63,7 +63,7 @@ internal class GetHistoryItemsCase @Inject constructor(
         val async2 = async { showsRepository.watchlistShows.loadAll() }
         awaitAll(async1, async2).flatten()
       }
-      val showsIds = shows.map { it.traktId }.chunked(250)
+      val showsIds = shows.map { it.tmdbId }.chunked(250)
 
       val periodFilter = settingsRepository.filters.historyShowsPeriod
       val periodRange = getPeriodRange(periodFilter)
@@ -90,9 +90,9 @@ internal class GetHistoryItemsCase @Inject constructor(
       val items = localEpisodes
         .map { episode ->
           async {
-            val show = shows.firstOrNull { it.traktId == episode.idShowTrakt }
+            val show = shows.firstOrNull { it.tmdbId == episode.idShowTmdb }
             val season = localSeasons.firstOrNull {
-              it.idShowTrakt == episode.idShowTrakt &&
+              it.idShowTmdb == episode.idShowTmdb &&
                 it.seasonNumber == episode.seasonNumber
             }
 
@@ -101,7 +101,7 @@ internal class GetHistoryItemsCase @Inject constructor(
             }
 
             val seasonEpisodes = episodes.filter {
-              it.idShowTrakt == season.idShowTrakt &&
+              it.idShowTmdb == season.idShowTmdb &&
                 it.seasonNumber == season.seasonNumber
             }
 
@@ -172,7 +172,7 @@ internal class GetHistoryItemsCase @Inject constructor(
     return TranslationsBundle(
       episode = translationsRepository.loadTranslation(
         language = language,
-        showId = show.ids.trakt,
+        showId = show.ids.tmdb,
         episode = episode,
         onlyLocal = true,
       ),

@@ -12,9 +12,9 @@ interface MovieTranslationsDao :
   BaseDao<MovieTranslation>,
   MovieTranslationsLocalDataSource {
 
-  @Query("SELECT * FROM movies_translations WHERE id_trakt == :traktId AND language == :language")
+  @Query("SELECT * FROM movies_translations WHERE id_tmdb == :tmdbId AND language == :language")
   override suspend fun getById(
-    traktId: Long,
+    tmdbId: Long,
     language: String,
   ): MovieTranslation?
 

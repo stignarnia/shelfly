@@ -26,6 +26,6 @@ class ShowDetailsTranslationCase @Inject constructor(
       if (language == DEFAULT_LANGUAGE) {
         return@withContext null
       }
-      translationsRepository.loadTranslation(episode, show.ids.trakt, language, onlyLocal)
+      translationsRepository.loadTranslation(episode, show.ids.tmdb, language, onlyLocal)
     }
 }

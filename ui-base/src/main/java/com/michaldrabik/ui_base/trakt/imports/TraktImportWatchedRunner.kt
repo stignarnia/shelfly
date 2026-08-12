@@ -24,7 +24,7 @@ import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_base.Logger
 import com.michaldrabik.ui_base.trakt.TraktSyncRunner
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.ImageType.FANART
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Show
@@ -121,7 +121,7 @@ class TraktImportWatchedRunner @Inject constructor(
 
       val syncResults = remoteAuthSource
         .fetchSyncWatchedShows("full,progress")
-        .distinctBy { it.show?.ids?.trakt }
+        .distinctBy { it.show?.ids?.tmdb }
 
       Timber.d("Importing hidden/dropped shows...")
 
@@ -131,21 +131,21 @@ class TraktImportWatchedRunner @Inject constructor(
       )
 
       (remoteHiddenShows + remoteDroppedShows)
-        .distinctBy { it.show?.ids?.trakt }
+        .distinctBy { it.show?.ids?.tmdb }
         .forEach { item ->
           item.show?.let {
             val show = mappers.show.fromNetwork(it)
             val dbShow = mappers.show.toDatabase(show)
-            val archiveShow = ArchiveShow.fromTraktId(
-              traktId = show.traktId,
+            val archiveShow = ArchiveShow.fromTmdbId(
+              tmdbId = show.tmdbId,
               createdAt = item.hiddenAtMillis(),
             )
             transactions.withTransaction {
               with(localSource) {
                 shows.upsert(listOf(dbShow))
                 archiveShows.insert(archiveShow)
-                myShows.deleteById(show.traktId)
-                watchlistShows.deleteById(show.traktId)
+                myShows.deleteById(show.tmdbId)
+                watchlistShows.deleteById(show.tmdbId)
               }
             }
           }
@@ -171,7 +171,7 @@ class TraktImportWatchedRunner @Inject constructor(
                 progressTitles.add(showTitle)
               }
 
-              val log = traktSyncLogs.firstOrNull { it.idTrakt == syncItem.show?.ids?.trakt }
+              val log = traktSyncLogs.firstOrNull { it.idTmdb == syncItem.show?.ids?.tmdb }
               if (syncItem.lastUpdateMillis() == (log?.syncedAt ?: 0)) {
                 Timber.d("Nothing changed in \'$showTitle\'. Skipping...")
                 return@async
@@ -189,8 +189,8 @@ class TraktImportWatchedRunner @Inject constructor(
                   val show = mappers.show.fromNetwork(syncItem.requireShow())
                   val showDb = mappers.show.toDatabase(show)
 
-                  val myShow = MyShow.fromTraktId(
-                    traktId = showDb.idTrakt,
+                  val myShow = MyShow.fromTmdbId(
+                    tmdbId = showDb.idTmdb,
                     createdAt = syncItem.lastWatchedMillis(),
                     updatedAt = syncItem.lastWatchedMillis(),
                     watchedAt = syncItem.lastWatchedMillis(),
@@ -243,18 +243,18 @@ class TraktImportWatchedRunner @Inject constructor(
     val localEpisodesIds = localSource.episodes.getAllWatchedIdsForShows(listOf(showId))
 
     val seasons = remoteSeasons
-      .filterNot { localSeasonsIds.contains(it.ids?.trakt) }
+      .filterNot { localSeasonsIds.contains(it.ids?.tmdb) }
       .map { mappers.season.fromNetwork(it) }
       .map { remoteSeason ->
         val isWatched = syncItem.seasons?.any {
           it.number == remoteSeason.number && it.episodes?.size == remoteSeason.episodes.size
         } ?: false
-        mappers.season.toDatabase(remoteSeason, IdTrakt(showId), isWatched)
+        mappers.season.toDatabase(remoteSeason, IdTmdb(showId), isWatched)
       }
 
     val episodes = remoteSeasons.flatMap { season ->
       season.episodes
-        ?.filterNot { localEpisodesIds.contains(it.ids?.trakt) }
+        ?.filterNot { localEpisodesIds.contains(it.ids?.tmdb) }
         ?.map { episode ->
           val syncEpisode = syncItem.seasons
             ?.find { it.number == season.number }
@@ -269,7 +269,7 @@ class TraktImportWatchedRunner @Inject constructor(
           val seasonDb = mappers.season.fromNetwork(season)
           val episodeDb = mappers.episode.fromNetwork(episode)
           mappers.episode.toDatabase(
-            showId = IdTrakt(showId),
+            showId = IdTmdb(showId),
             season = seasonDb,
             episode = episodeDb,
             isWatched = syncEpisode != null,
@@ -322,7 +322,7 @@ class TraktImportWatchedRunner @Inject constructor(
       val syncItems = remoteAuthSource
         .fetchSyncWatchedMovies("full,progress")
         .filter { it.movie != null }
-        .distinctBy { it.movie?.ids?.trakt }
+        .distinctBy { it.movie?.ids?.tmdb }
 
       Timber.d("Importing hidden movies...")
 
@@ -333,13 +333,13 @@ class TraktImportWatchedRunner @Inject constructor(
         hiddenMovie.movie?.let {
           val movie = mappers.movie.fromNetwork(it)
           val dbMovie = mappers.movie.toDatabase(movie)
-          val archiveMovie = ArchiveMovie.fromTraktId(movie.traktId, hiddenMovie.hiddenAtMillis())
+          val archiveMovie = ArchiveMovie.fromTmdbId(movie.tmdbId, hiddenMovie.hiddenAtMillis())
           transactions.withTransaction {
             with(localSource) {
               movies.upsert(listOf(dbMovie))
               archiveMovies.insert(archiveMovie)
-              myMovies.deleteById(movie.traktId)
-              watchlistMovies.deleteById(movie.traktId)
+              myMovies.deleteById(movie.tmdbId)
+              watchlistMovies.deleteById(movie.tmdbId)
             }
           }
         }
@@ -370,7 +370,7 @@ class TraktImportWatchedRunner @Inject constructor(
                   val movie = mappers.movie.fromNetwork(item.requireMovie())
                   val movieDb = mappers.movie.toDatabase(movie)
 
-                  val myMovie = MyMovie.fromTraktId(movieDb.idTrakt, item.lastWatchedMillis())
+                  val myMovie = MyMovie.fromTmdbId(movieDb.idTmdb, item.lastWatchedMillis())
                   localSource.movies.upsert(listOf(movieDb))
                   localSource.myMovies.insert(listOf(myMovie))
 

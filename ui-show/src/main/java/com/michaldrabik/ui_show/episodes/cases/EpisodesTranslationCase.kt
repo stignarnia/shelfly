@@ -30,6 +30,6 @@ class EpisodesTranslationCase @Inject constructor(
         return@withContext emptyList()
       }
 
-      translationsRepository.loadTranslations(season, show.ids.trakt, language)
+      translationsRepository.loadTranslations(season, show.ids.tmdb, language)
     }
 }

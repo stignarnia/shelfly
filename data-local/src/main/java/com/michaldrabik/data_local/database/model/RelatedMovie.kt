@@ -11,27 +11,27 @@ import androidx.room.PrimaryKey
   foreignKeys = [
     ForeignKey(
       entity = Movie::class,
-      parentColumns = arrayOf("id_trakt"),
-      childColumns = arrayOf("id_trakt_related_movie"),
+      parentColumns = arrayOf("id_tmdb"),
+      childColumns = arrayOf("id_tmdb_related_movie"),
       onDelete = CASCADE,
     ),
   ],
 )
 data class RelatedMovie(
   @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
-  @ColumnInfo(name = "id_trakt", defaultValue = "-1") val idTrakt: Long,
-  @ColumnInfo(name = "id_trakt_related_movie", defaultValue = "-1", index = true) val idTraktRelatedMovie: Long,
+  @ColumnInfo(name = "id_tmdb", defaultValue = "-1") val idTmdb: Long,
+  @ColumnInfo(name = "id_tmdb_related_movie", defaultValue = "-1", index = true) val idTmdbRelatedMovie: Long,
   @ColumnInfo(name = "updated_at", defaultValue = "-1") val updatedAt: Long,
 ) {
 
   companion object {
-    fun fromTraktId(
-      traktId: Long,
+    fun fromTmdbId(
+      tmdbId: Long,
       relatedTraktId: Long,
       nowUtcMillis: Long,
     ) = RelatedMovie(
-      idTrakt = traktId,
-      idTraktRelatedMovie = relatedTraktId,
+      idTmdb = tmdbId,
+      idTmdbRelatedMovie = relatedTraktId,
       updatedAt = nowUtcMillis,
     )
   }

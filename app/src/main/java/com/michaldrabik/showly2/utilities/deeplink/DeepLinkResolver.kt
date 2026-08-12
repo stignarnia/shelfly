@@ -59,7 +59,7 @@ class DeepLinkResolver @Inject constructor() {
     try {
       resetNavigation(navController, navigationView)
 
-      val navBundle = bundleOf(NavigationArgs.ARG_SHOW_ID to show.traktId)
+      val navBundle = bundleOf(NavigationArgs.ARG_SHOW_ID to show.tmdbId)
       val actionId = when (navController.currentDestination?.id) {
         R.id.progressMainFragment -> R.id.actionProgressFragmentToShowDetailsFragment
         R.id.progressMoviesMainFragment -> R.id.actionProgressMoviesFragmentToShowDetailsFragment
@@ -67,7 +67,7 @@ class DeepLinkResolver @Inject constructor() {
       }
       navController.navigate(actionId, navBundle)
     } catch (error: Throwable) {
-      Logger.record(error, "DeepLinkResolver::resolveDestination(show:${show.traktId})")
+      Logger.record(error, "DeepLinkResolver::resolveDestination(show:${show.tmdbId})")
     }
   }
 
@@ -79,7 +79,7 @@ class DeepLinkResolver @Inject constructor() {
     try {
       resetNavigation(navController, navigationView)
 
-      val navBundle = bundleOf(NavigationArgs.ARG_MOVIE_ID to movie.traktId)
+      val navBundle = bundleOf(NavigationArgs.ARG_MOVIE_ID to movie.tmdbId)
       val actionId = when (navController.currentDestination?.id) {
         R.id.progressMainFragment -> R.id.actionProgressFragmentToMovieDetailsFragment
         R.id.progressMoviesMainFragment -> R.id.actionProgressMoviesFragmentToMovieDetailsFragment
@@ -87,7 +87,7 @@ class DeepLinkResolver @Inject constructor() {
       }
       navController.navigate(actionId, navBundle)
     } catch (error: Throwable) {
-      Logger.record(error, "DeepLinkResolver::resolveDestination(movie:${movie.traktId})")
+      Logger.record(error, "DeepLinkResolver::resolveDestination(movie:${movie.tmdbId})")
     }
   }
 

@@ -5,7 +5,7 @@ import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.database.model.WatchlistShow
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.repository.mappers.Mappers
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import javax.inject.Inject
 
 class WatchlistShowsRepository @Inject constructor(
@@ -21,13 +21,13 @@ class WatchlistShowsRepository @Inject constructor(
 
   suspend fun loadAllIds() = localSource.watchlistShows.getAllTraktIds()
 
-  suspend fun load(id: IdTrakt) =
+  suspend fun load(id: IdTmdb) =
     localSource.watchlistShows.getById(id.id)?.let {
       mappers.show.fromDatabase(it)
     }
 
-  suspend fun insert(id: IdTrakt) {
-    val dbShow = WatchlistShow.fromTraktId(id.id, nowUtcMillis())
+  suspend fun insert(id: IdTmdb) {
+    val dbShow = WatchlistShow.fromTmdbId(id.id, nowUtcMillis())
     with(localSource) {
       transactions.withTransaction {
         watchlistShows.insert(dbShow)
@@ -37,7 +37,7 @@ class WatchlistShowsRepository @Inject constructor(
     }
   }
 
-  suspend fun delete(id: IdTrakt) = localSource.watchlistShows.deleteById(id.id)
+  suspend fun delete(id: IdTmdb) = localSource.watchlistShows.deleteById(id.id)
 
-  suspend fun exists(id: IdTrakt) = localSource.watchlistShows.checkExists(id.id)
+  suspend fun exists(id: IdTmdb) = localSource.watchlistShows.checkExists(id.id)
 }

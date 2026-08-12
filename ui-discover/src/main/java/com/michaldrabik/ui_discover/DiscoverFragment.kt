@@ -264,7 +264,7 @@ internal class DiscoverFragment :
       }
       clearFragmentResultListener(REQUEST_ITEM_MENU)
     }
-    val bundle = ContextMenuBottomSheet.createBundle(show.ids.trakt)
+    val bundle = ContextMenuBottomSheet.createBundle(show.ids.tmdb)
     navigateToSafe(R.id.actionDiscoverFragmentToItemMenu, bundle)
   }
 
@@ -294,7 +294,7 @@ internal class DiscoverFragment :
           startDelay = 350,
           endAction = {
             if (!isResumed) return@fadeOut
-            val bundle = Bundle().apply { putLong(ARG_SHOW_ID, item.show.traktId) }
+            val bundle = Bundle().apply { putLong(ARG_SHOW_ID, item.show.tmdbId) }
             navigateToSafe(R.id.actionDiscoverFragmentToShowDetailsFragment, bundle)
           },
         ).add(animations)

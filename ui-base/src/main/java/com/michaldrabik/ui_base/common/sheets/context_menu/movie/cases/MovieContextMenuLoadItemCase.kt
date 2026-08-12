@@ -9,7 +9,7 @@ import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.repository.settings.SettingsSpoilersRepository
 import com.michaldrabik.ui_base.common.sheets.context_menu.movie.helpers.MovieContextItem
 import com.michaldrabik.ui_base.dates.DateFormatProvider
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.ImageType
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.async
@@ -28,9 +28,9 @@ class MovieContextMenuLoadItemCase @Inject constructor(
   private val dateFormatProvider: DateFormatProvider,
 ) {
 
-  suspend fun loadItem(traktId: IdTrakt) =
+  suspend fun loadItem(tmdbId: IdTmdb) =
     withContext(dispatchers.IO) {
-      val movie = moviesRepository.movieDetails.load(traktId)
+      val movie = moviesRepository.movieDetails.load(tmdbId)
       val dateFormat = dateFormatProvider.loadShortDayFormat()
       val language = translationsRepository.getLanguage()
       val spoilers = settingsSpoilersRepository.getAll()
@@ -40,9 +40,9 @@ class MovieContextMenuLoadItemCase @Inject constructor(
         async { translationsRepository.loadTranslation(movie, language = language, onlyLocal = true) }
       val ratingAsync = async { ratingsRepository.movies.loadRatings(listOf(movie)) }
 
-      val isMyMovieAsync = async { moviesRepository.myMovies.exists(traktId) }
-      val isWatchlistAsync = async { moviesRepository.watchlistMovies.exists(traktId) }
-      val isHiddenAsync = async { moviesRepository.hiddenMovies.exists(traktId) }
+      val isMyMovieAsync = async { moviesRepository.myMovies.exists(tmdbId) }
+      val isWatchlistAsync = async { moviesRepository.watchlistMovies.exists(tmdbId) }
+      val isHiddenAsync = async { moviesRepository.hiddenMovies.exists(tmdbId) }
 
       val isPinnedAsync = async { pinnedItemsRepository.isItemPinned(movie) }
 

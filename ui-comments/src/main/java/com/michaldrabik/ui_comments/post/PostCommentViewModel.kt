@@ -17,7 +17,7 @@ import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
 import com.michaldrabik.ui_comments.R
 import com.michaldrabik.ui_model.Comment
 import com.michaldrabik.ui_model.Episode
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Show
@@ -41,7 +41,7 @@ class PostCommentViewModel @Inject constructor(
   private val successState = MutableStateFlow<Event<Pair<String, Comment>>?>(null)
 
   fun postShowComment(
-    showId: IdTrakt,
+    showId: IdTmdb,
     commentText: String,
     isSpoiler: Boolean,
   ) {
@@ -49,7 +49,7 @@ class PostCommentViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         loadingState.value = true
-        val show = Show.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = showId))
+        val show = Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = showId))
         val comment = commentsRepository
           .postComment(show, commentText, isSpoiler)
           .copy(isMe = true, isSignedIn = true)
@@ -61,7 +61,7 @@ class PostCommentViewModel @Inject constructor(
   }
 
   fun postMovieComment(
-    movieId: IdTrakt,
+    movieId: IdTmdb,
     commentText: String,
     isSpoiler: Boolean,
   ) {
@@ -69,7 +69,7 @@ class PostCommentViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         loadingState.value = true
-        val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = movieId))
+        val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = movieId))
         val comment = commentsRepository
           .postComment(movie, commentText, isSpoiler)
           .copy(isMe = true, isSignedIn = true)
@@ -81,7 +81,7 @@ class PostCommentViewModel @Inject constructor(
   }
 
   fun postEpisodeComment(
-    episodeId: IdTrakt,
+    episodeId: IdTmdb,
     commentText: String,
     isSpoiler: Boolean,
   ) {
@@ -89,7 +89,7 @@ class PostCommentViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         loadingState.value = true
-        val episode = Episode.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = episodeId))
+        val episode = Episode.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = episodeId))
         val comment = commentsRepository
           .postComment(episode, commentText, isSpoiler)
           .copy(isMe = true, isSignedIn = true)
@@ -101,7 +101,7 @@ class PostCommentViewModel @Inject constructor(
   }
 
   fun postReply(
-    commentId: IdTrakt,
+    commentId: IdTmdb,
     commentText: String,
     isSpoiler: Boolean,
   ) {

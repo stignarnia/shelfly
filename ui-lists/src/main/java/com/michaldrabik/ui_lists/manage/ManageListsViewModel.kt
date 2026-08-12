@@ -6,7 +6,7 @@ import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.findReplace
 import com.michaldrabik.ui_lists.manage.cases.ManageListsCase
 import com.michaldrabik.ui_lists.manage.recycler.ManageListsItem
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,7 +25,7 @@ class ManageListsViewModel @Inject constructor(
   private val itemsState = MutableStateFlow<List<ManageListsItem>?>(null)
 
   fun loadLists(
-    itemId: IdTrakt,
+    itemId: IdTmdb,
     itemType: String,
   ) {
     viewModelScope.launch {
@@ -41,7 +41,7 @@ class ManageListsViewModel @Inject constructor(
   }
 
   fun onListItemChecked(
-    itemId: IdTrakt,
+    itemId: IdTmdb,
     itemType: String,
     listItem: ManageListsItem,
     isChecked: Boolean,

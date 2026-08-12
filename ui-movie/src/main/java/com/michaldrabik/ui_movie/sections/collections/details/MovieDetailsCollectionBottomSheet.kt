@@ -29,7 +29,7 @@ import com.michaldrabik.ui_base.utilities.extensions.screenHeight
 import com.michaldrabik.ui_base.utilities.extensions.showErrorSnackbar
 import com.michaldrabik.ui_base.utilities.extensions.showInfoSnackbar
 import com.michaldrabik.ui_base.utilities.viewBinding
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_movie.R
 import com.michaldrabik.ui_movie.databinding.ViewMovieCollectionDetailsBinding
 import com.michaldrabik.ui_movie.sections.collections.details.recycler.MovieDetailsCollectionAdapter
@@ -48,8 +48,8 @@ class MovieDetailsCollectionBottomSheet : BaseBottomSheetFragment(R.layout.view_
     const val SHOW_BACK_UP_BUTTON_THRESHOLD = 25
 
     fun createBundle(
-      collectionId: IdTrakt,
-      sourceMovieId: IdTrakt,
+      collectionId: IdTmdb,
+      sourceMovieId: IdTmdb,
     ) = bundleOf(
       ARG_ID to collectionId,
       ARG_MOVIE_ID to sourceMovieId,
@@ -59,8 +59,8 @@ class MovieDetailsCollectionBottomSheet : BaseBottomSheetFragment(R.layout.view_
   private val viewModel by viewModels<MovieDetailsCollectionViewModel>()
   private val binding by viewBinding(ViewMovieCollectionDetailsBinding::bind)
 
-  private val collectionId by lazy { requireParcelable<IdTrakt>(ARG_ID) }
-  private val sourceMovieId by lazy { requireParcelable<IdTrakt>(ARG_MOVIE_ID) }
+  private val collectionId by lazy { requireParcelable<IdTmdb>(ARG_ID) }
+  private val sourceMovieId by lazy { requireParcelable<IdTmdb>(ARG_MOVIE_ID) }
 
   private var adapter: MovieDetailsCollectionAdapter? = null
   private var layoutManager: LinearLayoutManager? = null
@@ -117,7 +117,7 @@ class MovieDetailsCollectionBottomSheet : BaseBottomSheetFragment(R.layout.view_
 
   private fun openDetails(item: MovieDetailsCollectionItem) {
     if (item !is MovieDetailsCollectionItem.MovieItem) return
-    if (item.movie.ids.trakt == sourceMovieId) {
+    if (item.movie.ids.tmdb == sourceMovieId) {
       dismiss()
       return
     }
@@ -125,7 +125,7 @@ class MovieDetailsCollectionBottomSheet : BaseBottomSheetFragment(R.layout.view_
     val resultBundle = bundleOf(ARG_COLLECTION_ID to collectionId)
     setFragmentResult(REQUEST_DETAILS, resultBundle)
 
-    val argsBundle = bundleOf(ARG_MOVIE_ID to item.movie.traktId)
+    val argsBundle = bundleOf(ARG_MOVIE_ID to item.movie.tmdbId)
     requireParentFragment()
       .findNavController()
       .navigate(R.id.actionMovieCollectionDialogToMovie, argsBundle)
@@ -133,7 +133,7 @@ class MovieDetailsCollectionBottomSheet : BaseBottomSheetFragment(R.layout.view_
 
   private fun openContextDetails(item: MovieDetailsCollectionItem) {
     if (item !is MovieDetailsCollectionItem.MovieItem) return
-    if (item.movie.ids.trakt == sourceMovieId) return
+    if (item.movie.ids.tmdb == sourceMovieId) return
 
     setFragmentResultListener(NavigationArgs.REQUEST_ITEM_MENU) { requestKey, _ ->
       if (requestKey == NavigationArgs.REQUEST_ITEM_MENU) {
@@ -143,7 +143,7 @@ class MovieDetailsCollectionBottomSheet : BaseBottomSheetFragment(R.layout.view_
     }
 
     val bundle = ContextMenuBottomSheet.createBundle(
-      idTrakt = item.movie.ids.trakt,
+      idTmdb = item.movie.ids.tmdb,
       detailsEnabled = false,
     )
     navigateTo(R.id.actionMovieCollectionDialogToContextDialog, bundle)

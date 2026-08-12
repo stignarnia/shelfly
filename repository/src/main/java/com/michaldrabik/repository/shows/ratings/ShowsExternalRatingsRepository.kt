@@ -19,7 +19,7 @@ class ShowsExternalRatingsRepository @Inject constructor(
 ) {
 
   suspend fun loadRatings(show: Show): Ratings {
-    val localRatings = localSource.showRatings.getById(show.traktId)
+    val localRatings = localSource.showRatings.getById(show.tmdbId)
     localRatings?.let {
       if (nowUtcMillis() - it.updatedAt < ConfigVariant.RATINGS_CACHE_DURATION) {
         return mappers.ratings.fromDatabase(it)
@@ -31,7 +31,7 @@ class ShowsExternalRatingsRepository @Inject constructor(
       .let { mappers.ratings.fromNetwork(it) }
       .copy(trakt = Ratings.Value(String.format(Locale.ENGLISH, "%.1f", show.rating), false))
 
-    val dbRatings = mappers.ratings.toShowDatabase(show.ids.trakt, remoteRatings)
+    val dbRatings = mappers.ratings.toShowDatabase(show.ids.tmdb, remoteRatings)
     localSource.showRatings.upsert(dbRatings)
 
     return remoteRatings

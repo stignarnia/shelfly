@@ -81,7 +81,7 @@ class QuickSyncManager @Inject constructor(
   }
 
   suspend fun scheduleAddToList(
-    idTrakt: Long,
+    idTmdb: Long,
     idList: Long,
     type: Mode,
   ) {
@@ -89,8 +89,8 @@ class QuickSyncManager @Inject constructor(
 
     val time = nowUtcMillis()
     val item = when (type) {
-      Mode.SHOWS -> TraktSyncQueue.createListShow(idTrakt, idList, Operation.ADD, time, time)
-      Mode.MOVIES -> TraktSyncQueue.createListMovie(idTrakt, idList, Operation.ADD, time, time)
+      Mode.SHOWS -> TraktSyncQueue.createListShow(idTmdb, idList, Operation.ADD, time, time)
+      Mode.MOVIES -> TraktSyncQueue.createListMovie(idTmdb, idList, Operation.ADD, time, time)
     }
 
     val itemType = when (type) {
@@ -99,8 +99,8 @@ class QuickSyncManager @Inject constructor(
     }
 
     transactions.withTransaction {
-      localSource.traktSyncQueue.delete(idTrakt, idList, itemType.slug, Operation.ADD.slug)
-      val count = localSource.traktSyncQueue.delete(idTrakt, idList, itemType.slug, Operation.REMOVE.slug)
+      localSource.traktSyncQueue.delete(idTmdb, idList, itemType.slug, Operation.ADD.slug)
+      val count = localSource.traktSyncQueue.delete(idTmdb, idList, itemType.slug, Operation.REMOVE.slug)
       if (count == 0) {
         localSource.traktSyncQueue.insert(listOf(item))
         Timber.d("Added ${type.type} list item into add to list queue.")
@@ -111,7 +111,7 @@ class QuickSyncManager @Inject constructor(
   }
 
   suspend fun scheduleRemoveFromList(
-    idTrakt: Long,
+    idTmdb: Long,
     idList: Long,
     type: Mode,
   ) {
@@ -119,8 +119,8 @@ class QuickSyncManager @Inject constructor(
 
     val time = nowUtcMillis()
     val item = when (type) {
-      Mode.SHOWS -> TraktSyncQueue.createListShow(idTrakt, idList, Operation.REMOVE, time, time)
-      Mode.MOVIES -> TraktSyncQueue.createListMovie(idTrakt, idList, Operation.REMOVE, time, time)
+      Mode.SHOWS -> TraktSyncQueue.createListShow(idTmdb, idList, Operation.REMOVE, time, time)
+      Mode.MOVIES -> TraktSyncQueue.createListMovie(idTmdb, idList, Operation.REMOVE, time, time)
     }
 
     val itemType = when (type) {
@@ -129,8 +129,8 @@ class QuickSyncManager @Inject constructor(
     }
 
     transactions.withTransaction {
-      localSource.traktSyncQueue.delete(idTrakt, idList, itemType.slug, Operation.REMOVE.slug)
-      val count = localSource.traktSyncQueue.delete(idTrakt, idList, itemType.slug, Operation.ADD.slug)
+      localSource.traktSyncQueue.delete(idTmdb, idList, itemType.slug, Operation.REMOVE.slug)
+      val count = localSource.traktSyncQueue.delete(idTmdb, idList, itemType.slug, Operation.ADD.slug)
       if (count == 0 && ensureQuickRemove()) {
         localSource.traktSyncQueue.insert(listOf(item))
         Timber.d("Added ${type.type} list item into remove from list queue.")
@@ -141,7 +141,7 @@ class QuickSyncManager @Inject constructor(
   }
 
   suspend fun scheduleHidden(
-    idTrakt: Long,
+    idTmdb: Long,
     type: Mode,
     operation: Operation,
   ) {
@@ -149,15 +149,15 @@ class QuickSyncManager @Inject constructor(
 
     val time = nowUtcMillis()
     val item = when (type) {
-      Mode.SHOWS -> TraktSyncQueue.createHiddenShow(idTrakt, operation, time, time)
-      Mode.MOVIES -> TraktSyncQueue.createHiddenMovie(idTrakt, operation, time, time)
+      Mode.SHOWS -> TraktSyncQueue.createHiddenShow(idTmdb, operation, time, time)
+      Mode.MOVIES -> TraktSyncQueue.createHiddenMovie(idTmdb, operation, time, time)
     }
 
     localSource.traktSyncQueue.insert(listOf(item))
 
     when (type) {
-      Mode.SHOWS -> Timber.d("Hidden show added into sync queue. #$idTrakt")
-      Mode.MOVIES -> Timber.d("Hidden movie added into sync queue. #$idTrakt")
+      Mode.SHOWS -> Timber.d("Hidden show added into sync queue. #$idTmdb")
+      Mode.MOVIES -> Timber.d("Hidden movie added into sync queue. #$idTmdb")
     }
 
     QuickSyncWorker.schedule(workManager)

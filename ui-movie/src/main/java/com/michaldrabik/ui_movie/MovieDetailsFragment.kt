@@ -62,7 +62,7 @@ import com.michaldrabik.ui_base.utilities.extensions.withSuccessListener
 import com.michaldrabik.ui_base.utilities.viewBinding
 import com.michaldrabik.ui_comments.fragment.CommentsFragment
 import com.michaldrabik.ui_model.Genre
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageFamily.MOVIE
 import com.michaldrabik.ui_model.ImageStatus.UNAVAILABLE
@@ -102,7 +102,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
 
   override val viewModel by viewModels<MovieDetailsViewModel>()
 
-  private val movieId by lazy { IdTrakt(requireLong(ARG_MOVIE_ID)) }
+  private val movieId by lazy { IdTmdb(requireLong(ARG_MOVIE_ID)) }
 
   private val imageHeight by lazy {
     if (resources.configuration.orientation == ORIENTATION_PORTRAIT) {

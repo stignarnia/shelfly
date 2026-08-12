@@ -12,7 +12,7 @@ class CalendarMovieItemDiffCallback : DiffUtil.ItemCallback<CalendarMovieListIte
       return oldItem.textResId == newItem.textResId
     }
     if (oldItem is CalendarMovieListItem.MovieItem && newItem is CalendarMovieListItem.MovieItem) {
-      return oldItem.movie.traktId == newItem.movie.traktId
+      return oldItem.movie.tmdbId == newItem.movie.tmdbId
     }
     if (oldItem is CalendarMovieListItem.Filters && newItem is CalendarMovieListItem.Filters) {
       return true

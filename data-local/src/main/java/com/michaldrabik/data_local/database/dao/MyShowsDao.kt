@@ -15,7 +15,7 @@ interface MyShowsDao : MyShowsLocalDataSource {
 
   @Query(
     "SELECT " +
-      "shows.id_trakt, " +
+      "shows.id_tmdb, " +
       "shows.id_tvdb, " +
       "shows.id_tmdb, " +
       "shows.id_imdb, " +
@@ -43,13 +43,13 @@ interface MyShowsDao : MyShowsLocalDataSource {
       "shows_my_shows.last_watched_at AS updated_at, " +
       "shows_my_shows.created_at " +
       "FROM shows " +
-      "INNER JOIN shows_my_shows USING(id_trakt)",
+      "INNER JOIN shows_my_shows USING(id_tmdb)",
   )
   override suspend fun getAll(): List<Show>
 
   @Query(
     "SELECT " +
-      "shows.id_trakt, " +
+      "shows.id_tmdb, " +
       "shows.id_tvdb, " +
       "shows.id_tmdb, " +
       "shows.id_imdb, " +
@@ -77,33 +77,33 @@ interface MyShowsDao : MyShowsLocalDataSource {
       "shows_my_shows.last_watched_at AS updated_at, " +
       "shows_my_shows.created_at " +
       "FROM shows " +
-      "INNER JOIN shows_my_shows USING(id_trakt) WHERE id_trakt IN (:ids)",
+      "INNER JOIN shows_my_shows USING(id_tmdb) WHERE id_tmdb IN (:ids)",
   )
   override suspend fun getAll(ids: List<Long>): List<Show>
 
   @Query(
-    "SELECT shows.* FROM shows INNER JOIN shows_my_shows USING(id_trakt) ORDER BY shows_my_shows.created_at DESC LIMIT :limit",
+    "SELECT shows.* FROM shows INNER JOIN shows_my_shows USING(id_tmdb) ORDER BY shows_my_shows.created_at DESC LIMIT :limit",
   )
   override suspend fun getAllRecent(limit: Int): List<Show>
 
-  @Query("SELECT shows.id_trakt FROM shows INNER JOIN shows_my_shows USING(id_trakt)")
+  @Query("SELECT shows.id_tmdb FROM shows INNER JOIN shows_my_shows USING(id_tmdb)")
   override suspend fun getAllTraktIds(): List<Long>
 
-  @Query("SELECT shows.* FROM shows INNER JOIN shows_my_shows USING(id_trakt) WHERE id_trakt == :traktId")
-  override suspend fun getById(traktId: Long): Show?
+  @Query("SELECT shows.* FROM shows INNER JOIN shows_my_shows USING(id_tmdb) WHERE id_tmdb == :tmdbId")
+  override suspend fun getById(tmdbId: Long): Show?
 
-  @Query("UPDATE shows_my_shows SET last_watched_at = :watchedAt WHERE id_trakt == :traktId")
+  @Query("UPDATE shows_my_shows SET last_watched_at = :watchedAt WHERE id_tmdb == :tmdbId")
   override suspend fun updateWatchedAt(
-    traktId: Long,
+    tmdbId: Long,
     watchedAt: Long,
   )
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   override suspend fun insert(shows: List<MyShow>)
 
-  @Query("DELETE FROM shows_my_shows WHERE id_trakt == :traktId")
-  override suspend fun deleteById(traktId: Long)
+  @Query("DELETE FROM shows_my_shows WHERE id_tmdb == :tmdbId")
+  override suspend fun deleteById(tmdbId: Long)
 
-  @Query("SELECT EXISTS(SELECT 1 FROM shows_my_shows WHERE id_trakt = :traktId LIMIT 1);")
-  override suspend fun checkExists(traktId: Long): Boolean
+  @Query("SELECT EXISTS(SELECT 1 FROM shows_my_shows WHERE id_tmdb = :tmdbId LIMIT 1);")
+  override suspend fun checkExists(tmdbId: Long): Boolean
 }

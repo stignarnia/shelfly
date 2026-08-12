@@ -13,18 +13,18 @@ interface MovieStreamingsDao :
 
   @Transaction
   override suspend fun replace(
-    traktId: Long,
+    tmdbId: Long,
     entities: List<MovieStreaming>,
   ) {
-    deleteById(traktId)
+    deleteById(tmdbId)
     insert(entities)
   }
 
-  @Query("SELECT * FROM movies_streamings WHERE id_trakt == :traktId")
-  override suspend fun getById(traktId: Long): List<MovieStreaming>
+  @Query("SELECT * FROM movies_streamings WHERE id_tmdb == :tmdbId")
+  override suspend fun getById(tmdbId: Long): List<MovieStreaming>
 
-  @Query("DELETE FROM movies_streamings WHERE id_trakt == :traktId")
-  override suspend fun deleteById(traktId: Long)
+  @Query("DELETE FROM movies_streamings WHERE id_tmdb == :tmdbId")
+  override suspend fun deleteById(tmdbId: Long)
 
   @Query("DELETE FROM movies_streamings")
   override suspend fun deleteAll()

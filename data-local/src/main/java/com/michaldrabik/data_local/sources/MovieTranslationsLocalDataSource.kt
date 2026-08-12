@@ -5,7 +5,7 @@ import com.michaldrabik.data_local.database.model.MovieTranslation
 interface MovieTranslationsLocalDataSource {
 
   suspend fun getById(
-    traktId: Long,
+    tmdbId: Long,
     language: String,
   ): MovieTranslation?
 

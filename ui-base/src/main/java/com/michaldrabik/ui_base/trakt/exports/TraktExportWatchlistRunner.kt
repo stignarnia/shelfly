@@ -51,12 +51,12 @@ class TraktExportWatchlistRunner @Inject constructor(
 
       val localShows = localSource.watchlistShows
         .getAll()
-        .map { SyncExportItem.create(it.idTrakt) }
+        .map { SyncExportItem.create(it.idTmdb) }
       val localMovies = buildList {
         if (isMoviesEnables) {
           localSource.watchlistMovies
             .getAll()
-            .mapTo(this) { SyncExportItem.create(it.idTrakt) }
+            .mapTo(this) { SyncExportItem.create(it.idTmdb) }
         }
       }
 

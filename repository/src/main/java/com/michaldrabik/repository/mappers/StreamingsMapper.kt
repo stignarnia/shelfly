@@ -76,7 +76,6 @@ class StreamingsMapper @Inject constructor() {
     country: TmdbStreamingCountry,
     input: TmdbStreamingService,
   ) = MovieStreaming(
-    idTrakt = ids.trakt.id,
     idTmdb = ids.tmdb.id,
     type = option.name,
     providerId = input.provider_id,
@@ -94,7 +93,6 @@ class StreamingsMapper @Inject constructor() {
     country: TmdbStreamingCountry,
     input: TmdbStreamingService,
   ) = ShowStreaming(
-    idTrakt = ids.trakt.id,
     idTmdb = ids.tmdb.id,
     type = option.name,
     providerId = input.provider_id,

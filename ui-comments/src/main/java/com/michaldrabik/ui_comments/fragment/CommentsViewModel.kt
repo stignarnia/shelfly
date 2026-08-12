@@ -20,7 +20,7 @@ import com.michaldrabik.ui_comments.fragment.cases.DeleteCommentCase
 import com.michaldrabik.ui_comments.fragment.cases.LoadCommentsCase
 import com.michaldrabik.ui_comments.fragment.cases.LoadRepliesCase
 import com.michaldrabik.ui_model.Comment
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_OPTIONS
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -64,7 +64,7 @@ class CommentsViewModel @Inject constructor(
   }
 
   private fun loadComments(
-    id: IdTrakt,
+    id: IdTmdb,
     mode: Mode,
   ) {
     viewModelScope.launch {

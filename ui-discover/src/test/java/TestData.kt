@@ -3,7 +3,6 @@ import com.michaldrabik.ui_model.AirTime
 import com.michaldrabik.ui_model.IdImdb
 import com.michaldrabik.ui_model.IdSlug
 import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.IdTrakt
 import com.michaldrabik.ui_model.IdTvRage
 import com.michaldrabik.ui_model.IdTvdb
 import com.michaldrabik.ui_model.Ids
@@ -20,7 +19,6 @@ object TestData {
   val DISCOVER_LIST_ITEM = DiscoverListItem(
     show = Show(
       ids = Ids(
-        trakt = IdTrakt(id = 0),
         slug = IdSlug(id = ""),
         tvdb = IdTvdb(id = 0),
         imdb = IdImdb(id = ""),

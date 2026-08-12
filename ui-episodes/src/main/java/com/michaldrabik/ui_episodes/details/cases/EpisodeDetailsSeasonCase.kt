@@ -4,7 +4,7 @@ import com.michaldrabik.data_local.sources.EpisodesLocalDataSource
 import com.michaldrabik.data_local.sources.MyShowsLocalDataSource
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.Episode
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ class EpisodeDetailsSeasonCase @Inject constructor(
 ) {
 
   suspend fun loadSeason(
-    showId: IdTrakt,
+    showId: IdTmdb,
     episode: Episode,
     seasonEpisodes: IntArray?,
   ): List<Episode> {

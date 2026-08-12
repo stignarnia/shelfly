@@ -13,7 +13,7 @@ import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
 import com.michaldrabik.ui_model.Episode
 import com.michaldrabik.ui_model.EpisodeBundle
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.ProgressDateSelectionType.ALWAYS_ASK
 import com.michaldrabik.ui_model.Show
 import com.michaldrabik.ui_model.Translation
@@ -74,8 +74,8 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
   }
 
   private fun loadInitialData(
-    showId: IdTrakt,
-    seasonId: IdTrakt,
+    showId: IdTmdb,
+    seasonId: IdTmdb,
   ) {
     viewModelScope.launch {
       this@ShowDetailsEpisodesViewModel.show = loadShowCase.loadDetails(showId)
@@ -147,7 +147,7 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
       }
 
       translations.forEach { translation ->
-        val episode = episodes.find { it.id == translation.ids.trakt.id }
+        val episode = episodes.find { it.id == translation.ids.tmdb.id }
         episode?.let { ep ->
           if (translation.title.isNotBlank() || translation.overview.isNotBlank()) {
             val t = Translation(translation.title, translation.overview, translation.language)
@@ -201,12 +201,12 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
           val event = ShowDetailsEpisodesEvent.RemoveFromTrakt(
             actionId = R.id.actionEpisodesFragmentToRemoveTraktProgress,
             mode = RemoveTraktBottomSheet.Mode.EPISODE,
-            traktIds = listOf(episode.ids.trakt),
+            tmdbIds = listOf(episode.ids.tmdb),
           )
           eventChannel.send(event)
         }
         refreshWatchedEpisodes()
-        announcementsCase.refreshAnnouncements(show.ids.trakt)
+        announcementsCase.refreshAnnouncements(show.ids.tmdb)
       }
     }
   }
@@ -240,12 +240,12 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
         val event = ShowDetailsEpisodesEvent.RemoveFromTrakt(
           actionId = R.id.actionEpisodesFragmentToRemoveTraktProgress,
           mode = RemoveTraktBottomSheet.Mode.EPISODE,
-          traktIds = season.season.episodes.map { it.ids.trakt },
+          tmdbIds = season.season.episodes.map { it.ids.tmdb },
         )
         eventChannel.send(event)
       }
       refreshWatchedEpisodes()
-      announcementsCase.refreshAnnouncements(show.ids.trakt)
+      announcementsCase.refreshAnnouncements(show.ids.tmdb)
     }
   }
 
@@ -304,10 +304,10 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
   }
 
   private fun refreshSeasonsCache() {
-    val cachedSeasons = seasonsCache.loadSeasons(show.ids.trakt)?.toMutableList()
+    val cachedSeasons = seasonsCache.loadSeasons(show.ids.tmdb)?.toMutableList()
     val currentSeason = seasonState.value
     val currentEpisodes = episodesState.value
-    val isSeasonLocal = seasonsCache.areSeasonsLocal(show.ids.trakt)
+    val isSeasonLocal = seasonsCache.areSeasonsLocal(show.ids.tmdb)
 
     if (currentSeason != null && currentEpisodes != null) {
       cachedSeasons?.find { it.id == currentSeason.id }?.let { season ->
@@ -316,7 +316,7 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
           userRating = currentSeason.userRating,
         )
         cachedSeasons.findReplace(updated) { it.id == season.id }
-        seasonsCache.setSeasons(show.ids.trakt, cachedSeasons, isSeasonLocal)
+        seasonsCache.setSeasons(show.ids.tmdb, cachedSeasons, isSeasonLocal)
       }
     }
   }

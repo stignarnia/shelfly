@@ -18,7 +18,7 @@ import com.michaldrabik.ui_base.utilities.extensions.launchDelayed
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
 import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageType.FANART
 import com.michaldrabik.ui_model.RatingState
@@ -85,7 +85,7 @@ class ShowDetailsViewModel @Inject constructor(
   val parentShowState = showState.asStateFlow()
   val parentFollowedState = followedState.asStateFlow()
 
-  fun loadDetails(id: IdTrakt) {
+  fun loadDetails(id: IdTmdb) {
     viewModelScope.launch {
       val progressJob = launchDelayed(700) {
         showLoadingState.value = true
@@ -189,7 +189,7 @@ class ShowDetailsViewModel @Inject constructor(
     viewModelScope.launch {
       if (!checkSeasonsLoaded()) return@launch
 
-      val seasonItems = seasonsCache.loadSeasons(show.ids.trakt) ?: emptyList()
+      val seasonItems = seasonsCache.loadSeasons(show.ids.tmdb) ?: emptyList()
       val seasons = seasonItems.map { it.season }
       val episodes = seasonItems.flatMap { it.episodes.map { e -> e.episode } }
 
@@ -211,7 +211,7 @@ class ShowDetailsViewModel @Inject constructor(
     viewModelScope.launch {
       if (!checkSeasonsLoaded()) return@launch
 
-      val areSeasonsLocal = seasonsCache.areSeasonsLocal(show.ids.trakt)
+      val areSeasonsLocal = seasonsCache.areSeasonsLocal(show.ids.tmdb)
       hiddenCase.addToHidden(show, removeLocalData = !areSeasonsLocal)
       followedState.value = FollowedState.inHidden()
     }
@@ -224,7 +224,7 @@ class ShowDetailsViewModel @Inject constructor(
       val isMyShows = myShowsCase.isMyShows(show)
       val isWatchlist = watchlistCase.isWatchlist(show)
       val isArchived = hiddenCase.isHidden(show)
-      val areSeasonsLocal = seasonsCache.areSeasonsLocal(show.ids.trakt)
+      val areSeasonsLocal = seasonsCache.areSeasonsLocal(show.ids.tmdb)
 
       when {
         isMyShows -> myShowsCase.removeFromMyShows(show, removeLocalData = !areSeasonsLocal)
@@ -236,7 +236,7 @@ class ShowDetailsViewModel @Inject constructor(
       val showRemoveTrakt = userManager.isAuthorized() && traktQuickRemoveEnabled && !areSeasonsLocal
 
       val state = FollowedState.idle()
-      val ids = listOf(show.ids.trakt)
+      val ids = listOf(show.ids.tmdb)
       val mode = RemoveTraktBottomSheet.Mode.SHOW
       when {
         isMyShows -> {
@@ -264,7 +264,7 @@ class ShowDetailsViewModel @Inject constructor(
     }
   }
 
-  fun removeMalformedShow(id: IdTrakt) {
+  fun removeMalformedShow(id: IdTmdb) {
     viewModelScope.launch {
       try {
         mainCase.removeMalformedShow(id)
@@ -284,7 +284,7 @@ class ShowDetailsViewModel @Inject constructor(
   }
 
   private suspend fun checkSeasonsLoaded(): Boolean {
-    if (!seasonsCache.hasSeasons(show.ids.trakt)) {
+    if (!seasonsCache.hasSeasons(show.ids.tmdb)) {
       messageChannel.send(MessageEvent.Info(R.string.errorSeasonsNotLoaded))
       return false
     }
@@ -293,7 +293,7 @@ class ShowDetailsViewModel @Inject constructor(
 
   override fun onCleared() {
     if (this::show.isInitialized) {
-      seasonsCache.clear(show.ids.trakt)
+      seasonsCache.clear(show.ids.tmdb)
     }
     super.onCleared()
   }

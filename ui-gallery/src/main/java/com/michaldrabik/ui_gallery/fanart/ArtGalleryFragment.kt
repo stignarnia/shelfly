@@ -32,7 +32,7 @@ import com.michaldrabik.ui_base.utilities.viewBinding
 import com.michaldrabik.ui_gallery.R
 import com.michaldrabik.ui_gallery.databinding.FragmentArtGalleryBinding
 import com.michaldrabik.ui_gallery.fanart.recycler.ArtGalleryAdapter
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.ImageFamily
 import com.michaldrabik.ui_model.ImageFamily.SHOW
 import com.michaldrabik.ui_model.ImageType
@@ -52,8 +52,8 @@ class ArtGalleryFragment : BaseFragment<ArtGalleryViewModel>(R.layout.fragment_a
   override val viewModel by viewModels<ArtGalleryViewModel>()
   private val binding by viewBinding(FragmentArtGalleryBinding::bind)
 
-  private val showId by lazy { IdTrakt(arguments?.getLong(ARG_SHOW_ID, -1) ?: -1) }
-  private val movieId by lazy { IdTrakt(arguments?.getLong(ARG_MOVIE_ID, -1) ?: -1) }
+  private val showId by lazy { IdTmdb(arguments?.getLong(ARG_SHOW_ID, -1) ?: -1) }
+  private val movieId by lazy { IdTmdb(arguments?.getLong(ARG_MOVIE_ID, -1) ?: -1) }
   private val family by lazy { arguments?.getSerializable(ARG_FAMILY) as ImageFamily }
   private val type by lazy { arguments?.getSerializable(ARG_TYPE) as ImageType }
 

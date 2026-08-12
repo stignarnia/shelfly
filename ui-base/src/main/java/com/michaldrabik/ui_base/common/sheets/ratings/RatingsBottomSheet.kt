@@ -20,7 +20,7 @@ import com.michaldrabik.ui_base.utilities.extensions.showInfoSnackbar
 import com.michaldrabik.ui_base.utilities.extensions.visible
 import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.viewBinding
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.TraktRating
 import com.michaldrabik.ui_navigation.java.NavigationArgs
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +31,7 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
 
   companion object {
     fun createBundle(
-      id: IdTrakt,
+      id: IdTmdb,
       type: Options.Type,
       seasonNumber: Int? = null,
       episodeNumber: Int? = null,
@@ -149,7 +149,7 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
 
   @Parcelize
   data class Options(
-    val id: IdTrakt,
+    val id: IdTmdb,
     val type: Type,
     val seasonNumber: Int?,
     val episodeNumber: Int?,

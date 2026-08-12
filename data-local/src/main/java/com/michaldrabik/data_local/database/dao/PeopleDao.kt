@@ -30,7 +30,7 @@ interface PeopleDao : BaseDao<Person>, PeopleLocalDataSource {
     """
     SELECT
     people.id_tmdb,
-    people.id_trakt,
+    people.id_tmdb,
     people.id_imdb,
     people.name,
     people.biography,
@@ -49,7 +49,7 @@ interface PeopleDao : BaseDao<Person>, PeopleLocalDataSource {
     people_shows_movies.episodes_count AS episodes_count
     FROM people
     INNER JOIN people_shows_movies ON people_shows_movies.id_tmdb_person = people.id_tmdb
-    WHERE people_shows_movies.id_trakt_show = :showTraktId
+    WHERE people_shows_movies.id_tmdb_show = :showTraktId
     """
   )
   override suspend fun getAllForShow(showTraktId: Long): List<Person>
@@ -58,7 +58,7 @@ interface PeopleDao : BaseDao<Person>, PeopleLocalDataSource {
     """
     SELECT
     people.id_tmdb,
-    people.id_trakt,
+    people.id_tmdb,
     people.id_imdb,
     people.name,
     people.biography,
@@ -77,16 +77,13 @@ interface PeopleDao : BaseDao<Person>, PeopleLocalDataSource {
     people_shows_movies.episodes_count AS episodes_count
     FROM people
     INNER JOIN people_shows_movies ON people_shows_movies.id_tmdb_person = people.id_tmdb
-    WHERE people_shows_movies.id_trakt_movie = :movieTraktId
+    WHERE people_shows_movies.id_tmdb_movie = :movieTraktId
     """
   )
   override suspend fun getAllForMovie(movieTraktId: Long): List<Person>
 
   @Query("SELECT * FROM people")
   override suspend fun getAll(): List<Person>
-
-  @Query("UPDATE people SET id_trakt = :idTrakt WHERE id_tmdb = :idTmdb")
-  override suspend fun updateTraktId(idTrakt: Long, idTmdb: Long)
 
   @Query("UPDATE people SET biography_translation = NULL, details_updated_at = NULL")
   override suspend fun deleteTranslations()

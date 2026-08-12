@@ -16,5 +16,5 @@ data class SeasonListItem(
   val updatedAt: Long,
 ) {
 
-  val id = season.ids.trakt.id
+  val id = season.ids.tmdb.id
 }

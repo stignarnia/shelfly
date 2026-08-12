@@ -28,8 +28,8 @@ class ProgressMainEpisodesCase @Inject constructor(
   ) {
     episodesManager.setEpisodeWatched(bundle, customDate)
     quickSyncManager.scheduleEpisodes(
-      showId = bundle.show.traktId,
-      episodesIds = listOf(bundle.episode.ids.trakt.id),
+      showId = bundle.show.tmdbId,
+      episodesIds = listOf(bundle.episode.ids.tmdb.id),
       customDate = customDate,
     )
   }
@@ -49,7 +49,7 @@ class ProgressMainEpisodesCase @Inject constructor(
       ) {
         return@withContext false
       }
-      return@withContext localDataSource.isEpisodeWatched(show.traktId, episode.ids.trakt.id)
+      return@withContext localDataSource.isEpisodeWatched(show.tmdbId, episode.ids.tmdb.id)
     }
   }
 }

@@ -5,7 +5,7 @@ import com.michaldrabik.data_remote.trakt.model.SyncExportItem
 import com.michaldrabik.data_remote.trakt.model.SyncExportRequest
 import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet.Mode
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -19,11 +19,11 @@ class RemoveTraktHiddenCase @Inject constructor(
 ) {
 
   suspend fun removeTraktHidden(
-    traktIds: List<IdTrakt>,
+    tmdbIds: List<IdTmdb>,
     mode: Mode,
   ) {
     userManager.checkAuthorization()
-    val items = traktIds.map { SyncExportItem.create(it.id) }
+    val items = tmdbIds.map { SyncExportItem.create(it.id) }
 
     when (mode) {
       Mode.SHOW -> {

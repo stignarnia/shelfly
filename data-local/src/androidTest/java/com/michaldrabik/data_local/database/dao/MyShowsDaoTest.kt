@@ -20,9 +20,9 @@ class MyShowsDaoTest : BaseDaoTest() {
   @Before
   fun setUp() =
     runBlocking {
-      shows.add(TestData.createShow().copy(idTrakt = 1))
-      shows.add(TestData.createShow().copy(idTrakt = 2))
-      shows.add(TestData.createShow().copy(idTrakt = 3))
+      shows.add(TestData.createShow().copy(idTmdb = 1))
+      shows.add(TestData.createShow().copy(idTmdb = 2))
+      shows.add(TestData.createShow().copy(idTmdb = 3))
 
       database.showsDao().upsert(shows)
     }
@@ -30,7 +30,7 @@ class MyShowsDaoTest : BaseDaoTest() {
   @Test
   fun shouldInsertAndStoreEntities() {
     runBlocking {
-      val myShow = MyShow.fromTraktId(shows[0].idTrakt, 0, 0, 0)
+      val myShow = MyShow.fromTmdbId(shows[0].idTmdb, 0, 0, 0)
 
       database.myShowsDao().insert(listOf(myShow))
 
@@ -42,22 +42,22 @@ class MyShowsDaoTest : BaseDaoTest() {
   @Test
   fun shouldReturnIdsOnly() {
     runBlocking {
-      val myShow1 = MyShow.fromTraktId(shows[0].idTrakt, 0, 0, 0)
-      val myShow2 = MyShow.fromTraktId(shows[1].idTrakt, 0, 0, 0)
+      val myShow1 = MyShow.fromTmdbId(shows[0].idTmdb, 0, 0, 0)
+      val myShow2 = MyShow.fromTmdbId(shows[1].idTmdb, 0, 0, 0)
 
       database.myShowsDao().insert(listOf(myShow1))
       database.myShowsDao().insert(listOf(myShow2))
 
       val result = database.myShowsDao().getAllTraktIds()
-      assertThat(result).containsExactlyElementsIn(listOf(shows[0].idTrakt, shows[1].idTrakt))
+      assertThat(result).containsExactlyElementsIn(listOf(shows[0].idTmdb, shows[1].idTmdb))
     }
   }
 
   @Test
   fun shouldReturnMostRecentAddedShows() {
     runBlocking {
-      val myShow1 = MyShow.fromTraktId(shows[0].idTrakt, 0, 0, 0)
-      val myShow2 = MyShow.fromTraktId(shows[1].idTrakt, 999, 999, 999)
+      val myShow1 = MyShow.fromTmdbId(shows[0].idTmdb, 0, 0, 0)
+      val myShow2 = MyShow.fromTmdbId(shows[1].idTmdb, 999, 999, 999)
 
       database.myShowsDao().insert(listOf(myShow1))
       database.myShowsDao().insert(listOf(myShow2))
@@ -71,13 +71,13 @@ class MyShowsDaoTest : BaseDaoTest() {
   @Test
   fun shouldReturnById() {
     runBlocking {
-      val myShow1 = MyShow.fromTraktId(shows[0].idTrakt, 0, 0, 0)
-      val myShow2 = MyShow.fromTraktId(shows[1].idTrakt, 0, 0, 0)
+      val myShow1 = MyShow.fromTmdbId(shows[0].idTmdb, 0, 0, 0)
+      val myShow2 = MyShow.fromTmdbId(shows[1].idTmdb, 0, 0, 0)
 
       database.myShowsDao().insert(listOf(myShow1))
       database.myShowsDao().insert(listOf(myShow2))
 
-      val result = database.myShowsDao().getById(shows[1].idTrakt)
+      val result = database.myShowsDao().getById(shows[1].idTmdb)
       assertThat(result).isEqualTo(shows[1])
     }
   }
@@ -85,12 +85,12 @@ class MyShowsDaoTest : BaseDaoTest() {
   @Test
   fun shouldDeleteByIdWithoutDeletingParent() {
     runBlocking {
-      val myShow1 = MyShow.fromTraktId(shows[1].idTrakt, 0, 0, 0)
+      val myShow1 = MyShow.fromTmdbId(shows[1].idTmdb, 0, 0, 0)
 
       val showsSize = shows.size
       database.myShowsDao().insert(listOf(myShow1))
-      database.myShowsDao().deleteById(shows[1].idTrakt)
-      val result = database.myShowsDao().getById(shows[1].idTrakt)
+      database.myShowsDao().deleteById(shows[1].idTmdb)
+      val result = database.myShowsDao().getById(shows[1].idTmdb)
 
       assertThat(result).isNull()
       assertThat(shows).hasSize(showsSize)

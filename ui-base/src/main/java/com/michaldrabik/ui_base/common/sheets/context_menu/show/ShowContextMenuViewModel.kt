@@ -23,7 +23,7 @@ import com.michaldrabik.ui_base.utilities.extensions.launchDelayed
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
 import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.ImageType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -50,21 +50,21 @@ class ShowContextMenuViewModel @Inject constructor(
 ) : ViewModel(),
   ChannelsDelegate by DefaultChannelsDelegate() {
 
-  private var showId by notNull<IdTrakt>()
+  private var showId by notNull<IdTmdb>()
   private var isQuickRemoveEnabled by notNull<Boolean>()
 
   private val loadingState = MutableStateFlow(false)
   private val loadingSecondaryState = MutableStateFlow(false)
   private val itemState = MutableStateFlow<ShowContextItem?>(null)
 
-  fun loadShow(idTrakt: IdTrakt) {
+  fun loadShow(idTmdb: IdTmdb) {
     viewModelScope.launch {
-      showId = idTrakt
+      showId = idTmdb
       isQuickRemoveEnabled = settingsRepository.load().traktQuickRemoveEnabled
 
       try {
         loadingState.value = true
-        val item = loadItemCase.loadItem(idTrakt)
+        val item = loadItemCase.loadItem(idTmdb)
         itemState.value = item
       } catch (error: Throwable) {
         messageChannel.send(MessageEvent.Error(R.string.errorGeneral))
@@ -99,7 +99,7 @@ class ShowContextMenuViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         myShowsCase.removeFromMyShows(
-          traktId = showId,
+          tmdbId = showId,
           removeLocalData = networkProvider.isOnline(),
         )
         checkQuickRemove(RemoveTraktUiEvent(removeProgress = true))
@@ -113,7 +113,7 @@ class ShowContextMenuViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         val result = watchlistCase.moveToWatchlist(
-          traktId = showId,
+          tmdbId = showId,
           removeLocalData = networkProvider.isOnline(),
         )
         checkQuickRemove(result)
@@ -138,7 +138,7 @@ class ShowContextMenuViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         val result = hiddenCase.moveToHidden(
-          traktId = showId,
+          tmdbId = showId,
           removeLocalData = networkProvider.isOnline(),
         )
         checkQuickRemove(result)

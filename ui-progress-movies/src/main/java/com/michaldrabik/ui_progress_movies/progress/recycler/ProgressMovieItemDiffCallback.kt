@@ -37,7 +37,7 @@ class ProgressMovieItemDiffCallback : DiffUtil.ItemCallback<ProgressMovieListIte
   private fun areItemsTheSame(
     oldItem: ProgressMovieListItem.MovieItem,
     newItem: ProgressMovieListItem.MovieItem,
-  ): Boolean = oldItem.movie.ids.trakt == newItem.movie.ids.trakt
+  ): Boolean = oldItem.movie.ids.tmdb == newItem.movie.ids.tmdb
 
   private fun areContentsTheSame(
     oldItem: ProgressMovieListItem.MovieItem,

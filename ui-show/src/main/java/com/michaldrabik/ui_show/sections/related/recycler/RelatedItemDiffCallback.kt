@@ -7,7 +7,7 @@ class RelatedItemDiffCallback : DiffUtil.ItemCallback<RelatedListItem>() {
   override fun areItemsTheSame(
     oldItem: RelatedListItem,
     newItem: RelatedListItem,
-  ) = oldItem.show.ids.trakt == newItem.show.ids.trakt
+  ) = oldItem.show.ids.tmdb == newItem.show.ids.tmdb
 
   override fun areContentsTheSame(
     oldItem: RelatedListItem,

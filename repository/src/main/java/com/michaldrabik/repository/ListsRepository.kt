@@ -6,7 +6,7 @@ import com.michaldrabik.data_local.database.model.CustomListItem
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.CustomList
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -20,11 +20,11 @@ class ListsRepository @Inject constructor(
   suspend fun createList(
     name: String,
     description: String?,
-    idTrakt: Long?,
+    idTmdb: Long?,
     idSlug: String?,
   ): CustomList {
     val list = CustomList.create().copy(
-      idTrakt = idTrakt,
+      idTmdb = idTmdb,
       idSlug = idSlug ?: "",
       name = name.trim(),
       description = description?.trim(),
@@ -36,7 +36,7 @@ class ListsRepository @Inject constructor(
 
   suspend fun updateList(
     id: Long,
-    idTrakt: Long?,
+    idTmdb: Long?,
     idSlug: String?,
     name: String,
     description: String?,
@@ -44,7 +44,7 @@ class ListsRepository @Inject constructor(
     val listDb = localSource.customLists.getById(id)!!
     val updated = listDb.copy(
       name = name,
-      idTrakt = idTrakt ?: listDb.idTrakt,
+      idTmdb = idTmdb ?: listDb.idTmdb,
       idSlug = idSlug ?: listDb.idSlug,
       description = description,
       updatedAt = nowUtcMillis(),
@@ -57,7 +57,7 @@ class ListsRepository @Inject constructor(
 
   suspend fun addToList(
     listId: Long,
-    itemTraktId: IdTrakt,
+    itemTraktId: IdTmdb,
     itemType: String,
     listedAt: Long = nowUtcMillis(),
     createdAt: Long = nowUtcMillis(),
@@ -66,7 +66,7 @@ class ListsRepository @Inject constructor(
     val itemDb = CustomListItem(
       rank = 0,
       idList = listId,
-      idTrakt = itemTraktId.id,
+      idTmdb = itemTraktId.id,
       type = itemType,
       listedAt = listedAt,
       createdAt = createdAt,
@@ -80,7 +80,7 @@ class ListsRepository @Inject constructor(
 
   suspend fun removeFromList(
     listId: Long,
-    itemTraktId: IdTrakt,
+    itemTraktId: IdTmdb,
     itemType: String,
   ) {
     transactions.withTransaction {
@@ -90,7 +90,7 @@ class ListsRepository @Inject constructor(
   }
 
   suspend fun loadListIdsForItem(
-    itemTraktId: IdTrakt,
+    itemTraktId: IdTmdb,
     itemType: String,
   ) = localSource.customListsItems.getListsForItem(itemTraktId.id, itemType)
 

@@ -12,14 +12,13 @@ import java.time.ZonedDateTime
 @Entity(
   tableName = "movies_streamings",
   indices = [
-    Index(value = ["id_trakt"]),
     Index(value = ["id_tmdb"]),
   ],
   foreignKeys = [
     ForeignKey(
       entity = Movie::class,
-      parentColumns = arrayOf("id_trakt"),
-      childColumns = arrayOf("id_trakt"),
+      parentColumns = arrayOf("id_tmdb"),
+      childColumns = arrayOf("id_tmdb"),
       onDelete = ForeignKey.CASCADE,
     ),
   ],
@@ -27,7 +26,6 @@ import java.time.ZonedDateTime
 @TypeConverters(DateConverter::class)
 data class MovieStreaming(
   @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
-  @ColumnInfo(name = "id_trakt") val idTrakt: Long,
   @ColumnInfo(name = "id_tmdb") val idTmdb: Long,
   @ColumnInfo(name = "type") val type: String?,
   @ColumnInfo(name = "provider_id") val providerId: Long?,

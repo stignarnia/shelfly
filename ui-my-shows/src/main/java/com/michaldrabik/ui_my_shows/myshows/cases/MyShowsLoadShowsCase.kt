@@ -39,11 +39,11 @@ class MyShowsLoadShowsCase @Inject constructor(
     }
 
   suspend fun loadSeasonsForShows(
-    traktIds: List<Long>,
+    tmdbIds: List<Long>,
     buffer: MutableList<Season> = mutableListOf(),
   ): List<Season> =
     withContext(dispatchers.IO) {
-      val batch = traktIds.take(500)
+      val batch = tmdbIds.take(500)
       if (batch.isEmpty()) {
         return@withContext buffer
       }
@@ -53,7 +53,7 @@ class MyShowsLoadShowsCase @Inject constructor(
         .filter { it.seasonNumber != 0 }
       buffer.addAll(seasons)
 
-      loadSeasonsForShows(traktIds.filter { it !in batch }, buffer)
+      loadSeasonsForShows(tmdbIds.filter { it !in batch }, buffer)
     }
 
   fun filterSectionShows(
@@ -65,7 +65,7 @@ class MyShowsLoadShowsCase @Inject constructor(
   ): List<MyShowsItem> {
     val shows = allShows
       .filter { showItem ->
-        val seasons = allSeasons.filter { it.idShowTrakt == showItem.show.traktId }
+        val seasons = allSeasons.filter { it.idShowTmdb == showItem.show.tmdbId }
         val airedSeasons = seasons.filter { it.seasonFirstAired?.isBefore(nowUtc()) == true }
 
         when (val type = settingsRepository.filters.myShowsType) {

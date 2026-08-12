@@ -12,7 +12,7 @@ import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
 import com.michaldrabik.ui_model.CalendarMode
 import com.michaldrabik.ui_model.EpisodeBundle
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_progress.calendar.cases.items.CalendarFutureCase
 import com.michaldrabik.ui_progress.calendar.cases.items.CalendarRecentsCase
@@ -41,7 +41,7 @@ class CalendarViewModel @Inject constructor(
   ChannelsDelegate by DefaultChannelsDelegate() {
 
   private var loadItemsJob: Job? = null
-  private var loadTranslationJobs: MutableSet<IdTrakt> = mutableSetOf()
+  private var loadTranslationJobs: MutableSet<IdTmdb> = mutableSetOf()
 
   private val itemsState = MutableStateFlow<List<CalendarListItem>?>(null)
   private val modeState = MutableStateFlow(CalendarMode.PRESENT_FUTURE)
@@ -116,7 +116,7 @@ class CalendarViewModel @Inject constructor(
 
   fun findMissingTranslation(item: CalendarListItem) {
     check(item is CalendarListItem.Episode)
-    val showId = item.show.ids.trakt
+    val showId = item.show.ids.tmdb
     val language = translationsRepository.getLanguage()
     if (item.translations?.show != null ||
       language == Config.DEFAULT_LANGUAGE ||

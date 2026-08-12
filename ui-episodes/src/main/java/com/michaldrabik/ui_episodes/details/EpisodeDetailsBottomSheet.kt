@@ -118,10 +118,10 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
         { messageFlow.collect { renderSnackbar(it) } },
         doAfterLaunch = {
           val (ids, episode, seasonEpisodes) = options
-          loadLastWatchedAt(ids.trakt, episode)
-          loadSeason(ids.trakt, episode, seasonEpisodes?.toIntArray())
+          loadLastWatchedAt(ids.tmdb, episode)
+          loadSeason(ids.tmdb, episode, seasonEpisodes?.toIntArray())
           loadImage(ids.tmdb, episode)
-          loadTranslation(ids.trakt, episode)
+          loadTranslation(ids.tmdb, episode)
           loadRatings(episode)
         },
       )
@@ -150,7 +150,7 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
         episode.commentCount,
       )
       episodeDetailsCommentsButton.onClick {
-        viewModel.loadComments(showIds.trakt, episode.season, episode.number)
+        viewModel.loadComments(showIds.tmdb, episode.season, episode.number)
       }
       episodeDetailsPostCommentButton.onClick { openPostCommentSheet() }
       episodeDetailsLinksButton.onClick { openLinksSheet() }
@@ -432,7 +432,7 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
       setFragmentResult(REQUEST_EPISODE_DETAILS, bundleOf(NavigationArgs.ACTION_RATING_CHANGED to true))
     }
     val bundle = RatingsBottomSheet.createBundle(
-      id = options.episode.ids.trakt,
+      id = options.episode.ids.tmdb,
       type = Type.EPISODE,
       seasonNumber = options.episode.season,
       episodeNumber = options.episode.number,
@@ -455,7 +455,7 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
         ARG_COMMENT_ID to comment.getReplyId(),
         ARG_REPLY_USER to comment.user.username,
       )
-      else -> bundleOf(ARG_EPISODE_ID to options.episode.ids.trakt.id)
+      else -> bundleOf(ARG_EPISODE_ID to options.episode.ids.tmdb.id)
     }
     navigateTo(R.id.actionEpisodeDetailsDialogToPostComment, bundle)
   }

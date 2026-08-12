@@ -30,9 +30,9 @@ class ShowDetailsWatchedSeasonCase @Inject constructor(
   ): Result {
     val bundle = SeasonBundle(season, show)
 
-    val isMyShows = showsRepository.myShows.exists(show.ids.trakt)
-    val isWatchlist = showsRepository.watchlistShows.exists(show.ids.trakt)
-    val isHidden = showsRepository.hiddenShows.exists(show.ids.trakt)
+    val isMyShows = showsRepository.myShows.exists(show.ids.tmdb)
+    val isWatchlist = showsRepository.watchlistShows.exists(show.ids.tmdb)
+    val isHidden = showsRepository.hiddenShows.exists(show.ids.tmdb)
     val isCollection = isMyShows || isWatchlist || isHidden
 
     when {
@@ -40,8 +40,8 @@ class ShowDetailsWatchedSeasonCase @Inject constructor(
         val episodesAdded = episodesManager.setSeasonWatched(bundle, customDate)
         if (isMyShows) {
           quickSyncManager.scheduleEpisodes(
-            showId = show.traktId,
-            episodesIds = episodesAdded.map { it.ids.trakt.id },
+            showId = show.tmdbId,
+            episodesIds = episodesAdded.map { it.ids.tmdb.id },
             customDate = customDate,
           )
         }
@@ -49,7 +49,7 @@ class ShowDetailsWatchedSeasonCase @Inject constructor(
       }
       else -> {
         episodesManager.setSeasonUnwatched(bundle)
-        quickSyncManager.clearEpisodes(season.episodes.map { it.ids.trakt.id })
+        quickSyncManager.clearEpisodes(season.episodes.map { it.ids.tmdb.id })
 
         val traktQuickRemoveEnabled = settingsRepository.load().traktQuickRemoveEnabled
         val showRemoveTrakt = userManager.isAuthorized() && traktQuickRemoveEnabled && !isLocal && isCollection

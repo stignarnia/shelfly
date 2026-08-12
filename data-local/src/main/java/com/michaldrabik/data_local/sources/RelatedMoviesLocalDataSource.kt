@@ -6,9 +6,9 @@ interface RelatedMoviesLocalDataSource {
 
   suspend fun insert(items: List<RelatedMovie>): List<Long>
 
-  suspend fun getAllById(traktId: Long): List<RelatedMovie>
+  suspend fun getAllById(tmdbId: Long): List<RelatedMovie>
 
   suspend fun getAll(): List<RelatedMovie>
 
-  suspend fun deleteById(traktId: Long)
+  suspend fun deleteById(tmdbId: Long)
 }

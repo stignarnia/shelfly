@@ -12,7 +12,7 @@ import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.data_remote.trakt.TraktRemoteDataSource
 import com.michaldrabik.repository.mappers.CollectionMapper
 import com.michaldrabik.repository.mappers.MovieMapper
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.MovieCollection
 import kotlinx.coroutines.withContext
@@ -32,12 +32,12 @@ class MovieCollectionsRepository @Inject constructor(
   private val transactions: TransactionsProvider,
 ) {
 
-  suspend fun loadCollection(collectionId: IdTrakt) =
+  suspend fun loadCollection(collectionId: IdTmdb) =
     withContext(dispatchers.IO) {
       movieCollectionsLocalSource.getById(collectionId.id)
     }
 
-  suspend fun loadCollections(movieId: IdTrakt): Pair<List<MovieCollection>, Source> =
+  suspend fun loadCollections(movieId: IdTmdb): Pair<List<MovieCollection>, Source> =
     withContext(dispatchers.IO) {
       val now = nowUtc()
       val localCollections = movieCollectionsLocalSource.getByMovieId(movieId.id)
@@ -63,7 +63,7 @@ class MovieCollectionsRepository @Inject constructor(
       )
     }
 
-  suspend fun loadCollectionItems(collectionId: IdTrakt): List<Movie> =
+  suspend fun loadCollectionItems(collectionId: IdTmdb): List<Movie> =
     withContext(dispatchers.IO) {
       val now = nowUtc()
       val localItems = movieCollectionsItemsLocalSource.getById(collectionId.id)
@@ -82,8 +82,8 @@ class MovieCollectionsRepository @Inject constructor(
         val entities = items.mapIndexed { index, movie ->
           MovieCollectionItem(
             rank = index,
-            idTrakt = movie.traktId,
-            idTraktCollection = collectionId.id,
+            idTmdb = movie.tmdbId,
+            idTmdbCollection = collectionId.id,
             createdAt = now,
             updatedAt = now,
           )
@@ -95,8 +95,8 @@ class MovieCollectionsRepository @Inject constructor(
         val collection = movieCollectionsLocalSource.getById(collectionId.id)
         collection?.let { coll ->
           val insertEntities = entities
-            .filter { it.idTrakt != coll.idTraktMovie }
-            .map { coll.copy(id = 0, idTraktMovie = it.idTrakt) }
+            .filter { it.idTmdb != coll.idTmdbMovie }
+            .map { coll.copy(id = 0, idTmdbMovie = it.idTmdb) }
           movieCollectionsLocalSource.insertAll(insertEntities)
         }
       }
@@ -106,7 +106,7 @@ class MovieCollectionsRepository @Inject constructor(
 
   private suspend fun updateLocalCollections(
     collections: List<MovieCollection>,
-    movieId: IdTrakt,
+    movieId: IdTmdb,
     now: ZonedDateTime,
   ) {
     var entities = collections.map {

@@ -51,7 +51,7 @@ class StatisticsMoviesFragment : BaseFragment<StatisticsMoviesViewModel>(R.layou
     with(binding) {
       statisticsMoviesToolbar.setOnClickListener { activity?.onBackPressed() }
       statisticsMoviesRatings.onMovieClickListener = {
-        openMovieDetails(it.movie.traktId)
+        openMovieDetails(it.movie.tmdbId)
       }
     }
   }
@@ -82,8 +82,8 @@ class StatisticsMoviesFragment : BaseFragment<StatisticsMoviesViewModel>(R.layou
     }
   }
 
-  private fun openMovieDetails(traktId: Long) {
-    val bundle = bundleOf(ARG_MOVIE_ID to traktId)
+  private fun openMovieDetails(tmdbId: Long) {
+    val bundle = bundleOf(ARG_MOVIE_ID to tmdbId)
     navigateTo(R.id.actionStatisticsMoviesFragmentToMovieDetailsFragment, bundle)
   }
 }

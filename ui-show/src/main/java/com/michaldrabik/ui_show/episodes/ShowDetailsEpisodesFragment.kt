@@ -34,7 +34,7 @@ import com.michaldrabik.ui_base.utilities.viewBinding
 import com.michaldrabik.ui_episodes.details.EpisodeDetailsBottomSheet
 import com.michaldrabik.ui_model.Episode
 import com.michaldrabik.ui_model.EpisodeBundle
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Season
 import com.michaldrabik.ui_navigation.java.NavigationArgs
 import com.michaldrabik.ui_show.R
@@ -61,8 +61,8 @@ class ShowDetailsEpisodesFragment :
 
   companion object {
     fun createBundle(
-      showId: IdTrakt,
-      seasonId: IdTrakt,
+      showId: IdTmdb,
+      seasonId: IdTmdb,
     ): Bundle =
       bundleOf(
         NavigationArgs.ARG_OPTIONS to Options(showId, seasonId),
@@ -266,7 +266,7 @@ class ShowDetailsEpisodesFragment :
         (requireActivity() as SnackbarHost).provideSnackbarLayout().showInfoSnackbar(text)
       }
     }
-    val args = RemoveTraktBottomSheet.createBundle(event.traktIds, event.mode)
+    val args = RemoveTraktBottomSheet.createBundle(event.tmdbIds, event.mode)
     navigateToSafe(event.actionId, args)
   }
 
@@ -281,7 +281,7 @@ class ShowDetailsEpisodesFragment :
     }
 
     val bundle = RatingsBottomSheet.createBundle(
-      id = season.ids.trakt,
+      id = season.ids.tmdb,
       type = Type.SEASON,
       seasonNumber = season.number,
     )
@@ -319,7 +319,7 @@ class ShowDetailsEpisodesFragment :
 
   @Parcelize
   data class Options(
-    val showId: IdTrakt,
-    val seasonId: IdTrakt,
+    val showId: IdTmdb,
+    val seasonId: IdTmdb,
   ) : Parcelable
 }

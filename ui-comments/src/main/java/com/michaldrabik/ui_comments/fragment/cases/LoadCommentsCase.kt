@@ -5,7 +5,7 @@ import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.repository.CommentsRepository
 import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.ui_model.Comment
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -18,7 +18,7 @@ class LoadCommentsCase @Inject constructor(
 ) {
 
   suspend fun loadComments(
-    id: IdTrakt,
+    id: IdTmdb,
     mode: Mode,
   ): List<Comment> =
     withContext(dispatchers.IO) {

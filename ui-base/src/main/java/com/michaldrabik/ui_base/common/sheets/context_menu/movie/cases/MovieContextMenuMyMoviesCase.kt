@@ -6,7 +6,7 @@ import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
 import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Movie
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -26,33 +26,33 @@ class MovieContextMenuMyMoviesCase @Inject constructor(
 ) {
 
   suspend fun moveToMyMovies(
-    traktId: IdTrakt,
+    tmdbId: IdTmdb,
     customDate: ZonedDateTime? = null,
   ) = withContext(dispatchers.IO) {
-    val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(traktId))
+    val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdbId))
 
     val (isWatchlist, isHidden) = awaitAll(
-      async { moviesRepository.watchlistMovies.exists(traktId) },
-      async { moviesRepository.hiddenMovies.exists(traktId) },
+      async { moviesRepository.watchlistMovies.exists(tmdbId) },
+      async { moviesRepository.hiddenMovies.exists(tmdbId) },
     )
 
-    moviesRepository.myMovies.insert(traktId, customDate)
+    moviesRepository.myMovies.insert(tmdbId, customDate)
     pinnedItemsRepository.removePinnedItem(movie)
     announcementManager.refreshMoviesAnnouncements()
     with(quickSyncManager) {
-      clearWatchlistMovies(listOf(traktId.id))
-      clearHiddenMovies(listOf(traktId.id))
-      scheduleMovies(listOf(traktId.id), customDate)
+      clearWatchlistMovies(listOf(tmdbId.id))
+      clearHiddenMovies(listOf(tmdbId.id))
+      scheduleMovies(listOf(tmdbId.id), customDate)
     }
 
     RemoveTraktUiEvent(removeWatchlist = isWatchlist, removeHidden = isHidden)
   }
 
-  suspend fun removeFromMyMovies(traktId: IdTrakt) =
+  suspend fun removeFromMyMovies(tmdbId: IdTmdb) =
     withContext(dispatchers.IO) {
-      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(traktId))
-      moviesRepository.myMovies.delete(traktId)
+      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdbId))
+      moviesRepository.myMovies.delete(tmdbId)
       pinnedItemsRepository.removePinnedItem(movie)
-      quickSyncManager.clearMovies(listOf(traktId.id))
+      quickSyncManager.clearMovies(listOf(tmdbId.id))
     }
 }

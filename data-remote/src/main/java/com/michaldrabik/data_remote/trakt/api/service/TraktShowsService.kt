@@ -14,9 +14,9 @@ import retrofit2.http.Query
 
 interface TraktShowsService {
 
-  @GET("shows/{traktId}?extended=full")
+  @GET("shows/{tmdbId}?extended=full")
   suspend fun fetchShow(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
   ): Show
 
   @GET("shows/{traktSlug}?extended=full")
@@ -45,32 +45,32 @@ interface TraktShowsService {
     @Query("limit") limit: Int,
   ): List<ShowResult>
 
-  @GET("shows/{traktId}/related?extended=full")
+  @GET("shows/{tmdbId}/related?extended=full")
   suspend fun fetchRelatedShows(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
     @Query("limit") limit: Int,
   ): List<Show>
 
-  @GET("shows/{traktId}/next_episode?extended=full")
+  @GET("shows/{tmdbId}/next_episode?extended=full")
   suspend fun fetchNextEpisode(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
   ): Response<Episode>
 
-  @GET("shows/{traktId}/seasons?extended=full,episodes")
+  @GET("shows/{tmdbId}/seasons?extended=full,episodes")
   suspend fun fetchSeasons(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
   ): List<Season>
 
-  @GET("shows/{traktId}/comments/newest?extended=full")
+  @GET("shows/{tmdbId}/comments/newest?extended=full")
   suspend fun fetchShowComments(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
     @Query("limit") limit: Int,
     @Query("timestamp") timestamp: Long,
   ): List<Comment>
 
-  @GET("shows/{traktId}/translations/{code}")
+  @GET("shows/{tmdbId}/translations/{code}")
   suspend fun fetchShowTranslations(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
     @Path("code") countryCode: String,
   ): List<Translation>
 
@@ -81,9 +81,9 @@ interface TraktShowsService {
     @Query("translations") countryCode: String,
   ): List<SeasonTranslation>
 
-  @GET("shows/{traktId}/seasons/{seasonNumber}/episodes/{episodeNumber}/comments/newest?limit=50&extended=full")
+  @GET("shows/{tmdbId}/seasons/{seasonNumber}/episodes/{episodeNumber}/comments/newest?limit=50&extended=full")
   suspend fun fetchEpisodeComments(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
     @Path("seasonNumber") seasonNumber: Int,
     @Path("episodeNumber") episodeNumber: Int,
     @Query("timestamp") timestamp: Long,

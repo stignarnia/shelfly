@@ -120,7 +120,7 @@ class ProgressWidgetViewsFactory(
       val fillIntent = Intent().apply {
         putExtras(
           Bundle().apply {
-            putExtra(EXTRA_SHOW_ID, item.show.traktId)
+            putExtra(EXTRA_SHOW_ID, item.show.tmdbId)
           },
         )
       }
@@ -133,17 +133,17 @@ class ProgressWidgetViewsFactory(
               EXTRA_EPISODE_ID,
               item.episode
                 ?.ids
-                ?.trakt
+                ?.tmdb
                 ?.id,
             )
             putExtra(
               EXTRA_SEASON_ID,
               item.season
                 ?.ids
-                ?.trakt
+                ?.tmdb
                 ?.id,
             )
-            putExtra(EXTRA_SHOW_ID, item.show.traktId)
+            putExtra(EXTRA_SHOW_ID, item.show.tmdbId)
           },
         )
       }
@@ -199,7 +199,7 @@ class ProgressWidgetViewsFactory(
     }
   }
 
-  override fun getItemId(position: Int) = adapterItems[position].show.traktId
+  override fun getItemId(position: Int) = adapterItems[position].show.tmdbId
 
   override fun getLoadingView() = RemoteViews(context.packageName, R.layout.widget_loading_item)
 

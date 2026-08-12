@@ -21,7 +21,7 @@ import com.michaldrabik.ui_base.utilities.extensions.launchDelayed
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
 import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageType
 import com.michaldrabik.ui_model.Movie
@@ -86,7 +86,7 @@ class MovieDetailsViewModel @Inject constructor(
   val parentMovieState = movieState.asStateFlow()
   val parentFollowedState = followedState.asStateFlow()
 
-  fun loadDetails(id: IdTrakt) {
+  fun loadDetails(id: IdTmdb) {
     viewModelScope.launch {
       val progressJob = launchDelayed(700) {
         movieLoadingState.value = true
@@ -274,7 +274,7 @@ class MovieDetailsViewModel @Inject constructor(
     }
   }
 
-  fun removeMalformedMovie(id: IdTrakt) {
+  fun removeMalformedMovie(id: IdTmdb) {
     viewModelScope.launch {
       try {
         mainCase.removeMalformedMovie(id)

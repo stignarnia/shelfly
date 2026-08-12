@@ -28,7 +28,7 @@ class ShowDetailsHiddenCase @Inject constructor(
 
   suspend fun isHidden(show: Show) =
     withContext(dispatchers.IO) {
-      showsRepository.hiddenShows.exists(show.ids.trakt)
+      showsRepository.hiddenShows.exists(show.ids.tmdb)
     }
 
   suspend fun addToHidden(
@@ -36,15 +36,15 @@ class ShowDetailsHiddenCase @Inject constructor(
     removeLocalData: Boolean,
   ) = withContext(dispatchers.IO) {
     transactions.withTransaction {
-      showsRepository.hiddenShows.insert(show.ids.trakt)
+      showsRepository.hiddenShows.insert(show.ids.tmdb)
 
       if (removeLocalData) {
-        localSource.episodes.deleteAllUnwatchedForShow(show.traktId)
-        val seasons = localSource.seasons.getAllByShowId(show.traktId)
-        val episodes = localSource.episodes.getAllByShowId(show.traktId)
+        localSource.episodes.deleteAllUnwatchedForShow(show.tmdbId)
+        val seasons = localSource.seasons.getAllByShowId(show.tmdbId)
+        val episodes = localSource.episodes.getAllByShowId(show.tmdbId)
         val toDelete = mutableListOf<Season>()
         seasons.forEach { season ->
-          if (episodes.none { it.idSeason == season.idTrakt }) {
+          if (episodes.none { it.idSeason == season.idTmdb }) {
             toDelete.add(season)
           }
         }
@@ -53,14 +53,14 @@ class ShowDetailsHiddenCase @Inject constructor(
     }
     pinnedItemsRepository.removePinnedItem(show)
     announcementManager.refreshShowsAnnouncements()
-    quickSyncManager.scheduleHidden(show.traktId, Mode.SHOWS, TraktSyncQueue.Operation.ADD)
+    quickSyncManager.scheduleHidden(show.tmdbId, Mode.SHOWS, TraktSyncQueue.Operation.ADD)
   }
 
   suspend fun removeFromHidden(show: Show) =
     withContext(dispatchers.IO) {
-      showsRepository.hiddenShows.delete(show.ids.trakt)
+      showsRepository.hiddenShows.delete(show.ids.tmdb)
       pinnedItemsRepository.removePinnedItem(show)
       announcementManager.refreshShowsAnnouncements()
-      quickSyncManager.clearHiddenShows(listOf(show.traktId))
+      quickSyncManager.clearHiddenShows(listOf(show.tmdbId))
     }
 }

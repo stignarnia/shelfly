@@ -16,15 +16,15 @@ interface ShowsDao :
   @Query("SELECT * FROM shows")
   override suspend fun getAll(): List<Show>
 
-  @Query("SELECT * FROM shows WHERE id_trakt IN (:ids)")
+  @Query("SELECT * FROM shows WHERE id_tmdb IN (:ids)")
   override suspend fun getAll(ids: List<Long>): List<Show>
 
-  @Query("SELECT id_trakt, id_tmdb FROM shows WHERE id_trakt IN (:traktIds)")
+  @Query("SELECT id_tmdb, id_tmdb FROM shows WHERE id_tmdb IN (:tmdbIds)")
   override suspend fun getAllTmdbIds(
-    traktIds: List<Long>,
-  ): Map<@MapColumn(columnName = "id_trakt") Long, @MapColumn(columnName = "id_tmdb") Long>
+    tmdbIds: List<Long>,
+  ): Map<@MapColumn(columnName = "id_tmdb") Long, @MapColumn(columnName = "id_tmdb") Long>
 
-  @Query("SELECT shows.id_trakt, shows.title FROM shows")
+  @Query("SELECT shows.id_tmdb, shows.title FROM shows")
   override suspend fun getAllForSearch(): List<ShowSearch>
 
   @Transaction
@@ -36,8 +36,8 @@ interface ShowsDao :
         acc
       }
 
-  @Query("SELECT * FROM shows WHERE id_trakt == :traktId")
-  override suspend fun getById(traktId: Long): Show?
+  @Query("SELECT * FROM shows WHERE id_tmdb == :tmdbId")
+  override suspend fun getById(tmdbId: Long): Show?
 
   @Query("SELECT * FROM shows WHERE id_tmdb == :tmdbId")
   override suspend fun getByTmdbId(tmdbId: Long): Show?
@@ -48,8 +48,8 @@ interface ShowsDao :
   @Query("SELECT * FROM shows WHERE id_imdb == :imdbId")
   override suspend fun getById(imdbId: String): Show?
 
-  @Query("DELETE FROM shows where id_trakt == :traktId")
-  override suspend fun deleteById(traktId: Long)
+  @Query("DELETE FROM shows where id_tmdb == :tmdbId")
+  override suspend fun deleteById(tmdbId: Long)
 
   @Transaction
   override suspend fun upsert(shows: List<Show>) {

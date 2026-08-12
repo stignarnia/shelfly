@@ -86,7 +86,7 @@ class TraktExportRatingsRunner @Inject constructor(
 
       val showsRatingsToExport = localShowsRatings
         .filter { localRating ->
-          val remoteRating = remoteShowsRatings.find { it.show.ids.trakt == localRating.idTrakt.id }
+          val remoteRating = remoteShowsRatings.find { it.show.ids.trakt == localRating.idTmdb.id }
           if (remoteRating == null) {
             return@filter true
           }
@@ -98,7 +98,7 @@ class TraktExportRatingsRunner @Inject constructor(
 
       val seasonsRatingsToExport = localSeasonsRatings
         .filter { localRating ->
-          val remoteRating = remoteSeasonsRatings.find { it.season.ids.trakt == localRating.idTrakt }
+          val remoteRating = remoteSeasonsRatings.find { it.season.ids.trakt == localRating.idTmdb }
           if (remoteRating == null) {
             return@filter true
           }
@@ -110,7 +110,7 @@ class TraktExportRatingsRunner @Inject constructor(
 
       val episodesRatingsToExport = localEpisodesRatings
         .filter { localRating ->
-          val remoteRating = remoteEpisodesRatings.find { it.episode.ids.trakt == localRating.idTrakt }
+          val remoteRating = remoteEpisodesRatings.find { it.episode.ids.trakt == localRating.idTmdb }
           if (remoteRating == null) {
             return@filter true
           }
@@ -122,7 +122,7 @@ class TraktExportRatingsRunner @Inject constructor(
 
       val moviesRatingsToExport = localMoviesRatings
         .filter { localRating ->
-          val remoteRating = remoteMoviesRatings.find { it.movie.ids.trakt == localRating.idTrakt.id }
+          val remoteRating = remoteMoviesRatings.find { it.movie.ids.trakt == localRating.idTmdb.id }
           if (remoteRating == null) {
             return@filter true
           }
@@ -152,28 +152,28 @@ class TraktExportRatingsRunner @Inject constructor(
             RatingRequestValue(
               rating = it.rating,
               rated_at = dateIsoStringFromMillis(it.ratedAt.toUtcZone().toMillis()),
-              ids = RatingRequestIds(it.idTrakt.id),
+              ids = RatingRequestIds(it.idTmdb.id),
             )
           },
           seasons = seasonsChunk.map {
             RatingRequestValue(
               rating = it.rating,
               rated_at = dateIsoStringFromMillis(it.ratedAt.toUtcZone().toMillis()),
-              ids = RatingRequestIds(it.idTrakt),
+              ids = RatingRequestIds(it.idTmdb),
             )
           },
           episodes = episodesChunk.map {
             RatingRequestValue(
               rating = it.rating,
               rated_at = dateIsoStringFromMillis(it.ratedAt.toUtcZone().toMillis()),
-              ids = RatingRequestIds(it.idTrakt),
+              ids = RatingRequestIds(it.idTmdb),
             )
           },
           movies = moviesChunk.map {
             RatingRequestValue(
               rating = it.rating,
               rated_at = dateIsoStringFromMillis(it.ratedAt.toUtcZone().toMillis()),
-              ids = RatingRequestIds(it.idTrakt.id),
+              ids = RatingRequestIds(it.idTmdb.id),
             )
           },
         )

@@ -70,10 +70,10 @@ class QuickSetupView : FrameLayout {
 
     val item = items
       .filterNot { it.isHeader }
-      .first { it.episode.ids.trakt == episode.ids.trakt }
+      .first { it.episode.ids.tmdb == episode.ids.tmdb }
       .copy(isChecked = !isChecked)
 
-    items.findReplace(item) { it.episode.ids.trakt == episode.ids.trakt && !it.isHeader }
+    items.findReplace(item) { it.episode.ids.tmdb == episode.ids.tmdb && !it.isHeader }
 
     quickSetupAdapter.setItems(items.toList())
   }

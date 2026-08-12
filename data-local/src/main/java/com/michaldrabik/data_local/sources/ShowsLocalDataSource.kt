@@ -11,11 +11,11 @@ interface ShowsLocalDataSource {
 
   suspend fun getAll(ids: List<Long>): List<Show>
 
-  suspend fun getAllTmdbIds(traktIds: List<Long>): Map<Long, Long>
+  suspend fun getAllTmdbIds(tmdbIds: List<Long>): Map<Long, Long>
 
   suspend fun getAllChunked(ids: List<Long>): List<Show>
 
-  suspend fun getById(traktId: Long): Show?
+  suspend fun getById(tmdbId: Long): Show?
 
   suspend fun getByTmdbId(tmdbId: Long): Show?
 
@@ -23,7 +23,7 @@ interface ShowsLocalDataSource {
 
   suspend fun getById(imdbId: String): Show?
 
-  suspend fun deleteById(traktId: Long)
+  suspend fun deleteById(tmdbId: Long)
 
   suspend fun upsert(shows: List<Show>)
 }

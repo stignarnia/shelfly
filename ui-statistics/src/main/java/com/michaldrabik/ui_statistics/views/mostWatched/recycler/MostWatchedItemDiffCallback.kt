@@ -8,7 +8,7 @@ class MostWatchedItemDiffCallback : DiffUtil.ItemCallback<StatisticsMostWatchedI
   override fun areItemsTheSame(
     oldItem: StatisticsMostWatchedItem,
     newItem: StatisticsMostWatchedItem,
-  ) = oldItem.show.ids.trakt == newItem.show.ids.trakt
+  ) = oldItem.show.ids.tmdb == newItem.show.ids.tmdb
 
   override fun areContentsTheSame(
     oldItem: StatisticsMostWatchedItem,

@@ -1,7 +1,7 @@
 package com.michaldrabik.repository.mappers
 
 import com.michaldrabik.data_local.database.model.Episode
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Season
 import java.time.ZonedDateTime
@@ -44,7 +44,7 @@ class SeasonMapper @Inject constructor(
     seasonDb: SeasonDb,
     episodes: List<Episode> = emptyList(),
   ) = Season(
-    Ids.EMPTY.copy(trakt = IdTrakt(seasonDb.idTrakt)),
+    Ids.EMPTY.copy(tmdb = IdTmdb(seasonDb.idTmdb)),
     seasonDb.seasonNumber,
     seasonDb.episodesCount,
     seasonDb.episodesAiredCount,
@@ -57,11 +57,11 @@ class SeasonMapper @Inject constructor(
 
   fun toDatabase(
     season: Season,
-    showId: IdTrakt,
+    showId: IdTmdb,
     isWatched: Boolean,
   ): SeasonDb =
     SeasonDb(
-      season.ids.trakt.id,
+      season.ids.tmdb.id,
       showId.id,
       season.number,
       season.title,

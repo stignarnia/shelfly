@@ -9,7 +9,7 @@ import java.time.ZonedDateTime
 @Parcelize
 data class CustomList(
   val id: Long,
-  val idTrakt: Long?,
+  val idTmdb: Long?,
   val idSlug: String,
   val name: String,
   val description: String?,
@@ -32,7 +32,7 @@ data class CustomList(
     fun create() =
       CustomList(
         id = 0,
-        idTrakt = null,
+        idTmdb = null,
         idSlug = "",
         name = "",
         description = null,

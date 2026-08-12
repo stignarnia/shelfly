@@ -5,7 +5,7 @@ import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.repository.ListsRepository
 import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
 import com.michaldrabik.ui_lists.manage.recycler.ManageListsItem
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
@@ -19,7 +19,7 @@ class ManageListsCase @Inject constructor(
 ) {
 
   suspend fun loadLists(
-    itemId: IdTrakt,
+    itemId: IdTmdb,
     itemType: String,
   ) = withContext(dispatchers.IO) {
     val listsAsync = async { listsRepository.loadAll() }
@@ -34,7 +34,7 @@ class ManageListsCase @Inject constructor(
   }
 
   suspend fun addToList(
-    itemId: IdTrakt,
+    itemId: IdTmdb,
     itemType: String,
     listItem: ManageListsItem,
   ) = withContext(dispatchers.IO) {
@@ -43,7 +43,7 @@ class ManageListsCase @Inject constructor(
   }
 
   suspend fun removeFromList(
-    itemId: IdTrakt,
+    itemId: IdTmdb,
     itemType: String,
     listItem: ManageListsItem,
   ) = withContext(dispatchers.IO) {

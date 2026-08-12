@@ -6,9 +6,9 @@ import retrofit2.http.Path
 
 interface TraktPeopleService {
 
-  @GET("people/{traktId}/{type}?extended=full")
+  @GET("people/{tmdbId}/{type}?extended=full")
   suspend fun fetchPersonCredits(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
     @Path("type") type: String,
   ): PersonCreditsResult
 }

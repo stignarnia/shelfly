@@ -1,7 +1,7 @@
 package com.michaldrabik.repository
 
 import android.content.SharedPreferences
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Show
 import javax.inject.Inject
@@ -14,22 +14,22 @@ class PinnedItemsRepository @Inject constructor(
   @Named("progressMoviesPreferences") private val sharedPreferencesMovies: SharedPreferences,
 ) {
 
-  fun addPinnedItem(show: Show) = addShowPinnedItem(IdTrakt(show.traktId))
+  fun addPinnedItem(show: Show) = addShowPinnedItem(IdTmdb(show.tmdbId))
 
-  fun addPinnedItem(movie: Movie) = addMoviePinnedItem(IdTrakt(movie.traktId))
+  fun addPinnedItem(movie: Movie) = addMoviePinnedItem(IdTmdb(movie.tmdbId))
 
-  fun addShowPinnedItem(showId: IdTrakt) = sharedPreferences.edit().putLong(showId.id.toString(), showId.id).apply()
+  fun addShowPinnedItem(showId: IdTmdb) = sharedPreferences.edit().putLong(showId.id.toString(), showId.id).apply()
 
-  fun addMoviePinnedItem(movieId: IdTrakt) =
+  fun addMoviePinnedItem(movieId: IdTmdb) =
     sharedPreferencesMovies.edit().putLong(movieId.id.toString(), movieId.id).apply()
 
-  fun removePinnedItem(show: Show) = sharedPreferences.edit().remove(show.traktId.toString()).apply()
+  fun removePinnedItem(show: Show) = sharedPreferences.edit().remove(show.tmdbId.toString()).apply()
 
-  fun removePinnedItem(movie: Movie) = sharedPreferencesMovies.edit().remove(movie.traktId.toString()).apply()
+  fun removePinnedItem(movie: Movie) = sharedPreferencesMovies.edit().remove(movie.tmdbId.toString()).apply()
 
-  fun isItemPinned(show: Show) = sharedPreferences.contains(show.traktId.toString())
+  fun isItemPinned(show: Show) = sharedPreferences.contains(show.tmdbId.toString())
 
-  fun isItemPinned(movie: Movie) = sharedPreferencesMovies.contains(movie.traktId.toString())
+  fun isItemPinned(movie: Movie) = sharedPreferencesMovies.contains(movie.tmdbId.toString())
 
   fun getAllMovies(): List<Long> = sharedPreferencesMovies.all.values.map { it as Long }
 

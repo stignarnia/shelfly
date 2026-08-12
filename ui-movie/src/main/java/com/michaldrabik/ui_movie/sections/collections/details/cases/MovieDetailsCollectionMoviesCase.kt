@@ -8,7 +8,7 @@ import com.michaldrabik.repository.movies.MovieCollectionsRepository
 import com.michaldrabik.repository.movies.MyMoviesRepository
 import com.michaldrabik.repository.movies.WatchlistMoviesRepository
 import com.michaldrabik.repository.settings.SettingsSpoilersRepository
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.ImageType.POSTER
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Translation
@@ -31,7 +31,7 @@ class MovieDetailsCollectionMoviesCase @Inject constructor(
 ) {
 
   suspend fun loadCollectionMovies(
-    collectionId: IdTrakt,
+    collectionId: IdTmdb,
     language: String,
   ): List<MovieDetailsCollectionItem.MovieItem> =
     withContext(dispatchers.IO) {
@@ -43,8 +43,8 @@ class MovieDetailsCollectionMoviesCase @Inject constructor(
               rank = index + 1,
               movie = movie,
               image = imagesProvider.findCachedImage(movie, POSTER),
-              isMyMovie = myMoviesRepository.exists(movie.ids.trakt),
-              isWatchlist = watchlistMoviesRepository.exists(movie.ids.trakt),
+              isMyMovie = myMoviesRepository.exists(movie.ids.tmdb),
+              isWatchlist = watchlistMoviesRepository.exists(movie.ids.tmdb),
               translation = loadTranslation(movie, language),
               spoilers = settingsSpoilersRepository.getAll(),
               isLoading = false,

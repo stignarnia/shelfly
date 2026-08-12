@@ -13,16 +13,16 @@ interface MyShowsLocalDataSource {
 
   suspend fun getAllTraktIds(): List<Long>
 
-  suspend fun getById(traktId: Long): Show?
+  suspend fun getById(tmdbId: Long): Show?
 
   suspend fun updateWatchedAt(
-    traktId: Long,
+    tmdbId: Long,
     watchedAt: Long,
   )
 
   suspend fun insert(shows: List<MyShow>)
 
-  suspend fun deleteById(traktId: Long)
+  suspend fun deleteById(tmdbId: Long)
 
-  suspend fun checkExists(traktId: Long): Boolean
+  suspend fun checkExists(tmdbId: Long): Boolean
 }

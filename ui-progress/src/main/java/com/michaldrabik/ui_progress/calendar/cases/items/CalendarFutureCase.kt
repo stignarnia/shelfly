@@ -45,7 +45,7 @@ class CalendarFutureCase @Inject constructor(
 
   override fun sortEpisodes() =
     compareBy<Episode> { it.firstAired }
-      .thenByDescending { it.idShowTrakt }
+      .thenByDescending { it.idShowTmdb }
       .thenBy { it.episodeNumber }
 
   override fun isWatched(episode: Episode) = true

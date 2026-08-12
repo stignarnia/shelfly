@@ -9,7 +9,6 @@ import com.michaldrabik.data_remote.tmdb.model.TmdbImages
 import com.michaldrabik.repository.TranslationsRepository
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.IdTrakt
 import com.michaldrabik.ui_model.IdTvdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageFamily.SHOW
@@ -36,7 +35,7 @@ class ShowImagesProvider @Inject constructor(
   private var translationsRepository: TranslationsRepository,
 ) {
 
-  private val unavailableCache = mutableSetOf<IdTrakt>()
+  private val unavailableCache = mutableSetOf<IdTmdb>()
   private var awsImagesCache: AwsImages? = null
 
   suspend fun findCachedImage(
@@ -47,7 +46,7 @@ class ShowImagesProvider @Inject constructor(
       val image = localSource.showImages.getByShowId(show.ids.tmdb.id, type.key)
       when (image) {
         null -> {
-          if (unavailableCache.contains(show.ids.trakt)) {
+          if (unavailableCache.contains(show.ids.tmdb)) {
             Image.createUnavailable(type, SHOW)
           } else {
             Image.createUnknown(type, SHOW)
@@ -107,7 +106,7 @@ class ShowImagesProvider @Inject constructor(
           source = AWS
         } else {
           // If requested fanart is unavailable try backing up to an episode image
-          val seasons = remoteSource.trakt.fetchSeasons(show.traktId)
+          val seasons = remoteSource.trakt.fetchSeasons(show.tmdbId)
           if (seasons.isNotEmpty()) {
             val episode = seasons[0].episodes?.firstOrNull()
             episode?.let { ep ->
@@ -130,7 +129,7 @@ class ShowImagesProvider @Inject constructor(
 
       when (image.status) {
         UNAVAILABLE -> {
-          unavailableCache.add(show.ids.trakt)
+          unavailableCache.add(show.ids.tmdb)
           localSource.showImages.deleteByShowId(tmdbId.id, image.type.key)
         }
         else -> {

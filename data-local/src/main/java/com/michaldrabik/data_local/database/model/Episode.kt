@@ -15,24 +15,23 @@ import java.time.ZonedDateTime
   foreignKeys = [
     ForeignKey(
       entity = Season::class,
-      parentColumns = arrayOf("id_trakt"),
+      parentColumns = arrayOf("id_tmdb"),
       childColumns = arrayOf("id_season"),
       onDelete = CASCADE,
     ),
   ],
   indices = [
     Index("id_season"),
-    Index("id_show_trakt"),
+    Index("id_show_tmdb"),
   ],
 )
 @TypeConverters(DateConverter::class)
 data class Episode(
-  @PrimaryKey @ColumnInfo(name = "id_trakt") val idTrakt: Long,
+  @PrimaryKey @ColumnInfo(name = "id_tmdb") val idTmdb: Long,
   @ColumnInfo(name = "id_season") val idSeason: Long,
-  @ColumnInfo(name = "id_show_trakt") val idShowTrakt: Long,
+  @ColumnInfo(name = "id_show_tmdb") val idShowTmdb: Long,
   @ColumnInfo(name = "id_show_tvdb") val idShowTvdb: Long,
   @ColumnInfo(name = "id_show_imdb") val idShowImdb: String,
-  @ColumnInfo(name = "id_show_tmdb") val idShowTmdb: Long,
   @ColumnInfo(name = "season_number") val seasonNumber: Int,
   @ColumnInfo(name = "episode_number") val episodeNumber: Int,
   @ColumnInfo(name = "episode_number_abs") val episodeNumberAbs: Int?,

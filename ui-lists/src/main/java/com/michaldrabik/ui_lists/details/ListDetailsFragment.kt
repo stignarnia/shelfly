@@ -276,8 +276,8 @@ class ListDetailsFragment :
     binding.fragmentListDetailsRoot
       .fadeOut(150) {
         val bundle = bundleOf(
-          ARG_SHOW_ID to listItem.show?.traktId,
-          ARG_MOVIE_ID to listItem.movie?.traktId,
+          ARG_SHOW_ID to listItem.show?.tmdbId,
+          ARG_MOVIE_ID to listItem.movie?.tmdbId,
         )
         val destination =
           when {

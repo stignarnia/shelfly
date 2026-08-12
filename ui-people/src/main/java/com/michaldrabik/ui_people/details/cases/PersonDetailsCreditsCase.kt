@@ -64,7 +64,7 @@ class PersonDetailsCreditsCase @Inject constructor(
         val filterByRelease = (it.releaseDate != null || (it.releaseDate == null && it.isUpcoming))
 
         val filterByCollection = if (onlyCollection) {
-          it.show?.traktId in showsCollectionIds || it.movie?.traktId in moviesCollectionIds
+          it.show?.tmdbId in showsCollectionIds || it.movie?.tmdbId in moviesCollectionIds
         } else {
           true
         }
@@ -109,8 +109,8 @@ class PersonDetailsCreditsCase @Inject constructor(
     watchlistShowsId: List<Long>,
     spoilersSettings: SpoilersSettings,
   ) = show.let {
-    val isMyShow = it.traktId in myShowsIds
-    val isWatchlist = it.traktId in watchlistShowsId
+    val isMyShow = it.tmdbId in myShowsIds
+    val isWatchlist = it.tmdbId in watchlistShowsId
     val image = showImagesProvider.findCachedImage(it, ImageType.POSTER)
     val translation = when (val language = translationsRepository.getLanguage()) {
       Config.DEFAULT_LANGUAGE -> null
@@ -132,8 +132,8 @@ class PersonDetailsCreditsCase @Inject constructor(
     watchlistMoviesId: List<Long>,
     spoilersSettings: SpoilersSettings,
   ) = movie.let {
-    val isWatched = it.traktId in myMoviesIds
-    val isWatchlist = it.traktId in watchlistMoviesId
+    val isWatched = it.tmdbId in myMoviesIds
+    val isWatchlist = it.tmdbId in watchlistMoviesId
     val image = movieImagesProvider.findCachedImage(it, ImageType.POSTER)
     val translation = when (val language = translationsRepository.getLanguage()) {
       Config.DEFAULT_LANGUAGE -> null

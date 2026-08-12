@@ -1,7 +1,7 @@
 package com.michaldrabik.ui_lists.details.recycler
 
 import com.michaldrabik.common.extensions.toMillis
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Show
@@ -63,9 +63,9 @@ data class ListDetailsItem(
     throw IllegalStateException()
   }
 
-  fun getTraktId(): IdTrakt {
-    if (isShow()) return IdTrakt(requireShow().traktId)
-    if (isMovie()) return IdTrakt(requireMovie().traktId)
+  fun getTraktId(): IdTmdb {
+    if (isShow()) return IdTmdb(requireShow().tmdbId)
+    if (isMovie()) return IdTmdb(requireMovie().tmdbId)
     throw IllegalStateException()
   }
 

@@ -30,7 +30,7 @@ class StatisticsMoviesViewModel @Inject constructor(
 
   fun loadData(initialDelay: Long = 150L) {
     viewModelScope.launch {
-      val myMovies = moviesRepository.myMovies.loadAll().distinctBy { it.traktId }
+      val myMovies = moviesRepository.myMovies.loadAll().distinctBy { it.tmdbId }
       val genres = extractTopGenres(myMovies)
 
       delay(initialDelay) // Let transition finish peacefully.

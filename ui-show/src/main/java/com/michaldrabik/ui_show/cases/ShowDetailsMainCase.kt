@@ -2,7 +2,7 @@ package com.michaldrabik.ui_show.cases
 
 import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.repository.shows.ShowsRepository
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -14,18 +14,18 @@ class ShowDetailsMainCase @Inject constructor(
   private val showsRepository: ShowsRepository,
 ) {
 
-  suspend fun loadDetails(idTrakt: IdTrakt) =
+  suspend fun loadDetails(idTmdb: IdTmdb) =
     withContext(dispatchers.IO) {
-      showsRepository.detailsShow.load(idTrakt)
+      showsRepository.detailsShow.load(idTmdb)
     }
 
-  suspend fun removeMalformedShow(idTrakt: IdTrakt) =
+  suspend fun removeMalformedShow(idTmdb: IdTmdb) =
     withContext(dispatchers.IO) {
       with(showsRepository) {
-        myShows.delete(idTrakt)
-        watchlistShows.delete(idTrakt)
-        hiddenShows.delete(idTrakt)
-        detailsShow.delete(idTrakt)
+        myShows.delete(idTmdb)
+        watchlistShows.delete(idTmdb)
+        hiddenShows.delete(idTmdb)
+        detailsShow.delete(idTmdb)
       }
       Timber.d("Removing malformed show...")
     }

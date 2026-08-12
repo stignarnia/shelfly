@@ -5,7 +5,7 @@ import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.database.model.WatchlistMovie
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.repository.mappers.Mappers
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import javax.inject.Inject
 
 class WatchlistMoviesRepository @Inject constructor(
@@ -21,23 +21,23 @@ class WatchlistMoviesRepository @Inject constructor(
 
   suspend fun loadAllIds() = localSource.watchlistMovies.getAllTraktIds()
 
-  suspend fun load(id: IdTrakt) =
+  suspend fun load(id: IdTmdb) =
     localSource.watchlistMovies.getById(id.id)?.let {
       mappers.movie.fromDatabase(it)
     }
 
-  suspend fun insert(id: IdTrakt) {
-    val movie = WatchlistMovie.fromTraktId(id.id, nowUtcMillis())
+  suspend fun insert(id: IdTmdb) {
+    val movie = WatchlistMovie.fromTmdbId(id.id, nowUtcMillis())
     transactions.withTransaction {
       with(localSource) {
         watchlistMovies.insert(movie)
-        myMovies.deleteById(movie.idTrakt)
-        archiveMovies.deleteById(movie.idTrakt)
+        myMovies.deleteById(movie.idTmdb)
+        archiveMovies.deleteById(movie.idTmdb)
       }
     }
   }
 
-  suspend fun delete(id: IdTrakt) = localSource.watchlistMovies.deleteById(id.id)
+  suspend fun delete(id: IdTmdb) = localSource.watchlistMovies.deleteById(id.id)
 
-  suspend fun exists(id: IdTrakt) = localSource.watchlistMovies.checkExists(id.id)
+  suspend fun exists(id: IdTmdb) = localSource.watchlistMovies.checkExists(id.id)
 }

@@ -17,7 +17,7 @@ import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Impo
 import com.michaldrabik.ui_backup.model.BackupMovie
 import com.michaldrabik.ui_backup.model.BackupMovies
 import com.michaldrabik.ui_base.utilities.extensions.rethrowCancellation
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import timber.log.Timber
@@ -52,7 +52,7 @@ internal class BackupImportMoviesRunner @Inject constructor(
       val localPinned = pinnedItemsRepository.getAllMovies()
       for (pinned in backup.progressPinned) {
         if (!localPinned.contains(pinned)) {
-          pinnedItemsRepository.addMoviePinnedItem(IdTrakt(pinned))
+          pinnedItemsRepository.addMoviePinnedItem(IdTmdb(pinned))
         }
       }
     }
@@ -63,12 +63,12 @@ internal class BackupImportMoviesRunner @Inject constructor(
       val localRatings = ratingsRepository.loadMoviesRatings()
 
       for (rating in backup.ratingsMovies) {
-        if (localRatings.any { it.idTrakt.id == rating.traktId }) {
+        if (localRatings.any { it.idTmdb.id == rating.tmdbId }) {
           continue
         }
 
         val entity = Rating(
-          idTrakt = rating.traktId,
+          idTmdb = rating.tmdbId,
           type = "movie",
           rating = rating.rating,
           seasonNumber = null,
@@ -87,7 +87,7 @@ internal class BackupImportMoviesRunner @Inject constructor(
     withContext(dispatchers.IO) {
       val localCollection = moviesRepository
         .loadCollection()
-        .map { it.traktId }
+        .map { it.tmdbId }
 
       importMyMovies(backup, localCollection)
       importWatchlistMovies(backup, localCollection)
@@ -100,15 +100,15 @@ internal class BackupImportMoviesRunner @Inject constructor(
     localCollection: List<Long>,
   ) {
     for (movie in backupMovies.collectionHistory) {
-      Timber.d("Importing movie ${movie.traktId} ...")
+      Timber.d("Importing movie ${movie.tmdbId} ...")
       statusListener?.invoke(Importing(movie.title))
 
-      if (localCollection.contains(movie.traktId)) {
+      if (localCollection.contains(movie.tmdbId)) {
         Timber.d("Movie already in collection. Skipping.")
         continue
       }
 
-      val movieDetails = localSource.movies.getById(movie.traktId)
+      val movieDetails = localSource.movies.getById(movie.tmdbId)
       if (movieDetails == null) {
         if (!fetchMovieDetails(movie)) {
           continue
@@ -116,10 +116,10 @@ internal class BackupImportMoviesRunner @Inject constructor(
       }
 
       val timestamp = movie.addedAt.toUtcDateTime()?.toMillis() ?: nowUtcMillis()
-      val myMovie = MyMovie.fromTraktId(movie.traktId, timestamp)
+      val myMovie = MyMovie.fromTmdbId(movie.tmdbId, timestamp)
       localSource.myMovies.insert(listOf(myMovie))
 
-      Timber.d("Added to history ${movie.traktId} ...")
+      Timber.d("Added to history ${movie.tmdbId} ...")
     }
   }
 
@@ -128,15 +128,15 @@ internal class BackupImportMoviesRunner @Inject constructor(
     localCollection: List<Long>,
   ) {
     for (movie in backupMovies.collectionWatchlist) {
-      Timber.d("Importing movie ${movie.traktId} ...")
+      Timber.d("Importing movie ${movie.tmdbId} ...")
       statusListener?.invoke(Importing(movie.title))
 
-      if (localCollection.contains(movie.traktId)) {
+      if (localCollection.contains(movie.tmdbId)) {
         Timber.d("Movie already in collection. Skipping.")
         continue
       }
 
-      val movieDetails = localSource.movies.getById(movie.traktId)
+      val movieDetails = localSource.movies.getById(movie.tmdbId)
       if (movieDetails == null) {
         if (!fetchMovieDetails(movie)) {
           continue
@@ -144,10 +144,10 @@ internal class BackupImportMoviesRunner @Inject constructor(
       }
 
       val timestamp = movie.addedAt.toUtcDateTime()?.toMillis() ?: nowUtcMillis()
-      val watchlistMovie = WatchlistMovie.fromTraktId(movie.traktId, timestamp)
+      val watchlistMovie = WatchlistMovie.fromTmdbId(movie.tmdbId, timestamp)
       localSource.watchlistMovies.insert(watchlistMovie)
 
-      Timber.d("Added to Watchlist ${movie.traktId} ...")
+      Timber.d("Added to Watchlist ${movie.tmdbId} ...")
     }
   }
 
@@ -156,15 +156,15 @@ internal class BackupImportMoviesRunner @Inject constructor(
     localCollection: List<Long>,
   ) {
     for (movie in backupMovies.collectionHidden) {
-      Timber.d("Importing movie ${movie.traktId} ...")
+      Timber.d("Importing movie ${movie.tmdbId} ...")
       statusListener?.invoke(Importing(movie.title))
 
-      if (localCollection.contains(movie.traktId)) {
+      if (localCollection.contains(movie.tmdbId)) {
         Timber.d("Movie already in collection. Skipping.")
         continue
       }
 
-      val movieDetails = localSource.movies.getById(movie.traktId)
+      val movieDetails = localSource.movies.getById(movie.tmdbId)
       if (movieDetails == null) {
         if (!fetchMovieDetails(movie)) {
           continue
@@ -172,22 +172,22 @@ internal class BackupImportMoviesRunner @Inject constructor(
       }
 
       val timestamp = movie.addedAt.toUtcDateTime()?.toMillis() ?: nowUtcMillis()
-      val hiddenMovie = ArchiveMovie.fromTraktId(movie.traktId, timestamp)
+      val hiddenMovie = ArchiveMovie.fromTmdbId(movie.tmdbId, timestamp)
       localSource.archiveMovies.insert(hiddenMovie)
 
-      Timber.d("Added to Hidden ${movie.traktId} ...")
+      Timber.d("Added to Hidden ${movie.tmdbId} ...")
     }
   }
 
   private suspend fun fetchMovieDetails(movie: BackupMovie): Boolean {
-    Timber.d("Fetching remote movie details for ${movie.traktId} ...")
+    Timber.d("Fetching remote movie details for ${movie.tmdbId} ...")
     return try {
-      moviesRepository.movieDetails.load(IdTrakt(movie.traktId), force = true)
+      moviesRepository.movieDetails.load(IdTmdb(movie.tmdbId), force = true)
       true
     } catch (error: Throwable) {
       rethrowCancellation(error) {
         if (error is HttpException && error.code() == 404) {
-          Timber.w("Failed to fetch movie: ${movie.traktId} ${movie.title}")
+          Timber.w("Failed to fetch movie: ${movie.tmdbId} ${movie.title}")
         }
       }
       false

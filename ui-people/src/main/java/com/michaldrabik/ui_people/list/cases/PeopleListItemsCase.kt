@@ -3,7 +3,7 @@ package com.michaldrabik.ui_people.list.cases
 import com.michaldrabik.common.Mode
 import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.repository.PeopleRepository
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Person
 import com.michaldrabik.ui_people.list.recycler.PeopleListItem
@@ -18,12 +18,12 @@ class PeopleListItemsCase @Inject constructor(
 ) {
 
   suspend fun loadPeople(
-    idTrakt: IdTrakt,
+    idTmdb: IdTmdb,
     mode: Mode,
     department: Person.Department,
   ): List<PeopleListItem.PersonItem> =
     withContext(dispatchers.IO) {
-      val ids = Ids.EMPTY.copy(trakt = idTrakt)
+      val ids = Ids.EMPTY.copy(tmdb = idTmdb)
       val people: Map<Person.Department, List<Person>> = when (mode) {
         Mode.SHOWS -> peopleRepository.loadAllForShow(ids)
         Mode.MOVIES -> peopleRepository.loadAllForMovie(ids)

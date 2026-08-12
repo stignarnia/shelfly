@@ -21,23 +21,23 @@ class MovieDetailsWatchlistCase @Inject constructor(
 
   suspend fun isWatchlist(movie: Movie) =
     withContext(dispatchers.IO) {
-      moviesRepository.watchlistMovies.load(movie.ids.trakt) != null
+      moviesRepository.watchlistMovies.load(movie.ids.tmdb) != null
     }
 
   suspend fun addToWatchlist(movie: Movie) {
     withContext(dispatchers.IO) {
-      moviesRepository.watchlistMovies.insert(movie.ids.trakt)
+      moviesRepository.watchlistMovies.insert(movie.ids.tmdb)
       pinnedItemsRepository.removePinnedItem(movie)
-      quickSyncManager.scheduleMoviesWatchlist(listOf(movie.traktId))
+      quickSyncManager.scheduleMoviesWatchlist(listOf(movie.tmdbId))
       announcementManager.refreshMoviesAnnouncements()
     }
   }
 
   suspend fun removeFromWatchlist(movie: Movie) {
     withContext(dispatchers.IO) {
-      moviesRepository.watchlistMovies.delete(movie.ids.trakt)
+      moviesRepository.watchlistMovies.delete(movie.ids.tmdb)
       pinnedItemsRepository.removePinnedItem(movie)
-      quickSyncManager.clearWatchlistMovies(listOf(movie.traktId))
+      quickSyncManager.clearWatchlistMovies(listOf(movie.tmdbId))
     }
   }
 }

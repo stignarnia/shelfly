@@ -11,28 +11,28 @@ import androidx.room.PrimaryKey
   foreignKeys = [
     ForeignKey(
       entity = Show::class,
-      parentColumns = arrayOf("id_trakt"),
-      childColumns = arrayOf("id_trakt_related_show"),
+      parentColumns = arrayOf("id_tmdb"),
+      childColumns = arrayOf("id_tmdb_related_show"),
       onDelete = CASCADE,
     ),
   ],
 )
 data class RelatedShow(
   @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
-  @ColumnInfo(name = "id_trakt", defaultValue = "-1") val idTrakt: Long,
-  @ColumnInfo(name = "id_trakt_related_show", defaultValue = "-1", index = true) val idTraktRelatedShow: Long,
+  @ColumnInfo(name = "id_tmdb", defaultValue = "-1") val idTmdb: Long,
+  @ColumnInfo(name = "id_tmdb_related_show", defaultValue = "-1", index = true) val idTmdbRelatedShow: Long,
   @ColumnInfo(name = "updated_at", defaultValue = "-1") val updatedAt: Long,
 ) {
 
   companion object {
-    fun fromTraktId(
-      traktId: Long,
+    fun fromTmdbId(
+      tmdbId: Long,
       relatedShowTraktId: Long,
       nowUtcMillis: Long,
     ): RelatedShow =
       RelatedShow(
-        idTrakt = traktId,
-        idTraktRelatedShow = relatedShowTraktId,
+        idTmdb = tmdbId,
+        idTmdbRelatedShow = relatedShowTraktId,
         updatedAt = nowUtcMillis,
       )
   }

@@ -29,7 +29,7 @@ import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.extensions.withFailListener
 import com.michaldrabik.ui_base.utilities.extensions.withSuccessListener
 import com.michaldrabik.ui_base.utilities.viewBinding
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageStatus
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_ID
@@ -45,11 +45,11 @@ abstract class ContextMenuBottomSheet : BaseBottomSheetFragment(R.layout.view_co
     private const val ARG_DETAILS_ENABLED = "ARG_DETAILS_ENABLED"
 
     fun createBundle(
-      idTrakt: IdTrakt,
+      idTmdb: IdTmdb,
       showPinButtons: Boolean = false,
       detailsEnabled: Boolean = true,
     ) = bundleOf(
-      ARG_ID to idTrakt,
+      ARG_ID to idTmdb,
       ARG_OPTIONS to bundleOf(
         ARG_SHOW_PIN_BUTTONS to showPinButtons,
         ARG_DETAILS_ENABLED to detailsEnabled,
@@ -59,7 +59,7 @@ abstract class ContextMenuBottomSheet : BaseBottomSheetFragment(R.layout.view_co
 
   protected val binding by viewBinding(ViewContextMenuBinding::bind)
 
-  protected val itemId by lazy { requireParcelable<IdTrakt>(ARG_ID) }
+  protected val itemId by lazy { requireParcelable<IdTmdb>(ARG_ID) }
   private val showPinButtons by lazy { requireParcelable<Bundle>(ARG_OPTIONS).getBoolean(ARG_SHOW_PIN_BUTTONS) }
   private val detailsEnabled by lazy { requireParcelable<Bundle>(ARG_OPTIONS).getBoolean(ARG_DETAILS_ENABLED) }
 

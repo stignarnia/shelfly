@@ -11,16 +11,16 @@ interface PeopleShowsMoviesDao :
   BaseDao<PersonShowMovie>,
   PeopleShowsMoviesLocalDataSource {
 
-  @Query("SELECT updated_at FROM people_shows_movies WHERE id_trakt_show == :showTraktId LIMIT 1")
+  @Query("SELECT updated_at FROM people_shows_movies WHERE id_tmdb_show == :showTraktId LIMIT 1")
   override suspend fun getTimestampForShow(showTraktId: Long): Long?
 
-  @Query("SELECT updated_at FROM people_shows_movies WHERE id_trakt_movie == :movieTraktId LIMIT 1")
+  @Query("SELECT updated_at FROM people_shows_movies WHERE id_tmdb_movie == :movieTraktId LIMIT 1")
   override suspend fun getTimestampForMovie(movieTraktId: Long): Long?
 
-  @Query("DELETE FROM people_shows_movies WHERE id_trakt_show == :showTraktId")
+  @Query("DELETE FROM people_shows_movies WHERE id_tmdb_show == :showTraktId")
   override suspend fun deleteAllForShow(showTraktId: Long)
 
-  @Query("DELETE FROM people_shows_movies WHERE id_trakt_movie == :movieTraktId")
+  @Query("DELETE FROM people_shows_movies WHERE id_tmdb_movie == :movieTraktId")
   override suspend fun deleteAllForMovie(movieTraktId: Long)
 
   @Transaction

@@ -39,7 +39,7 @@ class CreateListCase @Inject constructor(
         mappers.customList.fromNetwork(this)
       }
       return listsRepository
-        .createList(name, description, list.idTrakt, list.idSlug)
+        .createList(name, description, list.idTmdb, list.idSlug)
         .also { eventsManager.sendEvent(TraktListQuickSyncSuccess) }
     }
     return listsRepository.createList(name, description, null, null)
@@ -57,7 +57,7 @@ class CreateListCase @Inject constructor(
           mappers.customList.fromNetwork(this)
         }
         listsRepository
-          .updateList(list.id, result.idTrakt, result.idSlug, result.name, result.description)
+          .updateList(list.id, result.idTmdb, result.idSlug, result.name, result.description)
           .also { eventsManager.sendEvent(TraktQuickSyncSuccess(1)) }
       } catch (error: Throwable) {
         if (ErrorHelper.parse(error) is ResourceNotFoundError) {
@@ -66,18 +66,18 @@ class CreateListCase @Inject constructor(
           val result = remoteSource
             .postCreateList(updateList.name, updateList.description)
             .run { mappers.customList.fromNetwork(this) }
-          listsRepository.updateList(list.id, result.idTrakt, result.idSlug, result.name, result.description)
+          listsRepository.updateList(list.id, result.idTmdb, result.idSlug, result.name, result.description)
 
           val localItems = listsRepository.loadListItemsForId(list.id)
           if (localItems.isNotEmpty()) {
-            val showsIds = localItems.filter { it.type == Mode.SHOWS.type }.map { it.idTrakt }
-            val moviesIds = localItems.filter { it.type == Mode.MOVIES.type }.map { it.idTrakt }
+            val showsIds = localItems.filter { it.type == Mode.SHOWS.type }.map { it.idTmdb }
+            val moviesIds = localItems.filter { it.type == Mode.MOVIES.type }.map { it.idTmdb }
             delay(1000)
-            remoteSource.postAddListItems(result.idTrakt!!, showsIds, moviesIds)
+            remoteSource.postAddListItems(result.idTmdb!!, showsIds, moviesIds)
           }
 
           listsRepository
-            .updateList(list.id, result.idTrakt, result.idSlug, result.name, result.description)
+            .updateList(list.id, result.idTmdb, result.idSlug, result.name, result.description)
             .also { eventsManager.sendEvent(TraktQuickSyncSuccess(1)) }
         } else {
           Logger.record(error, "CreateListCase::updateList()")

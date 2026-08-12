@@ -23,7 +23,7 @@ data class Show(
   val updatedAt: Long,
 ) {
 
-  val traktId = ids.trakt.id
+  val tmdbId = ids.tmdb.id
 
   val titleNoThe = title.removePrefix("The").trim()
 
@@ -32,7 +32,6 @@ data class Show(
   companion object {
     val EMPTY = Show(
       ids = Ids(
-        trakt = IdTrakt(id = 0),
         slug = IdSlug(id = ""),
         tvdb = IdTvdb(id = 0),
         imdb = IdImdb(id = ""),

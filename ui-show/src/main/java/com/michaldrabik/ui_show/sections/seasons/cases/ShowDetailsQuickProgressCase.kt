@@ -28,14 +28,14 @@ class ShowDetailsQuickProgressCase @Inject constructor(
     show: Show,
     customDate: ZonedDateTime?,
   ) = coroutineScope {
-    val isMyShows = async { showsRepository.myShows.exists(show.ids.trakt) }
-    val isWatchlist = async { showsRepository.watchlistShows.exists(show.ids.trakt) }
-    val isHidden = async { showsRepository.hiddenShows.exists(show.ids.trakt) }
+    val isMyShows = async { showsRepository.myShows.exists(show.ids.tmdb) }
+    val isWatchlist = async { showsRepository.watchlistShows.exists(show.ids.tmdb) }
+    val isHidden = async { showsRepository.hiddenShows.exists(show.ids.tmdb) }
 
     val isCollection = isMyShows.await() || isWatchlist.await() || isHidden.await()
     val episodesAdded = mutableListOf<Episode>()
 
-    episodesManager.setAllUnwatched(show.ids.trakt, skipSpecials = true)
+    episodesManager.setAllUnwatched(show.ids.tmdb, skipSpecials = true)
     val seasons = seasonsItems.map { it.season }
     seasons
       .filter { !it.isSpecial() && it.number < selectedItem.season.number }
@@ -57,11 +57,11 @@ class ShowDetailsQuickProgressCase @Inject constructor(
       }
 
     if (isCollection) {
-      val episodesIds = episodesAdded.map { it.ids.trakt.id }
+      val episodesIds = episodesAdded.map { it.ids.tmdb.id }
       quickSyncManager.clearEpisodes()
       quickSyncManager.scheduleEpisodes(
         episodesIds = episodesIds,
-        showId = show.traktId,
+        showId = show.tmdbId,
         customDate = customDate,
         clearProgress = true,
       )

@@ -19,7 +19,7 @@ class MoviesExternalRatingsRepository @Inject constructor(
 ) {
 
   suspend fun loadRatings(movie: Movie): Ratings {
-    val localRatings = localSource.movieRatings.getById(movie.traktId)
+    val localRatings = localSource.movieRatings.getById(movie.tmdbId)
     localRatings?.let {
       if (nowUtcMillis() - it.updatedAt < ConfigVariant.RATINGS_CACHE_DURATION) {
         return mappers.ratings.fromDatabase(it)
@@ -31,7 +31,7 @@ class MoviesExternalRatingsRepository @Inject constructor(
       .let { mappers.ratings.fromNetwork(it) }
       .copy(trakt = Ratings.Value(String.format(Locale.ENGLISH, "%.1f", movie.rating), false))
 
-    val dbRatings = mappers.ratings.toMovieDatabase(movie.ids.trakt, remoteRatings)
+    val dbRatings = mappers.ratings.toMovieDatabase(movie.ids.tmdb, remoteRatings)
     localSource.movieRatings.upsert(dbRatings)
 
     return remoteRatings

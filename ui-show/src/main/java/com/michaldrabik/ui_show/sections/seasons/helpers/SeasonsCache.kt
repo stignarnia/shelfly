@@ -1,6 +1,6 @@
 package com.michaldrabik.ui_show.sections.seasons.helpers
 
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_show.sections.seasons.recycler.SeasonListItem
 import java.util.Collections
 import javax.inject.Inject
@@ -12,23 +12,23 @@ import javax.inject.Singleton
 @Singleton
 class SeasonsCache @Inject constructor() {
 
-  private val seasonsCache = Collections.synchronizedMap(mutableMapOf<IdTrakt, SeasonsBundle?>())
+  private val seasonsCache = Collections.synchronizedMap(mutableMapOf<IdTmdb, SeasonsBundle?>())
 
   fun setSeasons(
-    showId: IdTrakt,
+    showId: IdTmdb,
     seasons: List<SeasonListItem>,
     areSeasonsLocal: Boolean,
   ) {
     seasonsCache[showId] = SeasonsBundle(seasons.toList(), areSeasonsLocal)
   }
 
-  fun loadSeasons(showId: IdTrakt): List<SeasonListItem>? = seasonsCache[showId]?.seasons
+  fun loadSeasons(showId: IdTmdb): List<SeasonListItem>? = seasonsCache[showId]?.seasons
 
-  fun hasSeasons(showId: IdTrakt): Boolean = seasonsCache[showId]?.seasons != null
+  fun hasSeasons(showId: IdTmdb): Boolean = seasonsCache[showId]?.seasons != null
 
-  fun areSeasonsLocal(showId: IdTrakt): Boolean = seasonsCache[showId]?.isLocal ?: false
+  fun areSeasonsLocal(showId: IdTmdb): Boolean = seasonsCache[showId]?.isLocal ?: false
 
-  fun clear(showId: IdTrakt) {
+  fun clear(showId: IdTmdb) {
     seasonsCache.remove(showId)
   }
 }

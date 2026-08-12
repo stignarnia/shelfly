@@ -17,7 +17,6 @@ import com.michaldrabik.data_remote.trakt.model.PersonCredit
 import com.michaldrabik.repository.common.BaseMockTest
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.IdTrakt
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Person
 import com.michaldrabik.ui_model.Person.Department
@@ -72,7 +71,7 @@ class PeopleRepositoryTest : BaseMockTest() {
       coEvery { peopleShowsMoviesDao.getTimestampForShow(any()) } returns nowUtc().minusHours(10).toMillis()
       coEvery { peopleDao.getAllForShow(any()) } returns listOf(person)
 
-      SUT.loadAllForShow(Ids.EMPTY.copy(trakt = IdTrakt(11)))
+      SUT.loadAllForShow(Ids.EMPTY.copy(tmdb = IdTmdb(11)))
 
       coVerifyOrder {
         peopleShowsMoviesDao.getTimestampForShow(11)
@@ -87,14 +86,14 @@ class PeopleRepositoryTest : BaseMockTest() {
       coEvery { peopleShowsMoviesDao.getTimestampForShow(any()) } returns nowUtc().minusDays(10).toMillis()
       coEvery { peopleDao.getAllForShow(any()) } returns listOf(person)
 
-      SUT.loadAllForShow(Ids.EMPTY.copy(trakt = IdTrakt(11), tmdb = IdTmdb(12)))
+      SUT.loadAllForShow(Ids.EMPTY.copy(tmdb = IdTmdb(12)))
 
       coVerifyOrder {
-        peopleShowsMoviesDao.getTimestampForShow(11)
-        peopleDao.getAllForShow(11)
+        peopleShowsMoviesDao.getTimestampForShow(12)
+        peopleDao.getAllForShow(12)
         tmdbApi.fetchShowPeople(12)
         peopleDao.upsert(any())
-        peopleShowsMoviesDao.insertForShow(any(), 11)
+        peopleShowsMoviesDao.insertForShow(any(), 12)
       }
     }
 
@@ -104,7 +103,7 @@ class PeopleRepositoryTest : BaseMockTest() {
       coEvery { peopleShowsMoviesDao.getTimestampForMovie(any()) } returns nowUtc().minusHours(10).toMillis()
       coEvery { peopleDao.getAllForMovie(any()) } returns listOf(person)
 
-      SUT.loadAllForMovie(Ids.EMPTY.copy(trakt = IdTrakt(11)))
+      SUT.loadAllForMovie(Ids.EMPTY.copy(tmdb = IdTmdb(11)))
 
       coVerifyOrder {
         peopleShowsMoviesDao.getTimestampForMovie(11)
@@ -119,14 +118,14 @@ class PeopleRepositoryTest : BaseMockTest() {
       coEvery { peopleShowsMoviesDao.getTimestampForMovie(any()) } returns nowUtc().minusDays(10).toMillis()
       coEvery { peopleDao.getAllForMovie(any()) } returns listOf(person)
 
-      SUT.loadAllForMovie(Ids.EMPTY.copy(trakt = IdTrakt(11), tmdb = IdTmdb(12)))
+      SUT.loadAllForMovie(Ids.EMPTY.copy(tmdb = IdTmdb(12)))
 
       coVerifyOrder {
-        peopleShowsMoviesDao.getTimestampForMovie(11)
-        peopleDao.getAllForMovie(11)
+        peopleShowsMoviesDao.getTimestampForMovie(12)
+        peopleDao.getAllForMovie(12)
         tmdbApi.fetchMoviePeople(12)
         peopleDao.upsert(any())
-        peopleShowsMoviesDao.insertForMovie(any(), 11)
+        peopleShowsMoviesDao.insertForMovie(any(), 12)
       }
     }
 
@@ -149,7 +148,7 @@ class PeopleRepositoryTest : BaseMockTest() {
       }
       coEvery { peopleDao.getAllForShow(any()) } returns listOf(person1, person2, person3)
 
-      val result = SUT.loadAllForShow(Ids.EMPTY.copy(trakt = IdTrakt(11)))
+      val result = SUT.loadAllForShow(Ids.EMPTY.copy(tmdb = IdTmdb(11)))
       assertThat(result[Department.ACTING]!!.first().imagePath).isNotNull()
 
       coVerify { peopleDao.getAllForShow(any()) }
@@ -174,38 +173,18 @@ class PeopleRepositoryTest : BaseMockTest() {
       }
       coEvery { peopleDao.getAllForMovie(any()) } returns listOf(person1, person2, person3)
 
-      val result = SUT.loadAllForMovie(Ids.EMPTY.copy(trakt = IdTrakt(11)))
+      val result = SUT.loadAllForMovie(Ids.EMPTY.copy(tmdb = IdTmdb(11)))
       assertThat(result[Department.ACTING]!!.first().imagePath).isNotNull()
 
       coVerify { peopleDao.getAllForMovie(any()) }
     }
 
   @Test
-  fun `Should return empty credits if Trakt ID is not found for given TMDB ID`() =
+  fun `Should return locally cached credits if cache is valid`() =
     runBlocking {
       val person = mockk<Person>(relaxed = true)
       val personDb = mockk<PersonDb>(relaxed = true) {
-        coEvery { idTrakt } returns null
-      }
-      val ids = mockk<IdsRemote>(relaxed = true) {
-        coEvery { trakt } returns null
-      }
-      coEvery { peopleDao.getById(any()) } returns personDb
-      coEvery { traktApi.fetchPersonIds(any(), any()) } returns ids
-
-      val result = SUT.loadCredits(person)
-
-      assertThat(result).isEmpty()
-      coVerify { peopleDao.getById(any()) }
-      coVerify(exactly = 0) { peopleDao.updateTraktId(any(), any()) }
-    }
-
-  @Test
-  fun `Should return locally cached credits if Trakt ID is found and cache is valid`() =
-    runBlocking {
-      val person = mockk<Person>(relaxed = true)
-      val personDb = mockk<PersonDb>(relaxed = true) {
-        coEvery { idTrakt } returns 1
+        coEvery { idTmdb } returns 1
       }
       val ids = mockk<IdsRemote>(relaxed = true) {
         coEvery { trakt } returns 1
@@ -223,18 +202,16 @@ class PeopleRepositoryTest : BaseMockTest() {
       assertThat(result).hasSize(2)
       assertThat(result[0].show).isNotNull()
       assertThat(result[1].movie).isNotNull()
-      coVerify { peopleDao.getById(any()) }
-      coVerify(exactly = 0) { peopleDao.updateTraktId(any(), any()) }
       coVerify(exactly = 0) { traktApi.fetchPersonShowsCredits(any(), any()) }
       coVerify(exactly = 0) { traktApi.fetchPersonMoviesCredits(any(), any()) }
     }
 
   @Test
-  fun `Should return remote credits if Trakt ID is found and cache is invalid`() =
+  fun `Should return remote credits if cache is invalid`() =
     runBlocking {
       val person = mockk<Person>(relaxed = true)
       val personDb = mockk<PersonDb>(relaxed = true) {
-        coEvery { idTrakt } returns 1
+        coEvery { idTmdb } returns 1
       }
       val ids = mockk<IdsRemote>(relaxed = true) {
         coEvery { trakt } returns 1
@@ -251,10 +228,8 @@ class PeopleRepositoryTest : BaseMockTest() {
       assertThat(result).hasSize(2)
       assertThat(result[0].show).isNotNull()
       assertThat(result[1].movie).isNotNull()
-      coVerify { peopleDao.getById(any()) }
       coVerify(exactly = 1) { showsDao.upsert(any()) }
       coVerify(exactly = 1) { moviesDao.upsert(any()) }
       coVerify(exactly = 1) { peopleCreditsDao.insertSingle(any(), any()) }
-      coVerify(exactly = 0) { peopleDao.updateTraktId(any(), any()) }
     }
 }

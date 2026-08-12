@@ -14,7 +14,7 @@ import com.michaldrabik.ui_base.utilities.extensions.launchAndRepeatStarted
 import com.michaldrabik.ui_base.utilities.extensions.navigateToSafe
 import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.viewBinding
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.MovieCollection
 import com.michaldrabik.ui_movie.MovieDetailsEvent.OpenCollectionSheet
@@ -96,13 +96,13 @@ class MovieDetailsCollectionsFragment :
   ) {
     requireParentFragment()
       .setFragmentResultListener(NavigationArgs.REQUEST_DETAILS) { _, bundle ->
-        bundle.getParcelable<IdTrakt>(ARG_COLLECTION_ID)?.let {
+        bundle.getParcelable<IdTmdb>(ARG_COLLECTION_ID)?.let {
           viewModel.saveLastOpenedCollection(it)
         }
       }
     val bundle = MovieDetailsCollectionBottomSheet.createBundle(
       collectionId = collection.id,
-      sourceMovieId = movie.ids.trakt,
+      sourceMovieId = movie.ids.tmdb,
     )
     navigateToSafe(R.id.actionMovieDetailsFragmentToCollection, bundle)
   }

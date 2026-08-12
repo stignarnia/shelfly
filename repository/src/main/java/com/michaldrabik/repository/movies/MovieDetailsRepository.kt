@@ -9,7 +9,6 @@ import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.IdImdb
 import com.michaldrabik.ui_model.IdSlug
 import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.IdTrakt
 import com.michaldrabik.ui_model.Movie
 import javax.inject.Inject
 
@@ -20,15 +19,15 @@ class MovieDetailsRepository @Inject constructor(
 ) {
 
   suspend fun load(
-    idTrakt: IdTrakt,
+    idTmdb: IdTmdb,
     force: Boolean = false,
   ): Movie {
-    val local = localSource.movies.getById(idTrakt.id)
+    val local = localSource.movies.getById(idTmdb.id)
     if (force || local == null || nowUtcMillis() - local.updatedAt > Config.MOVIE_DETAILS_CACHE_DURATION) {
-      val remote = remoteSource.trakt.fetchMovie(idTrakt.id)
+      val remote = remoteSource.trakt.fetchMovie(idTmdb.id)
       val movie = mappers.movie.fromNetwork(remote)
       localSource.movies.upsert(listOf(mappers.movie.toDatabase(movie)))
-      localSource.moviesSyncLog.upsert(MoviesSyncLog(movie.traktId, nowUtcMillis()))
+      localSource.moviesSyncLog.upsert(MoviesSyncLog(movie.tmdbId, nowUtcMillis()))
       return movie
     }
     return mappers.movie.fromDatabase(local)
@@ -58,5 +57,5 @@ class MovieDetailsRepository @Inject constructor(
     return null
   }
 
-  suspend fun delete(idTrakt: IdTrakt) = localSource.movies.deleteById(idTrakt.id)
+  suspend fun delete(idTmdb: IdTmdb) = localSource.movies.deleteById(idTmdb.id)
 }

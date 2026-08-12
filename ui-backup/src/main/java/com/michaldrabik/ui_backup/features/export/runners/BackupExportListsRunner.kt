@@ -34,21 +34,20 @@ internal class BackupExportListsRunner @Inject constructor(
       localLists.forEach { list ->
         val localItems = localSource.customListsItems.getItemsById(list.id)
 
-        val localShowIds = localItems.filter { it.type == "show" }.map { it.idTrakt }
-        val localMovieIds = localItems.filter { it.type == "movie" }.map { it.idTrakt }
+        val localShowIds = localItems.filter { it.type == "show" }.map { it.idTmdb }
+        val localMovieIds = localItems.filter { it.type == "movie" }.map { it.idTmdb }
 
-        val localShowTmdbIdsAsync = async { localSource.shows.getAllTmdbIds(traktIds = localShowIds) }
-        val localMovieTmdbIdsAsync = async { localSource.movies.getAllTmdbIds(traktIds = localMovieIds) }
+        val localShowTmdbIdsAsync = async { localSource.shows.getAllTmdbIds(tmdbIds = localShowIds) }
+        val localMovieTmdbIdsAsync = async { localSource.movies.getAllTmdbIds(tmdbIds = localMovieIds) }
         val (localShowTmdbIds, localMovieTmdbIds) = awaitAll(localShowTmdbIdsAsync, localMovieTmdbIdsAsync)
 
         val backupItems = localItems.map {
           BackupListItem(
             id = it.id,
             listId = list.id,
-            traktId = it.idTrakt,
             tmdbId = when (it.type) {
-              "show" -> localShowTmdbIds.getOrDefault(it.idTrakt, -1)
-              "movie" -> localMovieTmdbIds.getOrDefault(it.idTrakt, -1)
+              "show" -> localShowTmdbIds.getOrDefault(it.idTmdb, -1)
+              "movie" -> localMovieTmdbIds.getOrDefault(it.idTmdb, -1)
               else -> -1
             },
             type = it.type,
@@ -61,7 +60,6 @@ internal class BackupExportListsRunner @Inject constructor(
 
         val backupList = BackupList(
           id = list.id,
-          traktId = list.idTrakt,
           slugId = list.idSlug,
           name = list.name,
           description = list.description,

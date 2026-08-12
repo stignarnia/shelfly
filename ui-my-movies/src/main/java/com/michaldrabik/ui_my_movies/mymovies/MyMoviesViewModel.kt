@@ -98,7 +98,7 @@ class MyMoviesViewModel @Inject constructor(
             movie = it,
             dateFormat = dateFormat,
             type = POSTER,
-            userRating = ratings[it.ids.trakt],
+            userRating = ratings[it.ids.tmdb],
             sortOrder = sortOrder.first,
             spoilers = spoilers,
           )
@@ -119,7 +119,7 @@ class MyMoviesViewModel @Inject constructor(
               movie = it,
               dateFormat = dateFormat,
               type = ImageType.FANART,
-              userRating = ratings[it.ids.trakt],
+              userRating = ratings[it.ids.tmdb],
               sortOrder = sortOrder.first,
               spoilers = spoilers,
             )

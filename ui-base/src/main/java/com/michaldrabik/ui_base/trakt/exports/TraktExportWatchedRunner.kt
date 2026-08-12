@@ -63,11 +63,11 @@ class TraktExportWatchedRunner @Inject constructor(
 
     val localMyShows = localSource.myShows.getAll()
     var localEpisodes = emptyList<Episode>()
-    val localEpisodesNotExported = batchEpisodes(localMyShows.map { it.idTrakt })
+    val localEpisodesNotExported = batchEpisodes(localMyShows.map { it.idTmdb })
       .filter { it.lastExportedAt == null }
 
     if (localEpisodesNotExported.isNotEmpty()) {
-      val distinctShowIds = localEpisodesNotExported.map { it.idShowTrakt }.distinct()
+      val distinctShowIds = localEpisodesNotExported.map { it.idShowTmdb }.distinct()
       val watchedEpisodes = if (distinctShowIds.size == 1) {
         // Use history endpoint for single show instead of fetching all watched progress. The most usual case.
         val remoteShows = remoteSource.fetchSyncShowHistory(distinctShowIds.first())
@@ -78,23 +78,23 @@ class TraktExportWatchedRunner @Inject constructor(
         localEpisodesNotExported.filter { isEpisodeWatched(remoteShows, it) }
       }
 
-      val watchedEpisodesIds = watchedEpisodes.map { it.idTrakt }
+      val watchedEpisodesIds = watchedEpisodes.map { it.idTmdb }
       localSource.episodes.updateIsExported(
         exportedAt = nowUtcMillis(),
-        episodesIds = watchedEpisodes.map { it.idTrakt },
+        episodesIds = watchedEpisodes.map { it.idTmdb },
       )
-      localEpisodes = localEpisodesNotExported.filter { it.idTrakt !in watchedEpisodesIds }
+      localEpisodes = localEpisodesNotExported.filter { it.idTmdb !in watchedEpisodesIds }
     }
 
     val exportEpisodes = localEpisodes.map { ep ->
       val episodeTimestamp = ep.lastWatchedAt?.toMillis() ?: 0
-      val showTimestamp = localMyShows.find { it.idTrakt == ep.idShowTrakt }?.updatedAt ?: 0
+      val showTimestamp = localMyShows.find { it.idTmdb == ep.idShowTmdb }?.updatedAt ?: 0
       val timestamp = when {
         episodeTimestamp > 0 -> episodeTimestamp
         showTimestamp > 0 -> showTimestamp
         else -> nowUtcMillis()
       }
-      SyncExportItem.create(ep.idTrakt, dateIsoStringFromMillis(timestamp))
+      SyncExportItem.create(ep.idTmdb, dateIsoStringFromMillis(timestamp))
     }
 
     val exportMovies = mutableListOf<SyncExportItem>()
@@ -105,10 +105,10 @@ class TraktExportWatchedRunner @Inject constructor(
           .fetchSyncWatchedMovies("progress")
           .map { it.getTraktId() }
         val localMyMovies = batchMovies(localMoviesIds)
-          .filter { movie -> remoteMoviesIds.none { it == movie.idTrakt } }
+          .filter { movie -> remoteMoviesIds.none { it == movie.idTmdb } }
 
         localMyMovies.mapTo(exportMovies) {
-          SyncExportItem.create(it.idTrakt, dateIsoStringFromMillis(it.updatedAt))
+          SyncExportItem.create(it.idTmdb, dateIsoStringFromMillis(it.updatedAt))
         }
       }
     }
@@ -174,28 +174,28 @@ class TraktExportWatchedRunner @Inject constructor(
       val (localShows, localMovies) = awaitAll(showsAsync, moviesAsync)
 
       val remoteShowsIds = (remoteHiddenShows + remoteDroppedShows)
-        .distinctBy { it.show?.ids?.trakt }
-        .mapNotNull { it.show?.ids?.trakt }
+        .distinctBy { it.show?.ids?.tmdb }
+        .mapNotNull { it.show?.ids?.tmdb }
 
       val remoteMoviesIds = remoteMovies
-        .mapNotNull { it.movie?.ids?.trakt }
+        .mapNotNull { it.movie?.ids?.tmdb }
 
       val showsItems = localShows
-        .filter { (it as Show).idTrakt !in remoteShowsIds }
+        .filter { (it as Show).idTmdb !in remoteShowsIds }
         .map {
           (it as Show).let { show ->
             SyncExportItem.create(
-              traktId = show.idTrakt,
+              traktId = show.idTmdb,
               hiddenAt = dateIsoStringFromMillis(show.updatedAt),
             )
           }
         }
       val moviesItems = localMovies
-        .filter { (it as Movie).idTrakt !in remoteMoviesIds }
+        .filter { (it as Movie).idTmdb !in remoteMoviesIds }
         .map {
           (it as Movie).let { movie ->
             SyncExportItem.create(
-              traktId = movie.idTrakt,
+              traktId = movie.idTmdb,
               hiddenAt = dateIsoStringFromMillis(movie.updatedAt),
             )
           }
@@ -255,7 +255,7 @@ class TraktExportWatchedRunner @Inject constructor(
     episode: Episode,
   ): Boolean {
     val ep = remoteItems
-      .find { it.show?.ids?.trakt == episode.idShowTrakt }
+      .find { it.show?.ids?.tmdb == episode.idShowTmdb }
       ?.seasons
       ?.find { it.number == episode.seasonNumber }
       ?.episodes
@@ -267,13 +267,13 @@ class TraktExportWatchedRunner @Inject constructor(
     remoteItems: List<SyncHistoryItem>,
     episode: Episode,
   ): Boolean {
-    val shows = remoteItems.filter { it.show?.ids?.trakt == episode.idShowTrakt }
+    val shows = remoteItems.filter { it.show?.ids?.tmdb == episode.idShowTmdb }
     val seasons = shows.filter { it.episode?.season == episode.seasonNumber }
 
     val episodeBySeasonEpisode = seasons.find { it.episode?.number == episode.episodeNumber }
     if (episodeBySeasonEpisode == null) {
       // Extra check by Trakt ID
-      val episodeById = shows.find { it.episode?.ids?.trakt == episode.idTrakt }
+      val episodeById = shows.find { it.episode?.ids?.tmdb == episode.idTmdb }
       return episodeById != null
     }
 

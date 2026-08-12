@@ -5,7 +5,7 @@ import android.content.Context.MODE_PRIVATE
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-const val DATABASE_VERSION = 41
+const val DATABASE_VERSION = 42
 const val DATABASE_NAME = "SHOWLY2_DB_2"
 
 class Migrations(
@@ -41,8 +41,8 @@ class Migrations(
 
   private val migration6 = object : Migration(5, 6) {
     override fun migrate(database: SupportSQLiteDatabase) {
-      database.execSQL("CREATE INDEX index_episodes_id_show_trakt ON episodes(id_show_trakt)")
-      database.execSQL("CREATE INDEX index_seasons_id_show_trakt ON seasons(id_show_trakt)")
+      database.execSQL("CREATE INDEX index_episodes_id_show_tmdb ON episodes(id_show_tmdb)")
+      database.execSQL("CREATE INDEX index_seasons_id_show_tmdb ON seasons(id_show_tmdb)")
     }
   }
 
@@ -55,7 +55,7 @@ class Migrations(
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `trakt_sync_queue` (" +
           "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-          "`id_trakt` INTEGER NOT NULL, " +
+          "`id_tmdb` INTEGER NOT NULL, " +
           "`type` TEXT NOT NULL, " +
           "`created_at` INTEGER NOT NULL, " +
           "`updated_at` INTEGER NOT NULL)",
@@ -80,12 +80,12 @@ class Migrations(
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `shows_archive` (" +
           "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-          "`id_trakt` INTEGER NOT NULL, " +
+          "`id_tmdb` INTEGER NOT NULL, " +
           "`created_at` INTEGER NOT NULL, " +
           "`updated_at` INTEGER NOT NULL, " +
-          "FOREIGN KEY(`id_trakt`) REFERENCES `shows`(`id_trakt`) ON DELETE CASCADE)",
+          "FOREIGN KEY(`id_tmdb`) REFERENCES `shows`(`id_tmdb`) ON DELETE CASCADE)",
       )
-      database.execSQL("CREATE UNIQUE INDEX index_shows_archive_id_trakt ON shows_archive(id_trakt)")
+      database.execSQL("CREATE UNIQUE INDEX index_shows_archive_id_tmdb ON shows_archive(id_tmdb)")
       database.execSQL("ALTER TABLE settings ADD COLUMN archive_shows_sort_by TEXT NOT NULL DEFAULT 'NAME'")
     }
   }
@@ -106,25 +106,25 @@ class Migrations(
     override fun migrate(database: SupportSQLiteDatabase) {
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `shows_translations` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-          "`id_trakt` INTEGER NOT NULL, `title` TEXT NOT NULL, `language` TEXT NOT NULL, `overview` TEXT NOT NULL, " +
+          "`id_tmdb` INTEGER NOT NULL, `title` TEXT NOT NULL, `language` TEXT NOT NULL, `overview` TEXT NOT NULL, " +
           "`created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, " +
-          "FOREIGN KEY(`id_trakt`) REFERENCES `shows`(`id_trakt`) ON DELETE CASCADE)",
+          "FOREIGN KEY(`id_tmdb`) REFERENCES `shows`(`id_tmdb`) ON DELETE CASCADE)",
       )
-      database.execSQL("CREATE UNIQUE INDEX index_shows_translations_id_trakt ON shows_translations(id_trakt)")
+      database.execSQL("CREATE UNIQUE INDEX index_shows_translations_id_tmdb ON shows_translations(id_tmdb)")
 
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `episodes_translations` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-          "`id_trakt` INTEGER NOT NULL, `id_trakt_show` INTEGER NOT NULL, " +
+          "`id_tmdb` INTEGER NOT NULL, `id_tmdb_show` INTEGER NOT NULL, " +
           "`title` TEXT NOT NULL, `language` TEXT NOT NULL, `overview` TEXT NOT NULL, " +
           "`created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, " +
-          "FOREIGN KEY(`id_trakt_show`) REFERENCES `shows`(`id_trakt`) ON DELETE CASCADE)",
+          "FOREIGN KEY(`id_tmdb_show`) REFERENCES `shows`(`id_tmdb`) ON DELETE CASCADE)",
       )
-      database.execSQL("CREATE UNIQUE INDEX index_episodes_translations_id_trakt ON episodes_translations(id_trakt)")
-      database.execSQL("CREATE INDEX index_episodes_translations_id_trakt_show ON episodes_translations(id_trakt_show)")
+      database.execSQL("CREATE UNIQUE INDEX index_episodes_translations_id_tmdb ON episodes_translations(id_tmdb)")
+      database.execSQL("CREATE INDEX index_episodes_translations_id_tmdb_show ON episodes_translations(id_tmdb_show)")
 
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `sync_translations_log` (" +
-          "`id_show_trakt` INTEGER PRIMARY KEY NOT NULL, " +
+          "`id_show_tmdb` INTEGER PRIMARY KEY NOT NULL, " +
           "`synced_at` INTEGER NOT NULL)",
       )
     }
@@ -147,7 +147,7 @@ class Migrations(
 
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `movies` (" +
-          "`id_trakt` INTEGER PRIMARY KEY NOT NULL, " +
+          "`id_tmdb` INTEGER PRIMARY KEY NOT NULL, " +
           "`id_tmdb` INTEGER NOT NULL DEFAULT -1, " +
           "`id_imdb` TEXT NOT NULL DEFAULT '', " +
           "`id_slug` TEXT NOT NULL DEFAULT '', " +
@@ -171,12 +171,12 @@ class Migrations(
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `movies_discover` (" +
           "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-          "`id_trakt` INTEGER NOT NULL DEFAULT -1, " +
+          "`id_tmdb` INTEGER NOT NULL DEFAULT -1, " +
           "`created_at` INTEGER NOT NULL DEFAULT -1, " +
           "`updated_at` INTEGER NOT NULL DEFAULT -1, " +
-          "FOREIGN KEY(`id_trakt`) REFERENCES `movies`(`id_trakt`) ON DELETE CASCADE)",
+          "FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON DELETE CASCADE)",
       )
-      database.execSQL("CREATE INDEX index_discover_movies_id_trakt ON movies_discover(id_trakt)")
+      database.execSQL("CREATE INDEX index_discover_movies_id_tmdb ON movies_discover(id_tmdb)")
 
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `movies_images` (" +
@@ -190,14 +190,14 @@ class Migrations(
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `movies_translations` (" +
           "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-          "`id_trakt` INTEGER NOT NULL, `title` TEXT NOT NULL, " +
+          "`id_tmdb` INTEGER NOT NULL, `title` TEXT NOT NULL, " +
           "`language` TEXT NOT NULL, " +
           "`overview` TEXT NOT NULL, " +
           "`created_at` INTEGER NOT NULL, " +
           "`updated_at` INTEGER NOT NULL, " +
-          "FOREIGN KEY(`id_trakt`) REFERENCES `movies`(`id_trakt`) ON DELETE CASCADE)",
+          "FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON DELETE CASCADE)",
       )
-      database.execSQL("CREATE UNIQUE INDEX index_movies_translations_id_trakt ON movies_translations(id_trakt)")
+      database.execSQL("CREATE UNIQUE INDEX index_movies_translations_id_tmdb ON movies_translations(id_tmdb)")
 
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `sync_movies_translations_log` (" +
@@ -208,12 +208,12 @@ class Migrations(
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `movies_related` (" +
           "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-          "`id_trakt` INTEGER NOT NULL  DEFAULT -1, " +
-          "`id_trakt_related_movie` INTEGER NOT NULL DEFAULT -1, " +
+          "`id_tmdb` INTEGER NOT NULL  DEFAULT -1, " +
+          "`id_tmdb_related_movie` INTEGER NOT NULL DEFAULT -1, " +
           "`updated_at` INTEGER NOT NULL DEFAULT -1, " +
-          "FOREIGN KEY(`id_trakt_related_movie`) REFERENCES `movies`(`id_trakt`) ON DELETE CASCADE)",
+          "FOREIGN KEY(`id_tmdb_related_movie`) REFERENCES `movies`(`id_tmdb`) ON DELETE CASCADE)",
       )
-      database.execSQL("CREATE INDEX index_movies_related_id_trakt ON movies_related(id_trakt_related_movie)")
+      database.execSQL("CREATE INDEX index_movies_related_id_tmdb ON movies_related(id_tmdb_related_movie)")
 
       database.execSQL("ALTER TABLE actors ADD COLUMN id_tmdb_movie INTEGER NOT NULL DEFAULT -1")
       database.execSQL("ALTER TABLE actors ADD COLUMN id_tmdb INTEGER NOT NULL DEFAULT -1")
@@ -221,22 +221,22 @@ class Migrations(
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `movies_my_movies` (" +
           "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-          "`id_trakt` INTEGER NOT NULL DEFAULT -1, " +
+          "`id_tmdb` INTEGER NOT NULL DEFAULT -1, " +
           "`created_at` INTEGER NOT NULL DEFAULT -1, " +
           "`updated_at` INTEGER NOT NULL DEFAULT -1, " +
-          "FOREIGN KEY(`id_trakt`) REFERENCES `movies`(`id_trakt`) ON DELETE CASCADE)",
+          "FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON DELETE CASCADE)",
       )
-      database.execSQL("CREATE INDEX index_movies_my_movies_id_trakt ON movies_my_movies(id_trakt)")
+      database.execSQL("CREATE INDEX index_movies_my_movies_id_tmdb ON movies_my_movies(id_tmdb)")
 
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `movies_see_later` (" +
           "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-          "`id_trakt` INTEGER NOT NULL DEFAULT -1, " +
+          "`id_tmdb` INTEGER NOT NULL DEFAULT -1, " +
           "`created_at` INTEGER NOT NULL DEFAULT -1, " +
           "`updated_at` INTEGER NOT NULL DEFAULT -1, " +
-          "FOREIGN KEY(`id_trakt`) REFERENCES `movies`(`id_trakt`) ON DELETE CASCADE)",
+          "FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON DELETE CASCADE)",
       )
-      database.execSQL("CREATE INDEX index_movies_see_later_id_trakt ON movies_see_later(id_trakt)")
+      database.execSQL("CREATE INDEX index_movies_see_later_id_tmdb ON movies_see_later(id_tmdb)")
 
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `sync_movies_log` (" +
@@ -247,13 +247,13 @@ class Migrations(
       database.execSQL(
         "CREATE TABLE IF NOT EXISTS `sync_trakt_log` (" +
           "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-          "`id_trakt` INTEGER NOT NULL, " +
+          "`id_tmdb` INTEGER NOT NULL, " +
           "`type` TEXT NOT NULL, " +
           "`synced_at` INTEGER NOT NULL)",
       )
-      database.execSQL("CREATE INDEX index_sync_trakt_log_id_trakt ON sync_trakt_log(id_trakt)")
+      database.execSQL("CREATE INDEX index_sync_trakt_log_id_tmdb ON sync_trakt_log(id_tmdb)")
       database.execSQL("CREATE INDEX index_sync_trakt_log_type ON sync_trakt_log(type)")
-      database.execSQL("CREATE UNIQUE INDEX index_sync_trakt_log_id_trakt_type ON sync_trakt_log(id_trakt, type)")
+      database.execSQL("CREATE UNIQUE INDEX index_sync_trakt_log_id_tmdb_type ON sync_trakt_log(id_tmdb, type)")
     }
   }
 
@@ -299,12 +299,12 @@ class Migrations(
         execSQL(
           "CREATE TABLE IF NOT EXISTS `custom_images` (" +
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "`id_trakt` INTEGER NOT NULL, " +
+            "`id_tmdb` INTEGER NOT NULL, " +
             "`family` TEXT NOT NULL, " +
             "`type` TEXT NOT NULL, " +
             "`file_url` TEXT NOT NULL)",
         )
-        execSQL("CREATE INDEX index_custom_images_trakt_id_family_type ON custom_images(id_trakt, family, type)")
+        execSQL("CREATE INDEX index_custom_images_trakt_id_family_type ON custom_images(id_tmdb, family, type)")
       }
     }
   }
@@ -321,11 +321,11 @@ class Migrations(
     override fun migrate(database: SupportSQLiteDatabase) {
       with(database) {
         execSQL("ALTER TABLE shows ADD COLUMN created_at INTEGER NOT NULL DEFAULT -1")
-        val cursor = database.query("SELECT id_trakt, updated_at FROM shows")
+        val cursor = database.query("SELECT id_tmdb, updated_at FROM shows")
         while (cursor.moveToNext()) {
-          val id = cursor.getLong(cursor.getColumnIndexOrThrow("id_trakt"))
+          val id = cursor.getLong(cursor.getColumnIndexOrThrow("id_tmdb"))
           val updatedAt = cursor.getLong(cursor.getColumnIndexOrThrow("updated_at"))
-          execSQL("UPDATE shows SET created_at = $updatedAt WHERE id_trakt == $id")
+          execSQL("UPDATE shows SET created_at = $updatedAt WHERE id_tmdb == $id")
         }
       }
     }
@@ -337,7 +337,7 @@ class Migrations(
         execSQL(
           "CREATE TABLE IF NOT EXISTS `custom_lists` (" +
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "`id_trakt` INTEGER, " +
+            "`id_tmdb` INTEGER, " +
             "`id_slug` TEXT NOT NULL, " +
             "`name` TEXT NOT NULL, " +
             "`description` TEXT, " +
@@ -356,7 +356,7 @@ class Migrations(
             "`updated_at` INTEGER NOT NULL" +
             ")",
         )
-        execSQL("CREATE UNIQUE INDEX index_custom_lists_id_trakt ON custom_lists(id_trakt)")
+        execSQL("CREATE UNIQUE INDEX index_custom_lists_id_tmdb ON custom_lists(id_tmdb)")
         execSQL("ALTER TABLE settings ADD COLUMN lists_sort_by TEXT NOT NULL DEFAULT 'DATE_UPDATED'")
       }
     }
@@ -369,7 +369,7 @@ class Migrations(
           "CREATE TABLE IF NOT EXISTS `custom_list_item` (" +
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
             "`id_list` INTEGER NOT NULL, " +
-            "`id_trakt` INTEGER NOT NULL, " +
+            "`id_tmdb` INTEGER NOT NULL, " +
             "`type` TEXT NOT NULL, " +
             "`rank` INTEGER NOT NULL, " +
             "`listed_at` INTEGER NOT NULL, " +
@@ -379,10 +379,10 @@ class Migrations(
             ")",
         )
         execSQL("CREATE INDEX index_custom_list_item_id_list ON custom_list_item(id_list)")
-        execSQL("CREATE INDEX index_custom_list_item_id_trakt_type ON custom_list_item(id_trakt, type)")
+        execSQL("CREATE INDEX index_custom_list_item_id_tmdb_type ON custom_list_item(id_tmdb, type)")
         execSQL(
           "CREATE UNIQUE INDEX " +
-            "index_custom_list_item_id_list_id_trakt_type ON custom_list_item(id_list, id_trakt, type)",
+            "index_custom_list_item_id_list_id_tmdb_type ON custom_list_item(id_list, id_tmdb, type)",
         )
 
         execSQL("ALTER TABLE trakt_sync_queue ADD COLUMN id_list INTEGER")
@@ -429,7 +429,7 @@ class Migrations(
         execSQL(
           "CREATE TABLE IF NOT EXISTS `movies_ratings` (" +
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "`id_trakt` INTEGER NOT NULL, " +
+            "`id_tmdb` INTEGER NOT NULL, " +
             "`trakt` TEXT, " +
             "`imdb` TEXT, " +
             "`metascore` TEXT, " +
@@ -437,14 +437,14 @@ class Migrations(
             "`rotten_tomatoes_url` TEXT, " +
             "`created_at` INTEGER NOT NULL, " +
             "`updated_at` INTEGER NOT NULL, " +
-            "FOREIGN KEY(`id_trakt`) REFERENCES `movies`(`id_trakt`) ON DELETE CASCADE)",
+            "FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON DELETE CASCADE)",
         )
-        execSQL("CREATE UNIQUE INDEX index_movies_ratings_id_trakt ON movies_ratings(id_trakt)")
+        execSQL("CREATE UNIQUE INDEX index_movies_ratings_id_tmdb ON movies_ratings(id_tmdb)")
 
         execSQL(
           "CREATE TABLE IF NOT EXISTS `shows_ratings` (" +
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "`id_trakt` INTEGER NOT NULL, " +
+            "`id_tmdb` INTEGER NOT NULL, " +
             "`trakt` TEXT, " +
             "`imdb` TEXT, " +
             "`metascore` TEXT, " +
@@ -452,9 +452,9 @@ class Migrations(
             "`rotten_tomatoes_url` TEXT, " +
             "`created_at` INTEGER NOT NULL, " +
             "`updated_at` INTEGER NOT NULL, " +
-            "FOREIGN KEY(`id_trakt`) REFERENCES `shows`(`id_trakt`) ON DELETE CASCADE)",
+            "FOREIGN KEY(`id_tmdb`) REFERENCES `shows`(`id_tmdb`) ON DELETE CASCADE)",
         )
-        execSQL("CREATE UNIQUE INDEX index_shows_ratings_id_trakt ON shows_ratings(id_trakt)")
+        execSQL("CREATE UNIQUE INDEX index_shows_ratings_id_tmdb ON shows_ratings(id_tmdb)")
       }
     }
   }
@@ -465,7 +465,7 @@ class Migrations(
         execSQL(
           "CREATE TABLE IF NOT EXISTS `movies_streamings` (" +
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "`id_trakt` INTEGER NOT NULL, " +
+            "`id_tmdb` INTEGER NOT NULL, " +
             "`id_tmdb` INTEGER NOT NULL, " +
             "`type` TEXT, " +
             "`provider_id` INTEGER, " +
@@ -475,15 +475,15 @@ class Migrations(
             "`link` TEXT, " +
             "`created_at` INTEGER NOT NULL, " +
             "`updated_at` INTEGER NOT NULL, " +
-            "FOREIGN KEY(`id_trakt`) REFERENCES `movies`(`id_trakt`) ON DELETE CASCADE)",
+            "FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON DELETE CASCADE)",
         )
-        execSQL("CREATE INDEX index_movies_streamings_id_trakt ON movies_streamings(id_trakt)")
+        execSQL("CREATE INDEX index_movies_streamings_id_tmdb ON movies_streamings(id_tmdb)")
         execSQL("CREATE INDEX index_movies_streamings_id_tmdb ON movies_streamings(id_tmdb)")
 
         execSQL(
           "CREATE TABLE IF NOT EXISTS `shows_streamings` (" +
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "`id_trakt` INTEGER NOT NULL, " +
+            "`id_tmdb` INTEGER NOT NULL, " +
             "`id_tmdb` INTEGER NOT NULL, " +
             "`type` TEXT, " +
             "`provider_id` INTEGER, " +
@@ -493,9 +493,9 @@ class Migrations(
             "`link` TEXT, " +
             "`created_at` INTEGER NOT NULL, " +
             "`updated_at` INTEGER NOT NULL, " +
-            "FOREIGN KEY(`id_trakt`) REFERENCES `shows`(`id_trakt`) ON DELETE CASCADE)",
+            "FOREIGN KEY(`id_tmdb`) REFERENCES `shows`(`id_tmdb`) ON DELETE CASCADE)",
         )
-        execSQL("CREATE INDEX index_shows_streamings_id_trakt ON shows_streamings(id_trakt)")
+        execSQL("CREATE INDEX index_shows_streamings_id_tmdb ON shows_streamings(id_tmdb)")
         execSQL("CREATE INDEX index_shows_streamings_id_tmdb ON shows_streamings(id_tmdb)")
       }
     }
@@ -505,22 +505,22 @@ class Migrations(
     override fun migrate(database: SupportSQLiteDatabase) {
       with(database) {
         execSQL("ALTER TABLE movies ADD COLUMN created_at INTEGER NOT NULL DEFAULT -1")
-        val cursor = database.query("SELECT id_trakt, updated_at FROM movies")
+        val cursor = database.query("SELECT id_tmdb, updated_at FROM movies")
         while (cursor.moveToNext()) {
-          val id = cursor.getLong(cursor.getColumnIndexOrThrow("id_trakt"))
+          val id = cursor.getLong(cursor.getColumnIndexOrThrow("id_tmdb"))
           val updatedAt = cursor.getLong(cursor.getColumnIndexOrThrow("updated_at"))
-          execSQL("UPDATE movies SET created_at = $updatedAt WHERE id_trakt == $id")
+          execSQL("UPDATE movies SET created_at = $updatedAt WHERE id_tmdb == $id")
         }
 
         execSQL(
           "CREATE TABLE IF NOT EXISTS `movies_archive` (" +
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "`id_trakt` INTEGER NOT NULL, " +
+            "`id_tmdb` INTEGER NOT NULL, " +
             "`created_at` INTEGER NOT NULL, " +
             "`updated_at` INTEGER NOT NULL, " +
-            "FOREIGN KEY(`id_trakt`) REFERENCES `movies`(`id_trakt`) ON DELETE CASCADE)",
+            "FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON DELETE CASCADE)",
         )
-        execSQL("CREATE UNIQUE INDEX index_movies_archive_id_trakt ON movies_archive(id_trakt)")
+        execSQL("CREATE UNIQUE INDEX index_movies_archive_id_tmdb ON movies_archive(id_tmdb)")
       }
     }
   }
@@ -532,7 +532,7 @@ class Migrations(
         execSQL(
           "CREATE TABLE IF NOT EXISTS `people` (" +
             "`id_tmdb` INTEGER PRIMARY KEY NOT NULL, " +
-            "`id_trakt` INTEGER, " +
+            "`id_tmdb` INTEGER, " +
             "`id_imdb` TEXT, " +
             "`name` TEXT NOT NULL, " +
             "`department` TEXT NOT NULL, " +
@@ -550,7 +550,7 @@ class Migrations(
             "`details_updated_at` INTEGER, " +
             "`updated_at` INTEGER NOT NULL)",
         )
-        execSQL("CREATE INDEX index_people_id_trakt ON people(id_trakt)")
+        execSQL("CREATE INDEX index_people_id_tmdb ON people(id_tmdb)")
         execSQL("CREATE UNIQUE INDEX index_people_id_tmdb ON people(id_tmdb)")
 
         execSQL(
@@ -562,28 +562,28 @@ class Migrations(
             "`character` TEXT, " +
             "`job` TEXT, " +
             "`episodes_count` INTEGER NOT NULL, " +
-            "`id_trakt_show` INTEGER, " +
-            "`id_trakt_movie` INTEGER, " +
+            "`id_tmdb_show` INTEGER, " +
+            "`id_tmdb_movie` INTEGER, " +
             "`created_at` INTEGER NOT NULL, " +
             "`updated_at` INTEGER NOT NULL, " +
             "FOREIGN KEY(`id_tmdb_person`) REFERENCES `people`(`id_tmdb`) ON DELETE CASCADE)",
         )
-        execSQL("CREATE INDEX index_people_shows_movies_id_show_mode ON people_shows_movies(id_trakt_show, mode)")
-        execSQL("CREATE INDEX index_people_shows_movies_id_movie_mode ON people_shows_movies(id_trakt_movie, mode)")
+        execSQL("CREATE INDEX index_people_shows_movies_id_show_mode ON people_shows_movies(id_tmdb_show, mode)")
+        execSQL("CREATE INDEX index_people_shows_movies_id_movie_mode ON people_shows_movies(id_tmdb_movie, mode)")
 
         execSQL(
           "CREATE TABLE IF NOT EXISTS `people_credits` (" +
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "`id_trakt_person` INTEGER NOT NULL, " +
-            "`id_trakt_show` INTEGER, " +
-            "`id_trakt_movie` INTEGER, " +
+            "`id_tmdb_person` INTEGER NOT NULL, " +
+            "`id_tmdb_show` INTEGER, " +
+            "`id_tmdb_movie` INTEGER, " +
             "`type` TEXT NOT NULL, " +
             "`created_at` INTEGER NOT NULL, " +
             "`updated_at` INTEGER NOT NULL, " +
-            "FOREIGN KEY(`id_trakt_show`) REFERENCES `shows`(`id_trakt`) ON DELETE CASCADE, " +
-            "FOREIGN KEY(`id_trakt_movie`) REFERENCES `movies`(`id_trakt`) ON DELETE CASCADE)",
+            "FOREIGN KEY(`id_tmdb_show`) REFERENCES `shows`(`id_tmdb`) ON DELETE CASCADE, " +
+            "FOREIGN KEY(`id_tmdb_movie`) REFERENCES `movies`(`id_tmdb`) ON DELETE CASCADE)",
         )
-        execSQL("CREATE INDEX index_people_credits_id_person ON people_credits(id_trakt_person)")
+        execSQL("CREATE INDEX index_people_credits_id_person ON people_credits(id_tmdb_person)")
 
         execSQL(
           "CREATE TABLE IF NOT EXISTS `people_images` (" +
@@ -603,7 +603,7 @@ class Migrations(
       with(database) {
         execSQL(
           "CREATE TABLE IF NOT EXISTS `ratings` (" +
-            "`id_trakt` INTEGER NOT NULL, " +
+            "`id_tmdb` INTEGER NOT NULL, " +
             "`type` TEXT NOT NULL, " +
             "`rating` INTEGER NOT NULL, " +
             "`season_number` INTEGER, " +
@@ -611,14 +611,14 @@ class Migrations(
             "`rated_at` INTEGER NOT NULL, " +
             "`created_at` INTEGER NOT NULL, " +
             "`updated_at` INTEGER NOT NULL, " +
-            "PRIMARY KEY (id_trakt, type))",
+            "PRIMARY KEY (id_tmdb, type))",
         )
-        execSQL("CREATE INDEX index_ratings_id_trakt_type ON ratings(id_trakt, type)")
+        execSQL("CREATE INDEX index_ratings_id_tmdb_type ON ratings(id_tmdb, type)")
 
         execSQL("ALTER TABLE seasons ADD COLUMN rating REAL")
 
-        execSQL("CREATE INDEX index_people_credits_show ON people_credits(id_trakt_show)")
-        execSQL("CREATE INDEX index_people_credits_movies ON people_credits(id_trakt_movie)")
+        execSQL("CREATE INDEX index_people_credits_show ON people_credits(id_tmdb_show)")
+        execSQL("CREATE INDEX index_people_credits_movies ON people_credits(id_tmdb_movie)")
         execSQL("CREATE INDEX index_people_shows_movies_tmdb_person ON people_shows_movies(id_tmdb_person)")
       }
     }
@@ -650,13 +650,13 @@ class Migrations(
       with(database) {
         execSQL("ALTER TABLE episodes ADD COLUMN last_watched_at INTEGER")
         execSQL("ALTER TABLE shows_my_shows ADD COLUMN last_watched_at INTEGER")
-        val cursor = database.query("SELECT id_trakt, updated_at FROM shows_my_shows")
+        val cursor = database.query("SELECT id_tmdb, updated_at FROM shows_my_shows")
         while (cursor.moveToNext()) {
-          val idShow = cursor.getLong(cursor.getColumnIndexOrThrow("id_trakt"))
+          val idShow = cursor.getLong(cursor.getColumnIndexOrThrow("id_tmdb"))
           val updatedAt = cursor.getLong(cursor.getColumnIndexOrThrow("updated_at"))
 
           val epCursor = database.query(
-            "SELECT season_number, episode_number FROM episodes WHERE id_show_trakt == $idShow AND is_watched == 1 " +
+            "SELECT season_number, episode_number FROM episodes WHERE id_show_tmdb == $idShow AND is_watched == 1 " +
               "ORDER BY season_number DESC, episode_number DESC LIMIT 1",
           )
           while (epCursor.moveToNext()) {
@@ -665,11 +665,11 @@ class Migrations(
             if (updatedAt > 0 && episodeNumber > 0 && seasonNumber > 0) {
               execSQL(
                 "UPDATE episodes SET last_watched_at = $updatedAt " +
-                  "WHERE id_show_trakt == $idShow " +
+                  "WHERE id_show_tmdb == $idShow " +
                   "AND is_watched == 1 " +
                   "AND episode_number == $episodeNumber AND season_number == $seasonNumber",
               )
-              execSQL("UPDATE shows_my_shows SET last_watched_at = $updatedAt WHERE id_trakt == $idShow")
+              execSQL("UPDATE shows_my_shows SET last_watched_at = $updatedAt WHERE id_tmdb == $idShow")
             }
           }
         }
@@ -689,32 +689,32 @@ class Migrations(
         execSQL(
           "CREATE TABLE IF NOT EXISTS `movies_collections` (" +
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "`id_trakt` INTEGER NOT NULL, " +
-            "`id_trakt_movie` INTEGER NOT NULL, " +
+            "`id_tmdb` INTEGER NOT NULL, " +
+            "`id_tmdb_movie` INTEGER NOT NULL, " +
             "`name` TEXT NOT NULL, " +
             "`description` TEXT NOT NULL, " +
             "`item_count` INTEGER NOT NULL, " +
             "`created_at` INTEGER NOT NULL, " +
             "`updated_at` INTEGER NOT NULL, " +
-            "FOREIGN KEY(`id_trakt_movie`) REFERENCES `movies`(`id_trakt`) ON DELETE CASCADE)",
+            "FOREIGN KEY(`id_tmdb_movie`) REFERENCES `movies`(`id_tmdb`) ON DELETE CASCADE)",
         )
-        execSQL("CREATE INDEX index_movies_collections_id_trakt ON movies_collections(id_trakt)")
-        execSQL("CREATE INDEX index_movies_collections_id_trakt_movie ON movies_collections(id_trakt_movie)")
+        execSQL("CREATE INDEX index_movies_collections_id_tmdb ON movies_collections(id_tmdb)")
+        execSQL("CREATE INDEX index_movies_collections_id_tmdb_movie ON movies_collections(id_tmdb_movie)")
 
         execSQL(
           "CREATE TABLE IF NOT EXISTS `movies_collections_items` (" +
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "`id_trakt` INTEGER NOT NULL, " +
-            "`id_trakt_collection` INTEGER NOT NULL, " +
+            "`id_tmdb` INTEGER NOT NULL, " +
+            "`id_tmdb_collection` INTEGER NOT NULL, " +
             "`rank` INTEGER NOT NULL, " +
             "`created_at` INTEGER NOT NULL, " +
             "`updated_at` INTEGER NOT NULL, " +
-            "FOREIGN KEY(`id_trakt`) REFERENCES `movies`(`id_trakt`) ON DELETE CASCADE)",
+            "FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON DELETE CASCADE)",
         )
-        execSQL("CREATE INDEX index_movies_collections_items_id_trakt ON movies_collections_items(id_trakt)")
+        execSQL("CREATE INDEX index_movies_collections_items_id_tmdb ON movies_collections_items(id_tmdb)")
         execSQL(
           "CREATE INDEX " +
-            "index_movies_collections_items_id_trakt_collection ON movies_collections_items(id_trakt_collection)",
+            "index_movies_collections_items_id_tmdb_collection ON movies_collections_items(id_tmdb_collection)",
         )
       }
     }

@@ -41,7 +41,7 @@ class ShowDetailsNextEpisodeViewModel @Inject constructor(
     viewModelScope.launch {
       try {
         val dateFormat = dateFormatProvider.loadFullHourFormat()
-        val episode = nextEpisodeCase.loadNextEpisode(show.ids.trakt)
+        val episode = nextEpisodeCase.loadNextEpisode(show.ids.tmdb)
         episode?.let {
           val isWatched = watchedCase.isWatched(show, it)
           val nextEpisode = NextEpisodeBundle(

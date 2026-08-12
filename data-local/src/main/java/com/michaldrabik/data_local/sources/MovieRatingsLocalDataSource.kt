@@ -6,5 +6,5 @@ interface MovieRatingsLocalDataSource {
 
   suspend fun upsert(entity: MovieRatings)
 
-  suspend fun getById(traktId: Long): MovieRatings?
+  suspend fun getById(tmdbId: Long): MovieRatings?
 }

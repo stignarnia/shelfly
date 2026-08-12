@@ -19,5 +19,5 @@ data class EpisodeListItem(
   val spoilers: SpoilersSettings,
 ) {
 
-  val id = episode.ids.trakt.id
+  val id = episode.ids.tmdb.id
 }

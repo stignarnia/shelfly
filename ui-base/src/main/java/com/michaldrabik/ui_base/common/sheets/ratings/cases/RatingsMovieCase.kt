@@ -5,7 +5,7 @@ import com.michaldrabik.common.errors.ErrorHelper
 import com.michaldrabik.common.errors.ShowlyError
 import com.michaldrabik.repository.RatingsRepository
 import com.michaldrabik.repository.UserTraktManager
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.TraktRating
@@ -24,9 +24,9 @@ class RatingsMovieCase @Inject constructor(
     private val RATING_VALID_RANGE = 1..10
   }
 
-  suspend fun loadRating(idTrakt: IdTrakt): TraktRating =
+  suspend fun loadRating(idTmdb: IdTmdb): TraktRating =
     withContext(dispatchers.IO) {
-      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = idTrakt))
+      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = idTmdb))
       try {
         val rating = ratingsRepository.movies.loadRatings(listOf(movie))
         rating.firstOrNull() ?: TraktRating.EMPTY
@@ -37,13 +37,13 @@ class RatingsMovieCase @Inject constructor(
     }
 
   suspend fun saveRating(
-    idTrakt: IdTrakt,
+    idTmdb: IdTmdb,
     rating: Int,
   ) = withContext(dispatchers.IO) {
     check(rating in RATING_VALID_RANGE)
 
     try {
-      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = idTrakt))
+      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = idTmdb))
       ratingsRepository.movies.addRating(
         movie = movie,
         rating = rating,
@@ -54,9 +54,9 @@ class RatingsMovieCase @Inject constructor(
     }
   }
 
-  suspend fun deleteRating(idTrakt: IdTrakt) =
+  suspend fun deleteRating(idTmdb: IdTmdb) =
     withContext(dispatchers.IO) {
-      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = idTrakt))
+      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = idTmdb))
       try {
         ratingsRepository.movies.deleteRating(
           movie = movie,

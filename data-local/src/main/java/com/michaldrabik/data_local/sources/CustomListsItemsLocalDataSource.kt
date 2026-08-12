@@ -7,13 +7,13 @@ interface CustomListsItemsLocalDataSource {
   suspend fun update(items: List<CustomListItem>)
 
   suspend fun getListsForItem(
-    idTrakt: Long,
+    idTmdb: Long,
     type: String,
   ): List<Long>
 
-  suspend fun getByIdTrakt(
+  suspend fun getByIdTmdb(
     idList: Long,
-    idTrakt: Long,
+    idTmdb: Long,
     type: String,
   ): CustomListItem?
 
@@ -30,7 +30,7 @@ interface CustomListsItemsLocalDataSource {
 
   suspend fun deleteItem(
     idList: Long,
-    idTrakt: Long,
+    idTmdb: Long,
     type: String,
   )
 }

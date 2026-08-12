@@ -59,7 +59,7 @@ class ShowAnnouncementScheduler @Inject constructor(
       val title = if (translation?.hasTitle == true) translation.title else show.title
       val episode = context.getString(R.string.textSeasonEpisode, episodeSeasonNumber, episodeNumber)
 
-      putLong(AnnouncementWorker.DATA_SHOW_ID, showDb.idTrakt)
+      putLong(AnnouncementWorker.DATA_SHOW_ID, showDb.idTmdb)
       putString(AnnouncementWorker.DATA_TITLE, "$title - $episode")
       putString(AnnouncementWorker.DATA_CHANNEL, NotificationChannel.EPISODES_ANNOUNCEMENTS.name)
 

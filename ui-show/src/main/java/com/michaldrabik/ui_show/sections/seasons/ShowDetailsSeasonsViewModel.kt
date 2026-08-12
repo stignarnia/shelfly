@@ -103,7 +103,7 @@ class ShowDetailsSeasonsViewModel @Inject constructor(
         customDate = customDate,
       )
       if (result == Result.REMOVE_FROM_TRAKT) {
-        val ids = season.episodes.map { it.ids.trakt }
+        val ids = season.episodes.map { it.ids.tmdb }
         val event = ShowDetailsSeasonsEvent.RemoveFromTrakt(
           R.id.actionShowDetailsFragmentToRemoveTraktProgress,
           Mode.EPISODE,
@@ -150,8 +150,8 @@ class ShowDetailsSeasonsViewModel @Inject constructor(
 
   fun openSeasonEpisodes(season: SeasonListItem) {
     viewModelScope.launch {
-      seasonsCache.setSeasons(show.ids.trakt, seasonsState.value ?: emptyList(), areSeasonsLocal)
-      val event = ShowDetailsSeasonsEvent.OpenSeasonEpisodes(show.ids.trakt, season.season.ids.trakt)
+      seasonsCache.setSeasons(show.ids.tmdb, seasonsState.value ?: emptyList(), areSeasonsLocal)
+      val event = ShowDetailsSeasonsEvent.OpenSeasonEpisodes(show.ids.tmdb, season.season.ids.tmdb)
       eventChannel.send(event)
     }
   }
@@ -177,7 +177,7 @@ class ShowDetailsSeasonsViewModel @Inject constructor(
 
   private suspend fun updateSeasons(seasons: List<SeasonListItem>) {
     seasonsState.value = seasons
-    seasonsCache.setSeasons(show.ids.trakt, seasons, areSeasonsLocal)
+    seasonsCache.setSeasons(show.ids.tmdb, seasons, areSeasonsLocal)
     eventChannel.send(RequestWidgetsUpdate)
   }
 

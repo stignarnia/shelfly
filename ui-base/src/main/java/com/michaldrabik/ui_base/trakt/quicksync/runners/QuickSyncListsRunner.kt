@@ -78,10 +78,10 @@ class QuickSyncListsRunner @Inject constructor(
       val addItems = syncListItem.value.filter { it.operation == Operation.ADD.slug }
       val removeItems = syncListItem.value.filter { it.operation == Operation.REMOVE.slug }
 
-      if (localList.idTrakt == null && addItems.isNotEmpty()) {
+      if (localList.idTmdb == null && addItems.isNotEmpty()) {
         Timber.d("List with ID: $listId does not exist in Trakt. Creating...")
         localList = createMissingList(localList, addItems)
-      } else if (localList.idTrakt == null) {
+      } else if (localList.idTmdb == null) {
         Timber.d("List with ID: $listId does not exist in Trakt. No need to remove items...")
         localSource.traktSyncQueue.delete(removeItems)
         continue
@@ -117,14 +117,14 @@ class QuickSyncListsRunner @Inject constructor(
     try {
       val showIds = removeItems
         .filter { it.type == Type.LIST_ITEM_SHOW.slug }
-        .map { it.idTrakt }
+        .map { it.idTmdb }
 
       val movieIds = removeItems
         .filter { it.type == Type.LIST_ITEM_MOVIE.slug }
-        .map { it.idTrakt }
+        .map { it.idTmdb }
 
       if (showIds.isNotEmpty() || movieIds.isNotEmpty()) {
-        remoteSource.postRemoveListItems(list.idTrakt!!, showIds, movieIds)
+        remoteSource.postRemoveListItems(list.idTmdb!!, showIds, movieIds)
         localSource.traktSyncQueue.delete(removeItems)
       }
     } catch (error: Throwable) {
@@ -146,15 +146,15 @@ class QuickSyncListsRunner @Inject constructor(
   ) {
     val showIds = addItems
       .filter { it.type == Type.LIST_ITEM_SHOW.slug }
-      .map { it.idTrakt }
+      .map { it.idTmdb }
 
     val movieIds = addItems
       .filter { it.type == Type.LIST_ITEM_MOVIE.slug }
-      .map { it.idTrakt }
+      .map { it.idTmdb }
 
     try {
       if (showIds.isNotEmpty() || movieIds.isNotEmpty()) {
-        remoteSource.postAddListItems(localList.idTrakt!!, showIds, movieIds)
+        remoteSource.postAddListItems(localList.idTmdb!!, showIds, movieIds)
         localSource.traktSyncQueue.delete(addItems)
       }
     } catch (error: Throwable) {
@@ -186,17 +186,17 @@ class QuickSyncListsRunner @Inject constructor(
         .postCreateList(localList.name, localList.description)
         .run { mappers.customList.fromNetwork(this) }
 
-      listsRepository.updateList(localList.id, result.idTrakt, result.idSlug, result.name, result.description)
+      listsRepository.updateList(localList.id, result.idTmdb, result.idSlug, result.name, result.description)
 
       val localItems = listsRepository.loadListItemsForId(localList.id)
       if (localItems.isNotEmpty()) {
-        val showsIds = localItems.filter { it.type == Mode.SHOWS.type }.map { it.idTrakt }
-        val moviesIds = localItems.filter { it.type == Mode.MOVIES.type }.map { it.idTrakt }
+        val showsIds = localItems.filter { it.type == Mode.SHOWS.type }.map { it.idTmdb }
+        val moviesIds = localItems.filter { it.type == Mode.MOVIES.type }.map { it.idTmdb }
         delay(TRAKT_DELAY)
-        remoteSource.postAddListItems(result.idTrakt!!, showsIds, moviesIds)
+        remoteSource.postAddListItems(result.idTmdb!!, showsIds, moviesIds)
       }
 
-      return listsRepository.updateList(localList.id, result.idTrakt, result.idSlug, result.name, result.description)
+      return listsRepository.updateList(localList.id, result.idTmdb, result.idSlug, result.name, result.description)
     } catch (error: Throwable) {
       when (ErrorHelper.parse(error)) {
         ShowlyError.AccountLimitsError -> {

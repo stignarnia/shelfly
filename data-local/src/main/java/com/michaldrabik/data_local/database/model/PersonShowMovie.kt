@@ -21,8 +21,8 @@ import java.time.ZonedDateTime
   ],
   indices = [
     Index(value = ["id_tmdb_person"]),
-    Index(value = ["id_trakt_show", "mode"]),
-    Index(value = ["id_trakt_movie", "mode"]),
+    Index(value = ["id_tmdb_show", "mode"]),
+    Index(value = ["id_tmdb_movie", "mode"]),
   ],
 )
 @TypeConverters(DateConverter::class)
@@ -34,8 +34,8 @@ data class PersonShowMovie(
   @ColumnInfo(name = "character") val character: String?,
   @ColumnInfo(name = "job") val job: String?,
   @ColumnInfo(name = "episodes_count") val episodesCount: Int,
-  @ColumnInfo(name = "id_trakt_show") val idTraktShow: Long?,
-  @ColumnInfo(name = "id_trakt_movie") val idTraktMovie: Long?,
+  @ColumnInfo(name = "id_tmdb_show") val idTmdbShow: Long?,
+  @ColumnInfo(name = "id_tmdb_movie") val idTmdbMovie: Long?,
   @ColumnInfo(name = "created_at") val createdAt: ZonedDateTime,
   @ColumnInfo(name = "updated_at") val updatedAt: ZonedDateTime,
 )

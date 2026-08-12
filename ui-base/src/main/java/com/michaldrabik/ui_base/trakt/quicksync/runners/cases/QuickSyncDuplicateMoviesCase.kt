@@ -30,9 +30,9 @@ class QuickSyncDuplicateMoviesCase @Inject constructor(
 
       exportMovies.forEach { movie ->
         remoteMovies
-          .find { it.getTraktId() == movie.idTrakt }
+          .find { it.getTraktId() == movie.idTmdb }
           ?.let {
-            duplicateMoviesIds.add(movie.idTrakt)
+            duplicateMoviesIds.add(movie.idTmdb)
           }
       }
 

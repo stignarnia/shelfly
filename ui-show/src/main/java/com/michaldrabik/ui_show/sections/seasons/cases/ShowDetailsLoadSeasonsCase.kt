@@ -49,12 +49,12 @@ class ShowDetailsLoadSeasonsCase @Inject constructor(
         }
 
         val remoteSeasons = remoteSource.trakt
-          .fetchSeasons(show.traktId)
+          .fetchSeasons(show.tmdbId)
           .map { mappers.season.fromNetwork(it) }
           .filter { it.episodes.isNotEmpty() }
           .filter { if (!showSpecialSeasons) !it.isSpecial() else true }
 
-        val isFollowed = showsRepository.myShows.load(show.ids.trakt) != null
+        val isFollowed = showsRepository.myShows.load(show.ids.tmdb) != null
         if (isFollowed) {
           episodesManager.invalidateSeasons(show, remoteSeasons)
         }
@@ -70,11 +70,11 @@ class ShowDetailsLoadSeasonsCase @Inject constructor(
     show: Show,
     showSpecials: Boolean,
   ): SeasonsBundle {
-    val localEpisodes = localSource.episodes.getAllByShowId(show.traktId)
+    val localEpisodes = localSource.episodes.getAllByShowId(show.tmdbId)
     val localSeasons = localSource.seasons
-      .getAllByShowId(show.traktId)
+      .getAllByShowId(show.tmdbId)
       .map { season ->
-        val seasonEpisodes = localEpisodes.filter { ep -> ep.idSeason == season.idTrakt }
+        val seasonEpisodes = localEpisodes.filter { ep -> ep.idSeason == season.idTmdb }
         mappers.season.fromDatabase(season, seasonEpisodes)
       }.filter { it.episodes.isNotEmpty() }
       .filter { if (!showSpecials) !it.isSpecial() else true }
@@ -93,13 +93,13 @@ class ShowDetailsLoadSeasonsCase @Inject constructor(
     remoteSeasons
       .map {
         val userRating = RatingState(
-          userRating = seasonsRatings.find { rating -> rating.idTrakt == it.ids.trakt },
+          userRating = seasonsRatings.find { rating -> rating.idTmdb == it.ids.tmdb },
         )
         val episodes = it.episodes
           .map { episode ->
             async {
               val rating = ratingsRepository.shows.loadRating(episode)
-              val translation = translationsRepository.loadTranslation(episode, show.ids.trakt, onlyLocal = true)
+              val translation = translationsRepository.loadTranslation(episode, show.ids.tmdb, onlyLocal = true)
               EpisodeListItem(
                 episode = episode,
                 season = it,

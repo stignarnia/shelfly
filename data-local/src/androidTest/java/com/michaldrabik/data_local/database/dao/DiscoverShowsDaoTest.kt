@@ -14,8 +14,8 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class DiscoverShowsDaoTest : BaseDaoTest() {
 
-  private val show by lazy { TestData.createShow().copy(idTrakt = 11) }
-  private val discoverShow by lazy { DiscoverShow(1, show.idTrakt, 999, 999) }
+  private val show by lazy { TestData.createShow().copy(idTmdb = 11) }
+  private val discoverShow by lazy { DiscoverShow(1, show.idTmdb, 999, 999) }
 
   @Before
   fun setUp() {

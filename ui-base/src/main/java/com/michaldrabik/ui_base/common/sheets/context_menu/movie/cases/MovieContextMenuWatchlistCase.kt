@@ -6,7 +6,7 @@ import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
 import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Movie
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -24,31 +24,31 @@ class MovieContextMenuWatchlistCase @Inject constructor(
   private val quickSyncManager: QuickSyncManager,
 ) {
 
-  suspend fun moveToWatchlist(traktId: IdTrakt) =
+  suspend fun moveToWatchlist(tmdbId: IdTmdb) =
     withContext(dispatchers.IO) {
-      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(traktId))
+      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdbId))
 
       val (isMyMovie, isHidden) = awaitAll(
-        async { moviesRepository.myMovies.exists(traktId) },
-        async { moviesRepository.hiddenMovies.exists(traktId) },
+        async { moviesRepository.myMovies.exists(tmdbId) },
+        async { moviesRepository.hiddenMovies.exists(tmdbId) },
       )
 
-      moviesRepository.watchlistMovies.insert(movie.ids.trakt)
+      moviesRepository.watchlistMovies.insert(movie.ids.tmdb)
       pinnedItemsRepository.removePinnedItem(movie)
       announcementManager.refreshMoviesAnnouncements()
 
       with(quickSyncManager) {
-        clearMovies(listOf(traktId.id))
-        clearHiddenMovies(listOf(traktId.id))
-        scheduleMoviesWatchlist(listOf(traktId.id))
+        clearMovies(listOf(tmdbId.id))
+        clearHiddenMovies(listOf(tmdbId.id))
+        scheduleMoviesWatchlist(listOf(tmdbId.id))
       }
 
       RemoveTraktUiEvent(removeProgress = isMyMovie, removeHidden = isHidden)
     }
 
-  suspend fun removeFromWatchlist(traktId: IdTrakt) =
+  suspend fun removeFromWatchlist(tmdbId: IdTmdb) =
     withContext(dispatchers.IO) {
-      moviesRepository.watchlistMovies.delete(traktId)
-      quickSyncManager.clearWatchlistMovies(listOf(traktId.id))
+      moviesRepository.watchlistMovies.delete(tmdbId)
+      quickSyncManager.clearWatchlistMovies(listOf(tmdbId.id))
     }
 }

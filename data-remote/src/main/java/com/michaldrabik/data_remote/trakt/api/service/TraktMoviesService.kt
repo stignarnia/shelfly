@@ -12,9 +12,9 @@ import retrofit2.http.Query
 
 interface TraktMoviesService {
 
-  @GET("movies/{traktId}?extended=full")
+  @GET("movies/{tmdbId}?extended=full")
   suspend fun fetchMovie(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
   ): Movie
 
   @GET("movies/{traktSlug}?extended=full")
@@ -40,28 +40,28 @@ interface TraktMoviesService {
     @Query("limit") limit: Int,
   ): List<MovieResult>
 
-  @GET("movies/{traktId}/related?extended=full")
+  @GET("movies/{tmdbId}/related?extended=full")
   suspend fun fetchRelatedMovies(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
     @Query("limit") limit: Int,
   ): List<Movie>
 
-  @GET("movies/{traktId}/comments/newest?extended=full")
+  @GET("movies/{tmdbId}/comments/newest?extended=full")
   suspend fun fetchMovieComments(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
     @Query("limit") limit: Int,
     @Query("timestamp") timestamp: Long,
   ): List<Comment>
 
-  @GET("movies/{traktId}/translations/{code}")
+  @GET("movies/{tmdbId}/translations/{code}")
   suspend fun fetchMovieTranslations(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
     @Path("code") countryCode: String,
   ): List<Translation>
 
-  @GET("movies/{traktId}/lists/official/popular")
+  @GET("movies/{tmdbId}/lists/official/popular")
   suspend fun fetchMovieCollections(
-    @Path("traktId") traktId: Long,
+    @Path("tmdbId") tmdbId: Long,
   ): List<MovieCollection>
 
   @GET("lists/{collectionId}/items/movie?extended=full")

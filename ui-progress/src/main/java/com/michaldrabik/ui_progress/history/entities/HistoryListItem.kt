@@ -27,7 +27,7 @@ internal sealed class HistoryListItem(
     val dateFormat: DateTimeFormatter? = null,
   ) : HistoryListItem(show, image, isLoading) {
 
-    override fun isSameAs(other: ListItem): Boolean = episode.ids.trakt == (other as? Episode)?.episode?.ids?.trakt
+    override fun isSameAs(other: ListItem): Boolean = episode.ids.tmdb == (other as? Episode)?.episode?.ids?.tmdb
   }
 
   data class Header(

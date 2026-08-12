@@ -10,7 +10,7 @@ import com.michaldrabik.ui_base.utilities.events.Event
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.utilities.extensions.findReplace
 import com.michaldrabik.ui_model.HistoryPeriod
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_progress.history.entities.HistoryListItem
 import com.michaldrabik.ui_progress.history.usecases.GetHistoryItemsCase
@@ -42,7 +42,7 @@ internal class HistoryViewModel @Inject constructor(
   private val resetScrollEvent = MutableStateFlow(initialState.resetScrollEvent)
 
   private var itemsJob: Job? = null
-  private var translationJobs: MutableSet<IdTrakt> = mutableSetOf()
+  private var translationJobs: MutableSet<IdTmdb> = mutableSetOf()
 
   private var searchQuery: String? = null
   private var timestamp = 0L
@@ -102,7 +102,7 @@ internal class HistoryViewModel @Inject constructor(
 
   fun findMissingTranslation(item: HistoryListItem) {
     check(item is HistoryListItem.Episode)
-    val showId = item.show.ids.trakt
+    val showId = item.show.ids.tmdb
     val language = translationsRepository.getLanguage()
     if (item.translations?.show != null ||
       language == Config.DEFAULT_LANGUAGE ||

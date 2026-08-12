@@ -88,8 +88,8 @@ class QuickSyncRunner @Inject constructor(
     Timber.d("Exporting ${items.size} items...")
 
     val batch = items.take(BATCH_LIMIT)
-    val exportEpisodes = batch.filter { it.type == EPISODE.slug }.distinctBy { it.idTrakt }
-    val exportMovies = batch.filter { it.type == MOVIE.slug }.distinctBy { it.idTrakt }
+    val exportEpisodes = batch.filter { it.type == EPISODE.slug }.distinctBy { it.idTmdb }
+    val exportMovies = batch.filter { it.type == MOVIE.slug }.distinctBy { it.idTmdb }
     val clearProgress = items.any { it.operation == TraktSyncQueue.Operation.ADD_WITH_CLEAR.slug }
 
     if (clearProgress) {
@@ -108,7 +108,7 @@ class QuickSyncRunner @Inject constructor(
     }
 
     transactions.withTransaction {
-      val batchIds = batch.map { it.idTrakt }
+      val batchIds = batch.map { it.idTmdb }
       with(localSource.traktSyncQueue) {
         deleteAll(batchIds, EPISODE.slug)
         deleteAll(batchIds, MOVIE.slug)
@@ -122,10 +122,10 @@ class QuickSyncRunner @Inject constructor(
 
     val request = SyncExportRequest(
       episodes = exportEpisodes
-        .map { SyncExportItem.create(it.idTrakt, dateIsoStringFromMillis(it.updatedAt)) }
+        .map { SyncExportItem.create(it.idTmdb, dateIsoStringFromMillis(it.updatedAt)) }
         .filter { it.ids.trakt !in duplicateEpisodes },
       movies = exportMovies
-        .map { SyncExportItem.create(it.idTrakt, dateIsoStringFromMillis(it.updatedAt)) }
+        .map { SyncExportItem.create(it.idTmdb, dateIsoStringFromMillis(it.updatedAt)) }
         .filter { it.ids.trakt !in duplicateMovies },
     )
 
@@ -168,16 +168,16 @@ class QuickSyncRunner @Inject constructor(
 
     Timber.d("Exporting watchlist items...")
 
-    val exportShows = items.filter { it.type == SHOW_WATCHLIST.slug }.distinctBy { it.idTrakt }
-    val exportMovies = items.filter { it.type == MOVIE_WATCHLIST.slug }.distinctBy { it.idTrakt }
+    val exportShows = items.filter { it.type == SHOW_WATCHLIST.slug }.distinctBy { it.idTmdb }
+    val exportMovies = items.filter { it.type == MOVIE_WATCHLIST.slug }.distinctBy { it.idTmdb }
 
     val request = SyncExportRequest(
-      shows = exportShows.map { SyncExportItem.create(it.idTrakt, dateIsoStringFromMillis(it.updatedAt)) },
-      movies = exportMovies.map { SyncExportItem.create(it.idTrakt, dateIsoStringFromMillis(it.updatedAt)) },
+      shows = exportShows.map { SyncExportItem.create(it.idTmdb, dateIsoStringFromMillis(it.updatedAt)) },
+      movies = exportMovies.map { SyncExportItem.create(it.idTmdb, dateIsoStringFromMillis(it.updatedAt)) },
     )
 
     transactions.withTransaction {
-      val ids = items.map { it.idTrakt }
+      val ids = items.map { it.idTmdb }
       localSource.traktSyncQueue.deleteAll(ids, MOVIE_WATCHLIST.slug)
       localSource.traktSyncQueue.deleteAll(ids, SHOW_WATCHLIST.slug)
     }
@@ -208,11 +208,11 @@ class QuickSyncRunner @Inject constructor(
 
     Timber.d("Exporting hidden items...")
 
-    val exportShows = items.filter { it.type == HIDDEN_SHOW.slug }.distinctBy { it.idTrakt }
-    val exportMovies = items.filter { it.type == HIDDEN_MOVIE.slug }.distinctBy { it.idTrakt }
+    val exportShows = items.filter { it.type == HIDDEN_SHOW.slug }.distinctBy { it.idTmdb }
+    val exportMovies = items.filter { it.type == HIDDEN_MOVIE.slug }.distinctBy { it.idTmdb }
 
     transactions.withTransaction {
-      val ids = items.map { it.idTrakt }
+      val ids = items.map { it.idTmdb }
       with(localSource.traktSyncQueue) {
         deleteAll(ids, HIDDEN_SHOW.slug)
         deleteAll(ids, HIDDEN_MOVIE.slug)
@@ -221,7 +221,7 @@ class QuickSyncRunner @Inject constructor(
 
     if (exportShows.isNotEmpty()) {
       remoteSource.postHiddenShows(
-        shows = exportShows.map { SyncExportItem.create(it.idTrakt, hiddenAt = dateIsoStringFromMillis(it.updatedAt)) },
+        shows = exportShows.map { SyncExportItem.create(it.idTmdb, hiddenAt = dateIsoStringFromMillis(it.updatedAt)) },
       )
       delay(1500)
     }
@@ -230,7 +230,7 @@ class QuickSyncRunner @Inject constructor(
       remoteSource.postHiddenMovies(
         movies = exportMovies.map {
           SyncExportItem.create(
-            it.idTrakt,
+            it.idTmdb,
             hiddenAt = dateIsoStringFromMillis(it.updatedAt),
           )
         },

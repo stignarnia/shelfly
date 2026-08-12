@@ -22,14 +22,14 @@ class StatisticsLoadRatingsCase @Inject constructor(
   suspend fun loadRatings(): List<StatisticsRatingItem> {
     val ratings = ratingsRepository.shows.loadShowsRatings()
 
-    val ratingsIds = ratings.map { it.idTrakt }
+    val ratingsIds = ratings.map { it.idTmdb }
     val myShows = showsRepository.myShows.loadAll(ratingsIds)
 
     return ratings
-      .filter { rating -> myShows.any { it.traktId == rating.idTrakt.id } }
+      .filter { rating -> myShows.any { it.tmdbId == rating.idTmdb.id } }
       .take(LIMIT)
       .map { rating ->
-        val show = myShows.first { it.traktId == rating.idTrakt.id }
+        val show = myShows.first { it.tmdbId == rating.idTmdb.id }
         StatisticsRatingItem(
           isLoading = false,
           show = show,

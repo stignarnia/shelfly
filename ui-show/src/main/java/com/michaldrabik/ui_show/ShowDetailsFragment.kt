@@ -57,7 +57,7 @@ import com.michaldrabik.ui_base.utilities.extensions.withSuccessListener
 import com.michaldrabik.ui_base.utilities.viewBinding
 import com.michaldrabik.ui_comments.fragment.CommentsFragment
 import com.michaldrabik.ui_model.Genre
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageFamily.SHOW
 import com.michaldrabik.ui_model.ImageStatus.UNAVAILABLE
@@ -91,7 +91,7 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
 
   override val viewModel by viewModels<ShowDetailsViewModel>()
 
-  private val showId by lazy { IdTrakt(requireLong(ARG_SHOW_ID)) }
+  private val showId by lazy { IdTmdb(requireLong(ARG_SHOW_ID)) }
 
   private val imageHeight by lazy {
     if (resources.configuration.orientation == ORIENTATION_PORTRAIT) {
@@ -382,7 +382,7 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
         }
       }
     }
-    val args = RemoveTraktBottomSheet.createBundle(event.traktIds, event.mode)
+    val args = RemoveTraktBottomSheet.createBundle(event.tmdbIds, event.mode)
     navigateToSafe(event.actionId, args)
   }
 

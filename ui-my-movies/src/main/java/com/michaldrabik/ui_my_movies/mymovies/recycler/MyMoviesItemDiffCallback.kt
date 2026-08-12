@@ -9,7 +9,7 @@ class MyMoviesItemDiffCallback : DiffUtil.ItemCallback<MyMoviesItem>() {
     newItem: MyMoviesItem,
   ) = when (oldItem.type) {
     MyMoviesItem.Type.RECENT_MOVIES -> true
-    else -> oldItem.type == newItem.type && oldItem.movie.ids.trakt == newItem.movie.ids.trakt
+    else -> oldItem.type == newItem.type && oldItem.movie.ids.tmdb == newItem.movie.ids.tmdb
   }
 
   override fun areContentsTheSame(

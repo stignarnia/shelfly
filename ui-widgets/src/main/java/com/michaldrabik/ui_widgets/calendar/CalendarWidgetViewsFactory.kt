@@ -138,7 +138,7 @@ class CalendarWidgetViewsFactory(
       }
 
       val fillIntent = Intent().apply {
-        putExtras(bundleOf(EXTRA_SHOW_ID to item.show.traktId))
+        putExtras(bundleOf(EXTRA_SHOW_ID to item.show.tmdbId))
       }
       setOnClickFillInIntent(R.id.calendarWidgetItem, fillIntent)
 
@@ -189,7 +189,7 @@ class CalendarWidgetViewsFactory(
     }
   }
 
-  override fun getItemId(position: Int) = adapterItems[position].show.traktId
+  override fun getItemId(position: Int) = adapterItems[position].show.tmdbId
 
   override fun getLoadingView() = RemoteViews(context.packageName, R.layout.widget_loading_item)
 

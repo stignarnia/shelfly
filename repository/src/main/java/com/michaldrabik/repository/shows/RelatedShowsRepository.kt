@@ -7,7 +7,7 @@ import com.michaldrabik.data_local.database.model.RelatedShow
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.data_remote.RemoteDataSource
 import com.michaldrabik.repository.mappers.Mappers
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Show
 import javax.inject.Inject
 import kotlin.math.min
@@ -23,28 +23,28 @@ class RelatedShowsRepository @Inject constructor(
     show: Show,
     hiddenCount: Int,
   ): List<Show> {
-    val relatedShows = localSource.relatedShows.getAllById(show.traktId)
+    val relatedShows = localSource.relatedShows.getAllById(show.tmdbId)
     val latest = relatedShows.maxByOrNull { it.updatedAt }
 
     if (latest != null && nowUtcMillis() - latest.updatedAt < Config.RELATED_CACHE_DURATION) {
-      val relatedShowsIds = relatedShows.map { it.idTrakt }
+      val relatedShowsIds = relatedShows.map { it.idTmdb }
       return localSource.shows
         .getAll(relatedShowsIds)
         .map { mappers.show.fromDatabase(it) }
     }
 
     val remoteShows = remoteSource.trakt
-      .fetchRelatedShows(show.traktId, min(hiddenCount, 10))
+      .fetchRelatedShows(show.tmdbId, min(hiddenCount, 10))
       .map { mappers.show.fromNetwork(it) }
 
-    cacheRelatedShows(remoteShows, show.ids.trakt)
+    cacheRelatedShows(remoteShows, show.ids.tmdb)
 
     return remoteShows
   }
 
   private suspend fun cacheRelatedShows(
     shows: List<Show>,
-    showId: IdTrakt,
+    showId: IdTmdb,
   ) {
     transactions.withTransaction {
       val timestamp = nowUtcMillis()
@@ -52,7 +52,7 @@ class RelatedShowsRepository @Inject constructor(
       localSource.relatedShows.deleteById(showId.id)
       localSource.relatedShows.insert(
         shows.map {
-          RelatedShow.fromTraktId(it.ids.trakt.id, showId.id, timestamp)
+          RelatedShow.fromTmdbId(it.ids.tmdb.id, showId.id, timestamp)
         },
       )
     }

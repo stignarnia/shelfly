@@ -140,7 +140,7 @@ internal class TmdbApi(
       val seasonNumbers = show.seasons?.mapNotNull { it.season_number } ?: emptyList()
       seasonNumbers
         .map { number ->
-          async { service.fetchSeason(tmdbId, number).toSeason(tmdbId) }
+          async { service.fetchSeason(tmdbId, number).toSeason() }
         }.awaitAll()
     }
 

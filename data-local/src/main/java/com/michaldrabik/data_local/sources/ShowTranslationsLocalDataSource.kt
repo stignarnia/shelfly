@@ -5,7 +5,7 @@ import com.michaldrabik.data_local.database.model.ShowTranslation
 interface ShowTranslationsLocalDataSource {
 
   suspend fun getById(
-    traktId: Long,
+    tmdbId: Long,
     language: String,
   ): ShowTranslation?
 

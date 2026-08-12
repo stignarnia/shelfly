@@ -17,7 +17,7 @@ class WatchlistShowsDaoTest : BaseDaoTest() {
   fun shouldInsertAndStoreSingleEntity() {
     runBlocking {
       val show = TestData.createShow()
-      val seeLaterShow = WatchlistShow.fromTraktId(show.idTrakt, 999)
+      val seeLaterShow = WatchlistShow.fromTmdbId(show.idTmdb, 999)
 
       database.showsDao().upsert(listOf(show))
       database.watchlistShowsDao().insert(seeLaterShow)
@@ -30,9 +30,9 @@ class WatchlistShowsDaoTest : BaseDaoTest() {
   fun shouldInsertAndStoreSingleEntityById() {
     runBlocking {
       val show = TestData.createShow()
-      val show2 = TestData.createShow().copy(idTrakt = 2)
-      val seeLaterShow = WatchlistShow.fromTraktId(show.idTrakt, 999)
-      val seeLaterShow2 = WatchlistShow.fromTraktId(show2.idTrakt, 999)
+      val show2 = TestData.createShow().copy(idTmdb = 2)
+      val seeLaterShow = WatchlistShow.fromTmdbId(show.idTmdb, 999)
+      val seeLaterShow2 = WatchlistShow.fromTmdbId(show2.idTmdb, 999)
 
       database.showsDao().upsert(listOf(show, show2))
       database.watchlistShowsDao().insert(seeLaterShow)
@@ -47,9 +47,9 @@ class WatchlistShowsDaoTest : BaseDaoTest() {
   fun shouldDeleteSingleEntityById() {
     runBlocking {
       val show = TestData.createShow()
-      val show2 = TestData.createShow().copy(idTrakt = 2)
-      val seeLaterShow = WatchlistShow.fromTraktId(show.idTrakt, 999)
-      val seeLaterShow2 = WatchlistShow.fromTraktId(show2.idTrakt, 999)
+      val show2 = TestData.createShow().copy(idTmdb = 2)
+      val seeLaterShow = WatchlistShow.fromTmdbId(show.idTmdb, 999)
+      val seeLaterShow2 = WatchlistShow.fromTmdbId(show2.idTmdb, 999)
 
       database.showsDao().upsert(listOf(show, show2))
       database.watchlistShowsDao().insert(seeLaterShow)

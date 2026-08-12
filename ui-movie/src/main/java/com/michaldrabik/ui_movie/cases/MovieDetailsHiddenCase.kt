@@ -21,22 +21,22 @@ class MovieDetailsHiddenCase @Inject constructor(
 
   suspend fun isHidden(movie: Movie) =
     withContext(dispatchers.IO) {
-      moviesRepository.hiddenMovies.exists(movie.ids.trakt)
+      moviesRepository.hiddenMovies.exists(movie.ids.tmdb)
     }
 
   suspend fun addToHidden(movie: Movie) {
     withContext(dispatchers.IO) {
-      moviesRepository.hiddenMovies.insert(movie.ids.trakt)
+      moviesRepository.hiddenMovies.insert(movie.ids.tmdb)
       pinnedItemsRepository.removePinnedItem(movie)
-      quickSyncManager.scheduleHidden(movie.traktId, Mode.MOVIES, TraktSyncQueue.Operation.ADD)
+      quickSyncManager.scheduleHidden(movie.tmdbId, Mode.MOVIES, TraktSyncQueue.Operation.ADD)
     }
   }
 
   suspend fun removeFromHidden(movie: Movie) {
     withContext(dispatchers.IO) {
-      moviesRepository.hiddenMovies.delete(movie.ids.trakt)
+      moviesRepository.hiddenMovies.delete(movie.ids.tmdb)
       pinnedItemsRepository.removePinnedItem(movie)
-      quickSyncManager.clearHiddenMovies(listOf(movie.traktId))
+      quickSyncManager.clearHiddenMovies(listOf(movie.tmdbId))
     }
   }
 }

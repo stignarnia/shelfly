@@ -13,7 +13,7 @@ interface MovieRatingsDao :
 
   @Transaction
   override suspend fun upsert(entity: MovieRatings) {
-    val local = getById(entity.idTrakt)
+    val local = getById(entity.idTmdb)
     if (local != null) {
       update(
         listOf(
@@ -32,6 +32,6 @@ interface MovieRatingsDao :
     insert(listOf(entity))
   }
 
-  @Query("SELECT * FROM movies_ratings WHERE id_trakt == :traktId")
-  override suspend fun getById(traktId: Long): MovieRatings?
+  @Query("SELECT * FROM movies_ratings WHERE id_tmdb == :tmdbId")
+  override suspend fun getById(tmdbId: Long): MovieRatings?
 }

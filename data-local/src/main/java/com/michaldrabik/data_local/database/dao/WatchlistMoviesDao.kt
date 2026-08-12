@@ -13,7 +13,7 @@ interface WatchlistMoviesDao : WatchlistMoviesLocalDataSource {
 
   @Query(
     "SELECT " +
-      "movies.id_trakt, " +
+      "movies.id_tmdb, " +
       "movies.id_tmdb, " +
       "movies.id_imdb, " +
       "movies.id_slug, " +
@@ -34,25 +34,25 @@ interface WatchlistMoviesDao : WatchlistMoviesLocalDataSource {
       "movies_see_later.updated_at, " +
       "movies_see_later.created_at " +
       "FROM movies " +
-      "INNER JOIN movies_see_later USING(id_trakt)",
+      "INNER JOIN movies_see_later USING(id_tmdb)",
   )
   override suspend fun getAll(): List<Movie>
 
-  @Query("SELECT movies.id_trakt FROM movies INNER JOIN movies_see_later USING(id_trakt)")
+  @Query("SELECT movies.id_tmdb FROM movies INNER JOIN movies_see_later USING(id_tmdb)")
   override suspend fun getAllTraktIds(): List<Long>
 
   @Query(
     "SELECT movies.* FROM movies " +
-      "INNER JOIN movies_see_later ON movies_see_later.id_trakt == movies.id_trakt WHERE movies.id_trakt == :traktId",
+      "INNER JOIN movies_see_later ON movies_see_later.id_tmdb == movies.id_tmdb WHERE movies.id_tmdb == :tmdbId",
   )
-  override suspend fun getById(traktId: Long): Movie?
+  override suspend fun getById(tmdbId: Long): Movie?
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   override suspend fun insert(movie: WatchlistMovie)
 
-  @Query("DELETE FROM movies_see_later WHERE id_trakt == :traktId")
-  override suspend fun deleteById(traktId: Long)
+  @Query("DELETE FROM movies_see_later WHERE id_tmdb == :tmdbId")
+  override suspend fun deleteById(tmdbId: Long)
 
-  @Query("SELECT EXISTS(SELECT 1 FROM movies_see_later WHERE id_trakt = :traktId LIMIT 1);")
-  override suspend fun checkExists(traktId: Long): Boolean
+  @Query("SELECT EXISTS(SELECT 1 FROM movies_see_later WHERE id_tmdb = :tmdbId LIMIT 1);")
+  override suspend fun checkExists(tmdbId: Long): Boolean
 }

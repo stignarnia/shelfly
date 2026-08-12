@@ -7,7 +7,7 @@ import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.database.model.MyMovie
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.repository.mappers.Mappers
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import java.time.ZonedDateTime
 import javax.inject.Inject
 
@@ -17,7 +17,7 @@ class MyMoviesRepository @Inject constructor(
   private val mappers: Mappers,
 ) {
 
-  suspend fun load(id: IdTrakt) =
+  suspend fun load(id: IdTmdb) =
     localSource.myMovies.getById(id.id)?.let {
       mappers.movie.fromDatabase(it)
     }
@@ -27,7 +27,7 @@ class MyMoviesRepository @Inject constructor(
       .getAll()
       .map { mappers.movie.fromDatabase(it) }
 
-  suspend fun loadAll(ids: List<IdTrakt>) =
+  suspend fun loadAll(ids: List<IdTmdb>) =
     localSource.myMovies
       .getAll(ids.map { it.id })
       .map { mappers.movie.fromDatabase(it) }
@@ -40,11 +40,11 @@ class MyMoviesRepository @Inject constructor(
   suspend fun loadAllIds() = localSource.myMovies.getAllTraktIds()
 
   suspend fun insert(
-    id: IdTrakt,
+    id: IdTmdb,
     customDate: ZonedDateTime?,
   ) {
-    val movie = MyMovie.fromTraktId(
-      traktId = id.id,
+    val movie = MyMovie.fromTmdbId(
+      tmdbId = id.id,
       timestamp = customDate?.toUtcZone()?.toMillis() ?: nowUtcMillis(),
     )
     transactions.withTransaction {
@@ -56,7 +56,7 @@ class MyMoviesRepository @Inject constructor(
     }
   }
 
-  suspend fun delete(id: IdTrakt) = localSource.myMovies.deleteById(id.id)
+  suspend fun delete(id: IdTmdb) = localSource.myMovies.deleteById(id.id)
 
-  suspend fun exists(id: IdTrakt) = localSource.myMovies.checkExists(id.id)
+  suspend fun exists(id: IdTmdb) = localSource.myMovies.checkExists(id.id)
 }

@@ -113,7 +113,7 @@ class CalendarMoviesWidgetViewsFactory(
       setTextViewText(R.id.calendarMoviesWidgetItemDate, date)
 
       val fillIntent = Intent().apply {
-        putExtras(bundleOf(EXTRA_MOVIE_ID to item.movie.traktId))
+        putExtras(bundleOf(EXTRA_MOVIE_ID to item.movie.tmdbId))
       }
       setOnClickFillInIntent(R.id.calendarMoviesWidgetItem, fillIntent)
     }
@@ -162,7 +162,7 @@ class CalendarMoviesWidgetViewsFactory(
     }
   }
 
-  override fun getItemId(position: Int) = adapterItems[position].movie.traktId
+  override fun getItemId(position: Int) = adapterItems[position].movie.tmdbId
 
   override fun getLoadingView() = RemoteViews(context.packageName, R.layout.widget_loading_item)
 

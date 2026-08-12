@@ -9,7 +9,7 @@ import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -28,13 +28,13 @@ class RemoveTraktProgressViewModel @Inject constructor(
   private val finishedState = MutableStateFlow(false)
 
   fun removeFromTrakt(
-    traktIds: List<IdTrakt>,
+    tmdbIds: List<IdTmdb>,
     mode: Mode,
   ) {
     viewModelScope.launch {
       try {
         loadingState.value = true
-        removeTraktProgressCase.removeTraktProgress(traktIds, mode)
+        removeTraktProgressCase.removeTraktProgress(tmdbIds, mode)
         finishedState.value = true
       } catch (error: Throwable) {
         messageChannel.send(MessageEvent.Error(R.string.errorTraktSyncGeneral))

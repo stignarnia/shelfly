@@ -88,11 +88,11 @@ class EpisodeLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_li
 
   private fun setTraktLink() {
     binding.viewEpisodeLinksTrakt.run {
-      if (ids.trakt.id == -1L) {
+      if (ids.tmdb.id == -1L) {
         alpha = 0.5F
         isEnabled = false
       } else {
-        onClick { openWebUrl("https://trakt.tv/shows/${showIds.trakt.id}/seasons/$season/episodes/$episodeNumber") }
+        onClick { openWebUrl("https://trakt.tv/shows/${showIds.tmdb.id}/seasons/$season/episodes/$episodeNumber") }
       }
     }
   }

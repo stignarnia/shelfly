@@ -14,7 +14,7 @@ interface RatingsLocalDataSource {
   ): List<Rating>
 
   suspend fun deleteByType(
-    traktId: Long,
+    tmdbId: Long,
     type: String,
   )
 

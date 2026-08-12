@@ -80,7 +80,7 @@ class MainListsCase @Inject constructor(
   private suspend fun findImage(item: CustomListItem) =
     when (item.type) {
       SHOWS.type -> {
-        val showDb = localSource.shows.getById(item.idTrakt)
+        val showDb = localSource.shows.getById(item.idTmdb)
         showDb?.let {
           val show = mappers.show.fromDatabase(it)
           val image = showImagesProvider.findCachedImage(show, POSTER)
@@ -88,7 +88,7 @@ class MainListsCase @Inject constructor(
         }
       }
       MOVIES.type -> {
-        val movieDb = localSource.movies.getById(item.idTrakt)
+        val movieDb = localSource.movies.getById(item.idTmdb)
         movieDb?.let {
           val movie = mappers.movie.fromDatabase(movieDb)
           val image = movieImagesProvider.findCachedImage(movie, POSTER)

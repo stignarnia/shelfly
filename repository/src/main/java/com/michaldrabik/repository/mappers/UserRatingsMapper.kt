@@ -7,7 +7,7 @@ import com.michaldrabik.data_remote.trakt.model.RatingResultMovie
 import com.michaldrabik.data_remote.trakt.model.RatingResultSeason
 import com.michaldrabik.data_remote.trakt.model.RatingResultShow
 import com.michaldrabik.ui_model.Episode
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Season
 import com.michaldrabik.ui_model.Show
@@ -19,14 +19,14 @@ class UserRatingsMapper @Inject constructor() {
 
   fun fromDatabase(entity: Rating) =
     TraktRating(
-      idTrakt = IdTrakt(entity.idTrakt),
+      idTmdb = IdTmdb(entity.idTmdb),
       rating = entity.rating,
       ratedAt = entity.ratedAt,
     )
 
   fun toDatabaseMovie(rating: RatingResultMovie) =
     Rating(
-      idTrakt = rating.movie.ids.trakt!!,
+      idTmdb = rating.movie.ids.tmdb!!,
       type = "movie",
       rating = rating.rating,
       seasonNumber = null,
@@ -41,7 +41,7 @@ class UserRatingsMapper @Inject constructor() {
     rating: Int,
     ratedAt: ZonedDateTime,
   ) = Rating(
-    idTrakt = movie.traktId,
+    idTmdb = movie.tmdbId,
     type = "movie",
     rating = rating,
     seasonNumber = null,
@@ -53,7 +53,7 @@ class UserRatingsMapper @Inject constructor() {
 
   fun toDatabaseShow(rating: RatingResultShow) =
     Rating(
-      idTrakt = rating.show.ids.trakt!!,
+      idTmdb = rating.show.ids.tmdb!!,
       type = "show",
       rating = rating.rating,
       seasonNumber = null,
@@ -68,7 +68,7 @@ class UserRatingsMapper @Inject constructor() {
     rating: Int,
     ratedAt: ZonedDateTime,
   ) = Rating(
-    idTrakt = show.traktId,
+    idTmdb = show.tmdbId,
     type = "show",
     rating = rating,
     seasonNumber = null,
@@ -80,7 +80,7 @@ class UserRatingsMapper @Inject constructor() {
 
   fun toDatabaseEpisode(rating: RatingResultEpisode) =
     Rating(
-      idTrakt = rating.episode.ids.trakt!!,
+      idTmdb = rating.episode.ids.tmdb!!,
       type = "episode",
       rating = rating.rating,
       seasonNumber = rating.episode.season,
@@ -95,7 +95,7 @@ class UserRatingsMapper @Inject constructor() {
     rating: Int,
     ratedAt: ZonedDateTime,
   ) = Rating(
-    idTrakt = episode.ids.trakt.id,
+    idTmdb = episode.ids.tmdb.id,
     type = "episode",
     rating = rating,
     seasonNumber = episode.season,
@@ -107,7 +107,7 @@ class UserRatingsMapper @Inject constructor() {
 
   fun toDatabaseSeason(rating: RatingResultSeason) =
     Rating(
-      idTrakt = rating.season.ids.trakt!!,
+      idTmdb = rating.season.ids.tmdb!!,
       type = "season",
       rating = rating.rating,
       seasonNumber = rating.season.number,
@@ -122,7 +122,7 @@ class UserRatingsMapper @Inject constructor() {
     rating: Int,
     ratedAt: ZonedDateTime,
   ) = Rating(
-    idTrakt = season.ids.trakt.id,
+    idTmdb = season.ids.tmdb.id,
     type = "season",
     rating = rating,
     seasonNumber = season.number,

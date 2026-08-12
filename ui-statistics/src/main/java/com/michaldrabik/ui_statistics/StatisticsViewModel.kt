@@ -60,8 +60,8 @@ class StatisticsViewModel @Inject constructor(
       val watchlistShows = showsRepository.watchlistShows.loadAll() // Add shows from watchlist
       val hiddenShows = showsRepository.hiddenShows.loadAll()
 
-      val shows = (myShows + watchlistShows + hiddenShows).distinctBy { it.traktId }
-      val showsIds = shows.map { it.traktId }
+      val shows = (myShows + watchlistShows + hiddenShows).distinctBy { it.tmdbId }
+      val showsIds = shows.map { it.tmdbId }
 
       val episodes = batchEpisodes(showsIds)
       val seasons = batchSeasons(showsIds)
@@ -71,10 +71,10 @@ class StatisticsViewModel @Inject constructor(
         .map { show ->
           val translation = loadTranslation(language, show)
           StatisticsMostWatchedItem(
-            show = shows.first { it.traktId == show.traktId },
-            seasonsCount = seasons.filter { it.idShowTrakt == show.traktId }.count().toLong(),
+            show = shows.first { it.tmdbId == show.tmdbId },
+            seasonsCount = seasons.filter { it.idShowTmdb == show.tmdbId }.count().toLong(),
             episodes = episodes
-              .filter { it.idShowTrakt == show.traktId }
+              .filter { it.idShowTmdb == show.tmdbId }
               .map { mappers.episode.fromDatabase(it) },
             image = Image.createUnknown(POSTER),
             translation = translation,
@@ -91,7 +91,7 @@ class StatisticsViewModel @Inject constructor(
       mostWatchedTotalCountState.value = showsIds.size
       totalTimeSpentMinutesState.value = episodes.sumOf { it.runtime }
       totalWatchedEpisodesState.value = episodes.count()
-      totalWatchedEpisodesShowsState.value = episodes.distinctBy { it.idShowTrakt }.count()
+      totalWatchedEpisodesShowsState.value = episodes.distinctBy { it.idShowTmdb }.count()
       topGenresState.value = genres
     }
   }

@@ -97,12 +97,12 @@ internal class DiscoverShowsCase @Inject constructor(
     val language = translationsRepository.getLanguage()
     val collectionIds = myShowsIds + watchlistShowsIds + hiddenShowsIds
     shows
-      .filter { it.traktId !in hiddenShowsIds }
+      .filter { it.tmdbId !in hiddenShowsIds }
       .filter {
         if (!filters.hideCollection) {
           true
         } else {
-          it.traktId !in collectionIds
+          it.tmdbId !in collectionIds
         }
       }.sortedBy(filters.feedOrder)
       .mapIndexed { index, show ->
@@ -113,8 +113,8 @@ internal class DiscoverShowsCase @Inject constructor(
           DiscoverListItem(
             show = show,
             image = image,
-            isFollowed = show.traktId in myShowsIds,
-            isWatchlist = show.traktId in watchlistShowsIds,
+            isFollowed = show.tmdbId in myShowsIds,
+            isWatchlist = show.tmdbId in watchlistShowsIds,
             translation = translation,
           )
         }

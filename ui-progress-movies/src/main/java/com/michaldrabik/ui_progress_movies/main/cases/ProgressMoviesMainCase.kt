@@ -3,7 +3,7 @@ package com.michaldrabik.ui_progress_movies.main.cases
 import com.michaldrabik.repository.PinnedItemsRepository
 import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Movie
 import java.time.ZonedDateTime
@@ -21,14 +21,14 @@ class ProgressMoviesMainCase @Inject constructor(
     movie: Movie,
     customDate: ZonedDateTime?,
   ) {
-    moviesRepository.myMovies.insert(movie.ids.trakt, customDate)
+    moviesRepository.myMovies.insert(movie.ids.tmdb, customDate)
     pinnedItemsRepository.removePinnedItem(movie)
-    quickSyncManager.scheduleMovies(listOf(movie.traktId), customDate)
+    quickSyncManager.scheduleMovies(listOf(movie.tmdbId), customDate)
   }
 
-  suspend fun addToMyMovies(movieId: IdTrakt) {
+  suspend fun addToMyMovies(movieId: IdTmdb) {
     addToMyMovies(
-      movie = Movie.EMPTY.copy(Ids.EMPTY.copy(trakt = movieId)),
+      movie = Movie.EMPTY.copy(Ids.EMPTY.copy(tmdb = movieId)),
       customDate = null,
     )
   }

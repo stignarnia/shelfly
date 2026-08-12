@@ -9,7 +9,7 @@ object TestData {
 
   fun createShow() =
     Show(
-      idTrakt = 1,
+      idTmdb = 1,
       idTvdb = 1,
       idTmdb = 1,
       idImdb = "idImdb",
@@ -86,9 +86,9 @@ object TestData {
 
   fun createEpisode() =
     Episode(
-      idTrakt = 1,
+      idTmdb = 1,
       idSeason = 1,
-      idShowTrakt = 1,
+      idShowTmdb = 1,
       idShowTvdb = 1,
       idShowImdb = "",
       idShowTmdb = 1,
@@ -109,8 +109,8 @@ object TestData {
 
   fun createSeason() =
     Season(
-      idTrakt = 1,
-      idShowTrakt = 1,
+      idTmdb = 1,
+      idShowTmdb = 1,
       seasonNumber = 1,
       seasonTitle = "",
       seasonOverview = "",

@@ -7,7 +7,7 @@ import com.michaldrabik.data_remote.trakt.model.request.CommentRequest
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.Comment
 import com.michaldrabik.ui_model.Episode
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Show
 import javax.inject.Inject
@@ -21,7 +21,7 @@ class CommentsRepository @Inject constructor(
 ) {
 
   suspend fun loadComments(
-    id: IdTrakt,
+    id: IdTmdb,
     mode: Mode,
     limit: Int = 100,
   ): List<Comment> {
@@ -35,11 +35,11 @@ class CommentsRepository @Inject constructor(
   }
 
   suspend fun loadEpisodeComments(
-    idTrakt: IdTrakt,
+    idTmdb: IdTmdb,
     season: Int,
     episode: Int,
   ) = remoteSource
-    .fetchEpisodeComments(idTrakt.id, season, episode)
+    .fetchEpisodeComments(idTmdb.id, season, episode)
     .map { mappers.comment.fromNetwork(it) }
     .filter { it.parentId <= 0 }
 

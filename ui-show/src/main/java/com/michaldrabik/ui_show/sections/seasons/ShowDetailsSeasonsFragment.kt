@@ -193,7 +193,7 @@ class ShowDetailsSeasonsFragment : BaseFragment<ShowDetailsSeasonsViewModel>(R.l
         }
       }
     }
-    val args = RemoveTraktBottomSheet.createBundle(event.traktIds, event.mode)
+    val args = RemoveTraktBottomSheet.createBundle(event.tmdbIds, event.mode)
     navigateToSafe(event.actionId, args)
   }
 

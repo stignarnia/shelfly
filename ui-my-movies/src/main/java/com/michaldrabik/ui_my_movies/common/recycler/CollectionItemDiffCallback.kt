@@ -33,7 +33,7 @@ class CollectionItemDiffCallback : DiffUtil.ItemCallback<CollectionListItem>() {
   private fun areItemsTheSame(
     oldItem: CollectionListItem.MovieItem,
     newItem: CollectionListItem.MovieItem,
-  ): Boolean = oldItem.movie.traktId == newItem.movie.traktId
+  ): Boolean = oldItem.movie.tmdbId == newItem.movie.tmdbId
 
   private fun areContentsTheSame(
     oldItem: CollectionListItem.MovieItem,

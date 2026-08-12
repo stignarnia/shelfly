@@ -14,7 +14,7 @@ interface CustomListsLocalDataSource {
 
   suspend fun updateTraktId(
     id: Long,
-    idTrakt: Long,
+    idTmdb: Long,
     idSlug: String,
     timestamp: Long,
   )

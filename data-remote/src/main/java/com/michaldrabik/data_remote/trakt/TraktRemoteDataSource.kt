@@ -29,7 +29,7 @@ interface TraktRemoteDataSource {
 
   // Shows
 
-  suspend fun fetchShow(traktId: Long): Show
+  suspend fun fetchShow(tmdbId: Long): Show
 
   suspend fun fetchShow(traktSlug: String): Show
 
@@ -52,26 +52,26 @@ interface TraktRemoteDataSource {
   ): List<Show>
 
   suspend fun fetchRelatedShows(
-    traktId: Long,
+    tmdbId: Long,
     addToLimit: Int,
   ): List<Show>
 
   suspend fun fetchShowTranslations(
-    traktId: Long,
+    tmdbId: Long,
     code: String,
   ): List<Translation>
 
-  suspend fun fetchNextEpisode(traktId: Long): Episode?
+  suspend fun fetchNextEpisode(tmdbId: Long): Episode?
 
-  suspend fun fetchSeasons(traktId: Long): List<Season>
+  suspend fun fetchSeasons(tmdbId: Long): List<Season>
 
   suspend fun fetchShowComments(
-    traktId: Long,
+    tmdbId: Long,
     limit: Int,
   ): List<Comment>
 
   suspend fun fetchEpisodeComments(
-    traktId: Long,
+    tmdbId: Long,
     seasonNumber: Int,
     episodeNumber: Int,
   ): List<Comment>
@@ -84,7 +84,7 @@ interface TraktRemoteDataSource {
 
   // Movies
 
-  suspend fun fetchMovie(traktId: Long): Movie
+  suspend fun fetchMovie(tmdbId: Long): Movie
 
   suspend fun fetchMovie(traktSlug: String): Movie
 
@@ -104,21 +104,21 @@ interface TraktRemoteDataSource {
   ): List<Movie>
 
   suspend fun fetchRelatedMovies(
-    traktId: Long,
+    tmdbId: Long,
     addToLimit: Int,
   ): List<Movie>
 
   suspend fun fetchMovieComments(
-    traktId: Long,
+    tmdbId: Long,
     limit: Int,
   ): List<Comment>
 
   suspend fun fetchMovieTranslations(
-    traktId: Long,
+    tmdbId: Long,
     code: String,
   ): List<Translation>
 
-  suspend fun fetchMovieCollections(traktId: Long): List<MovieCollection>
+  suspend fun fetchMovieCollections(tmdbId: Long): List<MovieCollection>
 
   suspend fun fetchMovieCollectionItems(collectionId: Long): List<Movie>
 
@@ -130,12 +130,12 @@ interface TraktRemoteDataSource {
   ): Ids?
 
   suspend fun fetchPersonShowsCredits(
-    traktId: Long,
+    tmdbId: Long,
     type: TmdbPerson.Type,
   ): List<PersonCredit>
 
   suspend fun fetchPersonMoviesCredits(
-    traktId: Long,
+    tmdbId: Long,
     type: TmdbPerson.Type,
   ): List<PersonCredit>
 

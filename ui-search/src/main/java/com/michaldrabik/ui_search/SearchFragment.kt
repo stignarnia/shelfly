@@ -294,10 +294,10 @@ class SearchFragment :
 
   private fun openDetails(item: SearchListItem) {
     if (item.isShow) {
-      val bundle = Bundle().apply { putLong(ARG_SHOW_ID, item.show.traktId) }
+      val bundle = Bundle().apply { putLong(ARG_SHOW_ID, item.show.tmdbId) }
       navigateToSafe(R.id.actionSearchFragmentToShowDetailsFragment, bundle)
     } else if (item.isMovie) {
-      val bundle = Bundle().apply { putLong(ARG_MOVIE_ID, item.movie.traktId) }
+      val bundle = Bundle().apply { putLong(ARG_MOVIE_ID, item.movie.tmdbId) }
       navigateToSafe(R.id.actionSearchFragmentToMovieDetailsFragment, bundle)
     }
   }
@@ -310,10 +310,10 @@ class SearchFragment :
       clearFragmentResultListener(NavigationArgs.REQUEST_ITEM_MENU)
     }
     if (item.isShow) {
-      val bundle = ContextMenuBottomSheet.createBundle(item.show.ids.trakt)
+      val bundle = ContextMenuBottomSheet.createBundle(item.show.ids.tmdb)
       navigateToSafe(R.id.actionSearchFragmentToShowItemMenu, bundle)
     } else if (item.isMovie) {
-      val bundle = ContextMenuBottomSheet.createBundle(item.movie.ids.trakt)
+      val bundle = ContextMenuBottomSheet.createBundle(item.movie.ids.tmdb)
       navigateToSafe(R.id.actionSearchFragmentToMovieItemMenu, bundle)
     }
   }

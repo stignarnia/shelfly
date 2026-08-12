@@ -18,7 +18,7 @@ class MovieDetailsCollectionsCase @Inject constructor(
   suspend fun loadMovieCollections(movie: Movie): Pair<List<MovieCollection>, Source> =
     withContext(dispatchers.IO) {
       try {
-        val (collections, source) = repository.loadCollections(movie.ids.trakt)
+        val (collections, source) = repository.loadCollections(movie.ids.tmdb)
         return@withContext Pair(
           collections.filter { it.itemCount != -1 },
           source,

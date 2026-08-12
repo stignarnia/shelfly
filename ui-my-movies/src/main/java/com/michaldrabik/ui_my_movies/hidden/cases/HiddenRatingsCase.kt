@@ -2,7 +2,7 @@ package com.michaldrabik.ui_my_movies.hidden.cases
 
 import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.repository.RatingsRepository
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.TraktRating
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.withContext
@@ -14,8 +14,8 @@ class HiddenRatingsCase @Inject constructor(
   private val ratingsRepository: RatingsRepository,
 ) {
 
-  suspend fun loadRatings(): Map<IdTrakt, TraktRating?> =
+  suspend fun loadRatings(): Map<IdTmdb, TraktRating?> =
     withContext(dispatchers.IO) {
-      ratingsRepository.movies.loadMoviesRatings().associateBy { it.idTrakt }
+      ratingsRepository.movies.loadMoviesRatings().associateBy { it.idTmdb }
     }
 }

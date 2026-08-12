@@ -13,12 +13,12 @@ interface RelatedMoviesDao : RelatedMoviesLocalDataSource {
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   override suspend fun insert(items: List<RelatedMovie>): List<Long>
 
-  @Query("SELECT * FROM movies_related WHERE id_trakt_related_movie == :traktId")
-  override suspend fun getAllById(traktId: Long): List<RelatedMovie>
+  @Query("SELECT * FROM movies_related WHERE id_tmdb_related_movie == :tmdbId")
+  override suspend fun getAllById(tmdbId: Long): List<RelatedMovie>
 
   @Query("SELECT * FROM movies_related")
   override suspend fun getAll(): List<RelatedMovie>
 
-  @Query("DELETE FROM movies_related WHERE id_trakt_related_movie == :traktId")
-  override suspend fun deleteById(traktId: Long)
+  @Query("DELETE FROM movies_related WHERE id_tmdb_related_movie == :tmdbId")
+  override suspend fun deleteById(tmdbId: Long)
 }

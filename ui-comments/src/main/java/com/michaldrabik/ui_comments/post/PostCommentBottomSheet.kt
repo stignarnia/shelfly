@@ -19,7 +19,7 @@ import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.viewBinding
 import com.michaldrabik.ui_comments.R
 import com.michaldrabik.ui_comments.databinding.ViewPostCommentBinding
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_COMMENT
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_COMMENT_ACTION
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_COMMENT_ID
@@ -33,10 +33,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PostCommentBottomSheet : BaseBottomSheetFragment(R.layout.view_post_comment) {
 
-  private val showTraktId by lazy { IdTrakt(requireLong(ARG_SHOW_ID)) }
-  private val movieTraktId by lazy { IdTrakt(requireLong(ARG_MOVIE_ID)) }
-  private val episodeTraktId by lazy { IdTrakt(requireLong(ARG_EPISODE_ID)) }
-  private val replyCommentId by lazy { IdTrakt(requireLong(ARG_COMMENT_ID)) }
+  private val showTraktId by lazy { IdTmdb(requireLong(ARG_SHOW_ID)) }
+  private val movieTraktId by lazy { IdTmdb(requireLong(ARG_MOVIE_ID)) }
+  private val episodeTraktId by lazy { IdTmdb(requireLong(ARG_EPISODE_ID)) }
+  private val replyCommentId by lazy { IdTmdb(requireLong(ARG_COMMENT_ID)) }
   private val replyUser by lazy { requireString(ARG_REPLY_USER, default = "") }
 
   private val binding by viewBinding(ViewPostCommentBinding::bind)

@@ -17,9 +17,9 @@ interface TraktSyncLogDao : TraktSyncLogLocalDataSource {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   override suspend fun insert(log: TraktSyncLog)
 
-  @Query("UPDATE sync_trakt_log SET synced_at = :syncedAt WHERE id_trakt == :idTrakt AND type == :type")
+  @Query("UPDATE sync_trakt_log SET synced_at = :syncedAt WHERE id_tmdb == :idTmdb AND type == :type")
   override suspend fun update(
-    idTrakt: Long,
+    idTmdb: Long,
     type: String,
     syncedAt: Long,
   ): Int
@@ -29,12 +29,12 @@ interface TraktSyncLogDao : TraktSyncLogLocalDataSource {
 
   @Transaction
   override suspend fun upsertShow(
-    idTrakt: Long,
+    idTmdb: Long,
     syncedAt: Long,
   ) {
-    val result = update(idTrakt, "show", syncedAt)
+    val result = update(idTmdb, "show", syncedAt)
     if (result <= 0) {
-      insert(TraktSyncLog(0, idTrakt, "show", syncedAt))
+      insert(TraktSyncLog(0, idTmdb, "show", syncedAt))
     }
   }
 }

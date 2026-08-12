@@ -5,7 +5,7 @@ package com.michaldrabik.ui_show.sections.seasons
 import androidx.annotation.IdRes
 import com.michaldrabik.ui_base.common.sheets.remove_trakt.RemoveTraktBottomSheet
 import com.michaldrabik.ui_base.utilities.events.Event
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Season
 import com.michaldrabik.ui_show.quicksetup.QuickSetupListItem
 
@@ -14,9 +14,9 @@ sealed class ShowDetailsSeasonsEvent<T>(
 ) : Event<T>(action) {
 
   data class OpenSeasonEpisodes(
-    val showId: IdTrakt,
-    val seasonId: IdTrakt,
-  ) : ShowDetailsSeasonsEvent<IdTrakt>(showId)
+    val showId: IdTmdb,
+    val seasonId: IdTmdb,
+  ) : ShowDetailsSeasonsEvent<IdTmdb>(showId)
 
   data class OpenSeasonDateSelection(
     val season: Season,
@@ -29,7 +29,7 @@ sealed class ShowDetailsSeasonsEvent<T>(
   data class RemoveFromTrakt(
     @IdRes val actionId: Int,
     val mode: RemoveTraktBottomSheet.Mode,
-    val traktIds: List<IdTrakt>,
+    val tmdbIds: List<IdTmdb>,
   ) : ShowDetailsSeasonsEvent<Int>(actionId)
 
   object RequestWidgetsUpdate : ShowDetailsSeasonsEvent<Unit>(Unit)

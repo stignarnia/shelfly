@@ -51,7 +51,7 @@ class MovieAnnouncementScheduler @Inject constructor(
     }
 
     val data = Data.Builder().apply {
-      putLong(AnnouncementWorker.DATA_MOVIE_ID, movie.traktId)
+      putLong(AnnouncementWorker.DATA_MOVIE_ID, movie.tmdbId)
       putString(AnnouncementWorker.DATA_CHANNEL, NotificationChannel.MOVIES_ANNOUNCEMENTS.name)
       putString(AnnouncementWorker.DATA_TITLE, if (translation?.hasTitle == true) translation.title else movie.title)
       putString(AnnouncementWorker.DATA_CONTENT, context.getString(R.string.textNewMovieAvailable))

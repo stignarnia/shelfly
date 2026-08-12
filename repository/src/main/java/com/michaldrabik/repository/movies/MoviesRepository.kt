@@ -22,6 +22,6 @@ class MoviesRepository @Inject constructor(
       val async2 = async { watchlistMovies.loadAll() }
       val async3 = async { if (skipHidden) emptyList() else hiddenMovies.loadAll() }
       val (my, watchlist, hidden) = awaitAll(async1, async2, async3)
-      (my + watchlist + hidden).distinctBy { it.traktId }
+      (my + watchlist + hidden).distinctBy { it.tmdbId }
     }
 }

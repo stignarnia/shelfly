@@ -11,7 +11,6 @@ data class BackupMovies(
 )
 
 data class BackupMovie(
-  @Json(name = "id") val traktId: Long,
   @Json(name = "tmId") val tmdbId: Long,
   @Json(name = "t") val title: String,
   @Json(name = "a") val addedAt: String,
@@ -20,7 +19,6 @@ data class BackupMovie(
 // Ratings
 
 data class BackupMovieRating(
-  @Json(name = "id") val traktId: Long,
   @Json(name = "tmId") val tmdbId: Long,
   @Json(name = "r") val rating: Int,
   @Json(name = "rA") val ratedAt: String,

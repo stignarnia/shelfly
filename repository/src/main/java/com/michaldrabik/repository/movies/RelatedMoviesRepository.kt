@@ -7,7 +7,7 @@ import com.michaldrabik.data_local.database.model.RelatedMovie
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.data_remote.RemoteDataSource
 import com.michaldrabik.repository.mappers.Mappers
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Movie
 import javax.inject.Inject
 import kotlin.math.min
@@ -20,28 +20,28 @@ class RelatedMoviesRepository @Inject constructor(
 ) {
 
   suspend fun loadAll(movie: Movie): List<Movie> {
-    val related = localSource.relatedMovies.getAllById(movie.ids.trakt.id)
+    val related = localSource.relatedMovies.getAllById(movie.ids.tmdb.id)
     val latest = related.maxByOrNull { it.updatedAt }
 
     if (latest != null && nowUtcMillis() - latest.updatedAt < Config.RELATED_CACHE_DURATION) {
-      val relatedIds = related.map { it.idTrakt }
+      val relatedIds = related.map { it.idTmdb }
       return localSource.movies
         .getAll(relatedIds)
         .map { mappers.movie.fromDatabase(it) }
     }
 
     val remote = remoteSource.trakt
-      .fetchRelatedMovies(movie.ids.trakt.id, min(0, 15))
+      .fetchRelatedMovies(movie.ids.tmdb.id, min(0, 15))
       .map { mappers.movie.fromNetwork(it) }
 
-    cacheRelated(remote, movie.ids.trakt)
+    cacheRelated(remote, movie.ids.tmdb)
 
     return remote
   }
 
   private suspend fun cacheRelated(
     movies: List<Movie>,
-    movieId: IdTrakt,
+    movieId: IdTmdb,
   ) {
     transactions.withTransaction {
       val timestamp = nowUtcMillis()
@@ -49,7 +49,7 @@ class RelatedMoviesRepository @Inject constructor(
       localSource.relatedMovies.deleteById(movieId.id)
       localSource.relatedMovies.insert(
         movies.map {
-          RelatedMovie.fromTraktId(it.ids.trakt.id, movieId.id, timestamp)
+          RelatedMovie.fromTmdbId(it.ids.tmdb.id, movieId.id, timestamp)
         },
       )
     }

@@ -9,11 +9,11 @@ interface WatchlistShowsLocalDataSource {
 
   suspend fun getAllTraktIds(): List<Long>
 
-  suspend fun getById(traktId: Long): Show?
+  suspend fun getById(tmdbId: Long): Show?
 
   suspend fun insert(show: WatchlistShow)
 
-  suspend fun deleteById(traktId: Long)
+  suspend fun deleteById(tmdbId: Long)
 
-  suspend fun checkExists(traktId: Long): Boolean
+  suspend fun checkExists(tmdbId: Long): Boolean
 }

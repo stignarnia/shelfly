@@ -58,16 +58,16 @@ class SearchQueryCase @Inject constructor(
 
             val isFollowed =
               if (result.isShow) {
-                result.traktId in myShowsIds
+                result.tmdbId in myShowsIds
               } else {
-                result.traktId in myMoviesIds
+                result.tmdbId in myMoviesIds
               }
 
             val isWatchlist =
               if (result.isShow) {
-                result.traktId in watchlistShowsIds
+                result.tmdbId in watchlistShowsIds
               } else {
-                result.traktId in watchlistMoviesIds
+                result.tmdbId in watchlistMoviesIds
               }
 
             val image = loadImage(result)

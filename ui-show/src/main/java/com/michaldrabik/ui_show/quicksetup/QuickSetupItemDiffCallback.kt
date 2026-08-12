@@ -7,8 +7,8 @@ class QuickSetupItemDiffCallback : DiffUtil.ItemCallback<QuickSetupListItem>() {
   override fun areItemsTheSame(
     oldItem: QuickSetupListItem,
     newItem: QuickSetupListItem,
-  ) = oldItem.episode.ids.trakt == newItem.episode.ids.trakt &&
-    oldItem.season.ids.trakt == newItem.season.ids.trakt &&
+  ) = oldItem.episode.ids.tmdb == newItem.episode.ids.tmdb &&
+    oldItem.season.ids.tmdb == newItem.season.ids.tmdb &&
     oldItem.isHeader == newItem.isHeader
 
   override fun areContentsTheSame(

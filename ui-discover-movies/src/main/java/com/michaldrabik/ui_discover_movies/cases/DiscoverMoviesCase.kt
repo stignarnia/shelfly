@@ -85,12 +85,12 @@ internal class DiscoverMoviesCase @Inject constructor(
   ) = coroutineScope {
     val collectionIds = myMoviesIds + watchlistMoviesIds
     movies
-      .filter { !hiddenMoviesIds.contains(it.traktId) }
+      .filter { !hiddenMoviesIds.contains(it.tmdbId) }
       .filter {
         if (!filters.hideCollection) {
           true
         } else {
-          !collectionIds.contains(it.traktId)
+          !collectionIds.contains(it.tmdbId)
         }
       }.sortedBy(filters.feedOrder)
       .mapIndexed { index, movie ->
@@ -101,8 +101,8 @@ internal class DiscoverMoviesCase @Inject constructor(
           DiscoverMovieListItem(
             movie,
             image,
-            isCollected = movie.ids.trakt.id in myMoviesIds,
-            isWatchlist = movie.ids.trakt.id in watchlistMoviesIds,
+            isCollected = movie.ids.tmdb.id in myMoviesIds,
+            isWatchlist = movie.ids.tmdb.id in watchlistMoviesIds,
             translation = translation,
           )
         }

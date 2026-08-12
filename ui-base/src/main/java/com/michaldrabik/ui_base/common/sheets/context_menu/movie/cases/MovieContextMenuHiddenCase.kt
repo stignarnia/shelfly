@@ -7,7 +7,7 @@ import com.michaldrabik.repository.PinnedItemsRepository
 import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Movie
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -24,29 +24,29 @@ class MovieContextMenuHiddenCase @Inject constructor(
   private val quickSyncManager: QuickSyncManager,
 ) {
 
-  suspend fun moveToHidden(traktId: IdTrakt) =
+  suspend fun moveToHidden(tmdbId: IdTmdb) =
     withContext(dispatchers.IO) {
-      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(traktId))
+      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdbId))
 
       val (isMyMovie, isWatchlist) = awaitAll(
-        async { moviesRepository.myMovies.exists(traktId) },
-        async { moviesRepository.watchlistMovies.exists(traktId) },
+        async { moviesRepository.myMovies.exists(tmdbId) },
+        async { moviesRepository.watchlistMovies.exists(tmdbId) },
       )
 
-      moviesRepository.hiddenMovies.insert(movie.ids.trakt)
+      moviesRepository.hiddenMovies.insert(movie.ids.tmdb)
       pinnedItemsRepository.removePinnedItem(movie)
       with(quickSyncManager) {
-        clearMovies(listOf(traktId.id))
-        clearWatchlistMovies(listOf(traktId.id))
-        scheduleHidden(traktId.id, Mode.MOVIES, TraktSyncQueue.Operation.ADD)
+        clearMovies(listOf(tmdbId.id))
+        clearWatchlistMovies(listOf(tmdbId.id))
+        scheduleHidden(tmdbId.id, Mode.MOVIES, TraktSyncQueue.Operation.ADD)
       }
 
       RemoveTraktUiEvent(removeProgress = isMyMovie, removeWatchlist = isWatchlist)
     }
 
-  suspend fun removeFromHidden(traktId: IdTrakt) =
+  suspend fun removeFromHidden(tmdbId: IdTmdb) =
     withContext(dispatchers.IO) {
-      moviesRepository.hiddenMovies.delete(traktId)
-      quickSyncManager.clearHiddenMovies(listOf(traktId.id))
+      moviesRepository.hiddenMovies.delete(tmdbId)
+      quickSyncManager.clearHiddenMovies(listOf(tmdbId.id))
     }
 }

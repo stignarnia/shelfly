@@ -1,7 +1,7 @@
 package com.michaldrabik.repository.mappers
 
 import com.michaldrabik.common.extensions.nowUtc
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.MovieCollection
 import java.time.ZonedDateTime
 import javax.inject.Inject
@@ -12,7 +12,7 @@ class CollectionMapper @Inject constructor() {
 
   fun fromNetwork(input: MovieCollectionNetwork): MovieCollection =
     MovieCollection(
-      id = IdTrakt(input.ids.trakt!!),
+      id = IdTmdb(input.ids.tmdb!!),
       name = input.name,
       description = input.description,
       itemCount = input.item_count,
@@ -20,7 +20,7 @@ class CollectionMapper @Inject constructor() {
 
   fun fromEntity(input: MovieCollectionEntity): MovieCollection =
     MovieCollection(
-      id = IdTrakt(input.idTrakt),
+      id = IdTmdb(input.idTmdb),
       name = input.name,
       description = input.description,
       itemCount = input.itemCount,
@@ -33,8 +33,8 @@ class CollectionMapper @Inject constructor() {
     createdAt: ZonedDateTime = nowUtc(),
   ): MovieCollectionEntity =
     MovieCollectionEntity(
-      idTrakt = input.id.id,
-      idTraktMovie = movieId,
+      idTmdb = input.id.id,
+      idTmdbMovie = movieId,
       name = input.name,
       description = input.description,
       itemCount = input.itemCount,

@@ -16,7 +16,7 @@ import android.widget.RemoteViews
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import com.michaldrabik.common.Config
 import com.michaldrabik.ui_base.utilities.extensions.dimenToPx
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_widgets.BaseWidgetProvider
 import com.michaldrabik.ui_widgets.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -124,7 +124,7 @@ class ProgressMoviesWidgetProvider : BaseWidgetProvider() {
           val movieId = intent.getLongExtra(EXTRA_CHECK_MOVIE_ID, -1L)
           ProgressMoviesWidgetCheckService.initialize(
             context.applicationContext,
-            IdTrakt(movieId),
+            IdTmdb(movieId),
           )
         }
       }

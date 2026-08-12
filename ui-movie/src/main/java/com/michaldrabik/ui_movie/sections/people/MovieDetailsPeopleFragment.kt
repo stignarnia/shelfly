@@ -81,7 +81,7 @@ class MovieDetailsPeopleFragment : BaseFragment<MovieDetailsPeopleViewModel>(R.l
     personArgs: PersonDetailsArgs?,
   ) {
     handleSheetResult()
-    val bundle = PersonDetailsBottomSheet.createBundle(person, movie.ids.trakt, personArgs)
+    val bundle = PersonDetailsBottomSheet.createBundle(person, movie.ids.tmdb, personArgs)
     (requireParentFragment() as BaseFragment<*>)
       .navigateToSafe(R.id.actionMovieDetailsFragmentToPerson, bundle)
   }
@@ -100,7 +100,7 @@ class MovieDetailsPeopleFragment : BaseFragment<MovieDetailsPeopleViewModel>(R.l
     val title = (requireParentFragment() as MovieDetailsFragment)
       .binding.movieDetailsTitle.text
       .toString()
-    val bundle = PeopleListBottomSheet.createBundle(movie.ids.trakt, title, Mode.MOVIES, department)
+    val bundle = PeopleListBottomSheet.createBundle(movie.ids.tmdb, title, Mode.MOVIES, department)
     navigateToSafe(R.id.actionMovieDetailsFragmentToPeopleList, bundle)
   }
 

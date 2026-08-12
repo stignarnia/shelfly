@@ -92,14 +92,14 @@ class TraktImportListsRunner @Inject constructor(
 
     remoteLists.forEach { remoteList ->
       Timber.d("Processing '${remoteList.name}' ...")
-      val local = localLists.find { it.idTrakt == remoteList.idTrakt }
+      val local = localLists.find { it.idTmdb == remoteList.idTmdb }
       transactions.withTransaction {
         when {
           local == null -> {
             Timber.d("Local list not found. Creating...")
             val listDb = mappers.customList.toDatabase(remoteList)
             val id = localSource.customLists.insert(listOf(listDb)).first()
-            importListItems(id, remoteList.idTrakt!!, moviesEnabled, nowUtcMillis)
+            importListItems(id, remoteList.idTmdb!!, moviesEnabled, nowUtcMillis)
           }
           remoteList.updatedAt.isEqual(local.updatedAt).not() -> {
             Timber.d("Local list found and timestamp is different. Updating...")
@@ -109,7 +109,7 @@ class TraktImportListsRunner @Inject constructor(
                 .copy(id = local.id)
               localSource.customLists.update(listOf(listDb))
             }
-            importListItems(local.id, local.idTrakt!!, moviesEnabled, nowUtcMillis)
+            importListItems(local.id, local.idTmdb!!, moviesEnabled, nowUtcMillis)
           }
           else -> {
             Timber.d("Local list found but timestamp is the same. Skipping...")
@@ -123,7 +123,7 @@ class TraktImportListsRunner @Inject constructor(
 
   private suspend fun importListItems(
     listId: Long,
-    listIdTrakt: Long,
+    listIdTmdb: Long,
     moviesEnabled: Boolean,
     nowUtcMillis: Long,
   ) {
@@ -131,10 +131,10 @@ class TraktImportListsRunner @Inject constructor(
 
     val localItems = localSource.customListsItems.getItemsById(listId)
     val items = remoteSource
-      .fetchSyncListItems(listIdTrakt, moviesEnabled)
+      .fetchSyncListItems(listIdTmdb, moviesEnabled)
       .filter { item ->
         localItems.none {
-          it.idTrakt == item.getTraktId() && it.type == item.getType()
+          it.idTmdb == item.getTraktId() && it.type == item.getType()
         }
       }.filter { it.movie != null || it.show != null }
 
@@ -152,11 +152,11 @@ class TraktImportListsRunner @Inject constructor(
 
     items.forEach { remoteItem ->
       remoteItem.show?.let { remoteShow ->
-        val show = shows.first { remoteShow.ids?.trakt == it.traktId }
+        val show = shows.first { remoteShow.ids?.tmdb == it.tmdbId }
         val itemDb = CustomListItem(
           id = 0,
           idList = listId,
-          idTrakt = show.traktId,
+          idTmdb = show.tmdbId,
           type = Mode.SHOWS.type,
           rank = 0,
           listedAt = remoteItem.lastListedMillis(),
@@ -166,12 +166,12 @@ class TraktImportListsRunner @Inject constructor(
         localSource.customListsItems.insertItem(itemDb)
       }
       remoteItem.movie?.let { remoteMovie ->
-        val movie = movies.first { remoteMovie.ids?.trakt == it.traktId }
+        val movie = movies.first { remoteMovie.ids?.tmdb == it.tmdbId }
         localSource.movies.upsert(listOf(mappers.movie.toDatabase(movie)))
         val itemDb = CustomListItem(
           id = 0,
           idList = listId,
-          idTrakt = movie.traktId,
+          idTmdb = movie.tmdbId,
           type = Mode.MOVIES.type,
           rank = 0,
           listedAt = remoteItem.lastListedMillis(),

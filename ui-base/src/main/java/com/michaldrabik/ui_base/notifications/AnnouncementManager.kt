@@ -62,11 +62,11 @@ class AnnouncementManager @Inject constructor(
 
     val myShows = localSource.myShows
       .getAll()
-      .distinctBy { it.idTrakt }
+      .distinctBy { it.idTmdb }
 
     val watchlistShows = localSource.watchlistShows
       .getAll()
-      .distinctBy { it.idTrakt }
+      .distinctBy { it.idTmdb }
 
     if (myShows.isEmpty() && watchlistShows.isEmpty()) {
       Timber.d("Nothing to process. Exiting...")
@@ -79,15 +79,15 @@ class AnnouncementManager @Inject constructor(
 
     myShows
       .forEach { show ->
-        Timber.d("Processing ${show.title} (${show.idTrakt})")
+        Timber.d("Processing ${show.title} (${show.idTmdb})")
 
-        if (onHoldIds.contains(show.idTrakt)) {
-          Timber.d("${show.title} (${show.idTrakt}) is on hold. Skipping...")
+        if (onHoldIds.contains(show.idTmdb)) {
+          Timber.d("${show.title} (${show.idTmdb}) is on hold. Skipping...")
           return@forEach
         }
 
         val fromTime = if (delay.isBefore()) nowMillis else nowMillis - delay.delayMs
-        val episode = localSource.episodes.getFirstUnwatched(show.idTrakt, fromTime, limit.toMillis())
+        val episode = localSource.episodes.getFirstUnwatched(show.idTmdb, fromTime, limit.toMillis())
         episode?.firstAired?.let { airDate ->
           when {
             delay.isBefore() -> {
@@ -119,7 +119,7 @@ class AnnouncementManager @Inject constructor(
       }
 
     for (show in watchlistShows) {
-      Timber.d("Processing Watchlist ${show.title} (${show.idTrakt})")
+      Timber.d("Processing Watchlist ${show.title} (${show.idTmdb})")
 
       val fromTime = if (delay.isBefore()) nowMillis else nowMillis - delay.delayMs
       val airDate = show.firstAired.toZonedDateTime() ?: ZonedDateTime.now().minusYears(1)
@@ -169,7 +169,7 @@ class AnnouncementManager @Inject constructor(
 
     val movies = localSource.watchlistMovies
       .getAll()
-      .distinctBy { it.idTrakt }
+      .distinctBy { it.idTmdb }
       .map { mappers.movie.fromDatabase(it) }
 
     if (movies.isEmpty()) {
@@ -180,7 +180,7 @@ class AnnouncementManager @Inject constructor(
     val language = translationsRepository.getLanguage()
     movies
       .filter {
-        Timber.d("Processing ${it.title} (${it.traktId})")
+        Timber.d("Processing ${it.title} (${it.tmdbId})")
         it.released != null &&
           (!it.hasAired() || it.isToday()) &&
           it.released!!.toEpochDay() - nowUtcDay().toEpochDay() < MOVIE_MIN_THRESHOLD_DAYS &&

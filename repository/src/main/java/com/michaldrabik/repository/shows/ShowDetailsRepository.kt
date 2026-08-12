@@ -9,7 +9,6 @@ import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.IdImdb
 import com.michaldrabik.ui_model.IdSlug
 import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.IdTrakt
 import com.michaldrabik.ui_model.Show
 import javax.inject.Inject
 
@@ -21,12 +20,12 @@ class ShowDetailsRepository @Inject constructor(
 ) {
 
   suspend fun load(
-    idTrakt: IdTrakt,
+    idTmdb: IdTmdb,
     force: Boolean = false,
   ): Show {
-    val localShow = localSource.shows.getById(idTrakt.id)
+    val localShow = localSource.shows.getById(idTmdb.id)
     if (force || localShow == null || nowUtcMillis() - localShow.updatedAt > Config.SHOW_DETAILS_CACHE_DURATION) {
-      val remoteShow = remoteSource.trakt.fetchShow(idTrakt.id)
+      val remoteShow = remoteSource.trakt.fetchShow(idTmdb.id)
       val show = mappers.show.fromNetwork(remoteShow)
       localSource.shows.upsert(listOf(mappers.show.toDatabase(show)))
       return show
@@ -58,12 +57,12 @@ class ShowDetailsRepository @Inject constructor(
     return null
   }
 
-  suspend fun delete(idTrakt: IdTrakt) {
+  suspend fun delete(idTmdb: IdTmdb) {
     with(localSource) {
       transactions.withTransaction {
-        shows.deleteById(idTrakt.id)
-        seasons.deleteAllForShow(idTrakt.id)
-        episodes.deleteAllForShow(idTrakt.id)
+        shows.deleteById(idTmdb.id)
+        seasons.deleteAllForShow(idTmdb.id)
+        episodes.deleteAllForShow(idTmdb.id)
       }
     }
   }

@@ -90,7 +90,7 @@ internal fun TmdbMovie.toMovie(): Movie =
     language = original_language,
   )
 
-internal fun TmdbSeason.toSeason(showTmdbId: Long?): Season =
+internal fun TmdbSeason.toSeason(): Season =
   Season(
     ids = Ids(
       trakt = null,
@@ -107,10 +107,10 @@ internal fun TmdbSeason.toSeason(showTmdbId: Long?): Season =
     first_aired = air_date.toIsoInstant(),
     overview = overview,
     rating = vote_average,
-    episodes = episodes?.map { it.toEpisode(showTmdbId) },
+    episodes = episodes?.map { it.toEpisode() },
   )
 
-internal fun TmdbEpisode.toEpisode(showTmdbId: Long?): Episode =
+internal fun TmdbEpisode.toEpisode(): Episode =
   Episode(
     season = season_number,
     number = episode_number,
@@ -120,10 +120,7 @@ internal fun TmdbEpisode.toEpisode(showTmdbId: Long?): Episode =
       slug = null,
       tvdb = null,
       imdb = null,
-      // TMDB episode ids are not stable across the API the way show ids are, so
-      // episodes are addressed by (show, season, number) instead. The show id is
-      // carried here so callers can resolve the parent.
-      tmdb = showTmdbId,
+      tmdb = id,
       tvrage = null,
     ),
     overview = overview,

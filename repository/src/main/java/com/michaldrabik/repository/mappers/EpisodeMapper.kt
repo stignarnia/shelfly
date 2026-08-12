@@ -4,7 +4,6 @@ import com.michaldrabik.common.extensions.toZonedDateTime
 import com.michaldrabik.ui_model.Episode
 import com.michaldrabik.ui_model.IdImdb
 import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.IdTrakt
 import com.michaldrabik.ui_model.IdTvdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Season
@@ -52,18 +51,17 @@ class EpisodeMapper @Inject constructor(
   fun toDatabase(
     episode: Episode,
     season: Season,
-    showId: IdTrakt,
+    showId: IdTmdb,
     isWatched: Boolean,
     lastExportedAt: ZonedDateTime?,
     lastWatchedAt: ZonedDateTime?,
   ): EpisodeDb =
     EpisodeDb(
-      idTrakt = episode.ids.trakt.id,
-      idSeason = season.ids.trakt.id,
-      idShowTrakt = showId.id,
+      idTmdb = episode.ids.tmdb.id,
+      idSeason = season.ids.tmdb.id,
+      idShowTmdb = showId.id,
       idShowTvdb = episode.ids.tvdb.id,
       idShowImdb = episode.ids.imdb.id,
-      idShowTmdb = episode.ids.tmdb.id,
       seasonNumber = season.number,
       episodeNumber = episode.number,
       episodeNumberAbs = episode.numberAbs,
@@ -82,7 +80,6 @@ class EpisodeMapper @Inject constructor(
   fun fromDatabase(episodeDb: EpisodeDb) =
     Episode(
       ids = Ids.EMPTY.copy(
-        trakt = IdTrakt(episodeDb.idTrakt),
         tvdb = IdTvdb(episodeDb.idShowTvdb),
         imdb = IdImdb(episodeDb.idShowImdb),
         tmdb = IdTmdb(episodeDb.idShowTmdb),

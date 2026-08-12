@@ -4,7 +4,6 @@ import com.michaldrabik.common.extensions.nowUtc
 import com.michaldrabik.data_remote.tmdb.model.TmdbPerson
 import com.michaldrabik.ui_model.IdImdb
 import com.michaldrabik.ui_model.IdTmdb
-import com.michaldrabik.ui_model.IdTrakt
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Person
 import java.time.LocalDate
@@ -40,7 +39,6 @@ class PersonMapper @Inject constructor() {
     characters: List<String> = emptyList(),
   ) = Person(
     ids = Ids.EMPTY.copy(
-      trakt = IdTrakt(personDb.idTrakt ?: -1),
       tmdb = IdTmdb(personDb.idTmdb),
       imdb = IdImdb(personDb.idImdb ?: ""),
     ),
@@ -62,7 +60,7 @@ class PersonMapper @Inject constructor() {
     person: Person,
     detailsTimestamp: ZonedDateTime?,
   ): PersonDb {
-    val idTrakt = if (person.ids.trakt.id != -1L) person.ids.trakt.id else null
+    val idTmdb = if (person.ids.tmdb.id != -1L) person.ids.tmdb.id else null
     val idImdb = if (person.ids.imdb.id
         .isNotBlank()
     ) {
@@ -71,8 +69,7 @@ class PersonMapper @Inject constructor() {
       null
     }
     return PersonDb(
-      idTmdb = person.ids.tmdb.id,
-      idTrakt = idTrakt,
+      idTmdb = idTmdb ?: person.ids.tmdb.id,
       idImdb = idImdb,
       name = person.name,
       department = person.department.slug,

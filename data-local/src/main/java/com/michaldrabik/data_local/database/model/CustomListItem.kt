@@ -10,8 +10,8 @@ import androidx.room.PrimaryKey
   tableName = "custom_list_item",
   indices = [
     Index(value = ["id_list"], unique = false),
-    Index(value = ["id_trakt", "type"], unique = false),
-    Index(value = ["id_list", "id_trakt", "type"], unique = true),
+    Index(value = ["id_tmdb", "type"], unique = false),
+    Index(value = ["id_list", "id_tmdb", "type"], unique = true),
   ],
   foreignKeys = [
     ForeignKey(
@@ -25,7 +25,7 @@ import androidx.room.PrimaryKey
 data class CustomListItem(
   @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
   @ColumnInfo(name = "id_list") val idList: Long,
-  @ColumnInfo(name = "id_trakt") val idTrakt: Long,
+  @ColumnInfo(name = "id_tmdb") val idTmdb: Long,
   @ColumnInfo(name = "type") val type: String,
   @ColumnInfo(name = "rank") val rank: Long,
   @ColumnInfo(name = "listed_at") val listedAt: Long,

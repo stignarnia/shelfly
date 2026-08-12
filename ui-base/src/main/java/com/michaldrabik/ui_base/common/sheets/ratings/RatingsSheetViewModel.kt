@@ -16,7 +16,7 @@ import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import com.michaldrabik.ui_base.viewmodel.ChannelsDelegate
 import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
-import com.michaldrabik.ui_model.IdTrakt
+import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.TraktRating
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,16 +39,16 @@ class RatingsSheetViewModel @Inject constructor(
   private val ratingState = MutableStateFlow<TraktRating?>(null)
 
   fun loadRating(
-    idTrakt: IdTrakt,
+    idTmdb: IdTmdb,
     type: Type,
   ) {
     viewModelScope.launch {
       try {
         val rating = when (type) {
-          Type.SHOW -> showRatingsCase.loadRating(idTrakt)
-          Type.MOVIE -> movieRatingsCase.loadRating(idTrakt)
-          Type.EPISODE -> episodeRatingsCase.loadRating(idTrakt)
-          Type.SEASON -> seasonRatingsCase.loadRating(idTrakt)
+          Type.SHOW -> showRatingsCase.loadRating(idTmdb)
+          Type.MOVIE -> movieRatingsCase.loadRating(idTmdb)
+          Type.EPISODE -> episodeRatingsCase.loadRating(idTmdb)
+          Type.SEASON -> seasonRatingsCase.loadRating(idTmdb)
         }
         ratingState.value = rating
       } catch (error: Throwable) {
@@ -59,7 +59,7 @@ class RatingsSheetViewModel @Inject constructor(
 
   fun saveRating(
     rating: Int,
-    id: IdTrakt,
+    id: IdTmdb,
     type: Type,
     seasonNumber: Int?,
     episodeNumber: Int?,
@@ -82,7 +82,7 @@ class RatingsSheetViewModel @Inject constructor(
   }
 
   fun removeRating(
-    id: IdTrakt,
+    id: IdTmdb,
     type: Type,
   ) {
     viewModelScope.launch {

@@ -71,7 +71,7 @@ class TraktExportListsRunner @Inject constructor(
       .forEach { localList ->
         Timber.d("Processing ${localList.name}...")
         try {
-          val isNewList = remoteLists.none { it.idTrakt == localList.idTrakt }
+          val isNewList = remoteLists.none { it.idTmdb == localList.idTmdb }
           if (isNewList) {
             Timber.d("List not found in Trakt. Creating and uploading items...")
             exportNewList(localList)
@@ -105,8 +105,8 @@ class TraktExportListsRunner @Inject constructor(
 
     val localItems = localSource.customListsItems.getItemsById(localList.id)
     if (localItems.isNotEmpty()) {
-      val showsIds = localItems.filter { it.type == Mode.SHOWS.type }.map { it.idTrakt }
-      val moviesIds = localItems.filter { it.type == Mode.MOVIES.type }.map { it.idTrakt }
+      val showsIds = localItems.filter { it.type == Mode.SHOWS.type }.map { it.idTmdb }
+      val moviesIds = localItems.filter { it.type == Mode.MOVIES.type }.map { it.idTmdb }
       remoteSource.postAddListItems(listNet.ids.trakt, showsIds, moviesIds)
       Timber.d("Items added into Trakt list.")
       delay(TRAKT_LIMIT_DELAY_MS)
@@ -119,7 +119,7 @@ class TraktExportListsRunner @Inject constructor(
   ) {
     val moviesEnabled = settingsRepository.isMoviesEnabled
 
-    val remoteList = remoteLists.first { it.idTrakt == localList.idTrakt }
+    val remoteList = remoteLists.first { it.idTmdb == localList.idTmdb }
     if (localList.updatedAt.isEqual(remoteList.updatedAt)) {
       Timber.d("Timestamps are the same.")
       return
@@ -139,7 +139,7 @@ class TraktExportListsRunner @Inject constructor(
     }
 
     Timber.d("Processing list items...")
-    val listTraktId = localList.idTrakt!!
+    val listTraktId = localList.idTmdb!!
     val remoteItems = remoteSource
       .fetchSyncListItems(listTraktId, moviesEnabled)
       .filter { it.movie != null || it.show != null }
@@ -147,15 +147,15 @@ class TraktExportListsRunner @Inject constructor(
       .getItemsById(localList.id)
       .filter { localItem ->
         remoteItems.none {
-          it.getTraktId() == localItem.idTrakt && it.getType() == localItem.type
+          it.getTraktId() == localItem.idTmdb && it.getType() == localItem.type
         }
       }
 
     if (localItems.isNotEmpty()) {
       Timber.d("${localItems.size} to be exported...")
 
-      val showsIds = localItems.filter { it.type == Mode.SHOWS.type }.map { it.idTrakt }
-      val moviesIds = localItems.filter { it.type == Mode.MOVIES.type }.map { it.idTrakt }
+      val showsIds = localItems.filter { it.type == Mode.SHOWS.type }.map { it.idTmdb }
+      val moviesIds = localItems.filter { it.type == Mode.MOVIES.type }.map { it.idTmdb }
       remoteSource.postAddListItems(listTraktId, showsIds, moviesIds)
 
       Timber.d("Exported!")
