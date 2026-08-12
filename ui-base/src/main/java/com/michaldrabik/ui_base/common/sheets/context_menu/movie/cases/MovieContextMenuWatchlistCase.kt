@@ -5,7 +5,6 @@ import com.michaldrabik.repository.PinnedItemsRepository
 import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
-import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Movie
@@ -21,7 +20,6 @@ class MovieContextMenuWatchlistCase @Inject constructor(
   private val moviesRepository: MoviesRepository,
   private val pinnedItemsRepository: PinnedItemsRepository,
   private val announcementManager: AnnouncementManager,
-  private val quickSyncManager: QuickSyncManager,
 ) {
 
   suspend fun moveToWatchlist(tmdbId: IdTmdb) =
@@ -37,18 +35,11 @@ class MovieContextMenuWatchlistCase @Inject constructor(
       pinnedItemsRepository.removePinnedItem(movie)
       announcementManager.refreshMoviesAnnouncements()
 
-      with(quickSyncManager) {
-        clearMovies(listOf(tmdbId.id))
-        clearHiddenMovies(listOf(tmdbId.id))
-        scheduleMoviesWatchlist(listOf(tmdbId.id))
-      }
-
       RemoveTraktUiEvent(removeProgress = isMyMovie, removeHidden = isHidden)
     }
 
   suspend fun removeFromWatchlist(tmdbId: IdTmdb) =
     withContext(dispatchers.IO) {
       moviesRepository.watchlistMovies.delete(tmdbId)
-      quickSyncManager.clearWatchlistMovies(listOf(tmdbId.id))
     }
 }

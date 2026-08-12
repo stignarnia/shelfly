@@ -60,7 +60,6 @@ import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.extensions.withFailListener
 import com.michaldrabik.ui_base.utilities.extensions.withSuccessListener
 import com.michaldrabik.ui_base.utilities.viewBinding
-import com.michaldrabik.ui_comments.fragment.CommentsFragment
 import com.michaldrabik.ui_model.Genre
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Image
@@ -201,10 +200,6 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
               val args = LinksBottomSheet.createBundle(movie)
               navigateToSafe(R.id.actionMovieDetailsFragmentToLinks, args)
             }
-          }
-          movieDetailsActions.commentsChip.onClick {
-            val bundle = CommentsFragment.createBundle(movie)
-            navigateToSafe(R.id.actionMovieDetailsFragmentToComments, bundle)
           }
           movieDetailsActions.shareChip.run {
             isEnabled = movie.ids.imdb.id

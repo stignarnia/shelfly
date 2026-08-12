@@ -256,32 +256,6 @@
 
         </FrameLayout>
 
-        <FrameLayout
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          >
-
-          <com.google.android.material.chip.Chip
-            android:id="@+id/episodeDetailsCommentsButton"
-            style="@style/ShowlyChip.Button"
-            android:layout_marginStart="@dimen/spaceSmall"
-            android:text="@string/textLoadCommentsCount"
-            app:chipBackgroundColor="?colorSheetBackground"
-            app:chipIcon="@drawable/ic_comment"
-            />
-
-          <ProgressBar
-            android:id="@+id/episodeDetailsCommentsProgress"
-            style="@style/ProgressBar.Accent"
-            android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            tools:visibility="visible"
-            />
-
-        </FrameLayout>
-
         <com.google.android.material.chip.Chip
           android:id="@+id/episodeDetailsLinksButton"
           style="@style/ShowlyChip.Button"
@@ -293,55 +267,10 @@
 
       </LinearLayout>
 
-      <TextView
-        android:id="@+id/episodeDetailsCommentsEmpty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spaceBig"
-        android:layout_marginBottom="@dimen/spaceNormal"
-        android:gravity="center"
-        android:text="@string/textNoComments"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="14sp"
-        android:visibility="gone"
-        tools:visibility="visible"
-        />
-
-      <LinearLayout
-        android:id="@+id/episodeDetailsComments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spaceNormal"
-        android:layout_marginEnd="@dimen/spaceNormal"
-        android:layout_marginBottom="260dp"
-        android:clipToPadding="false"
-        android:divider="@drawable/divider_comments_list"
-        android:orientation="vertical"
-        android:paddingTop="@dimen/spaceBig"
-        android:showDividers="middle|end"
-        android:visibility="gone"
-        tools:visibility="visible"
-        />
-
     </LinearLayout>
 
   </androidx.core.widget.NestedScrollView>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/episodeDetailsPostCommentButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/spaceNormal"
-    android:layout_marginBottom="@dimen/spaceNormal"
-    android:visibility="gone"
-    app:backgroundTint="?attr/colorAccent"
-    app:fabSize="mini"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:srcCompat="@drawable/ic_add_comment"
-    app:tint="?attr/textColorOnSurface"
-    tools:visibility="visible"
-    />
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/episodeDetailsSnackbarHost"

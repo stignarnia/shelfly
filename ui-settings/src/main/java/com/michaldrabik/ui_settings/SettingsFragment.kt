@@ -23,7 +23,6 @@ import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.GEN
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.MISC
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.NOTIFICATIONS
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.SPOILERS
-import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.TRAKT
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.WIDGETS
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -95,7 +94,6 @@ class SettingsFragment :
   private fun renderFiltered(filter: SettingsFilter?) {
     with(binding) {
       settingsCategoryApiKeys.visibleIf(filter == API_KEYS || filter == null)
-      settingsCategoryTrakt.visibleIf(filter == TRAKT || filter == null)
       settingsCategoryGeneral.visibleIf(filter == GENERAL || filter == null)
       settingsCategoryNotifications.visibleIf(filter == NOTIFICATIONS || filter == null)
       settingsCategorySpoilers.visibleIf(filter == SPOILERS || filter == null)

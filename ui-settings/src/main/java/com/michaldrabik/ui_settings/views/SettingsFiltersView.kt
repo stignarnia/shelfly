@@ -16,7 +16,6 @@ import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.GEN
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.MISC
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.NOTIFICATIONS
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.SPOILERS
-import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.TRAKT
 import com.michaldrabik.ui_settings.views.SettingsFiltersView.SettingsFilter.WIDGETS
 
 class SettingsFiltersView : FrameLayout {
@@ -39,10 +38,6 @@ class SettingsFiltersView : FrameLayout {
     with(binding) {
       apiKeysChip.onClick(safe = false) {
         selectedFilter = if (selectedFilter == API_KEYS) null else API_KEYS
-        onFilterClick?.invoke(selectedFilter)
-      }
-      traktChip.onClick(safe = false) {
-        selectedFilter = if (selectedFilter == TRAKT) null else TRAKT
         onFilterClick?.invoke(selectedFilter)
       }
       generalChip.onClick(safe = false) {
@@ -85,7 +80,6 @@ class SettingsFiltersView : FrameLayout {
 
   enum class SettingsFilter {
     API_KEYS,
-    TRAKT,
     GENERAL,
     NOTIFICATIONS,
     SPOILERS,

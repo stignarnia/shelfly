@@ -43,7 +43,6 @@ dependencies {
   implementation project(':ui-navigation')
   implementation project(':repository')
   implementation project(':ui-model')
-  implementation project(':ui-comments')
 
   implementation libs.hilt.android
   ksp libs.hilt.compiler

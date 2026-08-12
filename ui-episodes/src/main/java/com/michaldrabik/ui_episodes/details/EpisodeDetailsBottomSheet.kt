@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
@@ -13,7 +12,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.michaldrabik.common.Config
 import com.michaldrabik.common.Config.IMAGE_FADE_DURATION_MS
@@ -28,7 +26,6 @@ import com.michaldrabik.ui_base.common.sheets.ratings.RatingsBottomSheet.Options
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_base.utilities.extensions.capitalizeWords
 import com.michaldrabik.ui_base.utilities.extensions.dimenToPx
-import com.michaldrabik.ui_base.utilities.extensions.fadeIf
 import com.michaldrabik.ui_base.utilities.extensions.fadeIn
 import com.michaldrabik.ui_base.utilities.extensions.gone
 import com.michaldrabik.ui_base.utilities.extensions.invisible
@@ -43,11 +40,9 @@ import com.michaldrabik.ui_base.utilities.extensions.visible
 import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.extensions.withFailListener
 import com.michaldrabik.ui_base.utilities.viewBinding
-import com.michaldrabik.ui_comments.CommentView
 import com.michaldrabik.ui_episodes.R
 import com.michaldrabik.ui_episodes.databinding.ViewEpisodeDetailsBinding
 import com.michaldrabik.ui_episodes.details.links.EpisodeLinksBottomSheet
-import com.michaldrabik.ui_model.Comment
 import com.michaldrabik.ui_model.Episode
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Image
@@ -55,14 +50,7 @@ import com.michaldrabik.ui_model.SpoilersSettings
 import com.michaldrabik.ui_model.Translation
 import com.michaldrabik.ui_navigation.java.NavigationArgs
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ACTION_EPISODE_TAB_SELECTED
-import com.michaldrabik.ui_navigation.java.NavigationArgs.ACTION_NEW_COMMENT
-import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_COMMENT
-import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_COMMENT_ACTION
-import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_COMMENT_ID
-import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_EPISODE_ID
 import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_OPTIONS
-import com.michaldrabik.ui_navigation.java.NavigationArgs.ARG_REPLY_USER
-import com.michaldrabik.ui_navigation.java.NavigationArgs.REQUEST_COMMENT
 import com.michaldrabik.ui_navigation.java.NavigationArgs.REQUEST_EPISODE_DETAILS
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
@@ -144,15 +132,6 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
       episodeDetailsWatchedAt.visibleIf(episode.lastWatchedAt != null || isWatched)
       if (!showTabs) episodeDetailsTabs.gone()
       episodeDetailsRating.text = String.format(ENGLISH, getString(R.string.textVotes), episode.rating, episode.votes)
-      episodeDetailsCommentsButton.text = String.format(
-        ENGLISH,
-        getString(R.string.textLoadCommentsCount),
-        episode.commentCount,
-      )
-      episodeDetailsCommentsButton.onClick {
-        viewModel.loadComments(showIds.tmdb, episode.season, episode.number)
-      }
-      episodeDetailsPostCommentButton.onClick { openPostCommentSheet() }
       episodeDetailsLinksButton.onClick { openLinksSheet() }
     }
   }
@@ -182,33 +161,6 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
         isImageLoading.let { episodeDetailsProgress.visibleIf(it) }
         image?.let { renderImage(it, spoilers) }
         episodes?.let { renderEpisodes(it) }
-        comments?.let { comments ->
-          episodeDetailsComments.removeAllViews()
-          comments.forEach {
-            val view = CommentView(requireContext()).apply {
-              bind(it, commentsDateFormat)
-              if (it.replies > 0) {
-                onRepliesClickListener = { comment -> viewModel.loadCommentReplies(comment) }
-              }
-              if (it.isSignedIn) {
-                onReplyClickListener = { comment -> openPostCommentSheet(comment) }
-              }
-              if (it.replies == 0L && it.isMe && it.isSignedIn) {
-                onDeleteClickListener = { comment -> openDeleteCommentDialog(comment) }
-              }
-            }
-            episodeDetailsComments.addView(view)
-          }
-          episodeDetailsComments.fadeIf(comments.isNotEmpty())
-          episodeDetailsCommentsEmpty.fadeIf(comments.isEmpty())
-          episodeDetailsPostCommentButton.fadeIf(isSignedIn)
-          episodeDetailsCommentsButton.isEnabled = false
-          episodeDetailsCommentsButton.text = String.format(
-            ENGLISH,
-            getString(R.string.textLoadCommentsCount),
-            comments.size,
-          )
-        }
         rating?.let { state ->
           episodeDetailsRateProgress.visibleIf(state.rateLoading == true)
           episodeDetailsRateButton.visibleIf(state.rateLoading == false, gone = false)
@@ -221,12 +173,6 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
           }
         }
         spoilers?.let { renderRating(it) }
-        isCommentsLoading.let {
-          episodeDetailsCommentsProgress.visibleIf(it)
-          episodeDetailsCommentsButton.visibleIf(!it, gone = false)
-          episodeDetailsCommentsButton.isEnabled = !it
-          episodeDetailsRateButton.isEnabled = !it
-        }
         renderTitle(translation, spoilers)
         renderDescription(translation, spoilers)
         renderWatchedAt(lastWatchedAt, dateFormat)
@@ -411,16 +357,6 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
     }
   }
 
-  private fun openDeleteCommentDialog(comment: Comment) {
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setTitle(R.string.textCommentConfirmDeleteTitle)
-      .setMessage(R.string.textCommentConfirmDelete)
-      .setPositiveButton(R.string.textYes) { _, _ -> viewModel.deleteComment(comment) }
-      .setNegativeButton(R.string.textNo) { _, _ -> }
-      .show()
-  }
-
   private fun openRateDialog() {
     setFragmentResultListener(NavigationArgs.REQUEST_RATING) { _, bundle ->
       when (bundle.optionalParcelable<Operation>(NavigationArgs.RESULT)) {
@@ -438,26 +374,6 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
       episodeNumber = options.episode.number,
     )
     navigateTo(R.id.actionEpisodeDetailsDialogToRate, bundle)
-  }
-
-  private fun openPostCommentSheet(comment: Comment? = null) {
-    setFragmentResultListener(REQUEST_COMMENT) { _, bundle ->
-      renderSnackbar(MessageEvent.Info(R.string.textCommentPosted))
-      when (bundle.getString(ARG_COMMENT_ACTION)) {
-        ACTION_NEW_COMMENT -> {
-          val newComment = bundle.getParcelable<Comment>(ARG_COMMENT)!!
-          viewModel.addNewComment(newComment)
-        }
-      }
-    }
-    val bundle = when {
-      comment != null -> bundleOf(
-        ARG_COMMENT_ID to comment.getReplyId(),
-        ARG_REPLY_USER to comment.user.username,
-      )
-      else -> bundleOf(ARG_EPISODE_ID to options.episode.ids.tmdb.id)
-    }
-    navigateTo(R.id.actionEpisodeDetailsDialogToPostComment, bundle)
   }
 
   private fun openLinksSheet() {

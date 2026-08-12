@@ -2,7 +2,6 @@ package com.michaldrabik.ui_progress_movies.main.cases
 
 import com.michaldrabik.repository.PinnedItemsRepository
 import com.michaldrabik.repository.movies.MoviesRepository
-import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Movie
@@ -14,7 +13,6 @@ import javax.inject.Singleton
 class ProgressMoviesMainCase @Inject constructor(
   private val moviesRepository: MoviesRepository,
   private val pinnedItemsRepository: PinnedItemsRepository,
-  private val quickSyncManager: QuickSyncManager,
 ) {
 
   suspend fun addToMyMovies(
@@ -23,7 +21,6 @@ class ProgressMoviesMainCase @Inject constructor(
   ) {
     moviesRepository.myMovies.insert(movie.ids.tmdb, customDate)
     pinnedItemsRepository.removePinnedItem(movie)
-    quickSyncManager.scheduleMovies(listOf(movie.tmdbId), customDate)
   }
 
   suspend fun addToMyMovies(movieId: IdTmdb) {

@@ -2,7 +2,6 @@ package com.michaldrabik.ui_show.sections.seasons.cases
 
 import com.michaldrabik.repository.EpisodesManager
 import com.michaldrabik.repository.shows.ShowsRepository
-import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
 import com.michaldrabik.ui_model.Episode
 import com.michaldrabik.ui_model.EpisodeBundle
 import com.michaldrabik.ui_model.SeasonBundle
@@ -19,7 +18,6 @@ import javax.inject.Inject
 class ShowDetailsQuickProgressCase @Inject constructor(
   private val showsRepository: ShowsRepository,
   private val episodesManager: EpisodesManager,
-  private val quickSyncManager: QuickSyncManager,
 ) {
 
   suspend fun setQuickProgress(
@@ -58,13 +56,6 @@ class ShowDetailsQuickProgressCase @Inject constructor(
 
     if (isCollection) {
       val episodesIds = episodesAdded.map { it.ids.tmdb.id }
-      quickSyncManager.clearEpisodes()
-      quickSyncManager.scheduleEpisodes(
-        episodesIds = episodesIds,
-        showId = show.tmdbId,
-        customDate = customDate,
-        clearProgress = true,
-      )
     }
   }
 }

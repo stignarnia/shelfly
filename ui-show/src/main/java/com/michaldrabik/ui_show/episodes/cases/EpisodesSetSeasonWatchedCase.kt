@@ -4,7 +4,6 @@ import com.michaldrabik.repository.EpisodesManager
 import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
-import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
 import com.michaldrabik.ui_model.Season
 import com.michaldrabik.ui_model.SeasonBundle
 import com.michaldrabik.ui_model.Show
@@ -17,7 +16,6 @@ import javax.inject.Inject
 class EpisodesSetSeasonWatchedCase @Inject constructor(
   private val showsRepository: ShowsRepository,
   private val episodesManager: EpisodesManager,
-  private val quickSyncManager: QuickSyncManager,
   private val userManager: UserTraktManager,
   private val seasonsCache: SeasonsCache,
   private val settingsRepository: SettingsRepository,
@@ -40,17 +38,11 @@ class EpisodesSetSeasonWatchedCase @Inject constructor(
       isChecked -> {
         val episodesAdded = episodesManager.setSeasonWatched(bundle, customDate)
         if (isMyShows) {
-          quickSyncManager.scheduleEpisodes(
-            showId = show.tmdbId,
-            episodesIds = episodesAdded.map { it.ids.tmdb.id },
-            customDate = customDate,
-          )
         }
         return Result.SUCCESS
       }
       else -> {
         episodesManager.setSeasonUnwatched(bundle)
-        quickSyncManager.clearEpisodes(season.episodes.map { it.ids.tmdb.id })
 
         val traktQuickRemoveEnabled = settingsRepository.load().traktQuickRemoveEnabled
         val isSeasonLocal = seasonsCache.areSeasonsLocal(show.ids.tmdb)

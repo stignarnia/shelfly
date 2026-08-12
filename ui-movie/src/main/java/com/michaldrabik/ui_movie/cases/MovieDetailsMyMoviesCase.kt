@@ -4,7 +4,6 @@ import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.repository.PinnedItemsRepository
 import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
-import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
 import com.michaldrabik.ui_model.Movie
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.async
@@ -18,7 +17,6 @@ class MovieDetailsMyMoviesCase @Inject constructor(
   private val dispatchers: CoroutineDispatchers,
   private val moviesRepository: MoviesRepository,
   private val pinnedItemsRepository: PinnedItemsRepository,
-  private val quickSyncManager: QuickSyncManager,
   private val announcementManager: AnnouncementManager,
 ) {
 
@@ -42,7 +40,6 @@ class MovieDetailsMyMoviesCase @Inject constructor(
   ) {
     withContext(dispatchers.IO) {
       moviesRepository.myMovies.insert(movie.ids.tmdb, customDate)
-      quickSyncManager.scheduleMovies(listOf(movie.tmdbId), customDate)
       pinnedItemsRepository.removePinnedItem(movie)
       announcementManager.refreshMoviesAnnouncements()
     }
@@ -52,7 +49,6 @@ class MovieDetailsMyMoviesCase @Inject constructor(
     withContext(dispatchers.IO) {
       moviesRepository.myMovies.delete(movie.ids.tmdb)
       pinnedItemsRepository.removePinnedItem(movie)
-      quickSyncManager.clearMovies(listOf(movie.tmdbId))
     }
   }
 }

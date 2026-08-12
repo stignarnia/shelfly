@@ -32,13 +32,6 @@
         />
 
       <com.google.android.material.chip.Chip
-        android:id="@+id/traktChip"
-        style="@style/ShowlyChip.Filter"
-        android:checkable="true"
-        android:text="@string/textSettingsTrakt"
-        />
-
-      <com.google.android.material.chip.Chip
         android:id="@+id/generalChip"
         style="@style/ShowlyChip.Filter"
         android:checkable="true"

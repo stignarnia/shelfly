@@ -4,7 +4,6 @@ import com.michaldrabik.repository.EpisodesManager
 import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
-import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
 import com.michaldrabik.ui_model.EpisodeBundle
 import com.michaldrabik.ui_show.sections.seasons.helpers.SeasonsCache
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -15,7 +14,6 @@ import javax.inject.Inject
 class EpisodesSetEpisodeWatchedCase @Inject constructor(
   private val showsRepository: ShowsRepository,
   private val episodesManager: EpisodesManager,
-  private val quickSyncManager: QuickSyncManager,
   private val userTraktManager: UserTraktManager,
   private val seasonsCache: SeasonsCache,
   private val settingsRepository: SettingsRepository,
@@ -37,18 +35,11 @@ class EpisodesSetEpisodeWatchedCase @Inject constructor(
       isChecked -> {
         episodesManager.setEpisodeWatched(episodeBundle, customDate)
         if (isMyShows) {
-          quickSyncManager.scheduleEpisodes(
-            episodesIds = listOf(episode.ids.tmdb.id),
-            showId = show.tmdbId,
-            customDate = customDate,
-            clearProgress = false,
-          )
         }
         return Result.SUCCESS
       }
       else -> {
         episodesManager.setEpisodeUnwatched(episodeBundle)
-        quickSyncManager.clearEpisodes(listOf(episode.ids.tmdb.id))
 
         val traktQuickRemoveEnabled = settingsRepository.load().traktQuickRemoveEnabled
         val isSeasonLocal = seasonsCache.areSeasonsLocal(show.ids.tmdb)

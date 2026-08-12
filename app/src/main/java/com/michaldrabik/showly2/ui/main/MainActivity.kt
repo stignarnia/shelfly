@@ -191,7 +191,6 @@ class MainActivity :
       }
     }
     viewModel.initialize()
-    viewModel.refreshTraktSyncSchedule()
     viewModel.refreshBackupExportSchedule()
   }
 

@@ -1,16 +1,13 @@
 package com.michaldrabik.ui_base.common.sheets.context_menu.show.cases
 
-import com.michaldrabik.common.Mode
 import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.database.model.Season
-import com.michaldrabik.data_local.database.model.TraktSyncQueue
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.repository.PinnedItemsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_base.common.sheets.context_menu.events.RemoveTraktUiEvent
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
-import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
 import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Show
@@ -27,7 +24,6 @@ class ShowContextMenuHiddenCase @Inject constructor(
   private val transactions: TransactionsProvider,
   private val showsRepository: ShowsRepository,
   private val pinnedItemsRepository: PinnedItemsRepository,
-  private val quickSyncManager: QuickSyncManager,
   private val announcementManager: AnnouncementManager,
 ) {
 
@@ -61,10 +57,6 @@ class ShowContextMenuHiddenCase @Inject constructor(
 
     pinnedItemsRepository.removePinnedItem(show)
     announcementManager.refreshShowsAnnouncements()
-    with(quickSyncManager) {
-      clearWatchlistShows(listOf(tmdbId.id))
-      scheduleHidden(tmdbId.id, Mode.SHOWS, TraktSyncQueue.Operation.ADD)
-    }
 
     RemoveTraktUiEvent(removeProgress = isMyShow, removeWatchlist = isWatchlist)
   }
@@ -73,6 +65,5 @@ class ShowContextMenuHiddenCase @Inject constructor(
     withContext(dispatchers.IO) {
       showsRepository.hiddenShows.delete(tmdbId)
       announcementManager.refreshShowsAnnouncements()
-      quickSyncManager.clearHiddenShows(listOf(tmdbId.id))
     }
 }

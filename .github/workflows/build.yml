@@ -47,7 +47,6 @@ jobs:
             :app:testDebugUnitTest \
             :repository:testDebugUnitTest \
             :ui-discover:testDebugUnitTest \
-            :ui-trakt-sync:testDebugUnitTest \
             :ui-statistics:testDebugUnitTest \
             :ui-statistics-movies:testDebugUnitTest \
             :ui-search:testDebugUnitTest \

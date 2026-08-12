@@ -2,11 +2,9 @@ package com.michaldrabik.ui_my_shows.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.michaldrabik.ui_base.events.EventsManager
 import com.michaldrabik.ui_base.events.ReloadData
-import com.michaldrabik.ui_base.trakt.TraktSyncWorker
 import com.michaldrabik.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,9 +24,6 @@ class FollowedShowsViewModel @Inject constructor(
   private val syncingState = MutableStateFlow(false)
 
   init {
-    workManager.getWorkInfosByTagLiveData(TraktSyncWorker.TAG_ID).observeForever { work ->
-      syncingState.value = work.any { it.state == WorkInfo.State.RUNNING }
-    }
   }
 
   fun onSearchQuery(searchQuery: String?) {

@@ -28,13 +28,6 @@
       />
 
     <com.google.android.material.chip.Chip
-      android:id="@+id/commentsChip"
-      style="@style/ShowlyChip.Button"
-      android:text="@string/textMovieComments2"
-      app:chipIcon="@drawable/ic_comment"
-      />
-
-    <com.google.android.material.chip.Chip
       android:id="@+id/trailerChip"
       style="@style/ShowlyChip.Button"
       android:text="@string/textMovieTrailer"

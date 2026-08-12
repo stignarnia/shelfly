@@ -1,15 +1,12 @@
 package com.michaldrabik.ui_show.cases
 
-import com.michaldrabik.common.Mode
 import com.michaldrabik.common.dispatchers.CoroutineDispatchers
 import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.database.model.Season
-import com.michaldrabik.data_local.database.model.TraktSyncQueue
 import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.repository.PinnedItemsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_base.notifications.AnnouncementManager
-import com.michaldrabik.ui_base.trakt.quicksync.QuickSyncManager
 import com.michaldrabik.ui_model.Show
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.withContext
@@ -22,7 +19,6 @@ class ShowDetailsHiddenCase @Inject constructor(
   private val transactions: TransactionsProvider,
   private val showsRepository: ShowsRepository,
   private val pinnedItemsRepository: PinnedItemsRepository,
-  private val quickSyncManager: QuickSyncManager,
   private val announcementManager: AnnouncementManager,
 ) {
 
@@ -53,7 +49,6 @@ class ShowDetailsHiddenCase @Inject constructor(
     }
     pinnedItemsRepository.removePinnedItem(show)
     announcementManager.refreshShowsAnnouncements()
-    quickSyncManager.scheduleHidden(show.tmdbId, Mode.SHOWS, TraktSyncQueue.Operation.ADD)
   }
 
   suspend fun removeFromHidden(show: Show) =
@@ -61,6 +56,5 @@ class ShowDetailsHiddenCase @Inject constructor(
       showsRepository.hiddenShows.delete(show.ids.tmdb)
       pinnedItemsRepository.removePinnedItem(show)
       announcementManager.refreshShowsAnnouncements()
-      quickSyncManager.clearHiddenShows(listOf(show.tmdbId))
     }
 }

@@ -43,7 +43,6 @@ dependencies {
   implementation project(':ui-model')
   implementation project(':ui-people')
   implementation project(':ui-navigation')
-  implementation project(':ui-comments')
   implementation project(':ui-streamings')
 
   implementation libs.hilt.android
