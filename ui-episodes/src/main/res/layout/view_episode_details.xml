@@ -101,7 +101,7 @@
         tools:visibility="visible"
         />
 
-      <FrameLayout
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spaceNormal"
@@ -109,98 +109,92 @@
         android:layout_marginEnd="@dimen/spaceNormal"
         android:layout_marginBottom="@dimen/spaceNormal"
         android:clipChildren="false"
+        android:orientation="vertical"
         >
 
-        <LinearLayout
+        <TextView
+          android:id="@+id/episodeDetailsTitle"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical"
+          android:layout_marginEnd="52dp"
+          android:layout_marginBottom="@dimen/spaceMicro"
+          android:ellipsize="end"
+          android:gravity="center_vertical|start"
+          android:maxLines="2"
+          android:textAlignment="viewStart"
+          android:textColor="?android:attr/textColorPrimary"
+          android:textSize="20sp"
+          android:textStyle="bold"
+          tools:text="That is not an example."
+          />
+
+        <TextView
+          android:id="@+id/episodeDetailsName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="48dp"
+          android:ellipsize="end"
+          android:textColor="?android:attr/textColorSecondary"
+          android:textSize="12sp"
+          tools:text="S.01 E.99 | Thursday, 23 December 2019 at 15:00 | 23 mins"
+          />
+
+        <LinearLayout
+          android:id="@+id/episodeDetailsRatingLayout"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/spaceMicro"
+          android:gravity="center_vertical|start"
+          android:orientation="horizontal"
+          android:translationX="-1dp"
           >
 
+          <ImageView
+            android:id="@+id/episodeDetailsRatingIcon"
+            android:layout_width="16dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/spaceMicro"
+            app:srcCompat="@drawable/ic_star"
+            app:tint="?attr/colorAccent"
+            />
+
           <TextView
-            android:id="@+id/episodeDetailsTitle"
+            android:id="@+id/episodeDetailsRating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="52dp"
-            android:layout_marginBottom="@dimen/spaceMicro"
             android:ellipsize="end"
-            android:gravity="center_vertical|start"
-            android:maxLines="2"
-            android:textAlignment="viewStart"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            tools:text="That is not an example."
-            />
-
-          <TextView
-            android:id="@+id/episodeDetailsName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
-            android:ellipsize="end"
+            android:gravity="center_vertical"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
-            tools:text="S.01 E.99 | Thursday, 23 December 2019 at 15:00 | 23 mins"
+            tools:text="8.2 (1000 votes)"
             />
 
-          <LinearLayout
-            android:id="@+id/episodeDetailsRatingLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spaceMicro"
-            android:gravity="center_vertical|start"
-            android:orientation="horizontal"
-            android:translationX="-1dp"
-            >
-
-            <ImageView
-              android:id="@+id/episodeDetailsRatingIcon"
-              android:layout_width="16dp"
-              android:layout_height="match_parent"
-              android:layout_marginEnd="@dimen/spaceMicro"
-              app:srcCompat="@drawable/ic_star"
-              app:tint="?attr/colorAccent"
-              />
-
-            <TextView
-              android:id="@+id/episodeDetailsRating"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:ellipsize="end"
-              android:gravity="center_vertical"
-              android:textColor="?android:attr/textColorSecondary"
-              android:textSize="12sp"
-              tools:text="8.2 (1000 votes)"
-              />
-
-          </LinearLayout>
-
-          <TextView
-            android:id="@+id/episodeDetailsWatchedAt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spaceNormal"
-            android:layout_marginEnd="@dimen/spaceSmall"
-            android:background="@drawable/bg_badge"
-            android:drawablePadding="5dp"
-            android:elevation="@dimen/elevationTiny"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:paddingStart="6dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="4dp"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="12sp"
-            android:visibility="gone"
-            app:drawableStartCompat="@drawable/ic_check_small_2x"
-            app:drawableTint="?android:attr/textColorPrimary"
-            tools:text="Thursday, 23 Dec 2019, 15:00"
-            tools:visibility="visible"
-            />
         </LinearLayout>
-      </FrameLayout>
+
+        <TextView
+          android:id="@+id/episodeDetailsWatchedAt"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/spaceNormal"
+          android:layout_marginEnd="@dimen/spaceSmall"
+          android:background="@drawable/bg_badge"
+          android:drawablePadding="5dp"
+          android:elevation="@dimen/elevationTiny"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:paddingStart="6dp"
+          android:paddingTop="4dp"
+          android:paddingEnd="8dp"
+          android:paddingBottom="4dp"
+          android:textColor="?android:attr/textColorPrimary"
+          android:textSize="12sp"
+          android:visibility="gone"
+          app:drawableStartCompat="@drawable/ic_check_small_2x"
+          app:drawableTint="?android:attr/textColorPrimary"
+          tools:text="Thursday, 23 Dec 2019, 15:00"
+          tools:visibility="visible"
+          />
+      </LinearLayout>
 
       <TextView
         android:id="@+id/episodeDetailsOverview"

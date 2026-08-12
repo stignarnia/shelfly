@@ -3,11 +3,6 @@
     <string name="menuProgress">Progres</string>
     <string name="menuDiscover">Descoperă</string>
     <string name="menuCollection">Colecție</string>
-    <string name="menuNews">Știri</string>
-    <string name="textRateAppTitle">Îți place Showly 2.0?</string>
-    <string name="textRateAppMessage">Dorești să evaluezi aplicația?\nDurează doar câteva secunde. Mulțumim!\n\n<i>Aplicația nu va fi închisă.</i></string>
-    <string name="textRateAppYesButton">Sigur, de ce nu?</string>
-    <string name="textRateAppNoButton">Nu acum</string>
     <string name="textDisclaimerTitle">Bine ai venit!</string>
     <string name="textDisclaimerText">Te rugăm să reții că <b>NU POȚI</b> viziona, transmite în flux sau descărca seriale și filme cu această aplicație.\n\nUtilizează aplicații precum <b>Netflix</b> pentru a transmite în flux și viziona conținut.</string>
     <string name="textDisclaimerConfirmText">Bine, înțeleg</string>

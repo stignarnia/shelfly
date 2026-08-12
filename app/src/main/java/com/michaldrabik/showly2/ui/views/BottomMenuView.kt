@@ -17,7 +17,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
 import androidx.core.view.forEach
 import androidx.core.view.updateLayoutParams
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.michaldrabik.common.Mode
 import com.michaldrabik.showly2.R
 import com.michaldrabik.showly2.databinding.ViewBottomMenuBinding
@@ -142,12 +141,13 @@ class BottomMenuView : FrameLayout {
   }
 
   private fun disableTooltips() {
+    // The menu view's children are the item views. Clearing the listener on all
+    // of them avoids naming BottomNavigationItemView, which Material restricts
+    // to its own library group.
     val content = binding.bottomNavigationView.getChildAt(0)
     if (content is ViewGroup) {
       content.children.forEach {
-        if (it is BottomNavigationItemView) {
-          it.setOnLongClickListener(null)
-        }
+        it.setOnLongClickListener(null)
       }
     }
   }

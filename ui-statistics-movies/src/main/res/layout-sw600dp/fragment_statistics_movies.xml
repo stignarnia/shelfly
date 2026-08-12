@@ -84,7 +84,6 @@
         app:layout_constraintStart_toEndOf="@id/statisticsMoviesTotalTimeSpent"
         app:layout_constraintTop_toTopOf="@id/statisticsMoviesTotalTimeSpent"
         />
-      s
 
       <com.michaldrabik.ui_statistics_movies.views.ratings.StatisticsMoviesRatingsView
         android:id="@+id/statisticsMoviesRatings"

@@ -3,11 +3,6 @@
   <string name="menuProgress">Fremskridt</string>
   <string name="menuDiscover">Opdag</string>
   <string name="menuCollection">Samling</string>
-  <string name="menuNews">Nyheder</string>
-  <string name="textRateAppTitle">Kan du lide Showly 2.0?</string>
-  <string name="textRateAppMessage">Vil du bedømme appen?\nDet tager kun få sekunder. Tak!\n\n<i>Appen bliver ikke lukket.</i></string>
-  <string name="textRateAppYesButton">Ja, hvorfor ikke?</string>
-  <string name="textRateAppNoButton">Ikke nu</string>
   <string name="textDisclaimerTitle">Velkommen!</string>
   <string name="textDisclaimerText">Bemærk venligst, at du <b>IKKE</b> kan se, streame eller downloade serier og film med denne app.\n\nBrug apps som <b>Netflix</b> til at streame og se indhold.</string>
   <string name="textDisclaimerConfirmText">OK, jeg forstår</string>
