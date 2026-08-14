@@ -4,31 +4,47 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.work.WorkManager
+import dagger.hilt.android.scopes.ViewModelScoped
+import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.ui_backup.features.export.model.BackupExportSchedule
 import xyz.stignarnia.ui_backup.features.export.workers.BackupExportScheduleWorker
-import dagger.hilt.android.scopes.ViewModelScoped
+import xyz.stignarnia.ui_model.BackupTarget
 import javax.inject.Inject
 import javax.inject.Named
 
 @ViewModelScoped
 class MainBackupCase @Inject constructor(
   @Named("miscPreferences") private var miscPreferences: SharedPreferences,
+  private val webDavRepository: SettingsWebDavRepository,
   private val workManager: WorkManager,
 ) {
 
   /**
-   * Get latest stored information about backup export schedule and reschedule to make sure the schedule is still
-   * running properly.
+   * Re-arms the periodic backup on app start, so a schedule survives the system
+   * dropping the work.
+   *
+   * Whether a schedule is still valid depends on the configured destination. A
+   * local folder needs its picked directory; a WebDAV server needs a URL and
+   * has no directory at all. Checking only for the directory would silently
+   * cancel every WebDAV schedule on the next launch.
    */
   fun refreshBackupExportSchedule() {
     val schedule = BackupExportSchedule.createFromName(
       miscPreferences.getString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_SCHEDULE, null),
     )
-    val uri = miscPreferences.getString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_DIRECTORY_URI, null)?.toUri()
-    if (uri != null) {
+    val directoryUri = miscPreferences
+      .getString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_DIRECTORY_URI, null)
+      ?.toUri()
+
+    val isDestinationUsable = when (webDavRepository.backupTarget) {
+      BackupTarget.WEBDAV -> webDavRepository.url.isNotBlank()
+      BackupTarget.LOCAL_FOLDER -> directoryUri != null
+    }
+
+    if (isDestinationUsable) {
       BackupExportScheduleWorker.schedulePeriodic(
         workManager = workManager,
-        directoryUri = uri,
+        directoryUri = directoryUri,
         schedule = schedule,
         cancelExisting = false,
       )
