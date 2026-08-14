@@ -1,0 +1,10 @@
+Shelfly 4.0.0
+
+First release of the fork.
+
+• WebDAV backup. Back your collection up to a server you control, on a schedule, and restore from it. Pull down on the progress list to back up right away.
+• Trakt is gone. TMDB is now the only catalog source and all tracking state stays on your device.
+• You supply the API keys. Nothing is compiled into the app, so every install uses its own TMDB quota.
+• Import your history from a Showly backup. Older backups are re-keyed onto TMDB ids on the way in, and anything that cannot be matched is reported rather than silently dropped.
+
+Known gaps: episode notifications fire on the air date rather than the exact airtime, because TMDB exposes no time of day. Discover has no network filter. The app is dark-only for now.

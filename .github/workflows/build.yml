@@ -1,10 +1,10 @@
 name: Build
 
+# Only release builds. Day-to-day verification happens locally; running the
+# full matrix on every push burns minutes for a single-maintainer fork.
 on:
   push:
-    branches: ['**']
     tags: ['v*']
-  pull_request:
   workflow_dispatch:
 
 concurrency:
@@ -120,3 +120,6 @@ jobs:
           name: ${{ github.ref_name }}
           files: app/build/outputs/apk/release/*.apk
           body_path: app/src/main/assets/release_notes.txt
+          # Appends the commit log beneath the hand-written notes, so a release
+          # is never published with an empty description.
+          generate_release_notes: true
