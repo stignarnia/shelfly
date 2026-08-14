@@ -6,6 +6,7 @@ import xyz.stignarnia.data_local.database.dao.ArchiveMoviesDao
 import xyz.stignarnia.data_local.database.dao.ArchiveShowsDao
 import xyz.stignarnia.data_local.database.dao.CustomListsDao
 import xyz.stignarnia.data_local.database.dao.CustomListsItemsDao
+import xyz.stignarnia.data_local.database.dao.SyncTombstonesDao
 import xyz.stignarnia.data_local.database.dao.DiscoverMoviesDao
 import xyz.stignarnia.data_local.database.dao.DiscoverShowsDao
 import xyz.stignarnia.data_local.database.dao.EpisodeTranslationsDao
@@ -45,6 +46,7 @@ import xyz.stignarnia.data_local.database.model.ArchiveMovie
 import xyz.stignarnia.data_local.database.model.ArchiveShow
 import xyz.stignarnia.data_local.database.model.CustomList
 import xyz.stignarnia.data_local.database.model.CustomListItem
+import xyz.stignarnia.data_local.database.model.SyncTombstone
 import xyz.stignarnia.data_local.database.model.DiscoverMovie
 import xyz.stignarnia.data_local.database.model.DiscoverShow
 import xyz.stignarnia.data_local.database.model.Episode
@@ -114,6 +116,7 @@ import xyz.stignarnia.data_local.database.model.WatchlistShow
     EpisodeTranslation::class,
     CustomList::class,
     CustomListItem::class,
+    SyncTombstone::class,
     Rating::class,
     ShowRatings::class,
     MovieRatings::class,
@@ -122,7 +125,7 @@ import xyz.stignarnia.data_local.database.model.WatchlistShow
     MovieCollection::class,
     MovieCollectionItem::class,
   ],
-  exportSchema = false,
+  exportSchema = true,
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -201,4 +204,6 @@ abstract class AppDatabase : RoomDatabase() {
   abstract fun customListsDao(): CustomListsDao
 
   abstract fun customListsItemsDao(): CustomListsItemsDao
+
+  abstract fun syncTombstonesDao(): SyncTombstonesDao
 }

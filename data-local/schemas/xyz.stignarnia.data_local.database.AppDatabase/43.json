@@ -1,0 +1,3268 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 43,
+    "identityHash": "4e8e4aa29e14bc38703263531aea2258",
+    "entities": [
+      {
+        "tableName": "shows",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_tmdb` INTEGER NOT NULL, `id_tvdb` INTEGER NOT NULL DEFAULT -1, `id_imdb` TEXT NOT NULL DEFAULT '', `id_slug` TEXT NOT NULL DEFAULT '', `id_tvrage` INTEGER NOT NULL DEFAULT -1, `title` TEXT NOT NULL DEFAULT '', `year` INTEGER NOT NULL DEFAULT -1, `overview` TEXT NOT NULL DEFAULT '', `first_aired` TEXT NOT NULL DEFAULT '', `runtime` INTEGER NOT NULL DEFAULT -1, `airtime_day` TEXT NOT NULL DEFAULT '', `airtime_time` TEXT NOT NULL DEFAULT '', `airtime_timezone` TEXT NOT NULL DEFAULT '', `certification` TEXT NOT NULL DEFAULT '', `network` TEXT NOT NULL DEFAULT '', `country` TEXT NOT NULL DEFAULT '', `trailer` TEXT NOT NULL DEFAULT '', `homepage` TEXT NOT NULL DEFAULT '', `status` TEXT NOT NULL DEFAULT '', `rating` REAL NOT NULL DEFAULT -1, `votes` INTEGER NOT NULL DEFAULT -1, `comment_count` INTEGER NOT NULL DEFAULT -1, `genres` TEXT NOT NULL DEFAULT '', `aired_episodes` INTEGER NOT NULL DEFAULT -1, `created_at` INTEGER NOT NULL DEFAULT -1, `updated_at` INTEGER NOT NULL DEFAULT -1, PRIMARY KEY(`id_tmdb`))",
+        "fields": [
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTvdb",
+            "columnName": "id_tvdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "idImdb",
+            "columnName": "id_imdb",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "idSlug",
+            "columnName": "id_slug",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "idTvrage",
+            "columnName": "id_tvrage",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "year",
+            "columnName": "year",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "overview",
+            "columnName": "overview",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "firstAired",
+            "columnName": "first_aired",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "runtime",
+            "columnName": "runtime",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "airtimeDay",
+            "columnName": "airtime_day",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "airtimeTime",
+            "columnName": "airtime_time",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "airtimeTimezone",
+            "columnName": "airtime_timezone",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "certification",
+            "columnName": "certification",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "network",
+            "columnName": "network",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "trailer",
+            "columnName": "trailer",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "homepage",
+            "columnName": "homepage",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "rating",
+            "columnName": "rating",
+            "affinity": "REAL",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "votes",
+            "columnName": "votes",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "commentCount",
+            "columnName": "comment_count",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "genres",
+            "columnName": "genres",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "airedEpisodes",
+            "columnName": "aired_episodes",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id_tmdb"
+          ]
+        }
+      },
+      {
+        "tableName": "movies",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_tmdb` INTEGER NOT NULL, `id_imdb` TEXT NOT NULL DEFAULT '', `id_slug` TEXT NOT NULL DEFAULT '', `title` TEXT NOT NULL DEFAULT '', `year` INTEGER NOT NULL DEFAULT -1, `overview` TEXT NOT NULL DEFAULT '', `released` TEXT NOT NULL DEFAULT '', `runtime` INTEGER NOT NULL DEFAULT -1, `country` TEXT NOT NULL DEFAULT '', `trailer` TEXT NOT NULL DEFAULT '', `language` TEXT NOT NULL DEFAULT '', `homepage` TEXT NOT NULL DEFAULT '', `status` TEXT NOT NULL DEFAULT '', `rating` REAL NOT NULL DEFAULT -1, `votes` INTEGER NOT NULL DEFAULT -1, `comment_count` INTEGER NOT NULL DEFAULT -1, `genres` TEXT NOT NULL DEFAULT '', `updated_at` INTEGER NOT NULL DEFAULT -1, `created_at` INTEGER NOT NULL DEFAULT -1, PRIMARY KEY(`id_tmdb`))",
+        "fields": [
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idImdb",
+            "columnName": "id_imdb",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "idSlug",
+            "columnName": "id_slug",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "year",
+            "columnName": "year",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "overview",
+            "columnName": "overview",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "released",
+            "columnName": "released",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "runtime",
+            "columnName": "runtime",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "trailer",
+            "columnName": "trailer",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "homepage",
+            "columnName": "homepage",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "rating",
+            "columnName": "rating",
+            "affinity": "REAL",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "votes",
+            "columnName": "votes",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "commentCount",
+            "columnName": "comment_count",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "genres",
+            "columnName": "genres",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id_tmdb"
+          ]
+        }
+      },
+      {
+        "tableName": "shows_discover",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL DEFAULT -1, `created_at` INTEGER NOT NULL DEFAULT -1, `updated_at` INTEGER NOT NULL DEFAULT -1, FOREIGN KEY(`id_tmdb`) REFERENCES `shows`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_shows_discover_id_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_shows_discover_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "shows",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "movies_discover",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL DEFAULT -1, `created_at` INTEGER NOT NULL DEFAULT -1, `updated_at` INTEGER NOT NULL DEFAULT -1, FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_movies_discover_id_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_movies_discover_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "movies",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "shows_my_shows",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL DEFAULT -1, `created_at` INTEGER NOT NULL DEFAULT -1, `updated_at` INTEGER NOT NULL DEFAULT -1, `last_watched_at` INTEGER, FOREIGN KEY(`id_tmdb`) REFERENCES `shows`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "lastWatchedAt",
+            "columnName": "last_watched_at",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_shows_my_shows_id_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_shows_my_shows_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "shows",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "movies_my_movies",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL DEFAULT -1, `created_at` INTEGER NOT NULL DEFAULT -1, `updated_at` INTEGER NOT NULL DEFAULT -1, FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_movies_my_movies_id_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_movies_my_movies_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "movies",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "shows_see_later",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL DEFAULT -1, `created_at` INTEGER NOT NULL DEFAULT -1, `updated_at` INTEGER NOT NULL DEFAULT -1, FOREIGN KEY(`id_tmdb`) REFERENCES `shows`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_shows_see_later_id_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_shows_see_later_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "shows",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "movies_see_later",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL DEFAULT -1, `created_at` INTEGER NOT NULL DEFAULT -1, `updated_at` INTEGER NOT NULL DEFAULT -1, FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_movies_see_later_id_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_movies_see_later_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "movies",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "shows_archive",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb`) REFERENCES `shows`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_shows_archive_id_tmdb",
+            "unique": true,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_shows_archive_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "shows",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "movies_archive",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_movies_archive_id_tmdb",
+            "unique": true,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_movies_archive_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "movies",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "shows_related",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL DEFAULT -1, `id_tmdb_related_show` INTEGER NOT NULL DEFAULT -1, `updated_at` INTEGER NOT NULL DEFAULT -1, FOREIGN KEY(`id_tmdb_related_show`) REFERENCES `shows`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "idTmdbRelatedShow",
+            "columnName": "id_tmdb_related_show",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_shows_related_id_tmdb_related_show",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb_related_show"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_shows_related_id_tmdb_related_show` ON `${TABLE_NAME}` (`id_tmdb_related_show`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "shows",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb_related_show"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "movies_related",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL DEFAULT -1, `id_tmdb_related_movie` INTEGER NOT NULL DEFAULT -1, `updated_at` INTEGER NOT NULL DEFAULT -1, FOREIGN KEY(`id_tmdb_related_movie`) REFERENCES `movies`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "idTmdbRelatedMovie",
+            "columnName": "id_tmdb_related_movie",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_movies_related_id_tmdb_related_movie",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb_related_movie"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_movies_related_id_tmdb_related_movie` ON `${TABLE_NAME}` (`id_tmdb_related_movie`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "movies",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb_related_movie"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "shows_images",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tvdb` INTEGER NOT NULL DEFAULT -1, `id_tmdb` INTEGER NOT NULL DEFAULT -1, `type` TEXT NOT NULL DEFAULT '', `family` TEXT NOT NULL DEFAULT '', `file_url` TEXT NOT NULL DEFAULT '', `thumbnail_url` TEXT NOT NULL DEFAULT '', `source` TEXT NOT NULL DEFAULT 'tvdb')",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTvdb",
+            "columnName": "id_tvdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "family",
+            "columnName": "family",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "fileUrl",
+            "columnName": "file_url",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "thumbnailUrl",
+            "columnName": "thumbnail_url",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "source",
+            "columnName": "source",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'tvdb'"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_shows_images_id_tmdb_type_family",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb",
+              "type",
+              "family"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_shows_images_id_tmdb_type_family` ON `${TABLE_NAME}` (`id_tmdb`, `type`, `family`)"
+          }
+        ]
+      },
+      {
+        "tableName": "movies_images",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL DEFAULT -1, `type` TEXT NOT NULL DEFAULT '', `file_url` TEXT NOT NULL DEFAULT '', `source` TEXT NOT NULL DEFAULT 'tmdb')",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "fileUrl",
+            "columnName": "file_url",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "source",
+            "columnName": "source",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'tmdb'"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_movies_images_id_tmdb_type",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb",
+              "type"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_movies_images_id_tmdb_type` ON `${TABLE_NAME}` (`id_tmdb`, `type`)"
+          }
+        ]
+      },
+      {
+        "tableName": "seasons",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_tmdb` INTEGER NOT NULL, `id_show_tmdb` INTEGER NOT NULL, `season_number` INTEGER NOT NULL, `season_title` TEXT NOT NULL, `season_overview` TEXT NOT NULL, `season_first_aired` INTEGER, `episodes_count` INTEGER NOT NULL, `episodes_aired_count` INTEGER NOT NULL, `rating` REAL, `is_watched` INTEGER NOT NULL, PRIMARY KEY(`id_tmdb`))",
+        "fields": [
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idShowTmdb",
+            "columnName": "id_show_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "seasonNumber",
+            "columnName": "season_number",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "seasonTitle",
+            "columnName": "season_title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "seasonOverview",
+            "columnName": "season_overview",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "seasonFirstAired",
+            "columnName": "season_first_aired",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "episodesCount",
+            "columnName": "episodes_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "episodesAiredCount",
+            "columnName": "episodes_aired_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rating",
+            "columnName": "rating",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "isWatched",
+            "columnName": "is_watched",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id_tmdb"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_seasons_id_show_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_show_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_seasons_id_show_tmdb` ON `${TABLE_NAME}` (`id_show_tmdb`)"
+          }
+        ]
+      },
+      {
+        "tableName": "people",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_tmdb` INTEGER NOT NULL, `id_imdb` TEXT, `name` TEXT NOT NULL, `department` TEXT NOT NULL, `biography` TEXT, `biography_translation` TEXT, `birthday` TEXT, `birthplace` TEXT, `character` TEXT, `episodes_count` INTEGER, `job` TEXT, `deathday` TEXT, `image_path` TEXT, `homepage` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, `details_updated_at` INTEGER, PRIMARY KEY(`id_tmdb`))",
+        "fields": [
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idImdb",
+            "columnName": "id_imdb",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "department",
+            "columnName": "department",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "biography",
+            "columnName": "biography",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "biographyTranslation",
+            "columnName": "biography_translation",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "birthday",
+            "columnName": "birthday",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "birthplace",
+            "columnName": "birthplace",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "character",
+            "columnName": "character",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "episodesCount",
+            "columnName": "episodes_count",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "job",
+            "columnName": "job",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "deathday",
+            "columnName": "deathday",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image_path",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "homepage",
+            "columnName": "homepage",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "detailsUpdatedAt",
+            "columnName": "details_updated_at",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id_tmdb"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_people_id_tmdb",
+            "unique": true,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_people_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ]
+      },
+      {
+        "tableName": "people_shows_movies",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb_person` INTEGER NOT NULL, `mode` TEXT NOT NULL, `department` TEXT NOT NULL, `character` TEXT, `job` TEXT, `episodes_count` INTEGER NOT NULL, `id_tmdb_show` INTEGER, `id_tmdb_movie` INTEGER, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb_person`) REFERENCES `people`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdbPerson",
+            "columnName": "id_tmdb_person",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mode",
+            "columnName": "mode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "department",
+            "columnName": "department",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "character",
+            "columnName": "character",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "job",
+            "columnName": "job",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "episodesCount",
+            "columnName": "episodes_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdbShow",
+            "columnName": "id_tmdb_show",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "idTmdbMovie",
+            "columnName": "id_tmdb_movie",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_people_shows_movies_id_tmdb_person",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb_person"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_people_shows_movies_id_tmdb_person` ON `${TABLE_NAME}` (`id_tmdb_person`)"
+          },
+          {
+            "name": "index_people_shows_movies_id_tmdb_show_mode",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb_show",
+              "mode"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_people_shows_movies_id_tmdb_show_mode` ON `${TABLE_NAME}` (`id_tmdb_show`, `mode`)"
+          },
+          {
+            "name": "index_people_shows_movies_id_tmdb_movie_mode",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb_movie",
+              "mode"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_people_shows_movies_id_tmdb_movie_mode` ON `${TABLE_NAME}` (`id_tmdb_movie`, `mode`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "people",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb_person"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "people_credits",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb_person` INTEGER NOT NULL, `id_tmdb_show` INTEGER, `id_tmdb_movie` INTEGER, `type` TEXT NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb_show`) REFERENCES `shows`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`id_tmdb_movie`) REFERENCES `movies`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdbPerson",
+            "columnName": "id_tmdb_person",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdbShow",
+            "columnName": "id_tmdb_show",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "idTmdbMovie",
+            "columnName": "id_tmdb_movie",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_people_credits_id_tmdb_person",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb_person"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_people_credits_id_tmdb_person` ON `${TABLE_NAME}` (`id_tmdb_person`)"
+          },
+          {
+            "name": "index_people_credits_id_tmdb_show",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb_show"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_people_credits_id_tmdb_show` ON `${TABLE_NAME}` (`id_tmdb_show`)"
+          },
+          {
+            "name": "index_people_credits_id_tmdb_movie",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb_movie"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_people_credits_id_tmdb_movie` ON `${TABLE_NAME}` (`id_tmdb_movie`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "shows",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb_show"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          },
+          {
+            "table": "movies",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb_movie"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "people_images",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `file_path` TEXT NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "filePath",
+            "columnName": "file_path",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_people_images_id_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_people_images_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ]
+      },
+      {
+        "tableName": "episodes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_tmdb` INTEGER NOT NULL, `id_season` INTEGER NOT NULL, `id_show_tmdb` INTEGER NOT NULL, `id_show_tvdb` INTEGER NOT NULL, `id_show_imdb` TEXT NOT NULL, `season_number` INTEGER NOT NULL, `episode_number` INTEGER NOT NULL, `episode_number_abs` INTEGER, `episode_overview` TEXT NOT NULL, `episode_title` TEXT NOT NULL, `first_aired` INTEGER, `comments_count` INTEGER NOT NULL, `rating` REAL NOT NULL, `runtime` INTEGER NOT NULL, `votes_count` INTEGER NOT NULL, `is_watched` INTEGER NOT NULL, `last_exported_at` INTEGER, `last_watched_at` INTEGER, PRIMARY KEY(`id_tmdb`), FOREIGN KEY(`id_season`) REFERENCES `seasons`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idSeason",
+            "columnName": "id_season",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idShowTmdb",
+            "columnName": "id_show_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idShowTvdb",
+            "columnName": "id_show_tvdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idShowImdb",
+            "columnName": "id_show_imdb",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "seasonNumber",
+            "columnName": "season_number",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "episodeNumber",
+            "columnName": "episode_number",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "episodeNumberAbs",
+            "columnName": "episode_number_abs",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "episodeOverview",
+            "columnName": "episode_overview",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "episode_title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstAired",
+            "columnName": "first_aired",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "commentsCount",
+            "columnName": "comments_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rating",
+            "columnName": "rating",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "runtime",
+            "columnName": "runtime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "votesCount",
+            "columnName": "votes_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isWatched",
+            "columnName": "is_watched",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastExportedAt",
+            "columnName": "last_exported_at",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "lastWatchedAt",
+            "columnName": "last_watched_at",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id_tmdb"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_episodes_id_season",
+            "unique": false,
+            "columnNames": [
+              "id_season"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_episodes_id_season` ON `${TABLE_NAME}` (`id_season`)"
+          },
+          {
+            "name": "index_episodes_id_show_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_show_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_episodes_id_show_tmdb` ON `${TABLE_NAME}` (`id_show_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "seasons",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_season"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "settings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `is_initial_run` INTEGER NOT NULL DEFAULT 0, `push_notifications_enabled` INTEGER NOT NULL DEFAULT 1, `episodes_notifications_enabled` INTEGER NOT NULL DEFAULT 1, `episodes_notifications_delay` INTEGER NOT NULL DEFAULT 0, `my_shows_recent_amount` INTEGER NOT NULL DEFAULT 6, `my_shows_running_sort_by` TEXT NOT NULL DEFAULT 'NAME', `my_shows_incoming_sort_by` TEXT NOT NULL DEFAULT 'NAME', `my_shows_ended_sort_by` TEXT NOT NULL DEFAULT 'NAME', `my_shows_all_sort_by` TEXT NOT NULL DEFAULT 'NAME', `my_shows_running_is_collapsed` INTEGER NOT NULL DEFAULT 0, `my_shows_incoming_is_collapsed` INTEGER NOT NULL DEFAULT 0, `my_shows_ended_is_collapsed` INTEGER NOT NULL DEFAULT 0, `my_shows_running_is_enabled` INTEGER NOT NULL DEFAULT 1, `my_shows_incoming_is_enabled` INTEGER NOT NULL DEFAULT 1, `my_shows_ended_is_enabled` INTEGER NOT NULL DEFAULT 1, `my_shows_recent_is_enabled` INTEGER NOT NULL DEFAULT 1, `see_later_shows_sort_by` TEXT NOT NULL DEFAULT 'NAME', `show_anticipated_shows` INTEGER NOT NULL DEFAULT 1, `discover_filter_genres` TEXT NOT NULL DEFAULT '', `discover_filter_networks` TEXT NOT NULL DEFAULT '', `discover_filter_feed` TEXT NOT NULL DEFAULT 'HOT', `watchlist_sort_by` TEXT NOT NULL DEFAULT 'NAME', `archive_shows_sort_by` TEXT NOT NULL DEFAULT 'NAME', `archive_shows_include_statistics` INTEGER NOT NULL DEFAULT 1, `special_seasons_enabled` INTEGER NOT NULL DEFAULT 0, `show_anticipated_movies` INTEGER NOT NULL DEFAULT 0, `discover_movies_filter_genres` TEXT NOT NULL DEFAULT '', `discover_movies_filter_feed` TEXT NOT NULL DEFAULT 'HOT', `my_movies_all_sort_by` TEXT NOT NULL DEFAULT 'NAME', `see_later_movies_sort_by` TEXT NOT NULL DEFAULT 'NAME', `progress_movies_sort_by` TEXT NOT NULL DEFAULT 'NAME', `show_collection_shows` INTEGER NOT NULL DEFAULT 1, `show_collection_movies` INTEGER NOT NULL DEFAULT 1, `widgets_show_label` INTEGER NOT NULL DEFAULT 1, `my_movies_recent_is_enabled` INTEGER NOT NULL DEFAULT 1, `quick_rate_enabled` INTEGER NOT NULL DEFAULT 0, `lists_sort_by` TEXT NOT NULL DEFAULT 'DATE_UPDATED', `progress_upcoming_enabled` INTEGER NOT NULL DEFAULT 1, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isInitialRun",
+            "columnName": "is_initial_run",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "pushNotificationsEnabled",
+            "columnName": "push_notifications_enabled",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "episodesNotificationsEnabled",
+            "columnName": "episodes_notifications_enabled",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "episodesNotificationsDelay",
+            "columnName": "episodes_notifications_delay",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "myShowsRecentsAmount",
+            "columnName": "my_shows_recent_amount",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "6"
+          },
+          {
+            "fieldPath": "myShowsRunningSortBy",
+            "columnName": "my_shows_running_sort_by",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'NAME'"
+          },
+          {
+            "fieldPath": "myShowsIncomingSortBy",
+            "columnName": "my_shows_incoming_sort_by",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'NAME'"
+          },
+          {
+            "fieldPath": "myShowsEndedSortBy",
+            "columnName": "my_shows_ended_sort_by",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'NAME'"
+          },
+          {
+            "fieldPath": "myShowsAllSortBy",
+            "columnName": "my_shows_all_sort_by",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'NAME'"
+          },
+          {
+            "fieldPath": "myShowsRunningIsCollapsed",
+            "columnName": "my_shows_running_is_collapsed",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "myShowsIncomingIsCollapsed",
+            "columnName": "my_shows_incoming_is_collapsed",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "myShowsEndedIsCollapsed",
+            "columnName": "my_shows_ended_is_collapsed",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "myShowsRunningIsEnabled",
+            "columnName": "my_shows_running_is_enabled",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "myShowsIncomingIsEnabled",
+            "columnName": "my_shows_incoming_is_enabled",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "myShowsEndedIsEnabled",
+            "columnName": "my_shows_ended_is_enabled",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "myShowsRecentIsEnabled",
+            "columnName": "my_shows_recent_is_enabled",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "seeLaterShowsSortBy",
+            "columnName": "see_later_shows_sort_by",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'NAME'"
+          },
+          {
+            "fieldPath": "showAnticipatedShows",
+            "columnName": "show_anticipated_shows",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "discoverFilterGenres",
+            "columnName": "discover_filter_genres",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "discoverFilterNetworks",
+            "columnName": "discover_filter_networks",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "discoverFilterFeed",
+            "columnName": "discover_filter_feed",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'HOT'"
+          },
+          {
+            "fieldPath": "watchlistSortBy",
+            "columnName": "watchlist_sort_by",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'NAME'"
+          },
+          {
+            "fieldPath": "archiveShowsSortBy",
+            "columnName": "archive_shows_sort_by",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'NAME'"
+          },
+          {
+            "fieldPath": "archiveShowsIncludeStatistics",
+            "columnName": "archive_shows_include_statistics",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "specialSeasonsEnabled",
+            "columnName": "special_seasons_enabled",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "showAnticipatedMovies",
+            "columnName": "show_anticipated_movies",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "discoverMoviesFilterGenres",
+            "columnName": "discover_movies_filter_genres",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "discoverMoviesFilterFeed",
+            "columnName": "discover_movies_filter_feed",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'HOT'"
+          },
+          {
+            "fieldPath": "myMoviesAllSortBy",
+            "columnName": "my_movies_all_sort_by",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'NAME'"
+          },
+          {
+            "fieldPath": "seeLaterMoviesSortBy",
+            "columnName": "see_later_movies_sort_by",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'NAME'"
+          },
+          {
+            "fieldPath": "progressMoviesSortBy",
+            "columnName": "progress_movies_sort_by",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'NAME'"
+          },
+          {
+            "fieldPath": "showCollectionShows",
+            "columnName": "show_collection_shows",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "showCollectionMovies",
+            "columnName": "show_collection_movies",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "widgetsShowLabel",
+            "columnName": "widgets_show_label",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "myMoviesRecentIsEnabled",
+            "columnName": "my_movies_recent_is_enabled",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "quickRateEnabled",
+            "columnName": "quick_rate_enabled",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "listsSortBy",
+            "columnName": "lists_sort_by",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'DATE_UPDATED'"
+          },
+          {
+            "fieldPath": "progressUpcomingEnabled",
+            "columnName": "progress_upcoming_enabled",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "recent_searches",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `text` TEXT NOT NULL DEFAULT '', `created_at` INTEGER NOT NULL DEFAULT -1, `updated_at` INTEGER NOT NULL DEFAULT -1)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "sync_episodes_log",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_show_tmdb` INTEGER NOT NULL DEFAULT -1, `synced_at` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`id_show_tmdb`))",
+        "fields": [
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_show_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "syncedAt",
+            "columnName": "synced_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id_show_tmdb"
+          ]
+        }
+      },
+      {
+        "tableName": "sync_movies_log",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_movie_tmdb` INTEGER NOT NULL DEFAULT -1, `synced_at` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`id_movie_tmdb`))",
+        "fields": [
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_movie_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-1"
+          },
+          {
+            "fieldPath": "syncedAt",
+            "columnName": "synced_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id_movie_tmdb"
+          ]
+        }
+      },
+      {
+        "tableName": "sync_translations_log",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_show_tmdb` INTEGER NOT NULL, `synced_at` INTEGER NOT NULL, PRIMARY KEY(`id_show_tmdb`))",
+        "fields": [
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_show_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "syncedAt",
+            "columnName": "synced_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id_show_tmdb"
+          ]
+        }
+      },
+      {
+        "tableName": "sync_movies_translations_log",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_movie_tmdb` INTEGER NOT NULL, `synced_at` INTEGER NOT NULL, PRIMARY KEY(`id_movie_tmdb`))",
+        "fields": [
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_movie_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "syncedAt",
+            "columnName": "synced_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id_movie_tmdb"
+          ]
+        }
+      },
+      {
+        "tableName": "shows_translations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `title` TEXT NOT NULL, `language` TEXT NOT NULL, `overview` TEXT NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb`) REFERENCES `shows`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "overview",
+            "columnName": "overview",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_shows_translations_id_tmdb",
+            "unique": true,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_shows_translations_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "shows",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "movies_translations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `title` TEXT NOT NULL, `language` TEXT NOT NULL, `overview` TEXT NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "overview",
+            "columnName": "overview",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_movies_translations_id_tmdb",
+            "unique": true,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_movies_translations_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "movies",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "episodes_translations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `id_tmdb_show` INTEGER NOT NULL, `title` TEXT NOT NULL, `language` TEXT NOT NULL, `overview` TEXT NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb_show`) REFERENCES `shows`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdbShow",
+            "columnName": "id_tmdb_show",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "overview",
+            "columnName": "overview",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_episodes_translations_id_tmdb",
+            "unique": true,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_episodes_translations_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          },
+          {
+            "name": "index_episodes_translations_id_tmdb_show",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb_show"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_episodes_translations_id_tmdb_show` ON `${TABLE_NAME}` (`id_tmdb_show`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "shows",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb_show"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "custom_lists",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER, `id_slug` TEXT NOT NULL, `name` TEXT NOT NULL, `description` TEXT, `privacy` TEXT NOT NULL, `display_numbers` INTEGER NOT NULL, `allow_comments` INTEGER NOT NULL, `sort_by` TEXT NOT NULL, `sort_how` TEXT NOT NULL, `sort_by_local` TEXT NOT NULL, `sort_how_local` TEXT NOT NULL, `filter_type_local` TEXT NOT NULL, `item_count` INTEGER NOT NULL, `comment_count` INTEGER NOT NULL, `likes` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "idSlug",
+            "columnName": "id_slug",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "privacy",
+            "columnName": "privacy",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "displayNumbers",
+            "columnName": "display_numbers",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "allowComments",
+            "columnName": "allow_comments",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sortBy",
+            "columnName": "sort_by",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sortHow",
+            "columnName": "sort_how",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sortByLocal",
+            "columnName": "sort_by_local",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sortHowLocal",
+            "columnName": "sort_how_local",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "filterTypeLocal",
+            "columnName": "filter_type_local",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemCount",
+            "columnName": "item_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "commentCount",
+            "columnName": "comment_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "likes",
+            "columnName": "likes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_custom_lists_id_tmdb",
+            "unique": true,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_custom_lists_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ]
+      },
+      {
+        "tableName": "custom_list_item",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_list` INTEGER NOT NULL, `id_tmdb` INTEGER NOT NULL, `type` TEXT NOT NULL, `rank` INTEGER NOT NULL, `listed_at` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_list`) REFERENCES `custom_lists`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idList",
+            "columnName": "id_list",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rank",
+            "columnName": "rank",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "listedAt",
+            "columnName": "listed_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_custom_list_item_id_list",
+            "unique": false,
+            "columnNames": [
+              "id_list"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_custom_list_item_id_list` ON `${TABLE_NAME}` (`id_list`)"
+          },
+          {
+            "name": "index_custom_list_item_id_tmdb_type",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb",
+              "type"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_custom_list_item_id_tmdb_type` ON `${TABLE_NAME}` (`id_tmdb`, `type`)"
+          },
+          {
+            "name": "index_custom_list_item_id_list_id_tmdb_type",
+            "unique": true,
+            "columnNames": [
+              "id_list",
+              "id_tmdb",
+              "type"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_custom_list_item_id_list_id_tmdb_type` ON `${TABLE_NAME}` (`id_list`, `id_tmdb`, `type`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "custom_lists",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_list"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "sync_tombstones",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entity_type` TEXT NOT NULL, `entity_key` TEXT NOT NULL, `deleted_at` INTEGER NOT NULL, PRIMARY KEY(`entity_type`, `entity_key`))",
+        "fields": [
+          {
+            "fieldPath": "entityType",
+            "columnName": "entity_type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entityKey",
+            "columnName": "entity_key",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deletedAt",
+            "columnName": "deleted_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "entity_type",
+            "entity_key"
+          ]
+        }
+      },
+      {
+        "tableName": "ratings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_tmdb` INTEGER NOT NULL, `type` TEXT NOT NULL, `rating` INTEGER NOT NULL, `season_number` INTEGER, `episode_number` INTEGER, `rated_at` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, PRIMARY KEY(`id_tmdb`, `type`))",
+        "fields": [
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rating",
+            "columnName": "rating",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "seasonNumber",
+            "columnName": "season_number",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "episodeNumber",
+            "columnName": "episode_number",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "ratedAt",
+            "columnName": "rated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id_tmdb",
+            "type"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_ratings_id_tmdb_type",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb",
+              "type"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ratings_id_tmdb_type` ON `${TABLE_NAME}` (`id_tmdb`, `type`)"
+          }
+        ]
+      },
+      {
+        "tableName": "shows_ratings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `tmdb` TEXT, `imdb` TEXT, `metascore` TEXT, `rotten_tomatoes` TEXT, `rotten_tomatoes_url` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb`) REFERENCES `shows`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tmdb",
+            "columnName": "tmdb",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "imdb",
+            "columnName": "imdb",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "metascore",
+            "columnName": "metascore",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "rottenTomatoes",
+            "columnName": "rotten_tomatoes",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "rottenTomatoesUrl",
+            "columnName": "rotten_tomatoes_url",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_shows_ratings_id_tmdb",
+            "unique": true,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_shows_ratings_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "shows",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "movies_ratings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `tmdb` TEXT, `imdb` TEXT, `metascore` TEXT, `rotten_tomatoes` TEXT, `rotten_tomatoes_url` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tmdb",
+            "columnName": "tmdb",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "imdb",
+            "columnName": "imdb",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "metascore",
+            "columnName": "metascore",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "rottenTomatoes",
+            "columnName": "rotten_tomatoes",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "rottenTomatoesUrl",
+            "columnName": "rotten_tomatoes_url",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_movies_ratings_id_tmdb",
+            "unique": true,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_movies_ratings_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "movies",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "shows_streamings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `type` TEXT, `provider_id` INTEGER, `provider_name` TEXT, `display_priority` INTEGER, `logo_path` TEXT, `link` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb`) REFERENCES `shows`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "providerId",
+            "columnName": "provider_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "providerName",
+            "columnName": "provider_name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "displayPriority",
+            "columnName": "display_priority",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "logoPath",
+            "columnName": "logo_path",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "link",
+            "columnName": "link",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_shows_streamings_id_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_shows_streamings_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "shows",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "movies_streamings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `type` TEXT, `provider_id` INTEGER, `provider_name` TEXT, `display_priority` INTEGER, `logo_path` TEXT, `link` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "providerId",
+            "columnName": "provider_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "providerName",
+            "columnName": "provider_name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "displayPriority",
+            "columnName": "display_priority",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "logoPath",
+            "columnName": "logo_path",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "link",
+            "columnName": "link",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_movies_streamings_id_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_movies_streamings_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "movies",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "movies_collections",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `id_tmdb_movie` INTEGER NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `item_count` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb_movie`) REFERENCES `movies`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdbMovie",
+            "columnName": "id_tmdb_movie",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemCount",
+            "columnName": "item_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_movies_collections_id_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_movies_collections_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          },
+          {
+            "name": "index_movies_collections_id_tmdb_movie",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb_movie"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_movies_collections_id_tmdb_movie` ON `${TABLE_NAME}` (`id_tmdb_movie`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "movies",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb_movie"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "movies_collections_items",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tmdb` INTEGER NOT NULL, `id_tmdb_collection` INTEGER NOT NULL, `rank` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, FOREIGN KEY(`id_tmdb`) REFERENCES `movies`(`id_tmdb`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdb",
+            "columnName": "id_tmdb",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTmdbCollection",
+            "columnName": "id_tmdb_collection",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rank",
+            "columnName": "rank",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_movies_collections_items_id_tmdb",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_movies_collections_items_id_tmdb` ON `${TABLE_NAME}` (`id_tmdb`)"
+          },
+          {
+            "name": "index_movies_collections_items_id_tmdb_collection",
+            "unique": false,
+            "columnNames": [
+              "id_tmdb_collection"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_movies_collections_items_id_tmdb_collection` ON `${TABLE_NAME}` (`id_tmdb_collection`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "movies",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tmdb"
+            ],
+            "referencedColumns": [
+              "id_tmdb"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4e8e4aa29e14bc38703263531aea2258')"
+    ]
+  }
+}

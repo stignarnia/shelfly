@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import xyz.stignarnia.data_local.database.AppDatabase
 import xyz.stignarnia.data_local.database.migrations.DATABASE_NAME
+import xyz.stignarnia.data_local.database.migrations.MIGRATION_42_43
 import xyz.stignarnia.data_local.utilities.TransactionsProvider
 import dagger.Module
 import dagger.Provides
@@ -36,6 +37,9 @@ class StorageModule {
         // makes the upstream migration chain for versions 1 to 41 unreachable,
         // so it is gone.
         fallbackToDestructiveMigration(dropAllTables = true)
+        // Everything from 42 onwards migrates properly - there is user data
+        // worth keeping now.
+        addMigrations(MIGRATION_42_43)
       }.build()
   }
 

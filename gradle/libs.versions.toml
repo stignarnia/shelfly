@@ -58,6 +58,7 @@ android-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-k
 android-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidRoom" }
 android-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidRoom" }
 android-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidRoom" }
+android-room-plugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "androidRoom" }
 
 android-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidLifecycle" }
 android-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidLifecycle" }

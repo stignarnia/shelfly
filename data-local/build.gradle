@@ -1,7 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'androidx.room'
 apply from: '../versions.gradle'
+
+room {
+  // Room writes the schema it expects here, so hand-written migrations can be
+  // checked against it rather than discovered to be wrong at runtime.
+  schemaDirectory("$projectDir/schemas")
+}
 
 android {
   kotlinOptions { jvmTarget = "21" }

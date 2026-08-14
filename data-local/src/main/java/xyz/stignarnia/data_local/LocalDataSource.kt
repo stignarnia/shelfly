@@ -9,6 +9,7 @@ import xyz.stignarnia.data_local.sources.DiscoverShowsLocalDataSource
 import xyz.stignarnia.data_local.sources.EpisodeTranslationsLocalDataSource
 import xyz.stignarnia.data_local.sources.EpisodesLocalDataSource
 import xyz.stignarnia.data_local.sources.EpisodesSyncLogLocalDataSource
+import xyz.stignarnia.data_local.sources.SyncTombstonesLocalDataSource
 import xyz.stignarnia.data_local.sources.MovieImagesLocalDataSource
 import xyz.stignarnia.data_local.sources.MovieRatingsLocalDataSource
 import xyz.stignarnia.data_local.sources.MovieStreamingsLocalDataSource
@@ -53,6 +54,7 @@ interface LocalDataSource {
   val discoverShows: DiscoverShowsLocalDataSource
   val episodes: EpisodesLocalDataSource
   val episodesSyncLog: EpisodesSyncLogLocalDataSource
+  val syncTombstones: SyncTombstonesLocalDataSource
   val episodesTranslations: EpisodeTranslationsLocalDataSource
   val movieImages: MovieImagesLocalDataSource
   val movieRatings: MovieRatingsLocalDataSource
@@ -93,6 +95,7 @@ internal class MainLocalDataSource @Inject constructor(
   override val discoverShows: DiscoverShowsLocalDataSource,
   override val episodes: EpisodesLocalDataSource,
   override val episodesSyncLog: EpisodesSyncLogLocalDataSource,
+  override val syncTombstones: SyncTombstonesLocalDataSource,
   override val episodesTranslations: EpisodeTranslationsLocalDataSource,
   override val movieImages: MovieImagesLocalDataSource,
   override val movieRatings: MovieRatingsLocalDataSource,

@@ -10,6 +10,7 @@ import xyz.stignarnia.data_local.sources.DiscoverShowsLocalDataSource
 import xyz.stignarnia.data_local.sources.EpisodeTranslationsLocalDataSource
 import xyz.stignarnia.data_local.sources.EpisodesLocalDataSource
 import xyz.stignarnia.data_local.sources.EpisodesSyncLogLocalDataSource
+import xyz.stignarnia.data_local.sources.SyncTombstonesLocalDataSource
 import xyz.stignarnia.data_local.sources.MovieCollectionsItemsLocalDataSource
 import xyz.stignarnia.data_local.sources.MovieCollectionsLocalDataSource
 import xyz.stignarnia.data_local.sources.MovieImagesLocalDataSource
@@ -91,6 +92,11 @@ class SourcesModule {
   @Singleton
   internal fun providesEpisodesSyncLog(database: AppDatabase): EpisodesSyncLogLocalDataSource =
     database.episodesSyncLogDao()
+
+  @Provides
+  @Singleton
+  internal fun providesSyncTombstones(database: AppDatabase): SyncTombstonesLocalDataSource =
+    database.syncTombstonesDao()
 
   @Provides
   @Singleton
