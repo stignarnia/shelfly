@@ -4,6 +4,12 @@
 
 Shelfly is a fork of [Showly](https://github.com/trakt/showly) (a TV shows and movies tracker for Android) that syncs to infrastructure you control.
 
+## Install
+
+[<img src="https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" height="54">](https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22xyz.stignarnia.shelfly%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2Fstignarnia%2Fshelfly%22%2C%22author%22%3A%22stignarnia%22%2C%22name%22%3A%22Shelfly%22%2C%22preferredApkIndex%22%3A0%2C%22additionalSettings%22%3A%22%7B%5C%22includePrereleases%5C%22%3Afalse%2C%5C%22fallbackToOlderReleases%5C%22%3Atrue%2C%5C%22verifyLatestTag%5C%22%3Afalse%2C%5C%22autoApkFilterByArch%5C%22%3Atrue%2C%5C%22appName%5C%22%3A%5C%22Shelfly%5C%22%7D%22%7D)
+
+Obtainium tracks this repository's GitHub releases and updates the app as new ones are published. You can also grab the APK straight from the [latest release](https://github.com/stignarnia/shelfly/releases/latest).
+
 ## Why this exists
 
 Showly kept your watch history on Trakt, but they now charge for API access, so downloading your history via an automatic script becomes paid. You can still do so manually via Showly's export feature but I didn't like the move and decided to fix it myself.
