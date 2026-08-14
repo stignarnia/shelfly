@@ -151,15 +151,31 @@
         android:layout_marginStart="@dimen/spaceBig"
         android:layout_marginTop="@dimen/spaceNormal"
         android:layout_marginEnd="@dimen/spaceBig"
-        android:layout_marginBottom="@dimen/spaceNormal"
         android:gravity="center"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/exportScheduleButton"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:text="Last Backup: 23 Feb 2020 17:23"
+        />
+
+    <TextView
+        android:id="@+id/syncStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spaceBig"
+        android:layout_marginTop="@dimen/spaceSmall"
+        android:layout_marginEnd="@dimen/spaceBig"
+        android:layout_marginBottom="@dimen/spaceNormal"
+        android:gravity="center"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lastExportTimestamp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Last sync: 23 Feb 2020 17:23 · 2 other devices"
         />
 
     <ProgressBar

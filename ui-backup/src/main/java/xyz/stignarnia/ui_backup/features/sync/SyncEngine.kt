@@ -32,13 +32,34 @@ class SyncEngine @Inject internal constructor(
 
   data class Result(
     val deviceId: String,
-    val peers: Int,
+    val peerIds: Set<String>,
     val syncedAt: Long,
-  )
+  ) {
+    val peers: Int get() = peerIds.size
+  }
 
-  suspend fun sync(credentials: WebDavCredentials): Result {
+  /**
+   * Runs a cycle, recording the outcome either way.
+   *
+   * A failure is written down rather than only thrown, because the screen has
+   * to be able to say that syncing is broken. Reporting the last success alone
+   * would leave a device that has been failing for a week looking merely idle.
+   */
+  suspend fun sync(credentials: WebDavCredentials): Result =
+    try {
+      runCycle(credentials).also {
+        settingsSyncRepository.lastError = null
+        settingsSyncRepository.lastPeers = it.peerIds
+      }
+    } catch (error: Throwable) {
+      settingsSyncRepository.lastError = error.message ?: error::class.java.simpleName
+      throw error
+    }
+
+  private suspend fun runCycle(credentials: WebDavCredentials): Result {
     val deviceId = settingsSyncRepository.deviceId
     val startedAt = nowUtcMillis()
+    settingsSyncRepository.lastAttemptAt = startedAt
     Timber.i("Sync started as device $deviceId")
 
     val local = exportWorker.run()
@@ -95,6 +116,10 @@ class SyncEngine @Inject internal constructor(
     settingsSyncRepository.lastSyncedAt = syncedAt
 
     Timber.i("Sync finished against ${peers.size} peer(s)")
-    return Result(deviceId = deviceId, peers = peers.size, syncedAt = syncedAt)
+    return Result(
+      deviceId = deviceId,
+      peerIds = peers.mapTo(mutableSetOf()) { it.deviceId },
+      syncedAt = syncedAt,
+    )
   }
 }

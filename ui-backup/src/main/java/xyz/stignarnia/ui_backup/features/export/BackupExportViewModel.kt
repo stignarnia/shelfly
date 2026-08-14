@@ -13,6 +13,7 @@ import xyz.stignarnia.ui_backup.features.export.model.BackupExportSchedule
 import xyz.stignarnia.ui_backup.features.export.workers.BackupExportScheduleWorker
 import xyz.stignarnia.ui_backup.model.BackupScheme
 import xyz.stignarnia.ui_model.BackupTarget
+import xyz.stignarnia.repository.settings.SettingsSyncRepository
 import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.ui_base.dates.DateFormatProvider
 import xyz.stignarnia.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
@@ -34,6 +35,7 @@ class BackupExportViewModel @Inject constructor(
   private val createBackupSchemeFromJsonUseCase: CreateBackupSchemeFromJsonUseCase,
   private val workManager: WorkManager,
   private val webDavRepository: SettingsWebDavRepository,
+  private val syncRepository: SettingsSyncRepository,
   dateFormatProvider: DateFormatProvider,
 ) : ViewModel() {
 
@@ -43,6 +45,7 @@ class BackupExportViewModel @Inject constructor(
     ),
     lastBackupExportTimestamp =
       miscPreferences.getLong(BackupExportScheduleWorker.KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP, 0),
+    syncStatus = null,
     dateFormat = dateFormatProvider.loadFullHourFormat(),
   )
 
@@ -51,6 +54,7 @@ class BackupExportViewModel @Inject constructor(
   private val errorState = MutableStateFlow(initialState.error)
   private val backupExportScheduleState = MutableStateFlow(initialState.backupExportSchedule)
   private val lastBackupExportTimestampState = MutableStateFlow(initialState.lastBackupExportTimestamp)
+  private val syncStatusState = MutableStateFlow(initialState.syncStatus)
   private val dateFormatState = MutableStateFlow(initialState.dateFormat)
 
   /**
@@ -115,6 +119,24 @@ class BackupExportViewModel @Inject constructor(
 
   /** Whether scheduled backups go to WebDAV, in which case no folder is needed. */
   fun isWebDavTarget() = webDavRepository.backupTarget == BackupTarget.WEBDAV
+
+  /**
+   * Re-reads how syncing is going. Called on every resume because the work
+   * runs in the background, so the screen would otherwise show whatever was
+   * true when it was opened.
+   */
+  fun refreshSyncStatus() {
+    if (!isWebDavTarget()) {
+      syncStatusState.value = null
+      return
+    }
+    syncStatusState.value = SyncStatus(
+      deviceId = syncRepository.deviceId,
+      lastSyncedAt = syncRepository.lastSyncedAt,
+      peers = syncRepository.lastPeers,
+      error = syncRepository.lastError,
+    )
+  }
 
   /**
    * Set up an automatic export schedule against the WebDAV server. The
@@ -184,15 +206,17 @@ class BackupExportViewModel @Inject constructor(
     errorState,
     backupExportScheduleState,
     lastBackupExportTimestampState,
+    syncStatusState,
     dateFormatState,
-  ) { s1, s2, s3, s4, s5, s6 ->
+  ) { s1, s2, s3, s4, s5, s6, s7 ->
     BackupExportUiState(
       isLoading = s1,
       exportContent = s2,
       error = s3,
       backupExportSchedule = s4,
       lastBackupExportTimestamp = s5,
-      dateFormat = s6,
+      syncStatus = s6,
+      dateFormat = s7,
     )
   }.stateIn(
     scope = viewModelScope,

@@ -43,6 +43,9 @@ class SyncEngineTest {
     every { settingsSyncRepository.deviceId } returns DEVICE
     every { settingsSyncRepository.lastSyncedAt } returns PREVIOUS_SYNC
     every { settingsSyncRepository.lastSyncedAt = any() } returns Unit
+    every { settingsSyncRepository.lastAttemptAt = any() } returns Unit
+    every { settingsSyncRepository.lastError = any() } returns Unit
+    every { settingsSyncRepository.lastPeers = any() } returns Unit
 
     coEvery { exportWorker.run() } returns scheme(show(1))
     coEvery { remoteSource.downloadOwn(any(), any()) } returns null
@@ -149,6 +152,24 @@ class SyncEngineTest {
     }
 
   @Test
+  fun `Should record why a failed sync failed`() =
+    runTest {
+      coEvery { remoteSource.upload(any(), any()) } returns Result.failure(RuntimeException("offline"))
+
+      runCatching { SUT.sync(CREDENTIALS) }
+
+      coVerify(exactly = 1) { settingsSyncRepository.lastError = "offline" }
+    }
+
+  @Test
+  fun `Should clear the recorded error once a sync succeeds`() =
+    runTest {
+      SUT.sync(CREDENTIALS)
+
+      coVerify(exactly = 1) { settingsSyncRepository.lastError = null }
+    }
+
+  @Test
   fun `Should report the peers it merged against`() =
     runTest {
       coEvery { remoteSource.downloadPeers(any(), any()) } returns listOf(
@@ -158,7 +179,7 @@ class SyncEngineTest {
 
       val result = SUT.sync(CREDENTIALS)
 
-      assertThat(result.peers).isEqualTo(2)
+      assertThat(result.peerIds).containsExactly("tablet", "laptop")
       assertThat(result.deviceId).isEqualTo(DEVICE)
     }
 

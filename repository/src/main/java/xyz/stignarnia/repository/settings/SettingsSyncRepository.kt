@@ -28,6 +28,9 @@ class SettingsSyncRepository @Inject constructor(
   companion object Key {
     private const val DEVICE_ID = "SYNC_DEVICE_ID"
     private const val LAST_SYNCED_AT = "SYNC_LAST_SYNCED_AT"
+    private const val LAST_ATTEMPT_AT = "SYNC_LAST_ATTEMPT_AT"
+    private const val LAST_ERROR = "SYNC_LAST_ERROR"
+    private const val LAST_PEERS = "SYNC_LAST_PEERS"
 
     /**
      * How long a deletion is remembered. A device offline for longer than this
@@ -45,5 +48,25 @@ class SettingsSyncRepository @Inject constructor(
       .take(12)
       .also { generated -> preferences.edit { putString(DEVICE_ID, generated) } }
 
+  /** When a cycle last completed, upload included. Only moves on success. */
   var lastSyncedAt: Long by LongPreference(preferences, LAST_SYNCED_AT, 0)
+
+  /**
+   * When a cycle was last attempted, successfully or not.
+   *
+   * Kept apart from [lastSyncedAt] so a run of failures cannot read as a
+   * healthy sync that simply happened a while ago. Without it the screen would
+   * show a stale success and say nothing about the failures since.
+   */
+  var lastAttemptAt: Long by LongPreference(preferences, LAST_ATTEMPT_AT, 0)
+
+  /** Why the last attempt failed, or null if it succeeded. */
+  var lastError: String?
+    get() = preferences.getString(LAST_ERROR, null)
+    set(value) = preferences.edit { putString(LAST_ERROR, value) }
+
+  /** Devices seen on the last successful cycle, this one excluded. */
+  var lastPeers: Set<String>
+    get() = preferences.getStringSet(LAST_PEERS, emptySet()).orEmpty()
+    set(value) = preferences.edit { putStringSet(LAST_PEERS, value) }
 }

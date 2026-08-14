@@ -30,6 +30,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.showErrorSnackbar
 import xyz.stignarnia.ui_base.utilities.extensions.showInfoSnackbar
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
 import xyz.stignarnia.ui_base.utilities.viewBinding
+import java.time.format.DateTimeFormatter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -85,7 +86,15 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
 
     launchAndRepeatStarted(
       { viewModel.uiState.collect { render(it) } },
+      doAfterLaunch = { viewModel.refreshSyncStatus() },
     )
+  }
+
+  override fun onResume() {
+    super.onResume()
+    // Sync runs in the background, so what was true when this screen opened may
+    // not be true now.
+    viewModel.refreshSyncStatus()
   }
 
   private fun setupView() {
@@ -194,6 +203,8 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
           val date = dateFormat?.format(dateFromMillis(lastBackupExportTimestamp).toLocalZone())?.capitalizeWords()
           lastExportTimestamp.text = getString(R.string.textBackupExportLastTimestamp, date)
         }
+        syncStatus.visibleIf(!isLoading && uiState.syncStatus != null)
+        uiState.syncStatus?.let { syncStatus.text = describeSync(it, dateFormat) }
       }
       exportContent?.let {
         saveNewExport(it.exportUri, it.exportContent)
@@ -204,6 +215,31 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
         showErrorSnack(error)
         viewModel.clearOneOffState()
       }
+    }
+  }
+
+  /**
+   * Says what syncing has actually been doing, failures included.
+   *
+   * A failure is shown next to the last success rather than replacing it: how
+   * long ago the last good sync was is exactly what the user needs in order to
+   * judge how much a broken one matters.
+   */
+  private fun describeSync(
+    status: SyncStatus,
+    dateFormat: DateTimeFormatter?,
+  ): String {
+    val lastSync = when (status.lastSyncedAt) {
+      0L -> getString(R.string.textSyncNever)
+      else -> {
+        val date = dateFormat?.format(dateFromMillis(status.lastSyncedAt).toLocalZone())?.capitalizeWords()
+        val peers = resources.getQuantityString(R.plurals.textSyncPeers, status.peers.size, status.peers.size)
+        "${getString(R.string.textSyncLastTimestamp, date)} \u00b7 $peers"
+      }
+    }
+    return when (val error = status.error) {
+      null -> lastSync
+      else -> "$lastSync\n${getString(R.string.textSyncFailed, error)}"
     }
   }
 
