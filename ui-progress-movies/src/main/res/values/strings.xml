@@ -8,4 +8,6 @@
   <string name="textDiscoverMovies">Discover Movies</string>
   <string name="textMoviesProgressEmpty">Your <b>Progress</b> is currently empty.\n\nVisit <b>Discover</b> tab to add movies or import your TMDB collection.</string>
 
+  <string name="textBackupStarted">Backing up to your WebDAV server…</string>
+  <string name="textBackupNotConfigured">Set up a WebDAV server in Settings to back up from here.</string>
 </resources>

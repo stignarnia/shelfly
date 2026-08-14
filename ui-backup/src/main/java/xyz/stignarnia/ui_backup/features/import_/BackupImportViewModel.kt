@@ -2,11 +2,17 @@ package xyz.stignarnia.ui_backup.features.import_
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import xyz.stignarnia.data_webdav.WebDavClient
+import xyz.stignarnia.data_webdav.WebDavCredentials
+import xyz.stignarnia.data_webdav.WebDavFile
+import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.ui_backup.BackupConfig.SCHEME_VERSION
+import xyz.stignarnia.ui_backup.features.export.BackupFileName
 import xyz.stignarnia.ui_backup.features.import_.migrations.BackupMigrationResult
 import xyz.stignarnia.ui_backup.features.import_.migrations.BackupMigrationV2
 import xyz.stignarnia.ui_backup.features.import_.model.BackupImportStatus.Idle
 import xyz.stignarnia.ui_backup.features.import_.model.BackupImportStatus.Initializing
+import xyz.stignarnia.ui_backup.features.import_.model.WebDavBackups
 import xyz.stignarnia.ui_backup.features.import_.workers.BackupImportWorker
 import xyz.stignarnia.ui_backup.model.BackupScheme
 import xyz.stignarnia.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
@@ -29,6 +35,8 @@ import kotlin.time.Duration.Companion.seconds
 class BackupImportViewModel @Inject constructor(
   private val backupImportWorker: BackupImportWorker,
   private val backupMigrationV2: BackupMigrationV2,
+  private val webDavRepository: SettingsWebDavRepository,
+  private val webDavClient: WebDavClient,
 ) : ViewModel() {
 
   private val initialState = BackupImportUiState()
@@ -37,12 +45,68 @@ class BackupImportViewModel @Inject constructor(
   private val successState = MutableStateFlow(initialState.isSuccess)
   private val errorState = MutableStateFlow(initialState.isError)
   private val reportState = MutableStateFlow(initialState.report)
+  private val webDavBackupsState = MutableStateFlow<WebDavBackups>(WebDavBackups.Idle)
 
   init {
     backupImportWorker.statusListener = { status ->
       importingState.update { status }
       Timber.d("Importing state: $status")
     }
+  }
+
+  /** Whether a server is configured, which is what gates the WebDAV import option. */
+  fun isWebDavConfigured() = webDavRepository.url.isNotBlank()
+
+  private fun credentials() =
+    WebDavCredentials(
+      url = webDavRepository.url,
+      username = webDavRepository.username,
+      password = webDavRepository.password,
+    )
+
+  /**
+   * Lists the backups on the server, newest first, so the user picks which one
+   * to restore rather than always getting the latest.
+   */
+  fun loadWebDavBackups() {
+    if (importingState.value != Idle) return
+    viewModelScope.launch {
+      webDavBackupsState.update { WebDavBackups.Loading }
+      webDavClient
+        .list(credentials())
+        .onSuccess { files ->
+          val backups = files
+            .filter { it.name.startsWith(BackupFileName.prefix) || it.name.startsWith(BackupFileName.legacyPrefix) }
+            .sortedWith(compareByDescending<WebDavFile> { it.lastModifiedMillis }.thenByDescending { it.name })
+            .map { it.name }
+          webDavBackupsState.update { WebDavBackups.Loaded(backups) }
+        }.onFailure { error ->
+          webDavBackupsState.update { WebDavBackups.Idle }
+          errorState.update { error }
+        }
+    }
+  }
+
+  /** Downloads the chosen backup and hands it to the same import path as a local file. */
+  fun runWebDavImport(fileName: String) {
+    if (importingState.value != Idle) return
+    viewModelScope.launch {
+      webDavBackupsState.update { WebDavBackups.Idle }
+      importingState.update { Initializing }
+      webDavClient
+        .get(credentials(), fileName)
+        .onSuccess { json ->
+          importingState.update { Idle }
+          runImport(json)
+        }.onFailure { error ->
+          importingState.update { Idle }
+          errorState.update { error }
+        }
+    }
+  }
+
+  fun clearWebDavBackups() {
+    webDavBackupsState.update { WebDavBackups.Idle }
   }
 
   fun runImport(jsonInput: String) {
@@ -107,6 +171,7 @@ class BackupImportViewModel @Inject constructor(
     successState.update { false }
     errorState.update { null }
     reportState.update { null }
+    webDavBackupsState.update { WebDavBackups.Idle }
   }
 
   val uiState = combine(
@@ -114,12 +179,14 @@ class BackupImportViewModel @Inject constructor(
     successState,
     errorState,
     reportState,
-  ) { s1, s2, s3, s4 ->
+    webDavBackupsState,
+  ) { s1, s2, s3, s4, s5 ->
     BackupImportUiState(
       isImporting = s1,
       isSuccess = s2,
       isError = s3,
       report = s4,
+      webDavBackups = s5,
     )
   }.stateIn(
     scope = viewModelScope,

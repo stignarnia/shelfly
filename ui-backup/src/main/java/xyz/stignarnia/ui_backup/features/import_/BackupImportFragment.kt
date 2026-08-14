@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import xyz.stignarnia.ui_backup.R
 import xyz.stignarnia.ui_backup.databinding.FragmentBackupImportBinding
@@ -17,8 +18,10 @@ import xyz.stignarnia.ui_backup.features.import_.migrations.BackupMigrationRepor
 import xyz.stignarnia.ui_backup.features.import_.model.BackupImportStatus.Idle
 import xyz.stignarnia.ui_backup.features.import_.model.BackupImportStatus.Importing
 import xyz.stignarnia.ui_backup.features.import_.model.BackupImportStatus.Initializing
+import xyz.stignarnia.ui_backup.features.import_.model.WebDavBackups
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.utilities.SnackbarHost
+import xyz.stignarnia.ui_base.utilities.events.MessageEvent
 import xyz.stignarnia.ui_base.utilities.events.MessageEvent.Error
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
@@ -68,6 +71,9 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
     with(binding) {
       toolbar.onClick { activity?.onBackPressed() }
       importButton.onClick { openNewImport() }
+      importWebDavButton.onClick { viewModel.loadWebDavBackups() }
+      // Only an option once a server is configured in Settings.
+      importWebDavButton.visibleIf(viewModel.isWebDavConfigured())
     }
   }
 
@@ -186,7 +192,30 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
         showErrorSnack(isError)
         viewModel.clearState()
       }
+
+      renderWebDavBackups(webDavBackups)
     }
+  }
+
+  private fun renderWebDavBackups(backups: WebDavBackups) {
+    with(binding) {
+      importWebDavButton.isEnabled = backups !is WebDavBackups.Loading
+    }
+    if (backups !is WebDavBackups.Loaded) return
+
+    viewModel.clearWebDavBackups()
+    if (backups.fileNames.isEmpty()) {
+      showSnack(MessageEvent.Info(R.string.textBackupWebDavNoBackups))
+      return
+    }
+
+    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
+      .setTitle(R.string.textBackupWebDavPick)
+      .setItems(backups.fileNames.toTypedArray()) { dialog, index ->
+        viewModel.runWebDavImport(backups.fileNames[index])
+        dialog.dismiss()
+      }.setNegativeButton(R.string.textCancel) { _, _ -> }
+      .show()
   }
 
   private fun renderImportStatus(uiState: BackupImportUiState) {

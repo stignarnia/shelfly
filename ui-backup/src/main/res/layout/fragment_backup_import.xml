@@ -120,12 +120,28 @@
       android:text="@string/textBackupImport"
       android:textColor="?attr/textColorOnSurface"
       app:backgroundTint="?attr/colorAccent"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintBottom_toTopOf="@id/importWebDavButton"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/descriptionText"
       app:rippleColor="?android:attr/textColorPrimary"
       app:strokeColor="?android:attr/textColorPrimary"
+      />
+
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/importWebDavButton"
+      style="@style/Widget.Material3.Button.TextButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/spaceSmall"
+      android:minWidth="200dp"
+      android:text="@string/textBackupImportFromWebDav"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/importButton"
+      tools:visibility="visible"
       />
 
     <ProgressBar

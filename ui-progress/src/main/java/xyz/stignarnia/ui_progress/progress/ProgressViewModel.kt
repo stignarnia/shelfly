@@ -7,6 +7,7 @@ import xyz.stignarnia.common.Config
 import xyz.stignarnia.repository.TranslationsRepository
 import xyz.stignarnia.repository.images.ShowImagesProvider
 import xyz.stignarnia.repository.settings.SettingsRepository
+import xyz.stignarnia.ui_backup.features.export.workers.BackupExportScheduleWorker
 import xyz.stignarnia.ui_base.utilities.events.Event
 import xyz.stignarnia.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import xyz.stignarnia.ui_base.utilities.extensions.findReplace
@@ -24,6 +25,7 @@ import xyz.stignarnia.ui_progress.progress.cases.ProgressHeadersCase
 import xyz.stignarnia.ui_progress.progress.cases.ProgressItemsCase
 import xyz.stignarnia.ui_progress.progress.cases.ProgressSortOrderCase
 import xyz.stignarnia.ui_progress.progress.recycler.ProgressListItem
+import xyz.stignarnia.ui_model.BackupTarget
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -161,6 +163,20 @@ class ProgressViewModel @Inject constructor(
   fun toggleHeaderCollapsed(headerType: ProgressListItem.Header.Type) {
     headersCase.toggleHeaderCollapsed(headerType)
     loadItems()
+  }
+
+  /**
+   * Runs a backup now, in response to the pull gesture on this screen.
+   *
+   * Returns false when there is nothing to back up to, so the gesture can say
+   * so rather than appearing to work. WorkManager keeps a run already in
+   * flight, so repeated pulls do not stack up.
+   */
+  fun startBackupNow(): Boolean {
+    if (settingsRepository.webdav.backupTarget != BackupTarget.WEBDAV) return false
+    if (settingsRepository.webdav.url.isBlank()) return false
+    BackupExportScheduleWorker.scheduleOneOff(workManager)
+    return true
   }
 
   private fun updateItem(newItem: ProgressListItem) {

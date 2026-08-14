@@ -10,7 +10,9 @@ import androidx.work.Constraints
 import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.ExistingWorkPolicy
 import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
@@ -57,6 +59,7 @@ class BackupExportScheduleWorker @AssistedInject constructor(
 
   companion object {
     private const val TAG = "BACKUP_EXPORT_WORK"
+    const val TAG_ONE_OFF = "BACKUP_EXPORT_WORK_ONE_OFF"
     const val KEY_BACKUP_EXPORT_SCHEDULE = "KEY_BACKUP_EXPORT_SCHEDULE"
     const val KEY_BACKUP_EXPORT_DIRECTORY_URI = "KEY_BACKUP_EXPORT_DIRECTORY_URI"
     const val KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP = "KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP"
@@ -110,6 +113,30 @@ class BackupExportScheduleWorker @AssistedInject constructor(
       )
 
       Timber.i("Backup export scheduled: $schedule")
+    }
+
+    /**
+     * Runs a backup once, now, against whichever destination is configured.
+     * Used by the pull-to-backup gesture on the progress screens.
+     *
+     * Enqueued as unique work that keeps any run already in flight, so an
+     * impatient second pull does not start a duplicate backup.
+     */
+    fun scheduleOneOff(workManager: WorkManager) {
+      val request = OneTimeWorkRequestBuilder<BackupExportScheduleWorker>()
+        .setConstraints(
+          Constraints
+            .Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build(),
+        ).addTag(TAG_ONE_OFF)
+        .build()
+
+      workManager.enqueueUniqueWork(
+        uniqueWorkName = TAG_ONE_OFF,
+        existingWorkPolicy = ExistingWorkPolicy.KEEP,
+        request = request,
+      )
     }
 
     /**

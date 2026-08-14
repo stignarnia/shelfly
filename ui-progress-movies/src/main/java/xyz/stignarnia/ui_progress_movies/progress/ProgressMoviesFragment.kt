@@ -22,6 +22,7 @@ import xyz.stignarnia.ui_base.common.WidgetsProvider
 import xyz.stignarnia.ui_base.common.sheets.sort_order.SortOrderBottomSheet
 import xyz.stignarnia.ui_base.utilities.NavigationHost
 import xyz.stignarnia.ui_base.utilities.events.Event
+import xyz.stignarnia.ui_base.utilities.events.MessageEvent
 import xyz.stignarnia.ui_base.utilities.extensions.add
 import xyz.stignarnia.ui_base.utilities.extensions.bump
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
@@ -197,6 +198,7 @@ class ProgressMoviesFragment :
                   binding.progressMoviesOverscrollProgress.progress >= 100
                 ) {
                   overscrollEnabled = false
+                  onOverscrollTriggered()
                 }
               }
             }
@@ -224,6 +226,17 @@ class ProgressMoviesFragment :
         delay(5)
       }
     }
+  }
+
+  /**
+   * The pull completed. Runs a backup when one can actually run, and says so
+   * either way - a gesture that animates and then does nothing is worse than
+   * no gesture.
+   */
+  private fun onOverscrollTriggered() {
+    val started = viewModel.startBackupNow()
+    val message = if (started) R.string.textBackupStarted else R.string.textBackupNotConfigured
+    showSnack(MessageEvent.Info(message))
   }
 
   private fun onOverscrollCancel() {

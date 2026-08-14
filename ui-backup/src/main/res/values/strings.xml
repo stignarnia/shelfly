@@ -39,4 +39,7 @@
   <string name="textBackupExportOptionWeeklyButton">Scheduled to run every week</string>
 
   <string name="textBackupExportLastTimestamp">Last Backup: %s</string>
+  <string name="textBackupImportFromWebDav">Import from WebDAV</string>
+  <string name="textBackupWebDavNoBackups">No backups found on the server.</string>
+  <string name="textBackupWebDavPick">Pick a backup to restore</string>
 </resources>
