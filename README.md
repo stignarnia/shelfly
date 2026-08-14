@@ -59,11 +59,21 @@ I think there is little chance this gets merged upstream given the repository's 
   :ui-discover:testDebugUnitTest :ui-statistics:testDebugUnitTest \
   :ui-statistics-movies:testDebugUnitTest :ui-search:testDebugUnitTest \
   :ui-progress-movies:testDebugUnitTest :data-remote:testDebugUnitTest \
-  :ui-backup:testDebugUnitTest
+  :ui-backup:testDebugUnitTest :data-webdav:testDebugUnitTest
 ./ktlint
 ```
 
 Two suites are opt-in and self-skip, so a green run does not mean they ran. `TmdbLiveApiTest` in `:data-remote` hits the real TMDB API and skips when no key is compiled in. `BackupMigrationV2FileTest` in `:ui-backup` skips unless `SHELFLY_V2_BACKUP` points at a real Showly export.
+
+## Backing up to WebDAV
+
+Set the server up in Settings → Backup & Restore → WebDAV server: the URL of the folder backups go into, plus credentials. "Test connection" tells you specifically what is wrong — wrong password, folder not found, rejected certificate, unreachable host — rather than just failing. The folder is created for you if the parent allows it.
+
+Saving a server does not start using it. Pick it under "Backup destination", which appears once a server is configured, then choose a cadence under Export data. Backups are verified by reading them back and parsing them before the timestamp is recorded, and the five newest are kept.
+
+Pulling down on the progress list runs a backup immediately.
+
+To restore, use Import data → Import from WebDAV and pick which backup you want.
 
 ## Importing from Showly
 
