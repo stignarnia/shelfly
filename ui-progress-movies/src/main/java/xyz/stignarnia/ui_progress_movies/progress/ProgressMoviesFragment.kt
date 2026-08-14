@@ -155,9 +155,9 @@ class ProgressMoviesFragment :
   }
 
   /**
-   * The pull completed. Runs a backup when one can actually run, and says so
-   * either way - a gesture that animates and then does nothing is worse than
-   * no gesture.
+   * The pull completed. Runs a backup, and a sync with the user's other
+   * devices, when one can actually run - and says so either way, because a
+   * gesture that animates and then does nothing is worse than no gesture.
    */
   private fun onOverscrollTriggered() {
     val started = viewModel.startBackupNow()

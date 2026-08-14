@@ -14,6 +14,6 @@
   <string name="textProgressEmpty">Your <b>Progress</b> is currently empty.\n\nVisit <b>Discover</b> tab to add shows or import your TMDB collection.</string>
   <string name="textNewSeason">Season Premiere</string>
   <string name="textPremieres">Premieres</string>
-  <string name="textBackupStarted">Backing up to your WebDAV server…</string>
+  <string name="textBackupStarted">Backing up and syncing with your other devices…</string>
   <string name="textBackupNotConfigured">Set up a WebDAV server in Settings to back up from here.</string>
 </resources>
