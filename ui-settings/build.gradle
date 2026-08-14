@@ -45,6 +45,7 @@ dependencies {
   implementation project(':common')
   implementation project(':data-local')
   implementation project(':data-remote')
+  implementation project(':data-webdav')
   implementation project(':repository')
   implementation project(':ui-base')
   implementation project(':ui-backup')

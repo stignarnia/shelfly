@@ -12,6 +12,8 @@ import xyz.stignarnia.ui_backup.features.export.cases.CreateBackupSchemeFromJson
 import xyz.stignarnia.ui_backup.features.export.model.BackupExportSchedule
 import xyz.stignarnia.ui_backup.features.export.workers.BackupExportScheduleWorker
 import xyz.stignarnia.ui_backup.model.BackupScheme
+import xyz.stignarnia.ui_model.BackupTarget
+import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.ui_base.dates.DateFormatProvider
 import xyz.stignarnia.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import xyz.stignarnia.ui_base.utilities.extensions.combine
@@ -31,6 +33,7 @@ class BackupExportViewModel @Inject constructor(
   private val createBackupJsonUseCase: CreateBackupJsonUseCase,
   private val createBackupSchemeFromJsonUseCase: CreateBackupSchemeFromJsonUseCase,
   private val workManager: WorkManager,
+  private val webDavRepository: SettingsWebDavRepository,
   dateFormatProvider: DateFormatProvider,
 ) : ViewModel() {
 
@@ -108,6 +111,27 @@ class BackupExportViewModel @Inject constructor(
     val now = nowUtcMillis()
     miscPreferences.edit { putLong(BackupExportScheduleWorker.KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP, now) }
     lastBackupExportTimestampState.update { now }
+  }
+
+  /** Whether scheduled backups go to WebDAV, in which case no folder is needed. */
+  fun isWebDavTarget() = webDavRepository.backupTarget == BackupTarget.WEBDAV
+
+  /**
+   * Set up an automatic export schedule against the WebDAV server. The
+   * destination is the configured URL, so unlike the local folder there is
+   * nothing to pick.
+   */
+  fun saveExportBackupSchedule(schedule: BackupExportSchedule) {
+    viewModelScope.launch {
+      miscPreferences.edit { putString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_SCHEDULE, schedule.name) }
+      BackupExportScheduleWorker.schedulePeriodic(
+        workManager = workManager,
+        directoryUri = null,
+        schedule = schedule,
+        cancelExisting = true,
+      )
+      backupExportScheduleState.value = schedule
+    }
   }
 
   /**

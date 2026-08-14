@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:paddingStart="@dimen/spaceNormal"
+  android:paddingTop="@dimen/spaceSmall"
+  android:paddingEnd="@dimen/spaceNormal"
+  >
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/webdavUrlInputLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/textSettingsWebDavUrlHint"
+    app:endIconMode="clear_text"
+    >
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/webdavUrlInput"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="textUri|textNoSuggestions"
+      android:maxLines="1"
+      />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/webdavUsernameInputLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spaceSmall"
+    android:hint="@string/textSettingsWebDavUsernameHint"
+    app:endIconMode="clear_text"
+    >
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/webdavUsernameInput"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="textNoSuggestions"
+      android:maxLines="1"
+      />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/webdavPasswordInputLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spaceSmall"
+    android:hint="@string/textSettingsWebDavPasswordHint"
+    app:endIconMode="password_toggle"
+    >
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/webdavPasswordInput"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="textPassword"
+      android:maxLines="1"
+      />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <TextView
+    android:id="@+id/webdavTestResult"
+    style="@style/Settings.Summary"
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/spaceSmall"
+    android:visibility="gone"
+    tools:text="Connected."
+    tools:visibility="visible"
+    xmlns:tools="http://schemas.android.com/tools"
+    />
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/webdavTestButton"
+    style="@style/Widget.Material3.Button.TextButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:text="@string/textSettingsWebDavTest"
+    />
+
+</LinearLayout>

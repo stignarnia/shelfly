@@ -82,4 +82,94 @@
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/settingsBackupWebDav"
+    style="@style/Settings.ItemLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/settingsBackupExport"
+    >
+
+    <TextView
+      android:id="@+id/settingsBackupWebDavTitle"
+      style="@style/Settings.Title"
+      android:text="@string/textSettingsWebDavTitle"
+      app:layout_constraintBottom_toTopOf="@id/settingsBackupWebDavDescription"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      />
+
+    <TextView
+      android:id="@+id/settingsBackupWebDavDescription"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceSmall"
+      android:text="@string/textSettingsWebDavDescription"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toTopOf="@id/settingsBackupWebDavValue"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsBackupWebDavTitle"
+      />
+
+    <TextView
+      android:id="@+id/settingsBackupWebDavValue"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceSmall"
+      android:ellipsize="middle"
+      android:maxLines="1"
+      android:textColor="?android:attr/textColorPrimary"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsBackupWebDavDescription"
+      tools:text="https://cloud.example.com/remote.php/dav/files/me/backups/"
+      />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/settingsBackupTarget"
+    style="@style/Settings.ItemLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/settingsBackupWebDav"
+    >
+
+    <TextView
+      android:id="@+id/settingsBackupTargetTitle"
+      style="@style/Settings.Title"
+      android:text="@string/textSettingsBackupTargetTitle"
+      app:layout_constraintBottom_toTopOf="@id/settingsBackupTargetDescription"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      />
+
+    <TextView
+      android:id="@+id/settingsBackupTargetDescription"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceSmall"
+      android:text="@string/textSettingsBackupTargetDescription"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toTopOf="@id/settingsBackupTargetValue"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsBackupTargetTitle"
+      />
+
+    <TextView
+      android:id="@+id/settingsBackupTargetValue"
+      style="@style/Settings.Summary"
+      android:textColor="?android:attr/textColorPrimary"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsBackupTargetDescription"
+      tools:text="WebDAV server"
+      />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

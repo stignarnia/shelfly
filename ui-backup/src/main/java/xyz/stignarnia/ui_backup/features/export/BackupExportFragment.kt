@@ -219,14 +219,24 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
       .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
       .setSingleChoiceItems(optionsStrings, options.indexOf(currentSchedule)) { dialog, index ->
         val newSchedule = options[index]
-        if (newSchedule == BackupExportSchedule.OFF) {
-          // For OFF schedule, we don't need a folder - directly save the schedule
-          viewModel.saveExportBackupScheduleOff()
-          showSnack(MessageEvent.Info(newSchedule.confirmationStringRes))
-        } else {
-          // For other schedules, ask for folder first
-          selectedSchedule = newSchedule
-          createFolderContract.launch(null)
+        when {
+          newSchedule == BackupExportSchedule.OFF -> {
+            // Nothing to write to, so no folder is needed.
+            viewModel.saveExportBackupScheduleOff()
+            showSnack(MessageEvent.Info(newSchedule.confirmationStringRes))
+          }
+
+          viewModel.isWebDavTarget() -> {
+            // The destination is the configured server URL - there is no folder
+            // to pick, so skip the picker entirely.
+            viewModel.saveExportBackupSchedule(newSchedule)
+            showSnack(MessageEvent.Info(newSchedule.confirmationStringRes))
+          }
+
+          else -> {
+            selectedSchedule = newSchedule
+            createFolderContract.launch(null)
+          }
         }
         dialog.dismiss()
       }.show()
