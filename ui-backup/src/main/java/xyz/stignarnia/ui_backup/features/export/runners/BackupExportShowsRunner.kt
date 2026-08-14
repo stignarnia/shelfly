@@ -148,12 +148,7 @@ internal class BackupExportShowsRunner @Inject constructor(
 
   private suspend fun exportShowsRatings(): BackupShows =
     withContext(dispatchers.IO) {
-      val ratings = ratingsRepository.loadShowsRatings()
-
-      val showsIds = ratings.map { it.idTmdb.id }
-      val showsTmdbIds = localSource.shows.getAllTmdbIds(tmdbIds = showsIds)
-
-      val showsRatings = ratings.map {
+      val showsRatings = ratingsRepository.loadShowsRatings().map {
         BackupShowRating(
           tmdbId = it.idTmdb.id,
           rating = it.rating,
@@ -166,21 +161,15 @@ internal class BackupExportShowsRunner @Inject constructor(
       )
     }
 
+  // Season and episode ratings are already stored under their show, so the
+  // backup entry is a straight copy - no lookup can fail here any more.
+
   private suspend fun exportSeasonsRatings(): BackupShows =
     withContext(dispatchers.IO) {
-      val ratings = ratingsRepository.loadSeasonsRatings()
-      val seasons = localSource.seasons.getAll(ratings.map { it.idTmdb })
-
-      val showsIds = seasons.map { it.idShowTmdb }.distinct()
-      val showsTmdbIds = localSource.shows.getAllTmdbIds(tmdbIds = showsIds)
-
-      val seasonsRatings = ratings.map { rating ->
-        val season = seasons.find { it.idTmdb == rating.idTmdb }
-        val showTmdbId = season?.idShowTmdb ?: -1
-
+      val seasonsRatings = ratingsRepository.loadSeasonsRatings().map { rating ->
         BackupSeasonRating(
-          showTmdbId = showTmdbId,
-          seasonNumber = rating.seasonNumber ?: -1,
+          showTmdbId = rating.idTmdb,
+          seasonNumber = rating.seasonNumber,
           rating = rating.rating,
           ratedAt = dateIsoStringFromMillis(rating.ratedAt.toMillis()),
         )
@@ -193,16 +182,11 @@ internal class BackupExportShowsRunner @Inject constructor(
 
   private suspend fun exportEpisodesRatings(): BackupShows =
     withContext(dispatchers.IO) {
-      val ratings = ratingsRepository.loadEpisodesRatings()
-      val episodes = localSource.episodes.getAll(ratings.map { it.idTmdb })
-
-      val episodesRatings = ratings.map { rating ->
-        val episode = episodes.find { it.idTmdb == rating.idTmdb }
-
+      val episodesRatings = ratingsRepository.loadEpisodesRatings().map { rating ->
         BackupEpisodeRating(
-          showTmdbId = episode?.idShowTmdb ?: -1,
-          seasonNumber = rating.seasonNumber ?: -1,
-          episodeNumber = rating.episodeNumber ?: -1,
+          showTmdbId = rating.idTmdb,
+          seasonNumber = rating.seasonNumber,
+          episodeNumber = rating.episodeNumber,
           rating = rating.rating,
           ratedAt = dateIsoStringFromMillis(rating.ratedAt.toMillis()),
         )

@@ -33,10 +33,11 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
     fun createBundle(
       id: IdTmdb,
       type: Options.Type,
+      showId: IdTmdb? = null,
       seasonNumber: Int? = null,
       episodeNumber: Int? = null,
     ): Bundle {
-      val options = Options(id, type, seasonNumber, episodeNumber)
+      val options = Options(id, type, showId, seasonNumber, episodeNumber)
       return bundleOf(NavigationArgs.ARG_OPTIONS to options)
     }
 
@@ -47,8 +48,6 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
   private val binding by viewBinding(ViewRateSheetBinding::bind)
 
   private val options by lazy { requireParcelable<Options>(NavigationArgs.ARG_OPTIONS) }
-  private val id by lazy { options.id }
-  private val type by lazy { options.type }
 
   private val starsViews by lazy {
     with(binding) { listOf(star1, star2, star3, star4, star5, star6, star7, star8, star9, star10) }
@@ -68,7 +67,7 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
       { viewModel.uiState.collect { render(it) } },
       { viewModel.messageFlow.collect { renderSnackbar(it) } },
       { viewModel.eventFlow.collect { handleEvent(it) } },
-      doAfterLaunch = { viewModel.loadRating(id, type) },
+      doAfterLaunch = { viewModel.loadRating(options) },
     )
   }
 
@@ -78,13 +77,10 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
     binding.viewRateSheetSaveButton.onClick {
       viewModel.saveRating(
         rating = selectedRating,
-        id = id,
-        type = type,
-        seasonNumber = options.seasonNumber,
-        episodeNumber = options.episodeNumber,
+        options = options,
       )
     }
-    binding.viewRateSheetRemoveButton.onClick { viewModel.removeRating(id, type) }
+    binding.viewRateSheetRemoveButton.onClick { viewModel.removeRating(options) }
   }
 
   private fun render(uiState: RatingsUiState) {
@@ -151,6 +147,8 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
   data class Options(
     val id: IdTmdb,
     val type: Type,
+    /** The show a season or episode belongs to. Ratings are keyed by it. */
+    val showId: IdTmdb?,
     val seasonNumber: Int?,
     val episodeNumber: Int?,
   ) : Parcelable {

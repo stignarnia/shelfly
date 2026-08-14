@@ -202,6 +202,10 @@ internal class BackupImportShowsRunner @Inject constructor(
     }
   }
 
+  // An import never overwrites a rating the user already has, so every runner
+  // below checks the full key first - show or movie id plus, for a season or an
+  // episode, the numbers underneath it.
+
   private suspend fun importShowsRatings(backup: BackupShows) {
     withContext(dispatchers.IO) {
       val localRatings = ratingsRepository.loadShowsRatings()
@@ -213,10 +217,8 @@ internal class BackupImportShowsRunner @Inject constructor(
 
         val entity = Rating(
           idTmdb = rating.tmdbId,
-          type = "show",
+          type = Rating.TYPE_SHOW,
           rating = rating.rating,
-          seasonNumber = null,
-          episodeNumber = null,
           ratedAt = rating.ratedAt.toUtcDateTime() ?: nowUtc(),
           createdAt = nowUtc(),
           updatedAt = nowUtc(),
@@ -229,19 +231,21 @@ internal class BackupImportShowsRunner @Inject constructor(
 
   private suspend fun importSeasonsRatings(backup: BackupShows) {
     withContext(dispatchers.IO) {
-      val localRatings = ratingsRepository.loadSeasonsRatings()
+      val localKeys = ratingsRepository
+        .loadSeasonsRatings()
+        .mapTo(mutableSetOf()) { it.idTmdb to it.seasonNumber }
 
       for (rating in backup.ratingsSeasons) {
-        if (localRatings.any { it.idTmdb == rating.showTmdbId && it.seasonNumber == rating.seasonNumber }) {
+        val key = rating.showTmdbId to rating.seasonNumber
+        if (!localKeys.add(key)) {
           continue
         }
 
         val entity = Rating(
           idTmdb = rating.showTmdbId,
-          type = "season",
+          type = Rating.TYPE_SEASON,
           rating = rating.rating,
           seasonNumber = rating.seasonNumber,
-          episodeNumber = null,
           ratedAt = rating.ratedAt.toUtcDateTime() ?: nowUtc(),
           createdAt = nowUtc(),
           updatedAt = nowUtc(),
@@ -254,16 +258,19 @@ internal class BackupImportShowsRunner @Inject constructor(
 
   private suspend fun importEpisodesRatings(backup: BackupShows) {
     withContext(dispatchers.IO) {
-      val localRatings = ratingsRepository.loadEpisodesRatings()
+      val localKeys = ratingsRepository
+        .loadEpisodesRatings()
+        .mapTo(mutableSetOf()) { Triple(it.idTmdb, it.seasonNumber, it.episodeNumber) }
 
       for (rating in backup.ratingsEpisodes) {
-        if (localRatings.any { it.idTmdb == rating.showTmdbId && it.seasonNumber == rating.seasonNumber }) {
+        val key = Triple(rating.showTmdbId, rating.seasonNumber, rating.episodeNumber)
+        if (!localKeys.add(key)) {
           continue
         }
 
         val entity = Rating(
           idTmdb = rating.showTmdbId,
-          type = "episode",
+          type = Rating.TYPE_EPISODE,
           rating = rating.rating,
           seasonNumber = rating.seasonNumber,
           episodeNumber = rating.episodeNumber,

@@ -110,7 +110,7 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
           loadSeason(ids.tmdb, episode, seasonEpisodes?.toIntArray())
           loadImage(ids.tmdb, episode)
           loadTranslation(ids.tmdb, episode)
-          loadRatings(episode)
+          loadRatings(ids.tmdb, episode)
         },
       )
     }
@@ -364,12 +364,13 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
         Operation.REMOVE -> renderSnackbar(MessageEvent.Info(R.string.textRateRemoved))
         else -> Timber.w("Unknown result.")
       }
-      viewModel.loadRatings(options.episode)
+      viewModel.loadRatings(options.showIds.tmdb, options.episode)
       setFragmentResult(REQUEST_EPISODE_DETAILS, bundleOf(NavigationArgs.ACTION_RATING_CHANGED to true))
     }
     val bundle = RatingsBottomSheet.createBundle(
       id = options.episode.ids.tmdb,
       type = Type.EPISODE,
+      showId = options.showIds.tmdb,
       seasonNumber = options.episode.season,
       episodeNumber = options.episode.number,
     )

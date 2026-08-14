@@ -5,6 +5,7 @@ package xyz.stignarnia.ui_show.episodes
 import xyz.stignarnia.ui_base.utilities.events.Event
 import xyz.stignarnia.ui_model.Episode
 import xyz.stignarnia.ui_model.EpisodeBundle
+import xyz.stignarnia.ui_model.IdTmdb
 import xyz.stignarnia.ui_model.Season
 import xyz.stignarnia.ui_show.sections.seasons.recycler.SeasonListItem
 
@@ -18,6 +19,7 @@ sealed class ShowDetailsEpisodesEvent<T>(
   ) : ShowDetailsEpisodesEvent<EpisodeBundle>(bundle)
 
   data class OpenRateSeason(
+    val showId: IdTmdb,
     val season: Season,
   ) : ShowDetailsEpisodesEvent<Season>(season)
 

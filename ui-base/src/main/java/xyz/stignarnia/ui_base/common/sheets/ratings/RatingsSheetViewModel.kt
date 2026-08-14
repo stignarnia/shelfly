@@ -6,6 +6,7 @@ import xyz.stignarnia.common.errors.ErrorHelper
 import xyz.stignarnia.common.errors.ShelflyError.CoroutineCancellation
 import xyz.stignarnia.common.errors.ShelflyError.UnauthorizedError
 import xyz.stignarnia.ui_base.R
+import xyz.stignarnia.ui_base.common.sheets.ratings.RatingsBottomSheet.Options
 import xyz.stignarnia.ui_base.common.sheets.ratings.RatingsBottomSheet.Options.Operation
 import xyz.stignarnia.ui_base.common.sheets.ratings.RatingsBottomSheet.Options.Type
 import xyz.stignarnia.ui_base.common.sheets.ratings.cases.RatingsEpisodeCase
@@ -38,17 +39,16 @@ class RatingsSheetViewModel @Inject constructor(
   private val loadingState = MutableStateFlow(false)
   private val ratingState = MutableStateFlow<UserRating?>(null)
 
-  fun loadRating(
-    idTmdb: IdTmdb,
-    type: Type,
-  ) {
+  fun loadRating(options: Options) {
     viewModelScope.launch {
       try {
-        val rating = when (type) {
-          Type.SHOW -> showRatingsCase.loadRating(idTmdb)
-          Type.MOVIE -> movieRatingsCase.loadRating(idTmdb)
-          Type.EPISODE -> episodeRatingsCase.loadRating(idTmdb)
-          Type.SEASON -> seasonRatingsCase.loadRating(idTmdb)
+        val rating = with(options) {
+          when (type) {
+            Type.SHOW -> showRatingsCase.loadRating(id)
+            Type.MOVIE -> movieRatingsCase.loadRating(id)
+            Type.EPISODE -> episodeRatingsCase.loadRating(requireShowId(), seasonNumber(), episodeNumber())
+            Type.SEASON -> seasonRatingsCase.loadRating(requireShowId(), seasonNumber())
+          }
         }
         ratingState.value = rating
       } catch (error: Throwable) {
@@ -59,19 +59,19 @@ class RatingsSheetViewModel @Inject constructor(
 
   fun saveRating(
     rating: Int,
-    id: IdTmdb,
-    type: Type,
-    seasonNumber: Int?,
-    episodeNumber: Int?,
+    options: Options,
   ) {
     viewModelScope.launch {
       try {
         loadingState.value = true
-        when (type) {
-          Type.SHOW -> showRatingsCase.saveRating(id, rating)
-          Type.MOVIE -> movieRatingsCase.saveRating(id, rating)
-          Type.EPISODE -> episodeRatingsCase.saveRating(id, rating, seasonNumber ?: -1, episodeNumber ?: -1)
-          Type.SEASON -> seasonRatingsCase.saveRating(id, rating, seasonNumber ?: -1)
+        with(options) {
+          when (type) {
+            Type.SHOW -> showRatingsCase.saveRating(id, rating)
+            Type.MOVIE -> movieRatingsCase.saveRating(id, rating)
+            Type.EPISODE ->
+              episodeRatingsCase.saveRating(requireShowId(), seasonNumber(), episodeNumber(), rating)
+            Type.SEASON -> seasonRatingsCase.saveRating(requireShowId(), seasonNumber(), rating)
+          }
         }
         eventChannel.send(FinishUiEvent(operation = Operation.SAVE))
       } catch (error: Throwable) {
@@ -81,18 +81,17 @@ class RatingsSheetViewModel @Inject constructor(
     }
   }
 
-  fun removeRating(
-    id: IdTmdb,
-    type: Type,
-  ) {
+  fun removeRating(options: Options) {
     viewModelScope.launch {
       try {
         loadingState.value = true
-        when (type) {
-          Type.SHOW -> showRatingsCase.deleteRating(id)
-          Type.MOVIE -> movieRatingsCase.deleteRating(id)
-          Type.EPISODE -> episodeRatingsCase.deleteRating(id)
-          Type.SEASON -> seasonRatingsCase.deleteRating(id)
+        with(options) {
+          when (type) {
+            Type.SHOW -> showRatingsCase.deleteRating(id)
+            Type.MOVIE -> movieRatingsCase.deleteRating(id)
+            Type.EPISODE -> episodeRatingsCase.deleteRating(requireShowId(), seasonNumber(), episodeNumber())
+            Type.SEASON -> seasonRatingsCase.deleteRating(requireShowId(), seasonNumber())
+          }
         }
         eventChannel.send(FinishUiEvent(operation = Operation.REMOVE))
       } catch (error: Throwable) {
@@ -101,6 +100,15 @@ class RatingsSheetViewModel @Inject constructor(
       }
     }
   }
+
+  // A season or episode rating is stored under its show, so the sheet cannot be
+  // opened for one without saying which show it belongs to.
+
+  private fun Options.requireShowId(): IdTmdb = checkNotNull(showId) { "A $type rating needs the show it belongs to." }
+
+  private fun Options.seasonNumber(): Int = checkNotNull(seasonNumber) { "A $type rating needs a season number." }
+
+  private fun Options.episodeNumber(): Int = checkNotNull(episodeNumber) { "A $type rating needs an episode number." }
 
   private suspend fun handleError(error: Throwable) {
     when (ErrorHelper.parse(error)) {

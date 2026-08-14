@@ -119,11 +119,14 @@ class EpisodeDetailsViewModel @Inject constructor(
     }
   }
 
-  fun loadRatings(episode: Episode) {
+  fun loadRatings(
+    showTmdbId: IdTmdb,
+    episode: Episode,
+  ) {
     viewModelScope.launch {
       try {
         ratingState.value = RatingState(rateLoading = true)
-        val rating = ratingsRepository.shows.loadRating(episode)
+        val rating = ratingsRepository.shows.loadRating(showTmdbId, episode)
         ratingState.value = RatingState(rateLoading = false, userRating = rating)
       } catch (error: Throwable) {
         ratingState.value = RatingState(rateLoading = false)

@@ -69,10 +69,8 @@ internal class BackupImportMoviesRunner @Inject constructor(
 
         val entity = Rating(
           idTmdb = rating.tmdbId,
-          type = "movie",
+          type = Rating.TYPE_MOVIE,
           rating = rating.rating,
-          seasonNumber = null,
-          episodeNumber = null,
           ratedAt = rating.ratedAt.toUtcDateTime() ?: nowUtc(),
           createdAt = nowUtc(),
           updatedAt = nowUtc(),

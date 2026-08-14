@@ -6,7 +6,6 @@ import xyz.stignarnia.common.errors.ShelflyError
 import xyz.stignarnia.repository.RatingsRepository
 import xyz.stignarnia.ui_model.Episode
 import xyz.stignarnia.ui_model.IdTmdb
-import xyz.stignarnia.ui_model.Ids
 import xyz.stignarnia.ui_model.UserRating
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.withContext
@@ -22,12 +21,14 @@ class RatingsEpisodeCase @Inject constructor(
     private val RATING_VALID_RANGE = 1..10
   }
 
-  suspend fun loadRating(idTmdb: IdTmdb): UserRating =
+  suspend fun loadRating(
+    showId: IdTmdb,
+    seasonNumber: Int,
+    episodeNumber: Int,
+  ): UserRating =
     withContext(dispatchers.IO) {
-      val episode = Episode.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = idTmdb))
       try {
-        val rating = ratingsRepository.shows.loadRating(episode)
-        rating ?: UserRating.EMPTY
+        ratingsRepository.shows.loadRating(showId, episode(seasonNumber, episodeNumber)) ?: UserRating.EMPTY
       } catch (error: Throwable) {
         handleError(error)
         UserRating.EMPTY
@@ -35,22 +36,17 @@ class RatingsEpisodeCase @Inject constructor(
     }
 
   suspend fun saveRating(
-    idTmdb: IdTmdb,
-    rating: Int,
+    showId: IdTmdb,
     seasonNumber: Int,
     episodeNumber: Int,
+    rating: Int,
   ) = withContext(dispatchers.IO) {
     check(rating in RATING_VALID_RANGE)
 
-    val episode = Episode.EMPTY.copy(
-      ids = Ids.EMPTY.copy(tmdb = idTmdb),
-      season = seasonNumber,
-      number = episodeNumber,
-    )
-
     try {
       ratingsRepository.shows.addRating(
-        episode = episode,
+        showId = showId,
+        episode = episode(seasonNumber, episodeNumber),
         rating = rating,
       )
     } catch (error: Throwable) {
@@ -58,17 +54,27 @@ class RatingsEpisodeCase @Inject constructor(
     }
   }
 
-  suspend fun deleteRating(idTmdb: IdTmdb) =
-    withContext(dispatchers.IO) {
-      val episode = Episode.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = idTmdb))
-      try {
-        ratingsRepository.shows.deleteRating(
-          episode = episode,
-        )
-      } catch (error: Throwable) {
-        handleError(error)
-      }
+  suspend fun deleteRating(
+    showId: IdTmdb,
+    seasonNumber: Int,
+    episodeNumber: Int,
+  ) = withContext(dispatchers.IO) {
+    try {
+      ratingsRepository.shows.deleteRating(
+        showId = showId,
+        episode = episode(seasonNumber, episodeNumber),
+      )
+    } catch (error: Throwable) {
+      handleError(error)
     }
+  }
+
+  // The rating is keyed by show, season and episode number, so nothing else is
+  // read off the episode here.
+  private fun episode(
+    seasonNumber: Int,
+    episodeNumber: Int,
+  ) = Episode.EMPTY.copy(season = seasonNumber, number = episodeNumber)
 
   private suspend fun handleError(error: Throwable) {
     val parsedError = ErrorHelper.parse(error)

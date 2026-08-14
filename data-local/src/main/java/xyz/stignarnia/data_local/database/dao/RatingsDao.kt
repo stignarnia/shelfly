@@ -23,30 +23,42 @@ interface RatingsDao :
     type: String,
   ): List<Rating>
 
-  @Query("DELETE FROM ratings WHERE type == :type AND id_tmdb IN (:ids)")
-  suspend fun deleteAllByType(
-    type: String,
-    ids: Set<Long>,
-  )
+  @Query("SELECT * FROM ratings WHERE id_tmdb == :showTmdbId AND type == 'season' ORDER BY season_number")
+  override suspend fun getSeasonRatings(showTmdbId: Long): List<Rating>
 
-  @Query("DELETE FROM ratings WHERE id_tmdb == :tmdbId AND type == :type")
-  override suspend fun deleteByType(
+  @Query(
+    "SELECT * FROM ratings WHERE id_tmdb == :showTmdbId AND type == 'season' " +
+      "AND season_number == :seasonNumber LIMIT 1",
+  )
+  override suspend fun getSeasonRating(
+    showTmdbId: Long,
+    seasonNumber: Int,
+  ): Rating?
+
+  @Query(
+    "SELECT * FROM ratings WHERE id_tmdb == :showTmdbId AND type == 'episode' " +
+      "AND season_number == :seasonNumber AND episode_number == :episodeNumber LIMIT 1",
+  )
+  override suspend fun getEpisodeRating(
+    showTmdbId: Long,
+    seasonNumber: Int,
+    episodeNumber: Int,
+  ): Rating?
+
+  @Query(
+    "DELETE FROM ratings WHERE id_tmdb == :tmdbId AND type == :type " +
+      "AND season_number == :seasonNumber AND episode_number == :episodeNumber",
+  )
+  override suspend fun deleteByKey(
     tmdbId: Long,
     type: String,
+    seasonNumber: Int,
+    episodeNumber: Int,
   )
-
-  @Transaction
-  override suspend fun replaceAll(
-    ratings: List<Rating>,
-    type: String,
-  ) {
-    deleteAllByType(type, ratings.map { it.idTmdb }.toSet())
-    insert(ratings)
-  }
 
   @Transaction
   override suspend fun replace(rating: Rating) {
-    deleteByType(rating.idTmdb, rating.type)
+    deleteByKey(rating.idTmdb, rating.type, rating.seasonNumber, rating.episodeNumber)
     insert(listOf(rating))
   }
 }

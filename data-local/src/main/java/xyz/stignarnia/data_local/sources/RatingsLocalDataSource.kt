@@ -13,14 +13,25 @@ interface RatingsLocalDataSource {
     type: String,
   ): List<Rating>
 
-  suspend fun deleteByType(
+  /** All season ratings recorded under [showTmdbId]. */
+  suspend fun getSeasonRatings(showTmdbId: Long): List<Rating>
+
+  suspend fun getSeasonRating(
+    showTmdbId: Long,
+    seasonNumber: Int,
+  ): Rating?
+
+  suspend fun getEpisodeRating(
+    showTmdbId: Long,
+    seasonNumber: Int,
+    episodeNumber: Int,
+  ): Rating?
+
+  suspend fun deleteByKey(
     tmdbId: Long,
     type: String,
-  )
-
-  suspend fun replaceAll(
-    ratings: List<Rating>,
-    type: String,
+    seasonNumber: Int,
+    episodeNumber: Int,
   )
 
   suspend fun replace(rating: Rating)

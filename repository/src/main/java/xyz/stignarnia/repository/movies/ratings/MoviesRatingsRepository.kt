@@ -16,12 +16,8 @@ class MoviesRatingsRepository @Inject constructor(
   private val mappers: Mappers,
 ) {
 
-  companion object {
-    private const val TYPE_MOVIE = "movie"
-  }
-
   suspend fun loadMoviesRatings(): List<UserRating> {
-    val ratings = localSource.ratings.getAllByType(TYPE_MOVIE)
+    val ratings = localSource.ratings.getAllByType(Rating.TYPE_MOVIE)
     return ratings.map {
       mappers.userRatings.fromDatabase(it)
     }
@@ -30,7 +26,7 @@ class MoviesRatingsRepository @Inject constructor(
   suspend fun loadRatings(movies: List<Movie>): List<UserRating> {
     val ratings = mutableListOf<Rating>()
     movies.chunked(250).forEach { chunk ->
-      val items = localSource.ratings.getAllByType(chunk.map { it.tmdbId }, TYPE_MOVIE)
+      val items = localSource.ratings.getAllByType(chunk.map { it.tmdbId }, Rating.TYPE_MOVIE)
       ratings.addAll(items)
     }
     return ratings.map {
@@ -48,6 +44,11 @@ class MoviesRatingsRepository @Inject constructor(
   }
 
   suspend fun deleteRating(movie: Movie) {
-    localSource.ratings.deleteByType(movie.tmdbId, TYPE_MOVIE)
+    localSource.ratings.deleteByKey(
+      tmdbId = movie.tmdbId,
+      type = Rating.TYPE_MOVIE,
+      seasonNumber = Rating.NO_NUMBER,
+      episodeNumber = Rating.NO_NUMBER,
+    )
   }
 }

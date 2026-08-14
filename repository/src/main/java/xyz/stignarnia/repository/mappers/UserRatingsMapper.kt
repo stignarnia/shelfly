@@ -11,6 +11,12 @@ import xyz.stignarnia.ui_model.UserRating
 import java.time.ZonedDateTime
 import javax.inject.Inject
 
+/**
+ * Season and episode ratings are stored under the show they belong to, not
+ * under their own TMDB id - see [Rating]. That id is not part of a season or
+ * episode's identity anywhere outside the database, so the show has to be
+ * passed in.
+ */
 class UserRatingsMapper @Inject constructor() {
 
   fun fromDatabase(entity: Rating) =
@@ -26,10 +32,8 @@ class UserRatingsMapper @Inject constructor() {
     ratedAt: ZonedDateTime,
   ) = Rating(
     idTmdb = movie.tmdbId,
-    type = "movie",
+    type = Rating.TYPE_MOVIE,
     rating = rating,
-    seasonNumber = null,
-    episodeNumber = null,
     ratedAt = ratedAt,
     createdAt = nowUtc(),
     updatedAt = nowUtc(),
@@ -41,22 +45,21 @@ class UserRatingsMapper @Inject constructor() {
     ratedAt: ZonedDateTime,
   ) = Rating(
     idTmdb = show.tmdbId,
-    type = "show",
+    type = Rating.TYPE_SHOW,
     rating = rating,
-    seasonNumber = null,
-    episodeNumber = null,
     ratedAt = ratedAt,
     createdAt = nowUtc(),
     updatedAt = nowUtc(),
   )
 
   fun toDatabaseEpisode(
+    showId: IdTmdb,
     episode: Episode,
     rating: Int,
     ratedAt: ZonedDateTime,
   ) = Rating(
-    idTmdb = episode.ids.tmdb.id,
-    type = "episode",
+    idTmdb = showId.id,
+    type = Rating.TYPE_EPISODE,
     rating = rating,
     seasonNumber = episode.season,
     episodeNumber = episode.number,
@@ -66,15 +69,15 @@ class UserRatingsMapper @Inject constructor() {
   )
 
   fun toDatabaseSeason(
+    showId: IdTmdb,
     season: Season,
     rating: Int,
     ratedAt: ZonedDateTime,
   ) = Rating(
-    idTmdb = season.ids.tmdb.id,
-    type = "season",
+    idTmdb = showId.id,
+    type = Rating.TYPE_SEASON,
     rating = rating,
     seasonNumber = season.number,
-    episodeNumber = null,
     ratedAt = ratedAt,
     createdAt = nowUtc(),
     updatedAt = nowUtc(),

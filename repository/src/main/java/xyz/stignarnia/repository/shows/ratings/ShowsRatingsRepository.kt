@@ -5,12 +5,17 @@ import xyz.stignarnia.data_local.LocalDataSource
 import xyz.stignarnia.data_local.database.model.Rating
 import xyz.stignarnia.repository.mappers.Mappers
 import xyz.stignarnia.ui_model.Episode
+import xyz.stignarnia.ui_model.IdTmdb
 import xyz.stignarnia.ui_model.Season
 import xyz.stignarnia.ui_model.Show
 import xyz.stignarnia.ui_model.UserRating
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Season and episode ratings hang off the show that owns them, so every call
+ * about one takes the show's TMDB id - see [Rating].
+ */
 @Singleton
 class ShowsRatingsRepository @Inject constructor(
   val external: ShowsExternalRatingsRepository,
@@ -19,33 +24,24 @@ class ShowsRatingsRepository @Inject constructor(
 ) {
 
   companion object {
-    private const val TYPE_SHOW = "show"
-    private const val TYPE_EPISODE = "episode"
-    private const val TYPE_SEASON = "season"
     private const val CHUNK_SIZE = 250
   }
 
   suspend fun loadShowsRatings(): List<UserRating> {
-    val ratings = localSource.ratings.getAllByType(TYPE_SHOW)
+    val ratings = localSource.ratings.getAllByType(Rating.TYPE_SHOW)
     return ratings.map {
       mappers.userRatings.fromDatabase(it)
     }
   }
 
-  suspend fun loadSeasonsRatings(): List<Rating> {
-    val ratings = localSource.ratings.getAllByType(TYPE_SEASON)
-    return ratings
-  }
+  suspend fun loadSeasonsRatings(): List<Rating> = localSource.ratings.getAllByType(Rating.TYPE_SEASON)
 
-  suspend fun loadEpisodesRatings(): List<Rating> {
-    val ratings = localSource.ratings.getAllByType(TYPE_EPISODE)
-    return ratings
-  }
+  suspend fun loadEpisodesRatings(): List<Rating> = localSource.ratings.getAllByType(Rating.TYPE_EPISODE)
 
   suspend fun loadRatings(shows: List<Show>): List<UserRating> {
     val ratings = mutableListOf<Rating>()
     shows.chunked(CHUNK_SIZE).forEach { chunk ->
-      val items = localSource.ratings.getAllByType(chunk.map { it.tmdbId }, TYPE_SHOW)
+      val items = localSource.ratings.getAllByType(chunk.map { it.tmdbId }, Rating.TYPE_SHOW)
       ratings.addAll(items)
     }
     return ratings.map {
@@ -53,67 +49,84 @@ class ShowsRatingsRepository @Inject constructor(
     }
   }
 
-  suspend fun loadRatingsSeasons(seasons: List<Season>): List<UserRating> {
-    val ratings = mutableListOf<Rating>()
-    seasons.chunked(CHUNK_SIZE).forEach { chunk ->
-      val items = localSource.ratings.getAllByType(chunk.map { it.ids.tmdb.id }, TYPE_SEASON)
-      ratings.addAll(items)
-    }
-    return ratings.map {
-      mappers.userRatings.fromDatabase(it)
-    }
-  }
+  /** Every season rating for [showId], keyed by season number. */
+  suspend fun loadSeasonRatings(showId: IdTmdb): Map<Int, UserRating> =
+    localSource.ratings
+      .getSeasonRatings(showId.id)
+      .associate { it.seasonNumber to mappers.userRatings.fromDatabase(it) }
 
-  suspend fun loadRating(episode: Episode): UserRating? {
-    val rating = localSource.ratings.getAllByType(listOf(episode.ids.tmdb.id), TYPE_EPISODE)
-    return rating.firstOrNull()?.let {
-      mappers.userRatings.fromDatabase(it)
-    }
-  }
+  suspend fun loadRating(
+    showId: IdTmdb,
+    season: Season,
+  ): UserRating? =
+    localSource.ratings
+      .getSeasonRating(showId.id, season.number)
+      ?.let { mappers.userRatings.fromDatabase(it) }
 
-  suspend fun loadRating(season: Season): UserRating? {
-    val rating = localSource.ratings.getAllByType(listOf(season.ids.tmdb.id), TYPE_SEASON)
-    return rating.firstOrNull()?.let {
-      mappers.userRatings.fromDatabase(it)
-    }
-  }
+  suspend fun loadRating(
+    showId: IdTmdb,
+    episode: Episode,
+  ): UserRating? =
+    localSource.ratings
+      .getEpisodeRating(showId.id, episode.season, episode.number)
+      ?.let { mappers.userRatings.fromDatabase(it) }
 
   suspend fun addRating(
     show: Show,
     rating: Int,
   ) {
-    val ratedAt = nowUtc()
-    val entity = mappers.userRatings.toDatabaseShow(show, rating, ratedAt)
+    val entity = mappers.userRatings.toDatabaseShow(show, rating, nowUtc())
     localSource.ratings.replace(entity)
   }
 
   suspend fun addRating(
+    showId: IdTmdb,
     episode: Episode,
     rating: Int,
   ) {
-    val ratedAt = nowUtc()
-    val entity = mappers.userRatings.toDatabaseEpisode(episode, rating, ratedAt)
+    val entity = mappers.userRatings.toDatabaseEpisode(showId, episode, rating, nowUtc())
     localSource.ratings.replace(entity)
   }
 
   suspend fun addRating(
+    showId: IdTmdb,
     season: Season,
     rating: Int,
   ) {
-    val ratedAt = nowUtc()
-    val entity = mappers.userRatings.toDatabaseSeason(season, rating, ratedAt)
+    val entity = mappers.userRatings.toDatabaseSeason(showId, season, rating, nowUtc())
     localSource.ratings.replace(entity)
   }
 
   suspend fun deleteRating(show: Show) {
-    localSource.ratings.deleteByType(show.tmdbId, TYPE_SHOW)
+    localSource.ratings.deleteByKey(
+      tmdbId = show.tmdbId,
+      type = Rating.TYPE_SHOW,
+      seasonNumber = Rating.NO_NUMBER,
+      episodeNumber = Rating.NO_NUMBER,
+    )
   }
 
-  suspend fun deleteRating(episode: Episode) {
-    localSource.ratings.deleteByType(episode.ids.tmdb.id, TYPE_EPISODE)
+  suspend fun deleteRating(
+    showId: IdTmdb,
+    season: Season,
+  ) {
+    localSource.ratings.deleteByKey(
+      tmdbId = showId.id,
+      type = Rating.TYPE_SEASON,
+      seasonNumber = season.number,
+      episodeNumber = Rating.NO_NUMBER,
+    )
   }
 
-  suspend fun deleteRating(season: Season) {
-    localSource.ratings.deleteByType(season.ids.tmdb.id, TYPE_SEASON)
+  suspend fun deleteRating(
+    showId: IdTmdb,
+    episode: Episode,
+  ) {
+    localSource.ratings.deleteByKey(
+      tmdbId = showId.id,
+      type = Rating.TYPE_EPISODE,
+      seasonNumber = episode.season,
+      episodeNumber = episode.number,
+    )
   }
 }

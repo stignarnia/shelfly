@@ -209,7 +209,7 @@ class ShowDetailsEpisodesFragment :
   private fun handleEvent(event: ShowDetailsEpisodesEvent<*>) {
     when (event) {
       is OpenEpisodeDetails -> openEpisodeDetails(event.bundle, event.isWatched)
-      is OpenRateSeason -> openRateSeasonDialog(event.season)
+      is OpenRateSeason -> openRateSeasonDialog(event.showId, event.season)
       is OpenEpisodeDateSelection -> openDateSelectionDialog(event.episode)
       is OpenSeasonDateSelection -> openDateSelectionDialog(event.season)
       is RequestWidgetsUpdate -> (requireAppContext() as WidgetsProvider).requestShowsWidgetsUpdate()
@@ -254,7 +254,10 @@ class ShowDetailsEpisodesFragment :
     navigateToSafe(R.id.actionEpisodesFragmentToEpisodesDetails, bundle)
   }
 
-  private fun openRateSeasonDialog(season: Season) {
+  private fun openRateSeasonDialog(
+    showId: IdTmdb,
+    season: Season,
+  ) {
     setFragmentResultListener(NavigationArgs.REQUEST_RATING) { _, bundle ->
       when (bundle.optionalParcelable<Operation>(NavigationArgs.RESULT)) {
         Operation.SAVE -> showSnack(MessageEvent.Info(R.string.textRateSaved))
@@ -267,6 +270,7 @@ class ShowDetailsEpisodesFragment :
     val bundle = RatingsBottomSheet.createBundle(
       id = season.ids.tmdb,
       type = Type.SEASON,
+      showId = showId,
       seasonNumber = season.number,
     )
     navigateToSafe(R.id.actionEpisodesFragmentToRating, bundle)

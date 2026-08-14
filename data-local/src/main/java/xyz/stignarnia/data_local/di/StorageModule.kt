@@ -5,6 +5,7 @@ import androidx.room.Room
 import xyz.stignarnia.data_local.database.AppDatabase
 import xyz.stignarnia.data_local.database.migrations.DATABASE_NAME
 import xyz.stignarnia.data_local.database.migrations.MIGRATION_42_43
+import xyz.stignarnia.data_local.database.migrations.MIGRATION_43_44
 import xyz.stignarnia.data_local.utilities.TransactionsProvider
 import dagger.Module
 import dagger.Provides
@@ -39,7 +40,7 @@ class StorageModule {
         fallbackToDestructiveMigration(dropAllTables = true)
         // Everything from 42 onwards migrates properly - there is user data
         // worth keeping now.
-        addMigrations(MIGRATION_42_43)
+        addMigrations(MIGRATION_42_43, MIGRATION_43_44)
       }.build()
   }
 

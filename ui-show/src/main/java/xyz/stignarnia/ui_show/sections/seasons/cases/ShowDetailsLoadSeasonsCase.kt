@@ -88,17 +88,17 @@ class ShowDetailsLoadSeasonsCase @Inject constructor(
     show: Show,
   ) = coroutineScope {
     val format = dateFormatProvider.loadFullHourFormat()
-    val seasonsRatings = ratingsRepository.shows.loadRatingsSeasons(remoteSeasons)
+    val seasonsRatings = ratingsRepository.shows.loadSeasonRatings(show.ids.tmdb)
     val spoilers = settingsRepository.spoilers.getAll()
     remoteSeasons
       .map {
         val userRating = RatingState(
-          userRating = seasonsRatings.find { rating -> rating.idTmdb == it.ids.tmdb },
+          userRating = seasonsRatings[it.number],
         )
         val episodes = it.episodes
           .map { episode ->
             async {
-              val rating = ratingsRepository.shows.loadRating(episode)
+              val rating = ratingsRepository.shows.loadRating(show.ids.tmdb, episode)
               val translation = translationsRepository.loadTranslation(episode, show.ids.tmdb, onlyLocal = true)
               EpisodeListItem(
                 episode = episode,

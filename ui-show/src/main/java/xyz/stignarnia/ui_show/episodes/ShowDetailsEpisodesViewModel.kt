@@ -82,7 +82,7 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
         eventChannel.send(ShowDetailsEpisodesEvent.Finish)
         return@launch
       }
-      val ratingSeason = ratingsCase.loadRating(season.season)
+      val ratingSeason = ratingsCase.loadRating(showId, season.season)
       seasonState.value = season.copy(
         userRating = season.userRating.copy(ratingSeason),
       )
@@ -105,7 +105,7 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
         val updatedEpisodesItems = episodeItems
           .map { episodeItem ->
             async {
-              val ratingEpisode = ratingsCase.loadRating(episodeItem.episode)
+              val ratingEpisode = ratingsCase.loadRating(show.ids.tmdb, episodeItem.episode)
               episodeItem.copy(myRating = ratingEpisode)
             }
           }.awaitAll()
@@ -122,7 +122,7 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
     viewModelScope.launch {
       val seasonItem = seasonState.value
       seasonItem?.let {
-        val ratingSeason = ratingsCase.loadRating(seasonItem.season)
+        val ratingSeason = ratingsCase.loadRating(show.ids.tmdb, seasonItem.season)
         val updatedSeasonItem = seasonItem.copy(
           userRating = seasonItem.userRating.copy(ratingSeason),
         )
@@ -261,7 +261,7 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
   fun openRateSeasonDialog() {
     viewModelScope.launch {
       seasonState.value?.season?.let {
-        eventChannel.send(ShowDetailsEpisodesEvent.OpenRateSeason(it))
+        eventChannel.send(ShowDetailsEpisodesEvent.OpenRateSeason(show.ids.tmdb, it))
       }
     }
   }
