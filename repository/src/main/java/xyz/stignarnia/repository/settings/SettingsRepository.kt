@@ -35,6 +35,7 @@ class SettingsRepository @Inject constructor(
   val viewMode: SettingsViewModeRepository,
   val spoilers: SettingsSpoilersRepository,
   val sync: SettingsSyncRepository,
+  val webdav: SettingsWebDavRepository,
   private val dispatchers: CoroutineDispatchers,
   private val localSource: LocalDataSource,
   private val transactions: TransactionsProvider,

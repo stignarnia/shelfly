@@ -93,6 +93,17 @@ class PreferencesModule {
 
   @Provides
   @Singleton
+  @Named("webdavPreferences")
+  fun providesWebDavPreferences(
+    @ApplicationContext context: Context,
+  ): SharedPreferences =
+    context.applicationContext.getSharedPreferences(
+      "PREFERENCES_WEBDAV",
+      Context.MODE_PRIVATE,
+    )
+
+  @Provides
+  @Singleton
   @Named("syncPreferences")
   fun providesSyncPreferences(
     @ApplicationContext context: Context,

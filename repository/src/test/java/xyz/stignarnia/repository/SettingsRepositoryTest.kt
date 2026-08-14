@@ -10,6 +10,7 @@ import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.repository.settings.SettingsSortRepository
 import xyz.stignarnia.repository.settings.SettingsSpoilersRepository
 import xyz.stignarnia.repository.settings.SettingsSyncRepository
+import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.repository.settings.SettingsViewModeRepository
 import xyz.stignarnia.repository.settings.SettingsWidgetsRepository
 import xyz.stignarnia.ui_model.Settings
@@ -34,6 +35,7 @@ class SettingsRepositoryTest : BaseMockTest() {
   @MockK lateinit var settingsViewModeRepository: SettingsViewModeRepository
   @MockK lateinit var settingsSpoilerRepositoryTest: SettingsSpoilersRepository
   @MockK lateinit var settingsSyncRepository: SettingsSyncRepository
+  @MockK lateinit var settingsWebDavRepository: SettingsWebDavRepository
 
   private lateinit var SUT: SettingsRepository
 
@@ -48,6 +50,7 @@ class SettingsRepositoryTest : BaseMockTest() {
       viewMode = settingsViewModeRepository,
       spoilers = settingsSpoilerRepositoryTest,
       sync = settingsSyncRepository,
+      webdav = settingsWebDavRepository,
       dispatchers = testDispatchers,
       localSource = database,
       transactions = transactions,
