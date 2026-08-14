@@ -33,6 +33,7 @@ import xyz.stignarnia.ui_backup.features.export.targets.BackupDestination
 import xyz.stignarnia.ui_backup.features.export.targets.BackupEntry
 import xyz.stignarnia.ui_backup.features.export.targets.LocalFolderBackupDestination
 import xyz.stignarnia.ui_backup.features.export.targets.WebDavBackupDestination
+import xyz.stignarnia.ui_backup.features.sync.SyncEngine
 import xyz.stignarnia.ui_model.BackupTarget
 import javax.inject.Named
 
@@ -43,6 +44,12 @@ import javax.inject.Named
  * write it, read it straight back and parse it to prove the write landed, then
  * prune to the newest few. Only the storage differs, which is what
  * [BackupDestination] abstracts.
+ *
+ * A WebDAV target then syncs with the user's other devices. The snapshot is
+ * written first and is never skipped: sync propagates an accidental deletion
+ * rather than protecting against one, so the retained copies are what makes it
+ * safe to run at all. Sync needs a server both ends can see, so a local folder
+ * target only ever takes the snapshot.
  */
 @HiltWorker
 class BackupExportScheduleWorker @AssistedInject constructor(
@@ -54,6 +61,7 @@ class BackupExportScheduleWorker @AssistedInject constructor(
   private val createBackupSchemeFromJsonUseCase: CreateBackupSchemeFromJsonUseCase,
   private val webDavRepository: SettingsWebDavRepository,
   private val webDavClient: WebDavClient,
+  private val syncEngine: SyncEngine,
   @Named("miscPreferences") private val miscPreferences: SharedPreferences,
 ) : CoroutineWorker(appContext, workerParams) {
 
@@ -175,18 +183,40 @@ class BackupExportScheduleWorker @AssistedInject constructor(
       Timber.w(exception, "Cleaning up of old backups failed")
     }
 
+    val credentials = webDavCredentials()
+    if (credentials != null) {
+      try {
+        val result = syncEngine.sync(credentials)
+        Timber.i("Sync successful against ${result.peers} peer(s)")
+      } catch (exception: Exception) {
+        // Reported rather than swallowed: the snapshot above is safe either
+        // way, but a device that quietly stops syncing drifts from the others
+        // and nothing says so.
+        Timber.w(exception, "Sync failed")
+        return Result.failure()
+      }
+    }
+
     return Result.success()
+  }
+
+  /** Configured WebDAV credentials, or null when the target is a local folder. */
+  private fun webDavCredentials(): WebDavCredentials? {
+    if (webDavRepository.backupTarget != BackupTarget.WEBDAV) {
+      return null
+    }
+    return WebDavCredentials(
+      url = webDavRepository.url,
+      username = webDavRepository.username,
+      password = webDavRepository.password,
+    ).takeIf { it.isComplete }
   }
 
   private fun resolveDestination(): BackupDestination =
     when (webDavRepository.backupTarget) {
       BackupTarget.WEBDAV -> {
-        val credentials = WebDavCredentials(
-          url = webDavRepository.url,
-          username = webDavRepository.username,
-          password = webDavRepository.password,
-        )
-        require(credentials.isComplete) { "WebDAV backup is selected but no server is configured." }
+        val credentials = webDavCredentials()
+        require(credentials != null) { "WebDAV backup is selected but no server is configured." }
         WebDavBackupDestination(webDavClient, credentials)
       }
 

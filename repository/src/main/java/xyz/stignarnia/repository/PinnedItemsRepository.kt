@@ -23,9 +23,13 @@ class PinnedItemsRepository @Inject constructor(
   fun addMoviePinnedItem(movieId: IdTmdb) =
     sharedPreferencesMovies.edit().putLong(movieId.id.toString(), movieId.id).apply()
 
-  fun removePinnedItem(show: Show) = sharedPreferences.edit().remove(show.tmdbId.toString()).apply()
+  fun removePinnedItem(show: Show) = removeShowPinnedItem(IdTmdb(show.tmdbId))
 
-  fun removePinnedItem(movie: Movie) = sharedPreferencesMovies.edit().remove(movie.tmdbId.toString()).apply()
+  fun removePinnedItem(movie: Movie) = removeMoviePinnedItem(IdTmdb(movie.tmdbId))
+
+  fun removeShowPinnedItem(showId: IdTmdb) = sharedPreferences.edit().remove(showId.id.toString()).apply()
+
+  fun removeMoviePinnedItem(movieId: IdTmdb) = sharedPreferencesMovies.edit().remove(movieId.id.toString()).apply()
 
   fun isItemPinned(show: Show) = sharedPreferences.contains(show.tmdbId.toString())
 

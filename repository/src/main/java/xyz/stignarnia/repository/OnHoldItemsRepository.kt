@@ -18,7 +18,9 @@ class OnHoldItemsRepository @Inject constructor(
 
   fun addItem(showId: IdTmdb) = sharedPreferences.edit().putLong(showId.id.toString(), showId.id).apply()
 
-  fun removeItem(show: Show) = sharedPreferences.edit().remove(show.tmdbId.toString()).apply()
+  fun removeItem(show: Show) = removeItem(IdTmdb(show.tmdbId))
+
+  fun removeItem(showId: IdTmdb) = sharedPreferences.edit().remove(showId.id.toString()).apply()
 
   fun isOnHold(show: Show) = sharedPreferences.contains(show.tmdbId.toString())
 }
