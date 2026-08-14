@@ -165,7 +165,9 @@ class OverscrollActionView
       if (value >= 1F) startFill(lifecycleOwner) else cancelFill()
 
       when (state) {
-        STATE_DRAG_START_SIDE -> armed = true
+        STATE_DRAG_START_SIDE -> {
+          armed = true
+        }
         STATE_BOUNCE_BACK -> {
           val filled = binding.overscrollActionProgress.progress >= FILL_STEPS
           if (offset >= OVERSCROLL_OFFSET && armed && filled) {

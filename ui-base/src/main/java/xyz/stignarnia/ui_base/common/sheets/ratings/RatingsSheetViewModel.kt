@@ -66,11 +66,18 @@ class RatingsSheetViewModel @Inject constructor(
         loadingState.value = true
         with(options) {
           when (type) {
-            Type.SHOW -> showRatingsCase.saveRating(id, rating)
-            Type.MOVIE -> movieRatingsCase.saveRating(id, rating)
-            Type.EPISODE ->
+            Type.SHOW -> {
+              showRatingsCase.saveRating(id, rating)
+            }
+            Type.MOVIE -> {
+              movieRatingsCase.saveRating(id, rating)
+            }
+            Type.EPISODE -> {
               episodeRatingsCase.saveRating(requireShowId(), seasonNumber(), episodeNumber(), rating)
-            Type.SEASON -> seasonRatingsCase.saveRating(requireShowId(), seasonNumber(), rating)
+            }
+            Type.SEASON -> {
+              seasonRatingsCase.saveRating(requireShowId(), seasonNumber(), rating)
+            }
           }
         }
         eventChannel.send(FinishUiEvent(operation = Operation.SAVE))

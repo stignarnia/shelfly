@@ -152,7 +152,9 @@ class BackupImportViewModel @Inject constructor(
         // Older schemes identify entries by ids from the previous catalog
         // source, which this fork cannot resolve. Reading one goes through an
         // explicit migration rather than being parsed as the current scheme.
-        BackupMigrationV2.VERSION -> backupMigrationV2.migrate(jsonInput)
+        BackupMigrationV2.VERSION -> {
+          backupMigrationV2.migrate(jsonInput)
+        }
         else -> {
           errorState.update { Error("Backup scheme v$version is not supported.") }
           null

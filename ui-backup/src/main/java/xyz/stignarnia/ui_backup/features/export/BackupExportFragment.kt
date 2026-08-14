@@ -230,7 +230,9 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
     dateFormat: DateTimeFormatter?,
   ): String {
     val lastSync = when (status.lastSyncedAt) {
-      0L -> getString(R.string.textSyncNever)
+      0L -> {
+        getString(R.string.textSyncNever)
+      }
       else -> {
         val date = dateFormat?.format(dateFromMillis(status.lastSyncedAt).toLocalZone())?.capitalizeWords()
         val peers = resources.getQuantityString(R.plurals.textSyncPeers, status.peers.size, status.peers.size)
