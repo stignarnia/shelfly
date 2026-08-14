@@ -78,14 +78,19 @@ jobs:
 
       # Optional. Without these secrets the release APK still builds, just
       # unsigned - the debug APK below is always installable regardless.
+      # The guard lives in the shell because the secrets context is not
+      # available to a step-level "if", which fails the workflow at parse time.
       - name: Decode signing keystore
-        if: ${{ secrets.KEYSTORE_BASE64 != '' }}
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
         run: |
+          if [ -z "$KEYSTORE_BASE64" ]; then
+            echo "No signing secrets configured; the release APK will be unsigned."
+            exit 0
+          fi
           echo "$KEYSTORE_BASE64" | base64 -d > app/keystore
           cat > app/keystore.properties <<EOF
           storePassword=$STORE_PASSWORD
