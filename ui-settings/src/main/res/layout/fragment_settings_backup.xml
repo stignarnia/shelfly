@@ -172,4 +172,47 @@
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/settingsBackupRetention"
+    style="@style/Settings.ItemLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/settingsBackupTarget"
+    >
+
+    <TextView
+      android:id="@+id/settingsBackupRetentionTitle"
+      style="@style/Settings.Title"
+      android:text="@string/textSettingsBackupRetentionTitle"
+      app:layout_constraintBottom_toTopOf="@id/settingsBackupRetentionDescription"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      />
+
+    <TextView
+      android:id="@+id/settingsBackupRetentionDescription"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceSmall"
+      android:text="@string/textSettingsBackupRetentionDescription"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toTopOf="@id/settingsBackupRetentionValue"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsBackupRetentionTitle"
+      />
+
+    <TextView
+      android:id="@+id/settingsBackupRetentionValue"
+      style="@style/Settings.Summary"
+      android:textColor="?android:attr/textColorPrimary"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsBackupRetentionDescription"
+      tools:text="5 most recent"
+      />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,7 +41,7 @@ import javax.inject.Named
  *
  * The pipeline is the same whichever target is configured: build the JSON,
  * write it, read it straight back and parse it to prove the write landed, then
- * prune to the newest [MAX_BACKUPS]. Only the storage differs, which is what
+ * prune to the newest few. Only the storage differs, which is what
  * [BackupDestination] abstracts.
  */
 @HiltWorker
@@ -64,7 +64,6 @@ class BackupExportScheduleWorker @AssistedInject constructor(
     const val KEY_BACKUP_EXPORT_DIRECTORY_URI = "KEY_BACKUP_EXPORT_DIRECTORY_URI"
     const val KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP = "KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP"
     private const val ARG_DIRECTORY_URI = "ARG_DIRECTORY_URI"
-    private const val MAX_BACKUPS = 5
 
     /**
      * Schedules a periodic backup export, replacing any existing schedule.
@@ -222,7 +221,9 @@ class BackupExportScheduleWorker @AssistedInject constructor(
   }
 
   /**
-   * Keeps the [MAX_BACKUPS] newest backups and deletes the rest.
+   * Keeps the newest backups and deletes the rest, according to the retention
+   * the user configured. A retention of
+   * [SettingsWebDavRepository.RETENTION_KEEP_ALL] deletes nothing at all.
    *
    * Sorted by modification time, falling back to the name - which carries a
    * sortable timestamp - because not every WebDAV server reports a
@@ -230,15 +231,21 @@ class BackupExportScheduleWorker @AssistedInject constructor(
    * old and be deleted arbitrarily.
    */
   private suspend fun pruneOldBackups(destination: BackupDestination) {
+    val keep = webDavRepository.backupRetention
+    if (keep <= SettingsWebDavRepository.RETENTION_KEEP_ALL) {
+      Timber.i("Retention is set to keep all backups. Nothing to prune.")
+      return
+    }
+
     val backups = destination
       .list()
       .getOrThrow()
       .filter { it.isBackup() }
       .sortedWith(compareBy({ it.lastModifiedMillis }, { it.name }))
 
-    if (backups.size <= MAX_BACKUPS) return
+    if (backups.size <= keep) return
 
-    backups.take(backups.size - MAX_BACKUPS).forEach { entry ->
+    backups.take(backups.size - keep).forEach { entry ->
       destination.delete(entry).onFailure {
         Timber.w(it, "Failed to delete old backup: ${entry.name}")
       }

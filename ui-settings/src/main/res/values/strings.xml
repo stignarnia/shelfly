@@ -158,4 +158,10 @@
   <string name="textSettingsBackupTargetDescription">Where scheduled backups are written.</string>
   <string name="textSettingsBackupTargetLocal">Local folder</string>
   <string name="textSettingsBackupTargetWebDav">WebDAV server</string>
+  <string name="textSettingsBackupRetentionTitle">Backups to keep</string>
+  <string name="textSettingsBackupRetentionDescription">Older backups are deleted once there are more than this. Applies to both destinations.</string>
+  <string name="textSettingsBackupRetentionHint">Number of backups (0 keeps every one)</string>
+  <string name="textSettingsBackupRetentionKeepAll">Keep all</string>
+  <string name="textSettingsBackupRetentionValue">%1$d most recent</string>
+  <string name="textSettingsBackupRetentionInvalid">Enter a whole number of 0 or more.</string>
 </resources>

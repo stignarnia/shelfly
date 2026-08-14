@@ -30,6 +30,7 @@ class SettingsBackupViewModel @Inject constructor(
       webDavUsername = webDavRepository.username,
       hasWebDavPassword = webDavRepository.password.isNotBlank(),
       backupTarget = webDavRepository.backupTarget,
+      backupRetention = webDavRepository.backupRetention,
     )
   }
 
@@ -52,6 +53,17 @@ class SettingsBackupViewModel @Inject constructor(
     // Selecting a server is not the same as choosing to use it; the target is
     // switched deliberately, so a saved server does not silently redirect
     // backups away from the folder the user already picked.
+    refresh()
+  }
+
+  /**
+   * Stores how many backups to keep. Zero means keep everything, so callers
+   * must pass a non-negative value; anything lower is refused rather than
+   * silently clamped, since deleting backups is not something to guess at.
+   */
+  fun setBackupRetention(count: Int) {
+    if (count < SettingsWebDavRepository.RETENTION_KEEP_ALL) return
+    webDavRepository.backupRetention = count
     refresh()
   }
 

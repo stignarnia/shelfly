@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import xyz.stignarnia.common.security.SecretCipher
 import xyz.stignarnia.repository.utilities.EnumPreference
+import xyz.stignarnia.repository.utilities.IntPreference
 import xyz.stignarnia.repository.utilities.StringPreference
 import xyz.stignarnia.ui_model.BackupTarget
 import javax.inject.Inject
@@ -29,10 +30,20 @@ class SettingsWebDavRepository @Inject constructor(
     private const val USERNAME = "WEBDAV_USERNAME"
     private const val PASSWORD = "WEBDAV_PASSWORD"
     private const val TARGET = "BACKUP_TARGET"
+    private const val RETENTION = "BACKUP_RETENTION"
+
+    const val RETENTION_KEEP_ALL = 0
+    const val RETENTION_DEFAULT = 5
   }
 
   var url: String by StringPreference(preferences, URL, "")
   var username: String by StringPreference(preferences, USERNAME, "")
+
+  /**
+   * How many backups to keep at the destination. [RETENTION_KEEP_ALL] disables
+   * pruning entirely, so nothing is ever deleted on the user's behalf.
+   */
+  var backupRetention: Int by IntPreference(preferences, RETENTION, RETENTION_DEFAULT)
 
   var backupTarget: BackupTarget by EnumPreference(
     preferences,

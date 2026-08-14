@@ -3,6 +3,7 @@ package xyz.stignarnia.ui_settings.sections.backup
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -12,9 +13,11 @@ import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
 import xyz.stignarnia.ui_base.utilities.viewBinding
+import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.ui_model.BackupTarget
 import xyz.stignarnia.ui_settings.R
 import xyz.stignarnia.ui_settings.databinding.FragmentSettingsBackupBinding
+import xyz.stignarnia.ui_settings.databinding.ViewRetentionInputBinding
 import xyz.stignarnia.ui_settings.databinding.ViewWebdavInputBinding
 
 @AndroidEntryPoint
@@ -47,6 +50,7 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
       }
       settingsBackupWebDav.onClick { showWebDavDialog() }
       settingsBackupTarget.onClick { showTargetDialog() }
+      settingsBackupRetention.onClick { showRetentionDialog() }
     }
   }
 
@@ -57,6 +61,10 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
         else -> getString(R.string.textSettingsWebDavNotConfigured)
       }
       settingsBackupTargetValue.setText(uiState.backupTarget.displayName())
+      settingsBackupRetentionValue.text = when (uiState.backupRetention) {
+        SettingsWebDavRepository.RETENTION_KEEP_ALL -> getString(R.string.textSettingsBackupRetentionKeepAll)
+        else -> getString(R.string.textSettingsBackupRetentionValue, uiState.backupRetention)
+      }
       // Choosing a destination is meaningless with nowhere to send it.
       settingsBackupTarget.visibleIf(uiState.isWebDavConfigured)
     }
@@ -120,6 +128,39 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
       }.setNegativeButton(R.string.textCancel) { _, _ -> }
       .setOnDismissListener { viewModel.clearConnectionTest() }
       .show()
+  }
+
+  private fun showRetentionDialog() {
+    val current = viewModel.uiState.value.backupRetention
+    val inputBinding = ViewRetentionInputBinding.inflate(LayoutInflater.from(requireContext()))
+    inputBinding.retentionInput.setText(current.toString())
+
+    val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
+      .setTitle(R.string.textSettingsBackupRetentionTitle)
+      .setMessage(R.string.textSettingsBackupRetentionDescription)
+      .setView(inputBinding.root)
+      .setPositiveButton(R.string.textOk, null)
+      .setNegativeButton(R.string.textCancel) { _, _ -> }
+      .create()
+
+    // The button is bound after showing so a bad value can be rejected without
+    // dismissing the dialog and losing what was typed.
+    dialog.setOnShowListener {
+      dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+        val typed = inputBinding.retentionInput.text
+          ?.toString()
+          ?.trim()
+          .orEmpty()
+        val count = typed.toIntOrNull()
+        if (count == null || count < 0) {
+          inputBinding.retentionInputLayout.error = getString(R.string.textSettingsBackupRetentionInvalid)
+          return@setOnClickListener
+        }
+        viewModel.setBackupRetention(count)
+        dialog.dismiss()
+      }
+    }
+    dialog.show()
   }
 
   private fun showTargetDialog() {

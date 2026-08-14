@@ -75,7 +75,7 @@ Two suites are opt-in and self-skip, so a green run does not mean they ran. `Tmd
 
 Set the server up in Settings → Backup & Restore → WebDAV server: the URL of the folder backups go into, plus credentials. "Test connection" tells you specifically what is wrong — wrong password, folder not found, rejected certificate, unreachable host — rather than just failing. The folder is created for you if the parent allows it.
 
-Saving a server does not start using it. Pick it under "Backup destination", which appears once a server is configured, then choose a cadence under Export data. Backups are verified by reading them back and parsing them before the timestamp is recorded, and the five newest are kept.
+Saving a server does not start using it. Pick it under "Backup destination", which appears once a server is configured, then choose a cadence under Export data. Backups are verified by reading them back and parsing them before the timestamp is recorded. "Backups to keep" controls how many are retained at the destination — set it to 0 to keep every one and never delete anything.
 
 Pulling down on the progress list runs a backup immediately.
 

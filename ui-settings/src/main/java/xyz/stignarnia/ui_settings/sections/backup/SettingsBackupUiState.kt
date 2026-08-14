@@ -8,6 +8,7 @@ data class SettingsBackupUiState(
   val webDavUsername: String = "",
   val hasWebDavPassword: Boolean = false,
   val backupTarget: BackupTarget = BackupTarget.LOCAL_FOLDER,
+  val backupRetention: Int = 5,
   val connectionTest: ConnectionTest = ConnectionTest.Idle,
 ) {
 
