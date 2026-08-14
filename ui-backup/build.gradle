@@ -65,6 +65,7 @@ dependencies {
 
   testImplementation project(':common-test')
   testImplementation libs.bundles.testing
+  testImplementation libs.mockwebserver
 
   coreLibraryDesugaring libs.android.desugar
 }
