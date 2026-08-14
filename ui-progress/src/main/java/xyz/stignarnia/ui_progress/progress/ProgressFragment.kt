@@ -24,7 +24,6 @@ import xyz.stignarnia.ui_base.utilities.NavigationHost
 import xyz.stignarnia.ui_base.utilities.events.Event
 import xyz.stignarnia.ui_base.utilities.events.MessageEvent
 import xyz.stignarnia.ui_base.utilities.extensions.add
-import xyz.stignarnia.ui_base.utilities.extensions.bump
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.fadeIf
@@ -54,7 +53,6 @@ import xyz.stignarnia.ui_navigation.java.NavigationArgs.REQUEST_SORT_ORDER
 import xyz.stignarnia.ui_progress.R
 import xyz.stignarnia.ui_progress.databinding.FragmentProgressBinding
 import xyz.stignarnia.ui_progress.helpers.ProgressLayoutManagerProvider
-import xyz.stignarnia.ui_progress.helpers.TopOverscrollAdapter
 import xyz.stignarnia.ui_progress.main.EpisodeCheckActionUiEvent
 import xyz.stignarnia.ui_progress.main.ProgressMainFragment
 import xyz.stignarnia.ui_progress.main.ProgressMainViewModel
@@ -62,14 +60,7 @@ import xyz.stignarnia.ui_progress.main.RequestWidgetsUpdate
 import xyz.stignarnia.ui_progress.progress.recycler.ProgressAdapter
 import xyz.stignarnia.ui_progress.progress.recycler.ProgressListItem
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import me.everything.android.ui.overscroll.IOverScrollDecor
-import me.everything.android.ui.overscroll.IOverScrollState.STATE_BOUNCE_BACK
-import me.everything.android.ui.overscroll.IOverScrollState.STATE_DRAG_START_SIDE
-import me.everything.android.ui.overscroll.OverScrollBounceEffectDecoratorBase
-import me.everything.android.ui.overscroll.VerticalOverScrollBounceEffectDecorator
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -79,8 +70,6 @@ class ProgressFragment :
   OnScrollResetListener {
 
   private companion object {
-    const val OVERSCROLL_OFFSET = 225F
-    const val OVERSCROLL_OFFSET_TRANSLATION = 4.5F
   }
 
   @Inject lateinit var settings: SettingsViewModeRepository
@@ -93,10 +82,7 @@ class ProgressFragment :
 
   private var adapter: ProgressAdapter? = null
   private var layoutManager: LayoutManager? = null
-  private var overscroll: IOverScrollDecor? = null
-  private var overscrollJob: Job? = null
   private var statusBarHeight = 0
-  private var overscrollEnabled = true
   private var isSearching = false
 
   override fun onViewCreated(
@@ -210,71 +196,10 @@ class ProgressFragment :
   }
 
   private fun setupOverscroll() {
-    if (overscroll != null || view == null) {
-      return
-    }
-    val adapt = TopOverscrollAdapter(binding.progressRecycler)
-    overscroll = VerticalOverScrollBounceEffectDecorator(
-      adapt,
-      1F,
-      OverScrollBounceEffectDecoratorBase.DEFAULT_TOUCH_DRAG_MOVE_RATIO_BCK,
-      OverScrollBounceEffectDecoratorBase.DEFAULT_DECELERATE_FACTOR,
-    ).apply {
-      setOverScrollUpdateListener { _, state, offset ->
-        binding.progressOverscroll.run {
-          if (offset > 0) {
-            val value = (offset / OVERSCROLL_OFFSET).coerceAtMost(1F)
-            val valueTranslation = offset / OVERSCROLL_OFFSET_TRANSLATION
-            if (value >= 1F) {
-              onOverscrollReach()
-            } else {
-              onOverscrollCancel()
-            }
-            when (state) {
-              STATE_DRAG_START_SIDE -> {
-                alpha = value
-                scaleX = value
-                scaleY = value
-                translationY = valueTranslation
-                overscrollEnabled = true
-              }
-              STATE_BOUNCE_BACK -> {
-                alpha = value
-                scaleX = value
-                scaleY = value
-                translationY = valueTranslation
-                if (offset >= OVERSCROLL_OFFSET &&
-                  overscrollEnabled &&
-                  binding.progressOverscrollProgress.progress >= 100
-                ) {
-                  overscrollEnabled = false
-                  onOverscrollTriggered()
-                }
-              }
-            }
-          } else {
-            alpha = 0F
-            scaleX = 0F
-            scaleY = 0F
-            translationY = 0F
-            onOverscrollCancel()
-          }
-        }
-      }
-    }
-  }
-
-  private fun onOverscrollReach() {
-    if (overscrollJob != null) return
-    overscrollJob = viewLifecycleOwner.lifecycleScope.launch {
-      repeat(100) {
-        val progress = it + 1
-        binding.progressOverscrollProgress.progress = progress
-        if (progress >= 100) {
-          binding.progressOverscroll.bump(200)
-        }
-        delay(5)
-      }
+    if (view == null) return
+    with(binding.progressOverscroll) {
+      onTriggered = { onOverscrollTriggered() }
+      attach(binding.progressRecycler, viewLifecycleOwner)
     }
   }
 
@@ -287,12 +212,6 @@ class ProgressFragment :
     val started = viewModel.startBackupNow()
     val message = if (started) R.string.textBackupStarted else R.string.textBackupNotConfigured
     showSnack(MessageEvent.Info(message))
-  }
-
-  private fun onOverscrollCancel() {
-    overscrollJob?.cancel()
-    overscrollJob = null
-    binding.progressOverscrollProgress.progress = 0
   }
 
   private fun openSortOrderDialog(
@@ -321,8 +240,7 @@ class ProgressFragment :
       progressRecycler.smoothScrollToPosition(0)
     }
 
-    overscroll?.detach()
-    overscroll = null
+    binding.progressOverscroll.detach()
   }
 
   override fun onExitSearch() {
@@ -370,8 +288,7 @@ class ProgressFragment :
         if (it) {
           setupOverscroll()
         } else {
-          overscroll?.detach()
-          overscroll = null
+          binding.progressOverscroll.detach()
         }
       }
       sortOrder?.let { event ->
@@ -406,9 +323,6 @@ class ProgressFragment :
   override fun setupBackPressed() = Unit
 
   override fun onDestroyView() {
-    overscrollJob?.cancel()
-    overscrollJob = null
-    overscroll = null
     adapter = null
     layoutManager = null
     super.onDestroyView()

@@ -76,4 +76,7 @@
   <dimen name="collectionItemRippleSpace">6dp</dimen>
   <dimen name="collectionItemRippleSpaceSmall">4dp</dimen>
 
+  <dimen name="overscrollActionPaddingTop">132dp</dimen>
+  <dimen name="overscrollActionIcon">35dp</dimen>
+  <dimen name="overscrollActionProgress">48dp</dimen>
 </resources>

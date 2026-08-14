@@ -17,7 +17,6 @@ import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.common.OnTabReselectedListener
 import xyz.stignarnia.ui_base.common.sheets.context_menu.ContextMenuBottomSheet
 import xyz.stignarnia.ui_base.utilities.extensions.add
-import xyz.stignarnia.ui_base.utilities.extensions.colorFromAttr
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_base.utilities.extensions.disableUi
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
@@ -52,9 +51,6 @@ internal class DiscoverMoviesFragment :
 
   override val viewModel by viewModels<DiscoverMoviesViewModel>()
   override val navigationId = R.id.discoverMoviesFragment
-
-  private val swipeRefreshStartOffset by lazy { requireContext().dimenToPx(R.dimen.swipeRefreshStartOffset) }
-  private val swipeRefreshEndOffset by lazy { requireContext().dimenToPx(R.dimen.swipeRefreshEndOffset) }
 
   private var adapter: DiscoverMoviesAdapter? = null
   private var layoutManager: GridLayoutManager? = null
@@ -102,7 +98,7 @@ internal class DiscoverMoviesFragment :
     setupView()
     setupInsets()
     setupRecycler()
-    setupSwipeRefresh()
+    setupOverscroll()
 
     launchAndRepeatStarted(
       { viewModel.uiState.collect { render(it) } },
@@ -154,11 +150,6 @@ internal class DiscoverMoviesFragment :
           .updateMargins(top = statusBarSize + dimenToPx(R.dimen.collectionTabsMargin))
         (discoverMoviesFiltersView.layoutParams as ViewGroup.MarginLayoutParams)
           .updateMargins(top = statusBarSize + dimenToPx(R.dimen.collectionFiltersMargin))
-        discoverMoviesSwipeRefresh.setProgressViewOffset(
-          true,
-          swipeRefreshStartOffset + statusBarSize,
-          swipeRefreshEndOffset,
-        )
       }
     }
   }
@@ -179,16 +170,14 @@ internal class DiscoverMoviesFragment :
     }
   }
 
-  private fun setupSwipeRefresh() {
-    binding.discoverMoviesSwipeRefresh.apply {
-      val color = requireContext().colorFromAttr(R.attr.colorAccent)
-      setProgressBackgroundColorSchemeColor(requireContext().colorFromAttr(R.attr.colorSearchViewBackground))
-      setColorSchemeColors(color, color, color)
-      setOnRefreshListener {
+  private fun setupOverscroll() {
+    with(binding.discoverMoviesOverscroll) {
+      onTriggered = {
         searchViewPosition = 0F
         tabsViewPosition = 0F
         viewModel.loadMovies(pullToRefresh = true)
       }
+      attach(binding.discoverMoviesRecycler, viewLifecycleOwner)
     }
   }
 
@@ -282,7 +271,7 @@ internal class DiscoverMoviesFragment :
           discoverMoviesRecycler.fadeIn(200, withHardware = true)
         }
         isLoading?.let {
-          discoverMoviesSwipeRefresh.isRefreshing = it
+          discoverMoviesOverscroll.setRunning(it)
           discoverMoviesSearchView.isEnabled = !it
           discoverMoviesTabsView.isEnabled = !it
           discoverMoviesFiltersView.isEnabled = !it
@@ -301,6 +290,7 @@ internal class DiscoverMoviesFragment :
   override fun onTabReselected() = openSearch()
 
   override fun onDestroyView() {
+    binding.discoverMoviesOverscroll.detach()
     adapter = null
     layoutManager = null
     super.onDestroyView()

@@ -50,41 +50,13 @@
     tools:visibility="visible"
     />
 
-  <FrameLayout
+  <xyz.stignarnia.ui_base.common.views.OverscrollActionView
     android:id="@+id/progressMoviesOverscroll"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:layout_marginTop="@dimen/progressMoviesOverscrollPadding"
-    android:alpha="0"
-    android:scaleX="0"
-    android:scaleY="0"
-    tools:alpha="1"
-    tools:scaleX="1"
-    tools:scaleY="1"
-    >
-
-    <ImageView
-      android:id="@+id/progressMoviesOverscrollIcon"
-      android:layout_width="@dimen/progressMoviesOverscrollIcon"
-      android:layout_height="@dimen/progressMoviesOverscrollIcon"
-      android:layout_gravity="center"
-      app:srcCompat="@drawable/ic_arrow_alt_down"
-      app:tint="?android:attr/textColorPrimary"
-      />
-
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-      android:id="@+id/progressMoviesOverscrollProgress"
-      android:layout_width="@dimen/progressMoviesOverscrollProgress"
-      android:layout_height="@dimen/progressMoviesOverscrollProgress"
-      android:layout_gravity="center"
-      android:indeterminate="false"
-      app:indicatorColor="?android:attr/textColorPrimary"
-      app:indicatorSize="@dimen/progressMoviesOverscrollProgress"
-      app:trackThickness="4dp"
-      tools:progress="75"
-      />
-
-  </FrameLayout>
+    android:layout_marginTop="@dimen/progressOverscrollPadding"
+    app:actionIcon="@drawable/ic_cloud_upload"
+    />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

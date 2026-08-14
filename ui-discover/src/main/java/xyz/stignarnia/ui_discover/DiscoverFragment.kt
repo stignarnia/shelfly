@@ -17,7 +17,6 @@ import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.common.OnTabReselectedListener
 import xyz.stignarnia.ui_base.common.sheets.context_menu.ContextMenuBottomSheet
 import xyz.stignarnia.ui_base.utilities.extensions.add
-import xyz.stignarnia.ui_base.utilities.extensions.colorFromAttr
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_base.utilities.extensions.disableUi
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
@@ -55,9 +54,6 @@ internal class DiscoverFragment :
   override val viewModel by viewModels<DiscoverViewModel>()
   private val binding by viewBinding(FragmentDiscoverBinding::bind)
 
-  private val swipeRefreshStartOffset by lazy { requireContext().dimenToPx(R.dimen.swipeRefreshStartOffset) }
-  private val swipeRefreshEndOffset by lazy { requireContext().dimenToPx(R.dimen.swipeRefreshEndOffset) }
-
   private var adapter: DiscoverAdapter? = null
   private var layoutManager: GridLayoutManager? = null
 
@@ -88,7 +84,7 @@ internal class DiscoverFragment :
     super.onViewCreated(view, savedInstanceState)
     setupView()
     setupRecycler()
-    setupSwipeRefresh()
+    setupOverscroll()
     setupInsets()
 
     launchAndRepeatStarted(
@@ -118,6 +114,7 @@ internal class DiscoverFragment :
   }
 
   override fun onDestroyView() {
+    binding.discoverOverscroll.detach()
     adapter = null
     layoutManager = null
     super.onDestroyView()
@@ -169,16 +166,14 @@ internal class DiscoverFragment :
     }
   }
 
-  private fun setupSwipeRefresh() {
-    binding.discoverSwipeRefresh.apply {
-      val color = requireContext().colorFromAttr(R.attr.colorAccent)
-      setProgressBackgroundColorSchemeColor(requireContext().colorFromAttr(R.attr.colorSearchViewBackground))
-      setColorSchemeColors(color, color, color)
-      setOnRefreshListener {
+  private fun setupOverscroll() {
+    with(binding.discoverOverscroll) {
+      onTriggered = {
         searchViewPosition = 0F
         tabsViewPosition = 0F
         viewModel.loadShows(pullToRefresh = true)
       }
+      attach(binding.discoverRecycler, viewLifecycleOwner)
     }
   }
 
@@ -210,11 +205,6 @@ internal class DiscoverFragment :
           .updateMargins(top = statusBarSize + dimenToPx(R.dimen.collectionTabsMargin))
         (discoverFiltersView.layoutParams as MarginLayoutParams)
           .updateMargins(top = statusBarSize + dimenToPx(filtersPadding))
-        discoverSwipeRefresh.setProgressViewOffset(
-          true,
-          swipeRefreshStartOffset + statusBarSize,
-          swipeRefreshEndOffset,
-        )
       }
     }
   }
@@ -310,7 +300,7 @@ internal class DiscoverFragment :
         }
         isLoading?.let {
           discoverSearchView.isEnabled = !it
-          discoverSwipeRefresh.isRefreshing = it
+          discoverOverscroll.setRunning(it)
           discoverModeTabsView.isEnabled = !it
           discoverFiltersView.isEnabled = !it
           discoverRecycler.isEnabled = !it

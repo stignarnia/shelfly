@@ -10,31 +10,32 @@
   android:clipToPadding="false"
   >
 
-  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/discoverSwipeRefresh"
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/discoverRecycler"
+    style="@style/ScrollbarsStyle"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:overScrollMode="never"
+    android:paddingLeft="@dimen/gridPadding"
+    android:paddingTop="@dimen/discoverRecyclerPadding"
+    android:paddingRight="@dimen/gridPadding"
+    android:paddingBottom="@dimen/bottomNavigationHeightPadded"
+    android:scrollbars="vertical"
+    android:visibility="gone"
+    tools:visibility="visible"
+    />
+
+  <xyz.stignarnia.ui_base.common.views.OverscrollActionView
+    android:id="@+id/discoverOverscroll"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    >
-
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/discoverRecycler"
-      style="@style/ScrollbarsStyle"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@android:color/transparent"
-      android:clipChildren="false"
-      android:clipToPadding="false"
-      android:overScrollMode="never"
-      android:paddingLeft="@dimen/gridPadding"
-      android:paddingTop="@dimen/discoverRecyclerPadding"
-      android:paddingRight="@dimen/gridPadding"
-      android:paddingBottom="@dimen/bottomNavigationHeightPadded"
-      android:scrollbars="vertical"
-      android:visibility="gone"
-      tools:visibility="visible"
-      />
-
-  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="@dimen/overscrollActionPaddingTop"
+    app:actionIcon="@drawable/ic_catalog_refresh"
+    />
 
   <xyz.stignarnia.ui_base.common.views.ModeTabsView
     android:id="@+id/discoverModeTabsView"
