@@ -21,7 +21,6 @@ import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.common.sheets.context_menu.ContextMenuBottomSheet
 import xyz.stignarnia.ui_base.common.sheets.sort_order.SortOrderBottomSheet
 import xyz.stignarnia.ui_base.utilities.extensions.add
-import xyz.stignarnia.ui_base.utilities.extensions.colorFromAttr
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_base.utilities.extensions.disableUi
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
@@ -78,9 +77,6 @@ class SearchFragment :
   private var suggestionsAdapter: SuggestionAdapter? = null
   private var layoutManager: LayoutManager? = null
   private var suggestionsLayoutManager: LayoutManager? = null
-
-  private val swipeRefreshEndOffset by lazy { requireContext().dimenToPx(R.dimen.swipeRefreshEndOffset) }
-  private val swipeRefreshStartOffset by lazy { requireContext().dimenToPx(R.dimen.swipeRefreshStartOffset) }
 
   private var headerTranslation = 0F
 
@@ -209,14 +205,6 @@ class SearchFragment :
           }
         })
       }
-
-      searchSwipeRefresh.apply {
-        isEnabled = false
-        val color = requireContext().colorFromAttr(R.attr.colorAccent)
-        setProgressBackgroundColorSchemeColor(requireContext().colorFromAttr(R.attr.colorSearchViewBackground))
-        setColorSchemeColors(color, color, color)
-        setProgressViewOffset(false, swipeRefreshStartOffset, swipeRefreshEndOffset)
-      }
     }
   }
 
@@ -341,7 +329,7 @@ class SearchFragment :
           searchFiltersView.setSorting(it.sortOrder, it.sortType)
         }
         isSearching.let {
-          searchSwipeRefresh.isRefreshing = it
+          searchOverscroll.setRunning(it)
           searchViewLayout.isEnabled = !it
         }
         sortOrder?.let { event ->

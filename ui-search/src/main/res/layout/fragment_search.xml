@@ -10,29 +10,32 @@
   android:clipToPadding="true"
   >
 
-  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/searchSwipeRefresh"
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/searchRecycler"
+    style="@style/ScrollbarsStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@android:color/transparent"
+    android:clipToPadding="false"
+    android:layoutAnimation="@anim/anim_recycler_fall_down"
+    android:overScrollMode="never"
+    android:paddingStart="@dimen/searchRecyclerHorizontalPadding"
+    android:paddingTop="@dimen/searchRecyclerTopPadding"
+    android:paddingEnd="@dimen/searchRecyclerHorizontalPadding"
+    android:paddingBottom="@dimen/spaceMedium"
+    android:scrollbars="vertical"
+    />
 
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/searchRecycler"
-      style="@style/ScrollbarsStyle"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@android:color/transparent"
-      android:clipToPadding="false"
-      android:layoutAnimation="@anim/anim_recycler_fall_down"
-      android:overScrollMode="never"
-      android:paddingStart="@dimen/searchRecyclerHorizontalPadding"
-      android:paddingTop="@dimen/searchRecyclerTopPadding"
-      android:paddingEnd="@dimen/searchRecyclerHorizontalPadding"
-      android:paddingBottom="@dimen/spaceMedium"
-      android:scrollbars="vertical"
-      />
-
-  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+  <xyz.stignarnia.ui_base.common.views.OverscrollActionView
+    android:id="@+id/searchOverscroll"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/overscrollActionPaddingTop"
+    app:actionIcon="@drawable/ic_search"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    />
 
   <xyz.stignarnia.ui_search.views.SearchFiltersView
     android:id="@+id/searchFiltersView"
