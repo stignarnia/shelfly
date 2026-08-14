@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+
+  <string name="menuProgress">进度</string>
+  <string name="menuCalendar">日历</string>
+</resources>

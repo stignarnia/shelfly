@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="textStreamingsFilterAll">所有平台</string>
+  <string name="textStreamingsEmpty">未找到此影片的流媒体平台。</string>
+</resources>

@@ -12,4 +12,7 @@
   <string name="textProgressEmpty">قائمة <b>مستوى التقدم</b> فارغة حالياً.\n\nإذهب إلى صفحة <b>إكتشف</b> لإضافة مسلسلات، أو اِستورد البيانات من TMDB.</string>
   <string name="textNewSeason">إفتتاحية الموسم</string>
   <string name="textPremieres">العروض الأولى</string>
+
+  <string name="textBackupStarted">جارٍ النسخ الاحتياطي والمزامنة مع أجهزتك الأخرى…</string>
+  <string name="textBackupNotConfigured">قم بإعداد خادم WebDAV في الإعدادات للنسخ الاحتياطي من هنا.</string>
 </resources>

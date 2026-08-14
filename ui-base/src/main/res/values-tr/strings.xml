@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="textOk">Tamam</string>
   <string name="textYes">Evet</string>
   <string name="textNo">Hayır</string>
   <string name="textApply">Uygula</string>
   <string name="textCancel">İptal</string>
-  <string name="textContinue">Sonraki</string>
   <string name="textClose">Kapat</string>
   <string name="textShare">Paylaş</string>
   <string name="textNow">Şimdi</string>
@@ -61,15 +60,15 @@
   <string name="textActing">Oyunculuk</string>
   <string name="textAiredAlready">Yayınlandı</string>
   <string name="textAirsNow">Şimdi Yayında</string>
-  <plurals name="textDaysToAir">
+  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Yarın yayında</item>
     <item quantity="other">%d gün içinde yayınlanacak</item>
   </plurals>
-  <plurals name="textHoursToAir">
+  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">1 saat içinde yayınlanacak</item>
     <item quantity="other">%d saat içinde yayınlanır</item>
   </plurals>
-  <plurals name="textMinutesToAir">
+  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Şimdi yayında</item>
     <item quantity="other">%d dakika içinde yayında</item>
   </plurals>
@@ -121,5 +120,4 @@
   <string name="errorCouldNotLoadMovie">Bu filmin ayrıntılarını şu anda yükleyemiyoruz.\nBu durum devam ederse lütfen bizimle iletişime geçin.</string>
   <string name="errorCouldNotLoadSearchResults">Şu anda arama sonuçlarını yükleyemiyoruz.\nBu durum devam ederse lütfen bizimle iletişime geçin.</string>
   <string name="errorNoInternetConnection">İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.</string>
-  <string name="errorSubscriptionsNotAvailable">Google Play Abonelikleri bu cihazda kullanılamaz.</string>
-</resources>
+  </resources>

@@ -12,4 +12,7 @@
   <string name="textProgressEmpty">您的 <b>进度</b> 目前为空。\n\n访问 <b>发现</b> 选项卡去添加剧集或从 TMDB 导入数据。</string>
   <string name="textNewSeason">新季首播</string>
   <string name="textPremieres">首映</string>
+
+  <string name="textBackupStarted">正在备份并与其他设备同步…</string>
+  <string name="textBackupNotConfigured">请在“设置”中配置 WebDAV 服务器以在此处备份。</string>
 </resources>

@@ -10,4 +10,10 @@
   <string name="textProgressEmpty">Ваш <b>Прогресс</b> в настоящее время пуст.\n\nПосетите вкладку <b>Открытия</b>, чтобы добавить сериалы или импортировать вашу коллекцию TMDB.</string>
   <string name="textNewSeason">Премьера сезона</string>
   <string name="textPremieres">Премьеры</string>
+
+  <string name="tabHistory">История</string>
+
+  <string name="textBackupStarted">Создание резервной копии и синхронизация с другими устройствами…</string>
+  <string name="textBackupNotConfigured">Настройте сервер WebDAV в Настройках, чтобы создать резервную копию отсюда.</string>
+  <string name="textHistoryEmpty">В вашей истории ничего нет.</string>
 </resources>

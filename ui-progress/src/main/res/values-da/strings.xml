@@ -12,4 +12,7 @@
   <string name="textProgressEmpty">Dit <b>Fremskridt</b> er tomt i øjeblikket.\n\nBesøg <b>Opdag</b>-fanen for at tilføje serier eller importer din TMDB samling.</string>
   <string name="textNewSeason">Sæson Præmiere</string>
   <string name="textPremieres">Premierer</string>
+
+  <string name="textBackupStarted">Sikkerhedskopierer og synkroniserer med dine andre enheder…</string>
+  <string name="textBackupNotConfigured">Konfigurer en WebDAV-server i Indstillinger for at sikkerhedskopiere herfra.</string>
 </resources>

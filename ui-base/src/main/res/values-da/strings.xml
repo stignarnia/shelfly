@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="textOk">OK</string>
   <string name="textYes">Ja</string>
   <string name="textNo">Nej</string>
   <string name="textApply">Anvend</string>
   <string name="textCancel">Annuller</string>
-  <string name="textContinue">Fortsæt</string>
   <string name="textClose">Luk</string>
   <string name="textShare">Share</string>
   <string name="textNow">Nu</string>
@@ -59,19 +58,17 @@
   <string name="textSound">Lyd</string>
   <string name="textMusic">Musik</string>
   <string name="textActing">Skuespil</string>
-  <string name="textSetCustomImages">Brugerdefinerede Billeder</string>
-  <string name="textSetCustomImagesDescription">Vælg din egen plakat og fanart, der vil blive brugt igennem appen.</string>
   <string name="textAiredAlready">Sendt</string>
   <string name="textAirsNow">Sendes Nu</string>
-  <plurals name="textDaysToAir">
+  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Sendes i morgen</item>
     <item quantity="other">Sendes om %d dage</item>
   </plurals>
-  <plurals name="textHoursToAir">
+  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Sendes om 1 time</item>
     <item quantity="other">Sendes om %d timer</item>
   </plurals>
-  <plurals name="textMinutesToAir">
+  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Sendes nu</item>
     <item quantity="other">Sendes om %d minutter</item>
   </plurals>
@@ -123,5 +120,4 @@
   <string name="errorCouldNotLoadMovie">Vi kunne ikke indlæse denne films detaljer i øjeblikket.\nKontakt os venligst hvis dette fortsætter med at ske.</string>
   <string name="errorCouldNotLoadSearchResults">Vi kunne ikke indlæse søgeresultaterne i øjeblikket.\nKontakt os venligst hvis dette fortsætter med at ske.</string>
   <string name="errorNoInternetConnection">Ingen internetforbindelse. Tjek venligst din forbindelse.</string>
-  <string name="errorSubscriptionsNotAvailable">Google Play Abonnementer er ikke tilgængelige på denne enhed.</string>
-</resources>
+  </resources>

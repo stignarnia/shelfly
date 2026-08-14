@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">Görüntü önbelleği temizlendi.</string>
   <string name="textTurnOff">Kapat</string>
@@ -96,4 +96,42 @@
   <string name="textThemeLight">Aydınlık</string>
   <string name="textThemeSystem">Sistem</string>
   <string name="textTransparency100">Mat</string>
+
+  <string name="textSettingsApiKeys">API Anahtarları</string>
+  <string name="textSettingsBackupTargetTitle">Yedekleme hedefi</string>
+  <string name="textSettingsBackupTargetDescription">Otomatik yedeklerin nerede saklanacağını seçin</string>
+  <string name="textSettingsBackupTargetLocal">Yalnızca yerel depolama</string>
+  <string name="textSettingsBackupTargetWebDav">WebDAV sunucusu</string>
+  <string name="textSettingsBackupRetentionTitle">Yedek saklama</string>
+  <string name="textSettingsBackupRetentionDescription">WebDAV sunucusunda tutulacak otomatik yedekleme dosyası sayısı</string>
+  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionKeepAll">Tüm yedekleri sakla</string>
+  <string name="textSettingsBackupRetentionValue">Son %1$d yedeği sakla</string>
+  <string name="textSettingsBackupRetentionInvalid">Lütfen geçerli bir pozitif sayı girin</string>
+
+  <string name="textSettingsApiKeyNotSet">Ayarlanmadı</string>
+  <string name="textSettingsApiKeyHint">Anahtarınızı yapıştırın</string>
+  <string name="textSettingsTmdbApiKeyTitle">TMDB API Anahtarı</string>
+  <string name="textSettingsTmdbApiKeyDescription">Gerekli. Tüm dizi ve film verilerini sağlar.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">themoviedb.org adresinde ücretsiz bir hesap oluşturun, ardından Ayarlar → API bölümünden API anahtarını (v3 doğrulaması) kopyalayın ve aşağıya yapıştırın.</string>
+  <string name="textSettingsOmdbApiKeyTitle">OMDb API Anahtarı</string>
+  <string name="textSettingsOmdbApiKeyDescription">İsteğe bağlı. IMDb puanlarını ekler.</string>
+  <string name="textSettingsOmdbApiKeyDialogMessage">omdbapi.com/apikey.aspx adresinden ücretsiz bir anahtar isteyin, e-postadan etkinleştirin ve aşağıya yapıştırın.</string>
+  <string name="textSettingsTmdbDisclaimer">Bu ürün TMDB API\'sini kullanır ancak TMDB tarafından onaylanmamış veya onaylanmamıştır.</string>
+  <string name="textSettingsWebDavTitle">WebDAV sunucusu</string>
+  <string name="textSettingsWebDavDescription">Koleksiyonunuzu kontrol ettiğiniz bir sunucuya yedekleyin.</string>
+  <string name="textSettingsWebDavNotConfigured">Yapılandırılmadı</string>
+  <string name="textSettingsWebDavDialogMessage">Yedeklerin gideceği klasörün adresini ve erişim kimlik bilgilerini girin.</string>
+  <string name="textSettingsWebDavUrlHint">Klasör URL\'si</string>
+  <string name="textSettingsWebDavUsernameHint">Kullanıcı adı</string>
+  <string name="textSettingsWebDavPasswordHint">Şifre</string>
+  <string name="textSettingsWebDavPasswordSetHint">Şifre (mevcut olanı korumak için boş bırakın)</string>
+  <string name="textSettingsWebDavTest">Bağlantıyı test et</string>
+  <string name="textSettingsWebDavTesting">Test ediliyor…</string>
+  <string name="textSettingsWebDavConnected">Bağlandı. Klasöre erişilebilir ve yazılabilir.</string>
+  <string name="textSettingsWebDavErrorAuth">Kimlik doğrulama başarısız. Kullanıcı adını ve şifreyi kontrol edin.</string>
+  <string name="textSettingsWebDavErrorNotFound">Klasör bulunamadı ve oluşturulamadı. URL\'yi kontrol edin.</string>
+  <string name="textSettingsWebDavErrorTls">Güvenli bağlantı kurulamadı. Sunucu sertifikasına güvenilmiyor.</string>
+  <string name="textSettingsWebDavErrorUnreachable">Sunucuya ulaşılamadı. Adresi ve bağlantınızı kontrol edin.</string>
+  <string name="textSettingsWebDavErrorUnexpected">Sunucu beklenmedik bir yanıt verdi.</string>
 </resources>

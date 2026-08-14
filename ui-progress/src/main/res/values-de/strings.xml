@@ -12,4 +12,7 @@
   <string name="textProgressEmpty">Dein <b>Fortschritt</b>ist aktuell leer.\n\nTippe auf den <b>Entdecken</b> Tab, um Serien hinzuzufügen oder deine TMDB-Sammlung zu importieren.</string>
   <string name="textNewSeason">Staffel Premiere</string>
   <string name="textPremieres">Premieren</string>
+
+  <string name="textBackupStarted">Sicherung und Synchronisierung mit Ihren anderen Geräten läuft…</string>
+  <string name="textBackupNotConfigured">Richten Sie in den Einstellungen einen WebDAV-Server ein, um von hier aus zu sichern.</string>
 </resources>

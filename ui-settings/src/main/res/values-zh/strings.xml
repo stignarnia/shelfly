@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">图像缓存已清理。</string>
   <string name="textTurnOff">关闭</string>
@@ -96,4 +96,42 @@
   <string name="textThemeLight">亮色</string>
   <string name="textThemeSystem">跟随系统</string>
   <string name="textTransparency100">不透明</string>
+
+  <string name="textSettingsApiKeys">API 密钥</string>
+  <string name="textSettingsBackupTargetTitle">备份目标位置</string>
+  <string name="textSettingsBackupTargetDescription">选择自动备份文件的存储位置</string>
+  <string name="textSettingsBackupTargetLocal">仅本地存储</string>
+  <string name="textSettingsBackupTargetWebDav">WebDAV 服务器</string>
+  <string name="textSettingsBackupRetentionTitle">备份保留策略</string>
+  <string name="textSettingsBackupRetentionDescription">在 WebDAV 服务器上保留的自动备份文件数量</string>
+  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionKeepAll">保留所有备份</string>
+  <string name="textSettingsBackupRetentionValue">保留最近 %1$d 个备份</string>
+  <string name="textSettingsBackupRetentionInvalid">请输入有效的正整数</string>
+
+  <string name="textSettingsApiKeyNotSet">未设置</string>
+  <string name="textSettingsApiKeyHint">粘贴您的密钥</string>
+  <string name="textSettingsTmdbApiKeyTitle">TMDB API 密钥</string>
+  <string name="textSettingsTmdbApiKeyDescription">必填。提供所有剧集和电影数据。</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">在 themoviedb.org 注册免费账户，然后从“设置 → API”复制 API 密钥 (v3 认证) 并粘贴到下方。</string>
+  <string name="textSettingsOmdbApiKeyTitle">OMDb API 密钥</string>
+  <string name="textSettingsOmdbApiKeyDescription">可选。添加 IMDb 评分。</string>
+  <string name="textSettingsOmdbApiKeyDialogMessage">在 omdbapi.com/apikey.aspx 申请免费密钥，通过邮件激活后粘贴到下方。</string>
+  <string name="textSettingsTmdbDisclaimer">本产品使用 TMDB API，但未经 TMDB 认可或认证。</string>
+  <string name="textSettingsWebDavTitle">WebDAV 服务器</string>
+  <string name="textSettingsWebDavDescription">将您的片单备份到您自己控制的服务器上。</string>
+  <string name="textSettingsWebDavNotConfigured">未配置</string>
+  <string name="textSettingsWebDavDialogMessage">输入用于存储备份文件的文件夹地址以及访问凭据。</string>
+  <string name="textSettingsWebDavUrlHint">文件夹 URL</string>
+  <string name="textSettingsWebDavUsernameHint">用户名</string>
+  <string name="textSettingsWebDavPasswordHint">密码</string>
+  <string name="textSettingsWebDavPasswordSetHint">密码 (留空则保持当前密码)</string>
+  <string name="textSettingsWebDavTest">测试连接</string>
+  <string name="textSettingsWebDavTesting">正在测试…</string>
+  <string name="textSettingsWebDavConnected">已连接。该文件夹可访问且可写入。</string>
+  <string name="textSettingsWebDavErrorAuth">身份认证失败。请检查用户名和密码。</string>
+  <string name="textSettingsWebDavErrorNotFound">找不到该文件夹且无法创建。请检查 URL。</string>
+  <string name="textSettingsWebDavErrorTls">无法建立安全连接。服务器证书不受信任。</string>
+  <string name="textSettingsWebDavErrorUnreachable">无法连接到服务器。请检查地址和网络连接。</string>
+  <string name="textSettingsWebDavErrorUnexpected">服务器返回了意外响应。</string>
 </resources>

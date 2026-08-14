@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">Pamięć podręczna obrazków została wyczyszczona.</string>
   <string name="textTurnOff">Wyłącz</string>
@@ -96,4 +96,42 @@
   <string name="textThemeLight">Jasny</string>
   <string name="textThemeSystem">Systemowy</string>
   <string name="textTransparency100">Nieprzezroczysty</string>
+
+  <string name="textSettingsApiKeys">Klucze API</string>
+  <string name="textSettingsBackupTargetTitle">Miejsce docelowe kopii zapasowej</string>
+  <string name="textSettingsBackupTargetDescription">Wybierz, gdzie mają być zapisywane automatyczne kopie zapasowe</string>
+  <string name="textSettingsBackupTargetLocal">Tylko pamięć lokalna</string>
+  <string name="textSettingsBackupTargetWebDav">Serwer WebDAV</string>
+  <string name="textSettingsBackupRetentionTitle">Przechowywanie kopii zapasowych</string>
+  <string name="textSettingsBackupRetentionDescription">Liczba automatycznych plików kopii zapasowych zachowywanych na serwerze WebDAV</string>
+  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionKeepAll">Zachowaj wszystkie kopie zapasowe</string>
+  <string name="textSettingsBackupRetentionValue">Zachowaj ostatnie %1$d kopii zapasowych</string>
+  <string name="textSettingsBackupRetentionInvalid">Wprowadź prawidłową liczbę dodatnią</string>
+
+  <string name="textSettingsApiKeyNotSet">Nie ustawiono</string>
+  <string name="textSettingsApiKeyHint">Wklej swój klucz</string>
+  <string name="textSettingsTmdbApiKeyTitle">Klucz API TMDB</string>
+  <string name="textSettingsTmdbApiKeyDescription">Wymagany. Zapewnia wszystkie dane o serialach i filmach.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Załóż darmowe konto na themoviedb.org, skopiuj klucz API (uwierzytelnianie v3) z Ustawienia → API i wklej go poniżej.</string>
+  <string name="textSettingsOmdbApiKeyTitle">Klucz API OMDb</string>
+  <string name="textSettingsOmdbApiKeyDescription">Opcjonalny. Dodaje oceny z IMDb.</string>
+  <string name="textSettingsOmdbApiKeyDialogMessage">Uzyskaj darmowy klucz na omdbapi.com/apikey.aspx, aktywuj go z wiadomości e-mail i wklej poniżej.</string>
+  <string name="textSettingsTmdbDisclaimer">Ten produkt korzysta z interfejsu API TMDB, ale nie jest zatwierdzony ani certyfikowany przez TMDB.</string>
+  <string name="textSettingsWebDavTitle">Serwer WebDAV</string>
+  <string name="textSettingsWebDavDescription">Twórz kopie zapasowe swojej kolekcji na własnym serwerze.</string>
+  <string name="textSettingsWebDavNotConfigured">Nie skonfigurowano</string>
+  <string name="textSettingsWebDavDialogMessage">Wprowadź adres folderu na kopie zapasowe oraz dane logowania.</string>
+  <string name="textSettingsWebDavUrlHint">Adres URL folderu</string>
+  <string name="textSettingsWebDavUsernameHint">Nazwa użytkownika</string>
+  <string name="textSettingsWebDavPasswordHint">Hasło</string>
+  <string name="textSettingsWebDavPasswordSetHint">Hasło (pozostaw puste, aby zachować obecne)</string>
+  <string name="textSettingsWebDavTest">Testuj połączenie</string>
+  <string name="textSettingsWebDavTesting">Testowanie…</string>
+  <string name="textSettingsWebDavConnected">Połączono. Folder jest dostępny z prawem do zapisu.</string>
+  <string name="textSettingsWebDavErrorAuth">Uwierzytelnianie nie powiodło się. Sprawdź nazwę użytkownika i hasło.</string>
+  <string name="textSettingsWebDavErrorNotFound">Nie znaleziono folderu i nie można go utworzyć. Sprawdź adres URL.</string>
+  <string name="textSettingsWebDavErrorTls">Nie można nawiązać bezpiecznego połączenia. Certyfikat serwera nie jest zaufany.</string>
+  <string name="textSettingsWebDavErrorUnreachable">Nie można połączyć się z serwerem. Sprawdź adres i połączenie sieciowe.</string>
+  <string name="textSettingsWebDavErrorUnexpected">Serwer odpowiedział w nieoczekiwany sposób.</string>
 </resources>

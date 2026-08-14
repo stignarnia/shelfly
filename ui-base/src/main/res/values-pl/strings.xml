@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="textOk">OK</string>
   <string name="textYes">Tak</string>
   <string name="textNo">Nie</string>
   <string name="textApply">Zastosuj</string>
   <string name="textCancel">Anuluj</string>
-  <string name="textContinue">Dalej</string>
   <string name="textClose">Zamknij</string>
   <string name="textShare">Prześlij</string>
   <string name="textNow">Teraz</string>
@@ -63,19 +62,19 @@
   <string name="textActing">Aktorstwo</string>
   <string name="textAiredAlready">Po premierze</string>
   <string name="textAirsNow">Premiera teraz</string>
-  <plurals name="textDaysToAir">
+  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Premiera jutro</item>
     <item quantity="few">Premiera za %d dni</item>
     <item quantity="many">Premiera za %d dni</item>
     <item quantity="other">Premiera za %d dni</item>
   </plurals>
-  <plurals name="textHoursToAir">
+  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Premiera za godzinę</item>
     <item quantity="few">Premiera za %d godzin</item>
     <item quantity="many">Premiera za %d godzin</item>
     <item quantity="other">Premiera za %d godzin</item>
   </plurals>
-  <plurals name="textMinutesToAir">
+  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Premiera teraz</item>
     <item quantity="few">Premiera za %d minut</item>
     <item quantity="many">Premiera za %d minut</item>
@@ -129,5 +128,4 @@
   <string name="errorCouldNotLoadMovie">W tej chwili nie można załadować informacji o filmie.\nSkontaktuj się z nami jeżeli błąd się powtarza.</string>
   <string name="errorCouldNotLoadSearchResults">W tej chwili nie można załadować wyników wyszukiwania.\nSkontaktuj się z nami jeżeli błąd się powtarza.</string>
   <string name="errorNoInternetConnection">Brak Internetu. Sprawdź swoje połączenie.</string>
-  <string name="errorSubscriptionsNotAvailable">Subskrypcje Google Play nie są dostępne na tym urządzeniu.</string>
-</resources>
+  </resources>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">Кэш изображений был очищен.</string>
   <string name="textTurnOff">Выключить</string>
@@ -96,4 +96,42 @@
   <string name="textThemeLight">Светлая</string>
   <string name="textThemeSystem">Системная</string>
   <string name="textTransparency100">Непрозрачная</string>
+
+  <string name="textSettingsApiKeys">Ключи API</string>
+  <string name="textSettingsBackupTargetTitle">Место сохранения резервных копий</string>
+  <string name="textSettingsBackupTargetDescription">Выберите, где сохранять автоматические резервные копии</string>
+  <string name="textSettingsBackupTargetLocal">Только локальное хранилище</string>
+  <string name="textSettingsBackupTargetWebDav">Сервер WebDAV</string>
+  <string name="textSettingsBackupRetentionTitle">Хранение резервных копий</string>
+  <string name="textSettingsBackupRetentionDescription">Количество автоматических резервных копий, сохраняемых на сервере WebDAV</string>
+  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionKeepAll">Хранить все копии</string>
+  <string name="textSettingsBackupRetentionValue">Хранить последние %1$d резервных копий</string>
+  <string name="textSettingsBackupRetentionInvalid">Пожалуйста, введите положительное число</string>
+
+  <string name="textSettingsApiKeyNotSet">Не задан</string>
+  <string name="textSettingsApiKeyHint">Вставьте ключ</string>
+  <string name="textSettingsTmdbApiKeyTitle">Ключ TMDB API</string>
+  <string name="textSettingsTmdbApiKeyDescription">Обязательно. Предоставляет все данные о сериалах и фильмах.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Создайте бесплатный аккаунт на themoviedb.org, скопируйте ключ API (v3 auth) из Настройки → API и вставьте его ниже.</string>
+  <string name="textSettingsOmdbApiKeyTitle">Ключ OMDb API</string>
+  <string name="textSettingsOmdbApiKeyDescription">Необязательно. Добавляет рейтинги IMDb.</string>
+  <string name="textSettingsOmdbApiKeyDialogMessage">Запросите бесплатный ключ на omdbapi.com/apikey.aspx, активируйте по почте и вставьте ниже.</string>
+  <string name="textSettingsTmdbDisclaimer">Этот продукт использует API TMDB, но не одобрен и не сертифицирован TMDB.</string>
+  <string name="textSettingsWebDavTitle">Сервер WebDAV</string>
+  <string name="textSettingsWebDavDescription">Сохраняйте резервные копии на собственном сервере.</string>
+  <string name="textSettingsWebDavNotConfigured">Не настроено</string>
+  <string name="textSettingsWebDavDialogMessage">Введите адрес папки для резервных копий и учетные данные для доступа.</string>
+  <string name="textSettingsWebDavUrlHint">URL папки</string>
+  <string name="textSettingsWebDavUsernameHint">Имя пользователя</string>
+  <string name="textSettingsWebDavPasswordHint">Пароль</string>
+  <string name="textSettingsWebDavPasswordSetHint">Пароль (оставьте пустым для сохранения текущего)</string>
+  <string name="textSettingsWebDavTest">Проверить подключение</string>
+  <string name="textSettingsWebDavTesting">Проверка…</string>
+  <string name="textSettingsWebDavConnected">Подключено. Папка доступна для записи.</string>
+  <string name="textSettingsWebDavErrorAuth">Ошибка аутентификации. Проверьте имя пользователя и пароль.</string>
+  <string name="textSettingsWebDavErrorNotFound">Папка не найдена и не может быть создана. Проверьте URL.</string>
+  <string name="textSettingsWebDavErrorTls">Не удалось установить защищенное соединение. Сертификат сервера не является доверенным.</string>
+  <string name="textSettingsWebDavErrorUnreachable">Не удалось подключиться к серверу. Проверьте адрес и соединение.</string>
+  <string name="textSettingsWebDavErrorUnexpected">Сервер вернул неожиданный ответ.</string>
 </resources>

@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="textOk">OK</string>
     <string name="textYes">Da</string>
     <string name="textNo">Nu</string>
     <string name="textApply">Aplică</string>
     <string name="textCancel">Anulează</string>
-    <string name="textContinue">Continuă</string>
     <string name="textClose">Închide</string>
     <string name="textShare">Distribuie</string>
     <string name="textNow">Acum</string>
@@ -60,21 +59,19 @@
     <string name="textSound">Sunet</string>
     <string name="textMusic">Muzică</string>
     <string name="textActing">Actorie</string>
-    <string name="textSetCustomImages">Imagini personalizate</string>
-    <string name="textSetCustomImagesDescription">Alege propriul poster și artă creată de fani care vor fi folosite în toată aplicația.</string>
     <string name="textAiredAlready">Difuzat</string>
     <string name="textAirsNow">Se difuzează acum</string>
-    <plurals name="textDaysToAir">
+    <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
         <item quantity="one">Se va difuza mâine</item>
         <item quantity="few">Se va difuza în %d zile</item>
         <item quantity="other">Se va difuza în %d zile</item>
     </plurals>
-    <plurals name="textHoursToAir">
+    <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
         <item quantity="one">Se difuzează într-o oră</item>
         <item quantity="few">Se difuzează în %d ore</item>
         <item quantity="other">Se difuzează în %d ore</item>
     </plurals>
-    <plurals name="textMinutesToAir">
+    <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
         <item quantity="one">Se difuzează acum</item>
         <item quantity="few">Se difuzează în %d minute</item>
         <item quantity="other">Se difuzează în %d minute</item>
@@ -127,5 +124,4 @@
     <string name="errorCouldNotLoadMovie">Nu am putut încărca detaliile acestui film în acest moment.\nVă rugăm să ne contactați dacă această problemă persistă.</string>
     <string name="errorCouldNotLoadSearchResults">Nu am putut încărca rezultatele căutării în acest moment.\nVă rugăm să ne contactați dacă această problemă persistă.</string>
     <string name="errorNoInternetConnection">Nu există conexiune la Internet. Vă rugăm să verificați conexiunea.</string>
-    <string name="errorSubscriptionsNotAvailable">Abonamentele Google Play nu sunt disponibile pe acest dispozitiv.</string>
-</resources>
+    </resources>

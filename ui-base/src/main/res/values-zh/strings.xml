@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="textOk">确定</string>
   <string name="textYes">确定</string>
   <string name="textNo">取消</string>
   <string name="textApply">应用</string>
   <string name="textCancel">取消</string>
-  <string name="textContinue">继续</string>
   <string name="textClose">关闭</string>
   <string name="textShare">分享</string>
   <string name="textNow">当前</string>
@@ -60,13 +59,13 @@
   <string name="textActing">出演</string>
   <string name="textAiredAlready">已播出</string>
   <string name="textAirsNow">现已开播</string>
-  <plurals name="textDaysToAir">
+  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="other">%d 天后开播</item>
   </plurals>
-  <plurals name="textHoursToAir">
+  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="other">%d 小时后开播</item>
   </plurals>
-  <plurals name="textMinutesToAir">
+  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="other">%d 分钟后开播</item>
   </plurals>
   <string name="textToday">今日</string>
@@ -117,5 +116,4 @@
   <string name="errorCouldNotLoadMovie">当前暂时无法加载该电影详情。\n如果这种情况持续发生，请联系我们。</string>
   <string name="errorCouldNotLoadSearchResults">当前暂时无法加载搜索结果。\n如果这种情况持续发生，请联系我们。</string>
   <string name="errorNoInternetConnection">无互联网连接。请检查您的网络。</string>
-  <string name="errorSubscriptionsNotAvailable">Google Play 服务在此设备上无法使用。</string>
-</resources>
+  </resources>

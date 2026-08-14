@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">Billede cachen er blevet ryddet.</string>
   <string name="textTurnOff">Slå Fra</string>
@@ -34,10 +34,6 @@
   <string name="textSettingsLogoutMessage">\nEr du sikker på, at du gerne vil logge ud?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Film</string>
   <string name="textSettingsMoviesEnabledSummary">Aktiver/deaktiver film support. Appen vil genstarte.</string>
-  <string name="textSettingsManagePaymentsTitle">Administrer Abonnementer</string>
-  <string name="textSettingsManagePaymentsSummary">Administrer abonnementer i Google Play Butik.</string>
-  <string name="textSettingsNewsEnabledTitle">Nyheder</string>
-  <string name="textSettingsNewsEnabledSummary">Aktiver/deaktiver nyhedssektionen. Appen vil genstarte.</string>
   <string name="textSettingsWidgets">Widgets</string>
   <string name="textSettingsWidgetsLabelsTitle">Titler</string>
   <string name="textSettingsWidgetsLabelsSummary">Vis gennemsigtige widget titler.</string>
@@ -100,4 +96,42 @@
   <string name="textThemeLight">Lys</string>
   <string name="textThemeSystem">System</string>
   <string name="textTransparency100">Uigennemsigtig</string>
+
+  <string name="textSettingsApiKeys">API-nøgler</string>
+  <string name="textSettingsBackupTargetTitle">Sikkerhedskopieringsdestination</string>
+  <string name="textSettingsBackupTargetDescription">Vælg, hvor automatiske sikkerhedskopier gemmes</string>
+  <string name="textSettingsBackupTargetLocal">Kun lokal lagring</string>
+  <string name="textSettingsBackupTargetWebDav">WebDAV-server</string>
+  <string name="textSettingsBackupRetentionTitle">Opbevaring af sikkerhedskopier</string>
+  <string name="textSettingsBackupRetentionDescription">Antal automatiske sikkerhedskopifiler, der skal beholdes på WebDAV-serveren</string>
+  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionKeepAll">Behold alle sikkerhedskopier</string>
+  <string name="textSettingsBackupRetentionValue">Behold de seneste %1$d sikkerhedskopier</string>
+  <string name="textSettingsBackupRetentionInvalid">Indtast venligst et gyldigt positivt tal</string>
+
+  <string name="textSettingsApiKeyNotSet">Ikke angivet</string>
+  <string name="textSettingsApiKeyHint">Indsæt din nøgle</string>
+  <string name="textSettingsTmdbApiKeyTitle">TMDB API-nøgle</string>
+  <string name="textSettingsTmdbApiKeyDescription">Påkrævet. Leverer alle serie- og filmdata.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Opret en gratis konto på themoviedb.org, kopiér API-nøglen (v3-godkendelse) fra Indstillinger → API og indsæt den nedenfor.</string>
+  <string name="textSettingsOmdbApiKeyTitle">OMDb API-nøgle</string>
+  <string name="textSettingsOmdbApiKeyDescription">Valgfrit. Tilføjer IMDb-bedømmelser.</string>
+  <string name="textSettingsOmdbApiKeyDialogMessage">Anmod om en gratis nøgle på omdbapi.com/apikey.aspx, aktivér den via e-mail, og indsæt den nedenfor.</string>
+  <string name="textSettingsTmdbDisclaimer">Dette produkt bruger TMDB API, men er ikke godkendt eller certificeret af TMDB.</string>
+  <string name="textSettingsWebDavTitle">WebDAV-server</string>
+  <string name="textSettingsWebDavDescription">Sikkerhedskopier din samling til en server, du kontrollerer.</string>
+  <string name="textSettingsWebDavNotConfigured">Ikke konfigureret</string>
+  <string name="textSettingsWebDavDialogMessage">Indtast adressen på den mappe, sikkerhedskopier skal gemmes i, samt legitimationsoplysningerne.</string>
+  <string name="textSettingsWebDavUrlHint">Mappe-URL</string>
+  <string name="textSettingsWebDavUsernameHint">Brugernavn</string>
+  <string name="textSettingsWebDavPasswordHint">Adgangskode</string>
+  <string name="textSettingsWebDavPasswordSetHint">Adgangskode (lad stå tomt for at beholde nuværende)</string>
+  <string name="textSettingsWebDavTest">Test forbindelse</string>
+  <string name="textSettingsWebDavTesting">Tester…</string>
+  <string name="textSettingsWebDavConnected">Forbundet. Mappen kan nås og er skrivbar.</string>
+  <string name="textSettingsWebDavErrorAuth">Godkendelse mislykkedes. Tjek brugernavn og adgangskode.</string>
+  <string name="textSettingsWebDavErrorNotFound">Mappe ikke fundet, og den kunne ikke oprettes. Tjek URL.</string>
+  <string name="textSettingsWebDavErrorTls">Kunne ikke etablere en sikker forbindelse. Serverens certifikat blev ikke betroet.</string>
+  <string name="textSettingsWebDavErrorUnreachable">Kunne ikke nå serveren. Tjek adressen og din forbindelse.</string>
+  <string name="textSettingsWebDavErrorUnexpected">Serveren svarede uventet.</string>
 </resources>

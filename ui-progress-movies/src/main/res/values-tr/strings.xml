@@ -6,4 +6,8 @@
   <string name="textMoviesCalendarRecentsEmpty">Yakın zamanda yayınlanan film yok.</string>
   <string name="textDiscoverMovies">Filmleri Keşfet</string>
   <string name="textMoviesProgressEmpty"><b>İlerlemeniz</b> şu anda boştur.\n\nFilmler eklemek için <b>Keşfet</b> sekmesini ziyaret edin veya TMDB koleksiyonunuzdan aktarın.</string>
+
+  <string name="textBackupStarted">Yedekleniyor ve diğer cihazlarınızla senkronize ediliyor…</string>
+
+  <string name="textBackupNotConfigured">Buradan yedekleme yapmak için Ayarlar\'da bir WebDAV sunucusu kurun.</string>
 </resources>

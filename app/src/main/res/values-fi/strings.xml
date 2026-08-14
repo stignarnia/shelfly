@@ -12,4 +12,7 @@
   <string name="shortcutCollection">Kokoelma</string>
   <string name="shortcutSearch">Haku</string>
   <string name="shortcutProgress">Katselutila</string>
+
+  <string name="textOnboardingApiKeyTitle">TMDB API -avain vaaditaan</string>
+  <string name="textOnboardingApiKeyMessage">Tämä sovellus käyttää omaa TMDB-avaintasi, joten avainta ei toimiteta sovelluksen mukana eikä käyttöäsi jaeta kenenkään kanssa.\n\nLuo ilmainen tili osoitteessa themoviedb.org, kopioi API-avain (v3-todennus) kohdasta Asetukset → API ja liitä se alle. Voit muuttaa sitä myöhemmin Asetuksissa.</string>
 </resources>

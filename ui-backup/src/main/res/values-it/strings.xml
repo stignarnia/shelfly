@@ -21,4 +21,25 @@
   <string name="textBackupExportOption3DayButton">Programmata per ogni 3 giorni</string>
   <string name="textBackupExportOptionWeeklyButton">Programmata per ogni settimana</string>
   <string name="textBackupExportLastTimestamp">Ultimo backup: %s</string>
+
+  <string name="textBackupImportSkipped">Alcuni elementi non hanno trovato corrispondenza su TMDB e sono stati ignorati:</string>
+  <string name="textBackupImportSkippedShows">%1$d serie (%2$s)</string>
+  <string name="textBackupImportSkippedMovies">%1$d film (%2$s)</string>
+  <string name="textBackupImportSkippedSeasons">%1$d stagioni</string>
+  <string name="textBackupImportSkippedEpisodes">%1$d episodi visti</string>
+  <string name="textBackupImportSkippedShowRatings">%1$d valutazioni serie</string>
+  <string name="textBackupImportSkippedSeasonRatings">%1$d valutazioni stagioni</string>
+  <string name="textBackupImportSkippedEpisodeRatings">%1$d valutazioni episodi</string>
+  <string name="textBackupImportSkippedMovieRatings">%1$d valutazioni film</string>
+  <string name="textBackupImportSkippedListItems">%1$d elementi dell\'elenco</string>
+  <string name="textSyncLastTimestamp">Ultima sincronizzazione: %s</string>
+  <string name="textSyncNever">Non ancora sincronizzato con nessun altro dispositivo</string>
+  <string name="textSyncFailed">Sincronizzazione fallita: %s</string>
+  <string name="textBackupImportFromWebDav">Importa da WebDAV</string>
+  <string name="textBackupWebDavNoBackups">Nessun backup trovato sul server.</string>
+  <string name="textBackupWebDavPick">Seleziona un backup da ripristinare</string>
+  <plurals name="textSyncPeers">
+    <item quantity="one">%d altro dispositivo</item>
+    <item quantity="other">%d altri dispositivi</item>
+  </plurals>
 </resources>

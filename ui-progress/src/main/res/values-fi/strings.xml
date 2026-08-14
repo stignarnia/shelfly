@@ -12,4 +12,7 @@
   <string name="textProgressEmpty"><b>Katselutila</b> on tyhjä.\n\nLisää sarjoja <b>Etsi</b>-osiosta tai tuo TMDB-kokoelmasi.</string>
   <string name="textNewSeason">Kauden aloitus</string>
   <string name="textPremieres">Ensiesitykset</string>
+
+  <string name="textBackupStarted">Varmuuskopioidaan ja synkronoidaan muiden laitteidesi kanssa…</string>
+  <string name="textBackupNotConfigured">Määritä WebDAV-palvelin Asetuksissa varmuuskopioidaksesi täältä.</string>
 </resources>

@@ -21,4 +21,27 @@
   <string name="textBackupExportOption3DayButton">Заплановано запускати кожні 3 дні</string>
   <string name="textBackupExportOptionWeeklyButton">Заплановано запускати кожен тиждень</string>
   <string name="textBackupExportLastTimestamp">Остання резервна копія: %s</string>
+
+  <string name="textBackupImportSkipped">Деякі записи не знайдені в TMDB і були пропущені:</string>
+  <string name="textBackupImportSkippedShows">%1$d серіалів (%2$s)</string>
+  <string name="textBackupImportSkippedMovies">%1$d фільмів (%2$s)</string>
+  <string name="textBackupImportSkippedSeasons">%1$d сезонів</string>
+  <string name="textBackupImportSkippedEpisodes">%1$d переглянутих серій</string>
+  <string name="textBackupImportSkippedShowRatings">%1$d оцінок серіалів</string>
+  <string name="textBackupImportSkippedSeasonRatings">%1$d оцінок сезонів</string>
+  <string name="textBackupImportSkippedEpisodeRatings">%1$d оцінок серій</string>
+  <string name="textBackupImportSkippedMovieRatings">%1$d оцінок фільмів</string>
+  <string name="textBackupImportSkippedListItems">%1$d елементів списку</string>
+  <string name="textSyncLastTimestamp">Остання синхронізація: %s</string>
+  <string name="textSyncNever">Ще не синхронізовано з жодним іншим пристроєм</string>
+  <string name="textSyncFailed">Помилка синхронізації: %s</string>
+  <string name="textBackupImportFromWebDav">Імпорт із WebDAV</string>
+  <string name="textBackupWebDavNoBackups">На сервері не знайдено резервних копій.</string>
+  <string name="textBackupWebDavPick">Виберіть резервну копію для відновлення</string>
+  <plurals name="textSyncPeers">
+    <item quantity="one">%d інший пристрій</item>
+    <item quantity="few">%d інші пристрої</item>
+    <item quantity="many">%d інших пристроїв</item>
+    <item quantity="other">%d інших пристроїв</item>
+  </plurals>
 </resources>

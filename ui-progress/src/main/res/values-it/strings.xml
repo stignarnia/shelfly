@@ -12,4 +12,7 @@
   <string name="textProgressEmpty">La tua pagina <b>Progressi</b> è vuota.\n\nVisita la pagina <b>Scopri</b> per aggiungere uno show o importa la tua raccolta TMDB.</string>
   <string name="textNewSeason">Primo episodio</string>
   <string name="textPremieres">Anteprime</string>
+
+  <string name="textBackupStarted">Backup e sincronizzazione con gli altri tuoi dispositivi in corso…</string>
+  <string name="textBackupNotConfigured">Configura un server WebDAV nelle Impostazioni per eseguire il backup da qui.</string>
 </resources>

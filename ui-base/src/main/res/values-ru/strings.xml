@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="textOk">ОК</string>
   <string name="textYes">Да</string>
   <string name="textNo">Нет</string>
   <string name="textApply">Применить</string>
   <string name="textCancel">Отменить</string>
-  <string name="textContinue">Продолжить</string>
   <string name="textClose">Закрыть</string>
   <string name="textShare">Поделиться</string>
   <string name="textNow">Сейчас</string>
@@ -62,19 +61,19 @@
   <string name="textActing">Фильмография</string>
   <string name="textAiredAlready">Вышло</string>
   <string name="textAirsNow">Уже вышло</string>
-  <plurals name="textDaysToAir">
+  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Выходит через %d день</item>
     <item quantity="few">Выходит через %d дней</item>
     <item quantity="many">Выходит через %d дней</item>
     <item quantity="other">Выходит через %d дней</item>
   </plurals>
-  <plurals name="textHoursToAir">
+  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Выходит через 1 час</item>
     <item quantity="few">Выходит через %d часа</item>
     <item quantity="many">Выходит через %d часов</item>
     <item quantity="other">Выходит через %d часов</item>
   </plurals>
-  <plurals name="textMinutesToAir">
+  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Уже вышло</item>
     <item quantity="few">Выходит через %d минут</item>
     <item quantity="many">Выходит через %d минут</item>
@@ -128,5 +127,5 @@
   <string name="errorCouldNotLoadMovie">Мы не смогли загрузить детали этого фильма.\nПожалуйста, свяжитесь с нами, если это произойдет снова.</string>
   <string name="errorCouldNotLoadSearchResults">Мы не смогли загрузить результаты поиска.\nПожалуйста, свяжитесь с нами, если это произойдет снова.</string>
   <string name="errorNoInternetConnection">Нет интернет соединения. Проверьте своё подключение.</string>
-  <string name="errorSubscriptionsNotAvailable">Сервисы Google Play недоступны на этом устройстве.</string>
+  <string name="textReleaseDay">День премьеры</string>
 </resources>

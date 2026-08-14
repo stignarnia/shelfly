@@ -21,4 +21,24 @@
   <string name="textBackupExportOption3DayButton">已设置每隔 3 天运行</string>
   <string name="textBackupExportOptionWeeklyButton">已设置每隔 1 周运行</string>
   <string name="textBackupExportLastTimestamp">上次备份: %s</string>
+
+  <string name="textBackupImportSkipped">部分条目未匹配到 TMDB 数据，已跳过：</string>
+  <string name="textBackupImportSkippedShows">%1$d 部剧集 (%2$s)</string>
+  <string name="textBackupImportSkippedMovies">%1$d 部电影 (%2$s)</string>
+  <string name="textBackupImportSkippedSeasons">%1$d 个季</string>
+  <string name="textBackupImportSkippedEpisodes">%1$d 个已观看剧集</string>
+  <string name="textBackupImportSkippedShowRatings">%1$d 条剧集评分</string>
+  <string name="textBackupImportSkippedSeasonRatings">%1$d 条单季评分</string>
+  <string name="textBackupImportSkippedEpisodeRatings">%1$d 条单集评分</string>
+  <string name="textBackupImportSkippedMovieRatings">%1$d 条电影评分</string>
+  <string name="textBackupImportSkippedListItems">%1$d 个列表项</string>
+  <string name="textSyncLastTimestamp">上次同步：%s</string>
+  <string name="textSyncNever">尚未与其他任何设备同步</string>
+  <string name="textSyncFailed">同步失败：%s</string>
+  <string name="textBackupImportFromWebDav">从 WebDAV 导入</string>
+  <string name="textBackupWebDavNoBackups">服务器上未找到备份。</string>
+  <string name="textBackupWebDavPick">选择要恢复的备份</string>
+  <plurals name="textSyncPeers">
+    <item quantity="other">%d 台其他设备</item>
+  </plurals>
 </resources>

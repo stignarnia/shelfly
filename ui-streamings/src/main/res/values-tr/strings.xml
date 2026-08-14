@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="textStreamingsFilterAll">Tüm Sağlayıcılar</string>
+  <string name="textStreamingsEmpty">Bu başlık için akış sağlayıcısı bulunamadı.</string>
+</resources>

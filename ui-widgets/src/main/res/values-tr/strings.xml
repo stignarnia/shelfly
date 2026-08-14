@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+
+  <string name="menuProgress">İlerleme</string>
+  <string name="menuCalendar">Takvim</string>
+</resources>

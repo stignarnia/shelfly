@@ -12,4 +12,7 @@
     <string name="shortcutCollection">Colecție</string>
     <string name="shortcutSearch">Căutare</string>
     <string name="shortcutProgress">Progres</string>
+
+  <string name="textOnboardingApiKeyTitle">Cheie API TMDB necesară</string>
+  <string name="textOnboardingApiKeyMessage">Această aplicație folosește propria cheie TMDB, astfel încât nicio cheie nu este inclusă în aplicație și utilizarea nu este partajată cu nimeni altcineva.\n\nCreați un cont gratuit pe themoviedb.org, copiați cheia API (autentificare v3) din Setări → API și inserați-o mai jos. O puteți schimba ulterior în Setări.</string>
 </resources>

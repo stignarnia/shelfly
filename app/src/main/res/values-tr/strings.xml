@@ -12,4 +12,7 @@
   <string name="shortcutCollection">Koleksiyon</string>
   <string name="shortcutSearch">Ara</string>
   <string name="shortcutProgress">İlerleme</string>
+
+  <string name="textOnboardingApiKeyTitle">TMDB API anahtarı gerekli</string>
+  <string name="textOnboardingApiKeyMessage">Bu uygulama kendi TMDB anahtarınızı kullanır, bu nedenle içine hiçbir anahtar dahil edilmez ve kullanımınız başkalarıyla paylaşılmaz.\n\nthemoviedb.org adresinde ücretsiz bir hesap oluşturun, ardından Ayarlar → API bölümünden API anahtarını (v3 doğrulaması) kopyalayın ve aşağıya yapıştırın. Daha sonra Ayarlar\'dan değiştirebilirsiniz.</string>
 </resources>

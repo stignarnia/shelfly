@@ -21,4 +21,25 @@
   <string name="textBackupExportOption3DayButton">Ajoitettu suoritettavaksi 3 päivän välein</string>
   <string name="textBackupExportOptionWeeklyButton">Ajoitettu suoritettavaksi kerran viikossa</string>
   <string name="textBackupExportLastTimestamp">Viimeksi varmuuskopioitu: %s</string>
+
+  <string name="textBackupImportSkipped">Joillekin kohteille ei löytynyt TMDB-vastaavuutta ja ne ohitettiin:</string>
+  <string name="textBackupImportSkippedShows">%1$d sarjaa (%2$s)</string>
+  <string name="textBackupImportSkippedMovies">%1$d elokuvaa (%2$s)</string>
+  <string name="textBackupImportSkippedSeasons">%1$d kautta</string>
+  <string name="textBackupImportSkippedEpisodes">%1$d katsottua jaksoa</string>
+  <string name="textBackupImportSkippedShowRatings">%1$d sarja-arviota</string>
+  <string name="textBackupImportSkippedSeasonRatings">%1$d kausiarviota</string>
+  <string name="textBackupImportSkippedEpisodeRatings">%1$d jaksoarviota</string>
+  <string name="textBackupImportSkippedMovieRatings">%1$d elokuva-arviota</string>
+  <string name="textBackupImportSkippedListItems">%1$d listamerkintää</string>
+  <string name="textSyncLastTimestamp">Viimeisin synkronointi: %s</string>
+  <string name="textSyncNever">Ei vielä synkronoitu toisen laitteen kanssa</string>
+  <string name="textSyncFailed">Synkronointi epäonnistui: %s</string>
+  <string name="textBackupImportFromWebDav">Tuo WebDAV-palvelimelta</string>
+  <string name="textBackupWebDavNoBackups">Palvelimelta ei löytynyt varmuuskopioita.</string>
+  <string name="textBackupWebDavPick">Valitse palautettava varmuuskopio</string>
+  <plurals name="textSyncPeers">
+    <item quantity="one">%d muu laite</item>
+    <item quantity="other">%d muuta laitetta</item>
+  </plurals>
 </resources>

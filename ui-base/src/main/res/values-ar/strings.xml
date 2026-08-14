@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="textOk">حسنًا</string>
   <string name="textYes">نعم</string>
   <string name="textNo">لا</string>
@@ -64,7 +64,7 @@
   <string name="textActing">التمثيل</string>
   <string name="textAiredAlready">بُثت</string>
   <string name="textAirsNow">يُبث الآن</string>
-  <plurals name="textDaysToAir">
+  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="zero">سيُعرض بعد 0 يوم</item>
     <item quantity="one">سيُعرض غدًا</item>
     <item quantity="two">سيُعرض بعد يومين</item>
@@ -72,7 +72,7 @@
     <item quantity="many">سيُعرض بعد %d أيام</item>
     <item quantity="other">سيُعرض بعد %d أيام</item>
   </plurals>
-  <plurals name="textHoursToAir">
+  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="zero">سيُعرض بعد 0 ساعة</item>
     <item quantity="one">سيُعرض بعد ساعة</item>
     <item quantity="two">سيُعرض بعد ساعتين</item>
@@ -80,7 +80,7 @@
     <item quantity="many">سيُعرض بعد %d ساعة</item>
     <item quantity="other">تُعرض بعد %d ساعة</item>
   </plurals>
-  <plurals name="textMinutesToAir">
+  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="zero">سيُعرض بعد 0 دقيقة</item>
     <item quantity="one">سيُعرض الآن</item>
     <item quantity="two">سيُعرض بعد دقيقتين</item>
@@ -136,5 +136,4 @@
   <string name="errorCouldNotLoadMovie">لم نستطع تحميل معلومات هذا الفيلم.\nرجاءً تواصل معنا إذا إستمرت هذه المشكلة بالحدوث.</string>
   <string name="errorCouldNotLoadSearchResults">لم نستطع تحميل نتائج البحث.\nرجاءً تواصل معنا إذا استمرت هذه المشكلة بالحدوث.</string>
   <string name="errorNoInternetConnection">لا يوجد إتصال بالإنترنت. رجاءً تحقق من إتصالك.</string>
-  <string name="errorSubscriptionsNotAvailable">الدفع عبر Google Play غير متوفر على هذا الجهاز.</string>
-</resources>
+  </resources>

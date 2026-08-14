@@ -6,4 +6,8 @@
   <string name="textMoviesCalendarRecentsEmpty">Non sono stati trasmessi film di recente.</string>
   <string name="textDiscoverMovies">Scopri film</string>
   <string name="textMoviesProgressEmpty">La tua pagina <b>Progressi</b> è vuota.\n\nVisita la pagina <b>Scopri</b> per aggiungere film o importa la tua raccolta Trak.tv.</string>
+
+  <string name="textBackupStarted">Backup e sincronizzazione con gli altri tuoi dispositivi in corso…</string>
+
+  <string name="textBackupNotConfigured">Configura un server WebDAV nelle Impostazioni per eseguire il backup da qui.</string>
 </resources>

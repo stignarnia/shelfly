@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">Kuvavälimuisti tyhjennettiin.</string>
   <string name="textTurnOff">Poista käytöstä</string>
@@ -96,4 +96,42 @@
   <string name="textThemeLight">Vaalea</string>
   <string name="textThemeSystem">Järjestelmä</string>
   <string name="textTransparency100">Läpinäkymätön</string>
+
+  <string name="textSettingsApiKeys">API-avaimet</string>
+  <string name="textSettingsBackupTargetTitle">Varmuuskopion kohde</string>
+  <string name="textSettingsBackupTargetDescription">Valitse mihin automaattiset varmuuskopiot tallennetaan</string>
+  <string name="textSettingsBackupTargetLocal">Vain paikallinen tallennustila</string>
+  <string name="textSettingsBackupTargetWebDav">WebDAV-palvelin</string>
+  <string name="textSettingsBackupRetentionTitle">Varmuuskopioiden säilytys</string>
+  <string name="textSettingsBackupRetentionDescription">WebDAV-palvelimella säilytettävien automaattisten varmuuskopioiden määrä</string>
+  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionKeepAll">Säilytä kaikki varmuuskopiot</string>
+  <string name="textSettingsBackupRetentionValue">Säilytä viimeiset %1$d varmuuskopiota</string>
+  <string name="textSettingsBackupRetentionInvalid">Anna kelvollinen positiivinen numero</string>
+
+  <string name="textSettingsApiKeyNotSet">Ei asetettu</string>
+  <string name="textSettingsApiKeyHint">Liitä avaimesi</string>
+  <string name="textSettingsTmdbApiKeyTitle">TMDB API -avain</string>
+  <string name="textSettingsTmdbApiKeyDescription">Pakollinen. Tarjoaa kaikki sarja- ja elokuvatiedot.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Luo ilmainen tili osoitteessa themoviedb.org, kopioi API-avain (v3-todennus) kohdasta Asetukset → API ja liitä se alle.</string>
+  <string name="textSettingsOmdbApiKeyTitle">OMDb API -avain</string>
+  <string name="textSettingsOmdbApiKeyDescription">Valinnainen. Lisää IMDb-arvosanat.</string>
+  <string name="textSettingsOmdbApiKeyDialogMessage">Pyydä ilmainen avain osoitteessa omdbapi.com/apikey.aspx, aktivoi se sähköpostista ja liitä se alle.</string>
+  <string name="textSettingsTmdbDisclaimer">Tämä tuote käyttää TMDB:n rajapintaa, mutta TMDB ei ole tukenut tai sertifioinut sitä.</string>
+  <string name="textSettingsWebDavTitle">WebDAV-palvelin</string>
+  <string name="textSettingsWebDavDescription">Varmuuskopioi kokoelmasi omalle palvelimellesi.</string>
+  <string name="textSettingsWebDavNotConfigured">Ei määritetty</string>
+  <string name="textSettingsWebDavDialogMessage">Anna kansion osoite, johon varmuuskopiot tallennetaan, sekä kirjautumistiedot.</string>
+  <string name="textSettingsWebDavUrlHint">Kansion URL</string>
+  <string name="textSettingsWebDavUsernameHint">Käyttäjätunnus</string>
+  <string name="textSettingsWebDavPasswordHint">Salasana</string>
+  <string name="textSettingsWebDavPasswordSetHint">Salasana (jätä tyhjäksi säilyttääksesi nykyisen)</string>
+  <string name="textSettingsWebDavTest">Testaa yhteys</string>
+  <string name="textSettingsWebDavTesting">Testataan…</string>
+  <string name="textSettingsWebDavConnected">Yhdistetty. Kansio on tavoitettavissa ja kirjoitettavissa.</string>
+  <string name="textSettingsWebDavErrorAuth">Todennus epäonnistui. Tarkista käyttäjätunnus ja salasana.</string>
+  <string name="textSettingsWebDavErrorNotFound">Kansiota ei löytynyt eikä sitä voitu luoda. Tarkista URL.</string>
+  <string name="textSettingsWebDavErrorTls">Suojattua yhteyttä ei voitu muodostaa. Palvelimen varmenteeseen ei luoteta.</string>
+  <string name="textSettingsWebDavErrorUnreachable">Palvelimeen ei saatu yhteyttä. Tarkista osoite ja verkkoyhteys.</string>
+  <string name="textSettingsWebDavErrorUnexpected">Palvelin vastasi odottamattomasti.</string>
 </resources>

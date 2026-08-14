@@ -12,4 +12,7 @@
   <string name="shortcutCollection">Samling</string>
   <string name="shortcutSearch">Søg</string>
   <string name="shortcutProgress">Fremskridt</string>
+
+  <string name="textOnboardingApiKeyTitle">TMDB API-nøgle påkrævet</string>
+  <string name="textOnboardingApiKeyMessage">Denne app bruger din egen TMDB-nøgle, så ingen nøgle leveres i appen, og dit forbrug deles ikke med andre.\n\nOpret en gratis konto på themoviedb.org, kopiér API-nøglen (v3-godkendelse) fra Indstillinger → API og indsæt den nedenfor. Du kan ændre den senere i Indstillinger.</string>
 </resources>

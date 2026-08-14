@@ -8,4 +8,39 @@
   <string name="textBackupExportSuccess">Veriler başarıyla dışa aktarıldı.</string>
   <string name="textBackupImportSuccess">Veriler başarıyla içe aktarıldı.</string>
   <string name="errorImportCancelled">Veri içe aktarma iptal edildi.</string>
+
+  <string name="textBackupImportSkipped">Bazı öğelerin TMDB eşleşmesi bulunamadı ve atlandı:</string>
+  <string name="textBackupImportSkippedShows">%1$d dizi (%2$s)</string>
+  <string name="textBackupImportSkippedMovies">%1$d film (%2$s)</string>
+  <string name="textBackupImportSkippedSeasons">%1$d sezon</string>
+  <string name="textBackupImportSkippedEpisodes">%1$d izlenen bölüm</string>
+  <string name="textBackupImportSkippedShowRatings">%1$d dizi puanı</string>
+  <string name="textBackupImportSkippedSeasonRatings">%1$d sezon puanı</string>
+  <string name="textBackupImportSkippedEpisodeRatings">%1$d bölüm puanı</string>
+  <string name="textBackupImportSkippedMovieRatings">%1$d film puanı</string>
+  <string name="textBackupImportSkippedListItems">%1$d liste öğesi</string>
+  <string name="textSyncLastTimestamp">Son senkronizasyon: %s</string>
+  <string name="textSyncNever">Henüz başka bir cihazla senkronize edilmedi</string>
+  <string name="textSyncFailed">Senkronizasyon başarısız: %s</string>
+  <string name="textBackupImportFromWebDav">WebDAV\'dan içe aktar</string>
+  <string name="textBackupWebDavNoBackups">Sunucuda yedekleme bulunamadı.</string>
+  <string name="textBackupWebDavPick">Geri yüklenecek bir yedek seçin</string>
+  <plurals name="textSyncPeers">
+    <item quantity="one">%d diğer cihaz</item>
+    <item quantity="other">%d diğer cihaz</item>
+  </plurals>
+
+  <string name="textBackupExportSchedule">Zamanlama</string>
+  <string name="textBackupExportOptionOff">Kapalı</string>
+  <string name="textBackupExportOption6Hours">Her 6 Saatte Bir</string>
+  <string name="textBackupExportOptionDaily">Her Gün</string>
+  <string name="textBackupExportOption3Day">Her 3 Günde Bir</string>
+  <string name="textBackupExportOptionWeekly">Her Hafta</string>
+  <string name="textBackupExportOptionOffMessage">Yedekleme otomatik olarak çalışmayacaktır.</string>
+  <string name="textBackupExportOptionConfirmMessage">Otomatik yedekleme zamanlandı.</string>
+  <string name="textBackupExportOption6HoursButton">Her 6 saatte bir çalışacak şekilde zamanlandı</string>
+  <string name="textBackupExportOptionDailyButton">Her gün çalışacak şekilde zamanlandı</string>
+  <string name="textBackupExportOption3DayButton">Her 3 günde bir çalışacak şekilde zamanlandı</string>
+  <string name="textBackupExportOptionWeeklyButton">Her hafta çalışacak şekilde zamanlandı</string>
+  <string name="textBackupExportLastTimestamp">Son Yedekleme: %s</string>
 </resources>

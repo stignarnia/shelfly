@@ -12,4 +12,7 @@
   <string name="textProgressEmpty">Twój <b>Postęp</b> jest obecnie pusty.\n\nDodaj nowe seriale w zakładce <b>Odkrywaj</b> lub zaimportuj swoją kolekcję z TMDB.</string>
   <string name="textNewSeason">Premiera Sezonu</string>
   <string name="textPremieres">Premiery</string>
+
+  <string name="textBackupStarted">Tworzenie kopii zapasowej i synchronizacja z innymi urządzeniami…</string>
+  <string name="textBackupNotConfigured">Skonfiguruj serwer WebDAV w Ustawieniach, aby tworzyć kopie zapasowe z tego miejsca.</string>
 </resources>

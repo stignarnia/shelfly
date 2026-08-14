@@ -12,4 +12,7 @@
   <string name="textProgressEmpty">Ваш <b>Прогрес</b> зараз порожній.\n\nВідвідайте вкладку <b>Огляд</b>, щоб додати серіали або імпортуйте колекцію з TMDB.</string>
   <string name="textNewSeason">Прем\'єра сезону</string>
   <string name="textPremieres">Прем\'єри</string>
+
+  <string name="textBackupStarted">Створення резервної копії та синхронізація з іншими пристроями…</string>
+  <string name="textBackupNotConfigured">Налаштуйте сервер WebDAV у Налаштуваннях, щоб створювати резервні копії звідси.</string>
 </resources>

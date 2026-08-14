@@ -12,4 +12,7 @@
   <string name="shortcutCollection">المجموعة</string>
   <string name="shortcutSearch">البحث</string>
   <string name="shortcutProgress">مستوى التقدم</string>
+
+  <string name="textOnboardingApiKeyTitle">مفتاح TMDB API مطلوب</string>
+  <string name="textOnboardingApiKeyMessage">يستخدم هذا التطبيق مفتاح TMDB الخاص بك، لذلك لا يتم تضمين أي مفتاح داخله ولا تتم مشاركة استخدامك مع أي شخص آخر.\n\nأنشئ حساباً مجانياً على themoviedb.org، ثم انسخ مفتاح API (مصادقة v3) من الإعدادات ← API والصقه أدناه. يمكنك تغييره لاحقاً في الإعدادات.</string>
 </resources>

@@ -12,4 +12,7 @@
   <string name="shortcutCollection">Колекція</string>
   <string name="shortcutSearch">Пошук</string>
   <string name="shortcutProgress">Прогрес</string>
+
+  <string name="textOnboardingApiKeyTitle">Потрібен ключ TMDB API</string>
+  <string name="textOnboardingApiKeyMessage">Ця програма використовує ваш власний ключ TMDB, тому жоден ключ не вбудований у програму, а ваші дані нікому не передаються.\n\nСтворіть безкоштовний обліковий запис на themoviedb.org, скопіюйте ключ API (v3 auth) із Налаштування → API і вставте його нижче. Ви зможете змінити його пізніше в Налаштуваннях.</string>
 </resources>

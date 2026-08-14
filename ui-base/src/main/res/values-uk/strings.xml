@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="textOk">OK</string>
   <string name="textYes">Так</string>
   <string name="textNo">Ні</string>
@@ -62,19 +62,19 @@
   <string name="textActing">Акторство</string>
   <string name="textAiredAlready">Прем\'єра відбулася</string>
   <string name="textAirsNow">Прем\'єра зараз</string>
-  <plurals name="textDaysToAir">
+  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Прем\'єра за %d день</item>
     <item quantity="few">Прем\'єра за %d дні</item>
     <item quantity="many">Прем\'єра за %d днів</item>
     <item quantity="other">Прем\'єра за %d днів</item>
   </plurals>
-  <plurals name="textHoursToAir">
+  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Прем\'єра за годину</item>
     <item quantity="few">Прем\'єра за %d години</item>
     <item quantity="many">Прем\'єра за %d годин</item>
     <item quantity="other">Прем\'єра за %d годин</item>
   </plurals>
-  <plurals name="textMinutesToAir">
+  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Прем\'єра зараз</item>
     <item quantity="few">Прем\'єра за %d хвилини</item>
     <item quantity="many">Прем\'єра за %d хвилин</item>
@@ -128,5 +128,4 @@
   <string name="errorCouldNotLoadMovie">Нам не вдалося завантажити інформацію про цей фільм.\nБудь ласка, зв\'яжіться з нами, якщо помилка не зникає.</string>
   <string name="errorCouldNotLoadSearchResults">Нам не вдалося завантажити результати пошуку.\nБудь ласка, зв\'яжіться з нами, якщо помилка не зникає.</string>
   <string name="errorNoInternetConnection">Немає доступу до інтернету. Перевірте підключення до мережі.</string>
-  <string name="errorSubscriptionsNotAvailable">Підписки Google Play недоступні на цьому пристрої.</string>
-</resources>
+  </resources>

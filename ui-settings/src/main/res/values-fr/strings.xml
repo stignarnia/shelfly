@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">La mémoire cache des images a été nettoyée.</string>
   <string name="textTurnOff">Éteindre</string>
@@ -34,8 +34,6 @@
   <string name="textSettingsLogoutMessage">\nVoulez-vous vraiment vous déconnecter ?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Films</string>
   <string name="textSettingsMoviesEnabledSummary">Activer/désactiver la prise en compte des films. L\'application va redémarrer.</string>
-  <string name="textSettingsManagePaymentsTitle">Gérer les abonnements</string>
-  <string name="textSettingsManagePaymentsSummary">Gérer les abonnements dans le Google Play Store.</string>
   <string name="textSettingsWidgets">Widgets</string>
   <string name="textSettingsWidgetsLabelsTitle">Titres</string>
   <string name="textSettingsWidgetsLabelsSummary">Afficher les titres translucides des widgets.</string>
@@ -98,4 +96,42 @@
   <string name="textThemeLight">Clair</string>
   <string name="textThemeSystem">Système</string>
   <string name="textTransparency100">Opaque</string>
+
+  <string name="textSettingsApiKeys">Clés API</string>
+  <string name="textSettingsBackupTargetTitle">Destination de sauvegarde</string>
+  <string name="textSettingsBackupTargetDescription">Choisissez l\'emplacement de stockage des sauvegardes automatiques</string>
+  <string name="textSettingsBackupTargetLocal">Stockage local uniquement</string>
+  <string name="textSettingsBackupTargetWebDav">Serveur WebDAV</string>
+  <string name="textSettingsBackupRetentionTitle">Rétention des sauvegardes</string>
+  <string name="textSettingsBackupRetentionDescription">Nombre de fichiers de sauvegarde automatique à conserver sur le serveur WebDAV</string>
+  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionKeepAll">Conserver toutes les sauvegardes</string>
+  <string name="textSettingsBackupRetentionValue">Conserver les %1$d dernières sauvegardes</string>
+  <string name="textSettingsBackupRetentionInvalid">Veuillez entrer un nombre positif valide</string>
+
+  <string name="textSettingsApiKeyNotSet">Non défini</string>
+  <string name="textSettingsApiKeyHint">Collez votre clé</string>
+  <string name="textSettingsTmdbApiKeyTitle">Clé API TMDB</string>
+  <string name="textSettingsTmdbApiKeyDescription">Requis. Fournit toutes les données de séries et films.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Créez un compte gratuit sur themoviedb.org, copiez la clé API (auth v3) depuis Paramètres → API et collez-la ci-dessous.</string>
+  <string name="textSettingsOmdbApiKeyTitle">Clé API OMDb</string>
+  <string name="textSettingsOmdbApiKeyDescription">Facultatif. Ajoute les notes IMDb.</string>
+  <string name="textSettingsOmdbApiKeyDialogMessage">Demandez une clé gratuite sur omdbapi.com/apikey.aspx, activez-la par e-mail et collez-la ci-dessous.</string>
+  <string name="textSettingsTmdbDisclaimer">Ce produit utilise l\'API TMDB mais n\'est ni approuvé ni certifié par TMDB.</string>
+  <string name="textSettingsWebDavTitle">Serveur WebDAV</string>
+  <string name="textSettingsWebDavDescription">Sauvegardez votre collection sur un serveur que vous contrôlez.</string>
+  <string name="textSettingsWebDavNotConfigured">Non configuré</string>
+  <string name="textSettingsWebDavDialogMessage">Entrez l\'adresse du dossier de sauvegarde et les identifiants d\'accès.</string>
+  <string name="textSettingsWebDavUrlHint">URL du dossier</string>
+  <string name="textSettingsWebDavUsernameHint">Nom d\'utilisateur</string>
+  <string name="textSettingsWebDavPasswordHint">Mot de passe</string>
+  <string name="textSettingsWebDavPasswordSetHint">Mot de passe (laisser vide pour conserver l\'actuel)</string>
+  <string name="textSettingsWebDavTest">Tester la connexion</string>
+  <string name="textSettingsWebDavTesting">Test en cours…</string>
+  <string name="textSettingsWebDavConnected">Connecté. Le dossier est accessible et modifiable.</string>
+  <string name="textSettingsWebDavErrorAuth">Échec de l\'authentification. Vérifiez le nom d\'utilisateur et le mot de passe.</string>
+  <string name="textSettingsWebDavErrorNotFound">Dossier introuvable et création impossible. Vérifiez l\'URL.</string>
+  <string name="textSettingsWebDavErrorTls">Impossible d\'établir une connexion sécurisée. Le certificat du serveur n\'est pas approuvé.</string>
+  <string name="textSettingsWebDavErrorUnreachable">Impossible de joindre le serveur. Vérifiez l\'adresse et votre connexion.</string>
+  <string name="textSettingsWebDavErrorUnexpected">Le serveur a répondu de manière inattendue.</string>
 </resources>

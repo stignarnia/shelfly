@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">تم مسح ذاكرة التخزين المؤقتة للصور.</string>
   <string name="textTurnOff">إيقاف التشغيل</string>
@@ -96,4 +96,42 @@
   <string name="textThemeLight">فاتح</string>
   <string name="textThemeSystem">إستخدم مظهر النظام</string>
   <string name="textTransparency100">غير شفاف</string>
+
+  <string name="textSettingsApiKeys">مفاتيح API</string>
+  <string name="textSettingsBackupTargetTitle">وجهة النسخ الاحتياطي</string>
+  <string name="textSettingsBackupTargetDescription">اختر مكان تخزين النسخ الاحتياطية التلقائية</string>
+  <string name="textSettingsBackupTargetLocal">التخزين المحلي فقط</string>
+  <string name="textSettingsBackupTargetWebDav">خادم WebDAV</string>
+  <string name="textSettingsBackupRetentionTitle">الاحتفاظ بالنسخ الاحتياطية</string>
+  <string name="textSettingsBackupRetentionDescription">عدد ملفات النسخ الاحتياطي التلقائي المحتفظ بها على خادم WebDAV</string>
+  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionKeepAll">الاحتفاظ بجميع النسخ</string>
+  <string name="textSettingsBackupRetentionValue">الاحتفاظ بآخر %1$d نسخ احتياطية</string>
+  <string name="textSettingsBackupRetentionInvalid">يرجى إدخال رقم موجب صالح</string>
+
+  <string name="textSettingsApiKeyNotSet">غير محدد</string>
+  <string name="textSettingsApiKeyHint">الصق مفتاحك</string>
+  <string name="textSettingsTmdbApiKeyTitle">مفتاح TMDB API</string>
+  <string name="textSettingsTmdbApiKeyDescription">مطلوب. يوفر جميع بيانات العروض والأفلام.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">أنشئ حساباً مجانياً على themoviedb.org، ثم انسخ مفتاح API (مصادقة v3) من الإعدادات ← API والصقه أدناه.</string>
+  <string name="textSettingsOmdbApiKeyTitle">مفتاح OMDb API</string>
+  <string name="textSettingsOmdbApiKeyDescription">اختياري. يضيف تقييمات IMDb.</string>
+  <string name="textSettingsOmdbApiKeyDialogMessage">اطلب مفتاحاً مجانياً على omdbapi.com/apikey.aspx وفعّله من البريد الإلكتروني، ثم الصقه أدناه.</string>
+  <string name="textSettingsTmdbDisclaimer">يستخدم هذا المنتج واجهة برمجة تطبيقات TMDB ولكنه غير معتمد أو معتمد من قِبل TMDB.</string>
+  <string name="textSettingsWebDavTitle">خادم WebDAV</string>
+  <string name="textSettingsWebDavDescription">انسخ مجموعتك احتياطياً إلى خادم تتحكم فيه.</string>
+  <string name="textSettingsWebDavNotConfigured">غير مهيأ</string>
+  <string name="textSettingsWebDavDialogMessage">أدخل عنوان المجلد الذي يجب حفظ النسخ الاحتياطية فيه، وبيانات الاعتماد للوصول إليه.</string>
+  <string name="textSettingsWebDavUrlHint">عنوان URL للمجلد</string>
+  <string name="textSettingsWebDavUsernameHint">اسم المستخدم</string>
+  <string name="textSettingsWebDavPasswordHint">كلمة المرور</string>
+  <string name="textSettingsWebDavPasswordSetHint">كلمة المرور (اتركها فارغة للاحتفاظ بالحالية)</string>
+  <string name="textSettingsWebDavTest">اختبار الاتصال</string>
+  <string name="textSettingsWebDavTesting">جارٍ الاختبار…</string>
+  <string name="textSettingsWebDavConnected">متصل. المجلد متاح وقابل للكتابة.</string>
+  <string name="textSettingsWebDavErrorAuth">فشلت المصادقة. تحقق من اسم المستخدم وكلمة المرور.</string>
+  <string name="textSettingsWebDavErrorNotFound">المجلد غير موجود، ولم يمكن إنشاؤه. تحقق من عنوان URL.</string>
+  <string name="textSettingsWebDavErrorTls">تعذر إنشاء اتصال آمن. لم يتم الوثوق بشهادة الخادم.</string>
+  <string name="textSettingsWebDavErrorUnreachable">تعذر الوصول إلى الخادم. تحقق من العنوان واتصالك.</string>
+  <string name="textSettingsWebDavErrorUnexpected">استجاب الخادم بشكل غير متوقع.</string>
 </resources>

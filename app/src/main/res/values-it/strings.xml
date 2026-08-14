@@ -12,4 +12,7 @@
   <string name="shortcutCollection">Raccolta</string>
   <string name="shortcutSearch">Cerca</string>
   <string name="shortcutProgress">Progressi</string>
+
+  <string name="textOnboardingApiKeyTitle">Chiave API TMDB richiesta</string>
+  <string name="textOnboardingApiKeyMessage">Questa applicazione utilizza la tua chiave TMDB personale, quindi nessuna chiave è inclusa nell\'app e il tuo utilizzo non è condiviso con nessun altro.\n\nCrea un account gratuito su themoviedb.org, copia la chiave API (autenticazione v3) da Impostazioni → API e incollala qui sotto. Potrai modificarla in seguito nelle Impostazioni.</string>
 </resources>

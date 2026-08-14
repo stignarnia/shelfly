@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="textOk">OK</string>
   <string name="textYes">Ja</string>
   <string name="textNo">Nein</string>
@@ -59,15 +59,15 @@
   <string name="textActing">Darsteller</string>
   <string name="textAiredAlready">Veröffentlicht</string>
   <string name="textAirsNow">Jetzt live</string>
-  <plurals name="textDaysToAir">
+  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Morgen verfügbar</item>
     <item quantity="other">Verfügbar in %d Tagen</item>
   </plurals>
-  <plurals name="textHoursToAir">
+  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Veröffentlichung in 1 Stunde</item>
     <item quantity="other">Verfügbar in %d Stunden</item>
   </plurals>
-  <plurals name="textMinutesToAir">
+  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Jetzt verfügbar</item>
     <item quantity="other">Verfügbar in %d Minuten</item>
   </plurals>
@@ -119,5 +119,5 @@
   <string name="errorCouldNotLoadMovie">Wir können die Details zu diesem Filme aktuell nicht laden.\nBitte kontaktiere uns, wenn dieser Fehler weiterhin passiert.</string>
   <string name="errorCouldNotLoadSearchResults">Wir können die Suchergebnisse aktuell nicht laden.\nBitte schreib uns, wenn dieser Fehler weiterhin passiert.</string>
   <string name="errorNoInternetConnection">Kein Internet. Bitte überprüfe deine Verbindung.</string>
-  <string name="errorSubscriptionsNotAvailable">Google Play Abonnements sind auf diesem Gerät nicht verfügbar.</string>
+  <string name="textDisabled">Deaktiviert</string>
 </resources>

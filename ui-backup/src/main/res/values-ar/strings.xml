@@ -8,4 +8,43 @@
   <string name="textBackupExportSuccess">تم تصدير البيانات بنجاح.</string>
   <string name="textBackupImportSuccess">تم استيراد البيانات بنجاح.</string>
   <string name="errorImportCancelled">تم إلغاء استيراد البيانات.</string>
+
+  <string name="textBackupImportSkipped">بعض العناصر لم تتطابق مع TMDB وتم تخطيها:</string>
+  <string name="textBackupImportSkippedShows">%1$d مسلسلات (%2$s)</string>
+  <string name="textBackupImportSkippedMovies">%1$d أفلام (%2$s)</string>
+  <string name="textBackupImportSkippedSeasons">%1$d مواسم</string>
+  <string name="textBackupImportSkippedEpisodes">%1$d حلقات تمت مشاهدتها</string>
+  <string name="textBackupImportSkippedShowRatings">%1$d تقييمات مسلسلات</string>
+  <string name="textBackupImportSkippedSeasonRatings">%1$d تقييمات مواسم</string>
+  <string name="textBackupImportSkippedEpisodeRatings">%1$d تقييمات حلقات</string>
+  <string name="textBackupImportSkippedMovieRatings">%1$d تقييمات أفلام</string>
+  <string name="textBackupImportSkippedListItems">%1$d عناصر قائمة</string>
+  <string name="textSyncLastTimestamp">آخر مزامنة: %s</string>
+  <string name="textSyncNever">لم تتم المزامنة مع أي جهاز آخر بعد</string>
+  <string name="textSyncFailed">فشلت المزامنة: %s</string>
+  <string name="textBackupImportFromWebDav">استيراد من WebDAV</string>
+  <string name="textBackupWebDavNoBackups">لم يتم العثور على نسخ احتياطية على الخادم.</string>
+  <string name="textBackupWebDavPick">اختر نسخة احتياطية للاستعادة</string>
+  <plurals name="textSyncPeers">
+    <item quantity="zero">%d أجهزة أخرى</item>
+    <item quantity="one">جهاز آخر (%d)</item>
+    <item quantity="two">جهازان آخران (%d)</item>
+    <item quantity="few">%d أجهزة أخرى</item>
+    <item quantity="many">%d جهازاً آخر</item>
+    <item quantity="other">%d جهاز آخر</item>
+  </plurals>
+
+  <string name="textBackupExportSchedule">الجدول الزمني</string>
+  <string name="textBackupExportOptionOff">إيقاف</string>
+  <string name="textBackupExportOption6Hours">كل 6 ساعات</string>
+  <string name="textBackupExportOptionDaily">يومياً</string>
+  <string name="textBackupExportOption3Day">كل 3 أيام</string>
+  <string name="textBackupExportOptionWeekly">أسبوعياً</string>
+  <string name="textBackupExportOptionOffMessage">لن يتم تشغيل النسخ الاحتياطي تلقائياً.</string>
+  <string name="textBackupExportOptionConfirmMessage">تمت جدولة النسخ الاحتياطي التلقائي.</string>
+  <string name="textBackupExportOption6HoursButton">مجدول للتشغيل كل 6 ساعات</string>
+  <string name="textBackupExportOptionDailyButton">مجدول للتشغيل يومياً</string>
+  <string name="textBackupExportOption3DayButton">مجدول للتشغيل كل 3 أيام</string>
+  <string name="textBackupExportOptionWeeklyButton">مجدول للتشغيل أسبوعياً</string>
+  <string name="textBackupExportLastTimestamp">آخر نسخة احتياطية: %s</string>
 </resources>

@@ -6,4 +6,8 @@
   <string name="textMoviesCalendarRecentsEmpty">Não há filmes recentes.</string>
   <string name="textDiscoverMovies">Descubra filmes</string>
   <string name="textMoviesProgressEmpty">Seu <b>Progresso</b> está vazio atualmente.\n\nVisite a guia <b>Explorar</b> para adicionar filmes ou importar sua coleção de TMDB.</string>
+
+  <string name="textBackupStarted">A criar cópia de segurança e a sincronizar com os seus outros dispositivos…</string>
+
+  <string name="textBackupNotConfigured">Configure um servidor WebDAV nas Definições para efetuar cópias de segurança a partir daqui.</string>
 </resources>

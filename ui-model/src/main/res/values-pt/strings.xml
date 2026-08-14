@@ -73,4 +73,15 @@
   <string name="textStreamingBuy">Comprar</string>
   <string name="textStreamingRent">Aluguel</string>
   <string name="textStreamingFree">Gratuito</string>
+
+  <string name="textSortRuntime">Duração</string>
+  <string name="textPeriodThisWeek">Esta semana</string>
+  <string name="textPeriodLastWeek">Semana passada</string>
+  <string name="textPeriodThisMonth">Este mês</string>
+  <string name="textPeriodLastMonth">Mês passado</string>
+  <string name="textPeriodLast30Days">Últimos 30 dias</string>
+  <string name="textPeriodLast90Days">Últimos 90 dias</string>
+  <string name="textPeriodLast365Days">Últimos 365 dias</string>
+  <string name="textPeriodAllTime">Todo o período</string>
+  <string name="textTipDefaultOption">A opção padrão pode ser ajustada nas Definições</string>
 </resources>

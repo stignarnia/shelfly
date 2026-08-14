@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="menuLists">Списки</string>
   <string name="menuList">Список</string>
@@ -22,4 +22,5 @@
   <string name="errorCouldNotCreateList">Мы не смогли создать новый список в вашей учетной записи TMDB.\nПожалуйста, проверьте подключение к Интернету и повторите попытку.</string>
   <string name="errorCouldNotUpdateList">Мы не смогли обновить список в вашей учетной записи TMDB.\nПожалуйста, проверьте подключение к Интернету и повторите попытку.</string>
   <string name="errorCouldNotDeleteList">Мы не смогли удалить список в вашей учетной записи TMDB.\nПожалуйста, проверьте подключение к Интернету и повторите попытку.</string>
-</resources>
+
+  </resources>

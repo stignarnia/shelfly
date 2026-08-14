@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+
+  <string name="menuProgress">Прогрес</string>
+  <string name="menuCalendar">Календар</string>
+</resources>

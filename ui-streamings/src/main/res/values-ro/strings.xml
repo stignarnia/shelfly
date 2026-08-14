@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="textStreamingsFilterAll">Toți furnizorii</string>
+  <string name="textStreamingsEmpty">Nu s-au găsit furnizori de streaming pentru acest titlu.</string>
+</resources>

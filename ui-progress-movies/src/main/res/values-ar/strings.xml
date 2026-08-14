@@ -6,4 +6,8 @@
   <string name="textMoviesCalendarRecentsEmpty">لا يُوجد أي أفلام جديدة.</string>
   <string name="textDiscoverMovies">إكتشف أفلام</string>
   <string name="textMoviesProgressEmpty">قائمة <b>مستوى التقدم</b> فارغة حالياً.\n\nإذهب إلى صفحة <b>إكتشف</b> لإضافة أفلام، أو اِستورد البيانات من TMDB.</string>
+
+  <string name="textBackupStarted">جارٍ النسخ الاحتياطي والمزامنة مع أجهزتك الأخرى…</string>
+
+  <string name="textBackupNotConfigured">قم بإعداد خادم WebDAV في الإعدادات للنسخ الاحتياطي من هنا.</string>
 </resources>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">La cache delle immagini è stata pulita.</string>
   <string name="textTurnOff">Disattiva</string>
@@ -96,4 +96,42 @@
   <string name="textThemeLight">Chiaro</string>
   <string name="textThemeSystem">Sistema</string>
   <string name="textTransparency100">Opaco</string>
+
+  <string name="textSettingsApiKeys">Chiavi API</string>
+  <string name="textSettingsBackupTargetTitle">Destinazione backup</string>
+  <string name="textSettingsBackupTargetDescription">Scegli dove salvare i backup automatici</string>
+  <string name="textSettingsBackupTargetLocal">Solo memoria locale</string>
+  <string name="textSettingsBackupTargetWebDav">Server WebDAV</string>
+  <string name="textSettingsBackupRetentionTitle">Conservazione backup</string>
+  <string name="textSettingsBackupRetentionDescription">Numero di file di backup automatici da conservare sul server WebDAV</string>
+  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionKeepAll">Conserva tutti i backup</string>
+  <string name="textSettingsBackupRetentionValue">Conserva gli ultimi %1$d backup</string>
+  <string name="textSettingsBackupRetentionInvalid">Inserisci un numero positivo valido</string>
+
+  <string name="textSettingsApiKeyNotSet">Non impostato</string>
+  <string name="textSettingsApiKeyHint">Incolla la tua chiave</string>
+  <string name="textSettingsTmdbApiKeyTitle">Chiave API TMDB</string>
+  <string name="textSettingsTmdbApiKeyDescription">Obbligatorio. Fornisce tutti i dati su serie e film.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Crea un account gratuito su themoviedb.org, copia la chiave API (autenticazione v3) da Impostazioni → API e incollala qui sotto.</string>
+  <string name="textSettingsOmdbApiKeyTitle">Chiave API OMDb</string>
+  <string name="textSettingsOmdbApiKeyDescription">Opzionale. Aggiunge i voti di IMDb.</string>
+  <string name="textSettingsOmdbApiKeyDialogMessage">Richiedi una chiave gratuita su omdbapi.com/apikey.aspx, attivala via email e incollala qui sotto.</string>
+  <string name="textSettingsTmdbDisclaimer">Questo prodotto utilizza le API di TMDB ma non è approvato o certificato da TMDB.</string>
+  <string name="textSettingsWebDavTitle">Server WebDAV</string>
+  <string name="textSettingsWebDavDescription">Esegui il backup della tua collezione su un server gestito da te.</string>
+  <string name="textSettingsWebDavNotConfigured">Non configurato</string>
+  <string name="textSettingsWebDavDialogMessage">Inserisci l\'indirizzo della cartella di backup e le credenziali di accesso.</string>
+  <string name="textSettingsWebDavUrlHint">URL cartella</string>
+  <string name="textSettingsWebDavUsernameHint">Nome utente</string>
+  <string name="textSettingsWebDavPasswordHint">Password</string>
+  <string name="textSettingsWebDavPasswordSetHint">Password (lascia vuoto per mantenere quella attuale)</string>
+  <string name="textSettingsWebDavTest">Testa connessione</string>
+  <string name="textSettingsWebDavTesting">Test in corso…</string>
+  <string name="textSettingsWebDavConnected">Connesso. La cartella è raggiungibile e scrivibile.</string>
+  <string name="textSettingsWebDavErrorAuth">Autenticazione fallita. Controlla nome utente e password.</string>
+  <string name="textSettingsWebDavErrorNotFound">Cartella non trovata e impossibile crearla. Controlla l\'URL.</string>
+  <string name="textSettingsWebDavErrorTls">Impossibile stabilire una connessione sicura. Il certificato del server non è affidabile.</string>
+  <string name="textSettingsWebDavErrorUnreachable">Impossibile raggiungere il server. Controlla l\'indirizzo e la connessione.</string>
+  <string name="textSettingsWebDavErrorUnexpected">Il server ha risposto in modo imprevisto.</string>
 </resources>

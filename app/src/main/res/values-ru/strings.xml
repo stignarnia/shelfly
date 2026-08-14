@@ -12,4 +12,7 @@
   <string name="shortcutCollection">Коллекция</string>
   <string name="shortcutSearch">Поиск</string>
   <string name="shortcutProgress">Прогресс</string>
+
+  <string name="textOnboardingApiKeyTitle">Требуется ключ TMDB API</string>
+  <string name="textOnboardingApiKeyMessage">Это приложение использует ваш собственный ключ TMDB, поэтому никакой ключ не встроен в приложение, а ваши данные никому не передаются.\n\nСоздайте бесплатный аккаунт на themoviedb.org, скопируйте ключ API (v3 auth) из Настройки → API и вставьте его ниже. Вы сможете изменить его позже в Настройках.</string>
 </resources>

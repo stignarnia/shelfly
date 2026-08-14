@@ -21,4 +21,26 @@
     <string name="textBackupExportOption3DayButton">Programat să ruleze la fiecare 3 zile</string>
     <string name="textBackupExportOptionWeeklyButton">Programat să ruleze în fiecare săptămână</string>
     <string name="textBackupExportLastTimestamp">Ultima copie de rezervă: %s</string>
+
+  <string name="textBackupImportSkipped">Unele intrări nu au avut potrivire în TMDB și au fost omise:</string>
+  <string name="textBackupImportSkippedShows">%1$d seriale (%2$s)</string>
+  <string name="textBackupImportSkippedMovies">%1$d filme (%2$s)</string>
+  <string name="textBackupImportSkippedSeasons">%1$d sezoane</string>
+  <string name="textBackupImportSkippedEpisodes">%1$d episoade vizionate</string>
+  <string name="textBackupImportSkippedShowRatings">%1$d evaluări de seriale</string>
+  <string name="textBackupImportSkippedSeasonRatings">%1$d evaluări de sezoane</string>
+  <string name="textBackupImportSkippedEpisodeRatings">%1$d evaluări de episoade</string>
+  <string name="textBackupImportSkippedMovieRatings">%1$d evaluări de filme</string>
+  <string name="textBackupImportSkippedListItems">%1$d elemente de listă</string>
+  <string name="textSyncLastTimestamp">Ultima sincronizare: %s</string>
+  <string name="textSyncNever">Nu s-a sincronizat încă cu niciun alt dispozitiv</string>
+  <string name="textSyncFailed">Sincronizarea a eșuat: %s</string>
+  <string name="textBackupImportFromWebDav">Importă din WebDAV</string>
+  <string name="textBackupWebDavNoBackups">Nu s-au găsit copii de rezervă pe server.</string>
+  <string name="textBackupWebDavPick">Alegeți o copie de rezervă pentru restaurare</string>
+  <plurals name="textSyncPeers">
+    <item quantity="one">%d alt dispozitiv</item>
+    <item quantity="few">%d alte dispozitive</item>
+    <item quantity="other">%d de alte dispozitive</item>
+  </plurals>
 </resources>

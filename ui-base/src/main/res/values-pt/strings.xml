@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="textOk">OK</string>
   <string name="textYes">Sim</string>
   <string name="textNo">Não</string>
   <string name="textApply">Aplicar</string>
   <string name="textCancel">Cancelar</string>
-    <string name="textContinue">Continuar</string>
-  <string name="textClose">Fechar</string>
+    <string name="textClose">Fechar</string>
     <string name="textShare">Compartilhar</string>
     <string name="textNow">Agora</string>
   <string name="textNotNow">Agora não</string>
@@ -61,15 +60,15 @@
   <string name="textActing">Atuação</string>
   <string name="textAiredAlready">Exibido</string>
   <string name="textAirsNow">No ar agora</string>
-  <plurals name="textDaysToAir">
+  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">No ar amanhã</item>
     <item quantity="other">No ar em %d dias</item>
   </plurals>
-  <plurals name="textHoursToAir">
+  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">No ar em 1 hora</item>
     <item quantity="other">No ar em %d horas</item>
   </plurals>
-  <plurals name="textMinutesToAir">
+  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">No ar agora</item>
     <item quantity="other">No ar em %d minutos</item>
   </plurals>
@@ -121,5 +120,4 @@
   <string name="errorCouldNotLoadMovie">Não foi possível carregar os detalhes deste filme no momento.\nPor favor, entre em contato conosco se isto continuar acontecendo.</string>
   <string name="errorCouldNotLoadSearchResults">Não foi possível carregar os resultados da pesquisa no momento.\nEntre em contato conosco se isso continuar acontecendo.</string>
   <string name="errorNoInternetConnection">Sem conexão com a internet. Por favor, verifique sua conexão.</string>
-  <string name="errorSubscriptionsNotAvailable">As assinaturas do Google Play não estão disponíveis neste dispositivo.</string>
-</resources>
+  </resources>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="textOk">OK</string>
   <string name="textYes">Kyllä</string>
   <string name="textNo">Ei</string>
@@ -60,15 +60,15 @@
   <string name="textActing">Näyttely</string>
   <string name="textAiredAlready">Esitetty</string>
   <string name="textAirsNow">Esitetään nyt</string>
-  <plurals name="textDaysToAir">
+  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Esitetään huomenna</item>
     <item quantity="other">Esitetään %d päivän kuluttua</item>
   </plurals>
-  <plurals name="textHoursToAir">
+  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Esitetään tunnin kuluttua</item>
     <item quantity="other">Esitetään %d tunnin kuluttua</item>
   </plurals>
-  <plurals name="textMinutesToAir">
+  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Esitetään nyt</item>
     <item quantity="other">Esitetään %d minuutin kuluttua</item>
   </plurals>
@@ -120,5 +120,4 @@
   <string name="errorCouldNotLoadMovie">Elokuvan tietoja ei voitu ladata.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorCouldNotLoadSearchResults">Hakutuloksia ei voitu ladata.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorNoInternetConnection">Ei Internet-yhteyttä. Tarkista yhteys.</string>
-  <string name="errorSubscriptionsNotAvailable">Google Play -tilaukset eivät ole käytettävissä tällä laitteella.</string>
-</resources>
+  </resources>

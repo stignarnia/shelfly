@@ -21,4 +21,27 @@
   <string name="textBackupExportOption3DayButton">Zaplanowano co 3 dni</string>
   <string name="textBackupExportOptionWeeklyButton">Zaplanowano raz każdego tygodnia</string>
   <string name="textBackupExportLastTimestamp">Ostatni zapis: %s</string>
+
+  <string name="textBackupImportSkipped">Niektóre pozycje nie pasowały do TMDB i zostały pominięte:</string>
+  <string name="textBackupImportSkippedShows">%1$d seriali (%2$s)</string>
+  <string name="textBackupImportSkippedMovies">%1$d filmów (%2$s)</string>
+  <string name="textBackupImportSkippedSeasons">%1$d sezonów</string>
+  <string name="textBackupImportSkippedEpisodes">%1$d obejrzanych odcinków</string>
+  <string name="textBackupImportSkippedShowRatings">%1$d ocen seriali</string>
+  <string name="textBackupImportSkippedSeasonRatings">%1$d ocen sezonów</string>
+  <string name="textBackupImportSkippedEpisodeRatings">%1$d ocen odcinków</string>
+  <string name="textBackupImportSkippedMovieRatings">%1$d ocen filmów</string>
+  <string name="textBackupImportSkippedListItems">%1$d elementów listy</string>
+  <string name="textSyncLastTimestamp">Ostatnia synchronizacja: %s</string>
+  <string name="textSyncNever">Jeszcze nie zsynchronizowano z żadnym innym urządzeniem</string>
+  <string name="textSyncFailed">Synchronizacja nie powiodła się: %s</string>
+  <string name="textBackupImportFromWebDav">Importuj z WebDAV</string>
+  <string name="textBackupWebDavNoBackups">Nie znaleziono kopii zapasowych na serwerze.</string>
+  <string name="textBackupWebDavPick">Wybierz kopię zapasową do przywrócenia</string>
+  <plurals name="textSyncPeers">
+    <item quantity="one">%d inne urządzenie</item>
+    <item quantity="few">%d inne urządzenia</item>
+    <item quantity="many">%d innych urządzeń</item>
+    <item quantity="other">%d innych urządzeń</item>
+  </plurals>
 </resources>

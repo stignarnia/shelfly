@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="textImagesCacheCleared">Cache-ul imaginilor a fost șters.</string>
     <string name="textTurnOff">Dezactivare</string>
@@ -34,10 +34,6 @@
     <string name="textSettingsLogoutMessage">\nEști sigur că dorești să te deconectezi?\n</string>
     <string name="textSettingsMoviesEnabledTitle">Filme</string>
     <string name="textSettingsMoviesEnabledSummary">Activează/dezactivează suportul pentru filme. Aplicația se va reporni.</string>
-    <string name="textSettingsManagePaymentsTitle">Gestionează abonamentele</string>
-    <string name="textSettingsManagePaymentsSummary">Gestionează abonamentele în Google Play Store.</string>
-    <string name="textSettingsNewsEnabledTitle">Știri</string>
-    <string name="textSettingsNewsEnabledSummary">Activează/dezactivează secțiunea de știri. Aplicația se va reporni.</string>
     <string name="textSettingsWidgets">Widgeturi</string>
     <string name="textSettingsWidgetsLabelsTitle">Titluri</string>
     <string name="textSettingsWidgetsLabelsSummary">Afișează titlurile widgeturilor translucide.</string>
@@ -50,9 +46,6 @@
     <string name="textSettingsDateSelectionMessage">Selectează opțiunea implicită de selectare a datei.</string>
     <string name="textSettingsTabletColumnsTitle">Liste Coloane Număr</string>
     <string name="textSettingsTabletColumnsSummary">Selectare numărul coloanelor preferate pentru liste.</string>
-    <string name="textSettingsPrivacy">Confidențialitate</string>
-    <string name="textSettingsCrashesTitle">Rapoarte de eroare</string>
-    <string name="textSettingsCrashesSummary">Permite rapoartele anonime de erori pentru a ajuta la crearea celei mai bune aplicații posibile.</string>
     <string name="textSettingsBackup">Copie de rezervă &amp; Restaurare</string>
     <string name="textSettingsBackupExportTitle">Export</string>
     <string name="textSettingsBackupExportDescription">Exportarea datelor pentru a crea o copie de rezervă sau pentru a le transfera pe un dispozitiv nou.</string>
@@ -103,4 +96,42 @@
     <string name="textThemeLight">Luminos</string>
     <string name="textThemeSystem">Sistem</string>
     <string name="textTransparency100">Opac</string>
+
+  <string name="textSettingsApiKeys">Chei API</string>
+  <string name="textSettingsBackupTargetTitle">Destinație copie de rezervă</string>
+  <string name="textSettingsBackupTargetDescription">Alegeți unde sunt stocate copiile de rezervă automate</string>
+  <string name="textSettingsBackupTargetLocal">Doar stocare locală</string>
+  <string name="textSettingsBackupTargetWebDav">Server WebDAV</string>
+  <string name="textSettingsBackupRetentionTitle">Păstrarea copiilor de rezervă</string>
+  <string name="textSettingsBackupRetentionDescription">Numărul de fișiere de rezervă automate păstrate pe serverul WebDAV</string>
+  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionKeepAll">Păstrează toate copiile</string>
+  <string name="textSettingsBackupRetentionValue">Păstrează ultimele %1$d copii de rezervă</string>
+  <string name="textSettingsBackupRetentionInvalid">Introduceți un număr pozitiv valid</string>
+
+  <string name="textSettingsApiKeyNotSet">Nesetat</string>
+  <string name="textSettingsApiKeyHint">Lipiți cheia</string>
+  <string name="textSettingsTmdbApiKeyTitle">Cheie API TMDB</string>
+  <string name="textSettingsTmdbApiKeyDescription">Necesar. Oferă toate datele despre seriale și filme.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Creați un cont gratuit pe themoviedb.org, copiați cheia API (autentificare v3) din Setări → API și inserați-o mai jos.</string>
+  <string name="textSettingsOmdbApiKeyTitle">Cheie API OMDb</string>
+  <string name="textSettingsOmdbApiKeyDescription">Opțional. Adaugă evaluările IMDb.</string>
+  <string name="textSettingsOmdbApiKeyDialogMessage">Solicitați o cheie gratuită la omdbapi.com/apikey.aspx, activați-o din e-mail și inserați-o mai jos.</string>
+  <string name="textSettingsTmdbDisclaimer">Acest produs folosește API-ul TMDB, dar nu este aprobat sau certificat de TMDB.</string>
+  <string name="textSettingsWebDavTitle">Server WebDAV</string>
+  <string name="textSettingsWebDavDescription">Creați o copie de rezervă pe un server controlat de dvs.</string>
+  <string name="textSettingsWebDavNotConfigured">Neconfigurat</string>
+  <string name="textSettingsWebDavDialogMessage">Introduceți adresa folderului pentru copii de rezervă și credențialele de acces.</string>
+  <string name="textSettingsWebDavUrlHint">URL folder</string>
+  <string name="textSettingsWebDavUsernameHint">Nume utilizator</string>
+  <string name="textSettingsWebDavPasswordHint">Parolă</string>
+  <string name="textSettingsWebDavPasswordSetHint">Parolă (lăsați gol pentru a o păstra pe cea actuală)</string>
+  <string name="textSettingsWebDavTest">Testare conexiune</string>
+  <string name="textSettingsWebDavTesting">Se testează…</string>
+  <string name="textSettingsWebDavConnected">Conectat. Folderul este accesibil și se poate scrie în el.</string>
+  <string name="textSettingsWebDavErrorAuth">Autentificare eșuată. Verificați numele de utilizator și parola.</string>
+  <string name="textSettingsWebDavErrorNotFound">Folderul nu a fost găsit și nu a putut fi creat. Verificați URL-ul.</string>
+  <string name="textSettingsWebDavErrorTls">Nu s-a putut stabili o conexiune securizată. Certificatul serverului nu este de încredere.</string>
+  <string name="textSettingsWebDavErrorUnreachable">Serverul nu a putut fi contactat. Verificați adresa și conexiunea.</string>
+  <string name="textSettingsWebDavErrorUnexpected">Serverul a răspuns neașteptat.</string>
 </resources>

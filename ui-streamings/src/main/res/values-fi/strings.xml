@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="textStreamingsFilterAll">Kaikki tarjoajat</string>
+  <string name="textStreamingsEmpty">Tälle nimikkeelle ei löytynyt suoratoistopalveluita.</string>
+</resources>

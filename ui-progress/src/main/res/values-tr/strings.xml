@@ -12,4 +12,7 @@
   <string name="textProgressEmpty"><b>İlerlemeniz</b> şu anda boş.\n\nDiziler eklemek için <b>Keşfet</b> sekmesini ziyaret edin veya TMDB koleksiyonunuzdan aktarın.</string>
   <string name="textNewSeason">Sezon Prömiyeri</string>
   <string name="textPremieres">Prömiyerler</string>
+
+  <string name="textBackupStarted">Yedekleniyor ve diğer cihazlarınızla senkronize ediliyor…</string>
+  <string name="textBackupNotConfigured">Buradan yedekleme yapmak için Ayarlar\'da bir WebDAV sunucusu kurun.</string>
 </resources>

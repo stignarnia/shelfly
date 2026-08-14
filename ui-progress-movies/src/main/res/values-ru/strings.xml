@@ -6,4 +6,8 @@
   <string name="textMoviesCalendarRecentsEmpty">Недавно вышедших фильмов нет.</string>
   <string name="textDiscoverMovies">Найти фильмы</string>
   <string name="textMoviesProgressEmpty">Ваш <b>Прогресс</b> в настоящее время пуст.\n\nПосетите вкладку <b>Открытия</b>, чтобы добавить сериалы или импортировать вашу коллекцию TMDB.</string>
+
+  <string name="textBackupStarted">Создание резервной копии и синхронизация с другими устройствами…</string>
+
+  <string name="textBackupNotConfigured">Настройте сервер WebDAV в Настройках, чтобы создать резервную копию отсюда.</string>
 </resources>

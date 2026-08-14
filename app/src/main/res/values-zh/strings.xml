@@ -12,4 +12,7 @@
   <string name="shortcutCollection">合集</string>
   <string name="shortcutSearch">搜索</string>
   <string name="shortcutProgress">进度</string>
+
+  <string name="textOnboardingApiKeyTitle">需要 TMDB API 密钥</string>
+  <string name="textOnboardingApiKeyMessage">此应用使用您自己的 TMDB 密钥，因此应用内部未内置任何密钥，您的使用情况也不会与任何人共享。\n\n请在 themoviedb.org 创建免费账户，然后从“设置 → API”复制 API 密钥 (v3 认证) 并粘贴到下方。您稍后可以在“设置”中随时更改。</string>
 </resources>

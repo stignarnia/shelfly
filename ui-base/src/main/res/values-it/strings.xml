@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="textOk">OK</string>
   <string name="textYes">Sì</string>
   <string name="textNo">No</string>
@@ -60,15 +60,15 @@
   <string name="textActing">Recitazione</string>
   <string name="textAiredAlready">Trasmesso</string>
   <string name="textAirsNow">Trasmesso ora</string>
-  <plurals name="textDaysToAir">
+  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Trasmesso domani</item>
     <item quantity="other">Trasmesso tra %d giorni</item>
   </plurals>
-  <plurals name="textHoursToAir">
+  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Trasmesso tra 1 ora</item>
     <item quantity="other">Trasmesso tra %d ore</item>
   </plurals>
-  <plurals name="textMinutesToAir">
+  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Trasmesso ora</item>
     <item quantity="other">Trasmesso tra %d minuti</item>
   </plurals>
@@ -120,5 +120,4 @@
   <string name="errorCouldNotLoadMovie">Non siamo riusciti a scaricare i dettagli del film.\nPer favore contattaci se il problema persiste.</string>
   <string name="errorCouldNotLoadSearchResults">Non siamo riusciti a caricare i risultati di ricerca.\nPer favore contattaci se il problema persiste.</string>
   <string name="errorNoInternetConnection">Nessuna connessione. Per favore controlla la tua connessione internet.</string>
-  <string name="errorSubscriptionsNotAvailable">Gli abbonamenti tramite Google Play non sono disponibili su questo dispositivo.</string>
-</resources>
+  </resources>

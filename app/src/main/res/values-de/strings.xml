@@ -12,4 +12,7 @@
   <string name="shortcutCollection">Sammlung</string>
   <string name="shortcutSearch">Suche</string>
   <string name="shortcutProgress">Fortschritt</string>
+
+  <string name="textOnboardingApiKeyTitle">TMDB-API-Schlüssel erforderlich</string>
+  <string name="textOnboardingApiKeyMessage">Diese App verwendet Ihren eigenen TMDB-Schlüssel. Es ist kein Schlüssel in der App enthalten und Ihre Nutzung wird mit niemandem geteilt.\n\nErstellen Sie ein kostenloses Konto auf themoviedb.org, kopieren Sie den API-Schlüssel (v3 Auth) aus Einstellungen → API und fügen Sie ihn unten ein. Sie können ihn später in den Einstellungen ändern.</string>
 </resources>
