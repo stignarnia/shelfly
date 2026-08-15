@@ -23,15 +23,16 @@ class ShowDetailsRatingsViewModel @Inject constructor(
   private val ratingsSpoilersCase: ShowDetailsRatingSpoilersCase,
 ) : ViewModel() {
 
-  private lateinit var show: Show
+  private var loadedImdbId: String? = null
 
   private val showState = MutableStateFlow<Show?>(null)
   private val ratingsState = MutableStateFlow<Ratings?>(null)
   private val isRefreshingRatingsState = MutableStateFlow(false)
 
   fun loadRatings(show: Show) {
-    if (this::show.isInitialized) return
-    this.show = show
+    val imdbId = show.ids.imdb.id
+    if (loadedImdbId != null) return
+    loadedImdbId = imdbId
 
     viewModelScope.launch {
       showState.value = show
@@ -43,17 +44,37 @@ class ShowDetailsRatingsViewModel @Inject constructor(
         rottenTomatoes = Ratings.Value(null, true),
       )
 
+      isRefreshingRatingsState.value = false
+      ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, externalRatings)
+
+      // External ratings are looked up by IMDb id. Without one there is nothing
+      // to ask OMDb for, so settle rather than spinning on a request that could
+      // only fail.
+      if (imdbId.isBlank()) {
+        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, externalRatings.settled())
+        return@launch
+      }
+
       try {
-        isRefreshingRatingsState.value = false
-        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, externalRatings)
         val ratings = ratingsCase.loadExternalRatings(show)
         ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, ratings)
       } catch (error: Throwable) {
-        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, externalRatings)
+        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, externalRatings.settled())
         rethrowCancellation(error)
       }
     }
   }
+
+  /**
+   * Clears the loading flags so a failed lookup renders as absent rather than
+   * spinning forever.
+   */
+  private fun Ratings.settled() =
+    copy(
+      imdb = Ratings.Value(imdb?.value, false),
+      metascore = Ratings.Value(metascore?.value, false),
+      rottenTomatoes = Ratings.Value(rottenTomatoes?.value, false),
+    )
 
   fun refreshRatings() {
     val show = showState.value

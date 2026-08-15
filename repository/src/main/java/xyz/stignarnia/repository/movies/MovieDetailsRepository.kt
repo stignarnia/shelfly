@@ -23,7 +23,16 @@ class MovieDetailsRepository @Inject constructor(
     force: Boolean = false,
   ): Movie {
     val local = localSource.movies.getById(idTmdb.id)
-    if (force || local == null || nowUtcMillis() - local.updatedAt > Config.MOVIE_DETAILS_CACHE_DURATION) {
+    // Only the details endpoint appends external_ids, so a row first cached by a
+    // list endpoint carries no IMDb id. Treat that as stale however fresh it is,
+    // otherwise external ratings have nothing to look up for the whole cache
+    // window. Movies TMDB has no IMDb id for simply refetch on each open.
+    val isMissingImdbId = local != null && local.idImdb.isBlank()
+    if (force ||
+      local == null ||
+      isMissingImdbId ||
+      nowUtcMillis() - local.updatedAt > Config.MOVIE_DETAILS_CACHE_DURATION
+    ) {
       val remote = remoteSource.tmdb.fetchMovie(idTmdb.id)
       val movie = mappers.movie.fromNetwork(remote)
       localSource.movies.upsert(listOf(mappers.movie.toDatabase(movie)))

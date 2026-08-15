@@ -71,7 +71,7 @@ internal fun TmdbMovie.toMovie(): Movie =
     title = title,
     year = release_date.toYear(),
     overview = overview,
-    released = release_date.toIsoInstant(),
+    released = release_date.toReleaseDate(),
     runtime = runtime,
     country = production_countries?.firstOrNull()?.iso_3166_1?.lowercase(),
     trailer = videos.toTrailerUrl(),
@@ -154,7 +154,7 @@ internal fun TmdbSearchItem.toMovie(): Movie =
     title = title,
     year = release_date.toYear(),
     overview = overview,
-    released = release_date.toIsoInstant(),
+    released = release_date.toReleaseDate(),
     runtime = null,
     country = null,
     trailer = null,
@@ -188,3 +188,10 @@ private fun String?.toIsoInstant(): String? {
   }
   return if (length == "yyyy-MM-dd".length) "${this}T00:00:00.000Z" else this
 }
+
+/**
+ * A movie's release date stays a plain yyyy-MM-dd. Unlike a show's first_aired,
+ * which is carried around as an ISO instant, every consumer of [Movie.released]
+ * parses it with LocalDate, so widening it to an instant makes the parse throw.
+ */
+private fun String?.toReleaseDate(): String? = if (this.isNullOrBlank()) null else this

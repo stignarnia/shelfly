@@ -43,6 +43,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
     runBlocking {
       val showDb = mockk<Show>(relaxed = true) {
         every { idTmdb } returns 1
+        every { idImdb } returns "tt0000001"
         every { updatedAt } returns nowUtcMillis() - 100
       }
       coEvery { showsDao.getById(any<Long>()) } returns showDb
@@ -52,6 +53,31 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
       assertThat(show.ids.tmdb).isEqualTo(IdTmdb(1))
       coVerify(exactly = 1) { showsDao.getById(any<Long>()) }
       coVerify(exactly = 0) { catalogApi.fetchShow(any<Long>()) }
+    }
+  }
+
+  @Test
+  fun `Should load remote show details if cached show has no IMDb id`() {
+    runBlocking {
+      // Only the details endpoint appends external_ids, so a row cached by a
+      // list endpoint has no IMDb id and external ratings cannot be looked up.
+      val showDb = mockk<Show>(relaxed = true) {
+        every { idTmdb } returns 1
+        every { idImdb } returns ""
+        every { updatedAt } returns nowUtcMillis() - 100
+      }
+      val showRemote = mockk<ShowRemote>(relaxed = true) {
+        every { ids?.tmdb } returns 1
+        every { ids?.imdb } returns "tt0000001"
+      }
+      coEvery { showsDao.getById(any<Long>()) } returns showDb
+      coEvery { showsDao.upsert(any()) } just Runs
+      coEvery { catalogApi.fetchShow(any<Long>()) } returns showRemote
+
+      val show = SUT.load(IdTmdb(1), false)
+
+      assertThat(show.ids.imdb.id).isEqualTo("tt0000001")
+      coVerify(exactly = 1) { catalogApi.fetchShow(any<Long>()) }
     }
   }
 
