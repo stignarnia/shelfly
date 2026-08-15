@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.extensions.nowUtcMillis
+import xyz.stignarnia.data_remote.apikey.ApiKeyProvider
 import xyz.stignarnia.repository.images.ShowImagesProvider
 import xyz.stignarnia.ui_base.utilities.events.Event
 import xyz.stignarnia.ui_base.utilities.events.MessageEvent
@@ -37,6 +38,7 @@ internal class DiscoverViewModel @Inject constructor(
   private val showsCase: DiscoverShowsCase,
   private val filtersCase: DiscoverFiltersCase,
   private val imagesProvider: ShowImagesProvider,
+  private val apiKeyProvider: ApiKeyProvider,
 ) : ViewModel(),
   ChannelsDelegate by DefaultChannelsDelegate() {
 
@@ -79,7 +81,10 @@ internal class DiscoverViewModel @Inject constructor(
           scrollState.value = Event(resetScroll)
         }
 
-        if (pullToRefresh || skipCache || !showsCase.isCacheValid()) {
+        // Nothing to fetch without a key, and trying anyway would leave the
+        // screen showing a failure the user cannot act on until they have
+        // finished entering one.
+        if (apiKeyProvider.hasTmdbApiKey() && (pullToRefresh || skipCache || !showsCase.isCacheValid())) {
           val shows = showsCase.loadRemoteShows(filters)
           itemsState.value = emptyList()
           delay(50) // Added to avoid long scrolling to top

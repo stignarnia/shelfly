@@ -14,5 +14,22 @@
   <string name="shortcutProgress">Fremskridt</string>
 
   <string name="textOnboardingApiKeyTitle">TMDB API-nøgle påkrævet</string>
-  <string name="textOnboardingApiKeyMessage">Denne app bruger din egen TMDB-nøgle, så ingen nøgle leveres i appen, og dit forbrug deles ikke med andre.\n\nOpret en gratis konto på themoviedb.org, kopiér API-nøglen (v3-godkendelse) fra Indstillinger → API og indsæt den nedenfor. Du kan ændre den senere i Indstillinger.</string>
+  <string name="textOnboardingApiKeyMessage">Denne app bruger din egen TMDB-nøgle, så ingen nøgle leveres i appen, og dit forbrug deles ikke med andre.\n\nOpret en gratis konto på themoviedb.org/settings/api, kopiér API-nøglen (v3-godkendelse) fra Indstillinger → API og indsæt den nedenfor. Du kan ændre den senere i Indstillinger.</string>
+  <string name="textOnboardingApiKeyHint">API-nøgle (v3-godkendelse)</string>
+
+  <string name="textWelcomeStepIndicator">Trin %1$d af %2$d</string>
+  <string name="textBack">Tilbage</string>
+  <string name="textContinue">Fortsæt</string>
+
+  <string name="textOnboardingOmdbKeyTitle">OMDb API-nøgle (valgfri)</string>
+  <string name="textOnboardingOmdbKeyMessage">En OMDb-nøgle tilføjer bedømmelser fra IMDb, Metascore og Rotten Tomatoes til detaljer om serier og film. Alt andet virker uden den.\n\nHent en gratis nøgle på omdbapi.com/apikey.aspx og indsæt den nedenfor, eller spring over og tilføj den senere under Indstillinger.</string>
+  <string name="textOnboardingOmdbKeyHint">OMDb API-nøgle</string>
+  <string name="textOnboardingNotificationsTitle">Notifikationer om afsnit</string>
+  <string name="textOnboardingNotificationsMessage">Shelfly kan fortælle dig, når et nyt afsnit af en serie, du følger, sendes, og når en film, du venter på, udkommer.\n\nDu kan altid ændre dette under Indstillinger.</string>
+  <string name="textOnboardingNotificationsEnable">Aktivér</string>
+  <string name="textOnboardingSyncTitle">Synkronisér på tværs af enheder</string>
+  <string name="textOnboardingSyncMessage">Shelfly kan sikkerhedskopiere din samling til din egen WebDAV-server, så den samme fremgang følger dig over på en anden enhed. Intet sendes andre steder hen.\n\nHvis du allerede synkroniserer fra en anden enhed, gendanner den samme server her den samling.</string>
+  <string name="textOnboardingSyncSetUp">Opsæt</string>
+  <string name="textSkip">Spring over</string>
+  <string name="textNotNow">Ikke nu</string>
 </resources>

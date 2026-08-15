@@ -14,5 +14,22 @@
   <string name="shortcutProgress">进度</string>
 
   <string name="textOnboardingApiKeyTitle">需要 TMDB API 密钥</string>
-  <string name="textOnboardingApiKeyMessage">此应用使用您自己的 TMDB 密钥，因此应用内部未内置任何密钥，您的使用情况也不会与任何人共享。\n\n请在 themoviedb.org 创建免费账户，然后从“设置 → API”复制 API 密钥 (v3 认证) 并粘贴到下方。您稍后可以在“设置”中随时更改。</string>
+  <string name="textOnboardingApiKeyMessage">此应用使用您自己的 TMDB 密钥，因此应用内部未内置任何密钥，您的使用情况也不会与任何人共享。\n\n请在 themoviedb.org/settings/api 创建免费账户，然后从“设置 → API”复制 API 密钥 (v3 认证) 并粘贴到下方。您稍后可以在“设置”中随时更改。</string>
+  <string name="textOnboardingApiKeyHint">API 密钥（v3 认证）</string>
+
+  <string name="textWelcomeStepIndicator">第 %1$d 步，共 %2$d 步</string>
+  <string name="textBack">返回</string>
+  <string name="textContinue">继续</string>
+
+  <string name="textOnboardingOmdbKeyTitle">OMDb API 密钥（可选）</string>
+  <string name="textOnboardingOmdbKeyMessage">OMDb 密钥可为剧集和电影详情添加 IMDb、Metascore 和烂番茄评分。其余功能没有它也能正常使用。\n\n在 omdbapi.com/apikey.aspx 免费获取密钥并粘贴到下方，或跳过此步骤，稍后在设置中添加。</string>
+  <string name="textOnboardingOmdbKeyHint">OMDb API 密钥</string>
+  <string name="textOnboardingNotificationsTitle">剧集通知</string>
+  <string name="textOnboardingNotificationsMessage">Shelfly 可以在你关注的剧集播出新一集时，以及你期待的电影上映时通知你。\n\n你可以随时在设置中更改。</string>
+  <string name="textOnboardingNotificationsEnable">启用</string>
+  <string name="textOnboardingSyncTitle">跨设备同步</string>
+  <string name="textOnboardingSyncMessage">Shelfly 可以将你的收藏备份到你自己的 WebDAV 服务器，让相同的进度跟随你到另一台设备。不会向其他任何地方发送数据。\n\n如果你已在另一台设备上同步，在此配置相同的服务器即可恢复那份收藏。</string>
+  <string name="textOnboardingSyncSetUp">设置</string>
+  <string name="textSkip">跳过</string>
+  <string name="textNotNow">暂不</string>
 </resources>

@@ -14,5 +14,22 @@
   <string name="shortcutProgress">Postęp</string>
 
   <string name="textOnboardingApiKeyTitle">Wymagany klucz API TMDB</string>
-  <string name="textOnboardingApiKeyMessage">Ta aplikacja korzysta z Twojego własnego klucza TMDB, więc żaden klucz nie jest w niej zawarty, a Twoje użycie nie jest nikomu udostępniane.\n\nZałóż darmowe konto na themoviedb.org, skopiuj klucz API (uwierzytelnianie v3) z Ustawienia → API i wklej go poniżej. Możesz go zmienić później w Ustawieniach.</string>
+  <string name="textOnboardingApiKeyMessage">Ta aplikacja korzysta z Twojego własnego klucza TMDB, więc żaden klucz nie jest w niej zawarty, a Twoje użycie nie jest nikomu udostępniane.\n\nZałóż darmowe konto na themoviedb.org/settings/api, skopiuj klucz API (uwierzytelnianie v3) z Ustawienia → API i wklej go poniżej. Możesz go zmienić później w Ustawieniach.</string>
+  <string name="textOnboardingApiKeyHint">Klucz API (uwierzytelnianie v3)</string>
+
+  <string name="textWelcomeStepIndicator">Krok %1$d z %2$d</string>
+  <string name="textBack">Wstecz</string>
+  <string name="textContinue">Dalej</string>
+
+  <string name="textOnboardingOmdbKeyTitle">Klucz API OMDb (opcjonalnie)</string>
+  <string name="textOnboardingOmdbKeyMessage">Klucz OMDb dodaje oceny z IMDb, Metascore i Rotten Tomatoes do szczegółów seriali i filmów. Cała reszta działa bez niego.\n\nOdbierz darmowy klucz na omdbapi.com/apikey.aspx i wklej go poniżej albo pomiń ten krok i dodaj go później w Ustawieniach.</string>
+  <string name="textOnboardingOmdbKeyHint">Klucz API OMDb</string>
+  <string name="textOnboardingNotificationsTitle">Powiadomienia o odcinkach</string>
+  <string name="textOnboardingNotificationsMessage">Shelfly może informować o emisji nowego odcinka obserwowanego serialu i o premierze filmu, na który czekasz.\n\nMożesz to zmienić w każdej chwili w Ustawieniach.</string>
+  <string name="textOnboardingNotificationsEnable">Włącz</string>
+  <string name="textOnboardingSyncTitle">Synchronizacja między urządzeniami</string>
+  <string name="textOnboardingSyncMessage">Shelfly może tworzyć kopię zapasową kolekcji na twoim własnym serwerze WebDAV, dzięki czemu te same postępy trafią na inne urządzenie. Nic nie jest wysyłane gdzie indziej.\n\nJeśli synchronizujesz już z innego urządzenia, skonfigurowanie tutaj tego samego serwera przywróci tamtą kolekcję.</string>
+  <string name="textOnboardingSyncSetUp">Skonfiguruj</string>
+  <string name="textSkip">Pomiń</string>
+  <string name="textNotNow">Nie teraz</string>
 </resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Overriding backgroundTint with a flat colour would keep the filled button
+  looking live while it is disabled, so the disabled state is spelled out here
+  alongside the accent.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+    android:alpha="0.3"
+    android:color="@color/colorAccent"
+    android:state_enabled="false"
+    />
+
+  <item android:color="@color/colorAccent" />
+
+</selector>

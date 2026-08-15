@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Shared body for the steps that are purely an explanation plus a choice:
+  notification permission and WebDAV sync. Only the icon and the copy differ.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  >
+
+  <ImageView
+    android:id="@+id/viewWelcomeStepMessageIcon"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:layout_marginBottom="@dimen/spaceBig"
+    android:importantForAccessibility="no"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:srcCompat="@drawable/ic_notification_bell"
+    />
+
+  <TextView
+    android:id="@+id/viewWelcomeStepMessageTitle"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:textColor="?android:attr/textColorPrimary"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/viewWelcomeStepMessageIcon"
+    tools:text="@tools:sample/lorem"
+    />
+
+  <TextView
+    android:id="@+id/viewWelcomeStepMessageText"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spaceNormal"
+    android:autoLink="web"
+    android:textColor="?android:attr/textColorPrimary"
+    android:textColorLink="@color/colorAccent"
+    android:textSize="15sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/viewWelcomeStepMessageTitle"
+    tools:text="@tools:sample/lorem/random"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

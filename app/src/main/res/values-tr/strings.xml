@@ -14,5 +14,22 @@
   <string name="shortcutProgress">İlerleme</string>
 
   <string name="textOnboardingApiKeyTitle">TMDB API anahtarı gerekli</string>
-  <string name="textOnboardingApiKeyMessage">Bu uygulama kendi TMDB anahtarınızı kullanır, bu nedenle içine hiçbir anahtar dahil edilmez ve kullanımınız başkalarıyla paylaşılmaz.\n\nthemoviedb.org adresinde ücretsiz bir hesap oluşturun, ardından Ayarlar → API bölümünden API anahtarını (v3 doğrulaması) kopyalayın ve aşağıya yapıştırın. Daha sonra Ayarlar\'dan değiştirebilirsiniz.</string>
+  <string name="textOnboardingApiKeyMessage">Bu uygulama kendi TMDB anahtarınızı kullanır, bu nedenle içine hiçbir anahtar dahil edilmez ve kullanımınız başkalarıyla paylaşılmaz.\n\nthemoviedb.org/settings/api adresinde ücretsiz bir hesap oluşturun, ardından Ayarlar → API bölümünden API anahtarını (v3 doğrulaması) kopyalayın ve aşağıya yapıştırın. Daha sonra Ayarlar\'dan değiştirebilirsiniz.</string>
+  <string name="textOnboardingApiKeyHint">API anahtarı (v3 kimlik doğrulama)</string>
+
+  <string name="textWelcomeStepIndicator">Adım %1$d / %2$d</string>
+  <string name="textBack">Geri</string>
+  <string name="textContinue">Devam et</string>
+
+  <string name="textOnboardingOmdbKeyTitle">OMDb API anahtarı (isteğe bağlı)</string>
+  <string name="textOnboardingOmdbKeyMessage">OMDb anahtarı, dizi ve film ayrıntılarına IMDb, Metascore ve Rotten Tomatoes puanlarını ekler. Geri kalan her şey onsuz da çalışır.\n\nomdbapi.com/apikey.aspx adresinden ücretsiz bir anahtar alıp aşağıya yapıştırın ya da bunu atlayıp daha sonra Ayarlar\'dan ekleyin.</string>
+  <string name="textOnboardingOmdbKeyHint">OMDb API anahtarı</string>
+  <string name="textOnboardingNotificationsTitle">Bölüm bildirimleri</string>
+  <string name="textOnboardingNotificationsMessage">Shelfly, takip ettiğiniz bir dizinin yeni bölümü yayınlandığında ve beklediğiniz bir film çıktığında sizi haberdar edebilir.\n\nBunu istediğiniz zaman Ayarlar\'dan değiştirebilirsiniz.</string>
+  <string name="textOnboardingNotificationsEnable">Etkinleştir</string>
+  <string name="textOnboardingSyncTitle">Cihazlar arası eşitleme</string>
+  <string name="textOnboardingSyncMessage">Shelfly, koleksiyonunuzu kendi WebDAV sunucunuza yedekleyebilir; böylece aynı ilerleme başka bir cihazda da sizinle gelir. Başka hiçbir yere bir şey gönderilmez.\n\nBaşka bir cihazdan zaten eşitliyorsanız, burada aynı sunucuyu kurmak o koleksiyonu geri yükler.</string>
+  <string name="textOnboardingSyncSetUp">Kur</string>
+  <string name="textSkip">Atla</string>
+  <string name="textNotNow">Şimdi değil</string>
 </resources>

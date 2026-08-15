@@ -14,5 +14,22 @@
   <string name="shortcutProgress">Katselutila</string>
 
   <string name="textOnboardingApiKeyTitle">TMDB API -avain vaaditaan</string>
-  <string name="textOnboardingApiKeyMessage">Tämä sovellus käyttää omaa TMDB-avaintasi, joten avainta ei toimiteta sovelluksen mukana eikä käyttöäsi jaeta kenenkään kanssa.\n\nLuo ilmainen tili osoitteessa themoviedb.org, kopioi API-avain (v3-todennus) kohdasta Asetukset → API ja liitä se alle. Voit muuttaa sitä myöhemmin Asetuksissa.</string>
+  <string name="textOnboardingApiKeyMessage">Tämä sovellus käyttää omaa TMDB-avaintasi, joten avainta ei toimiteta sovelluksen mukana eikä käyttöäsi jaeta kenenkään kanssa.\n\nLuo ilmainen tili osoitteessa themoviedb.org/settings/api, kopioi API-avain (v3-todennus) kohdasta Asetukset → API ja liitä se alle. Voit muuttaa sitä myöhemmin Asetuksissa.</string>
+  <string name="textOnboardingApiKeyHint">API-avain (v3-todennus)</string>
+
+  <string name="textWelcomeStepIndicator">Vaihe %1$d / %2$d</string>
+  <string name="textBack">Takaisin</string>
+  <string name="textContinue">Jatka</string>
+
+  <string name="textOnboardingOmdbKeyTitle">OMDb API-avain (valinnainen)</string>
+  <string name="textOnboardingOmdbKeyMessage">OMDb-avain lisää IMDb-, Metascore- ja Rotten Tomatoes -arviot sarjojen ja elokuvien tietoihin. Kaikki muu toimii ilmankin.\n\nHanki ilmainen avain osoitteesta omdbapi.com/apikey.aspx ja liitä se alle, tai ohita tämä ja lisää avain myöhemmin asetuksista.</string>
+  <string name="textOnboardingOmdbKeyHint">OMDb API-avain</string>
+  <string name="textOnboardingNotificationsTitle">Jaksoilmoitukset</string>
+  <string name="textOnboardingNotificationsMessage">Shelfly voi kertoa, kun seuraamastasi sarjasta tulee uusi jakso ja kun odottamasi elokuva julkaistaan.\n\nVoit muuttaa tätä milloin tahansa asetuksista.</string>
+  <string name="textOnboardingNotificationsEnable">Ota käyttöön</string>
+  <string name="textOnboardingSyncTitle">Synkronointi laitteiden välillä</string>
+  <string name="textOnboardingSyncMessage">Shelfly voi varmuuskopioida kokoelmasi omalle WebDAV-palvelimellesi, jolloin sama edistyminen seuraa mukana toiselle laitteelle. Mitään ei lähetetä muualle.\n\nJos synkronoit jo toiselta laitteelta, saman palvelimen määrittäminen tässä palauttaa sen kokoelman.</string>
+  <string name="textOnboardingSyncSetUp">Määritä</string>
+  <string name="textSkip">Ohita</string>
+  <string name="textNotNow">Ei nyt</string>
 </resources>

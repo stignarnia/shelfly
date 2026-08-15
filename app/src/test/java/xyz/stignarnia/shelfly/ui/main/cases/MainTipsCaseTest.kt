@@ -3,7 +3,6 @@ package xyz.stignarnia.shelfly.ui.main.cases
 import BaseMockTest
 import android.content.SharedPreferences
 import com.google.common.truth.Truth.assertThat
-import xyz.stignarnia.shelfly.BuildConfig
 import xyz.stignarnia.ui_model.Tip
 import io.mockk.Runs
 import io.mockk.every
@@ -46,11 +45,7 @@ class MainTipsCaseTest : BaseMockTest() {
     val tip = Tip.MENU_DISCOVER
     every { sharedPreferences.getBoolean(tip.name, false) } returns false
 
-    if (BuildConfig.DEBUG) {
-      assertThat(SUT.isTipShown(tip)).isTrue()
-    } else {
-      assertThat(SUT.isTipShown(tip)).isFalse()
-    }
+    assertThat(SUT.isTipShown(tip)).isFalse()
   }
 
   @Test

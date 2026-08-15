@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.os.Build
 import android.os.StrictMode
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import com.jakewharton.processphoenix.ProcessPhoenix
@@ -50,6 +51,22 @@ class App :
           settingsRepository.update(Settings.createInitial())
         }
       }
+
+    /**
+     * Pin the stored language, which is the app's own source of truth for it.
+     * Applied unconditionally: re-applying the language already in force is a
+     * no-op, whereas reading back the current one this early is not reliable.
+     *
+     * Note this only takes effect from the following launch on API 33+, where
+     * it goes through the system LocaleManager asynchronously. The welcome flow
+     * therefore does not depend on it - see WelcomeState.displayLanguage.
+     */
+    fun setupLanguage() {
+      settingsRepository.isLocaleInitialised = true
+      AppCompatDelegate.setApplicationLocales(
+        LocaleListCompat.forLanguageTags(settingsRepository.language),
+      )
+    }
 
     fun setupStrictMode() {
       if (BuildConfig.DEBUG) {
@@ -105,6 +122,7 @@ class App :
     }
 
     setupSettings()
+    setupLanguage()
     AppCompatDelegate.setDefaultNightMode(settingsRepository.theme)
     setupStrictMode()
     setupNotificationChannels()

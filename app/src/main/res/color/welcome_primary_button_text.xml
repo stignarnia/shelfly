@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The primary welcome action is disabled until its step has an answer - notably
+  the key steps, which cannot continue on an empty field. A flat textColor would
+  keep looking enabled, so the disabled state has to be spelled out.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+    android:alpha="0.5"
+    android:color="@android:color/white"
+    android:state_enabled="false"
+    />
+
+  <item android:color="@android:color/white" />
+
+</selector>

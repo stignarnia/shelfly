@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.telephony.TelephonyManager
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.LocaleManagerCompat
 import androidx.core.content.edit
 import androidx.core.os.LocaleListCompat
 import xyz.stignarnia.common.Config
@@ -17,7 +18,6 @@ import xyz.stignarnia.ui_settings.helpers.AppLanguage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import timber.log.Timber
-import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -27,6 +27,11 @@ class MainInitialsCase @Inject constructor(
   private val settingsRepository: SettingsRepository,
   @Named("miscPreferences") private var miscPreferences: SharedPreferences,
 ) {
+
+  companion object {
+    private const val KEY_APP_VERSION = "APP_VERSION"
+    private const val KEY_APP_VERSION_NAME = "APP_VERSION_NAME"
+  }
 
   suspend fun setInitialRun(value: Boolean) {
     val settings = settingsRepository.load()
@@ -75,48 +80,39 @@ class MainInitialsCase @Inject constructor(
     AppCompatDelegate.setApplicationLocales(locales)
   }
 
-  fun checkInitialLanguage(): AppLanguage {
-    val locales = LocaleListCompat.getAdjustedDefault()
-    val appLanguages = AppLanguage.values()
-
-    if (locales.size() == 1 && !locales[0]?.language.equals(Locale("en").language)) {
-      appLanguages.forEach { appLanguage ->
-        if (appLanguage.code.equals(locales[0]?.language, ignoreCase = true)) {
-          return appLanguage
-        }
-      }
+  /**
+   * The language the device itself is set to, which is not the same thing as the
+   * app's own locale: once a per app locale has been applied,
+   * [LocaleListCompat.getAdjustedDefault] reports that one first. The welcome
+   * flow re-offers the device language whenever it changes, so it needs the
+   * system value on every launch rather than only before the first choice.
+   *
+   * Null when the device is set to a language the app has no translation for.
+   * That is not the same as English, and answering it with English would offer
+   * a user running the app in Italian on a Japanese phone a switch to English
+   * they never asked about.
+   */
+  fun detectSystemLanguage(): AppLanguage? {
+    val locales = LocaleManagerCompat.getSystemLocales(context)
+    for (index in 0 until locales.size()) {
+      val language = locales[index]?.language?.lowercase() ?: continue
+      AppLanguage.entries
+        .firstOrNull { it.code == language }
+        ?.let { return it }
     }
-
-    if (locales.size() > 1) {
-      val languagesCodes = arrayOf(locales[0], locales[1])
-        .filterNotNull()
-        .map { it.language.lowercase() }
-      if (languagesCodes.any { it != Locale(Config.DEFAULT_LANGUAGE).language }) {
-        val languageCodes = appLanguages.map { it.code }
-        languagesCodes.forEach { language ->
-          if (language in languageCodes) {
-            return appLanguages.first { it.code == language }
-          }
-        }
-        appLanguages
-          .filter { it.code != Config.DEFAULT_LANGUAGE }
-          .forEach { appLanguage ->
-            if (appLanguage.code in languagesCodes) {
-              return appLanguage
-            }
-          }
-      }
-    }
-
-    return AppLanguage.ENGLISH
+    return null
   }
 
+  /**
+   * When the notes are due to be shown the version stamp is deliberately left
+   * alone: [setWhatsNewSeen] writes it once the user has actually closed them,
+   * so an upgrade whose notes were never read is offered again. When nothing
+   * will be shown for this build the stamp is written right away, otherwise the
+   * next launch would mistake the build for an unread upgrade.
+   */
   fun showWhatsNew(isInitialRun: Boolean): Boolean {
-    val keyAppVersion = "APP_VERSION"
-    val keyAppVersionName = "APP_VERSION_NAME"
-
-    val version = miscPreferences.getInt(keyAppVersion, 0)
-    val name = miscPreferences.getString(keyAppVersionName, "")
+    val version = miscPreferences.getInt(KEY_APP_VERSION, 0)
+    val name = miscPreferences.getString(KEY_APP_VERSION_NAME, "")
 
     fun isPatchUpdate(): Boolean {
       if (name.isNullOrBlank()) return false
@@ -136,16 +132,24 @@ class MainInitialsCase @Inject constructor(
       return (major == currentMajor) && (minor == currentMinor)
     }
 
-    miscPreferences.edit {
-      putInt(keyAppVersion, BuildConfig.VERSION_CODE).apply()
-      putString(keyAppVersionName, BuildConfig.VERSION_NAME).apply()
-    }
-
-    return Config.SHOW_WHATS_NEW &&
+    val showWhatsNew = Config.SHOW_WHATS_NEW &&
       BuildConfig.VERSION_CODE > version &&
       BuildConfig.VERSION_NAME != name &&
       !isInitialRun &&
       !isPatchUpdate()
+
+    if (!showWhatsNew) {
+      setWhatsNewSeen()
+    }
+
+    return showWhatsNew
+  }
+
+  fun setWhatsNewSeen() {
+    miscPreferences.edit {
+      putInt(KEY_APP_VERSION, BuildConfig.VERSION_CODE)
+      putString(KEY_APP_VERSION_NAME, BuildConfig.VERSION_NAME)
+    }
   }
 
   fun saveInstallTimestamp() {

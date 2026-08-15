@@ -14,5 +14,22 @@
   <string name="shortcutProgress">Progressi</string>
 
   <string name="textOnboardingApiKeyTitle">Chiave API TMDB richiesta</string>
-  <string name="textOnboardingApiKeyMessage">Questa applicazione utilizza la tua chiave TMDB personale, quindi nessuna chiave è inclusa nell\'app e il tuo utilizzo non è condiviso con nessun altro.\n\nCrea un account gratuito su themoviedb.org, copia la chiave API (autenticazione v3) da Impostazioni → API e incollala qui sotto. Potrai modificarla in seguito nelle Impostazioni.</string>
+  <string name="textOnboardingApiKeyMessage">Questa applicazione utilizza la tua chiave TMDB personale, quindi nessuna chiave è inclusa nell\'app e il tuo utilizzo non è condiviso con nessun altro.\n\nCrea un account gratuito su themoviedb.org/settings/api, copia la chiave API (autenticazione v3) da Impostazioni → API e incollala qui sotto. Potrai modificarla in seguito nelle Impostazioni.</string>
+  <string name="textOnboardingApiKeyHint">Chiave API (autenticazione v3)</string>
+
+  <string name="textWelcomeStepIndicator">Passo %1$d di %2$d</string>
+  <string name="textBack">Indietro</string>
+  <string name="textContinue">Continua</string>
+
+  <string name="textOnboardingOmdbKeyTitle">Chiave API OMDb (facoltativa)</string>
+  <string name="textOnboardingOmdbKeyMessage">Una chiave OMDb aggiunge le valutazioni di IMDb, Metascore e Rotten Tomatoes ai dettagli di serie e film. Tutto il resto funziona anche senza.\n\nOttieni una chiave gratuita su omdbapi.com/apikey.aspx e incollala qui sotto, oppure salta e aggiungila più tardi nelle Impostazioni.</string>
+  <string name="textOnboardingOmdbKeyHint">Chiave API OMDb</string>
+  <string name="textOnboardingNotificationsTitle">Notifiche degli episodi</string>
+  <string name="textOnboardingNotificationsMessage">Shelfly può avvisarti quando esce un nuovo episodio di una serie che segui e quando viene pubblicato un film che stai aspettando.\n\nPuoi modificarlo in qualsiasi momento nelle Impostazioni.</string>
+  <string name="textOnboardingNotificationsEnable">Attiva</string>
+  <string name="textOnboardingSyncTitle">Sincronizza tra dispositivi</string>
+  <string name="textOnboardingSyncMessage">Shelfly può salvare la tua raccolta sul tuo server WebDAV, così gli stessi progressi ti seguono su un altro dispositivo. Nulla viene inviato altrove.\n\nSe sincronizzi già da un altro dispositivo, configurare qui lo stesso server ripristina quella raccolta.</string>
+  <string name="textOnboardingSyncSetUp">Configura</string>
+  <string name="textSkip">Salta</string>
+  <string name="textNotNow">Non ora</string>
 </resources>

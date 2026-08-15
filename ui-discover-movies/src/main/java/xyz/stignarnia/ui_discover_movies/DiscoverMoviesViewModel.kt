@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.extensions.nowUtcMillis
+import xyz.stignarnia.data_remote.apikey.ApiKeyProvider
 import xyz.stignarnia.repository.images.MovieImagesProvider
 import xyz.stignarnia.ui_base.utilities.events.Event
 import xyz.stignarnia.ui_base.utilities.events.MessageEvent
@@ -38,6 +39,7 @@ internal class DiscoverMoviesViewModel @Inject constructor(
   private val moviesCase: DiscoverMoviesCase,
   private val filtersCase: DiscoverFiltersCase,
   private val imagesProvider: MovieImagesProvider,
+  private val apiKeyProvider: ApiKeyProvider,
 ) : ViewModel(),
   ChannelsDelegate by DefaultChannelsDelegate() {
 
@@ -80,7 +82,10 @@ internal class DiscoverMoviesViewModel @Inject constructor(
           scrollState.value = Event(resetScroll)
         }
 
-        if (pullToRefresh || skipCache || !moviesCase.isCacheValid()) {
+        // Nothing to fetch without a key, and trying anyway would leave the
+        // screen showing a failure the user cannot act on until they have
+        // finished entering one.
+        if (apiKeyProvider.hasTmdbApiKey() && (pullToRefresh || skipCache || !moviesCase.isCacheValid())) {
           val movies = moviesCase.loadRemoteMovies(filters)
           itemsState.value = emptyList()
           delay(50) // Added to avoid long scrolling to top

@@ -1,20 +1,21 @@
 package xyz.stignarnia.shelfly.ui.main
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color.TRANSPARENT
+import android.os.Build
 import android.os.Bundle
-import android.text.InputType
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.view.animation.DecelerateInterpolator
-import android.widget.EditText
-import android.widget.FrameLayout
 import androidx.activity.SystemBarStyle
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -24,19 +25,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.work.WorkManager
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.common.Mode.MOVIES
 import xyz.stignarnia.common.Mode.SHOWS
-import xyz.stignarnia.data_remote.apikey.ApiKeyProvider
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.shelfly.R
 import xyz.stignarnia.shelfly.databinding.ActivityMainBinding
 import xyz.stignarnia.shelfly.ui.BaseActivity
 import xyz.stignarnia.shelfly.ui.main.delegates.MainTipsDelegate
 import xyz.stignarnia.shelfly.ui.main.delegates.TipsDelegate
-import xyz.stignarnia.shelfly.ui.views.WhatsNewView
+import xyz.stignarnia.shelfly.ui.main.welcome.WelcomeState
 import xyz.stignarnia.shelfly.utilities.deeplink.DeepLinkResolver
+import xyz.stignarnia.ui_settings.sections.backup.SettingsBackupFragment
 import xyz.stignarnia.ui_base.common.OnShowsMoviesSyncedListener
 import xyz.stignarnia.ui_base.common.OnTabReselectedListener
 import xyz.stignarnia.ui_base.events.Event
@@ -56,7 +56,6 @@ import xyz.stignarnia.ui_base.utilities.extensions.gone
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.visible
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
-import xyz.stignarnia.ui_settings.helpers.AppLanguage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
@@ -86,7 +85,6 @@ class MainActivity :
   private val navigationPadding by lazy { dimenToPx(R.dimen.spaceMedium) }
   private val decelerateInterpolator by lazy { DecelerateInterpolator(2F) }
 
-  @Inject lateinit var apiKeyProvider: ApiKeyProvider
   @Inject lateinit var workManager: WorkManager
   @Inject lateinit var eventsManager: EventsManager
   @Inject lateinit var deepLinkResolver: DeepLinkResolver
@@ -112,45 +110,6 @@ class MainActivity :
 
     restoreState(savedInstanceState)
     onNewIntent(intent)
-
-    showApiKeyDialogIfNeeded()
-  }
-
-  /**
-   * Without a TMDB key there is no catalog at all, so this blocks on first run
-   * until one is entered. The key can be changed later in Settings.
-   */
-  private fun showApiKeyDialogIfNeeded() {
-    if (apiKeyProvider.hasTmdbApiKey()) {
-      return
-    }
-
-    val input = EditText(this).apply {
-      inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
-      setSingleLine()
-    }
-    val padding = resources.getDimensionPixelSize(R.dimen.spaceNormal)
-    val container = FrameLayout(this).apply {
-      setPadding(padding, padding / 2, padding, 0)
-      addView(input)
-    }
-
-    MaterialAlertDialogBuilder(this, R.style.AlertDialog)
-      .setCancelable(false)
-      .setTitle(R.string.textOnboardingApiKeyTitle)
-      .setMessage(R.string.textOnboardingApiKeyMessage)
-      .setView(container)
-      .setPositiveButton(R.string.textOk) { _, _ ->
-        val key = input.text
-          ?.toString()
-          .orEmpty()
-          .trim()
-        if (key.isBlank()) {
-          showApiKeyDialogIfNeeded()
-        } else {
-          apiKeyProvider.setTmdbApiKey(key)
-        }
-      }.show()
   }
 
   override fun onStart() {
@@ -197,6 +156,12 @@ class MainActivity :
       bottomMenuView.isModeMenuEnabled = hasMoviesEnabled()
       bottomMenuView.onModeSelected = { setMode(it) }
       viewMask.onClick { /* NOOP */ }
+      with(welcomeView) {
+        onPrimaryClick = { viewModel.onWelcomePrimary() }
+        onSecondaryClick = { viewModel.onWelcomeSecondary() }
+        onBackClick = { viewModel.onWelcomeBack() }
+        onApiKeyChanged = { viewModel.onApiKeyDraftChanged(it) }
+      }
     }
   }
 
@@ -254,6 +219,9 @@ class MainActivity :
   private fun setupBackPressed() {
     with(binding) {
       onBackPressedDispatcher.addCallback(this@MainActivity) {
+        if (viewModel.onWelcomeBack()) {
+          return@addCallback
+        }
         if (tutorialView.isVisible) {
           tutorialView.fadeOut()
           return@addCallback
@@ -348,18 +316,15 @@ class MainActivity :
         showMask.let {
           viewMask.visibleIf(it)
         }
-        isInitialRun?.let {
-          if (it.consume() == true) {
-            viewModel.checkInitialLanguage()
-          }
+        renderWelcome(welcome)
+        showDiscover?.let {
+          if (it.consume() == true) navigateToDiscover()
         }
-        showWhatsNew?.let {
-          if (it.consume() == true) showWhatsNewDialog()
+        requestNotifications?.let {
+          if (it.consume() == true) requestNotificationsPermission()
         }
-        initialLanguage?.let { event ->
-          event.consume()?.let {
-            showWelcomeDialog(it)
-          }
+        openSettings?.let {
+          if (it.consume() == true) navigateToWebDavSetup()
         }
         openLink?.let { event ->
           event.consume()?.let { bundle ->
@@ -377,43 +342,53 @@ class MainActivity :
     }
   }
 
-  private fun showWelcomeDialog(language: AppLanguage) {
-    navigateToDiscover()
+  private val notificationsPermissionLauncher = registerForActivityResult(RequestPermission()) {
+    viewModel.onNotificationsPermissionResult(it)
+  }
+
+  private fun requestNotificationsPermission() {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+      viewModel.onNotificationsPermissionResult(true)
+      return
+    }
+    notificationsPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+  }
+
+  /**
+   * The WebDAV setup form already exists under Settings, so the welcome step
+   * hands the user over to it - opened, not just nearby - rather than growing a
+   * second copy of it.
+   */
+  private fun navigateToWebDavSetup() {
+    findNavControl()?.run {
+      val target = when (currentDestination?.id) {
+        R.id.discoverFragment -> R.id.actionDiscoverFragmentToSettingsFragment
+        R.id.discoverMoviesFragment -> R.id.actionDiscoverMoviesFragmentToSettingsFragment
+        R.id.progressMainFragment -> R.id.actionProgressFragmentToSettingsFragment
+        R.id.progressMoviesMainFragment -> R.id.actionProgressMoviesFragmentToSettingsFragment
+        R.id.followedShowsFragment -> R.id.actionFollowedShowsFragmentToSettingsFragment
+        R.id.followedMoviesFragment -> R.id.actionFollowedMoviesFragmentToSettingsFragment
+        R.id.listsFragment -> R.id.actionListsFragmentToSettingsFragment
+        else -> return
+      }
+      navigate(target, bundleOf(SettingsBackupFragment.ARG_OPEN_WEB_DAV to true))
+    }
+  }
+
+  /**
+   * The step is state, not an event, so this is safe to run on every emission and
+   * after a configuration change - including the restart that applying a new
+   * locale triggers midway through the flow.
+   */
+  private fun renderWelcome(state: WelcomeState?) {
     with(binding.welcomeView) {
-      setLanguage(language)
-      fadeIn()
-      onOkClickListener = {
-        fadeOut()
-        showMask(false)
-        if (language != AppLanguage.ENGLISH) {
-          showWelcomeLanguageDialog(language)
-        }
+      if (state == null) {
+        if (isVisible) fadeOut()
+        return
       }
+      render(state)
+      if (!isVisible) fadeIn()
     }
-    showMask(true)
-  }
-
-  private fun showWelcomeLanguageDialog(language: AppLanguage) {
-    with(binding.welcomeLanguageView) {
-      setLanguage(language)
-      fadeIn()
-      onYesClick = {
-        viewModel.setLanguage(language)
-        fadeOut()
-        showMask(false)
-      }
-      onNoClick = {
-        viewModel.setLanguage(AppLanguage.ENGLISH)
-        fadeOut()
-        showMask(false)
-      }
-    }
-    showMask(true)
-  }
-
-  private fun showMask(show: Boolean) {
-    binding.viewMask.visibleIf(show)
-    if (!show) viewModel.clearMask()
   }
 
   @SuppressLint("MissingSuperCall")
@@ -496,17 +471,6 @@ class MainActivity :
       } catch (error: Throwable) {
       }
     }
-  }
-
-  private fun showWhatsNewDialog() {
-    MaterialAlertDialogBuilder(
-      this,
-      R.style.AlertDialog,
-    ).setBackground(ContextCompat.getDrawable(this, R.drawable.bg_dialog))
-      .setView(WhatsNewView(this))
-      .setCancelable(false)
-      .setPositiveButton(R.string.textClose) { _, _ -> }
-      .show()
   }
 
   private fun getMenuDiscoverAction() =

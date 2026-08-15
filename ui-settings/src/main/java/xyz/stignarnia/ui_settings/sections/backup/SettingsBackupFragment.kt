@@ -23,6 +23,11 @@ import xyz.stignarnia.ui_settings.databinding.ViewWebdavInputBinding
 @AndroidEntryPoint
 class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fragment_settings_backup) {
 
+  companion object {
+    /** Matches the argument declared on settingsFragment in the navigation graph. */
+    const val ARG_OPEN_WEB_DAV = "openWebDav"
+  }
+
   override val viewModel by viewModels<SettingsBackupViewModel>()
   private val binding by viewBinding(FragmentSettingsBackupBinding::bind)
 
@@ -38,6 +43,19 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
     )
 
     viewModel.refresh()
+    openWebDavDialogIfRequested()
+  }
+
+  /**
+   * The welcome flow sends the user here to set sync up, so open the form for
+   * them instead of leaving it one more tap away. The flag is cleared once
+   * consumed, otherwise the dialog would come back on every rotation.
+   */
+  private fun openWebDavDialogIfRequested() {
+    val arguments = parentFragment?.arguments ?: return
+    if (!arguments.getBoolean(ARG_OPEN_WEB_DAV, false)) return
+    arguments.putBoolean(ARG_OPEN_WEB_DAV, false)
+    showWebDavDialog()
   }
 
   private fun setupView() {

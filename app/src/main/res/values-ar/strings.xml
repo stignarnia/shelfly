@@ -14,5 +14,22 @@
   <string name="shortcutProgress">مستوى التقدم</string>
 
   <string name="textOnboardingApiKeyTitle">مفتاح TMDB API مطلوب</string>
-  <string name="textOnboardingApiKeyMessage">يستخدم هذا التطبيق مفتاح TMDB الخاص بك، لذلك لا يتم تضمين أي مفتاح داخله ولا تتم مشاركة استخدامك مع أي شخص آخر.\n\nأنشئ حساباً مجانياً على themoviedb.org، ثم انسخ مفتاح API (مصادقة v3) من الإعدادات ← API والصقه أدناه. يمكنك تغييره لاحقاً في الإعدادات.</string>
+  <string name="textOnboardingApiKeyMessage">يستخدم هذا التطبيق مفتاح TMDB الخاص بك، لذلك لا يتم تضمين أي مفتاح داخله ولا تتم مشاركة استخدامك مع أي شخص آخر.\n\nأنشئ حساباً مجانياً على themoviedb.org/settings/api، ثم انسخ مفتاح API (مصادقة v3) من الإعدادات ← API والصقه أدناه. يمكنك تغييره لاحقاً في الإعدادات.</string>
+  <string name="textOnboardingApiKeyHint">مفتاح API (مصادقة v3)</string>
+
+  <string name="textWelcomeStepIndicator">الخطوة %1$d من %2$d</string>
+  <string name="textBack">رجوع</string>
+  <string name="textContinue">متابعة</string>
+
+  <string name="textOnboardingOmdbKeyTitle">مفتاح OMDb API (اختياري)</string>
+  <string name="textOnboardingOmdbKeyMessage">يضيف مفتاح OMDb تقييمات IMDb وMetascore وRotten Tomatoes إلى تفاصيل المسلسلات والأفلام. كل شيء آخر يعمل بدونه.\n\nاحصل على مفتاح مجاني من omdbapi.com/apikey.aspx والصقه أدناه، أو تخطَّ هذه الخطوة وأضفه لاحقاً من الإعدادات.</string>
+  <string name="textOnboardingOmdbKeyHint">مفتاح OMDb API</string>
+  <string name="textOnboardingNotificationsTitle">إشعارات الحلقات</string>
+  <string name="textOnboardingNotificationsMessage">يمكن لـ Shelfly إعلامك عند عرض حلقة جديدة من مسلسل تتابعه، وعند صدور فيلم تنتظره.\n\nيمكنك تغيير ذلك في أي وقت من الإعدادات.</string>
+  <string name="textOnboardingNotificationsEnable">تفعيل</string>
+  <string name="textOnboardingSyncTitle">المزامنة بين الأجهزة</string>
+  <string name="textOnboardingSyncMessage">يمكن لـ Shelfly نسخ مجموعتك احتياطياً إلى خادم WebDAV الخاص بك، بحيث يرافقك التقدم نفسه على جهاز آخر. لا يُرسل أي شيء إلى أي جهة أخرى.\n\nإذا كنت تزامن بالفعل من جهاز آخر، فإن إعداد الخادم نفسه هنا يستعيد تلك المجموعة.</string>
+  <string name="textOnboardingSyncSetUp">إعداد</string>
+  <string name="textSkip">تخطٍّ</string>
+  <string name="textNotNow">ليس الآن</string>
 </resources>

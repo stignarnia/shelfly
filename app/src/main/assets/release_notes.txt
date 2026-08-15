@@ -1,14 +1,12 @@
-Shelfly 4.0.1
+Shelfly 4.0.2
 
-• Fixed the label and outline of text fields in dialogs (API keys, WebDAV, backup retention) turning near-black and unreadable once the field was focused.
-• Dropped the crown icon from the Theme setting. It marked a Showly premium feature that no longer exists in this fork.
-• Fixed IMDb, Metascore and Rotten Tomatoes ratings never loading. Details were served from a cache entry that carried no IMDb id, so there was nothing to look up, and OMDb was queried on a host that only accepts paid keys.
-• Fixed the movie Discover page failing to load entirely.
-• Ratings that cannot be found now show as absent instead of spinning forever.
-• With no OMDb key set, IMDb, Metascore and Rotten Tomatoes now show a cross you can tap for an explanation, instead of sitting there empty.
-• Pull to refresh on Discover now opens a slot above the list instead of floating over it, so the indicator never overlaps the filters or the posters, and it carries the TMDB mark.
-• Removed the ten second cooldown that silently ignored a second pull to refresh.
-• Discover now filters by streaming service, on both shows and movies. The chips are the services TMDB lists for the country set in Settings, so the list matches your region rather than a fixed set of American networks, and the filter reaches TMDB instead of being dropped.
-• The Discover genre filter now also applies to the anticipated titles mixed into the trending feed, and to the anticipated feed itself, which both ignored it before.
-• The network filter in My Shows, Watchlist and Hidden now offers the broadcasters your collection actually holds, instead of a fixed list that omitted most non-American ones. Selections made against the old list are cleared.
-• Several filters accept more than one selection now instead of crashing on the second.
+• The welcome screens are one flow now, shown as numbered steps you can go back through, instead of separate popups that could land on top of each other. The TMDB key screen no longer appears over the welcome note.
+• The welcome flow picks up where it left off. Closing the app partway through no longer skips the screens you had not reached, and release notes closed unread are shown again.
+• The language question is now asked whenever your phone's language stops matching the app's, not only on the very first run, and it offers to keep the language you are actually using rather than always offering English. Declining settles that language for good, while a later switch to a different one asks again.
+• The TMDB key screen keeps what you have typed when the screen rotates, and no longer clears the field and starts over when you submit it empty.
+• The welcome flow now offers three more steps on a fresh install: an optional OMDb key for IMDb, Metascore and Rotten Tomatoes ratings; episode notifications, which ask for the permission instead of quietly starting switched off; and WebDAV sync, which opens the setup form directly. Each can be skipped, and skipping is remembered. Upgrades are not shown any of them.
+• The welcome flow fills the screen and is always shown in the language the app is set to, so the question about your phone's language is no longer asked in that same language.
+• Discover no longer fails to load on a fresh install. It used to fetch before you had entered a TMDB key, leaving an error that only a manual refresh would clear.
+• Links in the welcome flow open in your browser.
+• Fixed the Test connection button in the WebDAV dialog being almost invisible.
+• The "?" tutorial markers now behave the same in every build. Debug builds used to suppress them.

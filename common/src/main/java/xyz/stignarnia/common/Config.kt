@@ -29,7 +29,6 @@ object Config {
   const val DEFAULT_LISTS_GRID_SPAN = 2
   const val HOST_ACTIVITY_NAME = "xyz.stignarnia.shelfly.ui.main.MainActivity"
 
-  const val SHOW_TIPS = false
   const val SHOW_WHATS_NEW = true
 
   val PROGRESS_UPCOMING_OPTIONS = arrayOf(0, 7, 14, 30, 45, 60, 90)

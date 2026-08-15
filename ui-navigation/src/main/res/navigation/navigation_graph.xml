@@ -664,6 +664,13 @@
     android:name="xyz.stignarnia.ui_settings.SettingsFragment"
     android:label="fragmentSettings"
     >
+    <!-- Set by the welcome flow, which hands the user straight to the WebDAV
+         form rather than leaving them to find it under Backup. -->
+    <argument
+      android:name="openWebDav"
+      android:defaultValue="false"
+      app:argType="boolean"
+      />
     <action
       android:id="@+id/actionSettingsFragmentToSpoilersShows"
       app:destination="@id/settingsSpoilersShowsDialog"

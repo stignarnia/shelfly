@@ -5,6 +5,7 @@ import TestData
 import androidx.lifecycle.viewModelScope
 import com.google.common.truth.Truth.assertThat
 import xyz.stignarnia.common.extensions.nowUtcMillis
+import xyz.stignarnia.data_remote.apikey.ApiKeyProvider
 import xyz.stignarnia.repository.images.ShowImagesProvider
 import xyz.stignarnia.ui_base.utilities.events.MessageEvent
 import xyz.stignarnia.ui_discover.cases.DiscoverFiltersCase
@@ -32,6 +33,7 @@ class DiscoverViewModelTest : BaseMockTest() {
   @MockK internal lateinit var showsCase: DiscoverShowsCase
   @MockK lateinit var filtersCase: DiscoverFiltersCase
   @MockK lateinit var imagesProvider: ShowImagesProvider
+  @MockK lateinit var apiKeyProvider: ApiKeyProvider
 
   private lateinit var SUT: DiscoverViewModel
 
@@ -42,8 +44,9 @@ class DiscoverViewModelTest : BaseMockTest() {
     coEvery { filtersCase.loadFilters() } returns DiscoverFilters()
     coEvery { showsCase.loadCachedShows(any()) } returns emptyList()
     coEvery { showsCase.loadRemoteShows(any()) } returns emptyList()
+    coEvery { apiKeyProvider.hasTmdbApiKey() } returns true
 
-    SUT = DiscoverViewModel(showsCase, filtersCase, imagesProvider)
+    SUT = DiscoverViewModel(showsCase, filtersCase, imagesProvider, apiKeyProvider)
   }
 
   @After
@@ -69,6 +72,26 @@ class DiscoverViewModelTest : BaseMockTest() {
 
     coVerify(exactly = 1) { showsCase.loadCachedShows(any()) }
     coVerify(exactly = 1) { showsCase.loadRemoteShows(any()) }
+  }
+
+  @Test
+  fun `Should not load remote data if no TMDB key is set`() {
+    coEvery { showsCase.isCacheValid() } returns false
+    coEvery { apiKeyProvider.hasTmdbApiKey() } returns false
+
+    SUT.loadShows()
+
+    coVerify(exactly = 1) { showsCase.loadCachedShows(any()) }
+    coVerify(exactly = 0) { showsCase.loadRemoteShows(any()) }
+  }
+
+  @Test
+  fun `Should not load remote data on pull to refresh if no TMDB key is set`() {
+    coEvery { apiKeyProvider.hasTmdbApiKey() } returns false
+
+    SUT.loadShows(pullToRefresh = true)
+
+    coVerify(exactly = 0) { showsCase.loadRemoteShows(any()) }
   }
 
   @Test

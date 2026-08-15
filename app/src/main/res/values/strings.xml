@@ -10,7 +10,7 @@
   <string name="textDisclaimerText">Please note that you <b>CAN\'T</b> watch, stream or download shows and movies with this app.\n\nUse apps like <b>Netflix</b> to stream and watch content.</string>
   <string name="textDisclaimerConfirmText">OK, I understand</string>
   <string name="textLanguagesChoose2" translatable="false">Language can always be changed later via Settings.</string>
-  <string name="textLeaveEnglish" translatable="false">No, I prefer English</string>
+  <string name="textKeepLanguage" translatable="false">No, keep %1$s</string>
   <string name="textChangeLanguage" translatable="false">Yes</string>
 
   <string name="textWhatsNewTitle">What\'s New</string>
@@ -23,5 +23,24 @@
 
 
   <string name="textOnboardingApiKeyTitle">TMDB API key required</string>
-  <string name="textOnboardingApiKeyMessage">This app uses your own TMDB key, so no key is shipped inside it and your usage is not shared with anyone else.\n\nCreate a free account at themoviedb.org, then copy the API key (v3 auth) from Settings → API and paste it below. You can change it later in Settings.</string>
+  <string name="textOnboardingApiKeyMessage">This app uses your own TMDB key, so no key is shipped inside it and your usage is not shared with anyone else.\n\nCreate a free account at themoviedb.org/settings/api, then copy the API key (v3 auth) from Settings → API and paste it below. You can change it later in Settings.</string>
+  <string name="textOnboardingApiKeyHint">API key (v3 auth)</string>
+
+  <string name="textOnboardingOmdbKeyTitle">OMDb API key (optional)</string>
+  <string name="textOnboardingOmdbKeyMessage">An OMDb key adds IMDb, Metascore and Rotten Tomatoes ratings to show and movie details. Everything else works without it.\n\nGet a free key at omdbapi.com/apikey.aspx and paste it below, or skip this and add it later in Settings.</string>
+  <string name="textOnboardingOmdbKeyHint">OMDb API key</string>
+
+  <string name="textOnboardingNotificationsTitle">Episode notifications</string>
+  <string name="textOnboardingNotificationsMessage">Shelfly can tell you when a new episode of a show you follow airs, and when a film you are waiting for is released.\n\nYou can change this at any time in Settings.</string>
+  <string name="textOnboardingNotificationsEnable">Enable</string>
+
+  <string name="textOnboardingSyncTitle">Sync across devices</string>
+  <string name="textOnboardingSyncMessage">Shelfly can back your collection up to your own WebDAV server, so the same progress follows you onto another device. Nothing is sent anywhere else.\n\nIf you already sync from another device, setting up the same server here restores that collection.</string>
+  <string name="textOnboardingSyncSetUp">Set up</string>
+
+  <string name="textWelcomeStepIndicator">Step %1$d of %2$d</string>
+  <string name="textBack">Back</string>
+  <string name="textContinue">Continue</string>
+  <string name="textSkip">Skip</string>
+  <string name="textNotNow">Not now</string>
 </resources>
