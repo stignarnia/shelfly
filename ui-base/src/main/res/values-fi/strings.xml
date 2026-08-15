@@ -27,6 +27,9 @@
   <string name="textCommentedOn">Kirjoittanut %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Verkko:</string>
+  <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Suoratoisto</string>
+  <string name="textDiscoverFilterProvidersRegion">Saatavilla alueella %1$s</string>
+  <string name="textDiscoverFilterProvidersError">Alueesi suoratoistopalveluiden lataaminen epäonnistui.</string>
   <string name="textGenres">Lajityypit:</string>
   <string name="textShows">Sarjat</string>
   <string name="textMovies">Elokuvat</string>

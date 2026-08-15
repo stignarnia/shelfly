@@ -27,6 +27,9 @@
   <string name="textCommentedOn">%s 的评论</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">流媒体：</string>
+  <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">流媒体</string>
+  <string name="textDiscoverFilterProvidersRegion">%1$s 可用</string>
+  <string name="textDiscoverFilterProvidersError">无法加载你所在区域的流媒体服务。</string>
   <string name="textGenres">类型：</string>
   <string name="textShows">剧集</string>
   <string name="textMovies">电影</string>

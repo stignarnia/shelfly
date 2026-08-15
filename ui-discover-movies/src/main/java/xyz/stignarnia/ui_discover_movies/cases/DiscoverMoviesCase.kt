@@ -6,6 +6,7 @@ import xyz.stignarnia.common.extensions.nowUtcDay
 import xyz.stignarnia.repository.TranslationsRepository
 import xyz.stignarnia.repository.images.MovieImagesProvider
 import xyz.stignarnia.repository.movies.MoviesRepository
+import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.ui_discover_movies.helpers.itemtype.ImageTypeProvider
 import xyz.stignarnia.ui_discover_movies.recycler.DiscoverMovieListItem
 import xyz.stignarnia.ui_model.DiscoverFeed
@@ -27,6 +28,7 @@ internal class DiscoverMoviesCase @Inject constructor(
   private val imagesProvider: MovieImagesProvider,
   private val imageTypeProvider: ImageTypeProvider,
   private val translationsRepository: TranslationsRepository,
+  private val settingsRepository: SettingsRepository,
 ) {
 
   suspend fun isCacheValid() =
@@ -56,6 +58,7 @@ internal class DiscoverMoviesCase @Inject constructor(
     withContext(dispatchers.IO) {
       val showCollection = !filters.hideCollection
       val genres = filters.genres.toList()
+      val providers = filters.providers.toList()
 
       val myAsync = async { moviesRepository.myMovies.loadAllIds() }
       val watchlistSync = async { moviesRepository.watchlistMovies.loadAllIds() }
@@ -68,6 +71,8 @@ internal class DiscoverMoviesCase @Inject constructor(
         showCollection,
         collectionSize,
         genres,
+        providers,
+        settingsRepository.country,
       )
       val language = translationsRepository.getLanguage()
 

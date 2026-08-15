@@ -27,6 +27,10 @@
   <string name="textCommentedOn">Commented by %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Network:</string>
+  <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Streaming</string>
+  <string name="textDiscoverFilterProvidersRegion">Available in %1$s</string>
+  <string name="textDiscoverFilterProvidersError">Could not load the streaming services for your region.</string>
+  <string name="textDiscoverFilterProvidersCount" translatable="false">%1$s + %2$d</string>
   <string name="textGenres">Genres:</string>
   <string name="textTba" translatable="false">TBA</string>
   <string name="textShows">Shows</string>

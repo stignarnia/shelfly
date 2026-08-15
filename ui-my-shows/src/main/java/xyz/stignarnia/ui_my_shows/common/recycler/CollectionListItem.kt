@@ -5,7 +5,6 @@ import xyz.stignarnia.ui_base.common.ListItem
 import xyz.stignarnia.ui_model.Genre
 import xyz.stignarnia.ui_model.Image
 import xyz.stignarnia.ui_model.ImageType
-import xyz.stignarnia.ui_model.Network
 import xyz.stignarnia.ui_model.Show
 import xyz.stignarnia.ui_model.SortOrder
 import xyz.stignarnia.ui_model.SortType
@@ -47,7 +46,7 @@ sealed class CollectionListItem(
   data class FiltersItem(
     val sortOrder: SortOrder,
     val sortType: SortType,
-    val networks: List<Network>,
+    val networks: List<String>,
     val genres: List<Genre>,
     val upcoming: UpcomingFilter,
     val count: Int,

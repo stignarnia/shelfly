@@ -31,7 +31,7 @@ I think there is little chance this gets merged upstream given the repository's 
 - **You supply the API keys**, at runtime, rather than the build shipping someone else's.
 - The paid tier has been removed.
 - Episode notifications fire on the air date rather than at the exact airtime. TMDB exposes a date but no time of day, so the precision is not available.
-- Discover has no network filter. TMDB's `with_networks` needs numeric ids that do not map from the channel names the app knows. Genre filtering works.
+- Discover filters by streaming service rather than by TV network. TMDB's `with_networks` wants numeric ids that do not map from channel names, and it does not apply to films at all, so the filter asks for availability instead: the services listed for the country set in Settings, which is the same region the details screen uses. It works on shows and on movies.
 - The app is dark-only. The theme picker exists but offers a single option until a light palette is written.
 - The launcher icon and in-app logo are still upstream artwork, pending a replacement.
 

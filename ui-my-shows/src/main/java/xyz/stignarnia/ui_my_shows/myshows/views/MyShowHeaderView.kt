@@ -73,8 +73,12 @@ class MyShowHeaderView : FrameLayout {
         myShowsNetworksChip.onClick { networksClickListener?.invoke() }
         myShowsNetworksChip.text = when {
           networks.isEmpty() -> context.getString(R.string.textNetworks).filter { it.isLetter() }
-          networks.size == 1 -> networks[0].channels.first()
-          else -> throw IllegalStateException()
+          networks.size == 1 -> networks[0]
+          else -> context.getString(
+            R.string.textDiscoverFilterProvidersCount,
+            networks[0],
+            networks.size - 1,
+          )
         }
       }
 

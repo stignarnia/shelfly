@@ -27,6 +27,9 @@
   <string name="textCommentedOn">Коментар від %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Мережа:</string>
+  <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Стримінг</string>
+  <string name="textDiscoverFilterProvidersRegion">Доступно в: %1$s</string>
+  <string name="textDiscoverFilterProvidersError">Не вдалося завантажити стрімінгові сервіси для вашого регіону.</string>
   <string name="textGenres">Жанри:</string>
   <string name="textShows">Серіали</string>
   <string name="textMovies">Фільми</string>

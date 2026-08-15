@@ -51,6 +51,7 @@
   <dimen name="searchLocalViewCorner">16dp</dimen>
 
   <dimen name="discoverFilterChipStroke">1dp</dimen>
+  <dimen name="discoverFilterProviderIcon">18dp</dimen>
   <dimen name="discoverRecyclerPadding">159dp</dimen>
   <dimen name="discoverRecyclerPaddingNoTabs">117dp</dimen>
 

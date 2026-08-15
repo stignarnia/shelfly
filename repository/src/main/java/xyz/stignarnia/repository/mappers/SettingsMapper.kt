@@ -3,7 +3,6 @@ package xyz.stignarnia.repository.mappers
 import xyz.stignarnia.ui_model.DiscoverFeed
 import xyz.stignarnia.ui_model.DiscoverFeed.TRENDING
 import xyz.stignarnia.ui_model.Genre
-import xyz.stignarnia.ui_model.Network
 import xyz.stignarnia.ui_model.NotificationDelay
 import xyz.stignarnia.ui_model.Settings
 import javax.inject.Inject
@@ -35,11 +34,6 @@ class SettingsMapper @Inject constructor() {
           ",",
         ).filter { it.isNotBlank() }
         .map { Genre.valueOf(it) },
-      discoverFilterNetworks = settings.discoverFilterNetworks
-        .split(",")
-        .filter {
-          it.isNotBlank()
-        }.map { Network.valueOf(it) },
       progressSortOrder = enumValueOf(settings.watchlistSortBy),
       archiveIncludeStatistics = settings.archiveShowsIncludeStatistics,
       specialSeasonsEnabled = settings.specialSeasonsEnabled,
@@ -86,7 +80,10 @@ class SettingsMapper @Inject constructor() {
       showAnticipatedShows = settings.showAnticipatedShows,
       discoverFilterFeed = settings.discoverFilterFeed.name,
       discoverFilterGenres = settings.discoverFilterGenres.joinToString(",") { it.name },
-      discoverFilterNetworks = settings.discoverFilterNetworks.joinToString(",") { it.name },
+      // Held the old channel-name filter, which never reached TMDB. The
+      // streaming filter that replaced it is region-scoped, so it lives with
+      // the region in preferences rather than in the synced settings row.
+      discoverFilterNetworks = "",
       watchlistSortBy = settings.progressSortOrder.name,
       archiveShowsIncludeStatistics = settings.archiveIncludeStatistics,
       specialSeasonsEnabled = settings.specialSeasonsEnabled,

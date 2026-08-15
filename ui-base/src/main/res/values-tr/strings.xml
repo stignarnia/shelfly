@@ -27,6 +27,9 @@
   <string name="textCommentedOn">Yorum yapan: %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Ağ:</string>
+  <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Yayın</string>
+  <string name="textDiscoverFilterProvidersRegion">%1$s bölgesinde mevcut</string>
+  <string name="textDiscoverFilterProvidersError">Bölgeniz için yayın servisleri yüklenemedi.</string>
   <string name="textGenres">Türler:</string>
   <string name="textShows">Diziler</string>
   <string name="textMovies">Filmler</string>

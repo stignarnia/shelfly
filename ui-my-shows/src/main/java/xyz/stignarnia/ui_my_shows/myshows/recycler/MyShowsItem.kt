@@ -5,7 +5,6 @@ import xyz.stignarnia.ui_model.Genre
 import xyz.stignarnia.ui_model.Image
 import xyz.stignarnia.ui_model.ImageType.POSTER
 import xyz.stignarnia.ui_model.MyShowsSection
-import xyz.stignarnia.ui_model.Network
 import xyz.stignarnia.ui_model.Show
 import xyz.stignarnia.ui_model.SortOrder
 import xyz.stignarnia.ui_model.SortType
@@ -34,7 +33,7 @@ data class MyShowsItem(
     val section: MyShowsSection,
     val itemCount: Int,
     val sortOrder: Pair<SortOrder, SortType>?,
-    val networks: List<Network>?,
+    val networks: List<String>?,
     val genres: List<Genre>?,
   )
 
@@ -53,7 +52,7 @@ data class MyShowsItem(
       section: MyShowsSection,
       itemCount: Int,
       sortOrder: Pair<SortOrder, SortType>?,
-      networks: List<Network>?,
+      networks: List<String>?,
       genres: List<Genre>?,
     ) = MyShowsItem(
       type = Type.ALL_SHOWS_HEADER,

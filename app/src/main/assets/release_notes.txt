@@ -8,3 +8,7 @@ Shelfly 4.0.1
 • With no OMDb key set, IMDb, Metascore and Rotten Tomatoes now show a cross you can tap for an explanation, instead of sitting there empty.
 • Pull to refresh on Discover now opens a slot above the list instead of floating over it, so the indicator never overlaps the filters or the posters, and it carries the TMDB mark.
 • Removed the ten second cooldown that silently ignored a second pull to refresh.
+• Discover now filters by streaming service, on both shows and movies. The chips are the services TMDB lists for the country set in Settings, so the list matches your region rather than a fixed set of American networks, and the filter reaches TMDB instead of being dropped.
+• The Discover genre filter now also applies to the anticipated titles mixed into the trending feed, and to the anticipated feed itself, which both ignored it before.
+• The network filter in My Shows, Watchlist and Hidden now offers the broadcasters your collection actually holds, instead of a fixed list that omitted most non-American ones. Selections made against the old list are cleared.
+• Several filters accept more than one selection now instead of crashing on the second.

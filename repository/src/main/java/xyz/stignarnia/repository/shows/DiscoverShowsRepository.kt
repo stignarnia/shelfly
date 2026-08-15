@@ -15,8 +15,8 @@ import xyz.stignarnia.ui_model.DiscoverFeed.POPULAR
 import xyz.stignarnia.ui_model.DiscoverFeed.RECENT
 import xyz.stignarnia.ui_model.DiscoverFeed.TRENDING
 import xyz.stignarnia.ui_model.Genre
-import xyz.stignarnia.ui_model.Network
 import xyz.stignarnia.ui_model.Show
+import xyz.stignarnia.ui_model.StreamingProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
@@ -47,17 +47,19 @@ class DiscoverShowsRepository @Inject constructor(
     showCollection: Boolean,
     collectionSize: Int,
     genres: List<Genre>,
-    networks: List<Network>,
+    providers: List<StreamingProvider>,
+    countryCode: String,
   ): List<Show> =
     when (order) {
-      TRENDING, RECENT -> loadRemoteTrending(genres, networks, showCollection, collectionSize)
-      POPULAR -> loadRemotePopular(genres, networks)
-      ANTICIPATED -> loadRemoteAnticipated(genres, networks)
+      TRENDING, RECENT -> loadRemoteTrending(genres, providers, countryCode, showCollection, collectionSize)
+      POPULAR -> loadRemotePopular(genres, providers, countryCode)
+      ANTICIPATED -> loadRemoteAnticipated(genres, providers, countryCode)
     }
 
   private suspend fun loadRemoteTrending(
     genres: List<Genre>,
-    networks: List<Network>,
+    providers: List<StreamingProvider>,
+    countryCode: String,
     showCollection: Boolean,
     collectionSize: Int,
   ): List<Show> {
@@ -75,6 +77,8 @@ class DiscoverShowsRepository @Inject constructor(
         remoteSource.tmdb
           .fetchTrendingShows(
             genres = genres.map { it.slug },
+            providers = providers.map { it.id },
+            countryCode = countryCode,
             limit = limit,
           ).map { mappers.show.fromNetwork(it) }
       }
@@ -83,6 +87,8 @@ class DiscoverShowsRepository @Inject constructor(
         remoteSource.tmdb
           .fetchAnticipatedShows(
             genres = genres.map { it.slug },
+            providers = providers.map { it.id },
+            countryCode = countryCode,
             limit = ANTICIPATED_LIMIT,
           ).map { mappers.show.fromNetwork(it) }
       }
@@ -104,21 +110,27 @@ class DiscoverShowsRepository @Inject constructor(
 
   private suspend fun loadRemotePopular(
     genres: List<Genre>,
-    networks: List<Network>,
+    providers: List<StreamingProvider>,
+    countryCode: String,
   ): List<Show> =
     remoteSource.tmdb
       .fetchPopularShows(
         genres = genres.map { it.slug },
+        providers = providers.map { it.id },
+        countryCode = countryCode,
         limit = DISCOVER_LIMIT,
       ).map { mappers.show.fromNetwork(it) }
 
   private suspend fun loadRemoteAnticipated(
     genres: List<Genre>,
-    networks: List<Network>,
+    providers: List<StreamingProvider>,
+    countryCode: String,
   ): List<Show> =
     remoteSource.tmdb
       .fetchAnticipatedShows(
         genres = genres.map { it.slug },
+        providers = providers.map { it.id },
+        countryCode = countryCode,
         limit = DISCOVER_LIMIT,
       ).map { mappers.show.fromNetwork(it) }
 

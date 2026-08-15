@@ -57,7 +57,7 @@ internal class DiscoverShowsCase @Inject constructor(
     withContext(dispatchers.IO) {
       val showCollection = !filters.hideCollection
       val genres = filters.genres.toList()
-      val networks = filters.networks.toList()
+      val providers = filters.providers.toList()
 
       val myAsync = async { showsRepository.myShows.loadAllIds() }
       val watchlistSync = async { showsRepository.watchlistShows.loadAllIds() }
@@ -70,7 +70,8 @@ internal class DiscoverShowsCase @Inject constructor(
         showCollection = showCollection,
         collectionSize = collectionSize,
         genres = genres,
-        networks = networks,
+        providers = providers,
+        countryCode = settingsRepository.country,
       )
 
       showsRepository.discoverShows.cacheDiscoverShows(remoteShows)

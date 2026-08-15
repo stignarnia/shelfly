@@ -56,7 +56,6 @@ class HiddenLoadShowsCase @Inject constructor(
 
       var filtersItem = loadFiltersItem(sortOrder, sortType)
       val filtersNetworks = filtersItem.networks
-        .flatMap { network -> network.channels.map { it } }
       val filtersGenres = filtersItem.genres.map { it.slug.lowercase() }
 
       val hiddenItems = showsRepository.hiddenShows

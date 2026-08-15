@@ -17,6 +17,7 @@ import xyz.stignarnia.ui_model.DiscoverFeed.RECENT
 import xyz.stignarnia.ui_model.DiscoverFeed.TRENDING
 import xyz.stignarnia.ui_model.DiscoverFilters
 import xyz.stignarnia.ui_model.Genre
+import xyz.stignarnia.ui_model.StreamingProvider
 
 class DiscoverMoviesFiltersView : FrameLayout {
 
@@ -28,6 +29,7 @@ class DiscoverMoviesFiltersView : FrameLayout {
 
   var onFeedChipClick: (() -> Unit)? = null
   var onGenresChipClick: (() -> Unit)? = null
+  var onProvidersChipClick: (() -> Unit)? = null
   var onHideCollectionChipClick: (() -> Unit)? = null
 
   private lateinit var filters: DiscoverFilters
@@ -37,6 +39,7 @@ class DiscoverMoviesFiltersView : FrameLayout {
     with(binding) {
       discoverMoviesGenresChip.text = discoverMoviesGenresChip.text.toString().filter { it.isLetter() }
       discoverMoviesGenresChip.onClick { onGenresChipClick?.invoke() }
+      discoverMoviesProvidersChip.onClick { onProvidersChipClick?.invoke() }
       discoverMoviesFeedChip.onClick { onFeedChipClick?.invoke() }
       discoverMoviesCollectionChip.onClick { onHideCollectionChipClick?.invoke() }
     }
@@ -46,6 +49,7 @@ class DiscoverMoviesFiltersView : FrameLayout {
     this.filters = filters
     bindFeed(filters.feedOrder)
     bindGenres(filters.genres)
+    bindProviders(filters.providers)
     with(binding) {
       discoverMoviesCollectionChip.isChecked = filters.hideCollection
     }
@@ -82,6 +86,21 @@ class DiscoverMoviesFiltersView : FrameLayout {
             )
           }, ${context.getString(genres[1].displayName)} + ${genres.size - 2}"
         }
+      }
+    }
+  }
+
+  private fun bindProviders(providers: List<StreamingProvider>) {
+    with(binding) {
+      discoverMoviesProvidersChip.isSelected = providers.isNotEmpty()
+      discoverMoviesProvidersChip.text = when {
+        providers.isEmpty() -> context.getString(R.string.textDiscoverFilterProviders)
+        providers.size == 1 -> providers[0].name
+        else -> context.getString(
+          R.string.textDiscoverFilterProvidersCount,
+          providers[0].name,
+          providers.size - 1,
+        )
       }
     }
   }

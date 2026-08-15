@@ -13,6 +13,7 @@ import xyz.stignarnia.data_remote.tmdb.model.TmdbSeason
 import xyz.stignarnia.data_remote.tmdb.model.TmdbShow
 import xyz.stignarnia.data_remote.tmdb.model.TmdbStreamings
 import xyz.stignarnia.data_remote.tmdb.model.TmdbTranslationResponse
+import xyz.stignarnia.data_remote.tmdb.model.TmdbWatchProviders
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -71,6 +72,19 @@ interface TmdbService {
     @Path("tmdbId") tmdbId: Long,
   ): TmdbStreamings
 
+  // The directory of every provider carrying content in a region, as opposed to
+  // the providers carrying one title. Backs the discover availability filter.
+
+  @GET("watch/providers/tv")
+  suspend fun fetchShowProviders(
+    @Query("watch_region") watchRegion: String,
+  ): TmdbWatchProviders
+
+  @GET("watch/providers/movie")
+  suspend fun fetchMovieProviders(
+    @Query("watch_region") watchRegion: String,
+  ): TmdbWatchProviders
+
   // Catalog endpoints.
 
   @GET("tv/{tmdbId}?append_to_response=external_ids,content_ratings,videos")
@@ -119,12 +133,18 @@ interface TmdbService {
   @GET("discover/tv?sort_by=popularity.desc")
   suspend fun fetchAnticipatedShows(
     @Query("first_air_date.gte") fromDate: String,
+    @Query("with_genres") genres: String?,
+    @Query("with_watch_providers") providers: String?,
+    @Query("watch_region") watchRegion: String?,
     @Query("page") page: Int,
   ): TmdbPage<TmdbShow>
 
   @GET("discover/movie?sort_by=popularity.desc")
   suspend fun fetchAnticipatedMovies(
     @Query("primary_release_date.gte") fromDate: String,
+    @Query("with_genres") genres: String?,
+    @Query("with_watch_providers") providers: String?,
+    @Query("watch_region") watchRegion: String?,
     @Query("page") page: Int,
   ): TmdbPage<TmdbMovie>
 
@@ -141,18 +161,23 @@ interface TmdbService {
   ): TmdbPage<TmdbMovie>
 
   /**
-   * Used when a genre filter is active. Trending and popular do not accept
-   * filters, so a filtered request has to go through discover instead.
+   * Used when a genre or streaming filter is active. Trending and popular do
+   * not accept filters, so a filtered request has to go through discover
+   * instead.
    */
   @GET("discover/tv?sort_by=popularity.desc")
   suspend fun fetchDiscoverShows(
     @Query("with_genres") genres: String?,
+    @Query("with_watch_providers") providers: String?,
+    @Query("watch_region") watchRegion: String?,
     @Query("page") page: Int,
   ): TmdbPage<TmdbShow>
 
   @GET("discover/movie?sort_by=popularity.desc")
   suspend fun fetchDiscoverMovies(
     @Query("with_genres") genres: String?,
+    @Query("with_watch_providers") providers: String?,
+    @Query("watch_region") watchRegion: String?,
     @Query("page") page: Int,
   ): TmdbPage<TmdbMovie>
 

@@ -44,6 +44,8 @@ class TmdbLiveApiTest {
       override fun setOmdbApiKey(key: String) = Unit
 
       override fun hasTmdbApiKey() = true
+
+      override fun hasOmdbApiKey() = BuildConfig.OMDB_API_KEY.isNotBlank()
     }
 
     val okHttpClient = OkHttpClient

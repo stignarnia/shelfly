@@ -107,8 +107,8 @@
       app:launchSingleTop="true"
       />
     <action
-      android:id="@+id/actionDiscoverFragmentToFiltersNetworks"
-      app:destination="@id/discoverFiltersNetworksDialog"
+      android:id="@+id/actionDiscoverFragmentToFiltersProviders"
+      app:destination="@id/discoverFiltersProvidersDialog"
       app:launchSingleTop="true"
       />
     <action
@@ -153,6 +153,11 @@
     <action
       android:id="@+id/actionDiscoverMoviesFragmentToFiltersGenres"
       app:destination="@id/discoverMoviesFiltersGenresDialog"
+      app:launchSingleTop="true"
+      />
+    <action
+      android:id="@+id/actionDiscoverMoviesFragmentToFiltersProviders"
+      app:destination="@id/discoverMoviesFiltersProvidersDialog"
       app:launchSingleTop="true"
       />
   </fragment>
@@ -899,15 +904,21 @@
     />
 
   <dialog
-    android:id="@+id/discoverFiltersNetworksDialog"
-    android:name="xyz.stignarnia.ui_discover.filters.networks.DiscoverFiltersNetworksBottomSheet"
-    android:label="dialogDiscoverFiltersNetworks"
+    android:id="@+id/discoverFiltersProvidersDialog"
+    android:name="xyz.stignarnia.ui_discover.filters.providers.DiscoverFiltersProvidersBottomSheet"
+    android:label="dialogDiscoverFiltersProviders"
     />
 
   <dialog
     android:id="@+id/discoverMoviesFiltersGenresDialog"
     android:name="xyz.stignarnia.ui_discover_movies.filters.genres.DiscoverMoviesFiltersGenresBottomSheet"
     android:label="dialogDiscoverMoviesFiltersGenres"
+    />
+
+  <dialog
+    android:id="@+id/discoverMoviesFiltersProvidersDialog"
+    android:name="xyz.stignarnia.ui_discover_movies.filters.providers.DiscoverMoviesFiltersProvidersBottomSheet"
+    android:label="dialogDiscoverMoviesFiltersProviders"
     />
 
   <dialog

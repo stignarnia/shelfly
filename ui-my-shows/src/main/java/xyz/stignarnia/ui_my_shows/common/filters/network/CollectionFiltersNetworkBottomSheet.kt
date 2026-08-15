@@ -20,7 +20,6 @@ import xyz.stignarnia.ui_base.utilities.extensions.requireSerializable
 import xyz.stignarnia.ui_base.utilities.extensions.screenHeight
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
 import xyz.stignarnia.ui_base.utilities.viewBinding
-import xyz.stignarnia.ui_model.Network
 import xyz.stignarnia.ui_my_shows.R
 import xyz.stignarnia.ui_my_shows.common.filters.CollectionFiltersOrigin
 import xyz.stignarnia.ui_my_shows.common.filters.CollectionFiltersUiEvent.ApplyFilters
@@ -71,60 +70,62 @@ internal class CollectionFiltersNetworkBottomSheet : BaseBottomSheetFragment(R.l
     behavior.maxHeight = (screenHeight() * 0.9).toInt()
 
     with(binding) {
-      applyButton.onClick { saveNetworks() }
-      clearButton.onClick { renderNetworks(emptyList()) }
+      applyButton.onClick { viewModel.saveNetworks(checkedNetworks()) }
+      clearButton.onClick {
+        networksChipGroup.forEach { (it as Chip).isChecked = false }
+        clearButton.visibleIf(false)
+      }
     }
   }
 
-  private fun saveNetworks() {
-    with(binding) {
-      val networks = mutableListOf<Network>().apply {
-        networksChipGroup.forEach { chip ->
-          if ((chip as Chip).isChecked) {
-            add(Network.valueOf(chip.tag.toString()))
-          }
+  private fun checkedNetworks(): List<String> =
+    buildList {
+      binding.networksChipGroup.forEach { chip ->
+        if ((chip as Chip).isChecked) {
+          add(chip.tag.toString())
         }
       }
-      viewModel.saveNetworks(networks)
     }
-  }
 
   private fun render(uiState: CollectionFiltersNetworkUiState) {
     with(uiState) {
-      networks?.let { renderNetworks(it) }
+      available?.let { renderNetworks(it, selected) }
     }
   }
 
-  private fun renderNetworks(networks: List<Network>) {
+  private fun renderNetworks(
+    available: List<String>,
+    selected: List<String>,
+  ) {
     binding.networksChipGroup.removeAllViews()
-    binding.clearButton.visibleIf(networks.isNotEmpty())
+    binding.clearButton.visibleIf(selected.isNotEmpty())
 
-    val networksNames = networks.map { it.name }
-    Network
-      .values()
-      .sortedBy { it.name }
-      .forEach { network ->
-        val icon = networkIconProvider.getIcon(network)
-        val chip = Chip(requireContext()).apply {
-          tag = network.name
-          text = network.channels.first()
-          isCheckable = true
-          isCheckedIconVisible = false
-          shapeAppearanceModel = shapeAppearanceModel
-            .toBuilder()
-            .setAllCornerSizes(100f)
-            .build()
-          setEnsureMinTouchTargetSize(false)
-          setChipIconResource(icon)
-          chipBackgroundColor =
-            ContextCompat.getColorStateList(requireContext(), R.color.selector_discover_chip_background)
-          setChipStrokeColorResource(R.color.selector_discover_chip_stroke)
-          setChipStrokeWidthResource(R.dimen.discoverFilterChipStroke)
-          setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.selector_discover_chip_text))
-          isChecked = network.name in networksNames
+    available.forEach { network ->
+      val chip = Chip(requireContext()).apply {
+        tag = network
+        text = network
+        isCheckable = true
+        isCheckedIconVisible = false
+        shapeAppearanceModel = shapeAppearanceModel
+          .toBuilder()
+          .setAllCornerSizes(100f)
+          .build()
+        setEnsureMinTouchTargetSize(false)
+        // Only the handful of broadcasters with bundled artwork gets an icon;
+        // the rest stand on their name, which is the one TMDB gave the show.
+        networkIconProvider.getIcon(network)?.let { setChipIconResource(it) }
+        chipBackgroundColor =
+          ContextCompat.getColorStateList(requireContext(), R.color.selector_discover_chip_background)
+        setChipStrokeColorResource(R.color.selector_discover_chip_stroke)
+        setChipStrokeWidthResource(R.dimen.discoverFilterChipStroke)
+        setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.selector_discover_chip_text))
+        isChecked = network in selected
+        setOnCheckedChangeListener { _, _ ->
+          binding.clearButton.visibleIf(checkedNetworks().isNotEmpty())
         }
-        binding.networksChipGroup.addView(chip)
       }
+      binding.networksChipGroup.addView(chip)
+    }
   }
 
   private fun handleEvent(event: Event<*>) {

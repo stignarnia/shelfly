@@ -131,6 +131,7 @@ internal class DiscoverMoviesFragment :
       discoverMoviesFiltersView.run {
         translationY = filtersViewPosition
         onGenresChipClick = { navigateToSafe(R.id.actionDiscoverMoviesFragmentToFiltersGenres) }
+        onProvidersChipClick = { navigateToSafe(R.id.actionDiscoverMoviesFragmentToFiltersProviders) }
         onFeedChipClick = { navigateToSafe(R.id.actionDiscoverMoviesFragmentToFiltersFeed) }
         onHideCollectionChipClick = { viewModel.toggleCollection() }
       }

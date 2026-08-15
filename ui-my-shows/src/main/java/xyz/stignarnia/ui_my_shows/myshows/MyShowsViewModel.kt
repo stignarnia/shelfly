@@ -112,7 +112,7 @@ class MyShowsViewModel @Inject constructor(
         allShows = shows,
         allSeasons = seasons,
         searchQuery = searchQuery,
-        networks = networks.flatMap { network -> network.channels.map { it } },
+        networks = networks,
         genres = genres.map { it.slug },
       )
 

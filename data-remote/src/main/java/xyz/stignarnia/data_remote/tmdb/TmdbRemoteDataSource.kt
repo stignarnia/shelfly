@@ -5,6 +5,7 @@ import xyz.stignarnia.data_remote.tmdb.model.TmdbImages
 import xyz.stignarnia.data_remote.tmdb.model.TmdbPerson
 import xyz.stignarnia.data_remote.tmdb.model.TmdbStreamingCountry
 import xyz.stignarnia.data_remote.tmdb.model.TmdbTranslation
+import xyz.stignarnia.data_remote.tmdb.model.TmdbWatchProvider
 import xyz.stignarnia.data_remote.catalog.model.Episode
 import xyz.stignarnia.data_remote.catalog.model.Movie
 import xyz.stignarnia.data_remote.catalog.model.MovieCollection
@@ -44,6 +45,15 @@ interface TmdbRemoteDataSource {
     countryCode: String,
   ): TmdbStreamingCountry?
 
+  /**
+   * Every provider carrying content in [countryCode], ordered the way TMDB
+   * ranks them for that region rather than globally.
+   */
+  suspend fun fetchWatchProviders(
+    isMovie: Boolean,
+    countryCode: String,
+  ): List<TmdbWatchProvider>
+
   suspend fun fetchPersonDetails(id: Long): TmdbPerson
 
   suspend fun fetchPersonTranslations(id: Long): Map<String, TmdbTranslation.Data>
@@ -67,31 +77,43 @@ interface TmdbRemoteDataSource {
 
   suspend fun fetchTrendingShows(
     genres: List<String>,
+    providers: List<Long> = emptyList(),
+    countryCode: String = "",
     limit: Int,
   ): List<Show>
 
   suspend fun fetchTrendingMovies(
     genres: List<String>,
+    providers: List<Long> = emptyList(),
+    countryCode: String = "",
     limit: Int,
   ): List<Movie>
 
   suspend fun fetchPopularShows(
     genres: List<String>,
+    providers: List<Long> = emptyList(),
+    countryCode: String = "",
     limit: Int,
   ): List<Show>
 
   suspend fun fetchPopularMovies(
     genres: List<String>,
+    providers: List<Long> = emptyList(),
+    countryCode: String = "",
     limit: Int,
   ): List<Movie>
 
   suspend fun fetchAnticipatedShows(
     genres: List<String>,
+    providers: List<Long> = emptyList(),
+    countryCode: String = "",
     limit: Int,
   ): List<Show>
 
   suspend fun fetchAnticipatedMovies(
     genres: List<String>,
+    providers: List<Long> = emptyList(),
+    countryCode: String = "",
     limit: Int,
   ): List<Movie>
 

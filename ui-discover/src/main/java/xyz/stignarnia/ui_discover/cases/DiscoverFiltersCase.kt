@@ -27,7 +27,7 @@ class DiscoverFiltersCase @Inject constructor(
         hideAnticipated = !settings.showAnticipatedShows,
         hideCollection = !settings.showCollectionShows,
         genres = settings.discoverFilterGenres.toList(),
-        networks = settings.discoverFilterNetworks.toList(),
+        providers = settingsRepository.filters.discoverShowsProviders,
       )
     }
 
@@ -41,10 +41,10 @@ class DiscoverFiltersCase @Inject constructor(
           initialFilters?.let { initial ->
             val settings = settingsRepository.load()
             settingsRepository.filters.discoverShowsFeed = initial.feedOrder
+            settingsRepository.filters.discoverShowsProviders = initial.providers
             settingsRepository.update(
               settings.copy(
                 discoverFilterGenres = initial.genres,
-                discoverFilterNetworks = initial.networks,
                 showAnticipatedShows = !initial.hideAnticipated,
                 showCollectionShows = !initial.hideCollection,
               ),

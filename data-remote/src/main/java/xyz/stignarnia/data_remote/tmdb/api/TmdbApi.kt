@@ -7,6 +7,7 @@ import xyz.stignarnia.data_remote.tmdb.model.TmdbPage
 import xyz.stignarnia.data_remote.tmdb.model.TmdbPerson
 import xyz.stignarnia.data_remote.tmdb.model.TmdbStreamingCountry
 import xyz.stignarnia.data_remote.tmdb.model.TmdbTranslation
+import xyz.stignarnia.data_remote.tmdb.model.TmdbWatchProvider
 import xyz.stignarnia.data_remote.tmdb.toEpisode
 import xyz.stignarnia.data_remote.tmdb.toMovie
 import xyz.stignarnia.data_remote.tmdb.toSeason
@@ -86,11 +87,7 @@ internal class TmdbApi(
     countryCode: String,
   ): TmdbStreamingCountry? {
     val result = service.fetchShowWatchProviders(tmdbId)
-    val code = when (countryCode.uppercase()) {
-      "UK" -> "GB"
-      else -> countryCode.uppercase()
-    }
-    return result.results[code]
+    return result.results[watchRegion(countryCode)]
   }
 
   override suspend fun fetchMovieWatchProviders(
@@ -98,11 +95,30 @@ internal class TmdbApi(
     countryCode: String,
   ): TmdbStreamingCountry? {
     val result = service.fetchMovieWatchProviders(tmdbId)
-    val code = when (countryCode.uppercase()) {
-      "UK" -> "GB"
-      else -> countryCode.uppercase()
+    return result.results[watchRegion(countryCode)]
+  }
+
+  override suspend fun fetchWatchProviders(
+    isMovie: Boolean,
+    countryCode: String,
+  ): List<TmdbWatchProvider> {
+    val region = watchRegion(countryCode)
+    val response = if (isMovie) {
+      service.fetchMovieProviders(region)
+    } else {
+      service.fetchShowProviders(region)
     }
-    return result.results[code]
+    // The global `display_priority` puts the American services first no matter
+    // where the user is, so the region's own ranking wins when TMDB publishes
+    // one for it.
+    return response.results
+      .orEmpty()
+      .sortedWith(
+        compareBy(
+          { it.display_priorities?.get(region) ?: it.display_priority ?: Long.MAX_VALUE },
+          { it.provider_name },
+        ),
+      )
   }
 
   override suspend fun fetchPersonDetails(id: Long): TmdbPerson = service.fetchPersonDetails(id)
@@ -151,58 +167,112 @@ internal class TmdbApi(
         }.awaitAll()
     }
 
-  // Trending and popular accept no filters, so a genre filter routes the
-  // request through discover instead.
+  // Trending and popular accept no filters, so an active genre or streaming
+  // filter routes the request through discover instead.
 
   override suspend fun fetchTrendingShows(
     genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
     limit: Int,
   ): List<Show> {
-    val query = TmdbGenres.showQuery(genres)
+    val genresQuery = TmdbGenres.showQuery(genres)
+    val providersQuery = providersQuery(providers)
     return fetchPaged(limit, { it.id }) {
-      if (query != null) service.fetchDiscoverShows(query, it) else service.fetchTrendingShows(it)
+      if (genresQuery != null || providersQuery != null) {
+        service.fetchDiscoverShows(genresQuery, providersQuery, region(providersQuery, countryCode), it)
+      } else {
+        service.fetchTrendingShows(it)
+      }
     }.map { it.toShow() }
   }
 
   override suspend fun fetchTrendingMovies(
     genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
     limit: Int,
   ): List<Movie> {
-    val query = TmdbGenres.movieQuery(genres)
+    val genresQuery = TmdbGenres.movieQuery(genres)
+    val providersQuery = providersQuery(providers)
     return fetchPaged(limit, { it.id }) {
-      if (query != null) service.fetchDiscoverMovies(query, it) else service.fetchTrendingMovies(it)
+      if (genresQuery != null || providersQuery != null) {
+        service.fetchDiscoverMovies(genresQuery, providersQuery, region(providersQuery, countryCode), it)
+      } else {
+        service.fetchTrendingMovies(it)
+      }
     }.map { it.toMovie() }
   }
 
   override suspend fun fetchPopularShows(
     genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
     limit: Int,
   ): List<Show> {
-    val query = TmdbGenres.showQuery(genres)
+    val genresQuery = TmdbGenres.showQuery(genres)
+    val providersQuery = providersQuery(providers)
     return fetchPaged(limit, { it.id }) {
-      if (query != null) service.fetchDiscoverShows(query, it) else service.fetchPopularShows(it)
+      if (genresQuery != null || providersQuery != null) {
+        service.fetchDiscoverShows(genresQuery, providersQuery, region(providersQuery, countryCode), it)
+      } else {
+        service.fetchPopularShows(it)
+      }
     }.map { it.toShow() }
   }
 
   override suspend fun fetchPopularMovies(
     genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
     limit: Int,
   ): List<Movie> {
-    val query = TmdbGenres.movieQuery(genres)
+    val genresQuery = TmdbGenres.movieQuery(genres)
+    val providersQuery = providersQuery(providers)
     return fetchPaged(limit, { it.id }) {
-      if (query != null) service.fetchDiscoverMovies(query, it) else service.fetchPopularMovies(it)
+      if (genresQuery != null || providersQuery != null) {
+        service.fetchDiscoverMovies(genresQuery, providersQuery, region(providersQuery, countryCode), it)
+      } else {
+        service.fetchPopularMovies(it)
+      }
     }.map { it.toMovie() }
   }
 
   override suspend fun fetchAnticipatedShows(
     genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
     limit: Int,
-  ): List<Show> = fetchPaged(limit, { it.id }) { service.fetchAnticipatedShows(today(), it) }.map { it.toShow() }
+  ): List<Show> {
+    val providersQuery = providersQuery(providers)
+    return fetchPaged(limit, { it.id }) {
+      service.fetchAnticipatedShows(
+        today(),
+        TmdbGenres.showQuery(genres),
+        providersQuery,
+        region(providersQuery, countryCode),
+        it,
+      )
+    }.map { it.toShow() }
+  }
 
   override suspend fun fetchAnticipatedMovies(
     genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
     limit: Int,
-  ): List<Movie> = fetchPaged(limit, { it.id }) { service.fetchAnticipatedMovies(today(), it) }.map { it.toMovie() }
+  ): List<Movie> {
+    val providersQuery = providersQuery(providers)
+    return fetchPaged(limit, { it.id }) {
+      service.fetchAnticipatedMovies(
+        today(),
+        TmdbGenres.movieQuery(genres),
+        providersQuery,
+        region(providersQuery, countryCode),
+        it,
+      )
+    }.map { it.toMovie() }
+  }
 
   /**
    * TMDB carries the next episode on the show payload rather than on a
@@ -403,6 +473,31 @@ internal class TmdbApi(
   }
 
   private fun today(): String = LocalDate.now(ZoneOffset.UTC).toString()
+
+  /**
+   * `|` is TMDB's OR separator, so several selected services widen the results
+   * rather than asking for a title carried by all of them at once.
+   */
+  private fun providersQuery(providers: List<Long>): String? =
+    providers
+      .takeIf { it.isNotEmpty() }
+      ?.joinToString("|")
+
+  /**
+   * `with_watch_providers` is only honoured together with a region, and sending
+   * a region without it would narrow the results for no reason.
+   */
+  private fun region(
+    providersQuery: String?,
+    countryCode: String,
+  ): String? = if (providersQuery == null) null else watchRegion(countryCode)
+
+  /** TMDB keys availability by ISO-3166-1, where the UK is GB. */
+  private fun watchRegion(countryCode: String): String =
+    when (countryCode.uppercase()) {
+      "UK" -> "GB"
+      else -> countryCode.uppercase()
+    }
 
   companion object {
     private const val EXTERNAL_SOURCE_IMDB = "imdb_id"

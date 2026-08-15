@@ -38,6 +38,13 @@
         />
 
       <com.google.android.material.chip.Chip
+        android:id="@+id/discoverMoviesProvidersChip"
+        style="@style/ShelflyChip.Filter"
+        android:checkable="false"
+        android:text="@string/textDiscoverFilterProviders"
+        />
+
+      <com.google.android.material.chip.Chip
         android:id="@+id/discoverMoviesGenresChip"
         style="@style/ShelflyChip.Filter"
         android:checkable="false"

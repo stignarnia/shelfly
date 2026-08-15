@@ -52,7 +52,6 @@ class WatchlistLoadShowsCase @Inject constructor(
 
       var filtersItem = loadFiltersItem()
       val filtersNetworks = filtersItem.networks
-        .flatMap { network -> network.channels.map { it } }
       val filtersGenres = filtersItem.genres.map { it.slug.lowercase() }
 
       val showsItems = showsRepository.watchlistShows

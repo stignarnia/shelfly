@@ -27,6 +27,9 @@
   <string name="textCommentedOn">Kommenteret af %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Netværk:</string>
+  <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Streaming</string>
+  <string name="textDiscoverFilterProvidersRegion">Tilgængelig i %1$s</string>
+  <string name="textDiscoverFilterProvidersError">Kunne ikke indlæse streamingtjenesterne for din region.</string>
   <string name="textGenres">Genrer:</string>
   <string name="textShows">Serier</string>
   <string name="textMovies">Film</string>

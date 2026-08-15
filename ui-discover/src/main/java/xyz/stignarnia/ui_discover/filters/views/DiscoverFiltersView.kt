@@ -17,7 +17,7 @@ import xyz.stignarnia.ui_model.DiscoverFeed.RECENT
 import xyz.stignarnia.ui_model.DiscoverFeed.TRENDING
 import xyz.stignarnia.ui_model.DiscoverFilters
 import xyz.stignarnia.ui_model.Genre
-import xyz.stignarnia.ui_model.Network
+import xyz.stignarnia.ui_model.StreamingProvider
 
 class DiscoverFiltersView : FrameLayout {
 
@@ -29,7 +29,7 @@ class DiscoverFiltersView : FrameLayout {
 
   var onFeedChipClick: (() -> Unit)? = null
   var onGenresChipClick: (() -> Unit)? = null
-  var onNetworksChipClick: (() -> Unit)? = null
+  var onProvidersChipClick: (() -> Unit)? = null
   var onHideCollectionChipClick: (() -> Unit)? = null
 
   private lateinit var filters: DiscoverFilters
@@ -39,8 +39,7 @@ class DiscoverFiltersView : FrameLayout {
     with(binding) {
       discoverGenresChip.text = discoverGenresChip.text.toString().filter { it.isLetter() }
       discoverGenresChip.onClick { onGenresChipClick?.invoke() }
-      discoverNetworksChip.text = discoverNetworksChip.text.toString().filter { it.isLetter() }
-      discoverNetworksChip.onClick { onNetworksChipClick?.invoke() }
+      discoverProvidersChip.onClick { onProvidersChipClick?.invoke() }
       discoverFeedChip.onClick { onFeedChipClick?.invoke() }
       discoverCollectionChip.onClick { onHideCollectionChipClick?.invoke() }
     }
@@ -50,7 +49,7 @@ class DiscoverFiltersView : FrameLayout {
     this.filters = filters
     bindFeed(filters.feedOrder)
     bindGenres(filters.genres)
-    bindNetworks(filters.networks)
+    bindProviders(filters.providers)
     with(binding) {
       discoverCollectionChip.isChecked = filters.hideCollection
     }
@@ -91,13 +90,17 @@ class DiscoverFiltersView : FrameLayout {
     }
   }
 
-  private fun bindNetworks(networks: List<Network>) {
+  private fun bindProviders(providers: List<StreamingProvider>) {
     with(binding) {
-      discoverNetworksChip.isSelected = networks.isNotEmpty()
-      discoverNetworksChip.text = when {
-        networks.isEmpty() -> context.getString(R.string.textNetworks).filter { it.isLetter() }
-        networks.size == 1 -> networks[0].channels.first()
-        else -> throw IllegalStateException()
+      discoverProvidersChip.isSelected = providers.isNotEmpty()
+      discoverProvidersChip.text = when {
+        providers.isEmpty() -> context.getString(R.string.textDiscoverFilterProviders)
+        providers.size == 1 -> providers[0].name
+        else -> context.getString(
+          R.string.textDiscoverFilterProvidersCount,
+          providers[0].name,
+          providers.size - 1,
+        )
       }
     }
   }

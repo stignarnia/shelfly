@@ -38,10 +38,10 @@
         />
 
       <com.google.android.material.chip.Chip
-        android:id="@+id/discoverNetworksChip"
+        android:id="@+id/discoverProvidersChip"
         style="@style/ShelflyChip.Filter"
         android:checkable="false"
-        android:text="@string/textNetworks"
+        android:text="@string/textDiscoverFilterProviders"
         />
 
       <com.google.android.material.chip.Chip

@@ -27,6 +27,9 @@
   <string name="textCommentedOn">Kommentiert von %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Sender:</string>
+  <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Streaming</string>
+  <string name="textDiscoverFilterProvidersRegion">Verfügbar in %1$s</string>
+  <string name="textDiscoverFilterProvidersError">Die Streamingdienste für deine Region konnten nicht geladen werden.</string>
   <string name="textGenres">Genres:</string>
   <string name="textShows">Serien</string>
   <string name="textMovies">Filme</string>

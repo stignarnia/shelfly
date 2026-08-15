@@ -8,7 +8,7 @@ import xyz.stignarnia.ui_model.DiscoverFeed
 import xyz.stignarnia.ui_model.Genre
 import xyz.stignarnia.ui_model.HistoryPeriod
 import xyz.stignarnia.ui_model.MyShowsSection
-import xyz.stignarnia.ui_model.Network
+import xyz.stignarnia.ui_model.StreamingProvider
 import xyz.stignarnia.ui_model.UpcomingFilter
 import javax.inject.Inject
 import javax.inject.Named
@@ -25,12 +25,16 @@ class SettingsFiltersRepository @Inject constructor(
     private const val CALENDAR_SHOWS_PREMIERES = "CALENDAR_SHOWS_PREMIERES"
     private const val HISTORY_SHOWS_PERIOD = "HISTORY_SHOWS_PERIOD"
     private const val MY_SHOWS_TYPE = "MY_SHOWS_TYPE"
-    private const val MY_SHOWS_NETWORKS = "MY_SHOWS_NETWORKS"
+
+    // Bumped when the collection network filters stopped storing the names of
+    // a fixed enum and started storing the broadcaster exactly as the show
+    // carries it. Old values name no real network, so they are left behind.
+    private const val MY_SHOWS_NETWORKS = "MY_SHOWS_NETWORKS_2"
     private const val MY_SHOWS_GENRES = "MY_SHOWS_GENRES"
     private const val WATCHLIST_SHOWS_UPCOMING = "WATCHLIST_SHOWS_UPCOMING_2"
-    private const val WATCHLIST_SHOWS_NETWORKS = "WATCHLIST_SHOWS_NETWORKS"
+    private const val WATCHLIST_SHOWS_NETWORKS = "WATCHLIST_SHOWS_NETWORKS_2"
     private const val WATCHLIST_SHOWS_GENRES = "WATCHLIST_SHOWS_GENRES"
-    private const val HIDDEN_SHOWS_NETWORKS = "HIDDEN_SHOWS_NETWORKS"
+    private const val HIDDEN_SHOWS_NETWORKS = "HIDDEN_SHOWS_NETWORKS_2"
     private const val HIDDEN_SHOWS_GENRES = "HIDDEN_SHOWS_GENRES"
 
     private const val MY_MOVIES_GENRES = "MY_MOVIES_GENRES"
@@ -40,6 +44,10 @@ class SettingsFiltersRepository @Inject constructor(
 
     private const val DISCOVER_SHOWS_FEED = "DISCOVER_SHOWS_FEED"
     private const val DISCOVER_MOVIES_FEED = "DISCOVER_MOVIES_FEED"
+    private const val DISCOVER_SHOWS_PROVIDERS = "DISCOVER_SHOWS_PROVIDERS"
+    private const val DISCOVER_MOVIES_PROVIDERS = "DISCOVER_MOVIES_PROVIDERS"
+
+    private const val PROVIDER_SEPARATOR = "|"
   }
 
   // Shows
@@ -57,13 +65,10 @@ class SettingsFiltersRepository @Inject constructor(
 
   var myShowsType by EnumPreference(preferences, MY_SHOWS_TYPE, MyShowsSection.ALL, MyShowsSection::class.java)
 
-  var myShowsNetworks: List<Network>
-    get() {
-      val filters = preferences.getStringSet(MY_SHOWS_NETWORKS, emptySet()) ?: emptySet()
-      return filters.map { Network.valueOf(it) }
-    }
+  var myShowsNetworks: List<String>
+    get() = preferences.getStringSet(MY_SHOWS_NETWORKS, emptySet()).orEmpty().sorted()
     set(value) {
-      preferences.edit { putStringSet(MY_SHOWS_NETWORKS, value.map { it.name }.toSet()) }
+      preferences.edit { putStringSet(MY_SHOWS_NETWORKS, value.toSet()) }
     }
 
   var myShowsGenres: List<Genre>
@@ -82,13 +87,10 @@ class SettingsFiltersRepository @Inject constructor(
     UpcomingFilter::class.java,
   )
 
-  var watchlistShowsNetworks: List<Network>
-    get() {
-      val filters = preferences.getStringSet(WATCHLIST_SHOWS_NETWORKS, emptySet()) ?: emptySet()
-      return filters.map { Network.valueOf(it) }
-    }
+  var watchlistShowsNetworks: List<String>
+    get() = preferences.getStringSet(WATCHLIST_SHOWS_NETWORKS, emptySet()).orEmpty().sorted()
     set(value) {
-      preferences.edit { putStringSet(WATCHLIST_SHOWS_NETWORKS, value.map { it.name }.toSet()) }
+      preferences.edit { putStringSet(WATCHLIST_SHOWS_NETWORKS, value.toSet()) }
     }
 
   var watchlistShowsGenres: List<Genre>
@@ -100,13 +102,10 @@ class SettingsFiltersRepository @Inject constructor(
       preferences.edit { putStringSet(WATCHLIST_SHOWS_GENRES, value.map { it.name }.toSet()) }
     }
 
-  var hiddenShowsNetworks: List<Network>
-    get() {
-      val filters = preferences.getStringSet(HIDDEN_SHOWS_NETWORKS, emptySet()) ?: emptySet()
-      return filters.map { Network.valueOf(it) }
-    }
+  var hiddenShowsNetworks: List<String>
+    get() = preferences.getStringSet(HIDDEN_SHOWS_NETWORKS, emptySet()).orEmpty().sorted()
     set(value) {
-      preferences.edit { putStringSet(HIDDEN_SHOWS_NETWORKS, value.map { it.name }.toSet()) }
+      preferences.edit { putStringSet(HIDDEN_SHOWS_NETWORKS, value.toSet()) }
     }
 
   var hiddenShowsGenres: List<Genre>
@@ -124,6 +123,10 @@ class SettingsFiltersRepository @Inject constructor(
       return DiscoverFeed.valueOf(preferences.getString(DISCOVER_SHOWS_FEED, default) ?: default)
     }
     set(value) = preferences.edit { putString(DISCOVER_SHOWS_FEED, value.name) }
+
+  var discoverShowsProviders: List<StreamingProvider>
+    get() = readProviders(DISCOVER_SHOWS_PROVIDERS)
+    set(value) = writeProviders(DISCOVER_SHOWS_PROVIDERS, value)
 
   // Movies
 
@@ -166,4 +169,43 @@ class SettingsFiltersRepository @Inject constructor(
       return DiscoverFeed.valueOf(preferences.getString(DISCOVER_MOVIES_FEED, default) ?: default)
     }
     set(value) = preferences.edit { putString(DISCOVER_MOVIES_FEED, value.name) }
+
+  var discoverMoviesProviders: List<StreamingProvider>
+    get() = readProviders(DISCOVER_MOVIES_PROVIDERS)
+    set(value) = writeProviders(DISCOVER_MOVIES_PROVIDERS, value)
+
+  /**
+   * A selected provider is stored whole - `id|name|logo` - rather than as a
+   * bare id, so the filter chip can name itself before the provider directory
+   * has been fetched, and still name itself with no network at all.
+   *
+   * Anything that no longer parses is dropped instead of throwing: the entries
+   * are region-scoped, and a preference file can outlive the region it was
+   * written in.
+   */
+  private fun readProviders(key: String): List<StreamingProvider> =
+    preferences
+      .getStringSet(key, emptySet())
+      .orEmpty()
+      .mapNotNull { entry ->
+        val parts = entry.split(PROVIDER_SEPARATOR)
+        if (parts.size < 3) return@mapNotNull null
+        val id = parts.first().toLongOrNull() ?: return@mapNotNull null
+        StreamingProvider(
+          id = id,
+          // A name holding the separator would otherwise lose its tail.
+          name = parts.subList(1, parts.size - 1).joinToString(PROVIDER_SEPARATOR),
+          logoPath = parts.last(),
+        )
+      }.sortedBy { it.name }
+
+  private fun writeProviders(
+    key: String,
+    value: List<StreamingProvider>,
+  ) = preferences.edit {
+    putStringSet(
+      key,
+      value.map { "${it.id}$PROVIDER_SEPARATOR${it.name}$PROVIDER_SEPARATOR${it.logoPath}" }.toSet(),
+    )
+  }
 }

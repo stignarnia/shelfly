@@ -9,6 +9,17 @@ import javax.inject.Singleton
 @Singleton
 class NetworkIconProvider @Inject constructor() {
 
+  /**
+   * Artwork for a broadcaster named the way the show carries it. Only the
+   * bundled handful resolves - anything else has no icon rather than a wrong
+   * one, which is why the result is nullable.
+   */
+  @DrawableRes
+  fun getIcon(networkName: String): Int? =
+    Network.entries
+      .firstOrNull { network -> network.channels.any { it.equals(networkName, ignoreCase = true) } }
+      ?.let { getIcon(it) }
+
   @DrawableRes
   fun getIcon(network: Network): Int =
     when (network) {

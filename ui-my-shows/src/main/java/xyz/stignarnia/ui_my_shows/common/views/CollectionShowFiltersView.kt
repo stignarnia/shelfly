@@ -62,8 +62,12 @@ class CollectionShowFiltersView : FrameLayout {
       followedShowsNetworksChip.isSelected = item.networks.isNotEmpty()
       followedShowsNetworksChip.text = when {
         item.networks.isEmpty() -> context.getString(R.string.textNetworks).filter { it.isLetter() }
-        item.networks.size == 1 -> item.networks[0].channels.first()
-        else -> throw IllegalStateException()
+        item.networks.size == 1 -> item.networks[0]
+        else -> context.getString(
+          R.string.textDiscoverFilterProvidersCount,
+          item.networks[0],
+          item.networks.size - 1,
+        )
       }
 
       followedShowsGenresChip.isSelected = item.genres.isNotEmpty()

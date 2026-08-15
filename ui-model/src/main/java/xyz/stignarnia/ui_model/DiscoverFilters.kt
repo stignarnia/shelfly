@@ -5,5 +5,5 @@ data class DiscoverFilters(
   val hideAnticipated: Boolean = true,
   val hideCollection: Boolean = false,
   val genres: List<Genre> = emptyList(),
-  val networks: List<Network> = emptyList(),
+  val providers: List<StreamingProvider> = emptyList(),
 )

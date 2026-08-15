@@ -16,6 +16,7 @@ import xyz.stignarnia.ui_model.DiscoverFeed.RECENT
 import xyz.stignarnia.ui_model.DiscoverFeed.TRENDING
 import xyz.stignarnia.ui_model.Genre
 import xyz.stignarnia.ui_model.Movie
+import xyz.stignarnia.ui_model.StreamingProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
@@ -46,15 +47,19 @@ class DiscoverMoviesRepository @Inject constructor(
     showCollection: Boolean,
     collectionSize: Int,
     genres: List<Genre>,
+    providers: List<StreamingProvider>,
+    countryCode: String,
   ): List<Movie> =
     when (order) {
-      TRENDING, RECENT -> loadRemoteTrending(genres, showCollection, collectionSize)
-      POPULAR -> loadRemotePopular(genres)
-      ANTICIPATED -> loadRemoteAnticipated(genres)
+      TRENDING, RECENT -> loadRemoteTrending(genres, providers, countryCode, showCollection, collectionSize)
+      POPULAR -> loadRemotePopular(genres, providers, countryCode)
+      ANTICIPATED -> loadRemoteAnticipated(genres, providers, countryCode)
     }
 
   private suspend fun loadRemoteTrending(
     genres: List<Genre>,
+    providers: List<StreamingProvider>,
+    countryCode: String,
     showCollection: Boolean,
     collectionSize: Int,
   ): List<Movie> {
@@ -70,13 +75,13 @@ class DiscoverMoviesRepository @Inject constructor(
 
       val trendingMoviesAsync = async {
         remoteSource.tmdb
-          .fetchTrendingMovies(genres.map { it.slug }, limit)
+          .fetchTrendingMovies(genres.map { it.slug }, providers.map { it.id }, countryCode, limit)
           .map { mappers.movie.fromNetwork(it) }
       }
 
       val anticipatedMoviesAsync = async {
         remoteSource.tmdb
-          .fetchAnticipatedMovies(genres.map { it.slug }, ANTICIPATED_LIMIT)
+          .fetchAnticipatedMovies(genres.map { it.slug }, providers.map { it.id }, countryCode, ANTICIPATED_LIMIT)
           .map { mappers.movie.fromNetwork(it) }
       }
 
@@ -95,14 +100,22 @@ class DiscoverMoviesRepository @Inject constructor(
     }
   }
 
-  private suspend fun loadRemotePopular(genres: List<Genre>): List<Movie> =
+  private suspend fun loadRemotePopular(
+    genres: List<Genre>,
+    providers: List<StreamingProvider>,
+    countryCode: String,
+  ): List<Movie> =
     remoteSource.tmdb
-      .fetchPopularMovies(genres.map { it.slug }, DISCOVER_LIMIT)
+      .fetchPopularMovies(genres.map { it.slug }, providers.map { it.id }, countryCode, DISCOVER_LIMIT)
       .map { mappers.movie.fromNetwork(it) }
 
-  private suspend fun loadRemoteAnticipated(genres: List<Genre>): List<Movie> =
+  private suspend fun loadRemoteAnticipated(
+    genres: List<Genre>,
+    providers: List<StreamingProvider>,
+    countryCode: String,
+  ): List<Movie> =
     remoteSource.tmdb
-      .fetchAnticipatedMovies(genres.map { it.slug }, DISCOVER_LIMIT)
+      .fetchAnticipatedMovies(genres.map { it.slug }, providers.map { it.id }, countryCode, DISCOVER_LIMIT)
       .map { mappers.movie.fromNetwork(it) }
 
   suspend fun cacheDiscoverMovies(movies: List<Movie>) {

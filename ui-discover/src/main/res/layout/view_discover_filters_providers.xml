@@ -28,22 +28,34 @@
       >
 
       <TextView
-        android:id="@+id/networksTitle"
+        android:id="@+id/providersTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/textNetworks"
+        android:text="@string/textDiscoverFilterProviders"
         android:textAllCaps="true"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/networksChipGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
+      <TextView
+        android:id="@+id/providersRegion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spaceTiny"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/providersTitle"
+        tools:text="Available in Italy"
+        />
+
       <com.google.android.material.chip.ChipGroup
-        android:id="@+id/networksChipGroup"
+        android:id="@+id/providersChipGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceNormal"
@@ -51,8 +63,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/networksTitle"
+        app:layout_constraintTop_toBottomOf="@+id/providersRegion"
         app:lineSpacing="10dp"
+        />
+
+      <TextView
+        android:id="@+id/providersError"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spaceNormal"
+        android:layout_marginBottom="@dimen/spaceNormal"
+        android:text="@string/textDiscoverFilterProvidersError"
+        android:textColor="?android:attr/textColorSecondary"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/providersChipGroup"
+        tools:visibility="visible"
         />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -141,7 +141,7 @@ internal class DiscoverFragment :
       discoverFiltersView.run {
         translationY = filtersViewPosition
         onGenresChipClick = { navigateToSafe(R.id.actionDiscoverFragmentToFiltersGenres) }
-        onNetworksChipClick = { navigateToSafe(R.id.actionDiscoverFragmentToFiltersNetworks) }
+        onProvidersChipClick = { navigateToSafe(R.id.actionDiscoverFragmentToFiltersProviders) }
         onFeedChipClick = { navigateToSafe(R.id.actionDiscoverFragmentToFiltersFeed) }
         onHideCollectionChipClick = { viewModel.toggleCollection() }
       }
