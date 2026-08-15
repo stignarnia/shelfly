@@ -24,7 +24,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import java.util.concurrent.TimeUnit
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Suppress("EXPERIMENTAL_API_USAGE")
@@ -51,16 +50,6 @@ class DiscoverViewModelTest : BaseMockTest() {
   fun tearDown() {
     SUT.viewModelScope.cancel()
   }
-
-  @Test
-  fun `Should not pull to refresh data too often`() =
-    runTest {
-      SUT.lastPullToRefreshMs = nowUtcMillis() - TimeUnit.SECONDS.toMillis(5)
-      SUT.loadShows(pullToRefresh = true)
-
-      coVerify(exactly = 0) { showsCase.loadCachedShows(any()) }
-      coVerify(exactly = 0) { showsCase.loadRemoteShows(any()) }
-    }
 
   @Test
   fun `Should load cached data and not load remote data if cache is valid`() {
@@ -107,47 +96,6 @@ class DiscoverViewModelTest : BaseMockTest() {
     SUT.loadShows(skipCache = true)
     coVerify(exactly = 0) { showsCase.loadCachedShows(any()) }
   }
-
-  @Test
-  fun `Should update last PTR stamp if PTR`() =
-    runTest {
-      coEvery { showsCase.isCacheValid() } returns false
-
-      SUT.loadShows(pullToRefresh = true)
-      advanceUntilIdle()
-
-      assertThat(SUT.lastPullToRefreshMs).isGreaterThan(nowUtcMillis() - TimeUnit.MINUTES.toMillis(1))
-    }
-
-  @Test
-  fun `Should not update last PTR stamp if was not PTR`() {
-    coEvery { showsCase.isCacheValid() } returns false
-
-    SUT.loadShows(pullToRefresh = false)
-    assertThat(SUT.lastPullToRefreshMs).isEqualTo(0)
-  }
-
-  @Test
-  fun `Should hide loading state when PTR is run too often`() =
-    runTest {
-      val stateResult = mutableListOf<DiscoverUiState>()
-      val messagesResult = mutableListOf<MessageEvent>()
-
-      val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
-      val job2 = launch(UnconfinedTestDispatcher()) { SUT.messageFlow.toList(messagesResult) }
-
-      SUT.lastPullToRefreshMs = nowUtcMillis() - TimeUnit.SECONDS.toMillis(5)
-      SUT.loadShows(pullToRefresh = true)
-
-      assertThat(stateResult[0].isLoading).isNull()
-      assertThat(stateResult[1].isLoading).isFalse()
-      assertThat(stateResult[2].isLoading).isTrue()
-      assertThat(stateResult[3].isLoading).isFalse()
-      assertThat(messagesResult).isEmpty()
-
-      job.cancel()
-      job2.cancel()
-    }
 
   @Test
   fun `Should show loading state instantly if pull to refresh`() =

@@ -54,5 +54,8 @@
 
   <declare-styleable name="OverscrollActionView">
     <attr name="actionIcon" format="reference" />
+    <!-- Overrides the icon's size inside the ring, for marks that need to sit
+         smaller than a plain glyph would. -->
+    <attr name="actionIconSize" format="dimension" />
   </declare-styleable>
 </resources>

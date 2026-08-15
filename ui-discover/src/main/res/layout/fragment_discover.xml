@@ -10,32 +10,49 @@
   android:clipToPadding="false"
   >
 
-  <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/discoverRecycler"
-    style="@style/ScrollbarsStyle"
+  <!--
+    The indicator and the list are stacked, never layered, so neither can paint
+    over the other. The list keeps a fixed height rather than a weight: a weight
+    would re-measure it on every frame the slot resizes, which tore up the
+    overscroll mid-drag. Fixed height means the slot only ever moves it.
+  -->
+  <LinearLayout
+    android:id="@+id/discoverRecyclerStack"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:overScrollMode="never"
-    android:paddingLeft="@dimen/gridPadding"
-    android:paddingTop="@dimen/discoverRecyclerPadding"
-    android:paddingRight="@dimen/gridPadding"
-    android:paddingBottom="@dimen/bottomNavigationHeightPadded"
-    android:scrollbars="vertical"
-    android:visibility="gone"
-    tools:visibility="visible"
-    />
+    android:orientation="vertical"
+    >
 
-  <xyz.stignarnia.ui_base.common.views.OverscrollActionView
-    android:id="@+id/discoverOverscroll"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginTop="@dimen/overscrollActionPaddingTop"
-    app:actionIcon="@drawable/ic_catalog_refresh"
-    />
+    <xyz.stignarnia.ui_base.common.views.OverscrollActionView
+      android:id="@+id/discoverOverscroll"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      app:actionIcon="@drawable/ic_tmdb_logo"
+      app:actionIconSize="@dimen/overscrollActionIconSmall"
+      />
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/discoverRecycler"
+      style="@style/ScrollbarsStyle"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@android:color/transparent"
+      android:clipChildren="false"
+      android:clipToPadding="false"
+      android:overScrollMode="never"
+      android:paddingLeft="@dimen/gridPadding"
+      android:paddingTop="@dimen/discoverRecyclerPadding"
+      android:paddingRight="@dimen/gridPadding"
+      android:paddingBottom="@dimen/bottomNavigationHeightPadded"
+      android:scrollbars="vertical"
+      android:visibility="gone"
+      tools:visibility="visible"
+      />
+
+  </LinearLayout>
+
 
   <xyz.stignarnia.ui_base.common.views.ModeTabsView
     android:id="@+id/discoverModeTabsView"

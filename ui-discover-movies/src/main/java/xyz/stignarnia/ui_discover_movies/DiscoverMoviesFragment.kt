@@ -142,8 +142,21 @@ internal class DiscoverMoviesFragment :
       discoverMoviesRoot.doOnApplyWindowInsets { _, insets, _, _ ->
         val tabletOffset = if (isTablet) dimenToPx(R.dimen.spaceMedium) else 0
         val statusBarSize = insets.getInsets(WindowInsetsCompat.Type.systemBars()).top + tabletOffset
+        // The slot opens past the filter chips, taking the space out of the
+        // list's top padding so the content barely shifts.
+        // Derived from the same dimens that place the chips, so the ring keeps
+        // its gap under them on any screen size instead of trusting one number.
+        discoverMoviesOverscroll.openHeight = statusBarSize +
+          dimenToPx(R.dimen.collectionFiltersMargin) +
+          dimenToPx(R.dimen.chipHeight) +
+          dimenToPx(R.dimen.discoverOverscrollGap) +
+          dimenToPx(R.dimen.overscrollActionProgress) +
+          dimenToPx(R.dimen.spaceMedium)
+        // The slot above the list provides the gap under the floating header,
+        // so the list itself needs no top padding of its own.
         discoverMoviesRecycler
-          .updatePadding(top = statusBarSize + dimenToPx(R.dimen.discoverRecyclerPadding))
+          .updatePadding(top = 0)
+        discoverMoviesOverscroll.restHeight = statusBarSize + dimenToPx(R.dimen.discoverRecyclerPadding)
         (discoverMoviesSearchView.layoutParams as ViewGroup.MarginLayoutParams)
           .updateMargins(top = statusBarSize + dimenToPx(R.dimen.spaceMedium))
         (discoverMoviesTabsView.layoutParams as ViewGroup.MarginLayoutParams)

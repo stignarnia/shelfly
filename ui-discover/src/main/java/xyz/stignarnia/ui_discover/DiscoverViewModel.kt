@@ -45,7 +45,6 @@ internal class DiscoverViewModel @Inject constructor(
   private val filtersState = MutableStateFlow<DiscoverFilters?>(null)
   private val scrollState = MutableStateFlow(Event(false))
 
-  @VisibleForTesting(otherwise = PRIVATE) var lastPullToRefreshMs = 0L
   private var initialFilters: DiscoverFilters? = null
 
   init {
@@ -61,11 +60,6 @@ internal class DiscoverViewModel @Inject constructor(
     instantProgress: Boolean = false,
   ) {
     loadingState.value = true
-
-    if (pullToRefresh && nowUtcMillis() - lastPullToRefreshMs < Config.PULL_TO_REFRESH_COOLDOWN_MS) {
-      loadingState.value = false
-      return
-    }
 
     loadingState.value = pullToRefresh
 
@@ -95,7 +89,6 @@ internal class DiscoverViewModel @Inject constructor(
         }
 
         if (pullToRefresh) {
-          lastPullToRefreshMs = nowUtcMillis()
         }
       } catch (error: Throwable) {
         onError(error)

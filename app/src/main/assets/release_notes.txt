@@ -6,3 +6,5 @@ Shelfly 4.0.1
 • Fixed the movie Discover page failing to load entirely.
 • Ratings that cannot be found now show as absent instead of spinning forever.
 • With no OMDb key set, IMDb, Metascore and Rotten Tomatoes now show a cross you can tap for an explanation, instead of sitting there empty.
+• Pull to refresh on Discover now opens a slot above the list instead of floating over it, so the indicator never overlaps the filters or the posters, and it carries the TMDB mark.
+• Removed the ten second cooldown that silently ignored a second pull to refresh.

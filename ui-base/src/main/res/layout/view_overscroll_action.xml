@@ -8,26 +8,42 @@
   tools:parentTag="android.widget.FrameLayout"
   >
 
-  <ImageView
-    android:id="@+id/overscrollActionIcon"
-    android:layout_width="@dimen/overscrollActionIcon"
-    android:layout_height="@dimen/overscrollActionIcon"
-    android:layout_gravity="center"
-    android:importantForAccessibility="no"
-    app:tint="?android:attr/textColorPrimary"
-    tools:srcCompat="@drawable/ic_cloud_upload"
-    />
-
-  <com.google.android.material.progressindicator.CircularProgressIndicator
-    android:id="@+id/overscrollActionProgress"
+  <!--
+    The ring and the icon are centred against each other inside a box of the
+    ring's size, so the icon stays centred in the ring wherever the box is
+    placed. Aligning them to the parent independently does not - it lines up
+    their edges, not their centres.
+  -->
+  <FrameLayout
+    android:id="@+id/overscrollActionBox"
     android:layout_width="@dimen/overscrollActionProgress"
     android:layout_height="@dimen/overscrollActionProgress"
-    android:layout_gravity="center"
-    android:indeterminate="false"
-    app:indicatorColor="?android:attr/textColorPrimary"
-    app:indicatorSize="@dimen/overscrollActionProgress"
-    app:trackThickness="4dp"
-    tools:progress="75"
-    />
+    android:layout_gravity="bottom|center_horizontal"
+    android:layout_marginBottom="@dimen/spaceMedium"
+    >
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+      android:id="@+id/overscrollActionProgress"
+      android:layout_width="@dimen/overscrollActionProgress"
+      android:layout_height="@dimen/overscrollActionProgress"
+      android:layout_gravity="center"
+      android:indeterminate="false"
+      app:indicatorColor="?android:attr/textColorPrimary"
+      app:indicatorSize="@dimen/overscrollActionProgress"
+      app:trackThickness="4dp"
+      tools:progress="75"
+      />
+
+    <ImageView
+      android:id="@+id/overscrollActionIcon"
+      android:layout_width="@dimen/overscrollActionIcon"
+      android:layout_height="@dimen/overscrollActionIcon"
+      android:layout_gravity="center"
+      android:importantForAccessibility="no"
+      app:tint="?android:attr/textColorPrimary"
+      tools:srcCompat="@drawable/ic_cloud_upload"
+      />
+
+  </FrameLayout>
 
 </merge>
