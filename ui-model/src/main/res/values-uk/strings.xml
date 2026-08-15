@@ -43,6 +43,7 @@
   <string name="textTipBottomModeMenu">Проведіть по нижньому меню ліворуч або праворуч, щоб швидко змінити режим.</string>
   <string name="textTipListSwipeToDelete">Проводьте по елементах, щоб видаляти їх зі списку.</string>
   <string name="textTipDefaultOption">Можна змінити опцію за замовчуванням у Налаштуваннях</string>
+  <string name="textTipRatingsOmdbKey">Оцінки IMDb, Metascore та Rotten Tomatoes надходять із OMDb. Додайте ключ API OMDb у налаштуваннях, щоб побачити їх.</string>
   <string name="textGenreAction">Екшн</string>
   <string name="textGenreAdventure">Пригоди</string>
   <string name="textGenreAnimation">Анімація</string>

@@ -11,6 +11,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.openImdbUrl
 import xyz.stignarnia.ui_base.utilities.extensions.openWebUrl
 import xyz.stignarnia.ui_base.utilities.viewBinding
 import xyz.stignarnia.ui_model.IdImdb
+import xyz.stignarnia.ui_model.Tip
 import xyz.stignarnia.ui_movie.MovieDetailsViewModel
 import xyz.stignarnia.ui_movie.R
 import xyz.stignarnia.ui_movie.databinding.FragmentMovieDetailsRatingsBinding
@@ -47,6 +48,7 @@ class MovieDetailsRatingsFragment :
             return
           }
           movieDetailsRatings.bind(ratings)
+          movieDetailsRatings.onOmdbKeyMissingClick = { showTip(Tip.RATINGS_OMDB_KEY) }
           movie?.let {
             movieDetailsRatings.onTmdbClick = { openMovieLink(MovieLink.TMDB, movie.tmdbId.toString()) }
             movieDetailsRatings.onImdbClick = { openMovieLink(MovieLink.IMDB, movie.ids.imdb.id) }

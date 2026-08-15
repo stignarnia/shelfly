@@ -13,4 +13,5 @@ enum class Tip(
   WATCHLIST_ITEM_PIN(R.string.textTipWatchlistPinItem),
   LIST_ITEM_SWIPE_DELETE(R.string.textTipListSwipeToDelete),
   DATE_SELECTION_DEFAULTS(R.string.textTipDefaultOption),
+  RATINGS_OMDB_KEY(R.string.textTipRatingsOmdbKey),
 }

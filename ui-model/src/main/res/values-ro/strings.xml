@@ -43,6 +43,7 @@
     <string name="textTipBottomModeMenu">Glisează meniul din partea de jos spre stânga sau dreapta pentru a schimba rapid modul.</string>
     <string name="textTipListSwipeToDelete">Glisează elementele listei pentru a le elimina din listă.</string>
     <string name="textTipDefaultOption">Opțiunea implicită poate fi ajustată în Setări</string>
+    <string name="textTipRatingsOmdbKey">Notările IMDb, Metascore și Rotten Tomatoes provin de la OMDb. Adaugă o cheie API OMDb în setări pentru a le vedea.</string>
     <string name="textGenreAction">Acțiune</string>
     <string name="textGenreAdventure">Aventură</string>
     <string name="textGenreAnimation">Animație</string>

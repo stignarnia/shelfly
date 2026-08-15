@@ -5,3 +5,4 @@ Shelfly 4.0.1
 • Fixed IMDb, Metascore and Rotten Tomatoes ratings never loading. Details were served from a cache entry that carried no IMDb id, so there was nothing to look up, and OMDb was queried on a host that only accepts paid keys.
 • Fixed the movie Discover page failing to load entirely.
 • Ratings that cannot be found now show as absent instead of spinning forever.
+• With no OMDb key set, IMDb, Metascore and Rotten Tomatoes now show a cross you can tap for an explanation, instead of sitting there empty.

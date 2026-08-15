@@ -43,6 +43,7 @@
   <string name="textTipBottomModeMenu">Vaihda aluetta nopeasti pyyhkäisemällä alareunan valikkoa vasemmalle tai oikealle.</string>
   <string name="textTipListSwipeToDelete">Poista kohde listalta pyyhkäisemällä se sivuun.</string>
   <string name="textTipDefaultOption">Voit muuttaa oletusvalinnan asetuksista</string>
+  <string name="textTipRatingsOmdbKey">IMDb-, Metascore- ja Rotten Tomatoes -arviot tulevat OMDb:stä. Lisää OMDb-API-avain asetuksiin nähdäksesi ne.</string>
   <string name="textGenreAction">Toiminta</string>
   <string name="textGenreAdventure">Seikkailu</string>
   <string name="textGenreAnimation">Animaatio</string>

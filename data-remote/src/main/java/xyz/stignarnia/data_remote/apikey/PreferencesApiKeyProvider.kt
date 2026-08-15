@@ -48,6 +48,8 @@ internal class PreferencesApiKeyProvider(
 
   override fun hasTmdbApiKey(): Boolean = getTmdbApiKey().isNotBlank()
 
+  override fun hasOmdbApiKey(): Boolean = getOmdbApiKey().isNotBlank()
+
   private fun read(
     key: String,
     fallback: String,

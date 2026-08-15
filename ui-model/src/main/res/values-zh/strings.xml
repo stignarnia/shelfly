@@ -43,6 +43,7 @@
   <string name="textTipBottomModeMenu">在底部菜单区域向左或向右滑动可快速切换（剧集/电影）模式。</string>
   <string name="textTipListSwipeToDelete">滑动列表项可将其移除。</string>
   <string name="textTipDefaultOption">可以在设置中调整默认选项</string>
+  <string name="textTipRatingsOmdbKey">IMDb、Metascore 和 Rotten Tomatoes 评分来自 OMDb。请在设置中添加 OMDb API 密钥以查看它们。</string>
   <string name="textGenreAction">动作</string>
   <string name="textGenreAdventure">冒险</string>
   <string name="textGenreAnimation">动画</string>

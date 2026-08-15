@@ -47,6 +47,14 @@ class ShowDetailsRatingsViewModel @Inject constructor(
       isRefreshingRatingsState.value = false
       ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, externalRatings)
 
+      // Every external rating comes from OMDb, so with no key there is nothing
+      // to fetch. Flag it rather than leaving three slots blank for no reason.
+      if (!ratingsCase.hasOmdbApiKey()) {
+        val settled = externalRatings.settled().copy(isOmdbKeyMissing = true)
+        ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, settled)
+        return@launch
+      }
+
       // External ratings are looked up by IMDb id. Without one there is nothing
       // to ask OMDb for, so settle rather than spinning on a request that could
       // only fail.

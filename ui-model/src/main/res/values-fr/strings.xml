@@ -43,6 +43,7 @@
   <string name="textTipBottomModeMenu">Balayez le menu inférieur vers la gauche ou vers la droite pour changer rapidement de mode.</string>
   <string name="textTipListSwipeToDelete">Glisser les éléments pour les retirer de la liste.</string>
   <string name="textTipDefaultOption">L\'option par défaut peut être ajustée dans les paramètres</string>
+  <string name="textTipRatingsOmdbKey">Les notes IMDb, Metascore et Rotten Tomatoes proviennent d\'OMDb. Ajoutez une clé d\'API OMDb dans les paramètres pour les afficher.</string>
   <string name="textGenreAction">Action</string>
   <string name="textGenreAdventure">Aventure</string>
   <string name="textGenreAnimation">Animation</string>

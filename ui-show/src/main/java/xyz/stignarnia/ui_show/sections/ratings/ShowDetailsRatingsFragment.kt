@@ -11,6 +11,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.openImdbUrl
 import xyz.stignarnia.ui_base.utilities.extensions.openWebUrl
 import xyz.stignarnia.ui_base.utilities.viewBinding
 import xyz.stignarnia.ui_model.IdImdb
+import xyz.stignarnia.ui_model.Tip
 import xyz.stignarnia.ui_show.R
 import xyz.stignarnia.ui_show.ShowDetailsViewModel
 import xyz.stignarnia.ui_show.databinding.FragmentShowDetailsRatingsBinding
@@ -45,6 +46,7 @@ class ShowDetailsRatingsFragment : BaseFragment<ShowDetailsRatingsViewModel>(R.l
             return
           }
           showDetailsRatings.bind(ratings)
+          showDetailsRatings.onOmdbKeyMissingClick = { showTip(Tip.RATINGS_OMDB_KEY) }
           show?.let {
             showDetailsRatings.onTmdbClick = { openLink(ShowLink.TMDB, show.tmdbId.toString()) }
             showDetailsRatings.onImdbClick = { openLink(ShowLink.IMDB, show.ids.imdb.id) }

@@ -29,4 +29,11 @@ interface ApiKeyProvider {
    * this gates the onboarding screen.
    */
   fun hasTmdbApiKey(): Boolean
+
+  /**
+   * Whether an OMDb key is available. Without one there are no IMDb, Metascore
+   * or Rotten Tomatoes ratings, which the ratings strip says explicitly rather
+   * than leaving the values blank for no visible reason.
+   */
+  fun hasOmdbApiKey(): Boolean
 }

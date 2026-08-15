@@ -43,6 +43,7 @@
   <string name="textTipBottomModeMenu">Modu hızlı bir şekilde değiştirmek için alt menüyü sola veya sağa kaydırın.</string>
   <string name="textTipListSwipeToDelete">Listeden çıkarmak için liste ögelerini kaydırın.</string>
   <string name="textTipDefaultOption">Varsayılan seçenek Ayarlar\'da ayarlanabilir</string>
+  <string name="textTipRatingsOmdbKey">IMDb, Metascore ve Rotten Tomatoes puanları OMDb\'den gelir. Bunları görmek için Ayarlar\'da bir OMDb API anahtarı ekleyin.</string>
   <string name="textGenreAction">Aksiyon</string>
   <string name="textGenreAdventure">Macera</string>
   <string name="textGenreAnimation">Animasyon</string>

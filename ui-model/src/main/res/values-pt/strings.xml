@@ -84,4 +84,5 @@
   <string name="textPeriodLast365Days">Últimos 365 dias</string>
   <string name="textPeriodAllTime">Todo o período</string>
   <string name="textTipDefaultOption">A opção padrão pode ser ajustada nas Definições</string>
+  <string name="textTipRatingsOmdbKey">As avaliações do IMDb, Metascore e Rotten Tomatoes vêm do OMDb. Adicione uma chave de API do OMDb nas definições para as ver.</string>
 </resources>
