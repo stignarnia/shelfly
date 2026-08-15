@@ -1,3 +1,4 @@
 Shelfly 4.0.1
 
 • Fixed the label and outline of text fields in dialogs (API keys, WebDAV, backup retention) turning near-black and unreadable once the field was focused.
+• Dropped the crown icon from the Theme setting. It marked a Showly premium feature that no longer exists in this fork.
