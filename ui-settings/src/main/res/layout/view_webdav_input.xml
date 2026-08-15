@@ -15,7 +15,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="@string/textSettingsWebDavUrlHint"
+    app:boxStrokeColor="@color/selector_text_input"
     app:endIconMode="clear_text"
+    app:hintTextColor="@color/selector_text_input"
     >
 
     <com.google.android.material.textfield.TextInputEditText
@@ -34,7 +36,9 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/spaceSmall"
     android:hint="@string/textSettingsWebDavUsernameHint"
+    app:boxStrokeColor="@color/selector_text_input"
     app:endIconMode="clear_text"
+    app:hintTextColor="@color/selector_text_input"
     >
 
     <com.google.android.material.textfield.TextInputEditText
@@ -53,7 +57,9 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/spaceSmall"
     android:hint="@string/textSettingsWebDavPasswordHint"
+    app:boxStrokeColor="@color/selector_text_input"
     app:endIconMode="password_toggle"
+    app:hintTextColor="@color/selector_text_input"
     >
 
     <com.google.android.material.textfield.TextInputEditText

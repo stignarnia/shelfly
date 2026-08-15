@@ -14,7 +14,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="@string/textSettingsBackupRetentionHint"
+    app:boxStrokeColor="@color/selector_text_input"
     app:endIconMode="clear_text"
+    app:hintTextColor="@color/selector_text_input"
     >
 
     <com.google.android.material.textfield.TextInputEditText
