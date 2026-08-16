@@ -3,6 +3,8 @@ package xyz.stignarnia.shelfly.ui.main.delegates
 import androidx.lifecycle.DefaultLifecycleObserver
 import xyz.stignarnia.shelfly.databinding.ActivityMainBinding
 import xyz.stignarnia.shelfly.ui.main.MainViewModel
+import xyz.stignarnia.ui_base.R
+import xyz.stignarnia.ui_base.common.views.modal.ModalBuilder
 import xyz.stignarnia.ui_base.utilities.TipsHost
 import xyz.stignarnia.ui_base.utilities.extensions.gone
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
@@ -59,7 +61,11 @@ class MainTipsDelegate :
   override fun isTipShown(tip: Tip) = viewModel.isTipShown(tip)
 
   override fun showTip(tip: Tip) {
-    binding.tutorialView.showTip(tip)
+    ModalBuilder(binding.root)
+      .setTitle(R.string.textTip)
+      .setMessage(tip.textResId)
+      .setPositiveButton(R.string.textOk) { it.dismiss() }
+      .show()
     setTipShow(tip)
   }
 

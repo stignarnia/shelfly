@@ -8,5 +8,5 @@
 
   <dimen name="mediaTileCorner">6dp</dimen>
   <dimen name="tutorialTipSize">34dp</dimen>
-  <dimen name="tutorialTipMargin">128dp</dimen>
+  <dimen name="modalMargin">128dp</dimen>
 </resources>

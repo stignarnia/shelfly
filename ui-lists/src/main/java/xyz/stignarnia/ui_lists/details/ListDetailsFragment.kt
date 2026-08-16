@@ -240,12 +240,13 @@ class ListDetailsFragment :
   }
 
   private fun openDeleteDialog() {
-    dialog()
+    modal()
       .setTitle(R.string.textConfirmDeleteListTitle)
       .setMessage(R.string.textConfirmDeleteListSubtitle)
-      .setPositiveButton(R.string.textYes) { _, _ ->
+      .setPositiveButton(R.string.textYes) { modal ->
         viewModel.deleteList(list.id)
-      }.setNegativeButton(R.string.textNo) { _, _ -> }
+        modal.dismiss()
+      }.setNegativeButton(R.string.textNo)
       .show()
   }
 

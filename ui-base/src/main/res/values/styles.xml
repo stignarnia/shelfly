@@ -109,51 +109,11 @@
     <item name="android:scrollbarThumbVertical">@color/colorGrayDark</item>
   </style>
 
-  <!-- Dialogs -->
+  <!-- Modals -->
 
-  <!--
-    Dialogs are the tip ("?") popup in dialog form: the same dark surface and
-    corner radius, the same filled accent confirm, the same rise-and-settle
-    entrance over a heavy scrim.
-
-    colorPrimary has to stay the accent so controls inside a dialog are tinted
-    like the rest of the app, but Material3 also feeds colorPrimary to
-    elevationOverlayColor - that overlay on the raised dialog surface is what
-    used to wash it red. Pinning the overlay to the surface colour keeps the
-    accent and drops the tint.
-  -->
-  <style name="AlertDialog" parent="@style/Theme.Material3.Dark.Dialog">
-    <item name="colorAccent">@color/colorAccent</item>
-    <item name="colorPrimary">@color/colorAccent</item>
-    <item name="elevationOverlayColor">@color/colorPrimary</item>
-    <item name="alertDialogStyle">@style/AlertDialog.Surface</item>
-    <item name="buttonBarPositiveButtonStyle">@style/AlertDialog.PositiveButton</item>
-    <item name="buttonBarNegativeButtonStyle">@style/AlertDialog.NegativeButton</item>
-    <item name="android:backgroundDimAmount">0.7</item>
-    <item name="android:windowAnimationStyle">@style/AlertDialog.Animation</item>
-  </style>
-
-  <!--
-    MaterialAlertDialogBuilder builds the window background from this style, so
-    the surface colour and the corners are set here rather than per call site.
-  -->
-  <style name="AlertDialog.Surface" parent="MaterialAlertDialog.Material3">
-    <item name="backgroundTint">@color/colorPrimary</item>
-    <item name="shapeAppearanceOverlay">@style/AlertDialog.Shape</item>
-  </style>
-
-  <style name="AlertDialog.Shape" parent="">
-    <item name="cornerSize">@dimen/popupCornerRadius</item>
-  </style>
-
-  <style name="AlertDialog.Animation" parent="">
-    <item name="android:windowEnterAnimation">@anim/anim_dialog_enter</item>
-    <item name="android:windowExitAnimation">@anim/anim_dialog_exit</item>
-  </style>
-
-  <style name="AlertDialog.PositiveButton" parent="PrimaryMaterialButton" />
-
-  <style name="AlertDialog.NegativeButton" parent="Widget.Material3.Button.TextButton.Dialog">
+  <!-- The dismissing half of a ModalView's button row, paired with
+       @style/PrimaryMaterialButton for the confirm. -->
+  <style name="ModalNegativeButton" parent="Widget.Material3.Button.TextButton.Dialog">
     <item name="android:textColor">@color/colorGrayLight</item>
     <item name="cornerRadius">100dp</item>
   </style>
@@ -162,10 +122,6 @@
 
   <style name="Toolbar.Button.Navigation.Tinted" parent="Widget.AppCompat.Toolbar.Button.Navigation">
     <item name="tint">?android:attr/textColorPrimary</item>
-  </style>
-
-  <style name="AlertDialog.SmallText" parent="AlertDialog">
-    <item name="android:textSize">13sp</item>
   </style>
 
   <!-- Other  -->
@@ -310,12 +266,21 @@
 
   <!--
     The primary call to action: a filled accent button. Shared by the welcome
-    steps and the tip ("?") popups so the confirm action looks the same
-    everywhere - define it here rather than tinting a button inline.
+    steps and every modal's confirm, so the action looks the same everywhere -
+    define it here rather than tinting a button inline.
   -->
   <style name="PrimaryMaterialButton" parent="RoundMaterialButton">
-    <item name="android:textColor">@color/selector_primary_button_text</item>
+    <item name="android:textColor">@color/selector_button_text</item>
     <item name="backgroundTint">@color/selector_primary_button_background</item>
+  </style>
+
+  <!--
+    The same button in grey, for an action that belongs next to the confirm
+    without competing with it - the WebDAV "Test connection" is the one so far.
+  -->
+  <style name="SecondaryMaterialButton" parent="RoundMaterialButton">
+    <item name="android:textColor">@color/selector_button_text</item>
+    <item name="backgroundTint">@color/selector_secondary_button_background</item>
   </style>
 
   <style name="RoundTextButton" parent="Widget.Material3.Button.TextButton">

@@ -7,12 +7,11 @@ import android.view.ViewPropertyAnimator
 import androidx.activity.addCallback
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import androidx.annotation.StyleRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import xyz.stignarnia.common.Mode
+import xyz.stignarnia.ui_base.common.views.modal.ModalBuilder
 import xyz.stignarnia.ui_base.utilities.ModeHost
 import xyz.stignarnia.ui_base.utilities.MoviesStatusHost
 import xyz.stignarnia.ui_base.utilities.NavigationHost
@@ -73,30 +72,30 @@ abstract class BaseFragment<T : ViewModel>(
   }
 
   /**
-   * Every dialog in the app wears [R.style.AlertDialog] - the tip ("?") popup's
-   * surface, corners and entrance. Building them here instead of naming the
-   * style at each call site keeps that one decision in one place.
+   * The app's one modal - the same ModalView the "?" tips appear in.
+   *
+   * Anchored on the decor view rather than this fragment's, because a fragment
+   * that opens one straight out of onViewCreated - the backup screen does, when
+   * the welcome flow sends the user there to set WebDAV up - has a view that is
+   * not in the window yet, and the modal would be trapped inside it.
    */
-  protected fun dialog(
-    @StyleRes style: Int = R.style.AlertDialog,
-  ) = MaterialAlertDialogBuilder(requireContext(), style)
+  protected fun modal() = ModalBuilder(requireActivity().window.decorView)
 
   /**
-   * Pick one of a list, which is what most of these dialogs are for. Whether an
+   * Pick one of a list, which is what most of these modals are for. Whether an
    * unchanged pick is worth acting on is left to the caller: for some of them
    * re-picking the current option is how the step gets redone.
    */
-  protected fun <T> showSingleChoiceDialog(
+  protected fun <T> showSingleChoiceModal(
     options: List<T>,
     selected: T?,
     label: (T) -> CharSequence,
-    @StyleRes style: Int = R.style.AlertDialog,
+    textSizeSp: Float = ModalBuilder.DEFAULT_ITEM_TEXT_SIZE_SP,
     onPicked: (T) -> Unit,
   ) {
-    dialog(style)
-      .setSingleChoiceItems(options.map(label).toTypedArray(), options.indexOf(selected)) { picker, index ->
+    modal()
+      .setSingleChoiceItems(options.map(label), options.indexOf(selected), textSizeSp) { index ->
         onPicked(options[index])
-        picker.dismiss()
       }.show()
   }
 

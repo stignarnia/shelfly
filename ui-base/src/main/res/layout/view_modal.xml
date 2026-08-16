@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/modalRoot"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:parentTag="android.widget.FrameLayout"
+  >
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/modalCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/modalMargin"
+    android:background="@drawable/bg_modal"
+    android:clickable="true"
+    android:descendantFocusability="afterDescendants"
+    android:elevation="8dp"
+    android:focusable="true"
+    android:paddingTop="@dimen/spaceNormal"
+    >
+
+    <TextView
+      android:id="@+id/modalTitle"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/spaceBig"
+      android:layout_marginEnd="@dimen/spaceBig"
+      android:textColor="?android:attr/textColorPrimary"
+      android:textSize="20sp"
+      android:textStyle="bold"
+      android:visibility="gone"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="@string/textTip"
+      tools:visibility="visible"
+      />
+
+    <TextView
+      android:id="@+id/modalMessage"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/spaceBig"
+      android:layout_marginTop="@dimen/spaceNormal"
+      android:layout_marginEnd="@dimen/spaceBig"
+      android:textColor="?android:attr/textColorPrimary"
+      android:textSize="14sp"
+      android:visibility="gone"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/modalTitle"
+      tools:text="Double tap Discover menu button to quickly open search screen."
+      tools:visibility="visible"
+      />
+
+    <!--
+      Holds whatever the caller passes to setView, and the rows built by
+      setItems / setSingleChoiceItems. Capped and scrollable so a long list or a
+      form with the keyboard up cannot push the buttons off screen.
+    -->
+    <ScrollView
+      android:id="@+id/modalContentScroll"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/spaceNormal"
+      android:visibility="gone"
+      app:layout_constrainedHeight="true"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHeight_max="@dimen/modalContentMaxHeight"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/modalMessage"
+      >
+
+      <LinearLayout
+        android:id="@+id/modalContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        />
+
+    </ScrollView>
+
+    <!--
+      A side action that is neither confirm nor cancel gets its own centred row.
+      Sharing the confirm row meant three labels competing for one line, which a
+      longer translation would have broken outright.
+    -->
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/modalNeutralButton"
+      style="@style/SecondaryMaterialButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/spaceBig"
+      android:layout_marginTop="@dimen/spaceNormal"
+      android:layout_marginEnd="@dimen/spaceBig"
+      android:visibility="gone"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/modalContentScroll"
+      tools:text="Test connection"
+      tools:visibility="visible"
+      />
+
+    <LinearLayout
+      android:id="@+id/modalButtons"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/spaceNormal"
+      android:layout_marginEnd="@dimen/spaceBig"
+      android:layout_marginBottom="@dimen/spaceNormal"
+      android:gravity="end"
+      android:orientation="horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/modalNeutralButton"
+      app:layout_goneMarginTop="@dimen/spaceNormal"
+      >
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/modalNegativeButton"
+        style="@style/ModalNegativeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:text="@string/textCancel"
+        tools:visibility="visible"
+        />
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/modalPositiveButton"
+        style="@style/PrimaryMaterialButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spaceSmall"
+        android:visibility="gone"
+        tools:text="@string/textOk"
+        tools:visibility="visible"
+        />
+
+    </LinearLayout>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Background for @style/SecondaryMaterialButton: the primary button's shape in
+  grey, for an action that sits beside the confirm without competing with it.
+
+  Mirrors @color/selector_primary_button_background, including spelling out the
+  disabled state rather than letting a flat tint keep it looking live.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+    android:alpha="0.3"
+    android:color="@color/colorGray"
+    android:state_enabled="false"
+    />
+
+  <item android:color="@color/colorGray" />
+
+</selector>

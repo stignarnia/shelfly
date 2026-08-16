@@ -3,7 +3,6 @@ package xyz.stignarnia.ui_settings.sections.backup
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.stignarnia.ui_base.BaseFragment
@@ -93,13 +92,6 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
     with(inputBinding) {
       webdavUrlInput.setText(state.webDavUrl)
       webdavUsernameInput.setText(state.webDavUsername)
-      webdavTestButton.onClick {
-        viewModel.testConnection(
-          url = webdavUrlInput.text?.toString().orEmpty(),
-          username = webdavUsernameInput.text?.toString().orEmpty(),
-          password = webdavPasswordInput.text?.toString().orEmpty(),
-        )
-      }
     }
 
     // The stored password is never shown. An empty field means "leave it as it
@@ -108,28 +100,23 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
       inputBinding.webdavPasswordInputLayout.hint = getString(R.string.textSettingsWebDavPasswordSetHint)
     }
 
-    launchAndRepeatStarted(
-      {
-        viewModel.uiState.collect { uiState ->
-          with(inputBinding) {
-            webdavTestButton.isEnabled = uiState.connectionTest != ConnectionTest.Testing
-            webdavTestResult.visibleIf(uiState.connectionTest != ConnectionTest.Idle)
-            webdavTestResult.text = when (val test = uiState.connectionTest) {
-              is ConnectionTest.Idle -> ""
-              is ConnectionTest.Testing -> getString(R.string.textSettingsWebDavTesting)
-              is ConnectionTest.Succeeded -> getString(R.string.textSettingsWebDavConnected)
-              is ConnectionTest.Failed -> getString(test.reason)
-            }
-          }
-        }
-      },
-    )
-
-    dialog()
+    val modal = modal()
       .setTitle(R.string.textSettingsWebDavTitle)
       .setMessage(R.string.textSettingsWebDavDialogMessage)
       .setView(inputBinding.root)
-      .setPositiveButton(R.string.textOk) { _, _ ->
+      .setNeutralButton(R.string.textSettingsWebDavTest) {
+        viewModel.testConnection(
+          url = inputBinding.webdavUrlInput.text
+            ?.toString()
+            .orEmpty(),
+          username = inputBinding.webdavUsernameInput.text
+            ?.toString()
+            .orEmpty(),
+          password = inputBinding.webdavPasswordInput.text
+            ?.toString()
+            .orEmpty(),
+        )
+      }.setPositiveButton(R.string.textOk) { modal ->
         viewModel.saveWebDav(
           url = inputBinding.webdavUrlInput.text
             ?.toString()
@@ -141,9 +128,24 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
             ?.toString()
             .orEmpty(),
         )
-      }.setNegativeButton(R.string.textCancel) { _, _ -> }
-      .setOnDismissListener { viewModel.clearConnectionTest() }
+        modal.dismiss()
+      }.setNegativeButton(R.string.textCancel)
+      .setOnDismiss { viewModel.clearConnectionTest() }
       .show()
+
+    launchAndRepeatStarted(
+      {
+        viewModel.uiState.collect { uiState ->
+          modal.setNeutralButtonEnabled(uiState.connectionTest != ConnectionTest.Testing)
+          inputBinding.webdavTestResult.text = when (val test = uiState.connectionTest) {
+            is ConnectionTest.Idle -> ""
+            is ConnectionTest.Testing -> getString(R.string.textSettingsWebDavTesting)
+            is ConnectionTest.Succeeded -> getString(R.string.textSettingsWebDavConnected)
+            is ConnectionTest.Failed -> getString(test.reason)
+          }
+        }
+      },
+    )
   }
 
   private fun showRetentionDialog() {
@@ -151,36 +153,28 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
     val inputBinding = ViewRetentionInputBinding.inflate(LayoutInflater.from(requireContext()))
     inputBinding.retentionInput.setText(current.toString())
 
-    val retentionDialog = dialog()
+    modal()
       .setTitle(R.string.textSettingsBackupRetentionTitle)
       .setMessage(R.string.textSettingsBackupRetentionDescription)
       .setView(inputBinding.root)
-      .setPositiveButton(R.string.textOk, null)
-      .setNegativeButton(R.string.textCancel) { _, _ -> }
-      .create()
-
-    // The button is bound after showing so a bad value can be rejected without
-    // dismissing the dialog and losing what was typed.
-    retentionDialog.setOnShowListener {
-      retentionDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-        val typed = inputBinding.retentionInput.text
+      // A bad value is rejected without dismissing, so what was typed survives.
+      .setPositiveButton(R.string.textOk) { modal ->
+        val count = inputBinding.retentionInput.text
           ?.toString()
           ?.trim()
-          .orEmpty()
-        val count = typed.toIntOrNull()
+          ?.toIntOrNull()
         if (count == null || count < 0) {
           inputBinding.retentionInputLayout.error = getString(R.string.textSettingsBackupRetentionInvalid)
-          return@setOnClickListener
+          return@setPositiveButton
         }
         viewModel.setBackupRetention(count)
-        retentionDialog.dismiss()
-      }
-    }
-    retentionDialog.show()
+        modal.dismiss()
+      }.setNegativeButton(R.string.textCancel)
+      .show()
   }
 
   private fun showTargetDialog() =
-    showSingleChoiceDialog(
+    showSingleChoiceModal(
       options = BackupTarget.entries,
       selected = viewModel.uiState.value.backupTarget,
       label = { getString(it.displayName()) },

@@ -163,10 +163,12 @@ class ShowDetailsSeasonsFragment : BaseFragment<ShowDetailsSeasonsViewModel>(R.l
     val view = QuickSetupView(context).apply {
       bind(seasons)
     }
-    dialog()
+    modal()
       .setView(view)
-      .setPositiveButton(R.string.textSelect) { _, _ -> viewModel.onQuickProgressSelected(view.getSelectedItem()) }
-      .setNegativeButton(R.string.textCancel) { _, _ -> }
+      .setPositiveButton(R.string.textSelect) { modal ->
+        viewModel.onQuickProgressSelected(view.getSelectedItem())
+        modal.dismiss()
+      }.setNegativeButton(R.string.textCancel)
       .show()
   }
 

@@ -222,10 +222,6 @@ class MainActivity :
         if (viewModel.onWelcomeBack()) {
           return@addCallback
         }
-        if (tutorialView.isVisible) {
-          tutorialView.fadeOut()
-          return@addCallback
-        }
         findNavControl()?.run {
           when (currentDestination?.id) {
             R.id.discoverFragment,

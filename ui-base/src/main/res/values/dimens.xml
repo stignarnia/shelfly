@@ -69,11 +69,13 @@
   <dimen name="collectionFiltersMarginNoTabs">66dp</dimen>
   <dimen name="commentViewSpace">16dp</dimen>
   <dimen name="tutorialTipSize">28dp</dimen>
-  <dimen name="tutorialTipMargin">32dp</dimen>
 
-  <!-- Shared by the tip ("?") popup and by @style/AlertDialog, which is modelled
-       on it, so the two read as the same surface. -->
-  <dimen name="popupCornerRadius">16dp</dimen>
+  <!-- ModalView: the inset the card keeps from the screen edge, and the ceiling
+       on its scrolling middle so a long picker still leaves room for the
+       buttons. -->
+  <dimen name="modalMargin">32dp</dimen>
+  <dimen name="modalContentMaxHeight">360dp</dimen>
+  <dimen name="modalCornerRadius">16dp</dimen>
   <dimen name="scrollBarWidth">3dp</dimen>
   <dimen name="rateValueTranslation">80dp</dimen>
 

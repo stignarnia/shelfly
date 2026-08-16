@@ -208,12 +208,11 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
       return
     }
 
-    dialog()
+    modal()
       .setTitle(R.string.textBackupWebDavPick)
-      .setItems(backups.fileNames.toTypedArray()) { dialog, index ->
+      .setItems(backups.fileNames) { index ->
         viewModel.runWebDavImport(backups.fileNames[index])
-        dialog.dismiss()
-      }.setNegativeButton(R.string.textCancel) { _, _ -> }
+      }.setNegativeButton(R.string.textCancel)
       .show()
   }
 

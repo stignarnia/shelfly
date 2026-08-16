@@ -54,7 +54,7 @@ class SettingsNotificationsFragment :
   }
 
   private fun showWhenToNotifyDialog(settings: Settings) =
-    showSingleChoiceDialog(
+    showSingleChoiceModal(
       options = NotificationDelay.entries,
       selected = settings.episodesNotificationsDelay,
       label = { getString(it.stringRes) },
@@ -94,11 +94,12 @@ class SettingsNotificationsFragment :
   private fun showNotificationsRationaleDialog() {
     val context = requireContext()
     val view = NotificationsRationaleView(context)
-    dialog()
+    modal()
       .setView(view)
-      .setPositiveButton(R.string.textYes) { _, _ ->
+      .setPositiveButton(R.string.textYes) { modal ->
         requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-      }.setNegativeButton(R.string.textCancel) { _, _ -> }
+        modal.dismiss()
+      }.setNegativeButton(R.string.textCancel)
       .show()
   }
 

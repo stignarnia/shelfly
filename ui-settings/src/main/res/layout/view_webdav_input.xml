@@ -72,30 +72,20 @@
 
   </com.google.android.material.textfield.TextInputLayout>
 
+  <!--
+    Always present, always three lines tall. The longest outcome ("Could not
+    establish a secure connection...") wraps to three, so holding that height
+    from the start means running a test writes into a box that is already there
+    instead of growing the modal under the user's finger.
+  -->
   <TextView
     android:id="@+id/webdavTestResult"
     style="@style/Settings.Summary"
     android:layout_width="match_parent"
     android:layout_marginTop="@dimen/spaceSmall"
-    android:visibility="gone"
-    tools:text="Connected."
-    tools:visibility="visible"
+    android:lines="3"
+    tools:text="Connected. The folder is reachable and writable."
     xmlns:tools="http://schemas.android.com/tools"
-    />
-
-  <!--
-    An unstyled TextButton picks up a foreground colour that is all but
-    invisible against the dialog, so this spells out a readable one and takes
-    an outline to still read as a button.
-  -->
-  <com.google.android.material.button.MaterialButton
-    android:id="@+id/webdavTestButton"
-    style="@style/RoundOutlinedButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="end"
-    android:text="@string/textSettingsWebDavTest"
-    android:textColor="?android:attr/textColorPrimary"
     />
 
 </LinearLayout>

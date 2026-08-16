@@ -63,17 +63,18 @@ class SettingsApiKeysFragment : BaseFragment<SettingsApiKeysViewModel>(R.layout.
     val inputBinding = ViewApiKeyInputBinding.inflate(LayoutInflater.from(requireContext()))
     inputBinding.apiKeyInput.setText(currentKey)
 
-    dialog()
+    modal()
       .setTitle(titleResId)
       .setMessage(messageResId)
       .setView(inputBinding.root)
-      .setPositiveButton(R.string.textOk) { _, _ ->
+      .setPositiveButton(R.string.textOk) { modal ->
         onSave(
           inputBinding.apiKeyInput.text
             ?.toString()
             .orEmpty(),
         )
-      }.setNegativeButton(R.string.textCancel) { _, _ -> }
+        modal.dismiss()
+      }.setNegativeButton(R.string.textCancel)
       .show()
   }
 

@@ -173,12 +173,12 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
   }
 
   private fun showThemeDialog(theme: AppTheme) =
-    showSingleChoiceDialog(AppTheme.entries, theme, { getString(it.displayName) }) {
+    showSingleChoiceModal(AppTheme.entries, theme, { getString(it.displayName) }) {
       if (it != theme) viewModel.setTheme(it)
     }
 
   private fun showLanguageDialog(language: AppLanguage) =
-    showSingleChoiceDialog(AppLanguage.entries, language, { getString(it.displayName) }) {
+    showSingleChoiceModal(AppLanguage.entries, language, { getString(it.displayName) }) {
       if (it != language) viewModel.setLanguage(it)
     }
 
@@ -186,7 +186,7 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
     val options = Config.PROGRESS_UPCOMING_OPTIONS
     val selected = options.firstOrNull { it.toLong() == days }
 
-    showSingleChoiceDialog(options, selected, {
+    showSingleChoiceModal(options, selected, {
       if (it == 0) getString(R.string.textDisabled) else getString(R.string.textDays, it)
     }) {
       if (it != selected) viewModel.setProgressUpcomingDays(it.toLong())
@@ -194,17 +194,17 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
   }
 
   private fun showTabletColumnsDialog(columns: Int) =
-    showSingleChoiceDialog(listOf(1, 2), columns, { it.toString() }) {
+    showSingleChoiceModal(listOf(1, 2), columns, { it.toString() }) {
       if (it != columns) viewModel.setTabletColumns(it)
     }
 
   private fun showCountryDialog(country: AppCountry) =
-    showSingleChoiceDialog(AppCountry.entries, country, { it.displayName }) {
+    showSingleChoiceModal(AppCountry.entries, country, { it.displayName }) {
       if (it != country) viewModel.setCountry(it)
     }
 
   private fun showProgressTypeDialog(type: ProgressNextEpisodeType) =
-    showSingleChoiceDialog(ProgressNextEpisodeType.entries, type, {
+    showSingleChoiceModal(ProgressNextEpisodeType.entries, type, {
       getString(
         when (it) {
           LAST_WATCHED -> R.string.textNextEpisodeLastWatched
@@ -216,7 +216,7 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
     }
 
   private fun showDateSelectionTypeDialog(type: ProgressDateSelectionType) =
-    showSingleChoiceDialog(ProgressDateSelectionType.entries, type, {
+    showSingleChoiceModal(ProgressDateSelectionType.entries, type, {
       getString(
         when (it) {
           ALWAYS_ASK -> R.string.textDateSelectionAsk
@@ -230,11 +230,12 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
   private fun showDateFormatDialog(
     format: AppDateFormat,
     language: AppLanguage,
-  ) = showSingleChoiceDialog(
+  ) = showSingleChoiceModal(
     options = AppDateFormat.entries,
     selected = format,
     label = { DateFormatProvider.loadSettingsFormat(it, language.code).format(nowUtc().toLocalZone()) },
-    style = R.style.AlertDialog_SmallText,
+    // These labels are rendered dates, long enough to need their own size.
+    textSizeSp = 13F,
   ) {
     if (it != format) viewModel.setDateFormat(it, requireAppContext())
   }
@@ -242,7 +243,7 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
   private fun showRecentShowsDialog(settings: Settings?) {
     if (settings == null) return
 
-    showSingleChoiceDialog(Config.MY_SHOWS_RECENTS_OPTIONS, settings.myRecentsAmount, { it.toString() }) {
+    showSingleChoiceModal(Config.MY_SHOWS_RECENTS_OPTIONS, settings.myRecentsAmount, { it.toString() }) {
       viewModel.setRecentShowsAmount(it)
     }
   }

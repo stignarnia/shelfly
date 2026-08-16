@@ -249,7 +249,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
    * @param currentSchedule The currently selected backup export schedule.
    */
   private fun showScheduleDialog(currentSchedule: BackupExportSchedule) =
-    showSingleChoiceDialog(
+    showSingleChoiceModal(
       options = BackupExportSchedule.entries,
       selected = currentSchedule,
       label = { getString(it.stringRes) },
