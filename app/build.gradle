@@ -99,6 +99,37 @@ android {
   namespace 'xyz.stignarnia.shelfly'
 }
 
+// Debug APKs are copied onto a device by hand rather than installed over adb,
+// so each one has to look newer than whatever is already sitting there.
+//
+// The stamp has to *increase*, it cannot just be unique: versionCode is an int
+// and Android refuses to install a lower one over a higher one, so a random
+// value would fail as soon as it landed below the installed build. Seconds
+// since the epoch is monotonic and stays inside Integer.MAX until 2038.
+//
+// Read through a ValueSource, not directly: with the configuration cache on, a
+// value computed while configuring is stored in the cache entry and replayed,
+// which would hand every later build the same stamp.
+androidComponents {
+  onVariants(selector().withBuildType("debug")) { variant ->
+    def releaseName = versions.versionName
+    def stamp = providers.of(BuildStamp) {}
+    variant.outputs.each { output ->
+      output.versionCode.set(stamp.map { it.intValue() })
+      output.versionName.set(stamp.map { "$releaseName-debug-$it".toString() })
+    }
+  }
+}
+
+abstract class BuildStamp
+  implements org.gradle.api.provider.ValueSource<Long, org.gradle.api.provider.ValueSourceParameters.None> {
+
+  @Override
+  Long obtain() {
+    return System.currentTimeMillis().intdiv(1000)
+  }
+}
+
 dependencies {
   implementation project(':common')
   implementation project(':data-remote')
