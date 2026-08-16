@@ -26,6 +26,8 @@
   <string name="textSettingsShowsNotificationsSummary">Получать уведомления о новых фильмах, эпизодах, сезонах для сериалов, на которые вы подписаны.</string>
   <string name="textSettingsShowsNotificationsRationale">Пожалуйста, предоставьте приложению разрешение на отображение уведомлений.\n\nХотели бы вы сделать это сейчас?</string>
   <string name="textSettingsMisc">Прочее</string>
+  <string name="textSettingsContactDevsTitle">Связаться с разработчиками</string>
+  <string name="textSettingsContactDevsSummary">Возникли проблемы или есть предложения? Создайте issue на GitHub.</string>
   <string name="textSettingsDeleteCacheTitle">Очистить кеш изображений</string>
   <string name="textSettingsDeleteCacheSummary">Нажмите, чтобы очистить кэш локальных изображений. Это может помочь, если изображения загружаются некорректно.</string>
   <string name="textSettingsQuickSyncConfirmationTitle">Отключить автоматическую синхронизацию</string>

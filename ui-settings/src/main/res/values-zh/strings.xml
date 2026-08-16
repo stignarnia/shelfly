@@ -26,6 +26,8 @@
   <string name="textSettingsShowsNotificationsSummary">接到关于您正在关注电影、剧集的更新通知。</string>
   <string name="textSettingsShowsNotificationsRationale">请授予应用程序显示通知的权限。\n\n您想现在就启用吗？</string>
   <string name="textSettingsMisc">杂项</string>
+  <string name="textSettingsContactDevsTitle">联系开发者</string>
+  <string name="textSettingsContactDevsSummary">遇到了问题或有建议？在 GitHub 上提交 Issue。</string>
   <string name="textSettingsDeleteCacheTitle">清理图片缓存</string>
   <string name="textSettingsDeleteCacheSummary">点击清除本地图片缓存。如果显示图片未正确加载，这可能会有帮助。</string>
   <string name="textSettingsQuickSyncConfirmationTitle">禁用自动同步</string>

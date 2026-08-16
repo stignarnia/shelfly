@@ -26,6 +26,8 @@
   <string name="textSettingsShowsNotificationsSummary">Receber notificações sobre novos filmes, episódios, temporadas para séries que você está seguindo.</string>
   <string name="textSettingsShowsNotificationsRationale">Por favor, conceda permissão à aplicação para exibir notificações.\n\nGostaria de fazê-lo agora?</string>
   <string name="textSettingsMisc">Outros</string>
+  <string name="textSettingsContactDevsTitle">Contactar programadores</string>
+  <string name="textSettingsContactDevsSummary">Tem um problema ou sugestão? Abra um issue no GitHub.</string>
   <string name="textSettingsDeleteCacheTitle">Limpar cache de imagens</string>
   <string name="textSettingsDeleteCacheSummary">Clique para limpar o cache de imagens locais. Isso pode ajudar se imagens não estão sendo carregadas corretamente.</string>
   <string name="textSettingsQuickSyncConfirmationTitle">Desativar a sincronização automática</string>

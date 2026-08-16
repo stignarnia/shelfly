@@ -17,6 +17,24 @@
     />
 
   <LinearLayout
+    android:id="@+id/settingsContactDevs"
+    style="@style/Settings.ItemLayout"
+    android:layout_width="match_parent"
+    >
+
+    <TextView
+      style="@style/Settings.Title"
+      android:text="@string/textSettingsContactDevsTitle"
+      />
+
+    <TextView
+      style="@style/Settings.Summary"
+      android:text="@string/textSettingsContactDevsSummary"
+      />
+
+  </LinearLayout>
+
+  <LinearLayout
     android:id="@+id/settingsDeleteCache"
     style="@style/Settings.ItemLayout"
     android:layout_width="match_parent"

@@ -26,6 +26,8 @@
   <string name="textSettingsShowsNotificationsSummary">Modtag notifikationer om nye film, afsnit, sæsoner for serier du følger.</string>
   <string name="textSettingsShowsNotificationsRationale">Giv venligst applikationen tilladelse til at vise notifikationer.\n\nVil du gerne gøre det nu?</string>
   <string name="textSettingsMisc">Diverse</string>
+  <string name="textSettingsContactDevsTitle">Kontakt udviklerne</string>
+  <string name="textSettingsContactDevsSummary">Har du et problem eller feedback? Opret et issue på GitHub.</string>
   <string name="textSettingsDeleteCacheTitle">Ryd Billede Cache</string>
   <string name="textSettingsDeleteCacheSummary">Klik for at rydde den lokale cache for billeder. Dette kan hjælpe hvis billeder ikke bliver indlæst korrekt.</string>
   <string name="textSettingsQuickSyncConfirmationTitle">Deaktiver Automatisk Synkronisering</string>

@@ -15,6 +15,7 @@ object Config {
 
   const val JUST_WATCH_URL = "https://www.justwatch.com/"
   const val TMDB_URL = "https://www.themoviedb.org/"
+  const val GITHUB_ISSUES_URL = "https://github.com/stignarnia/shelfly/issues"
 
   const val MAIN_GRID_SPAN = 3
   const val MAIN_GRID_SPAN_TABLET = 6

@@ -36,6 +36,7 @@ class SettingsMiscFragment : BaseFragment<SettingsMiscViewModel>(R.layout.fragme
 
   private fun setupView() {
     with(binding) {
+      settingsContactDevs.onClick { openWebLink(Config.GITHUB_ISSUES_URL) }
       settingsDeleteCache.onClick { viewModel.deleteImagesCache(requireAppContext()) }
 
       settingsTmdbIcon.onClick { openWebLink(Config.TMDB_URL) }
