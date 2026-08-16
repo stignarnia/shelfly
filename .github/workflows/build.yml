@@ -81,8 +81,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
 
-      # Optional. Without these secrets the release APK still builds, just
-      # unsigned - the debug APK below is always installable regardless.
+      # Optional. Without these secrets the release APK still builds, just unsigned
       # The guard lives in the shell because the secrets context is not
       # available to a step-level "if", which fails the workflow at parse time.
       - name: Decode signing keystore
@@ -103,18 +102,8 @@ jobs:
           keyPassword=$KEY_PASSWORD
           EOF
 
-      - name: Build debug APK
-        run: ./gradlew :app:assembleDebug
-
       - name: Build release APK
         run: ./gradlew :app:assembleRelease
-
-      - name: Upload debug APK
-        uses: actions/upload-artifact@v7
-        with:
-          name: app-debug-${{ github.sha }}
-          path: app/build/outputs/apk/debug/*.apk
-          retention-days: 30
 
       - name: Upload release APK
         uses: actions/upload-artifact@v7
