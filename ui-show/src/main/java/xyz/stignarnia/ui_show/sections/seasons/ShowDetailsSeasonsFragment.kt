@@ -2,11 +2,9 @@ package xyz.stignarnia.ui_show.sections.seasons
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stignarnia.repository.settings.SettingsViewModeRepository
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.common.WidgetsProvider
@@ -165,8 +163,7 @@ class ShowDetailsSeasonsFragment : BaseFragment<ShowDetailsSeasonsViewModel>(R.l
     val view = QuickSetupView(context).apply {
       bind(seasons)
     }
-    MaterialAlertDialogBuilder(context, R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(context, R.drawable.bg_dialog))
+    dialog()
       .setView(view)
       .setPositiveButton(R.string.textSelect) { _, _ -> viewModel.onQuickProgressSelected(view.getSelectedItem()) }
       .setNegativeButton(R.string.textCancel) { _, _ -> }

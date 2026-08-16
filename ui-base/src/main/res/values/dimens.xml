@@ -70,6 +70,10 @@
   <dimen name="commentViewSpace">16dp</dimen>
   <dimen name="tutorialTipSize">28dp</dimen>
   <dimen name="tutorialTipMargin">32dp</dimen>
+
+  <!-- Shared by the tip ("?") popup and by @style/AlertDialog, which is modelled
+       on it, so the two read as the same surface. -->
+  <dimen name="popupCornerRadius">16dp</dimen>
   <dimen name="scrollBarWidth">3dp</dimen>
   <dimen name="rateValueTranslation">80dp</dimen>
 

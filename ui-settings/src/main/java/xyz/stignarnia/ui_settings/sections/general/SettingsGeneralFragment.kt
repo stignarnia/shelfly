@@ -2,9 +2,7 @@ package xyz.stignarnia.ui_settings.sections.general
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jakewharton.processphoenix.ProcessPhoenix
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.extensions.nowUtc
@@ -174,164 +172,79 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
     }
   }
 
-  private fun showThemeDialog(theme: AppTheme) {
-    val options = AppTheme.entries
-    val selected = options.indexOf(theme)
+  private fun showThemeDialog(theme: AppTheme) =
+    showSingleChoiceDialog(AppTheme.entries, theme, { getString(it.displayName) }) {
+      if (it != theme) viewModel.setTheme(it)
+    }
 
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(options.map { getString(it.displayName) }.toTypedArray(), selected) { dialog, index ->
-        if (index != selected) {
-          viewModel.setTheme(options[index])
-        }
-        dialog.dismiss()
-      }.show()
-  }
-
-  private fun showLanguageDialog(language: AppLanguage) {
-    val options = AppLanguage.values()
-    val selected = options.indexOf(language)
-
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(options.map { getString(it.displayName) }.toTypedArray(), selected) { dialog, index ->
-        if (index != selected) {
-          viewModel.setLanguage(options[index])
-        }
-        dialog.dismiss()
-      }.show()
-  }
+  private fun showLanguageDialog(language: AppLanguage) =
+    showSingleChoiceDialog(AppLanguage.entries, language, { getString(it.displayName) }) {
+      if (it != language) viewModel.setLanguage(it)
+    }
 
   private fun showProgressUpcomingDialog(days: Long) {
     val options = Config.PROGRESS_UPCOMING_OPTIONS
-    val selected = options.indexOfFirst { it.toLong() == days }
+    val selected = options.firstOrNull { it.toLong() == days }
 
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(
-        options
-          .map {
-            if (it == 0) {
-              getString(
-                R.string.textDisabled,
-              )
-            } else {
-              getString(R.string.textDays, it)
-            }
-          }.toTypedArray(),
-        selected,
-      ) { dialog, index ->
-        if (index != selected) {
-          viewModel.setProgressUpcomingDays(options[index].toLong())
-        }
-        dialog.dismiss()
-      }.show()
-  }
-
-  private fun showTabletColumnsDialog(columns: Int) {
-    val options = arrayOf(1, 2)
-    val selected = options.indexOf(columns)
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(options.map { it.toString() }.toTypedArray(), selected) { dialog, index ->
-        if (index != selected) {
-          viewModel.setTabletColumns(options[index])
-        }
-        dialog.dismiss()
-      }.show()
-  }
-
-  private fun showCountryDialog(country: AppCountry) {
-    val options = AppCountry.values()
-    val selected = options.indexOf(country)
-
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(options.map { it.displayName }.toTypedArray(), selected) { dialog, index ->
-        if (index != selected) {
-          viewModel.setCountry(options[index])
-        }
-        dialog.dismiss()
-      }.show()
-  }
-
-  private fun showProgressTypeDialog(type: ProgressNextEpisodeType) {
-    val options = ProgressNextEpisodeType.values()
-    val displayOptions = options.map {
-      val option = when (it) {
-        LAST_WATCHED -> R.string.textNextEpisodeLastWatched
-        OLDEST -> R.string.textNextEpisodeOldest
-      }
-      getString(option)
+    showSingleChoiceDialog(options, selected, {
+      if (it == 0) getString(R.string.textDisabled) else getString(R.string.textDays, it)
+    }) {
+      if (it != selected) viewModel.setProgressUpcomingDays(it.toLong())
     }
-    val selected = options.indexOf(type)
-
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(displayOptions.toTypedArray(), selected) { dialog, index ->
-        if (index != selected) {
-          viewModel.setProgressType(options[index])
-        }
-        dialog.dismiss()
-      }.show()
   }
 
-  private fun showDateSelectionTypeDialog(type: ProgressDateSelectionType) {
-    val options = ProgressDateSelectionType.values()
-    val displayOptions = options.map {
-      val option = when (it) {
-        ALWAYS_ASK -> R.string.textDateSelectionAsk
-        NOW -> R.string.textDateSelectionNow
-      }
-      getString(option)
+  private fun showTabletColumnsDialog(columns: Int) =
+    showSingleChoiceDialog(listOf(1, 2), columns, { it.toString() }) {
+      if (it != columns) viewModel.setTabletColumns(it)
     }
-    val selected = options.indexOf(type)
 
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(displayOptions.toTypedArray(), selected) { dialog, index ->
-        if (index != selected) {
-          viewModel.setDateSelectionType(options[index])
-        }
-        dialog.dismiss()
-      }.show()
-  }
+  private fun showCountryDialog(country: AppCountry) =
+    showSingleChoiceDialog(AppCountry.entries, country, { it.displayName }) {
+      if (it != country) viewModel.setCountry(it)
+    }
+
+  private fun showProgressTypeDialog(type: ProgressNextEpisodeType) =
+    showSingleChoiceDialog(ProgressNextEpisodeType.entries, type, {
+      getString(
+        when (it) {
+          LAST_WATCHED -> R.string.textNextEpisodeLastWatched
+          OLDEST -> R.string.textNextEpisodeOldest
+        },
+      )
+    }) {
+      if (it != type) viewModel.setProgressType(it)
+    }
+
+  private fun showDateSelectionTypeDialog(type: ProgressDateSelectionType) =
+    showSingleChoiceDialog(ProgressDateSelectionType.entries, type, {
+      getString(
+        when (it) {
+          ALWAYS_ASK -> R.string.textDateSelectionAsk
+          NOW -> R.string.textDateSelectionNow
+        },
+      )
+    }) {
+      if (it != type) viewModel.setDateSelectionType(it)
+    }
 
   private fun showDateFormatDialog(
     format: AppDateFormat,
     language: AppLanguage,
+  ) = showSingleChoiceDialog(
+    options = AppDateFormat.entries,
+    selected = format,
+    label = { DateFormatProvider.loadSettingsFormat(it, language.code).format(nowUtc().toLocalZone()) },
+    style = R.style.AlertDialog_SmallText,
   ) {
-    val options = AppDateFormat.values()
-    val selected = options.indexOf(format)
-
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog_SmallText)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(
-        options
-          .map {
-            DateFormatProvider.loadSettingsFormat(it, language.code).format(nowUtc().toLocalZone())
-          }.toTypedArray(),
-        selected,
-      ) { dialog, index ->
-        if (index != selected) {
-          viewModel.setDateFormat(options[index], requireAppContext())
-        }
-        dialog.dismiss()
-      }.show()
+    if (it != format) viewModel.setDateFormat(it, requireAppContext())
   }
 
   private fun showRecentShowsDialog(settings: Settings?) {
     if (settings == null) return
 
-    val options = Config.MY_SHOWS_RECENTS_OPTIONS.map { it.toString() }.toTypedArray()
-    val default = options.indexOf(settings.myRecentsAmount.toString())
-
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(options, default) { dialog, index ->
-        viewModel.setRecentShowsAmount(options[index].toInt())
-        dialog.dismiss()
-      }.show()
+    showSingleChoiceDialog(Config.MY_SHOWS_RECENTS_OPTIONS, settings.myRecentsAmount, { it.toString() }) {
+      viewModel.setRecentShowsAmount(it)
+    }
   }
 
   private fun restartApp() {

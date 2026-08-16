@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The entrance of the tip ("?") popup, expressed as a window animation so every
+  dialog gets it: the card starts a third of a screen low and rises past its
+  resting place before settling, while the scrim fades in underneath.
+-->
+<set
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <translate
+    android:duration="400"
+    android:fromYDelta="33%p"
+    android:interpolator="@interpolator/overshoot_soft"
+    android:toYDelta="0%p"
+    />
+  <alpha
+    android:duration="150"
+    android:fromAlpha="0.0"
+    android:interpolator="@android:anim/decelerate_interpolator"
+    android:toAlpha="1.0"
+    />
+</set>

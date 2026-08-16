@@ -9,7 +9,6 @@ import androidx.annotation.StringRes
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import xyz.stignarnia.ui_backup.R
 import xyz.stignarnia.ui_backup.databinding.FragmentBackupImportBinding
@@ -209,7 +208,7 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
       return
     }
 
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
+    dialog()
       .setTitle(R.string.textBackupWebDavPick)
       .setItems(backups.fileNames.toTypedArray()) { dialog, index ->
         viewModel.runWebDavImport(backups.fileNames[index])

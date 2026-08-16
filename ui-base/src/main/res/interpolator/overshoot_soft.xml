@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stands in for the spring TipOverlayView runs its card on. That spring is
+  underdamped at a ratio of 0.65, which overshoots its target by roughly 7%
+  before settling; this tension is the closest tween equivalent.
+-->
+<overshootInterpolator
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:tension="1.2"
+  />

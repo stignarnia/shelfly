@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
@@ -127,7 +125,7 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
       },
     )
 
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
+    dialog()
       .setTitle(R.string.textSettingsWebDavTitle)
       .setMessage(R.string.textSettingsWebDavDialogMessage)
       .setView(inputBinding.root)
@@ -153,7 +151,7 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
     val inputBinding = ViewRetentionInputBinding.inflate(LayoutInflater.from(requireContext()))
     inputBinding.retentionInput.setText(current.toString())
 
-    val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
+    val retentionDialog = dialog()
       .setTitle(R.string.textSettingsBackupRetentionTitle)
       .setMessage(R.string.textSettingsBackupRetentionDescription)
       .setView(inputBinding.root)
@@ -163,8 +161,8 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
 
     // The button is bound after showing so a bad value can be rejected without
     // dismissing the dialog and losing what was typed.
-    dialog.setOnShowListener {
-      dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+    retentionDialog.setOnShowListener {
+      retentionDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
         val typed = inputBinding.retentionInput.text
           ?.toString()
           ?.trim()
@@ -175,24 +173,18 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
           return@setOnClickListener
         }
         viewModel.setBackupRetention(count)
-        dialog.dismiss()
+        retentionDialog.dismiss()
       }
     }
-    dialog.show()
+    retentionDialog.show()
   }
 
-  private fun showTargetDialog() {
-    val options = BackupTarget.entries
-    val current = viewModel.uiState.value.backupTarget
-    val labels = options.map { getString(it.displayName()) }.toTypedArray()
-
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(labels, options.indexOf(current)) { dialog, index ->
-        viewModel.setBackupTarget(options[index])
-        dialog.dismiss()
-      }.show()
-  }
+  private fun showTargetDialog() =
+    showSingleChoiceDialog(
+      options = BackupTarget.entries,
+      selected = viewModel.uiState.value.backupTarget,
+      label = { getString(it.displayName()) },
+    ) { viewModel.setBackupTarget(it) }
 
   private fun BackupTarget.displayName() =
     when (this) {

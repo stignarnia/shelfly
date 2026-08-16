@@ -8,9 +8,7 @@ import android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS
 import android.provider.Settings.EXTRA_APP_PACKAGE
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.utilities.events.Event
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
@@ -55,17 +53,12 @@ class SettingsNotificationsFragment :
     }
   }
 
-  private fun showWhenToNotifyDialog(settings: Settings) {
-    val options = NotificationDelay.values()
-    val default = options.indexOf(settings.episodesNotificationsDelay)
-
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(options.map { getString(it.stringRes) }.toTypedArray(), default) { dialog, index ->
-        viewModel.setWhenToNotify(options[index])
-        dialog.dismiss()
-      }.show()
-  }
+  private fun showWhenToNotifyDialog(settings: Settings) =
+    showSingleChoiceDialog(
+      options = NotificationDelay.entries,
+      selected = settings.episodesNotificationsDelay,
+      label = { getString(it.stringRes) },
+    ) { viewModel.setWhenToNotify(it) }
 
   private fun render(uiState: SettingsNotificationsUiState) {
     uiState.run {
@@ -101,8 +94,7 @@ class SettingsNotificationsFragment :
   private fun showNotificationsRationaleDialog() {
     val context = requireContext()
     val view = NotificationsRationaleView(context)
-    MaterialAlertDialogBuilder(context, R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(context, R.drawable.bg_dialog))
+    dialog()
       .setView(view)
       .setPositiveButton(R.string.textYes) { _, _ ->
         requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)

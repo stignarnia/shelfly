@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.activity.result.contract.ActivityResultContracts.OpenDocumentTree
-import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import xyz.stignarnia.common.extensions.dateFromMillis
 import xyz.stignarnia.common.extensions.toLocalZone
@@ -250,33 +248,30 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
    *
    * @param currentSchedule The currently selected backup export schedule.
    */
-  private fun showScheduleDialog(currentSchedule: BackupExportSchedule) {
-    val options = BackupExportSchedule.entries
-    val optionsStrings = options.map { getString(it.stringRes) }.toTypedArray()
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
-      .setSingleChoiceItems(optionsStrings, options.indexOf(currentSchedule)) { dialog, index ->
-        val newSchedule = options[index]
-        when {
-          newSchedule == BackupExportSchedule.OFF -> {
-            // Nothing to write to, so no folder is needed.
-            viewModel.saveExportBackupScheduleOff()
-            showSnack(MessageEvent.Info(newSchedule.confirmationStringRes))
-          }
-
-          viewModel.isWebDavTarget() -> {
-            // The destination is the configured server URL - there is no folder
-            // to pick, so skip the picker entirely.
-            viewModel.saveExportBackupSchedule(newSchedule)
-            showSnack(MessageEvent.Info(newSchedule.confirmationStringRes))
-          }
-
-          else -> {
-            selectedSchedule = newSchedule
-            createFolderContract.launch(null)
-          }
+  private fun showScheduleDialog(currentSchedule: BackupExportSchedule) =
+    showSingleChoiceDialog(
+      options = BackupExportSchedule.entries,
+      selected = currentSchedule,
+      label = { getString(it.stringRes) },
+    ) { newSchedule ->
+      when {
+        newSchedule == BackupExportSchedule.OFF -> {
+          // Nothing to write to, so no folder is needed.
+          viewModel.saveExportBackupScheduleOff()
+          showSnack(MessageEvent.Info(newSchedule.confirmationStringRes))
         }
-        dialog.dismiss()
-      }.show()
-  }
+
+        viewModel.isWebDavTarget() -> {
+          // The destination is the configured server URL - there is no folder
+          // to pick, so skip the picker entirely.
+          viewModel.saveExportBackupSchedule(newSchedule)
+          showSnack(MessageEvent.Info(newSchedule.confirmationStringRes))
+        }
+
+        else -> {
+          selectedSchedule = newSchedule
+          createFolderContract.launch(null)
+        }
+      }
+    }
 }

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -19,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.repository.settings.SettingsViewModeRepository
 import xyz.stignarnia.ui_base.BaseFragment
@@ -242,8 +240,7 @@ class ListDetailsFragment :
   }
 
   private fun openDeleteDialog() {
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-      .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
+    dialog()
       .setTitle(R.string.textConfirmDeleteListTitle)
       .setMessage(R.string.textConfirmDeleteListSubtitle)
       .setPositiveButton(R.string.textYes) { _, _ ->

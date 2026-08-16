@@ -111,11 +111,47 @@
 
   <!-- Dialogs -->
 
+  <!--
+    Dialogs are the tip ("?") popup in dialog form: the same dark surface and
+    corner radius, the same filled accent confirm, the same rise-and-settle
+    entrance over a heavy scrim.
+
+    colorPrimary has to stay the accent so controls inside a dialog are tinted
+    like the rest of the app, but Material3 also feeds colorPrimary to
+    elevationOverlayColor - that overlay on the raised dialog surface is what
+    used to wash it red. Pinning the overlay to the surface colour keeps the
+    accent and drops the tint.
+  -->
   <style name="AlertDialog" parent="@style/Theme.Material3.Dark.Dialog">
     <item name="colorAccent">@color/colorAccent</item>
     <item name="colorPrimary">@color/colorAccent</item>
+    <item name="elevationOverlayColor">@color/colorPrimary</item>
+    <item name="alertDialogStyle">@style/AlertDialog.Surface</item>
+    <item name="buttonBarPositiveButtonStyle">@style/AlertDialog.PositiveButton</item>
     <item name="buttonBarNegativeButtonStyle">@style/AlertDialog.NegativeButton</item>
+    <item name="android:backgroundDimAmount">0.7</item>
+    <item name="android:windowAnimationStyle">@style/AlertDialog.Animation</item>
   </style>
+
+  <!--
+    MaterialAlertDialogBuilder builds the window background from this style, so
+    the surface colour and the corners are set here rather than per call site.
+  -->
+  <style name="AlertDialog.Surface" parent="MaterialAlertDialog.Material3">
+    <item name="backgroundTint">@color/colorPrimary</item>
+    <item name="shapeAppearanceOverlay">@style/AlertDialog.Shape</item>
+  </style>
+
+  <style name="AlertDialog.Shape" parent="">
+    <item name="cornerSize">@dimen/popupCornerRadius</item>
+  </style>
+
+  <style name="AlertDialog.Animation" parent="">
+    <item name="android:windowEnterAnimation">@anim/anim_dialog_enter</item>
+    <item name="android:windowExitAnimation">@anim/anim_dialog_exit</item>
+  </style>
+
+  <style name="AlertDialog.PositiveButton" parent="PrimaryMaterialButton" />
 
   <style name="AlertDialog.NegativeButton" parent="Widget.Material3.Button.TextButton.Dialog">
     <item name="android:textColor">@color/colorGrayLight</item>

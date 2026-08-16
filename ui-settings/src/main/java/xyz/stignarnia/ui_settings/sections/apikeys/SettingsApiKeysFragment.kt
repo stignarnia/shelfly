@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
@@ -64,7 +63,7 @@ class SettingsApiKeysFragment : BaseFragment<SettingsApiKeysViewModel>(R.layout.
     val inputBinding = ViewApiKeyInputBinding.inflate(LayoutInflater.from(requireContext()))
     inputBinding.apiKeyInput.setText(currentKey)
 
-    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
+    dialog()
       .setTitle(titleResId)
       .setMessage(messageResId)
       .setView(inputBinding.root)
