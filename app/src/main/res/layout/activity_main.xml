@@ -11,9 +11,13 @@
   tools:context=".ui.main.MainActivity"
   >
 
+  <!--
+    Deliberately empty: the navigation host is added in code once the welcome
+    flow is done, so its start destination cannot load and draw behind screens
+    the user has not answered yet.
+  -->
   <androidx.fragment.app.FragmentContainerView
     android:id="@+id/navigationHost"
-    android:name="androidx.navigation.fragment.NavHostFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     />
@@ -125,17 +129,16 @@
     tools:visibility="visible"
     />
 
-  <xyz.stignarnia.shelfly.ui.views.welcome.WelcomeView
-    android:id="@+id/welcomeView"
+  <ViewStub
+    android:id="@+id/welcomeViewStub"
     android:layout_width="0dp"
     android:layout_height="0dp"
-    android:translationZ="13dp"
-    android:visibility="gone"
+    android:inflatedId="@+id/welcomeView"
+    android:layout="@layout/view_welcome_host"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:visibility="visible"
     />
 
   <ProgressBar

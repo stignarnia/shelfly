@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
+import android.view.ViewTreeObserver
 import android.view.animation.DecelerateInterpolator
 import androidx.activity.SystemBarStyle
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
@@ -23,6 +24,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.work.WorkManager
 import xyz.stignarnia.common.Mode
@@ -35,6 +37,7 @@ import xyz.stignarnia.shelfly.ui.BaseActivity
 import xyz.stignarnia.shelfly.ui.main.delegates.MainTipsDelegate
 import xyz.stignarnia.shelfly.ui.main.delegates.TipsDelegate
 import xyz.stignarnia.shelfly.ui.main.welcome.WelcomeState
+import xyz.stignarnia.shelfly.ui.views.welcome.WelcomeView
 import xyz.stignarnia.shelfly.utilities.deeplink.DeepLinkResolver
 import xyz.stignarnia.ui_settings.sections.backup.SettingsBackupFragment
 import xyz.stignarnia.ui_base.common.OnShowsMoviesSyncedListener
@@ -50,7 +53,6 @@ import xyz.stignarnia.ui_base.utilities.NavigationHost
 import xyz.stignarnia.ui_base.utilities.SnackbarHost
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
-import xyz.stignarnia.ui_base.utilities.extensions.fadeIn
 import xyz.stignarnia.ui_base.utilities.extensions.fadeOut
 import xyz.stignarnia.ui_base.utilities.extensions.gone
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
@@ -81,6 +83,11 @@ class MainActivity :
   private val viewModel by viewModels<MainViewModel>()
   private lateinit var binding: ActivityMainBinding
 
+  private var welcomeView: WelcomeView? = null
+  private var isNavigationAttached = false
+  private var isFirstFrameReady = false
+  private var pendingIntent: Intent? = null
+
   private val navigationHeight by lazy { dimenToPx(R.dimen.bottomNavigationHeight) }
   private val navigationPadding by lazy { dimenToPx(R.dimen.spaceMedium) }
   private val decelerateInterpolator by lazy { DecelerateInterpolator(2F) }
@@ -103,8 +110,8 @@ class MainActivity :
 
     registerTipsDelegate(viewModel, binding)
 
+    holdFirstFrame()
     setupViewModel()
-    setupNavigation()
     setupView()
     setupNetworkObserver()
 
@@ -124,6 +131,17 @@ class MainActivity :
 
   override fun onNewIntent(intent: Intent?) {
     super.onNewIntent(intent)
+    // Every one of these ends up at the navigation controller, and there is none
+    // while the welcome flow owns the screen. The intent waits for it instead of
+    // being dropped.
+    if (!isNavigationAttached) {
+      pendingIntent = intent
+      return
+    }
+    handleIntent(intent)
+  }
+
+  private fun handleIntent(intent: Intent?) {
     handleAppShortcut(intent)
     handleNotification(intent?.extras) { hideNavigation(false) }
     handleDeepLink(intent)
@@ -156,12 +174,55 @@ class MainActivity :
       bottomMenuView.isModeMenuEnabled = hasMoviesEnabled()
       bottomMenuView.onModeSelected = { setMode(it) }
       viewMask.onClick { /* NOOP */ }
-      with(welcomeView) {
-        onPrimaryClick = { viewModel.onWelcomePrimary() }
-        onSecondaryClick = { viewModel.onWelcomeSecondary() }
-        onBackClick = { viewModel.onWelcomeBack() }
-        onApiKeyChanged = { viewModel.onApiKeyDraftChanged(it) }
-      }
+    }
+  }
+
+  /**
+   * Nothing is drawn until the welcome flow knows whether it has anything to
+   * show. Building its queue costs a database read, and drawing before it is
+   * back puts the main UI on screen for a frame or two, only for the first step
+   * to cover it - which is what made the flow look like an overlay rather than
+   * the entry point it is. The launch window stays up in the meantime.
+   */
+  private fun holdFirstFrame() {
+    val root = binding.root
+    root.viewTreeObserver.addOnPreDrawListener(
+      object : ViewTreeObserver.OnPreDrawListener {
+        override fun onPreDraw(): Boolean {
+          if (!isFirstFrameReady) return false
+          root.viewTreeObserver.removeOnPreDrawListener(this)
+          return true
+        }
+      },
+    )
+  }
+
+  /**
+   * The navigation host is created here rather than at inflation, so that on a
+   * launch that opens with the welcome flow the main UI is never built - let
+   * alone loaded - behind it.
+   *
+   * On a configuration change the fragment manager has already restored it, and
+   * restoring is what [setupNavigation] expects, so it is only added when
+   * genuinely absent.
+   */
+  private fun attachNavigation() {
+    if (isNavigationAttached) return
+    isNavigationAttached = true
+    if (findNavHostFragment() == null) {
+      supportFragmentManager
+        .beginTransaction()
+        .replace(R.id.navigationHost, NavHostFragment(), null)
+        .commitNow()
+    }
+    setupNavigation()
+    // The start destination is added through the child manager on a posted
+    // commit. Running it here means the frame released next has the destination
+    // in it rather than an empty container.
+    findNavHostFragment()?.childFragmentManager?.executePendingTransactions()
+    pendingIntent?.let {
+      pendingIntent = null
+      handleIntent(it)
     }
   }
 
@@ -312,12 +373,16 @@ class MainActivity :
         showMask.let {
           viewMask.visibleIf(it)
         }
-        renderWelcome(welcome)
-        showDiscover?.let {
-          if (it.consume() == true) navigateToDiscover()
-        }
+        renderWelcome(welcome, isWelcomeResolved)
         requestNotifications?.let {
           if (it.consume() == true) requestNotificationsPermission()
+        }
+        // The rest need somewhere to navigate to. Left unconsumed until there
+        // is - renderWelcome attaches it as the flow ends, so a step that asked
+        // for one of these is honoured on this same pass.
+        if (!isNavigationAttached) return@run
+        showDiscover?.let {
+          if (it.consume() == true) navigateToDiscover()
         }
         openSettings?.let {
           if (it.consume() == true) navigateToWebDavSetup()
@@ -376,16 +441,36 @@ class MainActivity :
    * after a configuration change - including the restart that applying a new
    * locale triggers midway through the flow.
    */
-  private fun renderWelcome(state: WelcomeState?) {
-    with(binding.welcomeView) {
-      if (state == null) {
-        if (isVisible) fadeOut()
-        return
+  private fun renderWelcome(
+    state: WelcomeState?,
+    isResolved: Boolean,
+  ) {
+    // A null step means "nothing left to show" only once the queue exists;
+    // before that it just means the answer is still on its way.
+    if (!isResolved) return
+    if (state == null) {
+      attachNavigation()
+      welcomeView?.let { if (it.isVisible) it.fadeOut() }
+    } else {
+      with(welcomeView()) {
+        render(state)
+        // Not faded in: on the launch it opens it is the first thing on screen,
+        // and there is nothing underneath for it to arrive on top of.
+        visible()
       }
-      render(state)
-      if (!isVisible) fadeIn()
     }
+    isFirstFrameReady = true
   }
+
+  /** Inflated on demand, so a launch with no steps due never builds it at all. */
+  private fun welcomeView(): WelcomeView =
+    welcomeView ?: (binding.welcomeViewStub.inflate() as WelcomeView).apply {
+      onPrimaryClick = { viewModel.onWelcomePrimary() }
+      onSecondaryClick = { viewModel.onWelcomeSecondary() }
+      onBackClick = { viewModel.onWelcomeBack() }
+      onApiKeyChanged = { viewModel.onApiKeyDraftChanged(it) }
+      welcomeView = this
+    }
 
   @SuppressLint("MissingSuperCall")
   override fun onSaveInstanceState(outState: Bundle) {

@@ -48,6 +48,7 @@ class MainViewModel @Inject constructor(
   private val loadingState = MutableStateFlow(false)
   private val maskState = MutableStateFlow(false)
   private val welcomeState = MutableStateFlow<WelcomeState?>(null)
+  private val welcomeResolvedState = MutableStateFlow(false)
   private val showDiscoverEvent = MutableStateFlow<Event<Boolean>?>(null)
   private val requestNotificationsEvent = MutableStateFlow<Event<Boolean>?>(null)
   private val openSettingsEvent = MutableStateFlow<Event<Boolean>?>(null)
@@ -70,11 +71,17 @@ class MainViewModel @Inject constructor(
     if (isInitialized) return
     isInitialized = true
     viewModelScope.launch {
-      val isInitialRun = checkInitialRun()
-      with(initCase) {
-        saveInstallTimestamp()
+      try {
+        val isInitialRun = checkInitialRun()
+        with(initCase) {
+          saveInstallTimestamp()
+        }
+        startWelcomeFlow(isInitialRun)
+      } finally {
+        // The first frame is held until this flips, so a failure above has to
+        // release it too rather than leave the app on the launch window.
+        welcomeResolvedState.value = true
       }
-      startWelcomeFlow(isInitialRun)
     }
   }
 
@@ -122,6 +129,10 @@ class MainViewModel @Inject constructor(
   private fun finishWelcomeFlow() {
     if (!isFirstRunFlow) return
     isFirstRunFlow = false
+    // Discover is only where a first run lands by default. A user who asked for
+    // the sync setup on the way out has already said where they want to be, and
+    // this would otherwise be navigated straight over the top of it.
+    if (openSettingsEvent.value != null) return
     showDiscoverEvent.value = Event(true)
   }
 
@@ -260,6 +271,7 @@ class MainViewModel @Inject constructor(
   }
 
   val uiState = combine(
+    welcomeResolvedState,
     welcomeState,
     showDiscoverEvent,
     requestNotificationsEvent,
@@ -267,16 +279,16 @@ class MainViewModel @Inject constructor(
     openLinkEvent,
     loadingState,
     maskState,
-  ) { welcome, discover, notifications, settings, link, loading, mask ->
+  ) { welcomeResolved, welcome, discover, notifications, settings, link, loading, mask ->
     MainUiState(
+      isWelcomeResolved = welcomeResolved,
       welcome = welcome,
       showDiscover = discover,
       requestNotifications = notifications,
       openSettings = settings,
       openLink = link,
       isLoading = loading,
-      // Derived: the flow is modal for as long as a step is on screen.
-      showMask = mask || welcome != null,
+      showMask = mask,
     )
   }.stateIn(
     scope = viewModelScope,

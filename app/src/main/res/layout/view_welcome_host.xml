@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Wraps the welcome view so it can sit behind a ViewStub in activity_main:
+  a launch with no steps due never inflates it at all.
+-->
+<xyz.stignarnia.shelfly.ui.views.welcome.WelcomeView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/welcomeView"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:translationZ="13dp"
+  />

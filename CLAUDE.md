@@ -71,3 +71,13 @@ refactor(ui): replace MaterialAlertDialogBuilder with unified ModalView
 
 - **Always update all languages**: When adding, modifying, or removing string resources, always check and update all locale folders (`res/values-*/strings.xml`) across the modules, not just the default English `res/values/strings.xml`. Ensure consistent and accurate translations across all supported languages.
 
+---
+
+## Release Notes
+
+`app/src/main/assets/release_notes.txt` is shown to users in the What's New screen. It is part of "done", not a release-time chore.
+
+- **Update it with any user-visible change**: new features, fixed bugs, changed behaviour. Purely internal work (refactors, tooling, tests) does not belong there.
+- **Keep the heading in sync with the version**: the first line is `Shelfly <versionName>`, matching `versions.gradle`. When the version is bumped, start a fresh list under the new heading.
+- **Write for users, not for the diff**: one `•` bullet per change, describing what is different in the app - not which class changed.
+
