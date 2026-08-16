@@ -99,13 +99,14 @@ android {
   namespace 'xyz.stignarnia.shelfly'
 }
 
-// Debug APKs are copied onto a device by hand rather than installed over adb,
-// so each one has to look newer than whatever is already sitting there.
+// Stamps every debug build so consecutive ones can be told apart on the
+// device. Without it they all report the same version and there is no way to
+// see which build is installed.
 //
-// The stamp has to *increase*, it cannot just be unique: versionCode is an int
-// and Android refuses to install a lower one over a higher one, so a random
-// value would fail as soon as it landed below the installed build. Seconds
-// since the epoch is monotonic and stays inside Integer.MAX until 2038.
+// The stamp increases rather than being random: versionCode is an int and
+// Android refuses to install a lower one over a higher one, so a random value
+// would fail as soon as it landed below the installed build. Seconds since the
+// epoch is monotonic and stays inside Integer.MAX until 2038.
 //
 // Read through a ValueSource, not directly: with the configuration cache on, a
 // value computed while configuring is stored in the cache entry and replayed,
