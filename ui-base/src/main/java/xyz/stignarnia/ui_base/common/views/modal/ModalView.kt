@@ -1,6 +1,7 @@
 package xyz.stignarnia.ui_base.common.views.modal
 
 import android.content.Context
+import android.text.method.LinkMovementMethod
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -43,6 +44,7 @@ class ModalView : FrameLayout {
   init {
     layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT)
     setBackgroundResource(R.color.colorBlackTranslucent)
+    binding.modalMessage.movementMethod = LinkMovementMethod.getInstance()
     // Only the scrim gets this: the card is clickable in the layout, so it
     // swallows its own taps rather than letting them fall through to here.
     onClick { dismiss() }

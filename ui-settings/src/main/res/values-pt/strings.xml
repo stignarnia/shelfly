@@ -104,7 +104,7 @@
   <string name="textSettingsBackupTargetWebDav">Servidor WebDAV</string>
   <string name="textSettingsBackupRetentionTitle">Retenção de cópias de segurança</string>
   <string name="textSettingsBackupRetentionDescription">Número de ficheiros de cópias de segurança automáticas a manter no servidor WebDAV</string>
-  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionHint">Número de cópias de segurança (0 mantém todas)</string>
   <string name="textSettingsBackupRetentionKeepAll">Manter todas as cópias</string>
   <string name="textSettingsBackupRetentionValue">Manter as últimas %1$d cópias</string>
   <string name="textSettingsBackupRetentionInvalid">Introduza um número positivo válido</string>
@@ -113,7 +113,7 @@
   <string name="textSettingsApiKeyHint">Cole a sua chave</string>
   <string name="textSettingsTmdbApiKeyTitle">Chave de API do TMDB</string>
   <string name="textSettingsTmdbApiKeyDescription">Obrigatório. Fornece todos os dados de séries e filmes.</string>
-  <string name="textSettingsTmdbApiKeyDialogMessage">Crie uma conta gratuita em themoviedb.org, copie a chave de API (autenticação v3) de Definições → API e cole-a abaixo.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Crie uma conta gratuita em themoviedb.org/settings/api, copie a chave de API (autenticação v3) de Definições → API e cole-a abaixo.</string>
   <string name="textSettingsOmdbApiKeyTitle">Chave de API do OMDb</string>
   <string name="textSettingsOmdbApiKeyDescription">Opcional. Adiciona classificações do IMDb.</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">Solicite uma chave gratuita em omdbapi.com/apikey.aspx, ative-a pelo email e cole-a abaixo.</string>

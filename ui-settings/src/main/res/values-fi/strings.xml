@@ -104,7 +104,7 @@
   <string name="textSettingsBackupTargetWebDav">WebDAV-palvelin</string>
   <string name="textSettingsBackupRetentionTitle">Varmuuskopioiden säilytys</string>
   <string name="textSettingsBackupRetentionDescription">WebDAV-palvelimella säilytettävien automaattisten varmuuskopioiden määrä</string>
-  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionHint">Varmuuskopioiden määrä (0 säilyttää kaikki)</string>
   <string name="textSettingsBackupRetentionKeepAll">Säilytä kaikki varmuuskopiot</string>
   <string name="textSettingsBackupRetentionValue">Säilytä viimeiset %1$d varmuuskopiota</string>
   <string name="textSettingsBackupRetentionInvalid">Anna kelvollinen positiivinen numero</string>
@@ -113,7 +113,7 @@
   <string name="textSettingsApiKeyHint">Liitä avaimesi</string>
   <string name="textSettingsTmdbApiKeyTitle">TMDB API -avain</string>
   <string name="textSettingsTmdbApiKeyDescription">Pakollinen. Tarjoaa kaikki sarja- ja elokuvatiedot.</string>
-  <string name="textSettingsTmdbApiKeyDialogMessage">Luo ilmainen tili osoitteessa themoviedb.org, kopioi API-avain (v3-todennus) kohdasta Asetukset → API ja liitä se alle.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Luo ilmainen tili osoitteessa themoviedb.org/settings/api, kopioi API-avain (v3-todennus) kohdasta Asetukset → API ja liitä se alle.</string>
   <string name="textSettingsOmdbApiKeyTitle">OMDb API -avain</string>
   <string name="textSettingsOmdbApiKeyDescription">Valinnainen. Lisää IMDb-arvosanat.</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">Pyydä ilmainen avain osoitteessa omdbapi.com/apikey.aspx, aktivoi se sähköpostista ja liitä se alle.</string>

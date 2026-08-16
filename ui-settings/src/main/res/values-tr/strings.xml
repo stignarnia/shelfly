@@ -104,7 +104,7 @@
   <string name="textSettingsBackupTargetWebDav">WebDAV sunucusu</string>
   <string name="textSettingsBackupRetentionTitle">Yedek saklama</string>
   <string name="textSettingsBackupRetentionDescription">WebDAV sunucusunda tutulacak otomatik yedekleme dosyası sayısı</string>
-  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionHint">Yedek sayısı (0 tümünü saklar)</string>
   <string name="textSettingsBackupRetentionKeepAll">Tüm yedekleri sakla</string>
   <string name="textSettingsBackupRetentionValue">Son %1$d yedeği sakla</string>
   <string name="textSettingsBackupRetentionInvalid">Lütfen geçerli bir pozitif sayı girin</string>
@@ -113,7 +113,7 @@
   <string name="textSettingsApiKeyHint">Anahtarınızı yapıştırın</string>
   <string name="textSettingsTmdbApiKeyTitle">TMDB API Anahtarı</string>
   <string name="textSettingsTmdbApiKeyDescription">Gerekli. Tüm dizi ve film verilerini sağlar.</string>
-  <string name="textSettingsTmdbApiKeyDialogMessage">themoviedb.org adresinde ücretsiz bir hesap oluşturun, ardından Ayarlar → API bölümünden API anahtarını (v3 doğrulaması) kopyalayın ve aşağıya yapıştırın.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">themoviedb.org/settings/api adresinde ücretsiz bir hesap oluşturun, ardından Ayarlar → API bölümünden API anahtarını (v3 doğrulaması) kopyalayın ve aşağıya yapıştırın.</string>
   <string name="textSettingsOmdbApiKeyTitle">OMDb API Anahtarı</string>
   <string name="textSettingsOmdbApiKeyDescription">İsteğe bağlı. IMDb puanlarını ekler.</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">omdbapi.com/apikey.aspx adresinden ücretsiz bir anahtar isteyin, e-postadan etkinleştirin ve aşağıya yapıştırın.</string>

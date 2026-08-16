@@ -104,7 +104,7 @@
   <string name="textSettingsBackupTargetWebDav">WebDAV 服务器</string>
   <string name="textSettingsBackupRetentionTitle">备份保留策略</string>
   <string name="textSettingsBackupRetentionDescription">在 WebDAV 服务器上保留的自动备份文件数量</string>
-  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionHint">保留数量 (0 表示保留全部)</string>
   <string name="textSettingsBackupRetentionKeepAll">保留所有备份</string>
   <string name="textSettingsBackupRetentionValue">保留最近 %1$d 个备份</string>
   <string name="textSettingsBackupRetentionInvalid">请输入有效的正整数</string>
@@ -113,7 +113,7 @@
   <string name="textSettingsApiKeyHint">粘贴您的密钥</string>
   <string name="textSettingsTmdbApiKeyTitle">TMDB API 密钥</string>
   <string name="textSettingsTmdbApiKeyDescription">必填。提供所有剧集和电影数据。</string>
-  <string name="textSettingsTmdbApiKeyDialogMessage">在 themoviedb.org 注册免费账户，然后从“设置 → API”复制 API 密钥 (v3 认证) 并粘贴到下方。</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">在 themoviedb.org/settings/api 注册免费账户，然后从“设置 → API”复制 API 密钥 (v3 认证) 并粘贴到下方。</string>
   <string name="textSettingsOmdbApiKeyTitle">OMDb API 密钥</string>
   <string name="textSettingsOmdbApiKeyDescription">可选。添加 IMDb 评分。</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">在 omdbapi.com/apikey.aspx 申请免费密钥，通过邮件激活后粘贴到下方。</string>

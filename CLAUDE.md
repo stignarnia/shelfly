@@ -64,3 +64,10 @@ refactor(ui): replace MaterialAlertDialogBuilder with unified ModalView
 - **Run Unit Tests**: `./gradlew test` (or specific module: `./gradlew :app:testDebugUnitTest`)
 - **Build Release APK**: `./gradlew :app:assembleRelease`
 - **Build Debug APK**: `./gradlew :app:assembleDebug`
+
+---
+
+## Localization & Strings
+
+- **Always update all languages**: When adding, modifying, or removing string resources, always check and update all locale folders (`res/values-*/strings.xml`) across the modules, not just the default English `res/values/strings.xml`. Ensure consistent and accurate translations across all supported languages.
+

@@ -104,7 +104,7 @@
   <string name="textSettingsBackupTargetWebDav">Server WebDAV</string>
   <string name="textSettingsBackupRetentionTitle">Păstrarea copiilor de rezervă</string>
   <string name="textSettingsBackupRetentionDescription">Numărul de fișiere de rezervă automate păstrate pe serverul WebDAV</string>
-  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionHint">Număr de copii de rezervă (0 le păstrează pe toate)</string>
   <string name="textSettingsBackupRetentionKeepAll">Păstrează toate copiile</string>
   <string name="textSettingsBackupRetentionValue">Păstrează ultimele %1$d copii de rezervă</string>
   <string name="textSettingsBackupRetentionInvalid">Introduceți un număr pozitiv valid</string>
@@ -113,7 +113,7 @@
   <string name="textSettingsApiKeyHint">Lipiți cheia</string>
   <string name="textSettingsTmdbApiKeyTitle">Cheie API TMDB</string>
   <string name="textSettingsTmdbApiKeyDescription">Necesar. Oferă toate datele despre seriale și filme.</string>
-  <string name="textSettingsTmdbApiKeyDialogMessage">Creați un cont gratuit pe themoviedb.org, copiați cheia API (autentificare v3) din Setări → API și inserați-o mai jos.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Creați un cont gratuit pe themoviedb.org/settings/api, copiați cheia API (autentificare v3) din Setări → API și inserați-o mai jos.</string>
   <string name="textSettingsOmdbApiKeyTitle">Cheie API OMDb</string>
   <string name="textSettingsOmdbApiKeyDescription">Opțional. Adaugă evaluările IMDb.</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">Solicitați o cheie gratuită la omdbapi.com/apikey.aspx, activați-o din e-mail și inserați-o mai jos.</string>

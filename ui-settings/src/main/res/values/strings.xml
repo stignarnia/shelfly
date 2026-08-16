@@ -131,7 +131,7 @@
   <string name="textSettingsApiKeyHint">Paste your key</string>
   <string name="textSettingsTmdbApiKeyTitle">TMDB API key</string>
   <string name="textSettingsTmdbApiKeyDescription">Required. Provides all show and movie data.</string>
-  <string name="textSettingsTmdbApiKeyDialogMessage">Create a free account at themoviedb.org, then copy the API key (v3 auth) from Settings → API.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Create a free account at themoviedb.org/settings/api, then copy the API key (v3 auth) from Settings → API.</string>
   <string name="textSettingsOmdbApiKeyTitle">OMDb API key</string>
   <string name="textSettingsOmdbApiKeyDescription">Optional. Adds IMDb ratings.</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">Request a free key at omdbapi.com/apikey.aspx and activate it from the confirmation email. Without it, IMDb ratings are simply hidden.</string>

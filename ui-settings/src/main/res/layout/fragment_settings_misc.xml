@@ -44,21 +44,35 @@
       android:id="@+id/settingsTmdbIcon"
       android:layout_width="wrap_content"
       android:layout_height="30dp"
-      android:layout_marginStart="@dimen/spaceTiny"
-      android:layout_marginEnd="@dimen/spaceSmall"
+      android:layout_marginEnd="@dimen/spaceNormal"
       android:adjustViewBounds="true"
       app:layout_constraintBottom_toTopOf="@id/settingsTmdbDisclaimer"
-      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/settingsOmdbIcon"
       app:layout_constraintHorizontal_chainStyle="packed"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/ic_tmdb"
       />
 
+    <ImageView
+      android:id="@+id/settingsOmdbIcon"
+      android:layout_width="wrap_content"
+      android:layout_height="30dp"
+      android:adjustViewBounds="true"
+      app:layout_constraintBottom_toBottomOf="@id/settingsTmdbIcon"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@id/settingsTmdbIcon"
+      app:layout_constraintTop_toTopOf="@id/settingsTmdbIcon"
+      app:srcCompat="@drawable/ic_omdb"
+      />
+
     <TextView
       android:id="@+id/settingsTmdbDisclaimer"
       style="@style/Settings.Summary"
+      android:layout_width="0dp"
+      android:layout_marginStart="@dimen/spaceNormal"
       android:layout_marginTop="@dimen/spaceSmall"
+      android:layout_marginEnd="@dimen/spaceNormal"
       android:gravity="center"
       android:text="@string/textSettingsTmdbDisclaimer"
       android:textColor="?android:attr/textColorSecondary"

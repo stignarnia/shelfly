@@ -1,6 +1,8 @@
 Shelfly 4.0.3
 
 • All dialogs, option pickers, and settings popups (WebDAV setup, API keys, backup retention, tutorial tips) are now unified into a consistent modal system with smooth spring animations.
+• Links in modal dialogs and onboarding screens (such as TMDB and OMDb API key setup) are now directly clickable.
+• Fixed backup retention input floating label in localized languages where it mistakenly displayed a placeholder number.
 • Fixed dialog surfaces having an unwanted red tint overlay caused by Material 3 theme inheritance.
 • Tapping outside or pressing the system back button now reliably dismisses modal dialogs without losing unsaved input.
 • Improved WebDAV test connection button placement and fixed result layout to prevent the dialog from resizing during connectivity checks.

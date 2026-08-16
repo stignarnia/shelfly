@@ -104,7 +104,7 @@
   <string name="textSettingsBackupTargetWebDav">WebDAV-Server</string>
   <string name="textSettingsBackupRetentionTitle">Backup-Aufbewahrung</string>
   <string name="textSettingsBackupRetentionDescription">Anzahl der automatischen Backup-Dateien auf dem WebDAV-Server</string>
-  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionHint">Anzahl der Backups (0 behält alle)</string>
   <string name="textSettingsBackupRetentionKeepAll">Alle Backups behalten</string>
   <string name="textSettingsBackupRetentionValue">Die letzten %1$d Backups behalten</string>
   <string name="textSettingsBackupRetentionInvalid">Bitte geben Sie eine gültige positive Zahl ein</string>
@@ -113,7 +113,7 @@
   <string name="textSettingsApiKeyHint">Schlüssel einfügen</string>
   <string name="textSettingsTmdbApiKeyTitle">TMDB-API-Schlüssel</string>
   <string name="textSettingsTmdbApiKeyDescription">Erforderlich. Liefert alle Serien- und Filmdaten.</string>
-  <string name="textSettingsTmdbApiKeyDialogMessage">Erstellen Sie ein kostenloses Konto auf themoviedb.org, kopieren Sie den API-Schlüssel (v3 Auth) aus Einstellungen → API und fügen Sie ihn unten ein.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Erstellen Sie ein kostenloses Konto auf themoviedb.org/settings/api, kopieren Sie den API-Schlüssel (v3 Auth) aus Einstellungen → API und fügen Sie ihn unten ein.</string>
   <string name="textSettingsOmdbApiKeyTitle">OMDb-API-Schlüssel</string>
   <string name="textSettingsOmdbApiKeyDescription">Optional. Ergänzt IMDb-Bewertungen.</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">Fordern Sie einen kostenlosen Schlüssel unter omdbapi.com/apikey.aspx an, aktivieren Sie ihn per E-Mail und fügen Sie ihn unten ein.</string>

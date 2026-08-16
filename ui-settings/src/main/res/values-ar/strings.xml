@@ -104,7 +104,7 @@
   <string name="textSettingsBackupTargetWebDav">خادم WebDAV</string>
   <string name="textSettingsBackupRetentionTitle">الاحتفاظ بالنسخ الاحتياطية</string>
   <string name="textSettingsBackupRetentionDescription">عدد ملفات النسخ الاحتياطي التلقائي المحتفظ بها على خادم WebDAV</string>
-  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionHint">عدد النسخ الاحتياطية (0 للاحتفاظ بالكل)</string>
   <string name="textSettingsBackupRetentionKeepAll">الاحتفاظ بجميع النسخ</string>
   <string name="textSettingsBackupRetentionValue">الاحتفاظ بآخر %1$d نسخ احتياطية</string>
   <string name="textSettingsBackupRetentionInvalid">يرجى إدخال رقم موجب صالح</string>
@@ -113,7 +113,7 @@
   <string name="textSettingsApiKeyHint">الصق مفتاحك</string>
   <string name="textSettingsTmdbApiKeyTitle">مفتاح TMDB API</string>
   <string name="textSettingsTmdbApiKeyDescription">مطلوب. يوفر جميع بيانات العروض والأفلام.</string>
-  <string name="textSettingsTmdbApiKeyDialogMessage">أنشئ حساباً مجانياً على themoviedb.org، ثم انسخ مفتاح API (مصادقة v3) من الإعدادات ← API والصقه أدناه.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">أنشئ حساباً مجانياً على themoviedb.org/settings/api، ثم انسخ مفتاح API (مصادقة v3) من الإعدادات ← API والصقه أدناه.</string>
   <string name="textSettingsOmdbApiKeyTitle">مفتاح OMDb API</string>
   <string name="textSettingsOmdbApiKeyDescription">اختياري. يضيف تقييمات IMDb.</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">اطلب مفتاحاً مجانياً على omdbapi.com/apikey.aspx وفعّله من البريد الإلكتروني، ثم الصقه أدناه.</string>

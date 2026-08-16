@@ -104,7 +104,7 @@
   <string name="textSettingsBackupTargetWebDav">Сервер WebDAV</string>
   <string name="textSettingsBackupRetentionTitle">Хранение резервных копий</string>
   <string name="textSettingsBackupRetentionDescription">Количество автоматических резервных копий, сохраняемых на сервере WebDAV</string>
-  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionHint">Количество копий (0 сохраняет все)</string>
   <string name="textSettingsBackupRetentionKeepAll">Хранить все копии</string>
   <string name="textSettingsBackupRetentionValue">Хранить последние %1$d резервных копий</string>
   <string name="textSettingsBackupRetentionInvalid">Пожалуйста, введите положительное число</string>
@@ -113,7 +113,7 @@
   <string name="textSettingsApiKeyHint">Вставьте ключ</string>
   <string name="textSettingsTmdbApiKeyTitle">Ключ TMDB API</string>
   <string name="textSettingsTmdbApiKeyDescription">Обязательно. Предоставляет все данные о сериалах и фильмах.</string>
-  <string name="textSettingsTmdbApiKeyDialogMessage">Создайте бесплатный аккаунт на themoviedb.org, скопируйте ключ API (v3 auth) из Настройки → API и вставьте его ниже.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Создайте бесплатный аккаунт на themoviedb.org/settings/api, скопируйте ключ API (v3 auth) из Настройки → API и вставьте его ниже.</string>
   <string name="textSettingsOmdbApiKeyTitle">Ключ OMDb API</string>
   <string name="textSettingsOmdbApiKeyDescription">Необязательно. Добавляет рейтинги IMDb.</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">Запросите бесплатный ключ на omdbapi.com/apikey.aspx, активируйте по почте и вставьте ниже.</string>

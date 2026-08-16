@@ -104,7 +104,7 @@
   <string name="textSettingsBackupTargetWebDav">WebDAV-server</string>
   <string name="textSettingsBackupRetentionTitle">Opbevaring af sikkerhedskopier</string>
   <string name="textSettingsBackupRetentionDescription">Antal automatiske sikkerhedskopifiler, der skal beholdes på WebDAV-serveren</string>
-  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionHint">Antal sikkerhedskopier (0 beholder alle)</string>
   <string name="textSettingsBackupRetentionKeepAll">Behold alle sikkerhedskopier</string>
   <string name="textSettingsBackupRetentionValue">Behold de seneste %1$d sikkerhedskopier</string>
   <string name="textSettingsBackupRetentionInvalid">Indtast venligst et gyldigt positivt tal</string>
@@ -113,7 +113,7 @@
   <string name="textSettingsApiKeyHint">Indsæt din nøgle</string>
   <string name="textSettingsTmdbApiKeyTitle">TMDB API-nøgle</string>
   <string name="textSettingsTmdbApiKeyDescription">Påkrævet. Leverer alle serie- og filmdata.</string>
-  <string name="textSettingsTmdbApiKeyDialogMessage">Opret en gratis konto på themoviedb.org, kopiér API-nøglen (v3-godkendelse) fra Indstillinger → API og indsæt den nedenfor.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Opret en gratis konto på themoviedb.org/settings/api, kopiér API-nøglen (v3-godkendelse) fra Indstillinger → API og indsæt den nedenfor.</string>
   <string name="textSettingsOmdbApiKeyTitle">OMDb API-nøgle</string>
   <string name="textSettingsOmdbApiKeyDescription">Valgfrit. Tilføjer IMDb-bedømmelser.</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">Anmod om en gratis nøgle på omdbapi.com/apikey.aspx, aktivér den via e-mail, og indsæt den nedenfor.</string>

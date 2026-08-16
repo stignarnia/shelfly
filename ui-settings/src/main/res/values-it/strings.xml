@@ -104,7 +104,7 @@
   <string name="textSettingsBackupTargetWebDav">Server WebDAV</string>
   <string name="textSettingsBackupRetentionTitle">Conservazione backup</string>
   <string name="textSettingsBackupRetentionDescription">Numero di file di backup automatici da conservare sul server WebDAV</string>
-  <string name="textSettingsBackupRetentionHint">5</string>
+  <string name="textSettingsBackupRetentionHint">Numero di backup (0 per conservarli tutti)</string>
   <string name="textSettingsBackupRetentionKeepAll">Conserva tutti i backup</string>
   <string name="textSettingsBackupRetentionValue">Conserva gli ultimi %1$d backup</string>
   <string name="textSettingsBackupRetentionInvalid">Inserisci un numero positivo valido</string>
@@ -113,7 +113,7 @@
   <string name="textSettingsApiKeyHint">Incolla la tua chiave</string>
   <string name="textSettingsTmdbApiKeyTitle">Chiave API TMDB</string>
   <string name="textSettingsTmdbApiKeyDescription">Obbligatorio. Fornisce tutti i dati su serie e film.</string>
-  <string name="textSettingsTmdbApiKeyDialogMessage">Crea un account gratuito su themoviedb.org, copia la chiave API (autenticazione v3) da Impostazioni → API e incollala qui sotto.</string>
+  <string name="textSettingsTmdbApiKeyDialogMessage">Crea un account gratuito su themoviedb.org/settings/api, copia la chiave API (autenticazione v3) da Impostazioni → API e incollala qui sotto.</string>
   <string name="textSettingsOmdbApiKeyTitle">Chiave API OMDb</string>
   <string name="textSettingsOmdbApiKeyDescription">Opzionale. Aggiunge i voti di IMDb.</string>
   <string name="textSettingsOmdbApiKeyDialogMessage">Richiedi una chiave gratuita su omdbapi.com/apikey.aspx, attivala via email e incollala qui sotto.</string>
