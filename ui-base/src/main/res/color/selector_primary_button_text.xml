@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  The primary welcome action is disabled until its step has an answer - notably
-  the key steps, which cannot continue on an empty field. A flat textColor would
-  keep looking enabled, so the disabled state has to be spelled out.
+  Label colour for @style/PrimaryMaterialButton.
+
+  Some hosts disable the button until their state allows continuing - notably
+  the welcome key steps, which cannot continue on an empty field. A flat
+  textColor would keep looking enabled, so the disabled state has to be spelled
+  out.
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 

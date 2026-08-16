@@ -272,6 +272,16 @@
     <item name="android:letterSpacing">0.05</item>
   </style>
 
+  <!--
+    The primary call to action: a filled accent button. Shared by the welcome
+    steps and the tip ("?") popups so the confirm action looks the same
+    everywhere - define it here rather than tinting a button inline.
+  -->
+  <style name="PrimaryMaterialButton" parent="RoundMaterialButton">
+    <item name="android:textColor">@color/selector_primary_button_text</item>
+    <item name="backgroundTint">@color/selector_primary_button_background</item>
+  </style>
+
   <style name="RoundTextButton" parent="Widget.Material3.Button.TextButton">
     <item name="cornerRadius">100dp</item>
     <item name="android:textAllCaps">true</item>

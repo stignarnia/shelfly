@@ -85,12 +85,10 @@
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/viewWelcomePrimaryButton"
-      style="@style/RoundMaterialButton"
+      style="@style/PrimaryMaterialButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="@dimen/spaceSmall"
-      android:textColor="@color/welcome_primary_button_text"
-      app:backgroundTint="@color/welcome_primary_button_background"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       tools:text="@string/textDisclaimerConfirmText"

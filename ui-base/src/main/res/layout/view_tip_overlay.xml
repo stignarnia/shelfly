@@ -54,18 +54,16 @@
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/tutorialViewButton"
-      style="@style/RoundTextButton"
-      android:layout_width="0dp"
+      style="@style/PrimaryMaterialButton"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/spaceNormal"
-      android:layout_marginEnd="@dimen/spaceSmall"
-      android:layout_marginBottom="@dimen/spaceSmall"
+      android:layout_marginEnd="@dimen/spaceBig"
+      android:layout_marginBottom="@dimen/spaceNormal"
       android:text="@string/textOk"
-      android:textColor="?attr/colorAccent"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toBottomOf="@id/tutorialViewText"
-      app:rippleColor="?attr/colorAccent"
       />
 
   </androidx.constraintlayout.widget.ConstraintLayout>

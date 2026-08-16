@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+  Background for @style/PrimaryMaterialButton.
+
   Overriding backgroundTint with a flat colour would keep the filled button
   looking live while it is disabled, so the disabled state is spelled out here
   alongside the accent.
