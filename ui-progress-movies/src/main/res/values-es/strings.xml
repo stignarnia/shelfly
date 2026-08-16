@@ -5,7 +5,7 @@
   <string name="textMoviesCalendarEmpty">No hay nuevas películas en camino.</string>
   <string name="textMoviesCalendarRecentsEmpty">No hay películas emitidas recientemente.</string>
   <string name="textDiscoverMovies">Descubrir Películas</string>
-  <string name="textMoviesProgressEmpty">Tu <b>Progreso</b> actualmente está vacío.\n\nVisita la pestaña <b>Descubrir</b> para añadir películas o importar tu colección de TMDB.</string>
+  <string name="textMoviesProgressEmpty">Tu <b>Progreso</b> actualmente está vacío.\n\nVisita la pestaña <b>Descubrir</b> para añadir películas.</string>
 
   <string name="textBackupStarted">Haciendo copia de seguridad y sincronizando con tus otros dispositivos…</string>
 

@@ -5,7 +5,7 @@
     <string name="textMoviesCalendarEmpty">Nu urmează să apară filme noi.</string>
     <string name="textMoviesCalendarRecentsEmpty">Nu există filme difuzate recent.</string>
     <string name="textDiscoverMovies">Descoperă filme</string>
-    <string name="textMoviesProgressEmpty"><b>Progresul</b> este în prezent gol.\n\nVizitează <b>Descoperă</b> pentru a adăuga filme sau pentru a importa colecţia TMDB.</string>
+    <string name="textMoviesProgressEmpty"><b>Progresul</b> este în prezent gol.\n\nVizitează <b>Descoperă</b> pentru a adăuga filme.</string>
 
   <string name="textBackupStarted">Se creează copia de rezervă și se sincronizează cu celelalte dispozitive…</string>
 

@@ -5,7 +5,7 @@
   <string name="textMoviesCalendarEmpty">目前暂无将要上映的新电影。</string>
   <string name="textMoviesCalendarRecentsEmpty">目前暂无即将上映的新电影。</string>
   <string name="textDiscoverMovies">发现电影</string>
-  <string name="textMoviesProgressEmpty">您的 <b>进度</b> 目前为空。\n\n访问 <b>发现</b> 选项卡去添加电影或从 TMDB 导入数据。</string>
+  <string name="textMoviesProgressEmpty">您的 <b>进度</b> 目前为空。\n\n访问 <b>发现</b> 选项卡去添加电影。</string>
 
   <string name="textBackupStarted">正在备份并与其他设备同步…</string>
 

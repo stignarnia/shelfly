@@ -5,7 +5,7 @@
   <string name="textMoviesCalendarEmpty">Uusia elokuvia ei ole tulossa.</string>
   <string name="textMoviesCalendarRecentsEmpty">Hiljattain esitettyjä elokuvia ei ole.</string>
   <string name="textDiscoverMovies">Etsi elokuvia</string>
-  <string name="textMoviesProgressEmpty"><b>Katselutila</b> on tyhjä.\n\nLisää elokuvia <b>Etsi</b>-osiosta tai tuo TMDB-kokoelmasi.</string>
+  <string name="textMoviesProgressEmpty"><b>Katselutila</b> on tyhjä.\n\nLisää elokuvia <b>Etsi</b>-osiosta.</string>
 
   <string name="textBackupStarted">Varmuuskopioidaan ja synkronoidaan muiden laitteidesi kanssa…</string>
 

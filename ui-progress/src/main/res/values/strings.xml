@@ -11,7 +11,7 @@
   <string name="textOnHold" comment="This is a header for Progress subsection. It will contain pending shows marked by user.">On Hold</string>
   <string name="textDiscoverShows">Discover Shows</string>
   <string name="textEpisodeInfo">Details</string>
-  <string name="textProgressEmpty">Your <b>Progress</b> is currently empty.\n\nVisit <b>Discover</b> tab to add shows or import your TMDB collection.</string>
+  <string name="textProgressEmpty">Your <b>Progress</b> is currently empty.\n\nVisit <b>Discover</b> tab to add shows.</string>
   <string name="textNewSeason">Season Premiere</string>
   <string name="textPremieres">Premieres</string>
   <string name="textBackupStarted">Backing up and syncing with your other devices…</string>

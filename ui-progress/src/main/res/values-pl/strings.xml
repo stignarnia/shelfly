@@ -9,7 +9,7 @@
   <string name="textOnHold" comment="This is a header for Progress subsection. It will contain pending shows marked by user.">Wstrzymane</string>
   <string name="textDiscoverShows">Odkrywaj Seriale</string>
   <string name="textEpisodeInfo">Szczegóły</string>
-  <string name="textProgressEmpty">Twój <b>Postęp</b> jest obecnie pusty.\n\nDodaj nowe seriale w zakładce <b>Odkrywaj</b> lub zaimportuj swoją kolekcję z TMDB.</string>
+  <string name="textProgressEmpty">Twój <b>Postęp</b> jest obecnie pusty.\n\nDodaj nowe seriale w zakładce <b>Odkrywaj</b>.</string>
   <string name="textNewSeason">Premiera Sezonu</string>
   <string name="textPremieres">Premiery</string>
 

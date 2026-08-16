@@ -9,7 +9,7 @@
     <string name="textOnHold" comment="This is a header for Progress subsection. It will contain pending shows marked by user.">În așteptare</string>
     <string name="textDiscoverShows">Descoperă emisiuni</string>
     <string name="textEpisodeInfo">Detalii</string>
-    <string name="textProgressEmpty"><b>Progresul</b> este în prezent gol.\n\nVizitează <b>Descoperă</b> pentru a adăuga seriale sau pentru a importa colecţia TMDB.</string>
+    <string name="textProgressEmpty"><b>Progresul</b> este în prezent gol.\n\nVizitează <b>Descoperă</b> pentru a adăuga seriale.</string>
     <string name="textNewSeason">Premiera sezonului</string>
     <string name="textPremieres">Premiere</string>
 
