@@ -8,9 +8,7 @@
 .externalNativeBuild
 .cxx
 .kotlin
-ktlint2.jar
 /ktlint
 /app/keystore.properties
 /app/keystore
-/app/gpp-services-key.json
 .vscode
