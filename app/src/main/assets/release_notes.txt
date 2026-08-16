@@ -1,12 +1,8 @@
-Shelfly 4.0.2
+Shelfly 4.0.3
 
-• The welcome screens are one flow now, shown as numbered steps you can go back through, instead of separate popups that could land on top of each other. The TMDB key screen no longer appears over the welcome note.
-• The welcome flow picks up where it left off. Closing the app partway through no longer skips the screens you had not reached, and release notes closed unread are shown again.
-• The language question is now asked whenever your phone's language stops matching the app's, not only on the very first run, and it offers to keep the language you are actually using rather than always offering English. Declining settles that language for good, while a later switch to a different one asks again.
-• The TMDB key screen keeps what you have typed when the screen rotates, and no longer clears the field and starts over when you submit it empty.
-• The welcome flow now offers three more steps on a fresh install: an optional OMDb key for IMDb, Metascore and Rotten Tomatoes ratings; episode notifications, which ask for the permission instead of quietly starting switched off; and WebDAV sync, which opens the setup form directly. Each can be skipped, and skipping is remembered. Upgrades are not shown any of them.
-• The welcome flow fills the screen and is always shown in the language the app is set to, so the question about your phone's language is no longer asked in that same language.
-• Discover no longer fails to load on a fresh install. It used to fetch before you had entered a TMDB key, leaving an error that only a manual refresh would clear.
-• Links in the welcome flow open in your browser.
-• Fixed the Test connection button in the WebDAV dialog being almost invisible.
-• The "?" tutorial markers now behave the same in every build. Debug builds used to suppress them.
+• All dialogs, option pickers, and settings popups (WebDAV setup, API keys, backup retention, tutorial tips) are now unified into a consistent modal system with smooth spring animations.
+• Fixed dialog surfaces having an unwanted red tint overlay caused by Material 3 theme inheritance.
+• Tapping outside or pressing the system back button now reliably dismisses modal dialogs without losing unsaved input.
+• Improved WebDAV test connection button placement and fixed result layout to prevent the dialog from resizing during connectivity checks.
+• Standardized primary accent and secondary action button styles across all dialogs and popups.
+• Debug builds now include automatic build-time version stamps for easier identification during testing.
