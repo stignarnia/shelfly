@@ -61,9 +61,21 @@ refactor(ui): replace MaterialAlertDialogBuilder with unified ModalView
 ## Development & Build Commands
 
 - **Run ktlint**: `./ktlint`
-- **Run Unit Tests**: `./gradlew test` (or specific module: `./gradlew :app:testDebugUnitTest`)
+- **Run Unit Tests**: `./gradlew testDebugUnitTest` (or a single module: `./gradlew :app:testDebugUnitTest`)
 - **Build Release APK**: `./gradlew :app:assembleRelease`
 - **Build Debug APK**: `./gradlew :app:assembleDebug`
+
+**Never run `./gradlew test`.** It is the lifecycle task, so it runs the release
+unit test variant on top of the debug one - 1465 tasks against 732, for the same
+result. Unit tests never run R8, so the release variant only re-executes the same
+sources. `testDebugUnitTest` is what CI runs and what you should run.
+
+Two suites are opt-in and skip themselves, so a green run does not mean they ran:
+
+- `data-remote`'s `TmdbLiveApiTest` calls the real TMDB API and skips when no key
+  is compiled in. It has caught real mapping defects - run it locally.
+- `ui-backup`'s `BackupMigrationV2FileTest` skips unless `SHELFLY_V2_BACKUP`
+  points at a real v2 export.
 
 ---
 

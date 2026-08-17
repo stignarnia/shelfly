@@ -45,17 +45,16 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       # No API keys needed: the build falls back to empty strings, and keys are
-      # supplied by the user at runtime rather than baked into the binary.
+      # supplied by the user at runtime rather than baked into the binary. The two
+      # opt-in suites skip themselves here - TmdbLiveApiTest wants a real key, and
+      # BackupMigrationV2FileTest wants SHELFLY_V2_BACKUP - so nothing in this job
+      # reaches the network.
+      #
+      # Debug variant only. Unit tests never run R8, so ./gradlew test would just
+      # re-execute the same sources for the release variant - twice the tasks for
+      # the same signal.
       - name: Run unit tests
-        run: |
-          ./gradlew \
-            :app:testDebugUnitTest \
-            :repository:testDebugUnitTest \
-            :ui-discover:testDebugUnitTest \
-            :ui-statistics:testDebugUnitTest \
-            :ui-statistics-movies:testDebugUnitTest \
-            :ui-search:testDebugUnitTest \
-            :ui-progress-movies:testDebugUnitTest
+        run: ./gradlew testDebugUnitTest
 
       - name: Upload test reports
         if: failure()
