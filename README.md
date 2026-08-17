@@ -22,14 +22,14 @@ The catalog comes from [TMDB](https://www.themoviedb.org) instead, using a free 
 
 ## Why not a Pull Request instead?
 
-I think there is little chance this gets merged upstream given the repository's acquisition by Trakt itself. If this gets traction and they are willing to merge the WebDAV backup feature I will probably go back to the original, as removing the Trakt dependency was more necessary for me to not have to buy VIP during development than for the user facing feature I wanted to add.[Showly](https://github.com/trakt/showly)
+I think there is little chance this gets merged upstream given the repository's acquisition by Trakt itself. The original aim was the WebDAV feature which would already undercut the revenue they could get by integrating with the ecosystem. Then I started reimplementing some of the premium features as open source so now it would likely be impossible.
 
 ## Differences from upstream
 
 - **Trakt is gone entirely.** TMDB is the only catalog source and all tracking state is local.
 - **WebDAV backup.** Scheduled backup and restore against your own server, alongside the existing local folder target.
 - **You supply the API keys**, at runtime, rather than the build shipping someone else's.
-- The paid tier has been removed.
+- The paid tier has been removed, and I aim to reimplement what is possible from scratch and make it open source.
 - Episode notifications fire on the air date rather than at the exact airtime. TMDB exposes a date but no time of day, so the precision is not available.
 - Discover filters by streaming service rather than by TV network. TMDB's `with_networks` wants numeric ids that do not map from channel names, and it does not apply to films at all, so the filter asks for availability instead: the services listed for the country set in Settings, which is the same region the details screen uses. It works on shows and on movies.
 - **Six themes**, plus a pure-black switch. Light, dark and follow-system, each also available in Material You on Android 12 and later, and AMOLED backgrounds can be turned on for whichever of them ends up dark.

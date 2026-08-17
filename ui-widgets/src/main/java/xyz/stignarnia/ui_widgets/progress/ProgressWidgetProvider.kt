@@ -17,7 +17,6 @@ import android.net.Uri
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import xyz.stignarnia.common.Config.HOST_ACTIVITY_NAME
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_model.IdTmdb
@@ -46,13 +45,7 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
     }
   }
 
-  override fun getLayoutResId(): Int {
-    val isLight = settingsRepository.widgets.widgetsTheme == MODE_NIGHT_NO
-    return when {
-      isLight -> R.layout.widget_progress_day
-      else -> R.layout.widget_progress_night
-    }
-  }
+  override fun getLayoutResId(): Int = R.layout.widget_progress_night
 
   override fun onUpdate(
     context: Context,
@@ -83,8 +76,7 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
       setViewPadding(R.id.progressWidgetList, 0, paddingTop, 0, spaceTiny)
       setViewVisibility(R.id.progressWidgetLabel, labelVisibility)
 
-      setInt(R.id.progressWidgetNightRoot, "setBackgroundResource", getBackgroundResId())
-      setInt(R.id.progressWidgetDayRoot, "setBackgroundResource", getBackgroundResId())
+      setInt(R.id.progressWidgetNightRoot, "setBackgroundResource", R.drawable.bg_widget)
     }
 
     val mainIntent = PendingIntent.getActivity(

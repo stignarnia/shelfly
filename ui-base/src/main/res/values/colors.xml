@@ -18,9 +18,6 @@
   <color name="colorGray">#636363</color>
   <color name="colorGrayDark">#303030</color>
 
-  <color name="colorBlue">#17283A</color>
-  <color name="colorBlueLight">#70767C</color>
-
   <color name="colorNotificationDark">#F44336</color>
 
 </resources>

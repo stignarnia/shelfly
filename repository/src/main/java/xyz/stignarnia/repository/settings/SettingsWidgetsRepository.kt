@@ -1,6 +1,5 @@
 package xyz.stignarnia.repository.settings
 
-import android.app.UiModeManager
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import xyz.stignarnia.common.Mode
@@ -15,24 +14,9 @@ class SettingsWidgetsRepository @Inject constructor(
 ) {
 
   companion object Key {
-    private const val THEME_WIDGET = "KEY_THEME_WIDGET"
-    private const val THEME_WIDGET_TRANSPARENT = "KEY_THEME_WIDGET_TRANSPARENT"
-
     private const val WIDGET_CALENDAR_MODE = "WIDGET_CALENDAR_MODE"
     private const val WIDGET_CALENDAR_MOVIES_MODE = "WIDGET_CALENDAR_MOVIES_MODE"
   }
-
-  var widgetsTheme: Int
-    get() {
-      return UiModeManager.MODE_NIGHT_YES
-    }
-    set(value) = preferences.edit(true) { putInt(THEME_WIDGET, value) }
-
-  var widgetsTransparency: Int
-    get() {
-      return 100
-    }
-    set(value) = preferences.edit(true) { putInt(THEME_WIDGET_TRANSPARENT, value) }
 
   fun getWidgetCalendarMode(
     mode: Mode,

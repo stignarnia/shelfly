@@ -7,11 +7,9 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.ui_base.utilities.DurationPrinter
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_base.utilities.extensions.replace
@@ -30,7 +28,6 @@ import kotlin.math.roundToInt
 class ProgressWidgetViewsFactory(
   private val context: Context,
   private val itemsCase: ProgressItemsCase,
-  private val settingsRepository: SettingsRepository,
 ) : RemoteViewsService.RemoteViewsFactory {
 
   private val imageCorner by lazy { context.dimenToPx(R.dimen.mediaTileCorner) }
@@ -183,21 +180,9 @@ class ProgressWidgetViewsFactory(
       setTextViewText(R.id.progressWidgetHeaderTitle, context.getString(item.textResId))
     }
 
-  private fun getItemLayout(): Int {
-    val isLight = settingsRepository.widgets.widgetsTheme == MODE_NIGHT_NO
-    return when {
-      isLight -> R.layout.widget_progress_item_day
-      else -> R.layout.widget_progress_item_night
-    }
-  }
+  private fun getItemLayout(): Int = R.layout.widget_progress_item_night
 
-  private fun getHeaderLayout(): Int {
-    val isLight = settingsRepository.widgets.widgetsTheme == MODE_NIGHT_NO
-    return when {
-      isLight -> R.layout.widget_header_day
-      else -> R.layout.widget_header_night
-    }
-  }
+  private fun getHeaderLayout(): Int = R.layout.widget_header_night
 
   override fun getItemId(position: Int) = adapterItems[position].show.tmdbId
 

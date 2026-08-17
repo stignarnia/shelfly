@@ -14,7 +14,6 @@ import android.net.Uri
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
@@ -43,13 +42,7 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
     }
   }
 
-  override fun getLayoutResId(): Int {
-    val isLight = settingsRepository.widgets.widgetsTheme == MODE_NIGHT_NO
-    return when {
-      isLight -> R.layout.widget_calendar_day
-      else -> R.layout.widget_calendar_night
-    }
-  }
+  override fun getLayoutResId(): Int = R.layout.widget_calendar_night
 
   override fun onUpdate(
     context: Context,
@@ -81,8 +74,7 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
       setViewPadding(R.id.calendarWidgetEmptyView, 0, paddingTop, 0, 0)
       setViewVisibility(R.id.calendarWidgetLabel, labelVisibility)
 
-      setInt(R.id.calendarWidgetNightRoot, "setBackgroundResource", getBackgroundResId())
-      setInt(R.id.calendarWidgetDayRoot, "setBackgroundResource", getBackgroundResId())
+      setInt(R.id.calendarWidgetNightRoot, "setBackgroundResource", R.drawable.bg_widget)
 
       when (settingsRepository.widgets.getWidgetCalendarMode(Mode.SHOWS, widgetId)) {
         CalendarMode.PRESENT_FUTURE -> {

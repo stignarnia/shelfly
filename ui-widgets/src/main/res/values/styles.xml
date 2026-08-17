@@ -2,33 +2,22 @@
 
   <!-- Widgets -->
 
+  <!--
+    Widgets do not follow the app's theme.
+    They are drawn by the launcher, in its process and against its configuration, so the night mode the user picked in Shelfly has no bearing on them - and a widget that flipped to light because the launcher did would look nothing like the app beside it.
+    The parent is DayNight, so every colour a widget layout reads is spelled out here rather than inherited.
+  -->
   <style name="AppTheme.Widget.Dark" parent="AppTheme">
     <item name="colorWidgetBackground">#121212</item>
-    <item name="colorWidgetBackground75">#BF121212</item>
-    <item name="colorWidgetBackground50">#80121212</item>
-    <item name="colorWidgetBackground25">#41121212</item>
-    <item name="colorWidgetBackground0">#00121212</item>
     <item name="android:textColorPrimary">@color/colorWhite</item>
     <item name="android:textColorSecondary">@color/colorGrayLight</item>
     <item name="colorPlaceholderIcon">#6A6A6A</item>
     <item name="colorPlaceholderStroke">#6A6A6A</item>
     <item name="colorAccent">#F44336</item>
     <item name="colorBadgeBackground">@color/colorGrayDark</item>
+    <item name="colorWidgetStatusBackground">@color/colorBlackTranslucent</item>
   </style>
 
-  <style name="AppTheme.Widget.Light" parent="AppTheme">
-    <item name="colorWidgetBackground">#F6F7F9</item>
-    <item name="colorWidgetBackground75">#BEF6F7F9</item>
-    <item name="colorWidgetBackground50">#80F6F7F9</item>
-    <item name="colorWidgetBackground25">#40F6F7F9</item>
-    <item name="colorWidgetBackground0">#00F6F7F9</item>
-    <item name="android:textColorPrimary">@color/colorBlue</item>
-    <item name="android:textColorSecondary">@color/colorBlueLight</item>
-    <item name="colorPlaceholderIcon">#4B6383</item>
-    <item name="colorPlaceholderStroke">#4B6383</item>
-    <item name="colorAccent">#4B6383</item>
-    <item name="colorBadgeBackground">#E1E6EC</item>
-  </style>
 
   <style name="WidgetItem" />
 
