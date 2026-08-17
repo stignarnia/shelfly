@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   android:gravity="center"
   android:orientation="vertical"
-  tools:background="@color/colorBackground"
+  tools:background="?attr/colorAppBackground"
   tools:parentTag="android.widget.LinearLayout"
   tools:theme="@style/AppTheme"
   >

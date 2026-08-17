@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   app:cardBackgroundColor="?attr/colorCardBackground"
-  tools:cardBackgroundColor="@color/colorBackground"
+  tools:cardBackgroundColor="?attr/colorAppBackground"
   tools:parentTag="com.google.android.material.card.MaterialCardView"
   tools:theme="@style/AppTheme"
   >

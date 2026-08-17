@@ -5,6 +5,11 @@
 
   Mirrors @color/selector_primary_button_background, including spelling out the
   disabled state rather than letting a flat tint keep it looking live.
+
+  colorGray stays a fixed literal on purpose: it is a filled button carrying the
+  white label from @color/selector_button_text, and a mid grey clears white in
+  the light theme as readily as in the dark one. Theming it would only move it
+  toward one of the two backgrounds it is meant to sit against.
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorBackground">#131313</color>
+  <!--
+    The fixed palette. Nothing here varies by theme - the themed colours live in
+    colors_theme.xml, which exists in both values/ and values-night/. These are
+    the values that must stay put: the widget palette, and the whites and black
+    scrims that sit on poster artwork whatever the app is doing.
+  -->
 
-  <color name="colorPrimary">#222327</color>
-  <color name="colorPrimaryDark">#121212</color>
   <color name="colorAccent">#F44336</color>
   <color name="colorError">#F44336</color>
 
@@ -11,7 +14,6 @@
   <color name="colorBlack">#000000</color>
   <color name="colorBlackTranslucent">#B2000000</color>
   <color name="colorBlackTranslucentMedium">#66000000</color>
-  <color name="colorBlackTranslucentLight">#40000000</color>
   <color name="colorWhite">#FFFFFF</color>
   <color name="colorGrayLight">#AAAAAA</color>
   <color name="colorGray">#636363</color>
@@ -19,9 +21,7 @@
 
   <color name="colorBlue">#17283A</color>
   <color name="colorBlueLight">#70767C</color>
-  <color name="colorBlueLight2x">#91989F</color>
 
   <color name="colorNotificationDark">#F44336</color>
-  <color name="colorNotificationLight">#4B6383</color>
 
 </resources>

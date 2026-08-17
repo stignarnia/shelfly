@@ -1,3 +1,7 @@
+<!--
+  The selected number sits on the clock hand, which is drawn in the accent, so it
+  carries white in every theme rather than following the app's text colour.
+-->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:color="@color/colorWhite" android:state_selected="true" />
   <item android:color="?android:textColorPrimary" />

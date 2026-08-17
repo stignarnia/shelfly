@@ -1,11 +1,13 @@
 package xyz.stignarnia.ui_base.common.sheets.links.views
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
+import androidx.core.widget.ImageViewCompat
 import xyz.stignarnia.ui_base.R
 import xyz.stignarnia.ui_base.databinding.ViewLinksItemBinding
 
@@ -26,6 +28,10 @@ class LinkItemView : FrameLayout {
         with(binding) {
           viewLinkItemName.text = getString(R.styleable.LinkItem_text)
           viewLinkItemImage.setImageResource(getResourceId(R.styleable.LinkItem_icon, -1))
+          if (hasValue(R.styleable.LinkItem_iconTint)) {
+            val tint = getColor(R.styleable.LinkItem_iconTint, 0)
+            ImageViewCompat.setImageTintList(viewLinkItemImage, ColorStateList.valueOf(tint))
+          }
         }
       } finally {
         recycle()

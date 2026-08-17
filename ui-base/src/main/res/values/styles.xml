@@ -27,19 +27,20 @@
     <item name="textColorTab">@color/themeTextTertiary</item>
     <item name="textColorTabSelected">@color/themeTextPrimary</item>
     <item name="textColorChip">?android:textColorPrimary</item>
-    <item name="textColorChipSelected">@color/themeAccentText</item>
+    <item name="textColorChipSelected">?attr/colorAccentText</item>
     <item name="colorBackgroundChipSelected">@color/themeBackground</item>
     <item name="colorBackgroundChipSelectedLight">?colorSearchViewBackground</item>
     <item name="colorProgressTrack">@color/themeProgressTrack</item>
 
     <item name="colorIconPrimary">@color/themeTextPrimary</item>
-    <item name="colorIconSecondary">@color/themeTextSecondary</item>
-    <item name="colorRipple">@color/themeRipple</item>
     <item name="colorTabIndicator">@color/themeAccent</item>
     <item name="colorButtonDisabled">@color/themeDisabled</item>
+    <item name="colorAccentText">@color/themeAccentText</item>
 
-    <item name="colorInfoSnackbar">@color/themeSnackbar</item>
-    <item name="textColorInfoSnackbar">@color/themeOnSnackbar</item>
+    <item name="colorInverseSurface">@color/themeInverseSurface</item>
+    <item name="textColorInverseSurface">@color/themeOnInverseSurface</item>
+    <item name="colorInfoSnackbar">?attr/colorInverseSurface</item>
+    <item name="textColorInfoSnackbar">?attr/textColorInverseSurface</item>
 
     <item name="colorBottomMenuBackground">@color/themeSurface</item>
     <item name="colorBottomMenuItem">@color/themeMenuItem</item>
@@ -104,12 +105,12 @@
   </style>
 
   <style name="ProgressBar.Dark" parent="ProgressBar">
-    <item name="android:indeterminateTint">@color/colorGrayDark</item>
+    <item name="android:indeterminateTint">?attr/colorSeparator</item>
   </style>
 
   <style name="ProgressBar.Accent" parent="ProgressBar">
-    <item name="android:indeterminateTint">@color/colorAccent</item>
-    <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:indeterminateTint">?attr/colorAccent</item>
+    <item name="colorAccent">?attr/colorAccent</item>
   </style>
 
   <style name="ContentProgressBar" parent="Widget.AppCompat.ProgressBar">
@@ -117,13 +118,13 @@
   </style>
 
   <style name="ContentProgressBar.Dark" parent="ContentProgressBar">
-    <item name="colorAccent">@color/colorGrayDark</item>
-    <item name="android:indeterminateTint">@color/colorGrayDark</item>
+    <item name="colorAccent">?attr/colorSeparator</item>
+    <item name="android:indeterminateTint">?attr/colorSeparator</item>
   </style>
 
   <style name="ContentProgressBar.Accent" parent="ContentProgressBar">
-    <item name="colorAccent">@color/colorAccent</item>
-    <item name="android:indeterminateTint">@color/colorAccent</item>
+    <item name="colorAccent">?attr/colorAccent</item>
+    <item name="android:indeterminateTint">?attr/colorAccent</item>
   </style>
 
   <!-- Scrollbars -->
@@ -133,7 +134,7 @@
     <item name="android:scrollbarFadeDuration">100</item>
     <item name="android:scrollbarSize">@dimen/scrollBarWidth</item>
     <item name="android:scrollbarStyle">outsideOverlay</item>
-    <item name="android:scrollbarThumbVertical">@color/colorGrayDark</item>
+    <item name="android:scrollbarThumbVertical">?attr/colorSeparator</item>
   </style>
 
   <!-- Modals -->
@@ -141,7 +142,7 @@
   <!-- The dismissing half of a ModalView's button row, paired with
        @style/PrimaryMaterialButton for the confirm. -->
   <style name="ModalNegativeButton" parent="Widget.Material3.Button.TextButton.Dialog">
-    <item name="android:textColor">@color/colorGrayLight</item>
+    <item name="android:textColor">?android:attr/textColorSecondary</item>
     <item name="cornerRadius">100dp</item>
   </style>
 
@@ -170,7 +171,7 @@
 
   <style name="ScrollableTabsStyle" parent="Widget.Design.TabLayout">
     <item name="tabMode">scrollable</item>
-    <item name="tabIndicatorColor">@color/colorAccent</item>
+    <item name="tabIndicatorColor">?attr/colorTabIndicator</item>
     <item name="tabPaddingStart">8dp</item>
     <item name="tabPaddingEnd">8dp</item>
     <item name="tabTextAppearance">@style/ScrollableTabTextStyle</item>
@@ -192,7 +193,7 @@
     <item name="tabMinWidth">0dp</item>
     <item name="tabPaddingStart">8dp</item>
     <item name="tabPaddingEnd">8dp</item>
-    <item name="tabIndicatorColor">@color/colorAccent</item>
+    <item name="tabIndicatorColor">?attr/colorTabIndicator</item>
     <item name="tabTextAppearance">@style/ScrollableTabEpisodeTextStyle</item>
     <item name="tabSelectedTextColor">?attr/textColorTabSelected</item>
     <item name="tabIndicatorFullWidth">false</item>
@@ -229,7 +230,7 @@
     <item name="android:gravity">start|center_vertical</item>
     <item name="android:maxLines">1</item>
     <item name="android:textAlignment">viewStart</item>
-    <item name="android:textColor">?attr/colorAccent</item>
+    <item name="android:textColor">?attr/colorAccentText</item>
     <item name="android:textSize">12sp</item>
   </style>
 
@@ -323,7 +324,7 @@
   </style>
 
   <style name="DeclineOutlinedButton" parent="RoundOutlinedButton">
-    <item name="strokeColor">@color/colorGrayLight</item>
+    <item name="strokeColor">?android:attr/textColorSecondary</item>
   </style>
 
   <style name="ShelflyBottomBar" parent="Widget.MaterialComponents.BottomNavigationView">
@@ -344,8 +345,8 @@
   </style>
 
   <style name="ShelflySwitch.Overlay" parent="">
-    <item name="colorPrimary">@color/colorAccent</item>
-    <item name="colorPrimaryContainer">#4DF44336</item>
+    <item name="colorPrimary">?attr/colorAccent</item>
+    <item name="colorPrimaryContainer">@color/themeAccentTrack</item>
   </style>
 
   <style name="ShelflyChip" parent="Widget.Material3.Chip.Suggestion">
@@ -388,7 +389,7 @@
 
   <style name="ShelflyCheckbox" parent="Widget.Material3.CompoundButton.CheckBox">
     <item name="buttonTint">@color/selector_main_checkbox</item>
-    <item name="buttonIconTint">@color/colorBackground</item>
+    <item name="buttonIconTint">?attr/colorAppBackground</item>
     <item name="android:textColor">?android:textColorPrimary</item>
   </style>
 
@@ -398,9 +399,9 @@
   </style>
 
   <style name="ShelflyDatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
-    <item name="colorOnPrimary">@color/colorWhite</item>
-    <item name="colorSurface">@color/colorBackground</item>
-    <item name="colorOnSurface">@color/colorWhite</item>
+    <item name="colorOnPrimary">?android:attr/textColorPrimary</item>
+    <item name="colorSurface">?attr/colorAppBackground</item>
+    <item name="colorOnSurface">?android:attr/textColorPrimary</item>
     <item name="buttonBarPositiveButtonStyle">@style/ShelflyDatePicker.Button</item>
     <item name="buttonBarNegativeButtonStyle">@style/ShelflyDatePicker.Button</item>
   </style>
@@ -410,8 +411,8 @@
   </style>
 
   <style name="ShelflyTimePicker" parent="ThemeOverlay.MaterialComponents.TimePicker">
-    <item name="colorSurface">@color/colorBackground</item>
-    <item name="colorOnSurface">@color/colorGrayLight</item>
+    <item name="colorSurface">?attr/colorAppBackground</item>
+    <item name="colorOnSurface">?android:attr/textColorSecondary</item>
     <item name="colorPrimary">?attr/colorBottomMenuBackground</item>
     <item name="colorOnPrimary">?android:textColorPrimary</item>
     <item name="materialClockStyle">@style/ShelflyTimePicker.Clock</item>
@@ -430,7 +431,7 @@
   </style>
 
   <style name="ShelflyTimePicker.Button" parent="Widget.MaterialComponents.TimePicker.Button">
-    <item name="backgroundTint">@color/colorBackground</item>
+    <item name="backgroundTint">?attr/colorAppBackground</item>
     <item name="android:textColor">@color/selector_timepicker_button_text</item>
   </style>
 

@@ -7,7 +7,7 @@
   android:layout_height="match_parent"
   android:fillViewport="true"
   android:overScrollMode="never"
-  tools:background="@color/colorBackground"
+  tools:background="?attr/colorAppBackground"
   tools:theme="@style/AppTheme"
   >
 

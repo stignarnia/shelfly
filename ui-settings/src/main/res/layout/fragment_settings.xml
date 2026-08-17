@@ -10,7 +10,7 @@
   android:fillViewport="true"
   android:overScrollMode="never"
   android:scrollbars="none"
-  tools:background="@color/colorBackground"
+  tools:background="?attr/colorAppBackground"
   tools:layout_marginTop="-0dp"
   tools:theme="@style/AppTheme"
   >

@@ -2,7 +2,7 @@
 
   <style name="ScrollableTabsStyle" parent="Widget.Design.TabLayout">
     <item name="tabMode">fixed</item>
-    <item name="tabIndicatorColor">@color/colorAccent</item>
+    <item name="tabIndicatorColor">?attr/colorTabIndicator</item>
     <item name="tabPaddingStart">8dp</item>
     <item name="tabPaddingEnd">8dp</item>
     <item name="tabTextAppearance">@style/ScrollableTabTextStyle</item>

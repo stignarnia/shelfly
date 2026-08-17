@@ -50,7 +50,7 @@
       android:autoLink="web"
       android:linksClickable="true"
       android:textColor="?android:attr/textColorPrimary"
-      android:textColorLink="@color/colorAccent"
+      android:textColorLink="?attr/colorAccentText"
       android:textSize="14sp"
       android:visibility="gone"
       app:layout_constraintEnd_toEndOf="parent"

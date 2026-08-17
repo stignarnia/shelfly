@@ -43,7 +43,7 @@
     android:layout_marginTop="@dimen/spaceNormal"
     android:autoLink="web"
     android:textColor="?android:attr/textColorPrimary"
-    android:textColorLink="@color/colorAccent"
+    android:textColorLink="?attr/colorAccentText"
     android:textSize="15sp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"

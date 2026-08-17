@@ -98,7 +98,7 @@
     android:gravity="start"
     android:maxLines="1"
     android:textAlignment="viewStart"
-    android:textColor="@color/colorAccent"
+    android:textColor="?attr/colorAccentText"
     android:textSize="@dimen/personDetailsInfoSubtitle"
     app:layout_constraintEnd_toStartOf="@id/viewPersonDetailsLinkIcon"
     app:layout_constraintStart_toEndOf="@id/viewPersonDetailsImageGuide1"

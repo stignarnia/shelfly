@@ -12,7 +12,7 @@
   android:overScrollMode="never"
   android:paddingBottom="@dimen/spaceSmall"
   android:scrollbars="none"
-  tools:background="@color/colorBackground"
+  tools:background="?attr/colorAppBackground"
   tools:theme="@style/AppTheme"
   >
 

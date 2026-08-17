@@ -41,16 +41,17 @@
        darkened, because #F44336 on a light ground is 3:1 - fine for fills and
        icons, thin for a 12sp label. -->
   <color name="themeAccent">#F44336</color>
+  <!-- The switch track when checked: the accent at 30% -->
+  <color name="themeAccentTrack">#4DF44336</color>
   <color name="themeAccentText">#D32F2F</color>
 
   <!-- Bottom navigation active indicator -->
   <color name="themeNavIndicator">#E6E3E4E8</color>
 
-  <!-- Snackbars invert against the app, so they read as an overlay -->
-  <color name="themeSnackbar">#2A2A2A</color>
-  <color name="themeOnSnackbar">#FFFFFF</color>
+  <!-- Chrome that inverts against the app: the info snackbar, the tip badge -->
+  <color name="themeInverseSurface">#2A2A2A</color>
+  <color name="themeOnInverseSurface">#FFFFFF</color>
 
-  <color name="themeRipple">#1F000000</color>
   <color name="themeDisabled">#DADADA</color>
 
 </resources>

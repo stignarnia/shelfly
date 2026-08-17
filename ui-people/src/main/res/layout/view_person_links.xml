@@ -123,6 +123,7 @@
     app:layout_constraintStart_toEndOf="@id/viewPersonLinksGuideline"
     app:layout_constraintTop_toBottomOf="@id/viewPersonLinksDuckDuck"
     custom:icon="@drawable/ic_wikipedia"
+    custom:iconTint="?attr/colorIconPrimary"
     custom:text="Wikipedia"
     />
 
