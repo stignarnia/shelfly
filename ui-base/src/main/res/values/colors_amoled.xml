@@ -2,7 +2,8 @@
 <!--
   Surfaces for @style/ThemeOverlay.Shelfly.Amoled.
 
-  These are the light values, and they are deliberately identical to the matching names in values/colors_theme.xml. That is what lets the AMOLED switch stay on under "Follow system": the overlay is applied whatever the mode, and by day it resolves to the ordinary light surfaces and changes nothing.
+  These are the light values, and they are deliberately identical to the matching names in values/colors_theme.xml.
+  That is what lets the AMOLED switch stay on under "Follow system": the overlay is applied whatever the mode, and by day it resolves to the ordinary light surfaces and changes nothing.
   Pure black lives in values-night/colors_amoled.xml.
 
   Keep these in step with colors_theme.xml - if a light surface changes there, it has to change here, or turning AMOLED on will visibly alter the light theme.

@@ -31,7 +31,8 @@ class SyncNotificationManager @Inject constructor(
   private val notificationManager by lazy { NotificationManagerCompat.from(context) }
 
   /**
-   * Deliberately not [NotificationCompat.Builder.setOngoing]. This notification is not backed by a foreground service, so nothing guarantees the code that cancels it ever runs - a worker killed for memory, or by the platform's execution limit, takes its process down mid sync.
+   * Deliberately not [NotificationCompat.Builder.setOngoing].
+   * This notification is not backed by a foreground service, so nothing guarantees the code that cancels it ever runs - a worker killed for memory, or by the platform's execution limit, takes its process down mid sync.
    * An ongoing notification cannot be swiped away, so that would leave a permanent "Syncing…" the user has no way to be rid of.
    * Dismissible plus [cancelStaleProgress] on the next launch is worth more than a notification the user cannot accidentally clear.
    */

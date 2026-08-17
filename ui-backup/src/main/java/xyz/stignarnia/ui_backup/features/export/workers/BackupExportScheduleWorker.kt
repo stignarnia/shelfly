@@ -85,8 +85,8 @@ class BackupExportScheduleWorker @AssistedInject constructor(
      * Schedules a periodic backup export, replacing any existing schedule.
      * A schedule of [BackupExportSchedule.OFF] schedules nothing.
      *
-     * @param directoryUri Folder to write into. Ignored when the configured
-     * target is WebDAV, which addresses its directory by URL instead.
+     * @param directoryUri Folder to write into.
+     * Ignored when the configured target is WebDAV, which addresses its directory by URL instead.
      */
     fun schedulePeriodic(
       workManager: WorkManager,

@@ -18,8 +18,8 @@ internal object SyncTombstoneDeriver {
    * @param published what this device last uploaded, or null if it has never
    * synced - in which case nothing is treated as deleted, so a first sync only ever adds.
    * @param local current state.
-   * @param deletedAt when to date the deletions. Pass the *previous* sync time,
-   * not now: all that is known is that the deletion happened somewhere in between, and taking the earlier bound lets a genuine re-add on another device win the tie.
+   * @param deletedAt when to date the deletions.
+   * Pass the *previous* sync time, not now: all that is known is that the deletion happened somewhere in between, and taking the earlier bound lets a genuine re-add on another device win the tie.
    * Preserving data is the better way to be wrong.
    */
   fun derive(
