@@ -2,3 +2,4 @@ Shelfly 4.0.4
 
 • WebDAV sync now posts a notification while it runs and when it fails, so a device that has quietly stopped syncing says so. Tapping a failure notification opens the WebDAV settings from wherever you were in the app.
 • Pulling down on Progress to sync now keeps the ring on screen and fills it as the backup and sync actually advance, instead of putting it away the moment you let go.
+• The OMDb logo in Settings is legible again - its lettering was black on a black background - and tapping it opens omdbapi.com, the way the TMDb logo beside it already did.
