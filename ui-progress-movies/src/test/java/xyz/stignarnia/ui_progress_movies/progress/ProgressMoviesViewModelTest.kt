@@ -18,11 +18,13 @@ import io.mockk.Called
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.just
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -53,6 +55,11 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
     super.setUp()
 
     coEvery { translationsRepository.getLanguage() } returns "en"
+
+    // The constructor starts watching the manual backup run. Nothing here is
+    // about that indicator, so the work stream stays empty - without a stub the
+    // mock throws on the collect and takes down every test in the class.
+    every { workManager.getWorkInfosForUniqueWorkFlow(any()) } returns emptyFlow()
 
     SUT = ProgressMoviesViewModel(
       itemsCase,
