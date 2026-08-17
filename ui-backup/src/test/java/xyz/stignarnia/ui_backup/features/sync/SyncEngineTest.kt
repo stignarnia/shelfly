@@ -93,9 +93,8 @@ class SyncEngineTest {
   @Test
   fun `Should publish the state that actually landed, not the state it aimed for`() =
     runTest {
-      // The import can fall short - a show whose details will not fetch is
-      // skipped - and this file is the next cycle's baseline. Publishing the
-      // intent would make the next diff read those gaps as deletions.
+      // The import can fall short - a show whose details will not fetch is skipped - and this file is the next cycle's baseline.
+      // Publishing the intent would make the next diff read those gaps as deletions.
       val before = scheme(show(1))
       val after = scheme(show(1), show(2))
       coEvery { exportWorker.run() } returnsMany listOf(before, after)
@@ -141,8 +140,7 @@ class SyncEngineTest {
   @Test
   fun `Should leave the baseline alone when the upload fails`() =
     runTest {
-      // Moving it anyway would lose the deletions the failed file was carrying:
-      // the next diff would no longer re-derive them.
+      // Moving it anyway would lose the deletions the failed file was carrying: the next diff would no longer re-derive them.
       coEvery { remoteSource.upload(any(), any()) } returns Result.failure(RuntimeException("offline"))
 
       val error = runCatching { SUT.sync(CREDENTIALS) }

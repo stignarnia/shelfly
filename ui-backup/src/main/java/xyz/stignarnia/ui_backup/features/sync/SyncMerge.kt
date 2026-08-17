@@ -12,21 +12,20 @@ import xyz.stignarnia.ui_backup.model.BackupShows
 /**
  * Reconciles this device's state with every peer's.
  *
- * Pure by design - no database, no network, no clock. Everything that decides
- * whether your watch history survives a sync is decided here, and this is the
- * only part of the feature that can be tested exhaustively without two real
- * devices and a server.
+ * Pure by design - no database, no network, no clock.
+ * Everything that decides whether your watch history survives a sync is decided here, and this is the only part of the feature that can be tested exhaustively without two real devices and a server.
  *
  * The rules, in order of how much trouble each one prevents:
  *
- * - **Union first.** An entity present on any device is present in the result.
- * - **Absence is never deletion.** Only a tombstone removes something. A device
- *   that has been offline for a month has a stale, small state file; without
- *   this rule it would delete everything it had not heard about.
- * - **A tombstone wins only if it is newer** than the newest sighting of the
- *   entity. That is what lets a deletion propagate, and equally what lets a
- *   deliberate re-add on another device overrule an older deletion.
- * - **Ties go to keeping the data.** A tombstone must be strictly newer to win.
+ * - **Union first.**
+ * An entity present on any device is present in the result.
+ * - **Absence is never deletion.**
+ * Only a tombstone removes something.
+ * A device that has been offline for a month has a stale, small state file; without this rule it would delete everything it had not heard about.
+ * - **A tombstone wins only if it is newer** than the newest sighting of the entity.
+ * That is what lets a deletion propagate, and equally what lets a deliberate re-add on another device overrule an older deletion.
+ * - **Ties go to keeping the data.**
+ * A tombstone must be strictly newer to win.
  */
 internal object SyncMerge {
 
@@ -44,8 +43,7 @@ internal object SyncMerge {
     val states = listOf(local) + peers.map { it.state }
     val tombstones = newestPerKey(localTombstones + peers.flatMap { it.tombstones })
 
-    // The newest time any device saw each entity, used to decide whether a
-    // deletion happened before or after the thing it claims to delete.
+    // The newest time any device saw each entity, used to decide whether a deletion happened before or after the thing it claims to delete.
     val sightings = mutableMapOf<Pair<SyncEntity, String>, Long>()
     states.forEach { state ->
       SyncStateFlattener.flatten(state).forEach { (key, timestamp) ->
@@ -149,10 +147,8 @@ internal object SyncMerge {
   }
 
   /**
-   * A list's items live inside it, so they are gathered from every device's
-   * copy of that same list rather than from the one copy that happened to win.
-   * Otherwise an item added on another device would be dropped along with the
-   * losing copy of its list.
+   * A list's items live inside it, so they are gathered from every device's copy of that same list rather than from the one copy that happened to win.
+   * Otherwise an item added on another device would be dropped along with the losing copy of its list.
    */
   private fun BackupList.withMergedItems(
     states: List<BackupScheme>,
@@ -171,8 +167,7 @@ internal object SyncMerge {
   }
 
   /**
-   * Unions entries from every device, keeps the newest copy of each, and drops
-   * whatever a newer tombstone has deleted.
+   * Unions entries from every device, keeps the newest copy of each, and drops whatever a newer tombstone has deleted.
    */
   private fun <T> List<T>.mergeBy(
     entity: SyncEntity,

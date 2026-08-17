@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Material You, dark. The light counterpart is values-v31, and the two must carry
-  the same set of items - a name present in one and missing from the other falls
-  through to the static theme in that mode only, which is the hardest kind of
-  theming bug to spot.
+  Material You, dark.
+  The light counterpart is values-v31, and the two must carry the same set of items - a name present in one and missing from the other falls through to the static theme in that mode only, which is the hardest kind of theming bug to spot.
 
-  Under "Material You Dark (AMOLED)" the AMOLED overlay lands on top of this one
-  and takes the backgrounds to black, leaving the wallpaper accent and text in
-  place. That is why the surfaces here need no AMOLED-specific handling.
+  Under "Material You Dark (AMOLED)" the AMOLED overlay lands on top of this one and takes the backgrounds to black, leaving the wallpaper accent and text in place.
+  That is why the surfaces here need no AMOLED-specific handling.
 -->
 <resources>
 

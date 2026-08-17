@@ -7,11 +7,9 @@ import xyz.stignarnia.ui_settings.helpers.AppLanguage
 /**
  * A single screen of the welcome flow.
  *
- * Steps are plain data. [xyz.stignarnia.shelfly.ui.main.cases.MainWelcomeCase]
- * decides which ones are due and in which order, [xyz.stignarnia.shelfly.ui.main.MainViewModel]
- * walks the resulting queue and [xyz.stignarnia.shelfly.ui.views.welcome.WelcomeView]
- * renders whichever one is current. Adding a screen means adding a variant here
- * and a condition in the case, not another dialog with its own callback chain.
+ * Steps are plain data.
+ * [xyz.stignarnia.shelfly.ui.main.cases.MainWelcomeCase] decides which ones are due and in which order, [xyz.stignarnia.shelfly.ui.main.MainViewModel] walks the resulting queue and [xyz.stignarnia.shelfly.ui.views.welcome.WelcomeView] renders whichever one is current.
+ * Adding a screen means adding a variant here and a condition in the case, not another dialog with its own callback chain.
  */
 sealed interface WelcomeStep {
 
@@ -25,13 +23,9 @@ sealed interface WelcomeStep {
     get() = null
 
   /**
-   * Offered whenever the device language differs from the one the app is running
-   * in, not only on first run, and placed before everything else so that the rest
-   * of the flow follows the language just picked.
+   * Offered whenever the device language differs from the one the app is running in, not only on first run, and placed before everything else so that the rest of the flow follows the language just picked.
    *
-   * The secondary label is built from [current] rather than being a fixed
-   * resource, since what the user is declining is "keep the language I am already
-   * using", which is not always English.
+   * The secondary label is built from [current] rather than being a fixed resource, since what the user is declining is "keep the language I am already using", which is not always English.
    */
   data class Language(
     val suggested: AppLanguage,
@@ -52,8 +46,8 @@ sealed interface WelcomeStep {
   }
 
   /**
-   * A key the user pastes in. Both services share a screen shape, and differ only
-   * in their copy and in whether the flow can move on without an answer.
+   * A key the user pastes in.
+   * Both services share a screen shape, and differ only in their copy and in whether the flow can move on without an answer.
    */
   sealed interface ApiKey : WelcomeStep {
 
@@ -64,9 +58,7 @@ sealed interface WelcomeStep {
     @get:StringRes val hint: Int
 
     /**
-     * Without a TMDB key there is no catalog at all, so that step is queued
-     * whenever no key is stored - on first run and equally on any later launch
-     * after the key has been cleared.
+     * Without a TMDB key there is no catalog at all, so that step is queued whenever no key is stored - on first run and equally on any later launch after the key has been cleared.
      */
     data object Tmdb : ApiKey {
       const val ID = "API_KEY_TMDB"
@@ -78,8 +70,7 @@ sealed interface WelcomeStep {
     }
 
     /**
-     * Ratings only, so this one is skippable - and skipping is remembered, since
-     * the key stays unset and the condition alone would ask again every launch.
+     * Ratings only, so this one is skippable - and skipping is remembered, since the key stays unset and the condition alone would ask again every launch.
      */
     data object Omdb : ApiKey {
       const val ID = "API_KEY_OMDB"
@@ -93,9 +84,8 @@ sealed interface WelcomeStep {
   }
 
   /**
-   * API 33 and up only, where notifications need a runtime grant. First run
-   * switches episode notifications off precisely because the permission has not
-   * been asked for yet, so granting here turns them back on.
+   * API 33 and up only, where notifications need a runtime grant.
+   * First run switches episode notifications off precisely because the permission has not been asked for yet, so granting here turns them back on.
    */
   data object Notifications : WelcomeStep {
     const val ID = "NOTIFICATIONS"
@@ -105,9 +95,7 @@ sealed interface WelcomeStep {
   }
 
   /**
-   * Points at the existing backup screen rather than asking for a URL and
-   * credentials inline: the setup form already exists, and duplicating it here
-   * would mean two places to keep correct.
+   * Points at the existing backup screen rather than asking for a URL and credentials inline: the setup form already exists, and duplicating it here would mean two places to keep correct.
    */
   data object WebDavSync : WelcomeStep {
     const val ID = "WEBDAV_SYNC"

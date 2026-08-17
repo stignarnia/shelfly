@@ -11,8 +11,7 @@ import javax.inject.Inject
 /**
  * Reads and writes sync payloads on the user's WebDAV server.
  *
- * Each device writes only the file named after it, so two devices syncing at
- * the same moment never touch the same object and there is nothing to lock.
+ * Each device writes only the file named after it, so two devices syncing at the same moment never touch the same object and there is nothing to lock.
  */
 internal class SyncRemoteSource @Inject constructor(
   private val webDavClient: WebDavClient,
@@ -29,9 +28,8 @@ internal class SyncRemoteSource @Inject constructor(
   /**
    * Every peer's payload, excluding this device's own.
    *
-   * A file that cannot be read or parsed is skipped rather than failing the
-   * sync: one device writing something malformed should cost its own changes,
-   * not everyone else's. Skipping is safe because absence never deletes.
+   * A file that cannot be read or parsed is skipped rather than failing the sync: one device writing something malformed should cost its own changes, not everyone else's.
+   * Skipping is safe because absence never deletes.
    */
   suspend fun downloadPeers(
     credentials: WebDavCredentials,

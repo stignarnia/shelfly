@@ -202,9 +202,7 @@ internal class BackupImportShowsRunner @Inject constructor(
     }
   }
 
-  // An import never overwrites a rating the user already has, so every runner
-  // below checks the full key first - show or movie id plus, for a season or an
-  // episode, the numbers underneath it.
+  // An import never overwrites a rating the user already has, so every runner below checks the full key first - show or movie id plus, for a season or an episode, the numbers underneath it.
 
   private suspend fun importShowsRatings(backup: BackupShows) {
     withContext(dispatchers.IO) {

@@ -9,9 +9,9 @@ import javax.inject.Inject
 /**
  * Last resort for backup entries that carry no TMDB id at all.
  *
- * Only an exact title match counts. A backup entry has nothing else to match on
- * - no year, no external ids - so anything looser would quietly attach somebody
- * else's watch history to the wrong show.
+ * Only an exact title match counts.
+ * A backup entry has nothing else to match on
+ * - no year, no external ids - so anything looser would quietly attach somebody else's watch history to the wrong show.
  */
 interface CatalogIdResolver {
 

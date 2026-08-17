@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * Note: some extra work is added because of an issue:
- * https://gist.github.com/erikhuizinga/edf408167b46eb5b1568424563ca4e59?ts=2
+ * Note: some extra work is added because of an issue: https://gist.github.com/erikhuizinga/edf408167b46eb5b1568424563ca4e59?ts=2
  */
 class ScrollableViewBehaviour : CoordinatorLayout.Behavior<View> {
 

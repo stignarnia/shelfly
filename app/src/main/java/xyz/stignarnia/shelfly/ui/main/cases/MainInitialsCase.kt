@@ -81,16 +81,11 @@ class MainInitialsCase @Inject constructor(
   }
 
   /**
-   * The language the device itself is set to, which is not the same thing as the
-   * app's own locale: once a per app locale has been applied,
-   * [LocaleListCompat.getAdjustedDefault] reports that one first. The welcome
-   * flow re-offers the device language whenever it changes, so it needs the
-   * system value on every launch rather than only before the first choice.
+   * The language the device itself is set to, which is not the same thing as the app's own locale: once a per app locale has been applied, [LocaleListCompat.getAdjustedDefault] reports that one first.
+   * The welcome flow re-offers the device language whenever it changes, so it needs the system value on every launch rather than only before the first choice.
    *
    * Null when the device is set to a language the app has no translation for.
-   * That is not the same as English, and answering it with English would offer
-   * a user running the app in Italian on a Japanese phone a switch to English
-   * they never asked about.
+   * That is not the same as English, and answering it with English would offer a user running the app in Italian on a Japanese phone a switch to English they never asked about.
    */
   fun detectSystemLanguage(): AppLanguage? {
     val locales = LocaleManagerCompat.getSystemLocales(context)
@@ -104,11 +99,8 @@ class MainInitialsCase @Inject constructor(
   }
 
   /**
-   * When the notes are due to be shown the version stamp is deliberately left
-   * alone: [setWhatsNewSeen] writes it once the user has actually closed them,
-   * so an upgrade whose notes were never read is offered again. When nothing
-   * will be shown for this build the stamp is written right away, otherwise the
-   * next launch would mistake the build for an unread upgrade.
+   * When the notes are due to be shown the version stamp is deliberately left alone: [setWhatsNewSeen] writes it once the user has actually closed them, so an upgrade whose notes were never read is offered again.
+   * When nothing will be shown for this build the stamp is written right away, otherwise the next launch would mistake the build for an unread upgrade.
    */
   fun showWhatsNew(isInitialRun: Boolean): Boolean {
     val version = miscPreferences.getInt(KEY_APP_VERSION, 0)

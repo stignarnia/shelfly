@@ -86,8 +86,7 @@ class SettingsApiKeysFragment : BaseFragment<SettingsApiKeysViewModel>(R.layout.
   }
 
   /**
-   * Shows enough of the key to recognise which one is configured, without
-   * putting the whole secret on screen.
+   * Shows enough of the key to recognise which one is configured, without putting the whole secret on screen.
    */
   private fun mask(key: String): String {
     if (key.isBlank()) {

@@ -18,13 +18,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 /**
- * Hits the real TMDB API to prove the mapping against live payloads rather than
- * recorded ones - the only end-to-end check available while the app itself
- * cannot yet run.
+ * Hits the real TMDB API to prove the mapping against live payloads rather than recorded ones - the only end-to-end check available while the app itself cannot yet run.
  *
- * Skipped unless a TMDB key is compiled in, which is true for local debug builds
- * (prefilled from local.properties) and false on CI, so CI never makes network
- * calls.
+ * Skipped unless a TMDB key is compiled in, which is true for local debug builds (prefilled from local.properties) and false on CI, so CI never makes network calls.
  */
 class TmdbLiveApiTest {
 

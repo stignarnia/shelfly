@@ -5,12 +5,10 @@ import com.squareup.moshi.Json
 /**
  * Backup scheme v2, as written by Showly before this fork.
  *
- * Every entry is keyed by an id from the old catalog source ("id" on entries,
- * "sId" on children) which this fork cannot resolve. Some entries also carry a
- * TMDB id ("tmId"/"stmId"), written as -1 when the exporter could not find one.
+ * Every entry is keyed by an id from the old catalog source ("id" on entries, "sId" on children) which this fork cannot resolve.
+ * Some entries also carry a TMDB id ("tmId"/"stmId"), written as -1 when the exporter could not find one.
  *
- * These models exist only to be read by [xyz.stignarnia.ui_backup.features.import_.migrations.BackupMigrationV2];
- * nothing else should depend on them.
+ * These models exist only to be read by [xyz.stignarnia.ui_backup.features.import_.migrations.BackupMigrationV2]; nothing else should depend on them.
  */
 internal data class BackupSchemeV2(
   val version: Int,
@@ -51,11 +49,10 @@ internal data class BackupSeasonV2(
 )
 
 /**
- * "stmId" is deliberately not read here. The v2 exporter copied it from the
- * episode row's own show-TMDB column, which was never populated correctly, so
- * the value points at something other than the parent show. The parent is
- * recovered from "sId" instead. Seasons and show ratings are unaffected: their
- * exporter looked the id up properly.
+ * "stmId" is deliberately not read here.
+ * The v2 exporter copied it from the episode row's own show-TMDB column, which was never populated correctly, so the value points at something other than the parent show.
+ * The parent is recovered from "sId" instead.
+ * Seasons and show ratings are unaffected: their exporter looked the id up properly.
  */
 internal data class BackupEpisodeV2(
   @Json(name = "sId") val showLegacyId: Long = -1,

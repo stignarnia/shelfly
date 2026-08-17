@@ -1,8 +1,8 @@
 package xyz.stignarnia.data_remote.tmdb.model
 
 /**
- * A movie as returned by /movie/{id}. List endpoints return the same shape with
- * most fields absent, so everything is nullable.
+ * A movie as returned by /movie/{id}.
+ * List endpoints return the same shape with most fields absent, so everything is nullable.
  */
 data class TmdbMovie(
   val id: Long?,
@@ -30,9 +30,8 @@ data class TmdbCountry(
 )
 
 /**
- * Age certifications per country, from
- * /movie/{id}?append_to_response=release_dates. Shows use content_ratings
- * instead, with a different shape.
+ * Age certifications per country, from /movie/{id}?append_to_response=release_dates.
+ * Shows use content_ratings instead, with a different shape.
  */
 data class TmdbReleaseDates(
   val results: List<Result>?,
@@ -54,7 +53,8 @@ data class TmdbCollectionRef(
 )
 
 /**
- * A franchise from /collection/{id}. TMDB places a movie in at most one.
+ * A franchise from /collection/{id}.
+ * TMDB places a movie in at most one.
  */
 data class TmdbCollection(
   val id: Long?,

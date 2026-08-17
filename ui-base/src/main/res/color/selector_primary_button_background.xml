@@ -2,9 +2,7 @@
 <!--
   Background for @style/PrimaryMaterialButton.
 
-  Overriding backgroundTint with a flat colour would keep the filled button
-  looking live while it is disabled, so the disabled state is spelled out here
-  alongside the accent.
+  Overriding backgroundTint with a flat colour would keep the filled button looking live while it is disabled, so the disabled state is spelled out here alongside the accent.
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 

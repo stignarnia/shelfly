@@ -5,12 +5,10 @@ import com.squareup.moshi.Json
 /**
  * Backup scheme v3.
  *
- * The legacy id fields that v2 wrote ("id" on entries, "sId" on children) are
- * gone: they came from the previous catalog source. Entries are identified by
- * their TMDB id, and children by their parent show plus season/episode numbers.
+ * The legacy id fields that v2 wrote ("id" on entries, "sId" on children) are gone: they came from the previous catalog source.
+ * Entries are identified by their TMDB id, and children by their parent show plus season/episode numbers.
  *
- * The JSON keys are otherwise unchanged from v2, so a v2 file still reads - see
- * the importer, which remaps the legacy ids on the way in.
+ * The JSON keys are otherwise unchanged from v2, so a v2 file still reads - see the importer, which remaps the legacy ids on the way in.
  */
 data class BackupShows(
   @Json(name = "cH") val collectionHistory: List<BackupShow> = emptyList(),

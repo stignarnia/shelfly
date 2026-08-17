@@ -141,9 +141,8 @@ class BottomMenuView : FrameLayout {
   }
 
   private fun disableTooltips() {
-    // The menu view's children are the item views. Clearing the listener on all
-    // of them avoids naming BottomNavigationItemView, which Material restricts
-    // to its own library group.
+    // The menu view's children are the item views.
+    // Clearing the listener on all of them avoids naming BottomNavigationItemView, which Material restricts to its own library group.
     val content = binding.bottomNavigationView.getChildAt(0)
     if (content is ViewGroup) {
       content.children.forEach {

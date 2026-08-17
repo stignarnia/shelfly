@@ -84,9 +84,7 @@ internal class DiscoverMoviesFiltersProvidersBottomSheet :
     available: List<StreamingProvider>,
     selected: List<StreamingProvider>,
   ) {
-    // Rebuilding is only correct while the sheet has no unapplied edits of its
-    // own, which holds: the list arrives once and the state does not change
-    // again until the sheet closes.
+    // Rebuilding is only correct while the sheet has no unapplied edits of its own, which holds: the list arrives once and the state does not change again until the sheet closes.
     binding.providersChipGroup.removeAllViews()
     binding.clearButton.visibleIf(selected.isNotEmpty())
 

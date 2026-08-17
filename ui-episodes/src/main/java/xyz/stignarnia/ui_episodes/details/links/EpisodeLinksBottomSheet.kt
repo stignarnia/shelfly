@@ -123,7 +123,8 @@ class EpisodeLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_li
           try {
             startActivity(i)
           } catch (e: ActivityNotFoundException) {
-            // IMDb App not installed. Start in web browser
+            // IMDb App not installed.
+            // Start in web browser
             openWebUrl("https://www.imdb.com/title/${ids.imdb.id}")
           }
         }

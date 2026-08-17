@@ -6,21 +6,16 @@ import xyz.stignarnia.ui_backup.model.BackupScheme
 /**
  * Turns a full state snapshot into a flat set of keyed entities.
  *
- * Both halves of sync need the same view: the diff that derives deletions has
- * to compare two snapshots entity by entity, and the merge has to decide, per
- * entity, whether the newest thing it knows is an addition or a deletion.
- * Doing that against the nested backup scheme directly would mean repeating the
- * traversal in both places and letting them drift.
+ * Both halves of sync need the same view: the diff that derives deletions has to compare two snapshots entity by entity, and the merge has to decide, per entity, whether the newest thing it knows is an addition or a deletion.
+ * Doing that against the nested backup scheme directly would mean repeating the traversal in both places and letting them drift.
  */
 internal object SyncStateFlattener {
 
   /**
    * Every entity present in [scheme], keyed by kind and stable id.
    *
-   * The value is the entity's own timestamp where it has a meaningful one -
-   * when it was added or last changed - so the merge can order it against a
-   * deletion. Entities with no timestamp of their own report 0 and are ordered
-   * purely by tombstones.
+   * The value is the entity's own timestamp where it has a meaningful one - when it was added or last changed - so the merge can order it against a deletion.
+   * Entities with no timestamp of their own report 0 and are ordered purely by tombstones.
    */
   fun flatten(scheme: BackupScheme): Map<Pair<SyncEntity, String>, Long> {
     val entities = mutableMapOf<Pair<SyncEntity, String>, Long>()

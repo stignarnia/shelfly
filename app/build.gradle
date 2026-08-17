@@ -40,9 +40,8 @@ android {
   }
 
   signingConfigs {
-    // Both files are gitignored, so a fresh clone has neither. Only declare the
-    // release signing config when they are actually present - otherwise every
-    // task, debug builds and unit tests included, fails at configuration time.
+    // Both files are gitignored, so a fresh clone has neither.
+    // Only declare the release signing config when they are actually present - otherwise every task, debug builds and unit tests included, fails at configuration time.
     def keystorePropertiesFile = rootProject.file("app/keystore.properties")
     def keystoreFile = file("keystore")
 
@@ -99,18 +98,13 @@ android {
   namespace 'xyz.stignarnia.shelfly'
 }
 
-// Stamps every debug build so consecutive ones can be told apart on the
-// device. Without it they all report the same version and there is no way to
-// see which build is installed.
+// Stamps every debug build so consecutive ones can be told apart on the device.
+// Without it they all report the same version and there is no way to see which build is installed.
 //
-// The stamp increases rather than being random: versionCode is an int and
-// Android refuses to install a lower one over a higher one, so a random value
-// would fail as soon as it landed below the installed build. Seconds since the
-// epoch is monotonic and stays inside Integer.MAX until 2038.
+// The stamp increases rather than being random: versionCode is an int and Android refuses to install a lower one over a higher one, so a random value would fail as soon as it landed below the installed build.
+// Seconds since the epoch is monotonic and stays inside Integer.MAX until 2038.
 //
-// Read through a ValueSource, not directly: with the configuration cache on, a
-// value computed while configuring is stored in the cache entry and replayed,
-// which would hand every later build the same stamp.
+// Read through a ValueSource, not directly: with the configuration cache on, a value computed while configuring is stored in the cache entry and replayed, which would hand every later build the same stamp.
 androidComponents {
   onVariants(selector().withBuildType("debug")) { variant ->
     def releaseName = versions.versionName
@@ -165,6 +159,6 @@ dependencies {
   testImplementation libs.bundles.testing
   androidTestImplementation libs.android.test.runner
 
-  //  debugImplementation "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary"
+  // debugImplementation "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary"
   coreLibraryDesugaring libs.android.desugar
 }

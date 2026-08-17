@@ -1,8 +1,7 @@
 package xyz.stignarnia.data_remote.tmdb.model
 
 /**
- * TMDB paginates every list endpoint at 20 items per page, so callers that want
- * a longer list have to walk pages.
+ * TMDB paginates every list endpoint at 20 items per page, so callers that want a longer list have to walk pages.
  */
 data class TmdbPage<T>(
   val page: Int?,
@@ -12,9 +11,8 @@ data class TmdbPage<T>(
 )
 
 /**
- * An entry from /search/multi, which mixes shows, movies and people. Show and
- * movie fields both appear here because the payload is a union - "media_type"
- * says which ones are populated.
+ * An entry from /search/multi, which mixes shows, movies and people.
+ * Show and movie fields both appear here because the payload is a union - "media_type" says which ones are populated.
  */
 data class TmdbSearchItem(
   val id: Long?,
@@ -41,8 +39,8 @@ data class TmdbSearchItem(
 }
 
 /**
- * Everything a person has appeared in or worked on, from
- * /person/{id}/combined_credits. Entries carry "media_type" like search results.
+ * Everything a person has appeared in or worked on, from /person/{id}/combined_credits.
+ * Entries carry "media_type" like search results.
  */
 data class TmdbPersonCredits(
   val cast: List<TmdbSearchItem>?,

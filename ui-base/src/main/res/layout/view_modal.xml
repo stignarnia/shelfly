@@ -61,9 +61,8 @@
       />
 
     <!--
-      Holds whatever the caller passes to setView, and the rows built by
-      setItems / setSingleChoiceItems. Capped and scrollable so a long list or a
-      form with the keyboard up cannot push the buttons off screen.
+      Holds whatever the caller passes to setView, and the rows built by setItems / setSingleChoiceItems.
+      Capped and scrollable so a long list or a form with the keyboard up cannot push the buttons off screen.
     -->
     <ScrollView
       android:id="@+id/modalContentScroll"
@@ -89,8 +88,7 @@
 
     <!--
       A side action that is neither confirm nor cancel gets its own centred row.
-      Sharing the confirm row meant three labels competing for one line, which a
-      longer translation would have broken outright.
+      Sharing the confirm row meant three labels competing for one line, which a longer translation would have broken outright.
     -->
     <com.google.android.material.button.MaterialButton
       android:id="@+id/modalNeutralButton"

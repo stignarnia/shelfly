@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  One row of setSingleChoiceItems. A CheckedTextView rather than a RadioButton
-  so the whole row is the touch target, matching how the pickers behaved when
-  they were AlertDialog list items.
+  One row of setSingleChoiceItems.
+  A CheckedTextView rather than a RadioButton so the whole row is the touch target, matching how the pickers behaved when they were AlertDialog list items.
 -->
 <CheckedTextView
   xmlns:android="http://schemas.android.com/apk/res/android"

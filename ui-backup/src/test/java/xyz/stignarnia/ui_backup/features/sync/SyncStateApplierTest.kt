@@ -47,8 +47,7 @@ import xyz.stignarnia.data_local.database.model.Episode as EpisodeDb
 import xyz.stignarnia.data_local.database.model.Season as SeasonDb
 
 /**
- * The applier is the only part of sync that deletes local data, so these cover
- * what it removes as much as what it leaves alone.
+ * The applier is the only part of sync that deletes local data, so these cover what it removes as much as what it leaves alone.
  */
 class SyncStateApplierTest {
 
@@ -111,8 +110,7 @@ class SyncStateApplierTest {
   @Test
   fun `Should never remove something a peer simply has not heard of`() =
     runTest {
-      // The merged state is a superset: absence on one device is not deletion,
-      // so a bigger result must still remove nothing.
+      // The merged state is a superset: absence on one device is not deletion, so a bigger result must still remove nothing.
       val local = scheme(shows = BackupShows(collectionHistory = listOf(show(1))))
       val merged = scheme(shows = BackupShows(collectionHistory = listOf(show(1), show(2))))
 
@@ -136,9 +134,8 @@ class SyncStateApplierTest {
   @Test
   fun `Should carry both halves of a move between collections`() =
     runTest {
-      // Moving a show out of the watchlist and into the collection is a removal
-      // and an addition. Only the removal is this class's job, but it has to
-      // happen even though the show is still present elsewhere.
+      // Moving a show out of the watchlist and into the collection is a removal and an addition.
+      // Only the removal is this class's job, but it has to happen even though the show is still present elsewhere.
       val local = scheme(shows = BackupShows(collectionWatchlist = listOf(show(1))))
       val merged = scheme(shows = BackupShows(collectionHistory = listOf(show(1))))
 
@@ -231,8 +228,7 @@ class SyncStateApplierTest {
   @Test
   fun `Should delete the episode row when the show is no longer followed`() =
     runTest {
-      // For an unfollowed show the episodes table is only a cache, which is
-      // what EpisodesManager does on the same transition.
+      // For an unfollowed show the episodes table is only a cache, which is what EpisodesManager does on the same transition.
       val episode = episodeDb(showId = 1, seasonNumber = 2, episodeNumber = 5, isWatched = true)
       coEvery { episodes.getAllByShowId(1) } returns listOf(episode)
       coEvery { episodes.getAllForSeason(any()) } returns emptyList()

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  The Movie Database logo, from themoviedb.org/about/logos-attribution.
-  Path taken verbatim from their official SVG; the gradient is dropped so the
-  mark can be tinted, which is how the pull-to-refresh indicator renders it.
+  The Movie Database logo, from themoviedb.org/about/logos-attribution. Path taken verbatim from their official SVG; the gradient is dropped so the mark can be tinted, which is how the pull-to-refresh indicator renders it.
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
   android:width="24dp"

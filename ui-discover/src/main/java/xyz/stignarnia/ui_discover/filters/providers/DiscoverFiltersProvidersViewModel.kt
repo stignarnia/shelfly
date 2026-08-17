@@ -30,9 +30,8 @@ internal class DiscoverFiltersProvidersViewModel @Inject constructor(
 
   companion object {
     /**
-     * A region publishes upwards of two hundred services, most of them a single
-     * distributor's storefront. TMDB ranks them for the region, so the head of
-     * that list is the part worth offering as chips.
+     * A region publishes upwards of two hundred services, most of them a single distributor's storefront.
+     * TMDB ranks them for the region, so the head of that list is the part worth offering as chips.
      */
     private const val PROVIDERS_LIMIT = 50
   }
@@ -59,8 +58,7 @@ internal class DiscoverFiltersProvidersViewModel @Inject constructor(
           isMovie = false,
           countryCode = country,
         )
-        // A selection made before the cap moved, or before the region changed,
-        // still has to appear or the sheet could not clear it.
+        // A selection made before the cap moved, or before the region changed, still has to appear or the sheet could not clear it.
         val selectedIds = selected.map { it.id }
         availableState.value = (
           providers.take(PROVIDERS_LIMIT) +

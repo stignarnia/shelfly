@@ -42,9 +42,7 @@ internal class CollectionFiltersNetworkViewModel @Inject constructor(
     viewModelScope.launch {
       selectedState.value = selectedNetworks()
       loadingState.value = true
-      // The offered networks are the ones the collection actually holds rather
-      // than a fixed list, so a filter is never offered that matches nothing
-      // and no broadcaster is missing because it was never enumerated.
+      // The offered networks are the ones the collection actually holds rather than a fixed list, so a filter is never offered that matches nothing and no broadcaster is missing because it was never enumerated.
       availableState.value = withContext(dispatchers.IO) {
         val shows = when (origin) {
           MY_SHOWS -> showsRepository.myShows.loadAll()

@@ -13,8 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Season and episode ratings hang off the show that owns them, so every call
- * about one takes the show's TMDB id - see [Rating].
+ * Season and episode ratings hang off the show that owns them, so every call about one takes the show's TMDB id - see [Rating].
  */
 @Singleton
 class ShowsRatingsRepository @Inject constructor(

@@ -3,14 +3,10 @@
   <!--
     Base app theme.
 
-    The parent is DayNight, so light and dark are the same style resolved against
-    two sets of values: every colour below points at colors_theme.xml, which
-    exists in values/ (light) and values-night/ (dark). Nothing here should carry
-    a literal hex or a colors.xml name unless it is deliberately fixed across
-    themes - see the "held fixed" items further down.
+    The parent is DayNight, so light and dark are the same style resolved against two sets of values: every colour below points at colors_theme.xml, which exists in values/ (light) and values-night/ (dark).
+    Nothing here should carry a literal hex or a colors.xml name unless it is deliberately fixed across themes - see the "held fixed" items further down.
 
-    AMOLED and Material You are not separate themes; they are overlays applied on
-    top of this one in BaseActivity.
+    AMOLED and Material You are not separate themes; they are overlays applied on top of this one in BaseActivity.
   -->
   <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
     <item name="android:windowBackground">@color/themeBackground</item>
@@ -68,10 +64,9 @@
     <!--
       Held fixed across every theme.
 
-      The first two are burned over poster and backdrop artwork, which is dark
-      whatever the app is doing, so they stay white with their black shadow. The
-      error snackbar is white on the brand red in both. The widget status scrim
-      sits on artwork too, and widgets do not follow the app theme at all.
+      The first two are burned over poster and backdrop artwork, which is dark whatever the app is doing, so they stay white with their black shadow.
+      The error snackbar is white on the brand red in both.
+      The widget status scrim sits on artwork too, and widgets do not follow the app theme at all.
     -->
     <item name="textColorOnSurface">@color/colorWhite</item>
     <item name="textColorGridTitle">@color/colorWhite</item>
@@ -140,8 +135,9 @@
 
   <!-- Modals -->
 
-  <!-- The dismissing half of a ModalView's button row, paired with
-       @style/PrimaryMaterialButton for the confirm. -->
+  <!--
+    The dismissing half of a ModalView's button row, paired with @style/PrimaryMaterialButton for the confirm.
+  -->
   <style name="ModalNegativeButton" parent="Widget.Material3.Button.TextButton.Dialog">
     <item name="android:textColor">?android:attr/textColorSecondary</item>
     <item name="cornerRadius">100dp</item>
@@ -294,9 +290,8 @@
   </style>
 
   <!--
-    The primary call to action: a filled accent button. Shared by the welcome
-    steps and every modal's confirm, so the action looks the same everywhere -
-    define it here rather than tinting a button inline.
+    The primary call to action: a filled accent button.
+    Shared by the welcome steps and every modal's confirm, so the action looks the same everywhere - define it here rather than tinting a button inline.
   -->
   <style name="PrimaryMaterialButton" parent="RoundMaterialButton">
     <item name="android:textColor">@color/selector_button_text</item>
@@ -304,8 +299,7 @@
   </style>
 
   <!--
-    The same button in grey, for an action that belongs next to the confirm
-    without competing with it - the WebDAV "Test connection" is the one so far.
+    The same button in grey, for an action that belongs next to the confirm without competing with it - the WebDAV "Test connection" is the one so far.
   -->
   <style name="SecondaryMaterialButton" parent="RoundMaterialButton">
     <item name="android:textColor">@color/selector_button_text</item>

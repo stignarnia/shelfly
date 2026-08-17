@@ -1,4 +1,4 @@
-### Moshi
+# ## Moshi
 
 # JSR 305 annotations are for embedding nullability information.
 -dontwarn javax.annotation.**
@@ -18,11 +18,10 @@
 # The name of @JsonClass types is used to look up the generated adapter.
 -keepnames @com.squareup.moshi.JsonClass class *
 
-# Retain generated target class's synthetic defaults constructor and keep DefaultConstructorMarker's
-# name. We will look this up reflectively to invoke the type's constructor.
+# Retain generated target class's synthetic defaults constructor and keep DefaultConstructorMarker's name.
+# We will look this up reflectively to invoke the type's constructor.
 #
-# We can't _just_ keep the defaults constructor because Proguard/R8's spec doesn't allow wildcard
-# matching preceding parameters.
+# We can't _just_ keep the defaults constructor because Proguard/R8's spec doesn't allow wildcard matching preceding parameters.
 -keepnames class kotlin.jvm.internal.DefaultConstructorMarker
 -keepclassmembers @com.squareup.moshi.JsonClass @kotlin.Metadata class * {
     synthetic <init>(...);

@@ -9,7 +9,10 @@ sealed interface WebDavBackups {
 
   data object Loading : WebDavBackups
 
-  /** File names, newest first. Empty when the server has no backups yet. */
+  /**
+   * File names, newest first.
+   * Empty when the server has no backups yet.
+   */
   data class Loaded(
     val fileNames: List<String>,
   ) : WebDavBackups

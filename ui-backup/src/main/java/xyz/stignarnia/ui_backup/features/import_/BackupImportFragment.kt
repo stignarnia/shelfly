@@ -111,8 +111,7 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
         message = getString(R.string.textBackupImportSuccess),
       )
     } else {
-      // Losses stay on screen until acknowledged, so the numbers are never
-      // silently wrong.
+      // Losses stay on screen until acknowledged, so the numbers are never silently wrong.
       host.showInfoSnackbar(
         message = getString(R.string.textBackupImportSuccess) +
           "\n\n" + getString(R.string.textBackupImportSkipped) + "\n" + skipped,

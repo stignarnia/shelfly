@@ -12,15 +12,11 @@ import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.visible
 
 /**
- * Assembles a [ModalView]. The call shape follows the alert dialog builder it
- * replaced, so a screen reads the same as before, with one deliberate
- * difference: **a button never closes the modal by itself**. The confirm lambda
- * is handed the [ModalView] and dismisses when it is satisfied, which is what
- * lets the backup retention field reject a bad number without throwing away
- * what was typed.
+ * Assembles a [ModalView].
+ * The call shape follows the alert dialog builder it replaced, so a screen reads the same as before, with one deliberate difference: **a button never closes the modal by itself**.
+ * The confirm lambda is handed the [ModalView] and dismisses when it is satisfied, which is what lets the backup retention field reject a bad number without throwing away what was typed.
  *
- * [anchor] only has to be a view in the host's hierarchy; the modal is added to
- * that host's content root.
+ * [anchor] only has to be a view in the host's hierarchy; the modal is added to that host's content root.
  */
 class ModalBuilder(
   private val anchor: View,
@@ -53,11 +49,10 @@ class ModalBuilder(
   ) = addChoices(items, checkedIndex = -1, onPicked = onPicked)
 
   /**
-   * A list of choices with the current one ticked. Picking closes the modal,
-   * since that is the whole interaction.
+   * A list of choices with the current one ticked.
+   * Picking closes the modal, since that is the whole interaction.
    *
-   * [textSizeSp] exists for the date format picker, whose labels are long
-   * enough that they used to need their own dialog style.
+   * [textSizeSp] exists for the date format picker, whose labels are long enough that they used to need their own dialog style.
    */
   fun setSingleChoiceItems(
     items: List<CharSequence>,
@@ -78,9 +73,7 @@ class ModalBuilder(
   }
 
   /**
-   * A side action on its own centred row above the confirm, which leaves the
-   * modal open - the WebDAV form tests its credentials from here, and the
-   * result lands in the form above.
+   * A side action on its own centred row above the confirm, which leaves the modal open - the WebDAV form tests its credentials from here, and the result lands in the form above.
    */
   fun setNeutralButton(
     @StringRes textResId: Int,
@@ -136,8 +129,7 @@ class ModalBuilder(
   }
 
   /**
-   * The content view rather than the root, so the modal sits under the system
-   * bars' insets the way the rest of the screen does.
+   * The content view rather than the root, so the modal sits under the system bars' insets the way the rest of the screen does.
    */
   private fun host(): ViewGroup = anchor.rootView.findViewById(android.R.id.content) ?: anchor.rootView as ViewGroup
 

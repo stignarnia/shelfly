@@ -58,8 +58,7 @@ class BackupMigrationV2Test {
   @Test
   fun `Should take the episode's parent from its show id, never from the exported TMDB id`() =
     runTest {
-      // "stmId" on a v2 episode points at something other than the parent show,
-      // so an episode of "Kept Show" has to come back keyed 1000, not 99999.
+      // "stmId" on a v2 episode points at something other than the parent show, so an episode of "Kept Show" has to come back keyed 1000, not 99999.
       val result = SUT.migrate(fixture())
       val episodes = result.scheme.shows.progressEpisodes
 

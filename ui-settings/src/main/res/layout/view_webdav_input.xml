@@ -73,10 +73,8 @@
   </com.google.android.material.textfield.TextInputLayout>
 
   <!--
-    Always present, always three lines tall. The longest outcome ("Could not
-    establish a secure connection...") wraps to three, so holding that height
-    from the start means running a test writes into a box that is already there
-    instead of growing the modal under the user's finger.
+    Always present, always three lines tall.
+    The longest outcome ("Could not establish a secure connection...") wraps to three, so holding that height from the start means running a test writes into a box that is already there instead of growing the modal under the user's finger.
   -->
   <TextView
     android:id="@+id/webdavTestResult"

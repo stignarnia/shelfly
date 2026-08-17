@@ -32,8 +32,7 @@ allprojects {
 }
 
 subprojects {
-  // Centralised so the SDK and bytecode level live in one place instead of
-  // being repeated in every module's android {} block.
+  // Centralised so the SDK and bytecode level live in one place instead of being repeated in every module's android {} block.
   plugins.withId("com.android.base") {
     android {
       compileSdk versions.compileSdk
@@ -41,8 +40,7 @@ subprojects {
     }
   }
 
-  // Gradle itself runs on whatever JDK is installed; compilation is pinned to
-  // the toolchain so the output does not change with the local JDK.
+  // Gradle itself runs on whatever JDK is installed; compilation is pinned to the toolchain so the output does not change with the local JDK.
   plugins.withId("org.jetbrains.kotlin.android") {
     kotlin {
       jvmToolchain(versions.jvmTarget)

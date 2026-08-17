@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Label colour shared by @style/PrimaryMaterialButton and
-  @style/SecondaryMaterialButton - both are filled, so both carry white text.
+  Label colour shared by @style/PrimaryMaterialButton and @style/SecondaryMaterialButton - both are filled, so both carry white text.
 
-  Some hosts disable the button until their state allows continuing - notably
-  the welcome key steps, which cannot continue on an empty field, and the WebDAV
-  test while a test is already running. A flat textColor would keep looking
-  enabled, so the disabled state has to be spelled out.
+  Some hosts disable the button until their state allows continuing - notably the welcome key steps, which cannot continue on an empty field, and the WebDAV test while a test is already running.
+  A flat textColor would keep looking enabled, so the disabled state has to be spelled out.
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 

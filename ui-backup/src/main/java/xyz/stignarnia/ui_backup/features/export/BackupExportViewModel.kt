@@ -121,9 +121,8 @@ class BackupExportViewModel @Inject constructor(
   fun isWebDavTarget() = webDavRepository.backupTarget == BackupTarget.WEBDAV
 
   /**
-   * Re-reads how syncing is going. Called on every resume because the work
-   * runs in the background, so the screen would otherwise show whatever was
-   * true when it was opened.
+   * Re-reads how syncing is going.
+   * Called on every resume because the work runs in the background, so the screen would otherwise show whatever was true when it was opened.
    */
   fun refreshSyncStatus() {
     if (!isWebDavTarget()) {
@@ -139,9 +138,8 @@ class BackupExportViewModel @Inject constructor(
   }
 
   /**
-   * Set up an automatic export schedule against the WebDAV server. The
-   * destination is the configured URL, so unlike the local folder there is
-   * nothing to pick.
+   * Set up an automatic export schedule against the WebDAV server.
+   * The destination is the configured URL, so unlike the local folder there is nothing to pick.
    */
   fun saveExportBackupSchedule(schedule: BackupExportSchedule) {
     viewModelScope.launch {
@@ -182,7 +180,8 @@ class BackupExportViewModel @Inject constructor(
   }
 
   /**
-   * Set schedule to OFF. This cancels ongoing schedules.
+   * Set schedule to OFF.
+   * This cancels ongoing schedules.
    */
   fun saveExportBackupScheduleOff() {
     val offSchedule = BackupExportSchedule.OFF

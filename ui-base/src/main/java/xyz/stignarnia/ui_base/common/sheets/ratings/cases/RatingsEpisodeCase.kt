@@ -69,8 +69,7 @@ class RatingsEpisodeCase @Inject constructor(
     }
   }
 
-  // The rating is keyed by show, season and episode number, so nothing else is
-  // read off the episode here.
+  // The rating is keyed by show, season and episode number, so nothing else is read off the episode here.
   private fun episode(
     seasonNumber: Int,
     episodeNumber: Int,

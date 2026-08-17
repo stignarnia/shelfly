@@ -6,9 +6,7 @@ import xyz.stignarnia.data_webdav.WebDavCredentials
 /**
  * Writes into a directory on the user's own WebDAV server.
  *
- * Thinner than the local target: WebDAV addresses files by name under the
- * configured directory, so there is no handle to keep or document to create
- * ahead of the write.
+ * Thinner than the local target: WebDAV addresses files by name under the configured directory, so there is no handle to keep or document to create ahead of the write.
  */
 internal class WebDavBackupDestination(
   private val webDavClient: WebDavClient,

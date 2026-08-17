@@ -12,9 +12,7 @@
   >
 
   <!--
-    Deliberately empty: the navigation host is added in code once the welcome
-    flow is done, so its start destination cannot load and draw behind screens
-    the user has not answered yet.
+    Deliberately empty: the navigation host is added in code once the welcome flow is done, so its start destination cannot load and draw behind screens the user has not answered yet.
   -->
   <androidx.fragment.app.FragmentContainerView
     android:id="@+id/navigationHost"

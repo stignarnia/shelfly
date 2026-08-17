@@ -40,7 +40,9 @@ import xyz.stignarnia.data_local.sources.WatchlistShowsLocalDataSource
 import javax.inject.Inject
 import javax.inject.Singleton
 
-// TODO Refactor. Split or remove this wrapper at all. Clients do not need to be exposed to everything.
+// TODO Refactor.
+// Split or remove this wrapper at all.
+// Clients do not need to be exposed to everything.
 
 /**
  * Provides local data sources access points.

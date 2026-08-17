@@ -5,18 +5,13 @@ import org.junit.Test
 import java.io.File
 
 /**
- * Guards the invariants the theme system rests on, none of which the compiler
- * can see.
+ * Guards the invariants the theme system rests on, none of which the compiler can see.
  *
- * A theme here is one style resolved against two sets of values, plus two
- * overlays composed on top. That makes the dangerous failure a *missing* entry
- * rather than a wrong one: a colour defined for light but not dark, or an
- * attribute the Material You overlay forgets, silently falls through to the
- * static theme in one mode only. Nothing fails to build, nothing throws, and it
- * shows up as one wrong colour on one screen in one of six themes.
+ * A theme here is one style resolved against two sets of values, plus two overlays composed on top.
+ * That makes the dangerous failure a *missing* entry rather than a wrong one: a colour defined for light but not dark, or an attribute the Material You overlay forgets, silently falls through to the static theme in one mode only.
+ * Nothing fails to build, nothing throws, and it shows up as one wrong colour on one screen in one of six themes.
  *
- * These checks caught colorPrimaryDark missing from both overlays when they
- * were written.
+ * These checks caught colorPrimaryDark missing from both overlays when they were written.
  */
 class ThemeResourcesTest {
 
@@ -84,10 +79,8 @@ class ThemeResourcesTest {
   }
 
   /**
-   * The AMOLED overlay is applied whatever the night mode, so that the switch
-   * keeps working under "Follow system". By day it must therefore resolve to
-   * exactly the light theme's own surfaces, or turning it on would change the
-   * light theme too.
+   * The AMOLED overlay is applied whatever the night mode, so that the switch keeps working under "Follow system".
+   * By day it must therefore resolve to exactly the light theme's own surfaces, or turning it on would change the light theme too.
    */
   @Test
   fun `amoled light values match the light theme surfaces`() {
@@ -118,10 +111,8 @@ class ThemeResourcesTest {
   }
 
   /**
-   * Anything AppTheme colours has to be answered by Material You, or that
-   * attribute keeps the static palette while everything around it follows the
-   * wallpaper. Attributes whose value is already an attribute reference are
-   * excluded: overriding what they point at is enough.
+   * Anything AppTheme colours has to be answered by Material You, or that attribute keeps the static palette while everything around it follows the wallpaper.
+   * Attributes whose value is already an attribute reference are excluded: overriding what they point at is enough.
    */
   @Test
   fun `material you covers every themed attribute of AppTheme`() {

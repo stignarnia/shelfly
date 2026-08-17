@@ -19,9 +19,7 @@ data class SettingsBackupUiState(
 /**
  * The state of the "Test connection" action.
  *
- * [Failed] carries a specific reason rather than a generic error, because a
- * wrong password, a mistyped path and a rejected certificate need entirely
- * different fixes from the user.
+ * [Failed] carries a specific reason rather than a generic error, because a wrong password, a mistyped path and a rejected certificate need entirely different fixes from the user.
  */
 sealed interface ConnectionTest {
 

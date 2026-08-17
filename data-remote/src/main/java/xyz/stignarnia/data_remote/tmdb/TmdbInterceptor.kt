@@ -7,8 +7,7 @@ import okhttp3.Response
 /**
  * Authenticates against TMDB with a v3 API key passed as a query parameter.
  *
- * The v4 "Authorization: Bearer" scheme expects a read access token instead,
- * which is not the credential users are given when they create a TMDB key.
+ * The v4 "Authorization: Bearer" scheme expects a read access token instead, which is not the credential users are given when they create a TMDB key.
  */
 class TmdbInterceptor(
   private val apiKeyProvider: ApiKeyProvider,

@@ -46,8 +46,7 @@ interface TmdbRemoteDataSource {
   ): TmdbStreamingCountry?
 
   /**
-   * Every provider carrying content in [countryCode], ordered the way TMDB
-   * ranks them for that region rather than globally.
+   * Every provider carrying content in [countryCode], ordered the way TMDB ranks them for that region rather than globally.
    */
   suspend fun fetchWatchProviders(
     isMovie: Boolean,
@@ -60,8 +59,8 @@ interface TmdbRemoteDataSource {
 
   suspend fun fetchPersonImages(tmdbId: Long): TmdbImages
 
-  // Catalog access. These return the shared
-  // data-remote DTOs so the repository layer is unaffected by the source swap.
+  // Catalog access.
+  // These return the shared data-remote DTOs so the repository layer is unaffected by the source swap.
 
   suspend fun fetchShow(
     tmdbId: Long,

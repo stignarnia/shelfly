@@ -158,7 +158,8 @@ class LinksBottomSheet : BaseBottomSheetFragment(R.layout.view_links) {
           try {
             startActivity(i)
           } catch (e: ActivityNotFoundException) {
-            // IMDb App not installed. Start in web browser
+            // IMDb App not installed.
+            // Start in web browser
             openWebUrl("https://www.imdb.com/title/${ids.imdb.id}")
           }
         }

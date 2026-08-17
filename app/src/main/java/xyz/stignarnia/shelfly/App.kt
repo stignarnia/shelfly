@@ -56,12 +56,10 @@ class App :
 
     /**
      * Pin the stored language, which is the app's own source of truth for it.
-     * Applied unconditionally: re-applying the language already in force is a
-     * no-op, whereas reading back the current one this early is not reliable.
+     * Applied unconditionally: re-applying the language already in force is a no-op, whereas reading back the current one this early is not reliable.
      *
-     * Note this only takes effect from the following launch on API 33+, where
-     * it goes through the system LocaleManager asynchronously. The welcome flow
-     * therefore does not depend on it - see WelcomeState.displayLanguage.
+     * Note this only takes effect from the following launch on API 33+, where it goes through the system LocaleManager asynchronously.
+     * The welcome flow therefore does not depend on it - see WelcomeState.displayLanguage.
      */
     fun setupLanguage() {
       settingsRepository.isLocaleInitialised = true

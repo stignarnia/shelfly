@@ -21,10 +21,8 @@ import javax.inject.Named
 /**
  * Owns every "should this welcome screen appear" decision.
  *
- * All triggers are evaluated once, up front, so the screens that are due are
- * known as a single ordered list instead of being discovered one callback at a
- * time. Completion is recorded when the user finishes a step, not when it is
- * queued, so a flow abandoned halfway is resumed on the next launch.
+ * All triggers are evaluated once, up front, so the screens that are due are known as a single ordered list instead of being discovered one callback at a time.
+ * Completion is recorded when the user finishes a step, not when it is queued, so a flow abandoned halfway is resumed on the next launch.
  */
 @ViewModelScoped
 class MainWelcomeCase @Inject constructor(
@@ -42,9 +40,8 @@ class MainWelcomeCase @Inject constructor(
     private const val RELEASE_NOTES_ASSET = "release_notes.txt"
 
     /**
-     * Steps an install that predates the welcome flow must not be ambushed with
-     * on upgrade. They are all optional, and a wall of new screens in place of
-     * the app is a poor way to announce them.
+     * Steps an install that predates the welcome flow must not be ambushed with on upgrade.
+     * They are all optional, and a wall of new screens in place of the app is a poor way to announce them.
      */
     private val UPGRADE_SEED = setOf(
       WelcomeStep.Disclaimer.ID,
@@ -82,13 +79,9 @@ class MainWelcomeCase @Inject constructor(
   }
 
   /**
-   * Offered whenever the device is set to a language the app is not running in,
-   * on any launch rather than only the first - switching the phone to French is
-   * exactly when being asked about French is useful.
+   * Offered whenever the device is set to a language the app is not running in, on any launch rather than only the first - switching the phone to French is exactly when being asked about French is useful.
    *
-   * A declined suggestion is remembered by language, not as a one off flag, so
-   * saying no settles that language for good while a later switch to a different
-   * one still asks.
+   * A declined suggestion is remembered by language, not as a one off flag, so saying no settles that language for good while a later switch to a different one still asks.
    */
   private fun languageStep(): WelcomeStep.Language? {
     val suggested = initialsCase.detectSystemLanguage() ?: return null
@@ -126,8 +119,7 @@ class MainWelcomeCase @Inject constructor(
   fun setOmdbApiKey(key: String) = apiKeyProvider.setOmdbApiKey(key)
 
   /**
-   * First run switches episode notifications off because the runtime permission
-   * has not been asked for yet, so a grant here has to switch them back on.
+   * First run switches episode notifications off because the runtime permission has not been asked for yet, so a grant here has to switch them back on.
    */
   suspend fun setNotificationsEnabled(enabled: Boolean) {
     val settings = settingsRepository.load()
@@ -135,11 +127,8 @@ class MainWelcomeCase @Inject constructor(
   }
 
   /**
-   * Installs that already passed the previous first run flow have no record of
-   * it, and must not be shown those screens again. Seed one, once, the first time
-   * this build runs: the disclaimer counts as acknowledged, the newly added
-   * optional steps count as declined, and the language currently on the device
-   * counts as already asked about - only a change from here on should prompt.
+   * Installs that already passed the previous first run flow have no record of it, and must not be shown those screens again.
+   * Seed one, once, the first time this build runs: the disclaimer counts as acknowledged, the newly added optional steps count as declined, and the language currently on the device counts as already asked about - only a change from here on should prompt.
    */
   private fun migrate(isInitialRun: Boolean) {
     if (miscPreferences.contains(KEY_COMPLETED_STEPS)) return

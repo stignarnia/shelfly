@@ -8,9 +8,8 @@ import javax.inject.Singleton
 /**
  * Stores API keys encrypted in SharedPreferences.
  *
- * Falls back to the build-time key when nothing is stored. That value is empty
- * in release builds and only populated in debug builds from local.properties,
- * so development does not mean retyping a key after every install.
+ * Falls back to the build-time key when nothing is stored.
+ * That value is empty in release builds and only populated in debug builds from local.properties, so development does not mean retyping a key after every install.
  */
 @Singleton
 internal class PreferencesApiKeyProvider(

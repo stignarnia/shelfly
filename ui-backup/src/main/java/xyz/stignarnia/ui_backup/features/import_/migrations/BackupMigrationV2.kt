@@ -29,17 +29,12 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Reads a v2 backup - the scheme Showly wrote before this fork - and re-keys it
- * onto TMDB ids.
+ * Reads a v2 backup - the scheme Showly wrote before this fork - and re-keys it onto TMDB ids.
  *
- * v2 identifies everything by ids from the old catalog source, which no longer
- * resolve to anything. The remap is therefore driven by the show and movie
- * collections, the only place where an old id and a TMDB id sit side by side:
- * every child entry (episode, season, rating, list item) finds its parent by
- * old id and inherits the parent's TMDB id.
+ * v2 identifies everything by ids from the old catalog source, which no longer resolve to anything.
+ * The remap is therefore driven by the show and movie collections, the only place where an old id and a TMDB id sit side by side: every child entry (episode, season, rating, list item) finds its parent by old id and inherits the parent's TMDB id.
  *
- * Entries whose parent cannot be found are dropped and counted in
- * [BackupMigrationReport], never guessed at.
+ * Entries whose parent cannot be found are dropped and counted in [BackupMigrationReport], never guessed at.
  */
 class BackupMigrationV2 @Inject constructor(
   private val dispatchers: CoroutineDispatchers,

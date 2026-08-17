@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!--
-    The fixed palette. Nothing here varies by theme - the themed colours live in
-    colors_theme.xml, which exists in both values/ and values-night/. These are
-    the values that must stay put: the widget palette, and the whites and black
-    scrims that sit on poster artwork whatever the app is doing.
+    The fixed palette.
+    Nothing here varies by theme - the themed colours live in colors_theme.xml, which exists in both values/ and values-night/.
+    These are the values that must stay put: the widget palette, and the whites and black scrims that sit on poster artwork whatever the app is doing.
   -->
 
   <color name="colorAccent">#F44336</color>

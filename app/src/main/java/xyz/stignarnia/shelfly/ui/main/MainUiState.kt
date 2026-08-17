@@ -7,8 +7,8 @@ import xyz.stignarnia.ui_base.utilities.events.Event
 data class MainUiState(
   val isLoading: Boolean = false,
   /**
-   * Whether it is known yet what the welcome flow has to show. Nothing is drawn
-   * until it is: see MainActivity.holdFirstFrame.
+   * Whether it is known yet what the welcome flow has to show.
+   * Nothing is drawn until it is: see MainActivity.holdFirstFrame.
    */
   val isWelcomeResolved: Boolean = false,
   val welcome: WelcomeState? = null,

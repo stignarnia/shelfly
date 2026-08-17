@@ -9,9 +9,8 @@ data class Ratings(
   val isHidden: Boolean = false,
   val isTapToReveal: Boolean = false,
   /**
-   * IMDb, Metascore and Rotten Tomatoes all come from OMDb. With no key
-   * configured they can never be filled in, so the strip marks them rather than
-   * showing an empty slot.
+   * IMDb, Metascore and Rotten Tomatoes all come from OMDb.
+   * With no key configured they can never be filled in, so the strip marks them rather than showing an empty slot.
    */
   val isOmdbKeyMissing: Boolean = false,
 ) {

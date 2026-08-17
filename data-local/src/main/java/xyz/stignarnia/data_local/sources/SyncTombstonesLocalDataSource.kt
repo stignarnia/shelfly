@@ -9,9 +9,8 @@ interface SyncTombstonesLocalDataSource {
   suspend fun upsert(tombstone: SyncTombstone)
 
   /**
-   * Clears the tombstone for something the user has added back. This device is
-   * authoritative about its own state, so the record is dropped rather than
-   * left for timestamp ordering to resolve.
+   * Clears the tombstone for something the user has added back.
+   * This device is authoritative about its own state, so the record is dropped rather than left for timestamp ordering to resolve.
    */
   suspend fun delete(
     entityType: String,

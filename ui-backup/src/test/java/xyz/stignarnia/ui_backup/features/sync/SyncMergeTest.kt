@@ -89,10 +89,9 @@ class SyncMergeTest {
 
   @Test
   fun `Should survive the stale peer race by re-publishing adopted tombstones`() {
-    // The phone deleted show 2 and published the tombstone while the tablet was
-    // offline. The laptop saw it and now carries it. When the tablet finally
-    // syncs, it still hears about the deletion from the laptop rather than
-    // resurrecting the show.
+    // The phone deleted show 2 and published the tombstone while the tablet was offline.
+    // The laptop saw it and now carries it.
+    // When the tablet finally syncs, it still hears about the deletion from the laptop rather than resurrecting the show.
     val tabletLocal = scheme(myShows = listOf(show(1, JAN), show(2, JAN)))
     val laptop = payload(
       "laptop",
@@ -159,8 +158,8 @@ class SyncMergeTest {
 
   @Test
   fun `Should gather list items from every device's copy of the same list`() {
-    // Each device added a different item to the same list. Keeping only the
-    // winning copy of the list would silently drop the other's item.
+    // Each device added a different item to the same list.
+    // Keeping only the winning copy of the list would silently drop the other's item.
     val local = scheme(lists = listOf(list(1, JAN, listOf(item(1, "show", 10)))))
     val tablet = payload("tablet", scheme(lists = listOf(list(1, FEB, listOf(item(1, "movie", 20))))))
 

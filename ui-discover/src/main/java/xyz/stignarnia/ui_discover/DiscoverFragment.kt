@@ -197,18 +197,15 @@ internal class DiscoverFragment :
             R.dimen.collectionFiltersMarginNoTabs
           }
 
-        // The slot opens past the filter chips, taking the space out of the
-        // list's top padding so the content barely shifts.
-        // Derived from the same dimens that place the chips, so the ring keeps
-        // its gap under them on any screen size instead of trusting one number.
+        // The slot opens past the filter chips, taking the space out of the list's top padding so the content barely shifts.
+        // Derived from the same dimens that place the chips, so the ring keeps its gap under them on any screen size instead of trusting one number.
         discoverOverscroll.openHeight = statusBarSize +
           dimenToPx(filtersPadding) +
           dimenToPx(R.dimen.chipHeight) +
           dimenToPx(R.dimen.discoverOverscrollGap) +
           dimenToPx(R.dimen.overscrollActionProgress) +
           dimenToPx(R.dimen.spaceMedium)
-        // The slot above the list provides the gap under the floating header,
-        // so the list itself needs no top padding of its own.
+        // The slot above the list provides the gap under the floating header, so the list itself needs no top padding of its own.
         discoverRecycler
           .updatePadding(top = 0)
         discoverOverscroll.restHeight = statusBarSize + dimenToPx(recyclerPadding)

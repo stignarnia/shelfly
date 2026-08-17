@@ -24,10 +24,9 @@ class ShowDetailsRepository @Inject constructor(
     force: Boolean = false,
   ): Show {
     val localShow = localSource.shows.getById(idTmdb.id)
-    // Only the details endpoint appends external_ids, so a row first cached by a
-    // list endpoint carries no IMDb id. Treat that as stale however fresh it is,
-    // otherwise external ratings have nothing to look up for the whole cache
-    // window. Shows TMDB has no IMDb id for simply refetch on each open.
+    // Only the details endpoint appends external_ids, so a row first cached by a list endpoint carries no IMDb id.
+    // Treat that as stale however fresh it is, otherwise external ratings have nothing to look up for the whole cache window.
+    // Shows TMDB has no IMDb id for simply refetch on each open.
     val isMissingImdbId = localShow != null && localShow.idImdb.isBlank()
     if (force ||
       localShow == null ||

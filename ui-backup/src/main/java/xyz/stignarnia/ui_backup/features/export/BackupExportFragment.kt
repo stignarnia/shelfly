@@ -90,8 +90,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
 
   override fun onResume() {
     super.onResume()
-    // Sync runs in the background, so what was true when this screen opened may
-    // not be true now.
+    // Sync runs in the background, so what was true when this screen opened may not be true now.
     viewModel.refreshSyncStatus()
   }
 
@@ -219,9 +218,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
   /**
    * Says what syncing has actually been doing, failures included.
    *
-   * A failure is shown next to the last success rather than replacing it: how
-   * long ago the last good sync was is exactly what the user needs in order to
-   * judge how much a broken one matters.
+   * A failure is shown next to the last success rather than replacing it: how long ago the last good sync was is exactly what the user needs in order to judge how much a broken one matters.
    */
   private fun describeSync(
     status: SyncStatus,
@@ -262,8 +259,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
         }
 
         viewModel.isWebDavTarget() -> {
-          // The destination is the configured server URL - there is no folder
-          // to pick, so skip the picker entirely.
+          // The destination is the configured server URL - there is no folder to pick, so skip the picker entirely.
           viewModel.saveExportBackupSchedule(newSchedule)
           showSnack(MessageEvent.Info(newSchedule.confirmationStringRes))
         }

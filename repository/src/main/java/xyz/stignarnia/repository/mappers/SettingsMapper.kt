@@ -80,9 +80,8 @@ class SettingsMapper @Inject constructor() {
       showAnticipatedShows = settings.showAnticipatedShows,
       discoverFilterFeed = settings.discoverFilterFeed.name,
       discoverFilterGenres = settings.discoverFilterGenres.joinToString(",") { it.name },
-      // Held the old channel-name filter, which never reached TMDB. The
-      // streaming filter that replaced it is region-scoped, so it lives with
-      // the region in preferences rather than in the synced settings row.
+      // Held the old channel-name filter, which never reached TMDB.
+      // The streaming filter that replaced it is region-scoped, so it lives with the region in preferences rather than in the synced settings row.
       discoverFilterNetworks = "",
       watchlistSortBy = settings.progressSortOrder.name,
       archiveShowsIncludeStatistics = settings.archiveIncludeStatistics,

@@ -147,7 +147,10 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
   data class Options(
     val id: IdTmdb,
     val type: Type,
-    /** The show a season or episode belongs to. Ratings are keyed by it. */
+    /**
+     * The show a season or episode belongs to.
+     * Ratings are keyed by it.
+     */
     val showId: IdTmdb?,
     val seasonNumber: Int?,
     val episodeNumber: Int?,

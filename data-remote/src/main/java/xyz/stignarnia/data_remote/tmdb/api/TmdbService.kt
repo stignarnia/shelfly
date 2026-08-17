@@ -72,8 +72,8 @@ interface TmdbService {
     @Path("tmdbId") tmdbId: Long,
   ): TmdbStreamings
 
-  // The directory of every provider carrying content in a region, as opposed to
-  // the providers carrying one title. Backs the discover availability filter.
+  // The directory of every provider carrying content in a region, as opposed to the providers carrying one title.
+  // Backs the discover availability filter.
 
   @GET("watch/providers/tv")
   suspend fun fetchShowProviders(
@@ -127,8 +127,7 @@ interface TmdbService {
   ): TmdbPage<TmdbMovie>
 
   /**
-   * TMDB has no "anticipated" feed, so it is approximated with unreleased
-   * titles ordered by popularity.
+   * TMDB has no "anticipated" feed, so it is approximated with unreleased titles ordered by popularity.
    */
   @GET("discover/tv?sort_by=popularity.desc")
   suspend fun fetchAnticipatedShows(
@@ -161,9 +160,8 @@ interface TmdbService {
   ): TmdbPage<TmdbMovie>
 
   /**
-   * Used when a genre or streaming filter is active. Trending and popular do
-   * not accept filters, so a filtered request has to go through discover
-   * instead.
+   * Used when a genre or streaming filter is active.
+   * Trending and popular do not accept filters, so a filtered request has to go through discover instead.
    */
   @GET("discover/tv?sort_by=popularity.desc")
   suspend fun fetchDiscoverShows(

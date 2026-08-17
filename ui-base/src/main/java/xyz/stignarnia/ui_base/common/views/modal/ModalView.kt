@@ -20,9 +20,8 @@ import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.screenHeight
 
 /**
- * The app's only modal. It began as the "?" tip popup and still is one: a card
- * on a translucent scrim that springs up from a third of a screen down, inside
- * the host's view hierarchy rather than in a window of its own.
+ * The app's only modal.
+ * It began as the "?" tip popup and still is one: a card on a translucent scrim that springs up from a third of a screen down, inside the host's view hierarchy rather than in a window of its own.
  *
  * Build one with [ModalBuilder] instead of configuring it directly.
  */
@@ -45,16 +44,13 @@ class ModalView : FrameLayout {
     layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT)
     setBackgroundResource(R.color.colorBlackTranslucent)
     binding.modalMessage.movementMethod = LinkMovementMethod.getInstance()
-    // Only the scrim gets this: the card is clickable in the layout, so it
-    // swallows its own taps rather than letting them fall through to here.
+    // Only the scrim gets this: the card is clickable in the layout, so it swallows its own taps rather than letting them fall through to here.
     onClick { dismiss() }
   }
 
   /**
-   * Back has to be claimed on attach rather than left to the host. Fragments
-   * register their own callback on every onResume, and the dispatcher runs the
-   * most recently added one first, so anything the host installs up front is
-   * already buried by the time a modal opens.
+   * Back has to be claimed on attach rather than left to the host.
+   * Fragments register their own callback on every onResume, and the dispatcher runs the most recently added one first, so anything the host installs up front is already buried by the time a modal opens.
    */
   override fun onAttachedToWindow() {
     super.onAttachedToWindow()
@@ -89,9 +85,8 @@ class ModalView : FrameLayout {
   }
 
   /**
-   * Removes the modal once the fade finishes. Guarded because a button and the
-   * back press can both reach it, and the second call would fire [onDismissed]
-   * again after the view has already gone.
+   * Removes the modal once the fade finishes.
+   * Guarded because a button and the back press can both reach it, and the second call would fire [onDismissed] again after the view has already gone.
    */
   fun dismiss() {
     if (isDismissing) return

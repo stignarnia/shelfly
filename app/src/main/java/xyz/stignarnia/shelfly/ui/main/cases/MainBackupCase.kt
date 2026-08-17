@@ -20,13 +20,11 @@ class MainBackupCase @Inject constructor(
 ) {
 
   /**
-   * Re-arms the periodic backup on app start, so a schedule survives the system
-   * dropping the work.
+   * Re-arms the periodic backup on app start, so a schedule survives the system dropping the work.
    *
-   * Whether a schedule is still valid depends on the configured destination. A
-   * local folder needs its picked directory; a WebDAV server needs a URL and
-   * has no directory at all. Checking only for the directory would silently
-   * cancel every WebDAV schedule on the next launch.
+   * Whether a schedule is still valid depends on the configured destination.
+   * A local folder needs its picked directory; a WebDAV server needs a URL and has no directory at all.
+   * Checking only for the directory would silently cancel every WebDAV schedule on the next launch.
    */
   fun refreshBackupExportSchedule() {
     val schedule = BackupExportSchedule.createFromName(

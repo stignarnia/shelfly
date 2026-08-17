@@ -58,6 +58,15 @@ refactor(ui): replace MaterialAlertDialogBuilder with unified ModalView
 
 ---
 
+## Comment Formatting Rules
+
+- **Sentence-per-line (Newline on period)**: Every sentence in comments must be on its own line ending with a period (`.`).
+- **No arbitrary mid-sentence hard-wrapping**: Do NOT break lines in the middle of sentences to fit an arbitrary character width limit (e.g. 80/100/120 columns). Rely on editor soft-wrapping (Alt+Z / word wrap) instead.
+- **Applies to ALL file types**: Kotlin (`.kt`), Gradle (`.gradle`, `.kts`), YAML (`.yml`), XML (`.xml`), ProGuard (`.pro`), Shell (`.sh`), properties, etc.
+- **Preserve comment structure**: Maintain comment prefixes (`//`, `#`, ` * `, `<!--`), list items, doc tags (`@param`, `@return`), URLs, code snippets, and paragraph spacer lines.
+
+---
+
 ## Development & Build Commands
 
 - **Run ktlint**: `./ktlint`
@@ -65,17 +74,15 @@ refactor(ui): replace MaterialAlertDialogBuilder with unified ModalView
 - **Build Release APK**: `./gradlew :app:assembleRelease`
 - **Build Debug APK**: `./gradlew :app:assembleDebug`
 
-**Never run `./gradlew test`.** It is the lifecycle task, so it runs the release
-unit test variant on top of the debug one - 1465 tasks against 732, for the same
-result. Unit tests never run R8, so the release variant only re-executes the same
-sources. `testDebugUnitTest` is what CI runs and what you should run.
+**Never run `./gradlew test`.**
+It is the lifecycle task, so it runs the release unit test variant on top of the debug one - 1465 tasks against 732, for the same result.
+Unit tests never run R8, so the release variant only re-executes the same sources.
+`testDebugUnitTest` is what CI runs and what you should run.
 
 Two suites are opt-in and skip themselves, so a green run does not mean they ran:
 
-- `data-remote`'s `TmdbLiveApiTest` calls the real TMDB API and skips when no key
-  is compiled in. It has caught real mapping defects - run it locally.
-- `ui-backup`'s `BackupMigrationV2FileTest` skips unless `SHELFLY_V2_BACKUP`
-  points at a real v2 export.
+- `data-remote`'s `TmdbLiveApiTest` calls the real TMDB API and skips when no key is compiled in. It has caught real mapping defects - run it locally.
+- `ui-backup`'s `BackupMigrationV2FileTest` skips unless `SHELFLY_V2_BACKUP` points at a real v2 export.
 
 ---
 

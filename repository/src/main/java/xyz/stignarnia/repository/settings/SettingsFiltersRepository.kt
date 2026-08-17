@@ -26,9 +26,8 @@ class SettingsFiltersRepository @Inject constructor(
     private const val HISTORY_SHOWS_PERIOD = "HISTORY_SHOWS_PERIOD"
     private const val MY_SHOWS_TYPE = "MY_SHOWS_TYPE"
 
-    // Bumped when the collection network filters stopped storing the names of
-    // a fixed enum and started storing the broadcaster exactly as the show
-    // carries it. Old values name no real network, so they are left behind.
+    // Bumped when the collection network filters stopped storing the names of a fixed enum and started storing the broadcaster exactly as the show carries it.
+    // Old values name no real network, so they are left behind.
     private const val MY_SHOWS_NETWORKS = "MY_SHOWS_NETWORKS_2"
     private const val MY_SHOWS_GENRES = "MY_SHOWS_GENRES"
     private const val WATCHLIST_SHOWS_UPCOMING = "WATCHLIST_SHOWS_UPCOMING_2"
@@ -175,13 +174,9 @@ class SettingsFiltersRepository @Inject constructor(
     set(value) = writeProviders(DISCOVER_MOVIES_PROVIDERS, value)
 
   /**
-   * A selected provider is stored whole - `id|name|logo` - rather than as a
-   * bare id, so the filter chip can name itself before the provider directory
-   * has been fetched, and still name itself with no network at all.
+   * A selected provider is stored whole - `id|name|logo` - rather than as a bare id, so the filter chip can name itself before the provider directory has been fetched, and still name itself with no network at all.
    *
-   * Anything that no longer parses is dropped instead of throwing: the entries
-   * are region-scoped, and a preference file can outlive the region it was
-   * written in.
+   * Anything that no longer parses is dropped instead of throwing: the entries are region-scoped, and a preference file can outlive the region it was written in.
    */
   private fun readProviders(key: String): List<StreamingProvider> =
     preferences

@@ -11,14 +11,11 @@ import javax.inject.Singleton
 /**
  * This device's identity and progress in multi-device sync.
  *
- * The id names the file this device owns on the server. Every device writes
- * only its own file, which is what removes write conflicts from the design -
- * no locking, no ETag round trips, no lost updates when two devices sync at
- * once.
+ * The id names the file this device owns on the server.
+ * Every device writes only its own file, which is what removes write conflicts from the design - no locking, no ETag round trips, no lost updates when two devices sync at once.
  *
- * It is a random value generated on the device, used only as a filename on the
- * user's own server. It identifies a file, not a person, and is never sent
- * anywhere else.
+ * It is a random value generated on the device, used only as a filename on the user's own server.
+ * It identifies a file, not a person, and is never sent anywhere else.
  */
 @Singleton
 class SettingsSyncRepository @Inject constructor(
@@ -33,9 +30,8 @@ class SettingsSyncRepository @Inject constructor(
     private const val LAST_PEERS = "SYNC_LAST_PEERS"
 
     /**
-     * How long a deletion is remembered. A device offline for longer than this
-     * may re-add items it never learned were deleted, which is the standard
-     * trade against tombstones accumulating forever.
+     * How long a deletion is remembered.
+     * A device offline for longer than this may re-add items it never learned were deleted, which is the standard trade against tombstones accumulating forever.
      */
     const val TOMBSTONE_RETENTION_DAYS = 90L
   }
@@ -48,15 +44,17 @@ class SettingsSyncRepository @Inject constructor(
       .take(12)
       .also { generated -> preferences.edit { putString(DEVICE_ID, generated) } }
 
-  /** When a cycle last completed, upload included. Only moves on success. */
+  /**
+   * When a cycle last completed, upload included.
+   * Only moves on success.
+   */
   var lastSyncedAt: Long by LongPreference(preferences, LAST_SYNCED_AT, 0)
 
   /**
    * When a cycle was last attempted, successfully or not.
    *
-   * Kept apart from [lastSyncedAt] so a run of failures cannot read as a
-   * healthy sync that simply happened a while ago. Without it the screen would
-   * show a stale success and say nothing about the failures since.
+   * Kept apart from [lastSyncedAt] so a run of failures cannot read as a healthy sync that simply happened a while ago.
+   * Without it the screen would show a stale success and say nothing about the failures since.
    */
   var lastAttemptAt: Long by LongPreference(preferences, LAST_ATTEMPT_AT, 0)
 

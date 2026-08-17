@@ -24,20 +24,14 @@ import xyz.stignarnia.ui_base.utilities.extensions.bump
 /**
  * Pull a list past its top to trigger an action.
  *
- * The icon fades and scales in as you drag; holding past the threshold fills a
- * ring over roughly half a second and bumps when full; releasing then fires
- * [onTriggered]. The deliberate fill is what makes the gesture safe to put on a
- * scrolling list - a stray flick cannot start anything.
+ * The icon fades and scales in as you drag; holding past the threshold fills a ring over roughly half a second and bumps when full; releasing then fires [onTriggered].
+ * The deliberate fill is what makes the gesture safe to put on a scrolling list - a stray flick cannot start anything.
  *
- * Set [actionIcon] to say what the pull will do. While the action runs, call
- * [setRunning] to keep the view up with an indeterminate spinner, which is what
- * replaces a SwipeRefreshLayout's spinner for callers that had one.
+ * Set [actionIcon] to say what the pull will do.
+ * While the action runs, call [setRunning] to keep the view up with an indeterminate spinner, which is what replaces a SwipeRefreshLayout's spinner for callers that had one.
  *
- * Host this stacked directly above the list, not layered over it: the view owns
- * its own height - zero at rest, opening as the pull progresses - so the list
- * below is pushed down to make room. Occupying a slot of its own rather than
- * floating is what makes overlap impossible in either direction, and it costs
- * nothing while idle because the slot collapses.
+ * Host this stacked directly above the list, not layered over it: the view owns its own height - zero at rest, opening as the pull progresses - so the list below is pushed down to make room.
+ * Occupying a slot of its own rather than floating is what makes overlap impossible in either direction, and it costs nothing while idle because the slot collapses.
  */
 class OverscrollActionView
   @JvmOverloads
@@ -68,18 +62,16 @@ class OverscrollActionView
     private var isRunning = false
 
     /**
-     * How far the slot opens at a full pull. Defaults to just the ring; callers
-     * whose indicator has to clear floating header views set it larger.
+     * How far the slot opens at a full pull.
+     * Defaults to just the ring; callers whose indicator has to clear floating header views set it larger.
      */
     var openHeight: Int =
       resources.getDimensionPixelSize(R.dimen.overscrollActionProgress) +
         resources.getDimensionPixelSize(R.dimen.spaceMedium) * 2
 
     /**
-     * The slot's height at rest. This replaces the list's own top padding rather
-     * than adding to it - the slot IS the gap under the floating header - so
-     * opening it only has to find the difference, and the ring ends up sitting
-     * just above the content instead of miles above it.
+     * The slot's height at rest.
+     * This replaces the list's own top padding rather than adding to it - the slot IS the gap under the floating header - so opening it only has to find the difference, and the ring ends up sitting just above the content instead of miles above it.
      */
     var restHeight: Int = 0
       set(value) {
@@ -125,8 +117,8 @@ class OverscrollActionView
     }
 
     /**
-     * Attaches the gesture to [recycler]. Safe to call repeatedly; only the
-     * first call takes effect until [detach].
+     * Attaches the gesture to [recycler].
+     * Safe to call repeatedly; only the first call takes effect until [detach].
      */
     fun attach(
       recycler: RecyclerView,
@@ -148,8 +140,7 @@ class OverscrollActionView
     }
 
     fun detach() {
-      // Reset, or a view re-attached mid-run would refuse to show the indicator
-      // again: both running setters treat the flag as already handled.
+      // Reset, or a view re-attached mid-run would refuse to show the indicator again: both running setters treat the flag as already handled.
       isRunning = false
       cancelFill()
       heightAnimator?.cancel()
@@ -161,8 +152,7 @@ class OverscrollActionView
     }
 
     /**
-     * Keeps the indicator on screen with an indeterminate spinner while the
-     * triggered action is still working.
+     * Keeps the indicator on screen with an indeterminate spinner while the triggered action is still working.
      */
     fun setRunning(running: Boolean) {
       if (isRunning == running) return
@@ -174,13 +164,11 @@ class OverscrollActionView
     }
 
     /**
-     * Keeps the indicator up while the triggered action runs, with the ring
-     * filled to [percent] of the work actually done. Pass null once the action
-     * has finished, which puts the indicator away.
+     * Keeps the indicator up while the triggered action runs, with the ring filled to [percent] of the work actually done.
+     * Pass null once the action has finished, which puts the indicator away.
      *
-     * Preferred over [setRunning] by callers that can measure their work: the
-     * spinner says only that something is happening, this says how much is
-     * left. The two are mutually exclusive - a caller uses one or the other.
+     * Preferred over [setRunning] by callers that can measure their work: the spinner says only that something is happening, this says how much is left.
+     * The two are mutually exclusive - a caller uses one or the other.
      */
     fun setRunningProgress(percent: Int?) {
       if (percent == null) {
@@ -194,16 +182,13 @@ class OverscrollActionView
       val wasRunning = isRunning
       if (!wasRunning) {
         isRunning = true
-        // The pull's own fill is sitting full, from the hold that armed the
-        // trigger. Drop it to zero unanimated before taking over, or the first
-        // real reading is seen as the ring draining backwards from full.
+        // The pull's own fill is sitting full, from the hold that armed the trigger.
+        // Drop it to zero unanimated before taking over, or the first real reading is seen as the ring draining backwards from full.
         cancelFill()
         binding.overscrollActionProgress.setProgressCompat(0, false)
         animateIndicator(visible = true)
       }
-      // Animated only once the ring is already up and showing a real reading;
-      // the opening frame would otherwise animate away from a zero the user
-      // never saw.
+      // Animated only once the ring is already up and showing a real reading; the opening frame would otherwise animate away from a zero the user never saw.
       binding.overscrollActionProgress
         .setProgressCompat(percent.coerceIn(0, MAX_PROGRESS), wasRunning)
     }
@@ -220,14 +205,11 @@ class OverscrollActionView
     }
 
     /**
-     * The row is only ever resized, never translated, so the list below simply
-     * moves to make room. Height is driven directly rather than through an
-     * adapter notification, which would rebind on every frame of a drag.
+     * The row is only ever resized, never translated, so the list below simply moves to make room.
+     * Height is driven directly rather than through an adapter notification, which would rebind on every frame of a drag.
      */
     private fun setRowHeight(px: Int) {
-      // Never below the resting gap, and nothing outside this view is touched:
-      // the slot's height is the only thing that ever moves the list, so when it
-      // comes back to rest the list is exactly where it started.
+      // Never below the resting gap, and nothing outside this view is touched: the slot's height is the only thing that ever moves the list, so when it comes back to rest the list is exactly where it started.
       val height = px.coerceAtLeast(restHeight)
       if (layoutParams?.height == height) return
       updateLayoutParams { this.height = height }
@@ -261,8 +243,7 @@ class OverscrollActionView
       }
 
       val value = (offset / OVERSCROLL_OFFSET).coerceAtMost(1F)
-      // Follow the drag rather than snapping: it is only the difference between
-      // the resting gap and the open one, so the ring barely travels.
+      // Follow the drag rather than snapping: it is only the difference between the resting gap and the open one, so the ring barely travels.
       setRowHeight(restHeight + ((openHeight - restHeight) * value).toInt())
       alpha = value
       scaleX = value

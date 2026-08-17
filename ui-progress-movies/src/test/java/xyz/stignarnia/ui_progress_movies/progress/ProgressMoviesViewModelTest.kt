@@ -56,9 +56,8 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
 
     coEvery { translationsRepository.getLanguage() } returns "en"
 
-    // The constructor starts watching the manual backup run. Nothing here is
-    // about that indicator, so the work stream stays empty - without a stub the
-    // mock throws on the collect and takes down every test in the class.
+    // The constructor starts watching the manual backup run.
+    // Nothing here is about that indicator, so the work stream stays empty - without a stub the mock throws on the collect and takes down every test in the class.
     every { workManager.getWorkInfosForUniqueWorkFlow(any()) } returns emptyFlow()
 
     SUT = ProgressMoviesViewModel(

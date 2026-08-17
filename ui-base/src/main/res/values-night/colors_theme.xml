@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  The dark half of the themed palette. Every name here exists in
-  values/colors_theme.xml too - keep the two in step.
+  The dark half of the themed palette.
+  Every name here exists in values/colors_theme.xml too - keep the two in step.
 
-  These are the values the app shipped with before it had a light theme, moved
-  here verbatim, so dark is unchanged by the switch to a DayNight parent.
+  These are the values the app shipped with before it had a light theme, moved here verbatim, so dark is unchanged by the switch to a DayNight parent.
 -->
 <resources>
 
@@ -31,8 +30,10 @@
   <color name="themeStroke">#66AAAAAA</color>
   <color name="themeProgressTrack">#3C3C3C</color>
 
-  <!-- Accent. Held at the brand red in both themes; on a dark ground the
-       text-sized use needs no darkening, so both names carry the same value. -->
+  <!--
+    Accent.
+    Held at the brand red in both themes; on a dark ground the text-sized use needs no darkening, so both names carry the same value.
+  -->
   <color name="themeAccent">#F44336</color>
   <!-- The switch track when checked: the accent at 30% -->
   <color name="themeAccentTrack">#4DF44336</color>

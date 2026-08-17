@@ -44,9 +44,8 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
   }
 
   /**
-   * The welcome flow sends the user here to set sync up, so open the form for
-   * them instead of leaving it one more tap away. The flag is cleared once
-   * consumed, otherwise the dialog would come back on every rotation.
+   * The welcome flow sends the user here to set sync up, so open the form for them instead of leaving it one more tap away.
+   * The flag is cleared once consumed, otherwise the dialog would come back on every rotation.
    */
   private fun openWebDavDialogIfRequested() {
     val arguments = parentFragment?.arguments ?: return
@@ -94,8 +93,8 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
       webdavUsernameInput.setText(state.webDavUsername)
     }
 
-    // The stored password is never shown. An empty field means "leave it as it
-    // is", so re-saving the URL does not silently wipe working credentials.
+    // The stored password is never shown.
+    // An empty field means "leave it as it is", so re-saving the URL does not silently wipe working credentials.
     if (state.hasWebDavPassword) {
       inputBinding.webdavPasswordInputLayout.hint = getString(R.string.textSettingsWebDavPasswordSetHint)
     }

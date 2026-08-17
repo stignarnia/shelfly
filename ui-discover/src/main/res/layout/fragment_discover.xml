@@ -11,10 +11,9 @@
   >
 
   <!--
-    The indicator and the list are stacked, never layered, so neither can paint
-    over the other. The list keeps a fixed height rather than a weight: a weight
-    would re-measure it on every frame the slot resizes, which tore up the
-    overscroll mid-drag. Fixed height means the slot only ever moves it.
+    The indicator and the list are stacked, never layered, so neither can paint over the other.
+    The list keeps a fixed height rather than a weight: a weight would re-measure it on every frame the slot resizes, which tore up the overscroll mid-drag.
+    Fixed height means the slot only ever moves it.
   -->
   <LinearLayout
     android:id="@+id/discoverRecyclerStack"

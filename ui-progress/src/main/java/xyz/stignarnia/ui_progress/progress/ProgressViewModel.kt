@@ -65,9 +65,8 @@ class ProgressViewModel @Inject constructor(
   private var hasObservedBackupRun = false
 
   /**
-   * How far along the manual backup-and-sync run is, 0..100, or null when none
-   * is running. Kept out of [uiState] because it is the state of a background
-   * job rather than of this list, and it changes on its own schedule.
+   * How far along the manual backup-and-sync run is, 0..100, or null when none is running.
+   * Kept out of [uiState] because it is the state of a background job rather than of this list, and it changes on its own schedule.
    */
   val backupProgress = backupProgressState.asStateFlow()
 
@@ -78,9 +77,7 @@ class ProgressViewModel @Inject constructor(
   /**
    * Follows the run started by the pull gesture so the indicator can report it.
    *
-   * WorkManager publishes progress only while the work is RUNNING and drops it
-   * when the run ends, so there is no completion stage to wait for: the work
-   * leaving the active set is what takes the indicator down, succeeded or not.
+   * WorkManager publishes progress only while the work is RUNNING and drops it when the run ends, so there is no completion stage to wait for: the work leaving the active set is what takes the indicator down, succeeded or not.
    */
   private fun observeBackupRun() {
     viewModelScope.launch {
@@ -94,10 +91,8 @@ class ProgressViewModel @Inject constructor(
               backupProgressState.value =
                 active.progress.getInt(BackupExportScheduleWorker.KEY_PROGRESS_PERCENT, 0)
             }
-            // Runs from earlier launches stay on record under this name, already
-            // finished. Only a run this screen watched start may take the
-            // indicator down, or the reading set optimistically by the pull
-            // would be cleared before WorkManager has registered the new request.
+            // Runs from earlier launches stay on record under this name, already finished.
+            // Only a run this screen watched start may take the indicator down, or the reading set optimistically by the pull would be cleared before WorkManager has registered the new request.
             hasObservedBackupRun -> {
               hasObservedBackupRun = false
               backupProgressState.value = null
@@ -214,16 +209,14 @@ class ProgressViewModel @Inject constructor(
   /**
    * Runs a backup now, in response to the pull gesture on this screen.
    *
-   * Returns false when there is nothing to back up to, so the gesture can say
-   * so rather than appearing to work. WorkManager keeps a run already in
-   * flight, so repeated pulls do not stack up.
+   * Returns false when there is nothing to back up to, so the gesture can say so rather than appearing to work.
+   * WorkManager keeps a run already in flight, so repeated pulls do not stack up.
    */
   fun startBackupNow(): Boolean {
     if (settingsRepository.webdav.backupTarget != BackupTarget.WEBDAV) return false
     if (settingsRepository.webdav.url.isBlank()) return false
-    // Set here, synchronously, so the indicator takes over from the pull in the
-    // frame the gesture completes. Waiting for WorkManager to register the
-    // request and report it back would blink the indicator out and in again.
+    // Set here, synchronously, so the indicator takes over from the pull in the frame the gesture completes.
+    // Waiting for WorkManager to register the request and report it back would blink the indicator out and in again.
     backupProgressState.value = 0
     BackupExportScheduleWorker.scheduleOneOff(workManager)
     return true

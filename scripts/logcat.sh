@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 # Stream live logs from the debug build on the attached device.
 #
-# Scoped to the app's own process, so it shows Timber output and the OkHttp
-# request/response bodies that debug builds enable, without the system noise a
-# keyword grep over the full buffer drags in.
+# Scoped to the app's own process, so it shows Timber output and the OkHttp request/response bodies that debug builds enable, without the system noise a keyword grep over the full buffer drags in.
 #
 #   scripts/logcat.sh            # follow live
 #   scripts/logcat.sh omdb       # follow live, only lines matching a pattern

@@ -17,9 +17,7 @@ data class BackupExportUiState(
 /**
  * What this device's syncing looks like right now.
  *
- * A failure is reported alongside the last success rather than instead of it,
- * so a device that has been failing for a week cannot pass for one that simply
- * synced a while ago.
+ * A failure is reported alongside the last success rather than instead of it, so a device that has been failing for a week cannot pass for one that simply synced a while ago.
  */
 data class SyncStatus(
   val deviceId: String,

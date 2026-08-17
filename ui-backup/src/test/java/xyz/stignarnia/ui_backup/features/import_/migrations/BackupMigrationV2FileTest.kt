@@ -15,13 +15,12 @@ import java.io.File
 /**
  * Runs the migration over a real v2 export.
  *
- * Self-skips unless `SHELFLY_V2_BACKUP` points at one, so no personal watch
- * history ever has to live in the repository and CI stays green. Run it with:
+ * Self-skips unless `SHELFLY_V2_BACKUP` points at one, so no personal watch history ever has to live in the repository and CI stays green.
+ * Run it with:
  *
- *   SHELFLY_V2_BACKUP=/path/to/showly_export.json ./gradlew :ui-backup:testDebugUnitTest
+ * SHELFLY_V2_BACKUP=/path/to/showly_export.json ./gradlew :ui-backup:testDebugUnitTest
  *
- * The resolver is stubbed out, so this measures the offline remap only - what
- * the file can recover on its own, without a TMDB round trip.
+ * The resolver is stubbed out, so this measures the offline remap only - what the file can recover on its own, without a TMDB round trip.
  */
 class BackupMigrationV2FileTest {
 
@@ -79,8 +78,7 @@ class BackupMigrationV2FileTest {
         (collectionHistory + collectionWatchlist + collectionHidden).map { it.tmdbId }.toSet()
       }
 
-      // Every id that survived is usable, and every watched episode still hangs
-      // off a show that was actually imported.
+      // Every id that survived is usable, and every watched episode still hangs off a show that was actually imported.
       assertThat(collectedShows.none { it <= 0 }).isTrue()
       assertThat(collectedMovies.none { it <= 0 }).isTrue()
       assertThat(collectedShows).containsAtLeastElementsIn(

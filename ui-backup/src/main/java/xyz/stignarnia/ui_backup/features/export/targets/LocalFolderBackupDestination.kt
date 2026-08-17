@@ -10,9 +10,7 @@ import xyz.stignarnia.ui_backup.features.export.cases.WriteBackupJsonToFileUseCa
 /**
  * Writes into a folder the user picked through the system file picker.
  *
- * Everything goes through the Storage Access Framework, which is why the app
- * needs a persisted tree permission rather than a path: the folder may live on
- * external storage or in another app's provider.
+ * Everything goes through the Storage Access Framework, which is why the app needs a persisted tree permission rather than a path: the folder may live on external storage or in another app's provider.
  */
 internal class LocalFolderBackupDestination(
   private val context: Context,
@@ -31,8 +29,7 @@ internal class LocalFolderBackupDestination(
     }
 
   /**
-   * SAF creates the document and hands back its URI, so the file has to exist
-   * before anything can be written into it.
+   * SAF creates the document and hands back its URI, so the file has to exist before anything can be written into it.
    */
   override suspend fun write(
     fileName: String,

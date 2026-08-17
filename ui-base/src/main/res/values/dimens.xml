@@ -60,8 +60,9 @@
   <dimen name="linkItemImageHeight">26dp</dimen>
 
 
-  <!-- Shared by the chip styles and by anything positioning itself under a
-       row of chips, so the two cannot drift apart. -->
+  <!--
+    Shared by the chip styles and by anything positioning itself under a row of chips, so the two cannot drift apart.
+  -->
   <dimen name="chipHeight">32dp</dimen>
 
   <dimen name="collectionTabsMargin">70dp</dimen>
@@ -70,9 +71,9 @@
   <dimen name="commentViewSpace">16dp</dimen>
   <dimen name="tutorialTipSize">28dp</dimen>
 
-  <!-- ModalView: the inset the card keeps from the screen edge, and the ceiling
-       on its scrolling middle so a long picker still leaves room for the
-       buttons. -->
+  <!--
+    ModalView: the inset the card keeps from the screen edge, and the ceiling on its scrolling middle so a long picker still leaves room for the buttons.
+  -->
   <dimen name="modalMargin">32dp</dimen>
   <dimen name="modalContentMaxHeight">360dp</dimen>
   <dimen name="modalCornerRadius">16dp</dimen>
@@ -87,8 +88,9 @@
 
   <dimen name="overscrollActionPaddingTop">132dp</dimen>
   <dimen name="overscrollActionIcon">35dp</dimen>
-  <!-- The TMDB mark is a three-line wordmark, so it needs to sit smaller than
-       a single glyph to stay clear of the ring around it. -->
+  <!--
+    The TMDB mark is a three-line wordmark, so it needs to sit smaller than a single glyph to stay clear of the ring around it.
+  -->
   <dimen name="overscrollActionIconSmall">22dp</dimen>
   <!-- Gap left between the filter chips and the pull indicator below them. -->
   <dimen name="discoverOverscrollGap">24dp</dimen>

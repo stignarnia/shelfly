@@ -68,16 +68,20 @@ class SearchSuggestionsCaseTest : BaseMockTest() {
   @Test
   fun `Should skip preload local shows cache if already loaded`() =
     runTest {
-      SUT.preloadCache() // Initial preload. Db data should be loaded
-      SUT.preloadCache() // Further preload. Db data should not be loaded
+      SUT.preloadCache() // Initial preload.
+      // Db data should be loaded
+      SUT.preloadCache() // Further preload.
+      // Db data should not be loaded
       coVerify(exactly = 1) { showsDao.getAllForSearch() }
     }
 
   @Test
   fun `Should skip preload local movies cache if already loaded`() =
     runTest {
-      SUT.preloadCache() // Initial preload. Db data should be loaded
-      SUT.preloadCache() // Further preload. Db data should not be loaded
+      SUT.preloadCache() // Initial preload.
+      // Db data should be loaded
+      SUT.preloadCache() // Further preload.
+      // Db data should not be loaded
       coVerify(exactly = 1) { moviesDao.getAllForSearch() }
     }
 

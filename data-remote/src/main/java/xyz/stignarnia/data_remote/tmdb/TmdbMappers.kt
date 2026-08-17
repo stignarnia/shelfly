@@ -14,8 +14,7 @@ import xyz.stignarnia.data_remote.catalog.model.Season
 import xyz.stignarnia.data_remote.catalog.model.Show
 
 /**
- * Maps TMDB responses onto the shared catalog DTOs the repository layer
- * consumes.
+ * Maps TMDB responses onto the shared catalog DTOs the repository layer consumes.
  */
 
 private const val CERTIFICATION_COUNTRY = "US"
@@ -30,8 +29,8 @@ internal fun TmdbShow.toShow(): Show =
     overview = overview,
     first_aired = first_air_date.toIsoInstant(),
     runtime = episode_run_time?.firstOrNull(),
-    // TMDB exposes no airtime of day or timezone, only the air date. Episode
-    // notifications therefore fire on the date rather than at the exact time.
+    // TMDB exposes no airtime of day or timezone, only the air date.
+    // Episode notifications therefore fire on the date rather than at the exact time.
     airs = AirTime(day = null, time = null, timezone = null),
     certification = content_ratings
       ?.results
@@ -179,8 +178,7 @@ private fun String?.toYear(): Int? = this?.take(4)?.toIntOrNull()
 private fun String?.isAired(): Boolean = !this.isNullOrBlank()
 
 /**
- * TMDB returns plain dates ("2011-04-17") rather than full instants, and
- * ZonedDateTime.parse rejects those, so dates are widened to midnight UTC.
+ * TMDB returns plain dates ("2011-04-17") rather than full instants, and ZonedDateTime.parse rejects those, so dates are widened to midnight UTC.
  */
 private fun String?.toIsoInstant(): String? {
   if (this.isNullOrBlank()) {
@@ -190,8 +188,7 @@ private fun String?.toIsoInstant(): String? {
 }
 
 /**
- * A movie's release date stays a plain yyyy-MM-dd. Unlike a show's first_aired,
- * which is carried around as an ISO instant, every consumer of [Movie.released]
- * parses it with LocalDate, so widening it to an instant makes the parse throw.
+ * A movie's release date stays a plain yyyy-MM-dd.
+ * Unlike a show's first_aired, which is carried around as an ISO instant, every consumer of [Movie.released] parses it with LocalDate, so widening it to an instant makes the parse throw.
  */
 private fun String?.toReleaseDate(): String? = if (this.isNullOrBlank()) null else this

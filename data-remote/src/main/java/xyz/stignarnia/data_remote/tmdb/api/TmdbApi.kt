@@ -108,9 +108,7 @@ internal class TmdbApi(
     } else {
       service.fetchShowProviders(region)
     }
-    // The global `display_priority` puts the American services first no matter
-    // where the user is, so the region's own ranking wins when TMDB publishes
-    // one for it.
+    // The global `display_priority` puts the American services first no matter where the user is, so the region's own ranking wins when TMDB publishes one for it.
     return response.results
       .orEmpty()
       .sortedWith(
@@ -154,8 +152,8 @@ internal class TmdbApi(
   ): Movie = service.fetchMovie(tmdbId, language).toMovie()
 
   /**
-   * A show's episodes are only available per season, so this fans out over the
-   * season list from the show payload. Season 0 (specials) is included.
+   * A show's episodes are only available per season, so this fans out over the season list from the show payload.
+   * Season 0 (specials) is included.
    */
   override suspend fun fetchSeasons(tmdbId: Long): List<Season> =
     coroutineScope {
@@ -167,8 +165,7 @@ internal class TmdbApi(
         }.awaitAll()
     }
 
-  // Trending and popular accept no filters, so an active genre or streaming
-  // filter routes the request through discover instead.
+  // Trending and popular accept no filters, so an active genre or streaming filter routes the request through discover instead.
 
   override suspend fun fetchTrendingShows(
     genres: List<String>,
@@ -275,8 +272,7 @@ internal class TmdbApi(
   }
 
   /**
-   * TMDB carries the next episode on the show payload rather than on a
-   * dedicated endpoint.
+   * TMDB carries the next episode on the show payload rather than on a dedicated endpoint.
    */
   override suspend fun fetchNextEpisode(tmdbId: Long): Episode? =
     service
@@ -308,9 +304,8 @@ internal class TmdbApi(
   }
 
   /**
-   * TMDB serves localised text by asking for the resource in that language
-   * rather than through a separate translations endpoint. A title that comes
-   * back identical to the default is treated as untranslated.
+   * TMDB serves localised text by asking for the resource in that language rather than through a separate translations endpoint.
+   * A title that comes back identical to the default is treated as untranslated.
    */
   override suspend fun fetchShowTranslation(
     tmdbId: Long,
@@ -368,8 +363,7 @@ internal class TmdbApi(
   }
 
   /**
-   * A movie belongs to at most one TMDB collection, so this returns zero or
-   * one entry even though the caller accepts a list.
+   * A movie belongs to at most one TMDB collection, so this returns zero or one entry even though the caller accepts a list.
    */
   override suspend fun fetchMovieCollections(tmdbId: Long): List<MovieCollection> {
     val reference = service.fetchMovie(tmdbId, null).belongs_to_collection ?: return emptyList()
@@ -438,12 +432,9 @@ internal class TmdbApi(
       ?.toMovie()
 
   /**
-   * TMDB pages every list endpoint at 20 items, so a longer list means walking
-   * pages until the caller's limit is met or the results run out.
+   * TMDB pages every list endpoint at 20 items, so a longer list means walking pages until the caller's limit is met or the results run out.
    *
-   * Entries are deduplicated by id as they accumulate: the ranked feeds reorder
-   * between requests, so the same title can legitimately appear on two pages and
-   * would otherwise show up twice in the list.
+   * Entries are deduplicated by id as they accumulate: the ranked feeds reorder between requests, so the same title can legitimately appear on two pages and would otherwise show up twice in the list.
    */
   private suspend fun <T> fetchPaged(
     limit: Int,
@@ -475,8 +466,7 @@ internal class TmdbApi(
   private fun today(): String = LocalDate.now(ZoneOffset.UTC).toString()
 
   /**
-   * `|` is TMDB's OR separator, so several selected services widen the results
-   * rather than asking for a title carried by all of them at once.
+   * `|` is TMDB's OR separator, so several selected services widen the results rather than asking for a title carried by all of them at once.
    */
   private fun providersQuery(providers: List<Long>): String? =
     providers
@@ -484,8 +474,7 @@ internal class TmdbApi(
       ?.joinToString("|")
 
   /**
-   * `with_watch_providers` is only honoured together with a region, and sending
-   * a region without it would narrow the results for no reason.
+   * `with_watch_providers` is only honoured together with a region, and sending a region without it would narrow the results for no reason.
    */
   private fun region(
     providersQuery: String?,

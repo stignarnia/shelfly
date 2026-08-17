@@ -82,9 +82,7 @@ internal class DiscoverMoviesViewModel @Inject constructor(
           scrollState.value = Event(resetScroll)
         }
 
-        // Nothing to fetch without a key, and trying anyway would leave the
-        // screen showing a failure the user cannot act on until they have
-        // finished entering one.
+        // Nothing to fetch without a key, and trying anyway would leave the screen showing a failure the user cannot act on until they have finished entering one.
         if (apiKeyProvider.hasTmdbApiKey() && (pullToRefresh || skipCache || !moviesCase.isCacheValid())) {
           val movies = moviesCase.loadRemoteMovies(filters)
           itemsState.value = emptyList()

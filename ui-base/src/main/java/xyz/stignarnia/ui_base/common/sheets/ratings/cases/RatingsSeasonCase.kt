@@ -66,8 +66,7 @@ class RatingsSeasonCase @Inject constructor(
     }
   }
 
-  // The rating is keyed by show and season number, so nothing else is read off
-  // the season here.
+  // The rating is keyed by show and season number, so nothing else is read off the season here.
   private fun season(seasonNumber: Int) = Season.EMPTY.copy(number = seasonNumber)
 
   private suspend fun handleError(error: Throwable) {

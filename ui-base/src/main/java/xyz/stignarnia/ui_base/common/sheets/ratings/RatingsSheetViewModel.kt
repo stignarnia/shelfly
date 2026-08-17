@@ -108,8 +108,7 @@ class RatingsSheetViewModel @Inject constructor(
     }
   }
 
-  // A season or episode rating is stored under its show, so the sheet cannot be
-  // opened for one without saying which show it belongs to.
+  // A season or episode rating is stored under its show, so the sheet cannot be opened for one without saying which show it belongs to.
 
   private fun Options.requireShowId(): IdTmdb = checkNotNull(showId) { "A $type rating needs the show it belongs to." }
 

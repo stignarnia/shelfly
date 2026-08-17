@@ -9,10 +9,8 @@
   >
 
   <!--
-    The ring and the icon are centred against each other inside a box of the
-    ring's size, so the icon stays centred in the ring wherever the box is
-    placed. Aligning them to the parent independently does not - it lines up
-    their edges, not their centres.
+    The ring and the icon are centred against each other inside a box of the ring's size, so the icon stays centred in the ring wherever the box is placed.
+    Aligning them to the parent independently does not - it lines up their edges, not their centres.
   -->
   <FrameLayout
     android:id="@+id/overscrollActionBox"

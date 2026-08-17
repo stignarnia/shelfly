@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Shared body for the steps that are purely an explanation plus a choice:
-  notification permission and WebDAV sync. Only the icon and the copy differ.
+  Shared body for the steps that are purely an explanation plus a choice: notification permission and WebDAV sync.
+  Only the icon and the copy differ.
 -->
 <androidx.constraintlayout.widget.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"

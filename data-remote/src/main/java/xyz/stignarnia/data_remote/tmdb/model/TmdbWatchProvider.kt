@@ -1,9 +1,7 @@
 package xyz.stignarnia.data_remote.tmdb.model
 
 /**
- * An entry of the region-wide provider directory, which is a different payload
- * from the per-title availability in [TmdbStreamingService]: it carries no
- * offer type and its priority is published per region as well as globally.
+ * An entry of the region-wide provider directory, which is a different payload from the per-title availability in [TmdbStreamingService]: it carries no offer type and its priority is published per region as well as globally.
  */
 data class TmdbWatchProvider(
   val provider_id: Long,

@@ -12,8 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Encrypts small secrets - API keys, WebDAV credentials - with a key held in the
- * Android Keystore, so they are not stored as plain text in SharedPreferences.
+ * Encrypts small secrets - API keys, WebDAV credentials - with a key held in the Android Keystore, so they are not stored as plain text in SharedPreferences.
  *
  * Values are encoded as "base64(iv):base64(ciphertext)".
  */
@@ -37,10 +36,8 @@ class SecretCipher @Inject constructor() {
   }
 
   /**
-   * Returns null when the stored value is malformed, or when the Keystore key
-   * that encrypted it is gone - which happens after a device restore or when
-   * the user's lock screen credentials are reset. Callers treat that as
-   * "no value stored" and ask for the secret again.
+   * Returns null when the stored value is malformed, or when the Keystore key that encrypted it is gone - which happens after a device restore or when the user's lock screen credentials are reset.
+   * Callers treat that as "no value stored" and ask for the secret again.
    */
   fun decrypt(value: String): String? =
     try {

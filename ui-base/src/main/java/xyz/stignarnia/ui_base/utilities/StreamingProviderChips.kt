@@ -15,9 +15,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_model.StreamingProvider
 
 /**
- * The discover streaming filter offers whatever TMDB lists for the user's
- * region, so unlike the fixed network chips there is no bundled icon to show -
- * the logo is fetched with the rest of the entry.
+ * The discover streaming filter offers whatever TMDB lists for the user's region, so unlike the fixed network chips there is no bundled icon to show - the logo is fetched with the rest of the entry.
  */
 object StreamingProviderChips {
 

@@ -14,10 +14,8 @@ import javax.inject.Singleton
 /**
  * Stores the WebDAV backup destination and which target scheduled backups use.
  *
- * The password goes through [SecretCipher], so it is held as Keystore-encrypted
- * ciphertext rather than plain text in SharedPreferences. The URL and username
- * are not secret and are stored as-is, which keeps them readable when
- * diagnosing a failing backup.
+ * The password goes through [SecretCipher], so it is held as Keystore-encrypted ciphertext rather than plain text in SharedPreferences.
+ * The URL and username are not secret and are stored as-is, which keeps them readable when diagnosing a failing backup.
  */
 @Singleton
 class SettingsWebDavRepository @Inject constructor(
@@ -40,8 +38,8 @@ class SettingsWebDavRepository @Inject constructor(
   var username: String by StringPreference(preferences, USERNAME, "")
 
   /**
-   * How many backups to keep at the destination. [RETENTION_KEEP_ALL] disables
-   * pruning entirely, so nothing is ever deleted on the user's behalf.
+   * How many backups to keep at the destination.
+   * [RETENTION_KEEP_ALL] disables pruning entirely, so nothing is ever deleted on the user's behalf.
    */
   var backupRetention: Int by IntPreference(preferences, RETENTION, RETENTION_DEFAULT)
 
@@ -53,10 +51,8 @@ class SettingsWebDavRepository @Inject constructor(
   )
 
   /**
-   * Returns an empty string when nothing is stored, and also when the stored
-   * value cannot be decrypted - which happens if the Keystore key was lost to a
-   * device restore. The user is asked for the password again in that case,
-   * rather than the backup silently failing to authenticate.
+   * Returns an empty string when nothing is stored, and also when the stored value cannot be decrypted - which happens if the Keystore key was lost to a device restore.
+   * The user is asked for the password again in that case, rather than the backup silently failing to authenticate.
    */
   var password: String
     get() {

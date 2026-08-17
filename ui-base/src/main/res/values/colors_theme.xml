@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  The themed half of the palette: every colour here has a counterpart in
-  values-night/colors_theme.xml, and Android picks between them by night mode.
+  The themed half of the palette: every colour here has a counterpart in values-night/colors_theme.xml, and Android picks between them by night mode.
 
   This file is light, values-night is dark.
 
-  Nothing in colors.xml belongs here. Those are fixed literals - colorWhite,
-  colorBlack, the colorBlackTranslucent scrims, the widget blues - and several of
-  them are used by the widgets and by text burned over poster artwork, which is
-  dark in every theme. Giving any of them a values-night variant would quietly
-  break both, so the split is: colors.xml never varies, colors_theme.xml always
-  does.
+  Nothing in colors.xml belongs here.
+  Those are fixed literals - colorWhite, colorBlack, the colorBlackTranslucent scrims, the widget blues - and several of them are used by the widgets and by text burned over poster artwork, which is dark in every theme.
+  Giving any of them a values-night variant would quietly break both, so the split is: colors.xml never varies, colors_theme.xml always does.
 -->
 <resources>
 
@@ -37,9 +33,10 @@
   <color name="themeStroke">#66666666</color>
   <color name="themeProgressTrack">#DCDCDC</color>
 
-  <!-- Accent. Held at the brand red in both themes; only the text-sized use is
-       darkened, because #F44336 on a light ground is 3:1 - fine for fills and
-       icons, thin for a 12sp label. -->
+  <!--
+    Accent.
+    Held at the brand red in both themes; only the text-sized use is darkened, because #F44336 on a light ground is 3:1 - fine for fills and icons, thin for a 12sp label.
+  -->
   <color name="themeAccent">#F44336</color>
   <!-- The switch track when checked: the accent at 30% -->
   <color name="themeAccentTrack">#4DF44336</color>

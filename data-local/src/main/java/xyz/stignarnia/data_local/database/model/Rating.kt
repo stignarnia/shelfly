@@ -10,18 +10,14 @@ import java.time.ZonedDateTime
 /**
  * A user rating for a show, movie, season or episode.
  *
- * [idTmdb] is always the TMDB id of the *top level* item - the show or the
- * movie. Seasons and episodes are then addressed by their number underneath it,
- * which is why both numbers are part of the key.
+ * [idTmdb] is always the TMDB id of the *top level* item - the show or the movie.
+ * Seasons and episodes are then addressed by their number underneath it, which is why both numbers are part of the key.
  *
- * That is the same identity the backup scheme and the sync keys use, so a
- * rating survives an export/import round trip and can be merged across devices.
- * Keying seasons and episodes by their own TMDB id, as this table did before
- * version 44, could not: a backup file never carried those ids.
+ * That is the same identity the backup scheme and the sync keys use, so a rating survives an export/import round trip and can be merged across devices.
+ * Keying seasons and episodes by their own TMDB id, as this table did before version 44, could not: a backup file never carried those ids.
  *
- * [NO_NUMBER] stands in for "not applicable" on show and movie ratings. SQLite
- * does not enforce NOT NULL on primary key columns of a rowid table, so a
- * nullable column here would let duplicate show ratings through.
+ * [NO_NUMBER] stands in for "not applicable" on show and movie ratings.
+ * SQLite does not enforce NOT NULL on primary key columns of a rowid table, so a nullable column here would let duplicate show ratings through.
  */
 @Entity(
   tableName = "ratings",

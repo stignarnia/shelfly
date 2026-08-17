@@ -74,17 +74,13 @@ abstract class BaseFragment<T : ViewModel>(
   /**
    * The app's one modal - the same ModalView the "?" tips appear in.
    *
-   * Anchored on the decor view rather than this fragment's, because a fragment
-   * that opens one straight out of onViewCreated - the backup screen does, when
-   * the welcome flow sends the user there to set WebDAV up - has a view that is
-   * not in the window yet, and the modal would be trapped inside it.
+   * Anchored on the decor view rather than this fragment's, because a fragment that opens one straight out of onViewCreated - the backup screen does, when the welcome flow sends the user there to set WebDAV up - has a view that is not in the window yet, and the modal would be trapped inside it.
    */
   protected fun modal() = ModalBuilder(requireActivity().window.decorView)
 
   /**
-   * Pick one of a list, which is what most of these modals are for. Whether an
-   * unchanged pick is worth acting on is left to the caller: for some of them
-   * re-picking the current option is how the step gets redone.
+   * Pick one of a list, which is what most of these modals are for.
+   * Whether an unchanged pick is worth acting on is left to the caller: for some of them re-picking the current option is how the step gets redone.
    */
   protected fun <T> showSingleChoiceModal(
     options: List<T>,

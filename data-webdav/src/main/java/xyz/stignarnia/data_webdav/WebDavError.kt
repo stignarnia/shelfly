@@ -3,9 +3,7 @@ package xyz.stignarnia.data_webdav
 /**
  * Why a WebDAV call failed, in the terms a user can act on.
  *
- * The distinction matters for the "Test connection" action: a wrong password, a
- * mistyped path and a self-signed certificate all look like "it didn't work"
- * otherwise, and they need completely different fixes.
+ * The distinction matters for the "Test connection" action: a wrong password, a mistyped path and a self-signed certificate all look like "it didn't work" otherwise, and they need completely different fixes.
  */
 sealed class WebDavError(
   message: String,

@@ -22,8 +22,7 @@ internal object WebDavModule {
   fun providesWebDavOkHttpClient(): OkHttpClient =
     OkHttpClient
       .Builder()
-      // Backups are small, but a home server on the far end of a slow link is
-      // the normal case rather than the exception.
+      // Backups are small, but a home server on the far end of a slow link is the normal case rather than the exception.
       .connectTimeout(30, TimeUnit.SECONDS)
       .readTimeout(60, TimeUnit.SECONDS)
       .writeTimeout(60, TimeUnit.SECONDS)

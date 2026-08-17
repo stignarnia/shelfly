@@ -111,8 +111,7 @@ internal class CollectionFiltersNetworkBottomSheet : BaseBottomSheetFragment(R.l
           .setAllCornerSizes(100f)
           .build()
         setEnsureMinTouchTargetSize(false)
-        // Only the handful of broadcasters with bundled artwork gets an icon;
-        // the rest stand on their name, which is the one TMDB gave the show.
+        // Only the handful of broadcasters with bundled artwork gets an icon; the rest stand on their name, which is the one TMDB gave the show.
         networkIconProvider.getIcon(network)?.let { setChipIconResource(it) }
         chipBackgroundColor =
           ContextCompat.getColorStateList(requireContext(), R.color.selector_discover_chip_background)

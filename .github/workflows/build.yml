@@ -1,7 +1,7 @@
 name: Build
 
-# Only release builds. Day-to-day verification happens locally; running the
-# full matrix on every push burns minutes for a single-maintainer fork.
+# Only release builds.
+# Day-to-day verification happens locally; running the full matrix on every push burns minutes for a single-maintainer fork.
 on:
   push:
     tags:
@@ -44,15 +44,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
 
-      # No API keys needed: the build falls back to empty strings, and keys are
-      # supplied by the user at runtime rather than baked into the binary. The two
-      # opt-in suites skip themselves here - TmdbLiveApiTest wants a real key, and
-      # BackupMigrationV2FileTest wants SHELFLY_V2_BACKUP - so nothing in this job
-      # reaches the network.
+      # No API keys needed: the build falls back to empty strings, and keys are supplied by the user at runtime rather than baked into the binary.
+      # The two opt-in suites skip themselves here - TmdbLiveApiTest wants a real key, and BackupMigrationV2FileTest wants SHELFLY_V2_BACKUP - so nothing in this job reaches the network.
       #
-      # Debug variant only. Unit tests never run R8, so ./gradlew test would just
-      # re-execute the same sources for the release variant - twice the tasks for
-      # the same signal.
+      # Debug variant only.
+      # Unit tests never run R8, so ./gradlew test would just re-execute the same sources for the release variant - twice the tasks for the same signal.
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest
 
@@ -80,9 +76,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
 
-      # Optional. Without these secrets the release APK still builds, just unsigned
-      # The guard lives in the shell because the secrets context is not
-      # available to a step-level "if", which fails the workflow at parse time.
+      # Optional.
+      # Without these secrets the release APK still builds, just unsigned.
+      # The guard lives in the shell because the secrets context is not available to a step-level "if", which fails the workflow at parse time.
       - name: Decode signing keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
@@ -119,6 +115,5 @@ jobs:
           name: ${{ github.ref_name }}
           files: app/build/outputs/apk/release/*.apk
           body_path: app/src/main/assets/release_notes.txt
-          # Appends the commit log beneath the hand-written notes, so a release
-          # is never published with an empty description.
+          # Appends the commit log beneath the hand-written notes, so a release is never published with an empty description.
           generate_release_notes: true

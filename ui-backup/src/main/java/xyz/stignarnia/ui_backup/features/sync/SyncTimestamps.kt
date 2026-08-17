@@ -1,9 +1,8 @@
 package xyz.stignarnia.ui_backup.features.sync
 
 /**
- * Backup timestamps are ISO-8601 strings. An unparseable or absent one becomes
- * 0, which orders it behind everything rather than failing the whole sync for
- * one malformed field.
+ * Backup timestamps are ISO-8601 strings.
+ * An unparseable or absent one becomes 0, which orders it behind everything rather than failing the whole sync for one malformed field.
  */
 internal fun String?.toEpochMillis(): Long {
   if (this.isNullOrBlank()) return 0

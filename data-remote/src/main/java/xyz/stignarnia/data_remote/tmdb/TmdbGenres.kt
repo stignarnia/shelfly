@@ -1,13 +1,10 @@
 package xyz.stignarnia.data_remote.tmdb
 
 /**
- * Maps the app's genre slugs onto TMDB genre ids, which are what /discover
- * filters on. TMDB keeps separate genre lists for shows and movies, and they do
- * not line up: shows collapse action and adventure into one genre, and science
- * fiction into "Sci-Fi & Fantasy".
+ * Maps the app's genre slugs onto TMDB genre ids, which are what /discover filters on.
+ * TMDB keeps separate genre lists for shows and movies, and they do not line up: shows collapse action and adventure into one genre, and science fiction into "Sci-Fi & Fantasy".
  *
- * Slugs with no TMDB equivalent map to nothing and are dropped from the filter
- * rather than silently returning everything.
+ * Slugs with no TMDB equivalent map to nothing and are dropped from the filter rather than silently returning everything.
  */
 object TmdbGenres {
 
@@ -50,9 +47,8 @@ object TmdbGenres {
   )
 
   /**
-   * List endpoints return genre ids instead of full genre objects, so ids have
-   * to be resolved back to slugs. Several TMDB genres cover two of the app's
-   * slugs; the first match wins.
+   * List endpoints return genre ids instead of full genre objects, so ids have to be resolved back to slugs.
+   * Several TMDB genres cover two of the app's slugs; the first match wins.
    */
   fun showSlugs(ids: List<Int>): List<String> = slugs(ids, SHOW_GENRES)
 
@@ -64,8 +60,8 @@ object TmdbGenres {
   ): List<String> = ids.mapNotNull { id -> genres.entries.firstOrNull { it.value == id }?.key }
 
   /**
-   * TMDB treats a comma as AND and a pipe as OR. The app's filters are
-   * "any of these", so entries are joined with a pipe.
+   * TMDB treats a comma as AND and a pipe as OR.
+   * The app's filters are "any of these", so entries are joined with a pipe.
    */
   fun showQuery(slugs: List<String>): String? = query(slugs, SHOW_GENRES)
 

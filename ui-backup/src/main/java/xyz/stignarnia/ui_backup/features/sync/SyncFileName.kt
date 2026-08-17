@@ -3,10 +3,8 @@ package xyz.stignarnia.ui_backup.features.sync
 /**
  * Names the one file each device owns in the backup directory.
  *
- * Sync files sit alongside the timestamped snapshots and are deliberately
- * distinguishable from them: snapshots are point-in-time copies kept under
- * retention, sync files are live state that each device overwrites. Confusing
- * the two would either prune live state or restore a peer's file as a backup.
+ * Sync files sit alongside the timestamped snapshots and are deliberately distinguishable from them: snapshots are point-in-time copies kept under retention, sync files are live state that each device overwrites.
+ * Confusing the two would either prune live state or restore a peer's file as a backup.
  */
 internal object SyncFileName {
 

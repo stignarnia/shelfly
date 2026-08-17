@@ -39,8 +39,7 @@ android {
     buildConfigField("int", "VER_CODE", "${versions.versionCode}")
 
     // Release ships no key material - users enter their own keys at runtime.
-    // Debug builds prefill from local.properties so development does not mean
-    // retyping a key after every install.
+    // Debug builds prefill from local.properties so development does not mean retyping a key after every install.
     buildConfigField("String", "TMDB_API_KEY", '""')
     buildConfigField("String", "OMDB_API_KEY", '""')
   }

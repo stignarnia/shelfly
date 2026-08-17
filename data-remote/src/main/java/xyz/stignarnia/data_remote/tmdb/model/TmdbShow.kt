@@ -1,8 +1,8 @@
 package xyz.stignarnia.data_remote.tmdb.model
 
 /**
- * A TV show as returned by /tv/{id}. List endpoints return the same shape with
- * most fields absent, so everything is nullable.
+ * A TV show as returned by /tv/{id}.
+ * List endpoints return the same shape with most fields absent, so everything is nullable.
  */
 data class TmdbShow(
   val id: Long?,

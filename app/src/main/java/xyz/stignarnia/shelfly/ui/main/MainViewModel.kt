@@ -61,9 +61,7 @@ class MainViewModel @Inject constructor(
   private val apiKeyDrafts = mutableMapOf<String, String>()
 
   /**
-   * The activity calls [initialize] from every onCreate, but the queue must only
-   * be built once per view model: applying a language restarts the activity, and
-   * rebuilding would drop the user back to the first step.
+   * The activity calls [initialize] from every onCreate, but the queue must only be built once per view model: applying a language restarts the activity, and rebuilding would drop the user back to the first step.
    */
   private var isInitialized = false
 
@@ -78,8 +76,7 @@ class MainViewModel @Inject constructor(
         }
         startWelcomeFlow(isInitialRun)
       } finally {
-        // The first frame is held until this flips, so a failure above has to
-        // release it too rather than leave the app on the launch window.
+        // The first frame is held until this flips, so a failure above has to release it too rather than leave the app on the launch window.
         welcomeResolvedState.value = true
       }
     }
@@ -122,16 +119,13 @@ class MainViewModel @Inject constructor(
   }
 
   /**
-   * Discover is only opened once the flow is done, never while it runs: it
-   * fetches from TMDB, and before the key step there is no key to fetch with -
-   * which used to leave a load failure sitting behind the welcome screens.
+   * Discover is only opened once the flow is done, never while it runs: it fetches from TMDB, and before the key step there is no key to fetch with - which used to leave a load failure sitting behind the welcome screens.
    */
   private fun finishWelcomeFlow() {
     if (!isFirstRunFlow) return
     isFirstRunFlow = false
-    // Discover is only where a first run lands by default. A user who asked for
-    // the sync setup on the way out has already said where they want to be, and
-    // this would otherwise be navigated straight over the top of it.
+    // Discover is only where a first run lands by default.
+    // A user who asked for the sync setup on the way out has already said where they want to be, and this would otherwise be navigated straight over the top of it.
     if (openSettingsEvent.value != null) return
     showDiscoverEvent.value = Event(true)
   }
@@ -151,8 +145,7 @@ class MainViewModel @Inject constructor(
         }
       }
       is WelcomeStep.Notifications -> {
-        // The grant is the activity's to ask for; the step advances only once
-        // the answer is back, in onNotificationsPermissionResult.
+        // The grant is the activity's to ask for; the step advances only once the answer is back, in onNotificationsPermissionResult.
         requestNotificationsEvent.value = Event(true)
         return
       }
@@ -169,8 +162,7 @@ class MainViewModel @Inject constructor(
   fun onWelcomeSecondary() {
     val state = welcomeState.value ?: return
     when (val step = state.step) {
-      // Declining still has to pin the current language explicitly: with no app
-      // locale applied, the device language would win at resource lookup.
+      // Declining still has to pin the current language explicitly: with no app locale applied, the device language would win at resource lookup.
       is WelcomeStep.Language -> {
         welcomeCase.setLanguage(step.current)
       }
@@ -198,8 +190,8 @@ class MainViewModel @Inject constructor(
   }
 
   /**
-   * Returns whether the welcome flow handled the gesture. The flow itself cannot
-   * be dismissed, so the first step swallows back rather than letting it through.
+   * Returns whether the welcome flow handled the gesture.
+   * The flow itself cannot be dismissed, so the first step swallows back rather than letting it through.
    */
   fun onWelcomeBack(): Boolean {
     val state = welcomeState.value ?: return false

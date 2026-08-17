@@ -132,9 +132,8 @@ class MainActivity :
 
   override fun onNewIntent(intent: Intent?) {
     super.onNewIntent(intent)
-    // Every one of these ends up at the navigation controller, and there is none
-    // while the welcome flow owns the screen. The intent waits for it instead of
-    // being dropped.
+    // Every one of these ends up at the navigation controller, and there is none while the welcome flow owns the screen.
+    // The intent waits for it instead of being dropped.
     if (!isNavigationAttached) {
       pendingIntent = intent
       return
@@ -184,11 +183,9 @@ class MainActivity :
   }
 
   /**
-   * Nothing is drawn until the welcome flow knows whether it has anything to
-   * show. Building its queue costs a database read, and drawing before it is
-   * back puts the main UI on screen for a frame or two, only for the first step
-   * to cover it - which is what made the flow look like an overlay rather than
-   * the entry point it is. The launch window stays up in the meantime.
+   * Nothing is drawn until the welcome flow knows whether it has anything to show.
+   * Building its queue costs a database read, and drawing before it is back puts the main UI on screen for a frame or two, only for the first step to cover it - which is what made the flow look like an overlay rather than the entry point it is.
+   * The launch window stays up in the meantime.
    */
   private fun holdFirstFrame() {
     val root = binding.root
@@ -204,13 +201,9 @@ class MainActivity :
   }
 
   /**
-   * The navigation host is created here rather than at inflation, so that on a
-   * launch that opens with the welcome flow the main UI is never built - let
-   * alone loaded - behind it.
+   * The navigation host is created here rather than at inflation, so that on a launch that opens with the welcome flow the main UI is never built - let alone loaded - behind it.
    *
-   * On a configuration change the fragment manager has already restored it, and
-   * restoring is what [setupNavigation] expects, so it is only added when
-   * genuinely absent.
+   * On a configuration change the fragment manager has already restored it, and restoring is what [setupNavigation] expects, so it is only added when genuinely absent.
    */
   private fun attachNavigation() {
     if (isNavigationAttached) return
@@ -222,9 +215,8 @@ class MainActivity :
         .commitNow()
     }
     setupNavigation()
-    // The start destination is added through the child manager on a posted
-    // commit. Running it here means the frame released next has the destination
-    // in it rather than an empty container.
+    // The start destination is added through the child manager on a posted commit.
+    // Running it here means the frame released next has the destination in it rather than an empty container.
     findNavHostFragment()?.childFragmentManager?.executePendingTransactions()
     pendingIntent?.let {
       pendingIntent = null
@@ -383,9 +375,8 @@ class MainActivity :
         requestNotifications?.let {
           if (it.consume() == true) requestNotificationsPermission()
         }
-        // The rest need somewhere to navigate to. Left unconsumed until there
-        // is - renderWelcome attaches it as the flow ends, so a step that asked
-        // for one of these is honoured on this same pass.
+        // The rest need somewhere to navigate to.
+        // Left unconsumed until there is - renderWelcome attaches it as the flow ends, so a step that asked for one of these is honoured on this same pass.
         if (!isNavigationAttached) return@run
         showDiscover?.let {
           if (it.consume() == true) navigateToDiscover()
@@ -422,15 +413,11 @@ class MainActivity :
   }
 
   /**
-   * The WebDAV setup form already exists under Settings, so the welcome step and
-   * the sync failure notification hand the user over to it - opened, not just
-   * nearby - rather than growing a second copy of it.
+   * The WebDAV setup form already exists under Settings, so the welcome step and the sync failure notification hand the user over to it - opened, not just nearby - rather than growing a second copy of it.
    *
-   * Only the tab roots declare an action to Settings, and a notification is
-   * tapped from wherever the user last left the app - a show, a search, the
-   * gallery, Settings itself. Rather than give up there, walk back up the stack
-   * until a destination that can reach Settings is current. This terminates:
-   * every tab root can, and one of them is the start destination.
+   * Only the tab roots declare an action to Settings, and a notification is tapped from wherever the user last left the app - a show, a search, the gallery, Settings itself.
+   * Rather than give up there, walk back up the stack until a destination that can reach Settings is current.
+   * This terminates: every tab root can, and one of them is the start destination.
    */
   private fun navigateToWebDavSetup() {
     findNavControl()?.run {
@@ -441,9 +428,8 @@ class MainActivity :
         popped = true
         target = settingsActionFrom(currentDestination?.id)
       }
-      // The screen popped away may have hidden the bottom bar, and the root
-      // uncovered here is navigated away from before its onResume can restore
-      // it. Settings is always reached with the bar up, so put it up.
+      // The screen popped away may have hidden the bottom bar, and the root uncovered here is navigated away from before its onResume can restore it.
+      // Settings is always reached with the bar up, so put it up.
       if (popped) showNavigation(false)
       navigate(target, bundleOf(SettingsBackupFragment.ARG_OPEN_WEB_DAV to true))
     }
@@ -463,16 +449,13 @@ class MainActivity :
     }
 
   /**
-   * The step is state, not an event, so this is safe to run on every emission and
-   * after a configuration change - including the restart that applying a new
-   * locale triggers midway through the flow.
+   * The step is state, not an event, so this is safe to run on every emission and after a configuration change - including the restart that applying a new locale triggers midway through the flow.
    */
   private fun renderWelcome(
     state: WelcomeState?,
     isResolved: Boolean,
   ) {
-    // A null step means "nothing left to show" only once the queue exists;
-    // before that it just means the answer is still on its way.
+    // A null step means "nothing left to show" only once the queue exists; before that it just means the answer is still on its way.
     if (!isResolved) return
     if (state == null) {
       attachNavigation()
@@ -480,8 +463,7 @@ class MainActivity :
     } else {
       with(welcomeView()) {
         render(state)
-        // Not faded in: on the launch it opens it is the first thing on screen,
-        // and there is nothing underneath for it to arrive on top of.
+        // Not faded in: on the launch it opens it is the first thing on screen, and there is nothing underneath for it to arrive on top of.
         visible()
       }
     }

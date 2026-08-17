@@ -47,17 +47,16 @@ class ShowDetailsRatingsViewModel @Inject constructor(
       isRefreshingRatingsState.value = false
       ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, externalRatings)
 
-      // Every external rating comes from OMDb, so with no key there is nothing
-      // to fetch. Flag it rather than leaving three slots blank for no reason.
+      // Every external rating comes from OMDb, so with no key there is nothing to fetch.
+      // Flag it rather than leaving three slots blank for no reason.
       if (!ratingsCase.hasOmdbApiKey()) {
         val settled = externalRatings.settled().copy(isOmdbKeyMissing = true)
         ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, settled)
         return@launch
       }
 
-      // External ratings are looked up by IMDb id. Without one there is nothing
-      // to ask OMDb for, so settle rather than spinning on a request that could
-      // only fail.
+      // External ratings are looked up by IMDb id.
+      // Without one there is nothing to ask OMDb for, so settle rather than spinning on a request that could only fail.
       if (imdbId.isBlank()) {
         ratingsState.value = ratingsSpoilersCase.hideSpoilerRatings(show, externalRatings.settled())
         return@launch
@@ -74,8 +73,7 @@ class ShowDetailsRatingsViewModel @Inject constructor(
   }
 
   /**
-   * Clears the loading flags so a failed lookup renders as absent rather than
-   * spinning forever.
+   * Clears the loading flags so a failed lookup renders as absent rather than spinning forever.
    */
   private fun Ratings.settled() =
     copy(

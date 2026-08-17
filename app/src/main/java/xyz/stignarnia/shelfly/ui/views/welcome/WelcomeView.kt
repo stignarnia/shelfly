@@ -31,13 +31,11 @@ import java.util.Locale
 /**
  * Single host for every welcome screen.
  *
- * The card, the step indicator, the button row and the back affordance are shared;
- * only the body is swapped per step. Steps carry no presentation logic of their
- * own, so a new one costs a layout and a branch in [bindContent].
+ * The card, the step indicator, the button row and the back affordance are shared; only the body is swapped per step.
+ * Steps carry no presentation logic of their own, so a new one costs a layout and a branch in [bindContent].
  *
- * Every piece of text is resolved through [strings] rather than from the layouts,
- * because the flow has to be readable in the app's own language before Android
- * has necessarily applied it. See [WelcomeState.displayLanguage].
+ * Every piece of text is resolved through [strings] rather than from the layouts, because the flow has to be readable in the app's own language before Android has necessarily applied it.
+ * See [WelcomeState.displayLanguage].
  */
 class WelcomeView : FrameLayout {
 
@@ -63,9 +61,8 @@ class WelcomeView : FrameLayout {
       viewWelcomePrimaryButton.onClick { onPrimaryClick?.invoke() }
       viewWelcomeSecondaryButton.onClick { onSecondaryClick?.invoke() }
       viewWelcomeBackButton.onClick { onBackClick?.invoke() }
-      // Full screen and edge to edge, so the bars are this view's problem. The
-      // keyboard counts too: without it the buttons sit under the IME on the
-      // key steps.
+      // Full screen and edge to edge, so the bars are this view's problem.
+      // The keyboard counts too: without it the buttons sit under the IME on the key steps.
       viewWelcomeRoot.doOnApplyWindowInsets { view, insets, padding, _ ->
         val spacing = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.ime())
         view.updatePadding(
@@ -83,8 +80,7 @@ class WelcomeView : FrameLayout {
       renderedLanguage = state.displayLanguage
     }
 
-    // Only reinflate on an actual step or language change, so typing does not
-    // cost the body view its focus and the keyboard.
+    // Only reinflate on an actual step or language change, so typing does not cost the body view its focus and the keyboard.
     if (languageChanged || renderedStep?.let { it::class } != state.step::class) {
       bindContent(state.step)
       renderedStep = state.step
@@ -116,8 +112,7 @@ class WelcomeView : FrameLayout {
     val secondaryLabel = step.secondaryButton
     with(binding.viewWelcomeSecondaryButton) {
       when {
-        // Declining means keeping the language already in use, which is not
-        // always English, so this label cannot be a fixed resource.
+        // Declining means keeping the language already in use, which is not always English, so this label cannot be a fixed resource.
         step is WelcomeStep.Language -> {
           text = strings.getString(R.string.textKeepLanguage, step.current.displayNameRaw)
           visible()
@@ -212,9 +207,8 @@ class WelcomeView : FrameLayout {
   }
 
   /**
-   * Resources bound to one language, used for every string this view shows. The
-   * theme is left alone - only the locale is overridden - so colours and
-   * dimensions still come from the host.
+   * Resources bound to one language, used for every string this view shows.
+   * The theme is left alone - only the locale is overridden - so colours and dimensions still come from the host.
    */
   private fun resourcesFor(language: AppLanguage): Resources {
     val configuration = Configuration(context.resources.configuration)

@@ -26,7 +26,8 @@ fun Context.openImdbUrl(idImdb: IdImdb): String? {
     startActivity(i)
     i.data?.toString()
   } catch (e: ActivityNotFoundException) {
-    // IMDb App not installed. Start in web browser
+    // IMDb App not installed.
+    // Start in web browser
     openWebUrl("http://www.imdb.com/title/${idImdb.id}")
   }
 }

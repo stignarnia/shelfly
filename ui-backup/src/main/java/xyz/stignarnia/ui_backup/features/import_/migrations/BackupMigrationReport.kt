@@ -3,8 +3,7 @@ package xyz.stignarnia.ui_backup.features.import_.migrations
 import xyz.stignarnia.ui_backup.model.BackupScheme
 
 /**
- * What a migration produced: the backup in the current scheme, plus what had to
- * be dropped on the way there.
+ * What a migration produced: the backup in the current scheme, plus what had to be dropped on the way there.
  */
 data class BackupMigrationResult(
   val scheme: BackupScheme,
@@ -14,8 +13,7 @@ data class BackupMigrationResult(
 /**
  * Entries an older backup carried that could not be re-keyed onto TMDB ids.
  *
- * These are losses, not errors: the import still runs, and the counts are shown
- * once it finishes so the numbers are never silently wrong.
+ * These are losses, not errors: the import still runs, and the counts are shown once it finishes so the numbers are never silently wrong.
  */
 data class BackupMigrationReport(
   val unmatchedShows: List<String> = emptyList(),

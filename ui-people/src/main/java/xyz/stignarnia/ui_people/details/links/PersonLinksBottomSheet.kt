@@ -114,7 +114,8 @@ class PersonLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_person_link
           try {
             startActivity(i)
           } catch (e: ActivityNotFoundException) {
-            // IMDb App not installed. Start in web browser
+            // IMDb App not installed.
+            // Start in web browser
             openWebUrl("https://www.imdb.com/name/${ids.imdb.id}")
           }
         }

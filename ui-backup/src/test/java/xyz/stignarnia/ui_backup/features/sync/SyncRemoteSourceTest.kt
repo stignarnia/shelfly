@@ -54,8 +54,8 @@ class SyncRemoteSourceTest {
   @Test
   fun `Should skip a corrupt peer rather than failing the whole sync`() =
     runTest {
-      // One device writing something malformed should cost its own changes,
-      // not everyone else's. Skipping is safe because absence never deletes.
+      // One device writing something malformed should cost its own changes, not everyone else's.
+      // Skipping is safe because absence never deletes.
       val client = FakeWebDavClient(
         files = listOf("shelfly_sync_broken.json", "shelfly_sync_tablet.json"),
         contents = mapOf(

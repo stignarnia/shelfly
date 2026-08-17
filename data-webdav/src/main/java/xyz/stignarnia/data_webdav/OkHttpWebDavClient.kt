@@ -19,10 +19,8 @@ import javax.net.ssl.SSLException
 /**
  * Hand-rolled WebDAV over OkHttp.
  *
- * WebDAV is HTTP plus a handful of extra verbs, and the app only needs five of
- * them, so a Retrofit interface would mostly be fighting the XML body of
- * PROPFIND. This is small enough to read in one sitting and testable against
- * MockWebServer.
+ * WebDAV is HTTP plus a handful of extra verbs, and the app only needs five of them, so a Retrofit interface would mostly be fighting the XML body of PROPFIND.
+ * This is small enough to read in one sitting and testable against MockWebServer.
  */
 @Singleton
 internal class OkHttpWebDavClient @Inject constructor(
@@ -60,8 +58,7 @@ internal class OkHttpWebDavClient @Inject constructor(
       okHttpClient.newCall(listing).execute().use { response ->
         when {
           response.isSuccessful || response.code == 207 -> Unit
-          // A missing directory is recoverable when the parent is writable, so
-          // try to create it rather than reporting a dead end.
+          // A missing directory is recoverable when the parent is writable, so try to create it rather than reporting a dead end.
           response.code == 404 -> createDirectory(credentials)
           else -> throw response.toError()
         }
@@ -146,8 +143,7 @@ internal class OkHttpWebDavClient @Inject constructor(
     .header("Authorization", Credentials.basic(credentials.username, credentials.password))
 
   /**
-   * Runs a blocking OkHttp call off the main thread and maps anything thrown
-   * onto [WebDavError], so callers never see a raw OkHttp or TLS exception.
+   * Runs a blocking OkHttp call off the main thread and maps anything thrown onto [WebDavError], so callers never see a raw OkHttp or TLS exception.
    */
   private suspend fun <T> execute(
     credentials: WebDavCredentials,

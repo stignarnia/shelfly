@@ -15,9 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 /**
- * Verifies that TMDB payloads parse and map onto the DTOs the repository layer
- * consumes. These run against recorded responses - see TmdbLiveApiTest for the
- * checks against the real API.
+ * Verifies that TMDB payloads parse and map onto the DTOs the repository layer consumes.
+ * These run against recorded responses - see TmdbLiveApiTest for the checks against the real API.
  */
 class TmdbApiTest {
 

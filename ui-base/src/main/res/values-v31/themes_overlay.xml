@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Material You, light. The dark counterpart is values-night-v31.
+  Material You, light.
+  The dark counterpart is values-night-v31.
 
-  The parent brings Material's own dynamic roles - colorSurface, colorOnSurface
-  and the rest - so M3's widgets follow the wallpaper too. The app addresses
-  colour through its own attrs rather than those roles, so without the items
-  below the wallpaper would reach the dialogs and text fields and nothing else.
+  The parent brings Material's own dynamic roles - colorSurface, colorOnSurface and the rest - so M3's widgets follow the wallpaper too.
+  The app addresses colour through its own attrs rather than those roles, so without the items below the wallpaper would reach the dialogs and text fields and nothing else.
 
-  These are the raw tonal ramps rather than the semantic roles, and that is
-  deliberate: the app's attrs are named for where a colour goes, not for what M3
-  calls it, so mapping them onto a ramp keeps the same visual hierarchy the
-  static themes have.
+  These are the raw tonal ramps rather than the semantic roles, and that is deliberate: the app's attrs are named for where a colour goes, not for what M3 calls it, so mapping them onto a ramp keeps the same visual hierarchy the static themes have.
 
-  The items held fixed in AppTheme are absent on purpose. Poster overlay text,
-  the error snackbar and the widget scrim do not follow the wallpaper.
+  The items held fixed in AppTheme are absent on purpose.
+  Poster overlay text, the error snackbar and the widget scrim do not follow the wallpaper.
 -->
 <resources>
 

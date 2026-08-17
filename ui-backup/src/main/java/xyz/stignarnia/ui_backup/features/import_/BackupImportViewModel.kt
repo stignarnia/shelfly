@@ -65,8 +65,7 @@ class BackupImportViewModel @Inject constructor(
     )
 
   /**
-   * Lists the backups on the server, newest first, so the user picks which one
-   * to restore rather than always getting the latest.
+   * Lists the backups on the server, newest first, so the user picks which one to restore rather than always getting the latest.
    */
   fun loadWebDavBackups() {
     if (importingState.value != Idle) return
@@ -149,9 +148,8 @@ class BackupImportViewModel @Inject constructor(
             ?: throw IllegalArgumentException("Backup file is empty.")
           BackupMigrationResult(scheme)
         }
-        // Older schemes identify entries by ids from the previous catalog
-        // source, which this fork cannot resolve. Reading one goes through an
-        // explicit migration rather than being parsed as the current scheme.
+        // Older schemes identify entries by ids from the previous catalog source, which this fork cannot resolve.
+        // Reading one goes through an explicit migration rather than being parsed as the current scheme.
         BackupMigrationV2.VERSION -> {
           backupMigrationV2.migrate(jsonInput)
         }

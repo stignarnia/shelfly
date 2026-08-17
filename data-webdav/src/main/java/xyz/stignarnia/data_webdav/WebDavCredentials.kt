@@ -3,9 +3,8 @@ package xyz.stignarnia.data_webdav
 /**
  * Where backups go and how to authenticate.
  *
- * [url] points at the *directory* backups live in, not a file. A trailing slash
- * is optional; [normalizedUrl] adds one, since WebDAV collections require it and
- * servers differ on how forgiving they are about its absence.
+ * [url] points at the *directory* backups live in, not a file.
+ * A trailing slash is optional; [normalizedUrl] adds one, since WebDAV collections require it and servers differ on how forgiving they are about its absence.
  */
 data class WebDavCredentials(
   val url: String,

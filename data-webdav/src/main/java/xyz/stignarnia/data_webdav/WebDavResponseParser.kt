@@ -12,9 +12,8 @@ import javax.xml.parsers.DocumentBuilderFactory
 /**
  * Reads the multistatus XML a PROPFIND answers with.
  *
- * Servers vary in namespace prefix ("d:", "D:", none at all), so lookups go by
- * local name rather than qualified name. Entries are matched on the href, which
- * is a URL path and therefore percent-encoded.
+ * Servers vary in namespace prefix ("d:", "D:", none at all), so lookups go by local name rather than qualified name.
+ * Entries are matched on the href, which is a URL path and therefore percent-encoded.
  */
 internal object WebDavResponseParser {
 
@@ -39,8 +38,7 @@ internal object WebDavResponseParser {
   }
 
   private fun Element.toFile(): WebDavFile? {
-    // A <collection/> resourcetype marks a directory - including the one we
-    // just listed, which every server returns as the first entry.
+    // A <collection/> resourcetype marks a directory - including the one we just listed, which every server returns as the first entry.
     if (firstChildText("resourcetype")?.isNotBlank() == true) return null
     if (getElementsByTagNameNS("*", "collection").length > 0) return null
 
@@ -72,8 +70,8 @@ internal object WebDavResponseParser {
     }
 
   /**
-   * `getlastmodified` is an RFC 1123 date. Returns 0 when absent or unparseable,
-   * which callers treat as "unknown age".
+   * `getlastmodified` is an RFC 1123 date.
+   * Returns 0 when absent or unparseable, which callers treat as "unknown age".
    */
   private fun String?.toHttpDateMillis(): Long {
     if (this.isNullOrBlank()) return 0

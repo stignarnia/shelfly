@@ -10,8 +10,7 @@ const val DATABASE_NAME = "SHELFLY_DB"
 /**
  * Adds the tombstone table backing multi-device sync.
  *
- * Purely additive, so unlike the jump to 42 this is a real migration rather
- * than a wipe: there is user data to preserve now.
+ * Purely additive, so unlike the jump to 42 this is a real migration rather than a wipe: there is user data to preserve now.
  */
 val MIGRATION_42_43 = object : Migration(42, 43) {
   override fun migrate(connection: SQLiteConnection) {
@@ -24,29 +23,21 @@ val MIGRATION_42_43 = object : Migration(42, 43) {
 /**
  * Re-keys season and episode ratings onto the show they belong to.
  *
- * Until now the key was `(id_tmdb, type)`, where `id_tmdb` held the season's or
- * episode's own TMDB id. Nothing outside the database could speak that
- * identity: a backup file records a child by its parent show plus season and
- * episode number, and so do the sync keys. Two things followed from that.
+ * Until now the key was `(id_tmdb, type)`, where `id_tmdb` held the season's or episode's own TMDB id.
+ * Nothing outside the database could speak that identity: a backup file records a child by its parent show plus season and episode number, and so do the sync keys.
+ * Two things followed from that.
  *
- * A rating written by the app was invisible after an export/import round trip,
- * because the importer had no season id to write and used the show id instead.
- * And because the old key ignored the numbers, every season rating of one show
- * collided on import - a real export of 1962 season ratings collapsed to 90
- * rows, one per show, each holding whichever season came last.
+ * A rating written by the app was invisible after an export/import round trip, because the importer had no season id to write and used the show id instead.
+ * And because the old key ignored the numbers, every season rating of one show collided on import - a real export of 1962 season ratings collapsed to 90 rows, one per show, each holding whichever season came last.
  *
- * The new key is `(id_tmdb, type, season_number, episode_number)` with
- * `id_tmdb` always the show (or movie). Existing rows are sorted into three
- * cases:
+ * The new key is `(id_tmdb, type, season_number, episode_number)` with `id_tmdb` always the show (or movie).
+ * Existing rows are sorted into three cases:
  *
- *  - written by the app, so `id_tmdb` resolves in `seasons` / `episodes`: the
- *    parent show is read off that row and becomes the new `id_tmdb`;
- *  - written by an import, so `id_tmdb` is already a show id: kept as is, which
- *    is the first time those rows become readable;
- *  - neither: dropped, because there is nothing left to identify them by.
+ * - written by the app, so `id_tmdb` resolves in `seasons` / `episodes`: the parent show is read off that row and becomes the new `id_tmdb`;
+ * - written by an import, so `id_tmdb` is already a show id: kept as is, which is the first time those rows become readable;
+ * - neither: dropped, because there is nothing left to identify them by.
  *
- * The second pass runs `INSERT OR REPLACE` so a rating the app wrote always
- * wins over an imported row for the same season.
+ * The second pass runs `INSERT OR REPLACE` so a rating the app wrote always wins over an imported row for the same season.
  */
 val MIGRATION_43_44 = object : Migration(43, 44) {
   override fun migrate(connection: SQLiteConnection) {

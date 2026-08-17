@@ -161,8 +161,7 @@ internal class BackupExportShowsRunner @Inject constructor(
       )
     }
 
-  // Season and episode ratings are already stored under their show, so the
-  // backup entry is a straight copy - no lookup can fail here any more.
+  // Season and episode ratings are already stored under their show, so the backup entry is a straight copy - no lookup can fail here any more.
 
   private suspend fun exportSeasonsRatings(): BackupShows =
     withContext(dispatchers.IO) {

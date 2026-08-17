@@ -36,10 +36,8 @@ android {
   namespace 'xyz.stignarnia.ui_base'
 }
 
-// ThemeResourcesTest reads the theme XML off the filesystem rather than through
-// R, because what it checks is which entries exist - something R cannot express.
-// Gradle has no way to know that, so without this the test task stays up to date
-// through any resource edit and the guard silently stops running.
+// ThemeResourcesTest reads the theme XML off the filesystem rather than through R, because what it checks is which entries exist - something R cannot express.
+// Gradle has no way to know that, so without this the test task stays up to date through any resource edit and the guard silently stops running.
 tasks.withType(Test).configureEach {
   inputs
     .dir('src/main/res')

@@ -12,10 +12,8 @@ import java.time.ZonedDateTime
 import javax.inject.Inject
 
 /**
- * Season and episode ratings are stored under the show they belong to, not
- * under their own TMDB id - see [Rating]. That id is not part of a season or
- * episode's identity anywhere outside the database, so the show has to be
- * passed in.
+ * Season and episode ratings are stored under the show they belong to, not under their own TMDB id - see [Rating].
+ * That id is not part of a season or episode's identity anywhere outside the database, so the show has to be passed in.
  */
 class UserRatingsMapper @Inject constructor() {
 

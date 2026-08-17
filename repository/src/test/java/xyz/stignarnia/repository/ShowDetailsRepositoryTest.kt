@@ -59,8 +59,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
   @Test
   fun `Should load remote show details if cached show has no IMDb id`() {
     runBlocking {
-      // Only the details endpoint appends external_ids, so a row cached by a
-      // list endpoint has no IMDb id and external ratings cannot be looked up.
+      // Only the details endpoint appends external_ids, so a row cached by a list endpoint has no IMDb id and external ratings cannot be looked up.
       val showDb = mockk<Show>(relaxed = true) {
         every { idTmdb } returns 1
         every { idImdb } returns ""

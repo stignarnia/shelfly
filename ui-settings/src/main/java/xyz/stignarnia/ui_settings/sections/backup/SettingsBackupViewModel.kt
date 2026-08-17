@@ -35,10 +35,8 @@ class SettingsBackupViewModel @Inject constructor(
   }
 
   /**
-   * A blank [password] means "leave the stored one alone". The dialog never
-   * shows the saved password, so an empty field is the normal state when the
-   * user is only correcting the URL - treating it as a deletion would quietly
-   * break working credentials.
+   * A blank [password] means "leave the stored one alone".
+   * The dialog never shows the saved password, so an empty field is the normal state when the user is only correcting the URL - treating it as a deletion would quietly break working credentials.
    */
   fun saveWebDav(
     url: String,
@@ -50,16 +48,13 @@ class SettingsBackupViewModel @Inject constructor(
     if (password.isNotBlank()) {
       webDavRepository.password = password
     }
-    // Selecting a server is not the same as choosing to use it; the target is
-    // switched deliberately, so a saved server does not silently redirect
-    // backups away from the folder the user already picked.
+    // Selecting a server is not the same as choosing to use it; the target is switched deliberately, so a saved server does not silently redirect backups away from the folder the user already picked.
     refresh()
   }
 
   /**
-   * Stores how many backups to keep. Zero means keep everything, so callers
-   * must pass a non-negative value; anything lower is refused rather than
-   * silently clamped, since deleting backups is not something to guess at.
+   * Stores how many backups to keep.
+   * Zero means keep everything, so callers must pass a non-negative value; anything lower is refused rather than silently clamped, since deleting backups is not something to guess at.
    */
   fun setBackupRetention(count: Int) {
     if (count < SettingsWebDavRepository.RETENTION_KEEP_ALL) return
@@ -73,8 +68,7 @@ class SettingsBackupViewModel @Inject constructor(
   }
 
   /**
-   * Tests the credentials being typed rather than the stored ones, so the user
-   * can check a change before committing to it.
+   * Tests the credentials being typed rather than the stored ones, so the user can check a change before committing to it.
    */
   fun testConnection(
     url: String,
