@@ -62,7 +62,7 @@ refactor(ui): replace MaterialAlertDialogBuilder with unified ModalView
 
 - **Sentence-per-line (Newline on period)**: Every sentence in comments must be on its own line ending with a period (`.`).
 - **No arbitrary mid-sentence hard-wrapping**: Do NOT break lines in the middle of sentences to fit an arbitrary character width limit (e.g. 80/100/120 columns). Rely on editor soft-wrapping (Alt+Z / word wrap) instead.
-- **Applies to ALL file types**: Kotlin (`.kt`), Gradle (`.gradle`, `.kts`), YAML (`.yml`), XML (`.xml`), ProGuard (`.pro`), Shell (`.sh`), properties, etc.
+- **Applies to ALL file types**: Kotlin (`.kt`), Gradle (`.gradle`, `.kts`), YAML (`.yml`), XML (`.xml`), R8 / ProGuard (`.pro`), Shell (`.sh`), properties, etc.
 - **Preserve comment structure**: Maintain comment prefixes (`//`, `#`, ` * `, `<!--`), list items, doc tags (`@param`, `@return`), URLs, code snippets, and paragraph spacer lines.
 
 ---
