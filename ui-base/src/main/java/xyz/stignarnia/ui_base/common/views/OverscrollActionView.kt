@@ -148,6 +148,9 @@ class OverscrollActionView
     }
 
     fun detach() {
+      // Reset, or a view re-attached mid-run would refuse to show the indicator
+      // again: both running setters treat the flag as already handled.
+      isRunning = false
       cancelFill()
       heightAnimator?.cancel()
       heightAnimator = null
@@ -166,24 +169,54 @@ class OverscrollActionView
       isRunning = running
 
       binding.overscrollActionProgress.isIndeterminate = running
-      if (running) {
-        animate()
-          .alpha(1F)
-          .scaleX(1F)
-          .scaleY(1F)
-          .setDuration(BUMP_DURATION_MS)
-          .start()
-        animateRowHeight(openHeight)
-      } else {
-        binding.overscrollActionProgress.progress = 0
-        animate()
-          .alpha(0F)
-          .scaleX(0F)
-          .scaleY(0F)
-          .setDuration(BUMP_DURATION_MS)
-          .start()
-        animateRowHeight(restHeight)
+      if (!running) binding.overscrollActionProgress.progress = 0
+      animateIndicator(visible = running)
+    }
+
+    /**
+     * Keeps the indicator up while the triggered action runs, with the ring
+     * filled to [percent] of the work actually done. Pass null once the action
+     * has finished, which puts the indicator away.
+     *
+     * Preferred over [setRunning] by callers that can measure their work: the
+     * spinner says only that something is happening, this says how much is
+     * left. The two are mutually exclusive - a caller uses one or the other.
+     */
+    fun setRunningProgress(percent: Int?) {
+      if (percent == null) {
+        if (!isRunning) return
+        isRunning = false
+        binding.overscrollActionProgress.setProgressCompat(0, false)
+        animateIndicator(visible = false)
+        return
       }
+
+      val wasRunning = isRunning
+      if (!wasRunning) {
+        isRunning = true
+        // The pull's own fill is sitting full, from the hold that armed the
+        // trigger. Drop it to zero unanimated before taking over, or the first
+        // real reading is seen as the ring draining backwards from full.
+        cancelFill()
+        binding.overscrollActionProgress.setProgressCompat(0, false)
+        animateIndicator(visible = true)
+      }
+      // Animated only once the ring is already up and showing a real reading;
+      // the opening frame would otherwise animate away from a zero the user
+      // never saw.
+      binding.overscrollActionProgress
+        .setProgressCompat(percent.coerceIn(0, MAX_PROGRESS), wasRunning)
+    }
+
+    private fun animateIndicator(visible: Boolean) {
+      val to = if (visible) 1F else 0F
+      animate()
+        .alpha(to)
+        .scaleX(to)
+        .scaleY(to)
+        .setDuration(BUMP_DURATION_MS)
+        .start()
+      animateRowHeight(if (visible) openHeight else restHeight)
     }
 
     /**

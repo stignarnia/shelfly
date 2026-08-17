@@ -23,13 +23,20 @@
   <string name="textSyncNever">Ikke synkroniseret med andre enheder endnu</string>
   <string name="textSyncFailed">Synkronisering mislykkedes: %s</string>
   <string name="textBackupImportFromWebDav">Importér fra WebDAV</string>
-  <string name="textBackupWebDavNoBackups">Ingen sikkerhedskopier fundet på serveren.</string>
-  <string name="textBackupWebDavPick">Vælg en sikkerhedskopi til gendannelse</string>
+  <string name="textBackupWebDavNoBackups">Der blev ikke fundet nogen sikkerhedskopier på serveren.</string>
+  <string name="textBackupWebDavPick">Vælg en sikkerhedskopi, der skal gendannes</string>
   <plurals name="textSyncPeers">
     <item quantity="one">%d anden enhed</item>
     <item quantity="other">%d andre enheder</item>
   </plurals>
 
+  <string name="textSyncNotificationProgressTitle">WebDAV-synkronisering</string>
+  <string name="textSyncNotificationProgressContent">Synkroniserer data med serveren…</string>
+  <string name="textSyncNotificationSuccessTitle">WebDAV-synkronisering</string>
+  <string name="textSyncNotificationSuccessContent">Synkronisering fuldført.</string>
+  <string name="textSyncNotificationErrorTitle">WebDAV-synkronisering mislykkedes</string>
+  <string name="textSyncNotificationErrorContent">Synkronisering mislykkedes: %s</string>
+  <string name="textBackupNotificationErrorTitle">Sikkerhedskopiering mislykkedes</string>
   <string name="textBackupExportSchedule">Tidsplan</string>
   <string name="textBackupExportOptionOff">Fra</string>
   <string name="textBackupExportOption6Hours">Hver 6. time</string>

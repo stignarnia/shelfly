@@ -46,6 +46,7 @@ import xyz.stignarnia.ui_base.events.Event
 import xyz.stignarnia.ui_base.events.EventsManager
 import xyz.stignarnia.ui_base.events.ShowsMoviesSyncComplete
 import xyz.stignarnia.ui_base.network.NetworkStatusProvider
+import xyz.stignarnia.ui_base.notifications.SyncNotificationManager
 import xyz.stignarnia.ui_base.sync.ShowsMoviesSyncWorker
 import xyz.stignarnia.ui_base.utilities.ModeHost
 import xyz.stignarnia.ui_base.utilities.MoviesStatusHost
@@ -142,6 +143,11 @@ class MainActivity :
   }
 
   private fun handleIntent(intent: Intent?) {
+    if (intent?.getBooleanExtra(SyncNotificationManager.EXTRA_OPEN_WEBDAV_SETTINGS, false) == true) {
+      intent.removeExtra(SyncNotificationManager.EXTRA_OPEN_WEBDAV_SETTINGS)
+      navigateToWebDavSetup()
+      return
+    }
     handleAppShortcut(intent)
     handleNotification(intent?.extras) { hideNavigation(false) }
     handleDeepLink(intent)
@@ -416,25 +422,45 @@ class MainActivity :
   }
 
   /**
-   * The WebDAV setup form already exists under Settings, so the welcome step
-   * hands the user over to it - opened, not just nearby - rather than growing a
-   * second copy of it.
+   * The WebDAV setup form already exists under Settings, so the welcome step and
+   * the sync failure notification hand the user over to it - opened, not just
+   * nearby - rather than growing a second copy of it.
+   *
+   * Only the tab roots declare an action to Settings, and a notification is
+   * tapped from wherever the user last left the app - a show, a search, the
+   * gallery, Settings itself. Rather than give up there, walk back up the stack
+   * until a destination that can reach Settings is current. This terminates:
+   * every tab root can, and one of them is the start destination.
    */
   private fun navigateToWebDavSetup() {
     findNavControl()?.run {
-      val target = when (currentDestination?.id) {
-        R.id.discoverFragment -> R.id.actionDiscoverFragmentToSettingsFragment
-        R.id.discoverMoviesFragment -> R.id.actionDiscoverMoviesFragmentToSettingsFragment
-        R.id.progressMainFragment -> R.id.actionProgressFragmentToSettingsFragment
-        R.id.progressMoviesMainFragment -> R.id.actionProgressMoviesFragmentToSettingsFragment
-        R.id.followedShowsFragment -> R.id.actionFollowedShowsFragmentToSettingsFragment
-        R.id.followedMoviesFragment -> R.id.actionFollowedMoviesFragmentToSettingsFragment
-        R.id.listsFragment -> R.id.actionListsFragmentToSettingsFragment
-        else -> return
+      var target = settingsActionFrom(currentDestination?.id)
+      var popped = false
+      while (target == null) {
+        if (!popBackStack()) return
+        popped = true
+        target = settingsActionFrom(currentDestination?.id)
       }
+      // The screen popped away may have hidden the bottom bar, and the root
+      // uncovered here is navigated away from before its onResume can restore
+      // it. Settings is always reached with the bar up, so put it up.
+      if (popped) showNavigation(false)
       navigate(target, bundleOf(SettingsBackupFragment.ARG_OPEN_WEB_DAV to true))
     }
   }
+
+  /** The action from [destinationId] to Settings, or null if it declares none. */
+  private fun settingsActionFrom(destinationId: Int?): Int? =
+    when (destinationId) {
+      R.id.discoverFragment -> R.id.actionDiscoverFragmentToSettingsFragment
+      R.id.discoverMoviesFragment -> R.id.actionDiscoverMoviesFragmentToSettingsFragment
+      R.id.progressMainFragment -> R.id.actionProgressFragmentToSettingsFragment
+      R.id.progressMoviesMainFragment -> R.id.actionProgressMoviesFragmentToSettingsFragment
+      R.id.followedShowsFragment -> R.id.actionFollowedShowsFragmentToSettingsFragment
+      R.id.followedMoviesFragment -> R.id.actionFollowedMoviesFragmentToSettingsFragment
+      R.id.listsFragment -> R.id.actionListsFragmentToSettingsFragment
+      else -> null
+    }
 
   /**
    * The step is state, not an event, so this is safe to run on every emission and

@@ -12,7 +12,6 @@
   <string name="textReleaseDay">Julkaisupäivä</string>
   <string name="textNew">Uusi</string>
   <string name="textSelect">Valitse</string>
-  <string name="textSubmit">Lähetä</string>
   <string name="textHide">Piilota</string>
   <string name="textRemove">Poista</string>
   <string name="textEmptyResults">Ei tuloksia…</string>
@@ -23,8 +22,6 @@
   <string name="textEpisode">Jakso %1$d</string>
   <string name="textSeasonEpisode">K.%02d J.%02d</string>
   <string name="textSortBy">Järjestä:</string>
-  <string name="textSpoilersWarning">Kommentti sisältää juonipaljastuksia.\nLue napauttamalla.</string>
-  <string name="textCommentedOn">Kirjoittanut %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Verkko:</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Suoratoisto</string>
@@ -58,7 +55,6 @@
   <string name="textDirector">Ohjaaja</string>
   <string name="textWriting">Käsikirjoitus</string>
   <string name="textScreenplay">Käsikirjoitus</string>
-  <string name="textSound">Ääni</string>
   <string name="textMusic">Musiikki</string>
   <string name="textActing">Näyttely</string>
   <string name="textAiredAlready">Esitetty</string>
@@ -82,7 +78,6 @@
   <string name="textThisMonth">Tässä kuussa</string>
   <string name="textNextMonth">Ensi kuussa</string>
   <string name="textThisYear">Tänä vuonna</string>
-  <string name="textNextYear">Ensi vuonna</string>
   <string name="textLater">Myöhemmin</string>
   <string name="textYesterday">Eilen</string>
   <string name="textLast7Days">Viimeisinä 7 päivänä</string>
@@ -96,7 +91,6 @@
   <string name="textAddToMyShows">Lisää omiin sarjoihin</string>
   <string name="textAddToMyMovies">Lisää historiaan</string>
   <string name="textAddToWatchlist">Lisää katselulistalle</string>
-  <string name="textAddToHidden">Lisää piilotettuihin</string>
   <string name="textMoveToMyShows">Siirrä omiin sarjoihin</string>
   <string name="textMoveToMyMovies">Siirrä historiaan</string>
   <string name="textMoveToWatchlist">Siirrä katselulistalle</string>
@@ -113,7 +107,6 @@
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Kiinnitä pitoon</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Irrota pidosta</string>
   <string name="errorGeneral">Hups… Jotain meni pieleen.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
-  <string name="errorAuthorization">Valtuutus epäonnistui. Ota meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorSeasonsNotLoaded">Odota kun tuotantokausien tiedot ladataan.</string>
   <string name="errorEpisodeNotAired">Jaksoa ei ole vielä esitetty.</string>
   <string name="errorCouldNotLoadDiscover">Etsintäosion lataus ei juuri nyt onnistunut.\nOta yhteyttä, jos tämä jatkuu.</string>

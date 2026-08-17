@@ -2,7 +2,6 @@
 <resources>
   <string name="menuLists">Listas</string>
   <string name="menuList">Lista</string>
-  <string name="textFilters">Filtros:</string>
   <string name="textListsEmpty">La colección de tus listas está vacía.</string>
   <string name="textListEmpty">Tu lista está vacía.</string>
   <string name="textCreateList">Crear lista</string>

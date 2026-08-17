@@ -98,6 +98,7 @@ class ProgressMoviesFragment :
         }
         with(viewModel) {
           launch { uiState.collect { render(it) } }
+          launch { backupProgress.collect { binding.progressMoviesOverscroll.setRunningProgress(it) } }
           launch { messageFlow.collect { showSnack(it) } }
           launch { eventFlow.collect { handleEvent(it) } }
         }

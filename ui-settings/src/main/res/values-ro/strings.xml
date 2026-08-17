@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="textImagesCacheCleared">Cache-ul imaginilor a fost șters.</string>
-    <string name="textTurnOff">Dezactivare</string>
     <string name="textSettings">Setări</string>
     <string name="textSettingsGeneral">General &amp; UX</string>
     <string name="textSettingsRecentShowsTitle">Suma adăugată recent</string>
@@ -10,10 +9,6 @@
     <string name="textSettingsUpcomingSectionSummary">Activează/dezactivează secțiunea „Urmează” din fila „Progres”.</string>
     <string name="textSettingsThemeTitle">Teme</string>
     <string name="textSettingsThemeSummary">Selectează tema principală.</string>
-    <string name="textSettingsThemeWidgetsTitle">Teme</string>
-    <string name="textSettingsThemeWidgetsSummary">Selectați tema widgeturilor.</string>
-    <string name="textSettingsWidgetsTransparencyTitle">Fundal</string>
-    <string name="textSettingsWidgetsTransparencySummary">Setează nivelul de transparență al fundalului widgeturilor.</string>
     <string name="textSettingsMyShowsCountryTitle">Regiune</string>
     <string name="textSettingsMyShowsCountrySummary">Selectează regiunea pe care dorești să o utilizezi cu datele serviciilor de streaming.</string>
     <string name="textSettingsMyShowsLanguageTitle">Limba</string>
@@ -30,10 +25,6 @@
     <string name="textSettingsContactDevsSummary">Ai o problemă sau o sugestie? Deschide o problemă pe GitHub.</string>
     <string name="textSettingsDeleteCacheTitle">Șterge memoria cache a imaginilor</string>
     <string name="textSettingsDeleteCacheSummary">Selectează pentru a șterge memoria cache a imaginilor locale. Acest lucru poate fi util dacă imaginile nu se încarcă corect.</string>
-    <string name="textSettingsQuickSyncConfirmationTitle">Dezactivează sincronizarea automată</string>
-    <string name="textSettingsQuickSyncConfirmationMessage">\nSe pare că sincronizarea automată este deja activată.\n\nDorești să o dezactivezi înainte de a activa sincronizarea instantanee (recomandat)?\n</string>
-    <string name="textSettingsLogoutTitle">Deconectare TMDB</string>
-    <string name="textSettingsLogoutMessage">\nEști sigur că dorești să te deconectezi?\n</string>
     <string name="textSettingsMoviesEnabledTitle">Filme</string>
     <string name="textSettingsMoviesEnabledSummary">Activează/dezactivează suportul pentru filme. Aplicația se va reporni.</string>
     <string name="textSettingsWidgets">Widgeturi</string>
@@ -44,7 +35,6 @@
     <string name="textSettingsStreamingServicesMessage">Afișează datele serviciilor de streaming.</string>
     <string name="textSettingsProgressNextEpisodeTitle">Următorul episod</string>
     <string name="textSettingsProgressNextEpisodeMessage">Calculează următorul episod folosind:</string>
-    <string name="textSettingsDateSelectionTitle">Selectarea datei</string>
     <string name="textSettingsDateSelectionMessage">Selectează opțiunea implicită de selectare a datei.</string>
     <string name="textSettingsTabletColumnsTitle">Liste Coloane Număr</string>
     <string name="textSettingsTabletColumnsSummary">Selectare numărul coloanelor preferate pentru liste.</string>
@@ -95,9 +85,6 @@
     <string name="textDateSelectionAsk">Întreabă întotdeauna</string>
     <string name="textDateSelectionNow">Întotdeauna „Acum”</string>
     <string name="textThemeDark">Întunecat</string>
-    <string name="textThemeLight">Luminos</string>
-    <string name="textThemeSystem">Sistem</string>
-    <string name="textTransparency100">Opac</string>
 
   <string name="textSettingsApiKeys">Chei API</string>
   <string name="textSettingsBackupTargetTitle">Destinație copie de rezervă</string>

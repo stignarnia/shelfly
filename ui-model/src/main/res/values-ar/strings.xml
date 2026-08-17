@@ -60,13 +60,6 @@
   <string name="textGenreRomance">رومانسي</string>
   <string name="textGenreWar">حرب</string>
   <string name="textGenreWestern">ويسترن</string>
-  <string name="textTMDBSyncOption1Hour">كُل ساعة</string>
-  <string name="textTMDBSyncOption3Hours">كُل 3 ساعات</string>
-  <string name="textTMDBSyncOption6Hours">كُل 6 ساعات</string>
-  <string name="textTMDBSyncOption3Day">كُل 3 أيام</string>
-  <string name="textTMDBSyncOption3HoursButton">تم توقيت الجدولة لتعمل كُل 3 ساعات</string>
-  <string name="textTMDBSyncOption6HoursButton">تم توقيت الجدولة لتعمل كُل 6 ساعات</string>
-  <string name="textTMDBSyncOption3DayButton">تم توقيت الجدولة لتعمل كُل 3 أيام</string>
   <string name="textShowStatusReturning">مسلسل مستمر</string>
   <string name="textShowStatusUpcoming">يُعرض قريباً</string>
   <string name="textShowStatusInProduction">قيد الإنتاج</string>

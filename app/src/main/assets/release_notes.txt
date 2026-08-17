@@ -1,14 +1,4 @@
-Shelfly 4.0.3
+Shelfly 4.0.4
 
-• All dialogs, option pickers, and settings popups (WebDAV setup, API keys, backup retention, tutorial tips) are now unified into a consistent modal system with smooth spring animations.
-• Restored Contact Developers option in Misc settings linking directly to the GitHub issue tracker.
-• Links in modal dialogs and onboarding screens (such as TMDB and OMDb API key setup) are now directly clickable.
-• Fixed backup retention input floating label in localized languages where it mistakenly displayed a placeholder number.
-• Fixed dialog surfaces having an unwanted red tint overlay caused by Material 3 theme inheritance.
-• Tapping outside or pressing the system back button now reliably dismisses modal dialogs without losing unsaved input.
-• Improved WebDAV test connection button placement and fixed result layout to prevent the dialog from resizing during connectivity checks.
-• Standardized primary accent and secondary action button styles across all dialogs and popups.
-• Debug builds now include automatic build-time version stamps for easier identification during testing.
-• Welcome and What's New screens now open as the app's first screen instead of appearing a moment after the main UI, which was briefly visible behind them.
-• Launches with no welcome screens due go straight to the app, without building those screens at all.
-• Choosing to set up sync on the last welcome screen now lands on the WebDAV settings instead of being redirected to Discover.
+• WebDAV sync now posts a notification while it runs and when it fails, so a device that has quietly stopped syncing says so. Tapping a failure notification opens the WebDAV settings from wherever you were in the app.
+• Pulling down on Progress to sync now keeps the ring on screen and fills it as the backup and sync actually advance, instead of putting it away the moment you let go.

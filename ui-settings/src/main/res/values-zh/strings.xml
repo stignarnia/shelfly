@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">图像缓存已清理。</string>
-  <string name="textTurnOff">关闭</string>
   <string name="textSettings">设置</string>
   <string name="textSettingsGeneral">常规 &amp; 用户体验</string>
   <string name="textSettingsRecentShowsTitle">最近添加的数量</string>
@@ -10,10 +9,6 @@
   <string name="textSettingsUpcomingSectionSummary">在「进度」选项卡中启用/禁用「即将开播」模块。</string>
   <string name="textSettingsThemeTitle">主题</string>
   <string name="textSettingsThemeSummary">选择首要主题。</string>
-  <string name="textSettingsThemeWidgetsTitle">主题</string>
-  <string name="textSettingsThemeWidgetsSummary">选择桌面小部件主题。</string>
-  <string name="textSettingsWidgetsTransparencyTitle">背景</string>
-  <string name="textSettingsWidgetsTransparencySummary">设置桌面小部件背景透明度。</string>
   <string name="textSettingsMyShowsCountryTitle">地区</string>
   <string name="textSettingsMyShowsCountrySummary">选择用于流媒体服务数据的地区。</string>
   <string name="textSettingsMyShowsLanguageTitle">语言</string>
@@ -30,10 +25,6 @@
   <string name="textSettingsContactDevsSummary">遇到了问题或有建议？在 GitHub 上提交 Issue。</string>
   <string name="textSettingsDeleteCacheTitle">清理图片缓存</string>
   <string name="textSettingsDeleteCacheSummary">点击清除本地图片缓存。如果显示图片未正确加载，这可能会有帮助。</string>
-  <string name="textSettingsQuickSyncConfirmationTitle">禁用自动同步</string>
-  <string name="textSettingsQuickSyncConfirmationMessage">\n似乎自动同步已经开启。\n\n您想要在启用即时同步之前将其关闭吗（推荐）？\n</string>
-  <string name="textSettingsLogoutTitle">登出 TMDB</string>
-  <string name="textSettingsLogoutMessage">\n您确定要退出吗？\n</string>
   <string name="textSettingsMoviesEnabledTitle">电影</string>
   <string name="textSettingsMoviesEnabledSummary">启用/禁用电影模块。应用会重启。</string>
   <string name="textSettingsWidgets">桌面小部件</string>
@@ -44,7 +35,6 @@
   <string name="textSettingsStreamingServicesMessage">显示流媒体服务数据。</string>
   <string name="textSettingsProgressNextEpisodeTitle">下一集</string>
   <string name="textSettingsProgressNextEpisodeMessage">使用该方式展示下一集：</string>
-  <string name="textSettingsDateSelectionTitle">日期选择</string>
   <string name="textSettingsDateSelectionMessage">选择默认日期。</string>
   <string name="textSettingsTabletColumnsTitle">列表列数</string>
   <string name="textSettingsTabletColumnsSummary">选择列表的首选列数。</string>
@@ -95,9 +85,6 @@
   <string name="textDateSelectionAsk">总是询问</string>
   <string name="textDateSelectionNow">总是“现在”</string>
   <string name="textThemeDark">暗色</string>
-  <string name="textThemeLight">亮色</string>
-  <string name="textThemeSystem">跟随系统</string>
-  <string name="textTransparency100">不透明</string>
 
   <string name="textSettingsApiKeys">API 密钥</string>
   <string name="textSettingsBackupTargetTitle">备份目标位置</string>

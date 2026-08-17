@@ -2,7 +2,6 @@
 <resources>
   <string name="menuLists">Listen</string>
   <string name="menuList">Liste</string>
-  <string name="textFilters">Filter:</string>
   <string name="textListsEmpty">Ihre Listensammlung ist derzeit leer.</string>
   <string name="textListEmpty">Die Liste ist aktuell leer.</string>
   <string name="textCreateList">Liste erstellen</string>

@@ -2,7 +2,6 @@
 <resources>
   <string name="menuLists">列表</string>
   <string name="menuList">列表</string>
-  <string name="textFilters">筛选：</string>
   <string name="textListsEmpty">当前您的列表合集为空。</string>
   <string name="textListEmpty">当前您的列表为空。</string>
   <string name="textCreateList">创建列表</string>

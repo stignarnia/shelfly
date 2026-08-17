@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="textPoster">Afiș</string>
-    <string name="textFanart">Artă creată de fani</string>
     <string name="textGalleryEmpty">Nu sunt imagini disponibile</string>
-    <string name="textUrlDialogTitle">Descarcă imaginea</string>
     <string name="textUrlDialogHint">URL-ul imaginii</string>
-    <string name="textUrlDialogInvalidUrl">Format URL imagine invalid.\nExemplu: https://test.com/image.jpg</string>
-    <string name="textUrlDialogInvalidImage">Ne pare rău. Această imagine nu a putut fi încărcată.</string>
 </resources>

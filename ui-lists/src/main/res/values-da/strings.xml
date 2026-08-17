@@ -2,7 +2,6 @@
 <resources>
   <string name="menuLists">Lister</string>
   <string name="menuList">Liste</string>
-  <string name="textFilters">Filtre:</string>
   <string name="textListsEmpty">Din listesamling er tom i øjeblikket.</string>
   <string name="textListEmpty">Din liste er tom i øjeblikket.</string>
   <string name="textCreateList">Opret liste</string>

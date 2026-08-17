@@ -24,9 +24,9 @@
   <string name="textSyncFailed">فشلت المزامنة: %s</string>
   <string name="textBackupImportFromWebDav">استيراد من WebDAV</string>
   <string name="textBackupWebDavNoBackups">لم يتم العثور على نسخ احتياطية على الخادم.</string>
-  <string name="textBackupWebDavPick">اختر نسخة احتياطية للاستعادة</string>
+  <string name="textBackupWebDavPick">اختر نسخة احتياطية لاستعادتها</string>
   <plurals name="textSyncPeers">
-    <item quantity="zero">%d أجهزة أخرى</item>
+    <item quantity="zero">لا توجد أجهزة أخرى</item>
     <item quantity="one">جهاز آخر (%d)</item>
     <item quantity="two">جهازان آخران (%d)</item>
     <item quantity="few">%d أجهزة أخرى</item>
@@ -34,6 +34,13 @@
     <item quantity="other">%d جهاز آخر</item>
   </plurals>
 
+  <string name="textSyncNotificationProgressTitle">مزامنة WebDAV</string>
+  <string name="textSyncNotificationProgressContent">جارٍ مزامنة البيانات مع الخادم…</string>
+  <string name="textSyncNotificationSuccessTitle">مزامنة WebDAV</string>
+  <string name="textSyncNotificationSuccessContent">اكتملت المزامنة بنجاح.</string>
+  <string name="textSyncNotificationErrorTitle">فشلت مزامنة WebDAV</string>
+  <string name="textSyncNotificationErrorContent">فشلت المزامنة: %s</string>
+  <string name="textBackupNotificationErrorTitle">فشل النسخ الاحتياطي</string>
   <string name="textBackupExportSchedule">الجدول الزمني</string>
   <string name="textBackupExportOptionOff">إيقاف</string>
   <string name="textBackupExportOption6Hours">كل 6 ساعات</string>

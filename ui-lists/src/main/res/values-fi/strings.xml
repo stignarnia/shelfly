@@ -2,7 +2,6 @@
 <resources>
   <string name="menuLists">Listat</string>
   <string name="menuList">Lista</string>
-  <string name="textFilters">Suodattimet:</string>
   <string name="textListsEmpty">Listakokoelmasi on tyhjä.</string>
   <string name="textListEmpty">Lista on tyhjä.</string>
   <string name="textCreateList">Luo lista</string>

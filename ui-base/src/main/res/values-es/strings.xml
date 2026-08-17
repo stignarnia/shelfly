@@ -12,7 +12,6 @@
   <string name="textReleaseDay">Día de estreno</string>
   <string name="textNew">Nuevo</string>
   <string name="textSelect">Seleccionar</string>
-  <string name="textSubmit">Enviar</string>
   <string name="textHide">Ocultar</string>
   <string name="textRemove">Eliminar</string>
   <string name="textEmptyResults">No hay resultados...</string>
@@ -23,8 +22,6 @@
   <string name="textEpisode">Episodio %1$d</string>
   <string name="textSeasonEpisode">T.%02d E.%02d</string>
   <string name="textSortBy">Ordenar por:</string>
-  <string name="textSpoilersWarning">Este comentario contiene spoilers.\nTap para leer.</string>
-  <string name="textCommentedOn">Comentado por %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Cadena:</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Streaming</string>
@@ -58,7 +55,6 @@
   <string name="textDirector">Director</string>
   <string name="textWriting">Escritores</string>
   <string name="textScreenplay">Guión</string>
-  <string name="textSound">Sonido</string>
   <string name="textMusic">Música</string>
   <string name="textActing">Actuación</string>
   <string name="textAiredAlready">Emitido</string>
@@ -82,7 +78,6 @@
   <string name="textThisMonth">Este Mes</string>
   <string name="textNextMonth">El Próximo Mes</string>
   <string name="textThisYear">Este Año</string>
-  <string name="textNextYear">El Próximo Año</string>
   <string name="textLater">Más Tarde</string>
   <string name="textYesterday">Ayer</string>
   <string name="textLast7Days">Últimos 7 Días</string>
@@ -96,7 +91,6 @@
   <string name="textAddToMyShows">Añadir a Mis Series</string>
   <string name="textAddToMyMovies">Añadir al Historial</string>
   <string name="textAddToWatchlist">Añadir a Pendientes</string>
-  <string name="textAddToHidden">Añadir a Ocultos</string>
   <string name="textMoveToMyShows">Mover a Mis Series</string>
   <string name="textMoveToMyMovies">Mover al Historial</string>
   <string name="textMoveToWatchlist">Mover a Pendientes</string>
@@ -113,7 +107,6 @@
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Anclar a \"en espera\"</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Desanclar de \"en espera\"</string>
   <string name="errorGeneral">Ups… Algo salió mal.\nPor favor, contáctanos si esto sigue sucediendo.</string>
-  <string name="errorAuthorization">Autorización fallida. Por favor contáctenos si continúa sucediendo.</string>
   <string name="errorSeasonsNotLoaded">Por favor, espera a que se carguen los datos de las temporadas.</string>
   <string name="errorEpisodeNotAired">Este episodio aún no se ha emitido.</string>
   <string name="errorCouldNotLoadDiscover">No pudimos cargar los resultados de la página descubrir en este momento.\nPor favor, contáctanos si esto sigue sucediendo.</string>

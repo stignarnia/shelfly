@@ -49,13 +49,6 @@
   <string name="textGenreThriller">Suspense</string>
   <string name="textGenreWar">Guerra</string>
   <string name="textGenreWestern">Faroeste</string>
-  <string name="textTMDBSyncOption1Hour">A cada hora</string>
-  <string name="textTMDBSyncOption3Hours">A cada 3 horas</string>
-  <string name="textTMDBSyncOption6Hours">A cada 6 horas</string>
-  <string name="textTMDBSyncOption3Day">A cada 3 dias</string>
-  <string name="textTMDBSyncOption3HoursButton">Programado para ser executado a cada 3 horas</string>
-  <string name="textTMDBSyncOption6HoursButton">Programado para ser executado a cada 6 horas</string>
-  <string name="textTMDBSyncOption3DayButton">Programado para ser executado a cada 3 dias</string>
   <string name="textShowStatusReturning">Renovada</string>
   <string name="textShowStatusUpcoming">Em breve</string>
   <string name="textShowStatusInProduction">Em produção</string>

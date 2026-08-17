@@ -32,6 +32,14 @@
     <item quantity="other">%d других устройств</item>
   </plurals>
 
+  <string name="textSyncNotificationProgressTitle">Синхронизация WebDAV</string>
+  <string name="textSyncNotificationProgressContent">Синхронизация данных с сервером…</string>
+  <string name="textSyncNotificationSuccessTitle">Синхронизация WebDAV</string>
+  <string name="textSyncNotificationSuccessContent">Синхронизация успешно завершена.</string>
+  <string name="textSyncNotificationErrorTitle">Сбой синхронизации WebDAV</string>
+  <string name="textSyncNotificationErrorContent">Ошибка синхронизации: %s</string>
+  <string name="textBackupNotificationErrorTitle">Ошибка резервного копирования</string>
+
   <string name="textBackupExportSchedule">Расписание</string>
   <string name="textBackupExportOptionOff">Выкл.</string>
   <string name="textBackupExportOption6Hours">Каждые 6 часов</string>

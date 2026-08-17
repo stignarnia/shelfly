@@ -2,7 +2,6 @@
 <resources>
     <string name="menuLists">Liste</string>
     <string name="menuList">Listă</string>
-    <string name="textFilters">Filtre:</string>
     <string name="textListsEmpty">Colecția ta de liste este momentan goală.</string>
     <string name="textListEmpty">Lista ta este goală în acest moment.</string>
     <string name="textCreateList">Creează listă</string>

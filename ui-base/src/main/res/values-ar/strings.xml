@@ -12,7 +12,6 @@
   <string name="textReleaseDay">يوم الإصدار</string>
   <string name="textNew">جديد</string>
   <string name="textSelect">اختر</string>
-  <string name="textSubmit">إرسال</string>
   <string name="textHide">إخفاء</string>
   <string name="textRemove">حذف التقييم</string>
   <string name="textEmptyResults">لا توجد نتائج…</string>
@@ -23,8 +22,6 @@
   <string name="textEpisode">الحلقة %1$d</string>
   <string name="textSeasonEpisode">S.%02d E.%02d</string>
   <string name="textSortBy">ترتيب حسب:</string>
-  <string name="textSpoilersWarning">هذا التعليق يحتوى على حرق للأحداث.\nاضغط للقراءة.</string>
-  <string name="textCommentedOn">تعليق بواسطة %s</string>
   <string name="textNetwork">(%2$s) %1$s</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">الشبكة التلفزيونية:</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">البث</string>
@@ -62,7 +59,6 @@
   <string name="textDirector">المخرج</string>
   <string name="textWriting">الكتابة</string>
   <string name="textScreenplay">النص السينمائي</string>
-  <string name="textSound">الصوت</string>
   <string name="textMusic">موسيقى</string>
   <string name="textActing">التمثيل</string>
   <string name="textAiredAlready">بُثت</string>
@@ -98,7 +94,6 @@
   <string name="textThisMonth">هذا الشهر</string>
   <string name="textNextMonth">الشهر القادم</string>
   <string name="textThisYear">هذه السنة</string>
-  <string name="textNextYear">السنة القادمة</string>
   <string name="textLater">لاحقًا</string>
   <string name="textYesterday">أمس</string>
   <string name="textLast7Days">آخر 7 أيام</string>
@@ -112,7 +107,6 @@
   <string name="textAddToMyShows">إضافة إلى مسلسلاتي</string>
   <string name="textAddToMyMovies">إضافة إلى السجل</string>
   <string name="textAddToWatchlist">إضافة إلى قائمة المشاهدة</string>
-  <string name="textAddToHidden">إضافة إلى المخفية</string>
   <string name="textMoveToMyShows">نقل إلى مسلسلاتي</string>
   <string name="textMoveToMyMovies">نقل إلى السجل</string>
   <string name="textMoveToWatchlist">نقل إلى قائمة المشاهدة</string>
@@ -129,7 +123,6 @@
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">إضافة إلى \"المعلقة\"</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">إزالة من \"المعلقة\"</string>
   <string name="errorGeneral">عفواً… حدث خطأ ما.\nإذا استمرت المشكلة بالحدوث، رجاءً تواصل معنا.</string>
-  <string name="errorAuthorization">فشلت المصادقة. إذا استمرت المشكلة بالحدوث، رجاءً تواصل معنا.</string>
   <string name="errorSeasonsNotLoaded">رجاءً إنتظر قليلاً حتى يكتمل تحميل بيانات المواسم.</string>
   <string name="errorEpisodeNotAired">لم تُعرض الحلقة حتى الآن.</string>
   <string name="errorCouldNotLoadDiscover">لم نستطع تحميل صفحة إكتشف.\nرجاءً تواصل معنا إذا استمرت هذه المشكلة بالحدوث.</string>

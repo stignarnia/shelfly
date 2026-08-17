@@ -60,13 +60,6 @@
   <string name="textGenreThriller">Jännitys</string>
   <string name="textGenreWar">Sota</string>
   <string name="textGenreWestern">Länkkäri</string>
-  <string name="textTMDBSyncOption1Hour">Kerran tunnissa</string>
-  <string name="textTMDBSyncOption3Hours">3 tunnin välein</string>
-  <string name="textTMDBSyncOption6Hours">6 tunnin välein</string>
-  <string name="textTMDBSyncOption3Day">3 päivän välein</string>
-  <string name="textTMDBSyncOption3HoursButton">Ajoitettu suoritettavaksi 3 tunnin välein</string>
-  <string name="textTMDBSyncOption6HoursButton">Ajoitettu suoritettavaksi 6 tunnin välein</string>
-  <string name="textTMDBSyncOption3DayButton">Ajoitettu suoritettavaksi 3 päivän välein</string>
   <string name="textShowStatusReturning">Jatkuva sarja</string>
   <string name="textShowStatusUpcoming">Tulossa</string>
   <string name="textShowStatusInProduction">Tuotannossa</string>

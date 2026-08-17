@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="textStreamingsFilterAll">جميع المزودين</string>
-  <string name="textStreamingsEmpty">لم يتم العثور على مزودي خدمة البث لهذا العنوان.</string>
 </resources>

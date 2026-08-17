@@ -1,5 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="textStreamingsFilterAll">All Providers</string>
-  <string name="textStreamingsEmpty">No streaming providers found for this title.</string>
 </resources>

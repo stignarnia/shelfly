@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="textStreamingsFilterAll">Todos los proveedores</string>
-  <string name="textStreamingsEmpty">No se encontraron proveedores de streaming para este título.</string>
 </resources>

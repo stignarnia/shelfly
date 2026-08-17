@@ -101,6 +101,7 @@ class ProgressFragment :
         }
         with(viewModel) {
           launch { uiState.collect { render(it) } }
+          launch { backupProgress.collect { binding.progressOverscroll.setRunningProgress(it) } }
           launch { messageFlow.collect { showSnack(it) } }
           launch { eventFlow.collect { handleEvent(it) } }
         }

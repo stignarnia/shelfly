@@ -44,10 +44,17 @@ class SyncEngine @Inject internal constructor(
    * A failure is written down rather than only thrown, because the screen has
    * to be able to say that syncing is broken. Reporting the last success alone
    * would leave a device that has been failing for a week looking merely idle.
+   *
+   * [onStage] is called as each stage of the cycle completes, for callers that
+   * show how far along a run is. It is reporting only - a caller that does not
+   * care passes nothing, and a cycle behaves identically either way.
    */
-  suspend fun sync(credentials: WebDavCredentials): Result =
+  suspend fun sync(
+    credentials: WebDavCredentials,
+    onStage: suspend (BackupSyncStage) -> Unit = {},
+  ): Result =
     try {
-      runCycle(credentials).also {
+      runCycle(credentials, onStage).also {
         settingsSyncRepository.lastError = null
         settingsSyncRepository.lastPeers = it.peerIds
       }
@@ -56,13 +63,17 @@ class SyncEngine @Inject internal constructor(
       throw error
     }
 
-  private suspend fun runCycle(credentials: WebDavCredentials): Result {
+  private suspend fun runCycle(
+    credentials: WebDavCredentials,
+    onStage: suspend (BackupSyncStage) -> Unit,
+  ): Result {
     val deviceId = settingsSyncRepository.deviceId
     val startedAt = nowUtcMillis()
     settingsSyncRepository.lastAttemptAt = startedAt
     Timber.i("Sync started as device $deviceId")
 
     val local = exportWorker.run()
+    onStage(BackupSyncStage.LOCAL_STATE_READ)
 
     // What this device last published is the only baseline it has for spotting
     // its own deletions: anything in there and not here now is gone.
@@ -76,8 +87,11 @@ class SyncEngine @Inject internal constructor(
       deletedAt = settingsSyncRepository.lastSyncedAt,
       now = startedAt,
     )
+    onStage(BackupSyncStage.OWN_STATE_DOWNLOADED)
 
     val peers = remoteSource.downloadPeers(credentials, deviceId)
+    onStage(BackupSyncStage.PEERS_DOWNLOADED)
+
     val merged = SyncMerge.merge(local = local, localTombstones = tombstones, peers = peers)
 
     // Re-publish peers' deletions as well as our own. Without this a deletion
@@ -86,11 +100,13 @@ class SyncEngine @Inject internal constructor(
     // overruled is kept too - it is a claim, not a verdict, and it will keep
     // losing to the newer sighting until the store expires it.
     tombstoneStore.adopt(merged.tombstones)
+    onStage(BackupSyncStage.MERGED)
 
     // Removals first: the importer only ever adds, so running it first would
     // re-add what the merge just decided is gone.
     applier.apply(local = local, merged = merged.state)
     importWorker.run(merged.state)
+    onStage(BackupSyncStage.CHANGES_APPLIED)
 
     // Publish what this device actually ended up with, not what the merge asked
     // for. The import can legitimately fall short - a show whose details will
@@ -114,6 +130,7 @@ class SyncEngine @Inject internal constructor(
     // Only once the upload has landed. A failed publish must not move the
     // baseline, or the deletions it was carrying would never be re-derived.
     settingsSyncRepository.lastSyncedAt = syncedAt
+    onStage(BackupSyncStage.PUBLISHED)
 
     Timber.i("Sync finished against ${peers.size} peer(s)")
     return Result(

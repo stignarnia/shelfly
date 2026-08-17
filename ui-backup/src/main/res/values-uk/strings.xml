@@ -35,7 +35,7 @@
   <string name="textSyncLastTimestamp">Остання синхронізація: %s</string>
   <string name="textSyncNever">Ще не синхронізовано з жодним іншим пристроєм</string>
   <string name="textSyncFailed">Помилка синхронізації: %s</string>
-  <string name="textBackupImportFromWebDav">Імпорт із WebDAV</string>
+  <string name="textBackupImportFromWebDav">Імпортувати з WebDAV</string>
   <string name="textBackupWebDavNoBackups">На сервері не знайдено резервних копій.</string>
   <string name="textBackupWebDavPick">Виберіть резервну копію для відновлення</string>
   <plurals name="textSyncPeers">
@@ -44,4 +44,12 @@
     <item quantity="many">%d інших пристроїв</item>
     <item quantity="other">%d інших пристроїв</item>
   </plurals>
+
+  <string name="textSyncNotificationProgressTitle">Синхронізація WebDAV</string>
+  <string name="textSyncNotificationProgressContent">Синхронізація даних із сервером…</string>
+  <string name="textSyncNotificationSuccessTitle">Синхронізація WebDAV</string>
+  <string name="textSyncNotificationSuccessContent">Синхронізацію успішно завершено.</string>
+  <string name="textSyncNotificationErrorTitle">Помилка синхронізації WebDAV</string>
+  <string name="textSyncNotificationErrorContent">Помилка синхронізації: %s</string>
+  <string name="textBackupNotificationErrorTitle">Помилка резервного копіювання</string>
 </resources>

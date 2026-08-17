@@ -30,6 +30,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -57,9 +58,54 @@ class ProgressViewModel @Inject constructor(
   private val overscrollState = MutableStateFlow(false)
   private val scrollState = MutableStateFlow(Event(false))
   private val sortOrderState = MutableStateFlow<Event<Triple<SortOrder, SortType, Boolean>>?>(null)
+  private val backupProgressState = MutableStateFlow<Int?>(null)
 
   private var searchQuery: String? = null
   private var timestamp = 0L
+  private var hasObservedBackupRun = false
+
+  /**
+   * How far along the manual backup-and-sync run is, 0..100, or null when none
+   * is running. Kept out of [uiState] because it is the state of a background
+   * job rather than of this list, and it changes on its own schedule.
+   */
+  val backupProgress = backupProgressState.asStateFlow()
+
+  init {
+    observeBackupRun()
+  }
+
+  /**
+   * Follows the run started by the pull gesture so the indicator can report it.
+   *
+   * WorkManager publishes progress only while the work is RUNNING and drops it
+   * when the run ends, so there is no completion stage to wait for: the work
+   * leaving the active set is what takes the indicator down, succeeded or not.
+   */
+  private fun observeBackupRun() {
+    viewModelScope.launch {
+      workManager
+        .getWorkInfosForUniqueWorkFlow(BackupExportScheduleWorker.TAG_ONE_OFF)
+        .collect { infos ->
+          val active = infos.firstOrNull { !it.state.isFinished }
+          when {
+            active != null -> {
+              hasObservedBackupRun = true
+              backupProgressState.value =
+                active.progress.getInt(BackupExportScheduleWorker.KEY_PROGRESS_PERCENT, 0)
+            }
+            // Runs from earlier launches stay on record under this name, already
+            // finished. Only a run this screen watched start may take the
+            // indicator down, or the reading set optimistically by the pull
+            // would be cleared before WorkManager has registered the new request.
+            hasObservedBackupRun -> {
+              hasObservedBackupRun = false
+              backupProgressState.value = null
+            }
+          }
+        }
+    }
+  }
 
   fun onParentState(state: ProgressMainUiState) {
     when {
@@ -175,6 +221,10 @@ class ProgressViewModel @Inject constructor(
   fun startBackupNow(): Boolean {
     if (settingsRepository.webdav.backupTarget != BackupTarget.WEBDAV) return false
     if (settingsRepository.webdav.url.isBlank()) return false
+    // Set here, synchronously, so the indicator takes over from the pull in the
+    // frame the gesture completes. Waiting for WorkManager to register the
+    // request and report it back would blink the indicator out and in again.
+    backupProgressState.value = 0
     BackupExportScheduleWorker.scheduleOneOff(workManager)
     return true
   }

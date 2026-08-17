@@ -12,7 +12,6 @@
   <string name="textReleaseDay">发布日期</string>
   <string name="textNew">新播</string>
   <string name="textSelect">选择</string>
-  <string name="textSubmit">提交</string>
   <string name="textHide">隐藏</string>
   <string name="textRemove">移除</string>
   <string name="textEmptyResults">暂无结果…</string>
@@ -23,8 +22,6 @@
   <string name="textEpisode">第 %1$d 集</string>
   <string name="textSeasonEpisode">%02d 季 %02d 集</string>
   <string name="textSortBy">排序：</string>
-  <string name="textSpoilersWarning">此评论包含剧透。\n点后阅读。</string>
-  <string name="textCommentedOn">%s 的评论</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">流媒体：</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">流媒体</string>
@@ -57,7 +54,6 @@
   <string name="textDirector">导演</string>
   <string name="textWriting">编剧</string>
   <string name="textScreenplay">剧本</string>
-  <string name="textSound">声效</string>
   <string name="textMusic">音乐</string>
   <string name="textActing">出演</string>
   <string name="textAiredAlready">已播出</string>
@@ -78,7 +74,6 @@
   <string name="textThisMonth">本月</string>
   <string name="textNextMonth">下月</string>
   <string name="textThisYear">今年</string>
-  <string name="textNextYear">明年</string>
   <string name="textLater">随后</string>
   <string name="textYesterday">昨日</string>
   <string name="textLast7Days">最近 7 天</string>
@@ -92,7 +87,6 @@
   <string name="textAddToMyShows">加入我的剧集</string>
   <string name="textAddToMyMovies">添加到观看历史</string>
   <string name="textAddToWatchlist">加入观看列表</string>
-  <string name="textAddToHidden">加入隐藏项目</string>
   <string name="textMoveToMyShows">移至我的剧集</string>
   <string name="textMoveToMyMovies">移动到观看历史</string>
   <string name="textMoveToWatchlist">移至观看列表</string>
@@ -109,7 +103,6 @@
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">设为「暂缓中」</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">取消「暂缓」</string>
   <string name="errorGeneral">哎呀～ 出错了。\n如果这种情况持续发生，请联系我们。</string>
-  <string name="errorAuthorization">授权失败。如果这种情况持续发生，请联系我们。</string>
   <string name="errorSeasonsNotLoaded">剧集数据加载中，请等待。</string>
   <string name="errorEpisodeNotAired">该集尚未播出。</string>
   <string name="errorCouldNotLoadDiscover">当前暂时无法加载发现页面。\n如果这种情况持续发生，请联系我们。</string>

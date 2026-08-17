@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="textStreamingsFilterAll">Усі провайдери</string>
-  <string name="textStreamingsEmpty">Для цього тайтлу не знайдено потокових сервісів.</string>
 </resources>

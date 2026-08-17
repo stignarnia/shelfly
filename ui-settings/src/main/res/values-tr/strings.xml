@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">Görüntü önbelleği temizlendi.</string>
-  <string name="textTurnOff">Kapat</string>
   <string name="textSettings">Ayarlar</string>
   <string name="textSettingsGeneral">Genel ve Deneyim</string>
   <string name="textSettingsRecentShowsTitle">Son Eklenenler Miktarı</string>
@@ -10,10 +9,6 @@
   <string name="textSettingsUpcomingSectionSummary">\'İlerleme\' sekmesinde \'Yaklaşan\' bölümünü etkinleştir/devre dışı bırak.</string>
   <string name="textSettingsThemeTitle">Tema</string>
   <string name="textSettingsThemeSummary">Ana temayı seçin.</string>
-  <string name="textSettingsThemeWidgetsTitle">Tema</string>
-  <string name="textSettingsThemeWidgetsSummary">Widget\'ların temasını seçin.</string>
-  <string name="textSettingsWidgetsTransparencyTitle">Arka Plan</string>
-  <string name="textSettingsWidgetsTransparencySummary">Widget\'ların arka plan şeffaflık düzeyini ayarlayın.</string>
   <string name="textSettingsMyShowsCountryTitle">Bölge</string>
   <string name="textSettingsMyShowsCountrySummary">Akış hizmetleri verileriyle kullanılacak bölgeyi seçin.</string>
   <string name="textSettingsMyShowsLanguageTitle">Dil</string>
@@ -30,10 +25,6 @@
   <string name="textSettingsContactDevsSummary">Bir sorun veya geri bildiriminiz mi var? GitHub\'da bir issue açın.</string>
   <string name="textSettingsDeleteCacheTitle">Görüntü Önbelleğini Temizle</string>
   <string name="textSettingsDeleteCacheSummary">Yerel görüntü önbelleğini temizlemek için dokunun. Bu, dizi görüntülerinin doğru yüklenmediğinde yardımcı olabilir.</string>
-  <string name="textSettingsQuickSyncConfirmationTitle">Otomatik Eşitlemeyi Devre Dışı Bırak</string>
-  <string name="textSettingsQuickSyncConfirmationMessage">\nOtomatik Eşitleme zaten açık gibi görünüyor.\n\nAnlık eşitlemeyi etkinleştirmeden önce bu özelliği kapatmak ister misiniz (önerilir)?\n</string>
-  <string name="textSettingsLogoutTitle">TMDB Çıkış Yap</string>
-  <string name="textSettingsLogoutMessage">\nOturumu kapatmak istediğinizden emin misiniz?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Filmler</string>
   <string name="textSettingsMoviesEnabledSummary">Film desteğini etkinleştirin/devre dışı bırakın. Uygulama yeniden başlatılacaktır.</string>
   <string name="textSettingsWidgets">Widget’lar</string>
@@ -44,7 +35,6 @@
   <string name="textSettingsStreamingServicesMessage">Yayın hizmetleri verilerini görüntüleyin.</string>
   <string name="textSettingsProgressNextEpisodeTitle">Sonraki Bölüm</string>
   <string name="textSettingsProgressNextEpisodeMessage">Sonraki bölümü hesaplamakta şunu kullan:</string>
-  <string name="textSettingsDateSelectionTitle">Tarih Seçimi</string>
   <string name="textSettingsDateSelectionMessage">Varsayılan tarih seçme seçeneğini seçin.</string>
   <string name="textSettingsTabletColumnsTitle">Sütun Sayısını Listeler</string>
   <string name="textSettingsTabletColumnsSummary">Listeler için tercih edilen sütun sayısını seçin.</string>
@@ -95,9 +85,6 @@
   <string name="textDateSelectionAsk">Her zaman sor</string>
   <string name="textDateSelectionNow">Her zaman \"Şimdi\"</string>
   <string name="textThemeDark">Karanlık</string>
-  <string name="textThemeLight">Aydınlık</string>
-  <string name="textThemeSystem">Sistem</string>
-  <string name="textTransparency100">Mat</string>
 
   <string name="textSettingsApiKeys">API Anahtarları</string>
   <string name="textSettingsBackupTargetTitle">Yedekleme hedefi</string>

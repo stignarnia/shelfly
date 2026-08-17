@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">Billede cachen er blevet ryddet.</string>
-  <string name="textTurnOff">Slå Fra</string>
   <string name="textSettings">Indstillinger</string>
   <string name="textSettingsGeneral">General &amp; UX</string>
   <string name="textSettingsRecentShowsTitle">Senest Tilføjet Antal</string>
@@ -10,10 +9,6 @@
   <string name="textSettingsUpcomingSectionSummary">Aktiver/deaktiver \'Kommende\' sektion i \'Fremskridt-fanen.</string>
   <string name="textSettingsThemeTitle">Tema</string>
   <string name="textSettingsThemeSummary">Vælg hovedtema.</string>
-  <string name="textSettingsThemeWidgetsTitle">Tema</string>
-  <string name="textSettingsThemeWidgetsSummary">Vælg widget tema.</string>
-  <string name="textSettingsWidgetsTransparencyTitle">Baggrund</string>
-  <string name="textSettingsWidgetsTransparencySummary">Indstil niveauet af widget baggrund gennemsigtighed.</string>
   <string name="textSettingsMyShowsCountryTitle">Område</string>
   <string name="textSettingsMyShowsCountrySummary">Vælg område, der skal bruges med streamingtjenester data.</string>
   <string name="textSettingsMyShowsLanguageTitle">Sprog</string>
@@ -30,10 +25,6 @@
   <string name="textSettingsContactDevsSummary">Har du et problem eller feedback? Opret et issue på GitHub.</string>
   <string name="textSettingsDeleteCacheTitle">Ryd Billede Cache</string>
   <string name="textSettingsDeleteCacheSummary">Klik for at rydde den lokale cache for billeder. Dette kan hjælpe hvis billeder ikke bliver indlæst korrekt.</string>
-  <string name="textSettingsQuickSyncConfirmationTitle">Deaktiver Automatisk Synkronisering</string>
-  <string name="textSettingsQuickSyncConfirmationMessage">\nDet ser ud til, at Automatisk Synkronisering allerede er slået til.\n\nVil du gerne slå det fra før du aktiverer øjeblikkelig synkronisering (anbefalet)?\n</string>
-  <string name="textSettingsLogoutTitle">TMDB Log Ud</string>
-  <string name="textSettingsLogoutMessage">\nEr du sikker på, at du gerne vil logge ud?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Film</string>
   <string name="textSettingsMoviesEnabledSummary">Aktiver/deaktiver film support. Appen vil genstarte.</string>
   <string name="textSettingsWidgets">Widgets</string>
@@ -44,7 +35,6 @@
   <string name="textSettingsStreamingServicesMessage">Vis data for streamingtjenester.</string>
   <string name="textSettingsProgressNextEpisodeTitle">Næste Afsnit</string>
   <string name="textSettingsProgressNextEpisodeMessage">Beregn næste afsnit med:</string>
-  <string name="textSettingsDateSelectionTitle">Datovalg</string>
   <string name="textSettingsDateSelectionMessage">Vælg standardindstilling for datovalg.</string>
   <string name="textSettingsTabletColumnsTitle">Antal Kolonner i Lister</string>
   <string name="textSettingsTabletColumnsSummary">Vælg foretrukne antal kolonner i lister.</string>
@@ -95,9 +85,6 @@
   <string name="textDateSelectionAsk">Spørg altid</string>
   <string name="textDateSelectionNow">Altid \"Nu\"</string>
   <string name="textThemeDark">Mørk</string>
-  <string name="textThemeLight">Lys</string>
-  <string name="textThemeSystem">System</string>
-  <string name="textTransparency100">Uigennemsigtig</string>
 
   <string name="textSettingsApiKeys">API-nøgler</string>
   <string name="textSettingsBackupTargetTitle">Sikkerhedskopieringsdestination</string>

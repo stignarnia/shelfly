@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="textStreamingsFilterAll">Все провайдеры</string>
-  <string name="textStreamingsEmpty">Провайдеры стриминга для этого тайтла не найдены.</string>
 </resources>

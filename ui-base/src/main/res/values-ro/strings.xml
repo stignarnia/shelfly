@@ -12,7 +12,6 @@
     <string name="textReleaseDay">Ziua lansării</string>
     <string name="textNew">Nou</string>
     <string name="textSelect">Selectează</string>
-    <string name="textSubmit">Trimite</string>
     <string name="textHide">Ascunde</string>
     <string name="textRemove">Elimină</string>
     <string name="textEmptyResults">Nu au fost găsite rezultate…</string>
@@ -23,8 +22,6 @@
     <string name="textEpisode">Episod %1$d</string>
     <string name="textSeasonEpisode">S.%02d E.%02d</string>
     <string name="textSortBy">Sortează după:</string>
-    <string name="textSpoilersWarning">Acest comentariu conține spoilere.\nApasă pentru a citi.</string>
-    <string name="textCommentedOn">Comentat de %s</string>
     <string name="textNetwork">%1$s (%2$s)</string>
     <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Rețea:</string>
     <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Streaming</string>
@@ -59,7 +56,6 @@
     <string name="textDirector">Director</string>
     <string name="textWriting">Scriere</string>
     <string name="textScreenplay">Scenariu</string>
-    <string name="textSound">Sunet</string>
     <string name="textMusic">Muzică</string>
     <string name="textActing">Actorie</string>
     <string name="textAiredAlready">Difuzat</string>
@@ -86,7 +82,6 @@
     <string name="textThisMonth">Luna aceasta</string>
     <string name="textNextMonth">Luna viitoare</string>
     <string name="textThisYear">Anul acesta</string>
-    <string name="textNextYear">Anul viitor</string>
     <string name="textLater">Mai târziu</string>
     <string name="textYesterday">Ieri</string>
     <string name="textLast7Days">Ultimele 7 zile</string>
@@ -100,7 +95,6 @@
     <string name="textAddToMyShows">Adaugă la emisiunile mele</string>
     <string name="textAddToMyMovies">Adaugă la Istoric</string>
     <string name="textAddToWatchlist">Adaugă la lista de urmărire</string>
-    <string name="textAddToHidden">Adaugă la ascunse</string>
     <string name="textMoveToMyShows">Mută în emisiunile mele</string>
     <string name="textMoveToMyMovies">Mută la Istoric</string>
     <string name="textMoveToWatchlist">Mută în lista de urmărire</string>
@@ -117,7 +111,6 @@
     <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Fixează la „În așteptare”</string>
     <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Anulează fixarea de la „În așteptare”</string>
     <string name="errorGeneral">Oops… S-a produs o eroare.\nTe rugăm să ne contactezi dacă problema persistă.</string>
-    <string name="errorAuthorization">Autorizarea a eșuat. Te rugăm să ne contactezi dacă problema persistă.</string>
     <string name="errorSeasonsNotLoaded">Te rugăm să aștepți încărcarea datelor privind anotimpurile.</string>
     <string name="errorEpisodeNotAired">Acest episod nu a fost încă difuzat.</string>
     <string name="errorCouldNotLoadDiscover">Nu am putut încărca pagina Discover în acest moment.\nTe rugăm să ne contactezi dacă problema persistă.</string>

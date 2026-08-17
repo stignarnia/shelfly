@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">Кэш изображений был очищен.</string>
-  <string name="textTurnOff">Выключить</string>
   <string name="textSettings">Настройки</string>
   <string name="textSettingsGeneral">Общие &amp; UX</string>
   <string name="textSettingsRecentShowsTitle">Количество недавно добавленных</string>
@@ -10,10 +9,6 @@
   <string name="textSettingsUpcomingSectionSummary">Включить/выключить раздел «Предстоящие» на вкладке «Прогресс».</string>
   <string name="textSettingsThemeTitle">Тема</string>
   <string name="textSettingsThemeSummary">Выберите главную тему.</string>
-  <string name="textSettingsThemeWidgetsTitle">Тема</string>
-  <string name="textSettingsThemeWidgetsSummary">Выберите тему виджетов.</string>
-  <string name="textSettingsWidgetsTransparencyTitle">Фон</string>
-  <string name="textSettingsWidgetsTransparencySummary">Установить уровень прозрачности фона виджетов.</string>
   <string name="textSettingsMyShowsCountryTitle">Регион</string>
   <string name="textSettingsMyShowsCountrySummary">Выберите регион для использования с данными потоковых сервисов.</string>
   <string name="textSettingsMyShowsLanguageTitle">Язык</string>
@@ -30,10 +25,6 @@
   <string name="textSettingsContactDevsSummary">Возникли проблемы или есть предложения? Создайте issue на GitHub.</string>
   <string name="textSettingsDeleteCacheTitle">Очистить кеш изображений</string>
   <string name="textSettingsDeleteCacheSummary">Нажмите, чтобы очистить кэш локальных изображений. Это может помочь, если изображения загружаются некорректно.</string>
-  <string name="textSettingsQuickSyncConfirmationTitle">Отключить автоматическую синхронизацию</string>
-  <string name="textSettingsQuickSyncConfirmationMessage">\nпохоже, автоматическая синхронизация уже включена.\n\nХотите отключить ее перед включением мгновенной синхронизации (рекомендуется)?\n</string>
-  <string name="textSettingsLogoutTitle">Выход из TMDB</string>
-  <string name="textSettingsLogoutMessage">\nВы уверены, что хотите выйти?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Фильмы</string>
   <string name="textSettingsMoviesEnabledSummary">Включить/отключить поддержку фильмов. Приложение будет перезапущено.</string>
   <string name="textSettingsWidgets">Виджеты</string>
@@ -44,7 +35,6 @@
   <string name="textSettingsStreamingServicesMessage">Отображать данные потоковых служб.</string>
   <string name="textSettingsProgressNextEpisodeTitle">Следующая серия</string>
   <string name="textSettingsProgressNextEpisodeMessage">Вычислить следующий эпизод с помощью:</string>
-  <string name="textSettingsDateSelectionTitle">Выбор даты</string>
   <string name="textSettingsDateSelectionMessage">Выберите опцию выбора даты по умолчанию.</string>
   <string name="textSettingsTabletColumnsTitle">Число колонок списков</string>
   <string name="textSettingsTabletColumnsSummary">Выберите предпочтительный номер столбцов для списков.</string>
@@ -95,9 +85,6 @@
   <string name="textDateSelectionAsk">Всегда спрашивать</string>
   <string name="textDateSelectionNow">Всегда «Сейчас»</string>
   <string name="textThemeDark">Темная</string>
-  <string name="textThemeLight">Светлая</string>
-  <string name="textThemeSystem">Системная</string>
-  <string name="textTransparency100">Непрозрачная</string>
 
   <string name="textSettingsApiKeys">Ключи API</string>
   <string name="textSettingsBackupTargetTitle">Место сохранения резервных копий</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="textImagesCacheCleared">Images cache has been cleared.</string>
-  <string name="textTurnOff">Turn Off</string>
 
   <string name="textSettings">Settings</string>
   <string name="textSettingsGeneral">General &amp; UX</string>
@@ -11,10 +10,6 @@
   <string name="textSettingsUpcomingSectionSummary">Enable/disable \'Upcoming\' section in \'Progress\' tab.</string>
   <string name="textSettingsThemeTitle">Theme</string>
   <string name="textSettingsThemeSummary">Select main theme.</string>
-  <string name="textSettingsThemeWidgetsTitle">Theme</string>
-  <string name="textSettingsThemeWidgetsSummary">Select widgets theme.</string>
-  <string name="textSettingsWidgetsTransparencyTitle">Background</string>
-  <string name="textSettingsWidgetsTransparencySummary">Set level of widgets background transparency.</string>
   <string name="textSettingsMyShowsCountryTitle">Region</string>
   <string name="textSettingsMyShowsCountrySummary">Select region to use with streaming services data.</string>
   <string name="textSettingsMyShowsLanguageTitle">Language</string>
@@ -31,10 +26,6 @@
   <string name="textSettingsContactDevsSummary">Got an issue or feedback? Open an issue on GitHub.</string>
   <string name="textSettingsDeleteCacheTitle">Clear Images Cache</string>
   <string name="textSettingsDeleteCacheSummary">Click to clear local images cache. This may help if shows images are not being loaded correctly.</string>
-  <string name="textSettingsQuickSyncConfirmationTitle">Disable Automatic Sync</string>
-  <string name="textSettingsQuickSyncConfirmationMessage">\nIt seems like Automatic Sync is already turned on.\n\nWould you like to turn it off before enabling instant sync (advised)?\n</string>
-  <string name="textSettingsLogoutTitle">TMDB Sign Out</string>
-  <string name="textSettingsLogoutMessage">\nAre you sure you want to sign out?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Movies</string>
   <string name="textSettingsMoviesEnabledSummary">Enable/disable movies support. App will restart.</string>
   <string name="textSettingsWidgets">Widgets</string>
@@ -45,7 +36,6 @@
   <string name="textSettingsStreamingServicesMessage">Display streaming services data.</string>
   <string name="textSettingsProgressNextEpisodeTitle">Next Episode</string>
   <string name="textSettingsProgressNextEpisodeMessage">Calculate next episode using:</string>
-  <string name="textSettingsDateSelectionTitle">Date Selection</string>
   <string name="textSettingsDateSelectionMessage">Select default date selection option.</string>
   <string name="textSettingsTabletColumnsTitle">Lists Columns Number</string>
   <string name="textSettingsTabletColumnsSummary">Select preferred columns number for lists.</string>
@@ -120,13 +110,6 @@
   <string name="textLanguageFinnish" translatable="false">Suomi</string>
 
   <string name="textThemeDark">Dark</string>
-  <string name="textThemeLight">Light</string>
-  <string name="textThemeSystem">System</string>
-  <string name="textTransparency0" translatable="false">100%</string>
-  <string name="textTransparency25" translatable="false">25%</string>
-  <string name="textTransparency50" translatable="false">50%</string>
-  <string name="textTransparency75" translatable="false">75%</string>
-  <string name="textTransparency100">Opaque</string>
 
   <string name="textSettingsApiKeys">API keys</string>
   <string name="textSettingsApiKeyNotSet">Not set</string>

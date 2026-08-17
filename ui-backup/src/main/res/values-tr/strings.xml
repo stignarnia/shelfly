@@ -22,13 +22,21 @@
   <string name="textSyncLastTimestamp">Son senkronizasyon: %s</string>
   <string name="textSyncNever">Henüz başka bir cihazla senkronize edilmedi</string>
   <string name="textSyncFailed">Senkronizasyon başarısız: %s</string>
-  <string name="textBackupImportFromWebDav">WebDAV\'dan içe aktar</string>
-  <string name="textBackupWebDavNoBackups">Sunucuda yedekleme bulunamadı.</string>
+  <string name="textBackupImportFromWebDav">WebDAV\'dan İçe Aktar</string>
+  <string name="textBackupWebDavNoBackups">Sunucuda yedek bulunamadı.</string>
   <string name="textBackupWebDavPick">Geri yüklenecek bir yedek seçin</string>
   <plurals name="textSyncPeers">
     <item quantity="one">%d diğer cihaz</item>
     <item quantity="other">%d diğer cihaz</item>
   </plurals>
+
+  <string name="textSyncNotificationProgressTitle">WebDAV Senkronizasyonu</string>
+  <string name="textSyncNotificationProgressContent">Veriler sunucuyla senkronize ediliyor…</string>
+  <string name="textSyncNotificationSuccessTitle">WebDAV Senkronizasyonu</string>
+  <string name="textSyncNotificationSuccessContent">Senkronizasyon başarıyla tamamlandı.</string>
+  <string name="textSyncNotificationErrorTitle">WebDAV Senkronizasyonu Başarısız</string>
+  <string name="textSyncNotificationErrorContent">Senkronizasyon başarısız: %s</string>
+  <string name="textBackupNotificationErrorTitle">Yedekleme Başarısız</string>
 
   <string name="textBackupExportSchedule">Zamanlama</string>
   <string name="textBackupExportOptionOff">Kapalı</string>

@@ -60,13 +60,6 @@
   <string name="textGenreThriller">Gerilim</string>
   <string name="textGenreWar">Savaş</string>
   <string name="textGenreWestern">Western</string>
-  <string name="textTMDBSyncOption1Hour">Saatte Bir</string>
-  <string name="textTMDBSyncOption3Hours">Her 3 Saatte Bir</string>
-  <string name="textTMDBSyncOption6Hours">Her 6 Saatte Bir</string>
-  <string name="textTMDBSyncOption3Day">Her 3 Günde Bir</string>
-  <string name="textTMDBSyncOption3HoursButton">Her üç saatte bir çalışacak şekilde zamanlandı</string>
-  <string name="textTMDBSyncOption6HoursButton">Her altı saatte bir çalışacak şekilde zamanlandı</string>
-  <string name="textTMDBSyncOption3DayButton">Her üç güne bir çalışacak şekilde zamanlandı</string>
   <string name="textShowStatusReturning">Devam Ediyor</string>
   <string name="textShowStatusUpcoming">Yakında</string>
   <string name="textShowStatusInProduction">Yapım Aşamasında</string>

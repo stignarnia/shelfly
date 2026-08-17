@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">La cache delle immagini è stata pulita.</string>
-  <string name="textTurnOff">Disattiva</string>
   <string name="textSettings">Impostazioni</string>
   <string name="textSettingsGeneral">Generale &amp; UX</string>
   <string name="textSettingsRecentShowsTitle">Aggiunti di recente</string>
@@ -10,10 +9,6 @@
   <string name="textSettingsUpcomingSectionSummary">Attiva/disattiva la sezione \"In arrivo\" nella scheda \"Progressi\".</string>
   <string name="textSettingsThemeTitle">Tema</string>
   <string name="textSettingsThemeSummary">Selezione il tema principale.</string>
-  <string name="textSettingsThemeWidgetsTitle">Tema</string>
-  <string name="textSettingsThemeWidgetsSummary">Seleziona il tema per i widget.</string>
-  <string name="textSettingsWidgetsTransparencyTitle">Sfondo</string>
-  <string name="textSettingsWidgetsTransparencySummary">Imposta il livello di trasparenza dello sfondo dei widget.</string>
   <string name="textSettingsMyShowsCountryTitle">Regione</string>
   <string name="textSettingsMyShowsCountrySummary">Selezionare la regione da utilizzare con i dati dei servizi di streaming.</string>
   <string name="textSettingsMyShowsLanguageTitle">Lingua</string>
@@ -30,10 +25,6 @@
   <string name="textSettingsContactDevsSummary">Hai un problema o un suggerimento? Apri una segnalazione su GitHub.</string>
   <string name="textSettingsDeleteCacheTitle">Pulisci la cache delle immagini</string>
   <string name="textSettingsDeleteCacheSummary">Clicca per pulire la cache delle immagini. Questo potrebbe aiutare nel caso le immagini degli show non venissero scaricate correttamente.</string>
-  <string name="textSettingsQuickSyncConfirmationTitle">Disattiva la sincronizzazione automatica</string>
-  <string name="textSettingsQuickSyncConfirmationMessage">\nSembra che la sincronizzazione automatica sia attiva.\n\nVuoi disattivarla prima di attivare la sincronizzazione istantanea (consigliato)?\n</string>
-  <string name="textSettingsLogoutTitle">Esci da TMDB</string>
-  <string name="textSettingsLogoutMessage">\nSei sicuro di voler uscire?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Film</string>
   <string name="textSettingsMoviesEnabledSummary">Attiva/disattiva il supporto ai film. L\'app verrà riavviata.</string>
   <string name="textSettingsWidgets">Widget</string>
@@ -44,7 +35,6 @@
   <string name="textSettingsStreamingServicesMessage">Mostra dati sui servizi di streaming.</string>
   <string name="textSettingsProgressNextEpisodeTitle">Prossimo episodio</string>
   <string name="textSettingsProgressNextEpisodeMessage">Calcola l\'episodio successivo usando:</string>
-  <string name="textSettingsDateSelectionTitle">Selezione data</string>
   <string name="textSettingsDateSelectionMessage">Seleziona l\'opzione predefinita per la selezione della data.</string>
   <string name="textSettingsTabletColumnsTitle">Numero di colonne delle liste</string>
   <string name="textSettingsTabletColumnsSummary">Seleziona il numero di colonne preferito per le liste.</string>
@@ -95,9 +85,6 @@
   <string name="textDateSelectionAsk">Chiedi sempre</string>
   <string name="textDateSelectionNow">Adesso</string>
   <string name="textThemeDark">Scuro</string>
-  <string name="textThemeLight">Chiaro</string>
-  <string name="textThemeSystem">Sistema</string>
-  <string name="textTransparency100">Opaco</string>
 
   <string name="textSettingsApiKeys">Chiavi API</string>
   <string name="textSettingsBackupTargetTitle">Destinazione backup</string>

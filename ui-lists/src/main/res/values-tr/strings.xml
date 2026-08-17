@@ -2,7 +2,6 @@
 <resources>
   <string name="menuLists">Listeler</string>
   <string name="menuList">Liste</string>
-  <string name="textFilters">Filtreler:</string>
   <string name="textListsEmpty">Listeler koleksiyonunuz şu anda boş.</string>
   <string name="textListEmpty">Listeniz şu anda boş.</string>
   <string name="textCreateList">Liste oluştur</string>

@@ -35,11 +35,19 @@
   <string name="textSyncLastTimestamp">Última sincronización: %s</string>
   <string name="textSyncNever">Aún no se ha sincronizado con ningún otro dispositivo</string>
   <string name="textSyncFailed">Error de sincronización: %s</string>
-  <string name="textBackupImportFromWebDav">Importar desde WebDAV</string>
+  <string name="textBackupImportFromWebDav">Importar de WebDAV</string>
   <string name="textBackupWebDavNoBackups">No se encontraron copias de seguridad en el servidor.</string>
   <string name="textBackupWebDavPick">Elige una copia de seguridad para restaurar</string>
   <plurals name="textSyncPeers">
     <item quantity="one">%d otro dispositivo</item>
     <item quantity="other">%d otros dispositivos</item>
   </plurals>
+
+  <string name="textSyncNotificationProgressTitle">Sincronización WebDAV</string>
+  <string name="textSyncNotificationProgressContent">Sincronizando datos con el servidor…</string>
+  <string name="textSyncNotificationSuccessTitle">Sincronización WebDAV</string>
+  <string name="textSyncNotificationSuccessContent">Sincronización completada con éxito.</string>
+  <string name="textSyncNotificationErrorTitle">Error de sincronización WebDAV</string>
+  <string name="textSyncNotificationErrorContent">Error de sincronización: %s</string>
+  <string name="textBackupNotificationErrorTitle">Error al realizar copia de seguridad</string>
 </resources>

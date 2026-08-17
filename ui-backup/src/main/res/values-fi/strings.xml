@@ -42,4 +42,12 @@
     <item quantity="one">%d muu laite</item>
     <item quantity="other">%d muuta laitetta</item>
   </plurals>
+
+  <string name="textSyncNotificationProgressTitle">WebDAV-synkronointi</string>
+  <string name="textSyncNotificationProgressContent">Synkronoidaan tietoja palvelimen kanssa…</string>
+  <string name="textSyncNotificationSuccessTitle">WebDAV-synkronointi</string>
+  <string name="textSyncNotificationSuccessContent">Synkronointi suoritettu onnistuneesti.</string>
+  <string name="textSyncNotificationErrorTitle">WebDAV-synkronointi epäonnistui</string>
+  <string name="textSyncNotificationErrorContent">Synkronointi epäonnistui: %s</string>
+  <string name="textBackupNotificationErrorTitle">Varmuuskopiointi epäonnistui</string>
 </resources>

@@ -44,4 +44,12 @@
     <item quantity="many">%d innych urządzeń</item>
     <item quantity="other">%d innych urządzeń</item>
   </plurals>
+
+  <string name="textSyncNotificationProgressTitle">Synchronizacja WebDAV</string>
+  <string name="textSyncNotificationProgressContent">Synchronizowanie danych z serwerem…</string>
+  <string name="textSyncNotificationSuccessTitle">Synchronizacja WebDAV</string>
+  <string name="textSyncNotificationSuccessContent">Synchronizacja zakończona pomyślnie.</string>
+  <string name="textSyncNotificationErrorTitle">Błąd synchronizacji WebDAV</string>
+  <string name="textSyncNotificationErrorContent">Synchronizacja nie powiodła się: %s</string>
+  <string name="textBackupNotificationErrorTitle">Błąd kopii zapasowej</string>
 </resources>

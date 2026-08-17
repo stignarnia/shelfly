@@ -12,6 +12,7 @@ import com.jakewharton.processphoenix.ProcessPhoenix
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.ui_base.common.AppScopeProvider
 import xyz.stignarnia.ui_base.common.WidgetsProvider
+import xyz.stignarnia.ui_base.notifications.SyncNotificationManager
 import xyz.stignarnia.ui_base.utilities.extensions.notificationManager
 import xyz.stignarnia.ui_model.Settings
 import xyz.stignarnia.ui_widgets.calendar.CalendarWidgetProvider
@@ -37,6 +38,7 @@ class App :
 
   @Inject lateinit var workerFactory: HiltWorkerFactory
   @Inject lateinit var settingsRepository: SettingsRepository
+  @Inject lateinit var syncNotificationManager: SyncNotificationManager
 
   override val workManagerConfiguration: Configuration
     get() = Configuration
@@ -110,6 +112,7 @@ class App :
         createNotificationChannel(createChannel(AppNotificationChannel.SHOWS_INFO))
         createNotificationChannel(createChannel(AppNotificationChannel.EPISODES_ANNOUNCEMENTS))
         createNotificationChannel(createChannel(AppNotificationChannel.MOVIES_ANNOUNCEMENTS))
+        createNotificationChannel(createChannel(AppNotificationChannel.SYNC))
       }
     }
 
@@ -126,6 +129,7 @@ class App :
     AppCompatDelegate.setDefaultNightMode(settingsRepository.theme)
     setupStrictMode()
     setupNotificationChannels()
+    syncNotificationManager.cancelStaleProgress()
   }
 
   override fun requestShowsWidgetsUpdate() {

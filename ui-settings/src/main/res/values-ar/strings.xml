@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">تم مسح ذاكرة التخزين المؤقتة للصور.</string>
-  <string name="textTurnOff">إيقاف التشغيل</string>
   <string name="textSettings">الإعدادات</string>
   <string name="textSettingsGeneral">عام و واجهة المستخدم</string>
   <string name="textSettingsRecentShowsTitle">عدد المحتويات الأخيرة</string>
@@ -10,10 +9,6 @@
   <string name="textSettingsUpcomingSectionSummary">تفعيل/إلغاء تفعيل \"المحتويات القادمة\" في صفحة \"مستوى التقدم\".</string>
   <string name="textSettingsThemeTitle">المظهر</string>
   <string name="textSettingsThemeSummary">إختر المظهر الرئيسي.</string>
-  <string name="textSettingsThemeWidgetsTitle">المظهر</string>
-  <string name="textSettingsThemeWidgetsSummary">إختر مظهر التطبيقات المصغّرة.</string>
-  <string name="textSettingsWidgetsTransparencyTitle">الخلفية</string>
-  <string name="textSettingsWidgetsTransparencySummary">تعيين مستوى شفافية الخلفية للتطبيقات المصغّرة.</string>
   <string name="textSettingsMyShowsCountryTitle">المنطقة</string>
   <string name="textSettingsMyShowsCountrySummary">حدد المنطقة لاستخدامها مع بيانات خدمات البث.</string>
   <string name="textSettingsMyShowsLanguageTitle">اللغة</string>
@@ -30,10 +25,6 @@
   <string name="textSettingsContactDevsSummary">واجهتك مشكلة أو لديك ملاحظات؟ افتح مشكلة على GitHub.</string>
   <string name="textSettingsDeleteCacheTitle">مسح بيانات الصور في الذاكرة المؤقتة</string>
   <string name="textSettingsDeleteCacheSummary">إضغط لتنفيذ الإجراء، إذا واجهتك مشكلة في تحميل الصور، جرب الضغط هنا.</string>
-  <string name="textSettingsQuickSyncConfirmationTitle">تعطيل المزامنة التلقائية</string>
-  <string name="textSettingsQuickSyncConfirmationMessage">\nيبدو أنك مفعل المزامنة التلقائية مسبقاً.\n\nأترغب في إطفاء المزامنة التلقائية لتفعيل المزامنة الفورية؟ (يُنصح به)\n</string>
-  <string name="textSettingsLogoutTitle">تسجيل الخروج من TMDB</string>
-  <string name="textSettingsLogoutMessage">\nأترغب فِعلاً في تسجيل الخروج؟\n</string>
   <string name="textSettingsMoviesEnabledTitle">أفلام</string>
   <string name="textSettingsMoviesEnabledSummary">تفعيل/إلغاء تفعيل عرض الأفلام في التطبيق، سيتم إعادة تشغيله.</string>
   <string name="textSettingsWidgets">التطبيقات المصغّرة</string>
@@ -44,7 +35,6 @@
   <string name="textSettingsStreamingServicesMessage">إظهار بيانات خدمات البث.</string>
   <string name="textSettingsProgressNextEpisodeTitle">الحلقة التالية</string>
   <string name="textSettingsProgressNextEpisodeMessage">حساب الحلقة التالية باِستخدام:</string>
-  <string name="textSettingsDateSelectionTitle">تحديد التاريخ</string>
   <string name="textSettingsDateSelectionMessage">حدد خِيار تحديد التاريخ الافتراضي.</string>
   <string name="textSettingsTabletColumnsTitle">عدد أعمدة القوائم</string>
   <string name="textSettingsTabletColumnsSummary">حدد عدد الأعمدة المفضلة للقوائم.</string>
@@ -95,9 +85,6 @@
   <string name="textDateSelectionAsk">اسأل دائماً</string>
   <string name="textDateSelectionNow">دائماً \"الآن\"</string>
   <string name="textThemeDark">داكن</string>
-  <string name="textThemeLight">فاتح</string>
-  <string name="textThemeSystem">إستخدم مظهر النظام</string>
-  <string name="textTransparency100">غير شفاف</string>
 
   <string name="textSettingsApiKeys">مفاتيح API</string>
   <string name="textSettingsBackupTargetTitle">وجهة النسخ الاحتياطي</string>

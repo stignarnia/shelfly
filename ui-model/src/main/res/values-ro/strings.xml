@@ -60,13 +60,6 @@
     <string name="textGenreThriller">Suspans</string>
     <string name="textGenreWar">Război</string>
     <string name="textGenreWestern">Vest</string>
-    <string name="textTMDBSyncOption1Hour">La fiecare oră</string>
-    <string name="textTMDBSyncOption3Hours">La fiecare 3 ore</string>
-    <string name="textTMDBSyncOption6Hours">La fiecare 6 ore</string>
-    <string name="textTMDBSyncOption3Day">La fiecare 3 zile</string>
-    <string name="textTMDBSyncOption3HoursButton">Programat să ruleze la fiecare 3 ore</string>
-    <string name="textTMDBSyncOption6HoursButton">Programat să ruleze la fiecare 6 ore</string>
-    <string name="textTMDBSyncOption3DayButton">Programat să ruleze la fiecare 3 zile</string>
     <string name="textShowStatusReturning">Serial care revine</string>
     <string name="textShowStatusUpcoming">Urmează</string>
     <string name="textShowStatusInProduction">În producție</string>

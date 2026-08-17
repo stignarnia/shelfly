@@ -11,7 +11,6 @@
   <string name="textNotNow">Позже</string>
   <string name="textNew">Новое</string>
   <string name="textSelect">Выбрать</string>
-  <string name="textSubmit">Отправить</string>
   <string name="textHide">Скрыть</string>
   <string name="textRemove">Удалить</string>
   <string name="textEmptyResults">Ничего не найдено…</string>
@@ -22,8 +21,6 @@
   <string name="textEpisode">Эпизод %1$d</string>
   <string name="textSeasonEpisode">S.%02d Е.%02d</string>
   <string name="textSortBy">Сортировать по:</string>
-  <string name="textSpoilersWarning">Этот комментарий содержит спойлеры.\nНажмите, чтобы прочитать.</string>
-  <string name="textCommentedOn">Прокомментировал %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Студия:</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Стриминг</string>
@@ -59,7 +56,6 @@
   <string name="textDirector">Режиссер</string>
   <string name="textWriting">Сценарий</string>
   <string name="textScreenplay">Сценарист</string>
-  <string name="textSound">Звук</string>
   <string name="textMusic">Музыка</string>
   <string name="textActing">Фильмография</string>
   <string name="textAiredAlready">Вышло</string>
@@ -89,7 +85,6 @@
   <string name="textThisMonth">В этом месяце</string>
   <string name="textNextMonth">Следующий месяц</string>
   <string name="textThisYear">В этом году</string>
-  <string name="textNextYear">В следующем году</string>
   <string name="textLater">Позже</string>
   <string name="textYesterday">Вчера</string>
   <string name="textLast7Days">Последние 7 дней</string>
@@ -103,7 +98,6 @@
   <string name="textAddToMyShows">Добавить в Мои Сериалы</string>
   <string name="textAddToMyMovies">Добавить в историю просмотров</string>
   <string name="textAddToWatchlist">Добавить в Буду Смотреть</string>
-  <string name="textAddToHidden">Добавить в Скрытое</string>
   <string name="textMoveToMyShows">Переместить в Мои Сериалы</string>
   <string name="textMoveToMyMovies">Переместить в историю просмотров</string>
   <string name="textMoveToWatchlist">Переместить в Буду Смотреть</string>
@@ -120,7 +114,6 @@
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Закрепить в \'На паузе\'</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Открепить от \'На паузе\'</string>
   <string name="errorGeneral">Ой,… Что-то пошло не так.\nПожалуйста, свяжитесь с нами, если это повторится.</string>
-  <string name="errorAuthorization">Авторизация не удалась. Пожалуйста, свяжитесь с нами, если это произойдет снова.</string>
   <string name="errorSeasonsNotLoaded">Пожалуйста, дождитесь загрузки данных сезонов.</string>
   <string name="errorEpisodeNotAired">Этот эпизод еще не вышел.</string>
   <string name="errorCouldNotLoadDiscover">Мы не смогли загрузить Открытия данный момент.\nПожалуйста, свяжитесь с нами, если это произойдет снова.</string>

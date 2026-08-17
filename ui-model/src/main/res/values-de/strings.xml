@@ -60,13 +60,6 @@
   <string name="textGenreRomance">Romanze</string>
   <string name="textGenreWar">Krieg</string>
   <string name="textGenreWestern">Western</string>
-  <string name="textTMDBSyncOption1Hour">Jede Stunde</string>
-  <string name="textTMDBSyncOption3Hours">Alle 3 Stunden</string>
-  <string name="textTMDBSyncOption6Hours">Alle 6 Stunden</string>
-  <string name="textTMDBSyncOption3Day">Alle 3 Tage</string>
-  <string name="textTMDBSyncOption3HoursButton">Geplant für alle 3 Stunden</string>
-  <string name="textTMDBSyncOption6HoursButton">Geplant für alle 6 Stunden</string>
-  <string name="textTMDBSyncOption3DayButton">Geplant für alle 3 Tage.</string>
   <string name="textShowStatusReturning">Zurückkehrende Serien</string>
   <string name="textShowStatusUpcoming">Demnächst</string>
   <string name="textShowStatusInProduction">In Produktion</string>

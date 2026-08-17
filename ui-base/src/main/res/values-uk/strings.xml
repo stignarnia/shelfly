@@ -12,7 +12,6 @@
   <string name="textReleaseDay">День виходу</string>
   <string name="textNew">Нове</string>
   <string name="textSelect">Обрати</string>
-  <string name="textSubmit">Надіслати</string>
   <string name="textHide">Приховати</string>
   <string name="textRemove">Видалити</string>
   <string name="textEmptyResults">Результатів немає…</string>
@@ -23,8 +22,6 @@
   <string name="textEpisode">Серія %1$d</string>
   <string name="textSeasonEpisode">S.%02d E.%02d</string>
   <string name="textSortBy">Сортувати:</string>
-  <string name="textSpoilersWarning">Цей коментар містить спойлери.\nТоркніться, щоб прочитати.</string>
-  <string name="textCommentedOn">Коментар від %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Мережа:</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Стримінг</string>
@@ -60,7 +57,6 @@
   <string name="textDirector">Режисер</string>
   <string name="textWriting">Сценарій</string>
   <string name="textScreenplay">Сценарій</string>
-  <string name="textSound">Звук</string>
   <string name="textMusic">Музика</string>
   <string name="textActing">Акторство</string>
   <string name="textAiredAlready">Прем\'єра відбулася</string>
@@ -90,7 +86,6 @@
   <string name="textThisMonth">Цього місяця</string>
   <string name="textNextMonth">Наступного місяця</string>
   <string name="textThisYear">Цього року</string>
-  <string name="textNextYear">Наступного року</string>
   <string name="textLater">Пізніше</string>
   <string name="textYesterday">Вчора</string>
   <string name="textLast7Days">Останні 7 днів</string>
@@ -104,7 +99,6 @@
   <string name="textAddToMyShows">Додати до моїх серіалів</string>
   <string name="textAddToMyMovies">Додати до історії</string>
   <string name="textAddToWatchlist">Додати в \'На потім\'</string>
-  <string name="textAddToHidden">Додати в \'Приховане\'</string>
   <string name="textMoveToMyShows">Перемістити до моїх серіалів</string>
   <string name="textMoveToMyMovies">Перемістити до історії</string>
   <string name="textMoveToWatchlist">Перемістити в \'На потім\'</string>
@@ -121,7 +115,6 @@
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Закріпити в \'Призупинено\'</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Відкріпити з \'Призупинено\'</string>
   <string name="errorGeneral">Ой… Щось пішло не так.\nБудь ласка, зв\'яжіться з нами, якщо помилка не зникає.</string>
-  <string name="errorAuthorization">Не вдалося авторизуватись. Будь ласка, зв\'яжіться з нами, якщо помилка не зникає.</string>
   <string name="errorSeasonsNotLoaded">Будь ласка, дочекайтеся завантаження даних про сезони.</string>
   <string name="errorEpisodeNotAired">Прем\'єра цієї серії ще не відбулася.</string>
   <string name="errorCouldNotLoadDiscover">Нам не вдалося завантажити сторінку Огляд.\nБудь ласка, зв\'яжіться з нами, якщо помилка не зникає.</string>

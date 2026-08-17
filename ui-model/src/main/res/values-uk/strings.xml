@@ -60,13 +60,6 @@
   <string name="textGenreRomance">Романтика</string>
   <string name="textGenreWar">Військовий</string>
   <string name="textGenreWestern">Вестерн</string>
-  <string name="textTMDBSyncOption1Hour">Щогодини</string>
-  <string name="textTMDBSyncOption3Hours">Кожні 3 години</string>
-  <string name="textTMDBSyncOption6Hours">Кожні 6 годин</string>
-  <string name="textTMDBSyncOption3Day">Кожні 3 дні</string>
-  <string name="textTMDBSyncOption3HoursButton">Заплановано запускати кожні 3 години</string>
-  <string name="textTMDBSyncOption6HoursButton">Заплановано запускати кожні 6 годин</string>
-  <string name="textTMDBSyncOption3DayButton">Заплановано запускати кожні 3 дні</string>
   <string name="textShowStatusReturning">Продовжується</string>
   <string name="textShowStatusUpcoming">Незабаром</string>
   <string name="textShowStatusInProduction">У виробництві</string>

@@ -2,7 +2,6 @@
 <resources>
   <string name="menuLists">Списки</string>
   <string name="menuList">Список</string>
-  <string name="textFilters">Фільтри:</string>
   <string name="textListsEmpty">Ваші списки колекцій наразі порожні.</string>
   <string name="textListEmpty">Ваш список наразі порожній.</string>
   <string name="textCreateList">Створити список</string>

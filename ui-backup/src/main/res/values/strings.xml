@@ -49,4 +49,12 @@
   <string name="textBackupImportFromWebDav">Import from WebDAV</string>
   <string name="textBackupWebDavNoBackups">No backups found on the server.</string>
   <string name="textBackupWebDavPick">Pick a backup to restore</string>
+
+  <string name="textSyncNotificationProgressTitle">WebDAV Sync</string>
+  <string name="textSyncNotificationProgressContent">Syncing data with server…</string>
+  <string name="textSyncNotificationSuccessTitle">WebDAV Sync</string>
+  <string name="textSyncNotificationSuccessContent">Sync completed successfully.</string>
+  <string name="textSyncNotificationErrorTitle">WebDAV Sync Failed</string>
+  <string name="textSyncNotificationErrorContent">Sync failed: %s</string>
+  <string name="textBackupNotificationErrorTitle">Backup Failed</string>
 </resources>

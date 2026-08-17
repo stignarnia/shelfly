@@ -60,13 +60,6 @@
   <string name="textGenreThriller">Thriller</string>
   <string name="textGenreWar">Krig</string>
   <string name="textGenreWestern">Western</string>
-  <string name="textTMDBSyncOption1Hour">Hver Time</string>
-  <string name="textTMDBSyncOption3Hours">Hver 3. Time</string>
-  <string name="textTMDBSyncOption6Hours">Hver 6. Time</string>
-  <string name="textTMDBSyncOption3Day">Hver 3. Dag</string>
-  <string name="textTMDBSyncOption3HoursButton">Planlagt til at køre hver 3. time</string>
-  <string name="textTMDBSyncOption6HoursButton">Planlagt til at køre hver 6. time</string>
-  <string name="textTMDBSyncOption3DayButton">Planlagt til at køre hver 3. dag</string>
   <string name="textShowStatusReturning">Tilbagevendende Serier</string>
   <string name="textShowStatusUpcoming">Kommende</string>
   <string name="textShowStatusInProduction">I Produktion</string>

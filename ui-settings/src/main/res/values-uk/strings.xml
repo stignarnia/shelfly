@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="textImagesCacheCleared">Кеш зображень очищено.</string>
-  <string name="textTurnOff">Вимкнути</string>
   <string name="textSettings">Налаштування</string>
   <string name="textSettingsGeneral">Загальні &amp; UX</string>
   <string name="textSettingsRecentShowsTitle">Кількість нещодавно доданих</string>
@@ -10,10 +9,6 @@
   <string name="textSettingsUpcomingSectionSummary">Увімкнути/вимкнути розділ \'Незабаром\' у вкладці \'Прогрес\'.</string>
   <string name="textSettingsThemeTitle">Тема</string>
   <string name="textSettingsThemeSummary">Оберіть основну тему.</string>
-  <string name="textSettingsThemeWidgetsTitle">Тема</string>
-  <string name="textSettingsThemeWidgetsSummary">Оберіть тему віджетів.</string>
-  <string name="textSettingsWidgetsTransparencyTitle">Фон</string>
-  <string name="textSettingsWidgetsTransparencySummary">Встановити рівень прозорості фону віджетів.</string>
   <string name="textSettingsMyShowsCountryTitle">Регіон</string>
   <string name="textSettingsMyShowsCountrySummary">Виберіть регіон для використання з даними стрімінгових сервісів.</string>
   <string name="textSettingsMyShowsLanguageTitle">Мова</string>
@@ -30,10 +25,6 @@
   <string name="textSettingsContactDevsSummary">Є проблема чи пропозиція? Створіть issue на GitHub.</string>
   <string name="textSettingsDeleteCacheTitle">Очистити кеш зображень</string>
   <string name="textSettingsDeleteCacheSummary">Натисніть, щоб очистити кеш локальних зображень. Це може допомогти, якщо зображення серіалів не завантажуються коректно.</string>
-  <string name="textSettingsQuickSyncConfirmationTitle">Вимкнути автоматичну синхронізацію</string>
-  <string name="textSettingsQuickSyncConfirmationMessage">\nСхоже, що автоматична синхронізація вже ввімкнена.\n\nБажаєте вимкнути її перед увімкненням миттєвої синхронізації (рекомендовано)?\n</string>
-  <string name="textSettingsLogoutTitle">Вихід з TMDB</string>
-  <string name="textSettingsLogoutMessage">\nВи дійсно бажаєте вийти?\n</string>
   <string name="textSettingsMoviesEnabledTitle">Фільми</string>
   <string name="textSettingsMoviesEnabledSummary">Увімкнути/вимкнути підтримку фільмів. Додаток перезавантажиться.</string>
   <string name="textSettingsWidgets">Віджети</string>
@@ -44,7 +35,6 @@
   <string name="textSettingsStreamingServicesMessage">Показувати дані стрімінгових сервісів.</string>
   <string name="textSettingsProgressNextEpisodeTitle">Наступна серія</string>
   <string name="textSettingsProgressNextEpisodeMessage">Розрахувати наступну серію за допомогою:</string>
-  <string name="textSettingsDateSelectionTitle">Вибір дати</string>
   <string name="textSettingsDateSelectionMessage">Оберіть варіант вибору дати за замовчуванням.</string>
   <string name="textSettingsTabletColumnsTitle">Кількість стовпців у списках</string>
   <string name="textSettingsTabletColumnsSummary">Виберіть бажану кількість стовпців для списків.</string>
@@ -95,9 +85,6 @@
   <string name="textDateSelectionAsk">Завжди питати</string>
   <string name="textDateSelectionNow">Завжди \"Щойно\"</string>
   <string name="textThemeDark">Темна</string>
-  <string name="textThemeLight">Світла</string>
-  <string name="textThemeSystem">Системна</string>
-  <string name="textTransparency100">Непрозорий</string>
 
   <string name="textSettingsApiKeys">Ключі API</string>
   <string name="textSettingsBackupTargetTitle">Місце збереження резервних копій</string>

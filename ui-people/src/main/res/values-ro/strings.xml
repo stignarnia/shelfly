@@ -3,7 +3,6 @@
     <string name="textAge" comment="Person's age">Vârsta:</string>
     <string name="textBorn" comment="For example - Born: 12 January 1990">Născut:</string>
     <string name="textDied" comment="For example - Died: 12 January 2020">Decedat:</string>
-    <string name="textCredits" comment="List of shows and movies the person appears on">Credite</string>
     <string name="textEpisodes">Episoade</string>
     <string name="textGalleryEmpty">Nu sunt imagini disponibile</string>
 </resources>

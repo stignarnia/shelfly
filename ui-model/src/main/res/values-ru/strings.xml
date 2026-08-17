@@ -60,13 +60,6 @@
   <string name="textGenreThriller">Триллер</string>
   <string name="textGenreWar">Военный</string>
   <string name="textGenreWestern">Вестерн</string>
-  <string name="textTMDBSyncOption1Hour">Каждый час</string>
-  <string name="textTMDBSyncOption3Hours">Каждые 3 часа</string>
-  <string name="textTMDBSyncOption6Hours">Каждые 6 часов</string>
-  <string name="textTMDBSyncOption3Day">Каждые 3 дня</string>
-  <string name="textTMDBSyncOption3HoursButton">Запланировано запускать каждые 3 часа</string>
-  <string name="textTMDBSyncOption6HoursButton">Запланировано запускать каждые 6 часов</string>
-  <string name="textTMDBSyncOption3DayButton">Запланировано запускать каждые 3 дня</string>
   <string name="textShowStatusReturning">Продолжающиеся сериалы</string>
   <string name="textShowStatusUpcoming">Предстоящие</string>
   <string name="textShowStatusInProduction">В производстве</string>

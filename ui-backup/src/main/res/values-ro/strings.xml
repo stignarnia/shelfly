@@ -37,10 +37,18 @@
   <string name="textSyncFailed">Sincronizarea a eșuat: %s</string>
   <string name="textBackupImportFromWebDav">Importă din WebDAV</string>
   <string name="textBackupWebDavNoBackups">Nu s-au găsit copii de rezervă pe server.</string>
-  <string name="textBackupWebDavPick">Alegeți o copie de rezervă pentru restaurare</string>
+  <string name="textBackupWebDavPick">Alege o copie de rezervă pentru restaurare</string>
   <plurals name="textSyncPeers">
     <item quantity="one">%d alt dispozitiv</item>
     <item quantity="few">%d alte dispozitive</item>
-    <item quantity="other">%d de alte dispozitive</item>
+    <item quantity="other">%d alte dispozitive</item>
   </plurals>
+
+  <string name="textSyncNotificationProgressTitle">Sincronizare WebDAV</string>
+  <string name="textSyncNotificationProgressContent">Se sincronizează datele cu serverul…</string>
+  <string name="textSyncNotificationSuccessTitle">Sincronizare WebDAV</string>
+  <string name="textSyncNotificationSuccessContent">Sincronizare finalizată cu succes.</string>
+  <string name="textSyncNotificationErrorTitle">Sincronizare WebDAV eșuată</string>
+  <string name="textSyncNotificationErrorContent">Sincronizare eșuată: %s</string>
+  <string name="textBackupNotificationErrorTitle">Copie de rezervă eșuată</string>
 </resources>
