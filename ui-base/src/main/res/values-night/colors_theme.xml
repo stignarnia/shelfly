@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The dark half of the themed palette. Every name here exists in
+  values/colors_theme.xml too - keep the two in step.
+
+  These are the values the app shipped with before it had a light theme, moved
+  here verbatim, so dark is unchanged by the switch to a DayNight parent.
+-->
+<resources>
+
+  <!-- Surfaces, from furthest back to closest -->
+  <color name="themeBackground">#131313</color>
+  <color name="themeSurface">#222327</color>
+  <color name="themeCard">#282828</color>
+  <color name="themeElevated">#303030</color>
+
+  <!-- Poster and image placeholders -->
+  <color name="themePlaceholder">#222222</color>
+  <color name="themePlaceholderInk">#6A6A6A</color>
+
+  <!-- Text -->
+  <color name="themeTextPrimary">#FFFFFF</color>
+  <color name="themeTextSecondary">#AAAAAA</color>
+  <color name="themeTextTertiary">#A1A1A1</color>
+  <!-- Unselected bottom menu labels, a touch quieter than tertiary text -->
+  <color name="themeMenuItem">#838383</color>
+
+  <!-- Lines and strokes -->
+  <color name="themeSeparator">#303030</color>
+  <color name="themeMenuSeparator">#464646</color>
+  <color name="themeStroke">#66AAAAAA</color>
+  <color name="themeProgressTrack">#3C3C3C</color>
+
+  <!-- Accent. Held at the brand red in both themes; on a dark ground the
+       text-sized use needs no darkening, so both names carry the same value. -->
+  <color name="themeAccent">#F44336</color>
+  <color name="themeAccentText">#F44336</color>
+
+  <!-- Bottom navigation active indicator -->
+  <color name="themeNavIndicator">#E6323339</color>
+
+  <!-- Snackbars invert against the app, so they read as an overlay -->
+  <color name="themeSnackbar">#FFFFFF</color>
+  <color name="themeOnSnackbar">#000000</color>
+
+  <color name="themeRipple">#33FFFFFF</color>
+  <color name="themeDisabled">#303030</color>
+
+</resources>

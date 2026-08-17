@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The themed half of the palette: every colour here has a counterpart in
+  values-night/colors_theme.xml, and Android picks between them by night mode.
+
+  This file is light, values-night is dark.
+
+  Nothing in colors.xml belongs here. Those are fixed literals - colorWhite,
+  colorBlack, the colorBlackTranslucent scrims, the widget blues - and several of
+  them are used by the widgets and by text burned over poster artwork, which is
+  dark in every theme. Giving any of them a values-night variant would quietly
+  break both, so the split is: colors.xml never varies, colors_theme.xml always
+  does.
+-->
+<resources>
+
+  <!-- Surfaces, from furthest back to closest -->
+  <color name="themeBackground">#FAFAFA</color>
+  <color name="themeSurface">#FFFFFF</color>
+  <color name="themeCard">#F2F2F2</color>
+  <color name="themeElevated">#EBEBEB</color>
+
+  <!-- Poster and image placeholders -->
+  <color name="themePlaceholder">#EDEDED</color>
+  <color name="themePlaceholderInk">#9E9E9E</color>
+
+  <!-- Text -->
+  <color name="themeTextPrimary">#1A1A1A</color>
+  <color name="themeTextSecondary">#5F5F5F</color>
+  <color name="themeTextTertiary">#757575</color>
+  <!-- Unselected bottom menu labels, a touch quieter than tertiary text -->
+  <color name="themeMenuItem">#757575</color>
+
+  <!-- Lines and strokes -->
+  <color name="themeSeparator">#E0E0E0</color>
+  <color name="themeMenuSeparator">#D6D6D6</color>
+  <color name="themeStroke">#66666666</color>
+  <color name="themeProgressTrack">#DCDCDC</color>
+
+  <!-- Accent. Held at the brand red in both themes; only the text-sized use is
+       darkened, because #F44336 on a light ground is 3:1 - fine for fills and
+       icons, thin for a 12sp label. -->
+  <color name="themeAccent">#F44336</color>
+  <color name="themeAccentText">#D32F2F</color>
+
+  <!-- Bottom navigation active indicator -->
+  <color name="themeNavIndicator">#E6E3E4E8</color>
+
+  <!-- Snackbars invert against the app, so they read as an overlay -->
+  <color name="themeSnackbar">#2A2A2A</color>
+  <color name="themeOnSnackbar">#FFFFFF</color>
+
+  <color name="themeRipple">#1F000000</color>
+  <color name="themeDisabled">#DADADA</color>
+
+</resources>

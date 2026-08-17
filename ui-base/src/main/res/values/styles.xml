@@ -1,53 +1,80 @@
 <resources>
 
-  <!-- Base app theme -->
-  <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
-    <item name="android:windowBackground">@color/colorBackground</item>
+  <!--
+    Base app theme.
+
+    The parent is DayNight, so light and dark are the same style resolved against
+    two sets of values: every colour below points at colors_theme.xml, which
+    exists in values/ (light) and values-night/ (dark). Nothing here should carry
+    a literal hex or a colors.xml name unless it is deliberately fixed across
+    themes - see the "held fixed" items further down.
+
+    AMOLED and Material You are not separate themes; they are overlays applied on
+    top of this one in BaseActivity.
+  -->
+  <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+    <item name="android:windowBackground">@color/themeBackground</item>
     <item name="switchStyle">@style/ShelflySwitch</item>
     <item name="enableEdgeToEdge">true</item>
 
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorPrimary">@color/themeSurface</item>
+    <item name="colorPrimaryDark">@color/themeBackground</item>
+    <item name="colorAccent">@color/themeAccent</item>
+    <item name="colorAppBackground">@color/themeBackground</item>
 
-    <item name="android:textColorPrimary">@color/colorWhite</item>
-    <item name="android:textColorSecondary">@color/colorGrayLight</item>
+    <item name="android:textColorPrimary">@color/themeTextPrimary</item>
+    <item name="android:textColorSecondary">@color/themeTextSecondary</item>
+    <item name="textColorTab">@color/themeTextTertiary</item>
+    <item name="textColorTabSelected">@color/themeTextPrimary</item>
+    <item name="textColorChip">?android:textColorPrimary</item>
+    <item name="textColorChipSelected">@color/themeAccentText</item>
+    <item name="colorBackgroundChipSelected">@color/themeBackground</item>
+    <item name="colorBackgroundChipSelectedLight">?colorSearchViewBackground</item>
+    <item name="colorProgressTrack">@color/themeProgressTrack</item>
+
+    <item name="colorIconPrimary">@color/themeTextPrimary</item>
+    <item name="colorIconSecondary">@color/themeTextSecondary</item>
+    <item name="colorRipple">@color/themeRipple</item>
+    <item name="colorTabIndicator">@color/themeAccent</item>
+    <item name="colorButtonDisabled">@color/themeDisabled</item>
+
+    <item name="colorInfoSnackbar">@color/themeSnackbar</item>
+    <item name="textColorInfoSnackbar">@color/themeOnSnackbar</item>
+
+    <item name="colorBottomMenuBackground">@color/themeSurface</item>
+    <item name="colorBottomMenuItem">@color/themeMenuItem</item>
+    <item name="colorBottomMenuItemChecked">@color/themeTextPrimary</item>
+    <item name="colorBottomMenuSeparator">@color/themeMenuSeparator</item>
+    <item name="colorBottomMenuIndicator">@color/themeNavIndicator</item>
+
+    <item name="colorSearchViewBackground">@color/themeSurface</item>
+    <item name="colorSearchViewControl">@color/themeTextSecondary</item>
+
+    <item name="colorSearchLocalViewBackground">@color/themeElevated</item>
+    <item name="colorSearchLocalViewControl">@color/themeTextSecondary</item>
+
+    <item name="colorPlaceholderBackground">@color/themePlaceholder</item>
+    <item name="colorPlaceholderStroke">@color/themePlaceholderInk</item>
+    <item name="colorPlaceholderIcon">@color/themePlaceholderInk</item>
+
+    <item name="colorSeparator">@color/themeSeparator</item>
+    <item name="colorChipButtonStroke">@color/themeStroke</item>
+    <item name="colorCardBackground">@color/themeCard</item>
+    <item name="colorBadgeBackground">@color/themeElevated</item>
+    <item name="colorSheetBackground">@color/themeSurface</item>
+
+    <!--
+      Held fixed across every theme.
+
+      The first two are burned over poster and backdrop artwork, which is dark
+      whatever the app is doing, so they stay white with their black shadow. The
+      error snackbar is white on the brand red in both. The widget status scrim
+      sits on artwork too, and widgets do not follow the app theme at all.
+    -->
     <item name="textColorOnSurface">@color/colorWhite</item>
     <item name="textColorGridTitle">@color/colorWhite</item>
-    <item name="textColorTab">#A1A1A1</item>
-    <item name="textColorTabSelected">@color/colorWhite</item>
-    <item name="textColorChip">?android:textColorPrimary</item>
-    <item name="textColorChipSelected">@color/colorAccent</item>
-    <item name="colorBackgroundChipSelected">@color/colorBackground</item>
-    <item name="colorBackgroundChipSelectedLight">?colorSearchViewBackground</item>
-    <item name="colorProgressTrack">#3C3C3C</item>
-
-    <item name="colorInfoSnackbar">@color/colorWhite</item>
-    <item name="textColorInfoSnackbar">@color/colorBlack</item>
     <item name="colorErrorSnackbar">@color/colorError</item>
     <item name="textColorErrorSnackbar">@color/colorWhite</item>
-
-    <item name="colorBottomMenuBackground">@color/colorPrimary</item>
-    <item name="colorBottomMenuItem">#838383</item>
-    <item name="colorBottomMenuItemChecked">@color/colorWhite</item>
-    <item name="colorBottomMenuSeparator">#464646</item>
-    <item name="colorBottomMenuIndicator">#E6323339</item>
-
-    <item name="colorSearchViewBackground">@color/colorPrimary</item>
-    <item name="colorSearchViewControl">@color/colorGrayLight</item>
-
-    <item name="colorSearchLocalViewBackground">@color/colorGrayDark</item>
-    <item name="colorSearchLocalViewControl">@color/colorGrayLight</item>
-
-    <item name="colorPlaceholderBackground">#222222</item>
-    <item name="colorPlaceholderStroke">#6A6A6A</item>
-    <item name="colorPlaceholderIcon">#6A6A6A</item>
-
-    <item name="colorSeparator">@color/colorGrayDark</item>
-    <item name="colorChipButtonStroke">#66AAAAAA</item>
-    <item name="colorCardBackground">#282828</item>
-    <item name="colorBadgeBackground">@color/colorGrayDark</item>
-    <item name="colorSheetBackground">@color/colorPrimary</item>
     <item name="colorWidgetStatusBackground">@color/colorBlackTranslucent</item>
   </style>
 

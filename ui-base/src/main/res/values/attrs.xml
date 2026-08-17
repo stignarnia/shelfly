@@ -23,6 +23,26 @@
   <attr name="colorBadgeBackground" format="color" />
   <attr name="colorSheetBackground" format="color" />
 
+  <!--
+    The window background, reachable from a layout. Layouts used to point straight
+    at @color/colorBackground, which pins them to the dark palette - go through
+    this instead so they follow whichever theme is applied.
+  -->
+  <attr name="colorAppBackground" format="color" />
+
+  <!--
+    Icon tints. Several vectors are drawn as flat white glyphs (the brand marks in
+    the links sheet, ic_film, ic_television); they are tinted at the usage site
+    rather than in the drawable, because a theme attr in a vector's fillColor only
+    resolves when the drawable happens to be inflated with a theme.
+  -->
+  <attr name="colorIconPrimary" format="color" />
+  <attr name="colorIconSecondary" format="color" />
+
+  <attr name="colorRipple" format="color" />
+  <attr name="colorTabIndicator" format="color" />
+  <attr name="colorButtonDisabled" format="color" />
+
   <attr name="colorPlaceholderBackground" format="color" />
   <attr name="colorPlaceholderStroke" format="color" />
   <attr name="colorPlaceholderIcon" format="color" />
