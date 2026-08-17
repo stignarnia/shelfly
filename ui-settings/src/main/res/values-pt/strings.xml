@@ -84,7 +84,14 @@
   <string name="textNextEpisodeOldest">Episódio mais antigo não assistido</string>
   <string name="textDateSelectionAsk">Sempre perguntar</string>
   <string name="textDateSelectionNow">Sempre \"Agora\"</string>
+  <string name="textThemeSystem">Seguir o sistema</string>
+  <string name="textThemeLight">Claro</string>
   <string name="textThemeDark">Escuro</string>
+  <string name="textThemeMaterialYou">Material You</string>
+  <string name="textThemeMaterialYouLight">Material You claro</string>
+  <string name="textThemeMaterialYouDark">Material You escuro</string>
+  <string name="textSettingsAmoledTitle">Preto puro (AMOLED)</string>
+  <string name="textSettingsAmoledSummary">Usar fundos pretos puros quando a aplicação estiver escura.</string>
 
   <string name="textSettingsApiKeys">Chaves de API</string>
   <string name="textSettingsBackupTargetTitle">Destino da cópia de segurança</string>

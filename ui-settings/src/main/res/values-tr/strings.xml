@@ -84,7 +84,14 @@
   <string name="textNextEpisodeOldest">İzlenmeyen en eski bölüm</string>
   <string name="textDateSelectionAsk">Her zaman sor</string>
   <string name="textDateSelectionNow">Her zaman \"Şimdi\"</string>
+  <string name="textThemeSystem">Sistemi izle</string>
+  <string name="textThemeLight">Açık</string>
   <string name="textThemeDark">Karanlık</string>
+  <string name="textThemeMaterialYou">Material You</string>
+  <string name="textThemeMaterialYouLight">Material You açık</string>
+  <string name="textThemeMaterialYouDark">Material You koyu</string>
+  <string name="textSettingsAmoledTitle">Saf siyah (AMOLED)</string>
+  <string name="textSettingsAmoledSummary">Uygulama koyu olduğunda saf siyah arka plan kullan.</string>
 
   <string name="textSettingsApiKeys">API Anahtarları</string>
   <string name="textSettingsBackupTargetTitle">Yedekleme hedefi</string>

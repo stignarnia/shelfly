@@ -84,7 +84,14 @@
   <string name="textNextEpisodeOldest">最早未观看的单集</string>
   <string name="textDateSelectionAsk">总是询问</string>
   <string name="textDateSelectionNow">总是“现在”</string>
+  <string name="textThemeSystem">跟随系统</string>
+  <string name="textThemeLight">浅色</string>
   <string name="textThemeDark">暗色</string>
+  <string name="textThemeMaterialYou">Material You</string>
+  <string name="textThemeMaterialYouLight">Material You 浅色</string>
+  <string name="textThemeMaterialYouDark">Material You 深色</string>
+  <string name="textSettingsAmoledTitle">纯黑 (AMOLED)</string>
+  <string name="textSettingsAmoledSummary">应用处于深色模式时使用纯黑背景。</string>
 
   <string name="textSettingsApiKeys">API 密钥</string>
   <string name="textSettingsBackupTargetTitle">备份目标位置</string>

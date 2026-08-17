@@ -84,7 +84,14 @@
   <string name="textNextEpisodeOldest">Vanhin katsomaton jakso</string>
   <string name="textDateSelectionAsk">Kysy aina</string>
   <string name="textDateSelectionNow">Valitse \"Nyt\"</string>
+  <string name="textThemeSystem">Seuraa järjestelmää</string>
+  <string name="textThemeLight">Vaalea</string>
   <string name="textThemeDark">Tumma</string>
+  <string name="textThemeMaterialYou">Material You</string>
+  <string name="textThemeMaterialYouLight">Material You vaalea</string>
+  <string name="textThemeMaterialYouDark">Material You tumma</string>
+  <string name="textSettingsAmoledTitle">Täysin musta (AMOLED)</string>
+  <string name="textSettingsAmoledSummary">Käytä täysin mustia taustoja, kun sovellus on tumma.</string>
 
   <string name="textSettingsApiKeys">API-avaimet</string>
   <string name="textSettingsBackupTargetTitle">Varmuuskopion kohde</string>

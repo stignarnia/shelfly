@@ -68,7 +68,7 @@
       android:layout_weight="1"
       android:gravity="center"
       android:text="@string/textInMyMovies"
-      android:textColor="?attr/colorAccent"
+      android:textColor="?attr/colorAccentText"
       android:textSize="@dimen/addToButtonTextSize"
       android:visibility="gone"
       app:icon="@drawable/ic_bookmark_full"

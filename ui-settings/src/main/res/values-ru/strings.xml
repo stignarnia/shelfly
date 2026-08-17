@@ -84,7 +84,14 @@
   <string name="textNextEpisodeOldest">Ранее непросмотренная серия</string>
   <string name="textDateSelectionAsk">Всегда спрашивать</string>
   <string name="textDateSelectionNow">Всегда «Сейчас»</string>
+  <string name="textThemeSystem">Как в системе</string>
+  <string name="textThemeLight">Светлая</string>
   <string name="textThemeDark">Темная</string>
+  <string name="textThemeMaterialYou">Material You</string>
+  <string name="textThemeMaterialYouLight">Material You светлая</string>
+  <string name="textThemeMaterialYouDark">Material You тёмная</string>
+  <string name="textSettingsAmoledTitle">Чистый чёрный (AMOLED)</string>
+  <string name="textSettingsAmoledSummary">Использовать чисто чёрный фон, когда приложение тёмное.</string>
 
   <string name="textSettingsApiKeys">Ключи API</string>
   <string name="textSettingsBackupTargetTitle">Место сохранения резервных копий</string>

@@ -1,7 +1,6 @@
 package xyz.stignarnia.repository.settings
 
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import xyz.stignarnia.common.Config.DEFAULT_COUNTRY
 import xyz.stignarnia.common.Config.DEFAULT_DATE_FORMAT
@@ -13,7 +12,6 @@ import xyz.stignarnia.data_local.utilities.TransactionsProvider
 import xyz.stignarnia.repository.mappers.Mappers
 import xyz.stignarnia.repository.utilities.BooleanPreference
 import xyz.stignarnia.repository.utilities.EnumPreference
-import xyz.stignarnia.repository.utilities.IntPreference
 import xyz.stignarnia.repository.utilities.LongPreference
 import xyz.stignarnia.repository.utilities.StringPreference
 import xyz.stignarnia.ui_model.ProgressDateSelectionType
@@ -45,7 +43,8 @@ class SettingsRepository @Inject constructor(
 
   companion object Key {
     const val LANGUAGE = "KEY_LANGUAGE"
-    private const val THEME = "KEY_THEME"
+    private const val THEME_ID = "KEY_THEME_ID"
+    private const val THEME_AMOLED = "KEY_THEME_AMOLED"
     private const val COUNTRY = "KEY_COUNTRY"
     private const val DATE_FORMAT = "KEY_DATE_FORMAT"
     private const val MODE = "KEY_MOVIES_MODE"
@@ -85,7 +84,21 @@ class SettingsRepository @Inject constructor(
   var installTimestamp by LongPreference(preferences, INSTALL_TIMESTAMP, 0L)
   var streamingsEnabled by BooleanPreference(preferences, STREAMINGS_ENABLED, true)
   var isMoviesEnabled by BooleanPreference(preferences, MOVIES_ENABLED, true)
-  var theme by IntPreference(preferences, THEME, AppCompatDelegate.MODE_NIGHT_YES)
+
+  /**
+   * The selected theme's id, as named by AppTheme in ui-settings.
+   * Stored as a string for the same reason language and country are: the enum lives in the UI layer and this module cannot see it.
+   *
+   * The default is the theme the app shipped with before it had any others.
+   * No migration is needed from the old int key - the picker only ever offered one entry, so every existing install was already on dark.
+   */
+  var themeId by StringPreference(preferences, THEME_ID, "DARK")
+
+  /**
+   * Whether to black out backgrounds wherever the theme resolves to dark.
+   * Independent of [themeId] on purpose: the switch keeps its value while a light theme is selected, so coming back to a dark one restores what the user chose.
+   */
+  var isAmoled by BooleanPreference(preferences, THEME_AMOLED)
   var language by StringPreference(preferences, LANGUAGE, DEFAULT_LANGUAGE)
   var country by StringPreference(preferences, COUNTRY, DEFAULT_COUNTRY)
   var dateFormat by StringPreference(preferences, DATE_FORMAT, DEFAULT_DATE_FORMAT)

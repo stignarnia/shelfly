@@ -84,7 +84,14 @@
   <string name="textNextEpisodeOldest">Najstarszy nieobejrzany odcinek</string>
   <string name="textDateSelectionAsk">Zawsze pytaj</string>
   <string name="textDateSelectionNow">Zawsze \"Teraz\"</string>
+  <string name="textThemeSystem">Zgodnie z systemem</string>
+  <string name="textThemeLight">Jasny</string>
   <string name="textThemeDark">Ciemny</string>
+  <string name="textThemeMaterialYou">Material You</string>
+  <string name="textThemeMaterialYouLight">Material You jasny</string>
+  <string name="textThemeMaterialYouDark">Material You ciemny</string>
+  <string name="textSettingsAmoledTitle">Czysta czerń (AMOLED)</string>
+  <string name="textSettingsAmoledSummary">Używaj czarnego tła, gdy aplikacja jest ciemna.</string>
 
   <string name="textSettingsApiKeys">Klucze API</string>
   <string name="textSettingsBackupTargetTitle">Miejsce docelowe kopii zapasowej</string>

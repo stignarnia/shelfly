@@ -84,7 +84,14 @@
     <string name="textNextEpisodeOldest">Cel mai vechi episod nevizionat</string>
     <string name="textDateSelectionAsk">Întreabă întotdeauna</string>
     <string name="textDateSelectionNow">Întotdeauna „Acum”</string>
+    <string name="textThemeSystem">Urmează sistemul</string>
+    <string name="textThemeLight">Luminos</string>
     <string name="textThemeDark">Întunecat</string>
+    <string name="textThemeMaterialYou">Material You</string>
+    <string name="textThemeMaterialYouLight">Material You luminos</string>
+    <string name="textThemeMaterialYouDark">Material You întunecat</string>
+    <string name="textSettingsAmoledTitle">Negru pur (AMOLED)</string>
+    <string name="textSettingsAmoledSummary">Folosește fundaluri complet negre când aplicația este întunecată.</string>
 
   <string name="textSettingsApiKeys">Chei API</string>
   <string name="textSettingsBackupTargetTitle">Destinație copie de rezervă</string>

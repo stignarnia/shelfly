@@ -2,4 +2,6 @@ Shelfly 4.0.4
 
 • WebDAV sync now posts a notification while it runs and when it fails, so a device that has quietly stopped syncing says so. Tapping a failure notification opens the WebDAV settings from wherever you were in the app.
 • Pulling down on Progress to sync now keeps the ring on screen and fills it as the backup and sync actually advance, instead of putting it away the moment you let go.
+• Settings now offers a real choice of theme: light, dark, or whatever the phone is set to, each also available in Material You on Android 12 and later so the app takes its colours from your wallpaper.
+• A separate switch turns backgrounds pure black for OLED screens. It applies to whichever theme you have picked, so "follow system" can still go black at night.
 • The OMDb logo in Settings is legible again - its lettering was black on a black background - and tapping it opens omdbapi.com, the way the TMDb logo beside it already did.

@@ -44,7 +44,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/spaceSmall"
       android:lineSpacingExtra="2dp"
-      android:textColor="?attr/colorAccent"
+      android:textColor="?attr/colorAccentText"
       android:textSize="24sp"
       android:textStyle="bold"
       app:layout_constraintStart_toStartOf="parent"

@@ -84,7 +84,14 @@
   <string name="textNextEpisodeOldest">Найстаріша непереглянута серія</string>
   <string name="textDateSelectionAsk">Завжди питати</string>
   <string name="textDateSelectionNow">Завжди \"Щойно\"</string>
+  <string name="textThemeSystem">Як у системі</string>
+  <string name="textThemeLight">Світла</string>
   <string name="textThemeDark">Темна</string>
+  <string name="textThemeMaterialYou">Material You</string>
+  <string name="textThemeMaterialYouLight">Material You світла</string>
+  <string name="textThemeMaterialYouDark">Material You темна</string>
+  <string name="textSettingsAmoledTitle">Чистий чорний (AMOLED)</string>
+  <string name="textSettingsAmoledSummary">Використовувати чисто чорний фон, коли застосунок темний.</string>
 
   <string name="textSettingsApiKeys">Ключі API</string>
   <string name="textSettingsBackupTargetTitle">Місце збереження резервних копій</string>

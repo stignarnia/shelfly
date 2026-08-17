@@ -84,7 +84,14 @@
   <string name="textNextEpisodeOldest">Ældste usete afsnit</string>
   <string name="textDateSelectionAsk">Spørg altid</string>
   <string name="textDateSelectionNow">Altid \"Nu\"</string>
+  <string name="textThemeSystem">Følg systemet</string>
+  <string name="textThemeLight">Lys</string>
   <string name="textThemeDark">Mørk</string>
+  <string name="textThemeMaterialYou">Material You</string>
+  <string name="textThemeMaterialYouLight">Material You lys</string>
+  <string name="textThemeMaterialYouDark">Material You mørk</string>
+  <string name="textSettingsAmoledTitle">Helt sort (AMOLED)</string>
+  <string name="textSettingsAmoledSummary">Brug helt sorte baggrunde, når appen er mørk.</string>
 
   <string name="textSettingsApiKeys">API-nøgler</string>
   <string name="textSettingsBackupTargetTitle">Sikkerhedskopieringsdestination</string>

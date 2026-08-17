@@ -14,6 +14,12 @@ import xyz.stignarnia.ui_widgets.search.SearchWidgetProvider
 
 abstract class BaseActivity : AppCompatActivity() {
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    // Before super, so the AMOLED and Material You overlays are on the theme by the time anything is inflated against it.
+    ThemeApplier.applyOverlays(this)
+    super.onCreate(savedInstanceState)
+  }
+
   private val actionKeys = arrayOf(
     EXTRA_SHOW_ID,
     EXTRA_MOVIE_ID,

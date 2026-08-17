@@ -32,7 +32,7 @@ I think there is little chance this gets merged upstream given the repository's 
 - The paid tier has been removed.
 - Episode notifications fire on the air date rather than at the exact airtime. TMDB exposes a date but no time of day, so the precision is not available.
 - Discover filters by streaming service rather than by TV network. TMDB's `with_networks` wants numeric ids that do not map from channel names, and it does not apply to films at all, so the filter asks for availability instead: the services listed for the country set in Settings, which is the same region the details screen uses. It works on shows and on movies.
-- The app is dark-only. The theme picker exists but offers a single option until a light palette is written.
+- **Six themes**, plus a pure-black switch. Light, dark and follow-system, each also available in Material You on Android 12 and later, and AMOLED backgrounds can be turned on for whichever of them ends up dark.
 - The launcher icon and in-app logo are still upstream artwork, pending a replacement.
 
 ## Project setup

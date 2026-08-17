@@ -84,7 +84,14 @@
   <string name="textNextEpisodeOldest">Älteste ungesehene Folge</string>
   <string name="textDateSelectionAsk">Immer fragen</string>
   <string name="textDateSelectionNow">Immer \"Jetzt\"</string>
+  <string name="textThemeSystem">Systemeinstellung folgen</string>
+  <string name="textThemeLight">Hell</string>
   <string name="textThemeDark">Dunkel</string>
+  <string name="textThemeMaterialYou">Material You</string>
+  <string name="textThemeMaterialYouLight">Material You Hell</string>
+  <string name="textThemeMaterialYouDark">Material You Dunkel</string>
+  <string name="textSettingsAmoledTitle">Reines Schwarz (AMOLED)</string>
+  <string name="textSettingsAmoledSummary">Reinschwarze Hintergründe verwenden, wenn die App dunkel ist.</string>
 
   <string name="textSettingsApiKeys">API-Schlüssel</string>
   <string name="textSettingsBackupTargetTitle">Sicherungsziel</string>

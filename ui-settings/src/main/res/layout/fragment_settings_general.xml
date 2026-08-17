@@ -58,7 +58,7 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:text="@string/textLanguageEnglish"
-      android:textColor="?attr/colorAccent"
+      android:textColor="?attr/colorAccentText"
       app:layout_constraintBottom_toBottomOf="@id/settingsLanguage"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsLanguage"
@@ -102,7 +102,7 @@
       android:id="@+id/settingsCountryValue"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:textColor="?attr/colorAccent"
+      android:textColor="?attr/colorAccentText"
       app:layout_constraintBottom_toBottomOf="@id/settingsCountry"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsCountry"
@@ -114,7 +114,7 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/settingsTheme"
     style="@style/Settings.ItemLayout"
-    app:layout_constraintBottom_toTopOf="@+id/settingsDateFormat"
+    app:layout_constraintBottom_toTopOf="@+id/settingsAmoled"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsCountry"
@@ -147,11 +147,60 @@
       android:id="@+id/settingsThemeValue"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:textColor="?attr/colorAccent"
+      android:textColor="?attr/colorAccentText"
       app:layout_constraintBottom_toBottomOf="@id/settingsTheme"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsTheme"
       tools:text="@tools:sample/lorem"
+      />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <!--
+    Greyed out, not hidden, whenever the selected theme can never resolve to dark.
+    The preference behind it is kept either way, so returning to a dark theme restores what the user chose.
+  -->
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/settingsAmoled"
+    style="@style/Settings.ItemLayout"
+    app:layout_constraintBottom_toTopOf="@+id/settingsDateFormat"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/settingsTheme"
+    >
+
+    <TextView
+      android:id="@+id/settingsAmoledTitle"
+      style="@style/Settings.Title"
+      android:text="@string/textSettingsAmoledTitle"
+      app:layout_constraintBottom_toTopOf="@id/settingsAmoledDescription"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      />
+
+    <TextView
+      android:id="@+id/settingsAmoledDescription"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceNormal"
+      android:text="@string/textSettingsAmoledSummary"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/settingsAmoledSwitch"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsAmoledTitle"
+      />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+      android:id="@+id/settingsAmoledSwitch"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:background="@null"
+      android:clickable="false"
+      app:layout_constraintBottom_toBottomOf="@id/settingsAmoled"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/settingsAmoled"
       />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
@@ -162,7 +211,7 @@
     app:layout_constraintBottom_toTopOf="@id/settingsTabletColumns"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/settingsTheme"
+    app:layout_constraintTop_toBottomOf="@id/settingsAmoled"
     >
 
     <TextView
@@ -214,7 +263,7 @@
       android:id="@+id/settingsTabletColumnsValue"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:textColor="?attr/colorAccent"
+      android:textColor="?attr/colorAccentText"
       app:layout_constraintBottom_toBottomOf="@id/settingsTabletColumns"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsTabletColumns"
@@ -411,7 +460,7 @@
       android:gravity="end"
       android:maxLines="2"
       android:text="@string/textDateSelectionAsk"
-      android:textColor="?attr/colorAccent"
+      android:textColor="?attr/colorAccentText"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -461,7 +510,7 @@
       android:gravity="end"
       android:maxLines="2"
       android:text="@string/textNextEpisodeLastWatched"
-      android:textColor="?attr/colorAccent"
+      android:textColor="?attr/colorAccentText"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -507,7 +556,7 @@
       android:layout_height="wrap_content"
       android:gravity="end"
       android:maxLines="1"
-      android:textColor="?attr/colorAccent"
+      android:textColor="?attr/colorAccentText"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"

@@ -97,10 +97,16 @@ class SettingsGeneralMainCase @Inject constructor(
     }
   }
 
-  fun getTheme() = AppTheme.fromCode(settingsRepository.theme)
+  fun getTheme() = AppTheme.fromId(settingsRepository.themeId)
+
+  fun isAmoled() = settingsRepository.isAmoled
+
+  fun setAmoled(enabled: Boolean) {
+    settingsRepository.isAmoled = enabled
+  }
 
   fun setTheme(theme: AppTheme) {
-    settingsRepository.theme = theme.code
+    settingsRepository.themeId = theme.id
   }
 
   fun getCountry() = AppCountry.fromCode(settingsRepository.country)

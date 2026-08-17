@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.os.Build
 import android.os.StrictMode
 import androidx.appcompat.app.AppCompatDelegate
+import xyz.stignarnia.shelfly.ui.ThemeApplier
 import androidx.core.os.LocaleListCompat
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
@@ -124,7 +125,7 @@ class App :
 
     setupSettings()
     setupLanguage()
-    AppCompatDelegate.setDefaultNightMode(settingsRepository.theme)
+    ThemeApplier.applyNightMode(settingsRepository)
     setupStrictMode()
     setupNotificationChannels()
     syncNotificationManager.cancelStaleProgress()

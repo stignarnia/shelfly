@@ -43,7 +43,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/spaceTiny"
-      android:textColor="?attr/colorAccent"
+      android:textColor="?attr/colorAccentText"
       android:textSize="24sp"
       android:textStyle="bold"
       tools:text="298 episodes"

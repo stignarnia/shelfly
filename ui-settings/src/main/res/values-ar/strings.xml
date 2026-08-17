@@ -84,7 +84,14 @@
   <string name="textNextEpisodeOldest">أقدم حلقة لم تشاهدها</string>
   <string name="textDateSelectionAsk">اسأل دائماً</string>
   <string name="textDateSelectionNow">دائماً \"الآن\"</string>
+  <string name="textThemeSystem">اتّباع النظام</string>
+  <string name="textThemeLight">فاتح</string>
   <string name="textThemeDark">داكن</string>
+  <string name="textThemeMaterialYou">Material You</string>
+  <string name="textThemeMaterialYouLight">Material You فاتح</string>
+  <string name="textThemeMaterialYouDark">Material You داكن</string>
+  <string name="textSettingsAmoledTitle">أسود نقي (AMOLED)</string>
+  <string name="textSettingsAmoledSummary">استخدم خلفيات سوداء نقية عندما يكون التطبيق داكناً.</string>
 
   <string name="textSettingsApiKeys">مفاتيح API</string>
   <string name="textSettingsBackupTargetTitle">وجهة النسخ الاحتياطي</string>

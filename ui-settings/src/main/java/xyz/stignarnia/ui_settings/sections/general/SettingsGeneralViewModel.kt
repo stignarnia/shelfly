@@ -38,6 +38,8 @@ class SettingsGeneralViewModel @Inject constructor(
   private val moviesEnabledState = MutableStateFlow(true)
   private val streamingsEnabledState = MutableStateFlow(true)
   private val themeState = MutableStateFlow(AppTheme.DARK)
+  private val amoledState = MutableStateFlow(false)
+  private val recreateActivityState = MutableStateFlow(false)
   private val restartAppState = MutableStateFlow(false)
   private val progressTypeState = MutableStateFlow<ProgressNextEpisodeType?>(null)
   private val progressDateSelectionState = MutableStateFlow<ProgressDateSelectionType?>(null)
@@ -54,6 +56,7 @@ class SettingsGeneralViewModel @Inject constructor(
     settingsState.value = mainCase.getSettings()
     languageState.value = mainCase.getLanguage()
     themeState.value = mainCase.getTheme()
+    amoledState.value = mainCase.isAmoled()
     countryState.value = mainCase.getCountry()
     dateFormatState.value = mainCase.getDateFormat()
     moviesEnabledState.value = mainCase.isMoviesEnabled()
@@ -104,8 +107,28 @@ class SettingsGeneralViewModel @Inject constructor(
 
   fun setTheme(theme: AppTheme) {
     viewModelScope.launch {
+      val previous = mainCase.getTheme()
       mainCase.setTheme(theme)
-      AppCompatDelegate.setDefaultNightMode(theme.code)
+      if (previous.nightMode != theme.nightMode) {
+        // AppCompat recreates every live Activity itself when the night mode changes, so asking for one here would relaunch twice.
+        AppCompatDelegate.setDefaultNightMode(theme.nightMode)
+      } else {
+        // Same night mode, different overlay - dark to Material You dark, say.
+        // Nothing recreates on its own, and an overlay only lands while a theme is being applied.
+        recreateActivityState.value = true
+      }
+      refreshSettings()
+    }
+  }
+
+  /**
+   * The AMOLED switch never changes the night mode, so it always needs the recreate asking for.
+   */
+  fun setAmoled(enabled: Boolean) {
+    viewModelScope.launch {
+      mainCase.setAmoled(enabled)
+      recreateActivityState.value = true
+      refreshSettings()
     }
   }
 
@@ -168,7 +191,9 @@ class SettingsGeneralViewModel @Inject constructor(
     progressUpcomingDaysState,
     tabletsColumnsState,
     progressDateSelectionState,
-  ) { s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 ->
+    amoledState,
+    recreateActivityState,
+  ) { s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14 ->
     SettingsGeneralUiState(
       settings = s1,
       theme = s2,
@@ -182,6 +207,8 @@ class SettingsGeneralViewModel @Inject constructor(
       progressUpcomingDays = s10,
       tabletColumns = s11,
       progressDateSelectionType = s12,
+      amoled = s13,
+      recreateActivity = s14,
     )
   }.stateIn(
     scope = viewModelScope,

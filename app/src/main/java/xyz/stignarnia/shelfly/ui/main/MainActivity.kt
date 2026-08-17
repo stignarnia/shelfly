@@ -30,7 +30,6 @@ import androidx.work.WorkManager
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.common.Mode.MOVIES
 import xyz.stignarnia.common.Mode.SHOWS
-import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.shelfly.R
 import xyz.stignarnia.shelfly.databinding.ActivityMainBinding
 import xyz.stignarnia.shelfly.ui.BaseActivity
@@ -96,13 +95,16 @@ class MainActivity :
   @Inject lateinit var workManager: WorkManager
   @Inject lateinit var eventsManager: EventsManager
   @Inject lateinit var deepLinkResolver: DeepLinkResolver
-  @Inject lateinit var settingsRepository: SettingsRepository
   @Inject lateinit var networkStatusProvider: NetworkStatusProvider
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge(
-      statusBarStyle = SystemBarStyle.dark(TRANSPARENT),
+      // auto, not dark, so the status bar icons flip to dark glyphs under a light theme.
+      // The bar itself stays transparent either way, because content scrolls under it.
+      statusBarStyle = SystemBarStyle.auto(TRANSPARENT, TRANSPARENT),
+      // The navigation bar keeps its translucent black scrim in every theme.
+      // It sits over content rather than over a surface, so it is not the theme's to colour - the same reasoning that keeps the poster overlays fixed.
       navigationBarStyle = SystemBarStyle.dark(ContextCompat.getColor(this, R.color.colorBlackTranslucentMedium)),
     )
 

@@ -13,6 +13,8 @@ data class SettingsGeneralUiState(
   val settings: Settings? = null,
   val language: AppLanguage = AppLanguage.ENGLISH,
   val theme: AppTheme = AppTheme.DARK,
+  val amoled: Boolean = false,
+  val recreateActivity: Boolean = false,
   val country: AppCountry? = null,
   val dateFormat: AppDateFormat? = null,
   val moviesEnabled: Boolean = true,

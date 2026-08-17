@@ -109,7 +109,21 @@
   <string name="textLanguageRussian" translatable="false">Pусский</string>
   <string name="textLanguageFinnish" translatable="false">Suomi</string>
 
+  <string name="textThemeSystem">Follow system</string>
+
+  <string name="textThemeLight">Light</string>
+
   <string name="textThemeDark">Dark</string>
+
+  <string name="textThemeMaterialYou">Material You</string>
+
+  <string name="textThemeMaterialYouLight">Material You Light</string>
+
+  <string name="textThemeMaterialYouDark">Material You Dark</string>
+
+  <string name="textSettingsAmoledTitle">Pure black (AMOLED)</string>
+
+  <string name="textSettingsAmoledSummary">Use pure black backgrounds when the app is dark.</string>
 
   <string name="textSettingsApiKeys">API keys</string>
   <string name="textSettingsApiKeyNotSet">Not set</string>

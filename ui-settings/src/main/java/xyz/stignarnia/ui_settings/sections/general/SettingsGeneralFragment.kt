@@ -31,6 +31,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.fragment_settings_general) {
 
+  companion object {
+    /**
+     * Matches the disabled alpha the button and chip state lists already use, so a greyed row reads the same as every other disabled control.
+     */
+    private const val DISABLED_ALPHA = 0.5F
+  }
+
   override val viewModel by viewModels<SettingsGeneralViewModel>()
   private val binding by viewBinding(FragmentSettingsGeneralBinding::bind)
 
@@ -72,7 +79,7 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
 
         renderSettings(settings)
         renderLanguage(language)
-        renderTheme(theme)
+        renderTheme(theme, amoled)
         renderCountry(country)
         renderProgressType(progressNextType)
         renderDateSelection(progressDateSelectionType)
@@ -81,6 +88,8 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
         renderTabletColumns(tabletColumns)
 
         if (restartApp) restartApp()
+        // A theme lands while the Activity is being created, so the change needs a fresh one.
+        if (recreateActivity) requireActivity().recreate()
       }
     }
   }
@@ -99,10 +108,22 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
     }
   }
 
-  private fun renderTheme(theme: AppTheme) {
+  private fun renderTheme(
+    theme: AppTheme,
+    amoled: Boolean,
+  ) {
     with(binding) {
       settingsThemeValue.setText(theme.displayName)
       settingsTheme.onClick { showThemeDialog(theme) }
+
+      // AMOLED only has something to act on where the theme can end up dark.
+      // The switch still shows the stored value while it is disabled, so a trip through Light and back leaves the choice intact.
+      val canBeDark = theme.canBeDark
+      settingsAmoled.isEnabled = canBeDark
+      settingsAmoledSwitch.isEnabled = canBeDark
+      settingsAmoled.alpha = if (canBeDark) 1F else DISABLED_ALPHA
+      settingsAmoledSwitch.isChecked = amoled
+      settingsAmoled.onClick { if (canBeDark) viewModel.setAmoled(!amoled) }
     }
   }
 
@@ -173,7 +194,7 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
   }
 
   private fun showThemeDialog(theme: AppTheme) =
-    showSingleChoiceModal(AppTheme.entries, theme, { getString(it.displayName) }) {
+    showSingleChoiceModal(AppTheme.supported(), theme, { getString(it.displayName) }) {
       if (it != theme) viewModel.setTheme(it)
     }
 

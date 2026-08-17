@@ -72,7 +72,7 @@
       android:paddingEnd="@dimen/spaceTiny"
       android:text="@string/textNew"
       android:textAllCaps="true"
-      android:textColor="?attr/colorAccent"
+      android:textColor="?attr/colorAccentText"
       android:textSize="14sp"
       android:textStyle="bold"
       android:visibility="gone"
