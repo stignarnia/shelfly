@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Material You, light. The dark counterpart is values-night-v31.
+
+  The parent brings Material's own dynamic roles - colorSurface, colorOnSurface
+  and the rest - so M3's widgets follow the wallpaper too. The app addresses
+  colour through its own attrs rather than those roles, so without the items
+  below the wallpaper would reach the dialogs and text fields and nothing else.
+
+  These are the raw tonal ramps rather than the semantic roles, and that is
+  deliberate: the app's attrs are named for where a colour goes, not for what M3
+  calls it, so mapping them onto a ramp keeps the same visual hierarchy the
+  static themes have.
+
+  The items held fixed in AppTheme are absent on purpose. Poster overlay text,
+  the error snackbar and the widget scrim do not follow the wallpaper.
+-->
+<resources>
+
+  <style name="ThemeOverlay.Shelfly.MaterialYou" parent="ThemeOverlay.Material3.DynamicColors.Light">
+
+    <item name="android:windowBackground">@android:color/system_neutral1_10</item>
+    <item name="colorPrimaryDark">@android:color/system_neutral1_10</item>
+    <item name="colorAppBackground">@android:color/system_neutral1_10</item>
+    <item name="colorBackgroundChipSelected">@android:color/system_neutral1_10</item>
+
+    <item name="colorPrimary">@android:color/system_neutral1_50</item>
+    <item name="colorBottomMenuBackground">@android:color/system_neutral1_50</item>
+    <item name="colorSearchViewBackground">@android:color/system_neutral1_50</item>
+    <item name="colorSheetBackground">@android:color/system_neutral1_50</item>
+
+    <item name="colorCardBackground">@android:color/system_neutral2_50</item>
+    <item name="colorSearchLocalViewBackground">@android:color/system_neutral2_100</item>
+    <item name="colorBadgeBackground">@android:color/system_neutral2_100</item>
+    <item name="colorPlaceholderBackground">@android:color/system_neutral2_100</item>
+    <item name="colorPlaceholderStroke">@android:color/system_neutral2_500</item>
+    <item name="colorPlaceholderIcon">@android:color/system_neutral2_500</item>
+
+    <item name="android:textColorPrimary">@android:color/system_neutral1_900</item>
+    <item name="android:textColorSecondary">@android:color/system_neutral2_700</item>
+    <item name="colorIconPrimary">@android:color/system_neutral1_900</item>
+    <item name="textColorTab">@android:color/system_neutral2_600</item>
+    <item name="textColorTabSelected">@android:color/system_neutral1_900</item>
+    <item name="colorBottomMenuItem">@android:color/system_neutral2_600</item>
+    <item name="colorBottomMenuItemChecked">@android:color/system_neutral1_900</item>
+    <item name="colorSearchViewControl">@android:color/system_neutral2_700</item>
+    <item name="colorSearchLocalViewControl">@android:color/system_neutral2_700</item>
+
+    <item name="colorSeparator">@android:color/system_neutral2_300</item>
+    <item name="colorBottomMenuSeparator">@android:color/system_neutral2_300</item>
+    <item name="colorChipButtonStroke">@android:color/system_neutral2_400</item>
+    <item name="colorProgressTrack">@android:color/system_neutral2_300</item>
+    <item name="colorButtonDisabled">@android:color/system_neutral2_300</item>
+
+    <item name="colorAccent">@android:color/system_accent1_600</item>
+    <item name="colorAccentText">@android:color/system_accent1_700</item>
+    <item name="colorAccentTrack">@android:color/system_accent1_100</item>
+    <item name="colorTabIndicator">@android:color/system_accent1_600</item>
+    <item name="textColorChipSelected">@android:color/system_accent1_700</item>
+    <item name="colorBottomMenuIndicator">@android:color/system_accent2_100</item>
+
+    <item name="colorInverseSurface">@android:color/system_neutral1_800</item>
+    <item name="textColorInverseSurface">@android:color/system_neutral1_50</item>
+
+  </style>
+
+</resources>

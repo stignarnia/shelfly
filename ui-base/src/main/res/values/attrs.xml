@@ -48,6 +48,13 @@
   <attr name="colorAccentText" format="color" />
 
   <!--
+    The switch track behind a checked thumb. An attr rather than a colour on
+    @style/ShelflySwitch.Overlay directly, because a theme overlay cannot reach
+    into a style - and Material You has to be able to move it with the accent.
+  -->
+  <attr name="colorAccentTrack" format="color" />
+
+  <!--
     A surface that deliberately inverts against the app: dark chrome in the light
     theme, light chrome in the dark one. Used by the info snackbar and by the tip
     badge, both of which have to stay legible sitting directly on app chrome.

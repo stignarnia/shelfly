@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The two overlays that sit on top of @style/AppTheme.
+
+  Neither is a theme. BaseActivity applies them with Theme.applyStyle after
+  choosing AppTheme, in the order Material You then AMOLED, so a pure black
+  background wins over a dynamic surface. That composition is what produces the
+  full set of options from one theme and one night mode: light, dark and
+  follow-system, each with or without Material You, each dark state with or
+  without AMOLED.
+-->
+<resources>
+
+  <!--
+    Pure black surfaces. Only the backgrounds move - text, accent, separators and
+    everything sitting on artwork are already right.
+
+    Applied whatever the night mode, because under "Follow system" there is no
+    single answer at the time it is applied. The colours it points at carry the
+    ordinary light values in values/ and black in values-night/, so by day this
+    resolves to a no-op and by night it goes black, with no runtime check.
+  -->
+  <style name="ThemeOverlay.Shelfly.Amoled" parent="">
+    <item name="android:windowBackground">@color/amoledBackground</item>
+    <item name="colorPrimaryDark">@color/amoledBackground</item>
+    <item name="colorAppBackground">@color/amoledBackground</item>
+    <item name="colorBackgroundChipSelected">@color/amoledBackground</item>
+
+    <item name="colorPrimary">@color/amoledSurface</item>
+    <item name="colorBottomMenuBackground">@color/amoledSurface</item>
+    <item name="colorSearchViewBackground">@color/amoledSurface</item>
+    <item name="colorSheetBackground">@color/amoledSurface</item>
+
+    <item name="colorCardBackground">@color/amoledCard</item>
+    <item name="colorSearchLocalViewBackground">@color/amoledElevated</item>
+    <item name="colorBadgeBackground">@color/amoledElevated</item>
+    <item name="colorPlaceholderBackground">@color/amoledPlaceholder</item>
+  </style>
+
+  <!--
+    Material You needs the system palette, which arrives in API 31. The real
+    overlay lives in values-v31 and values-night-v31; this empty one keeps the
+    name resolvable on API 23 to 30, where the picker does not offer the option
+    in the first place.
+  -->
+  <style name="ThemeOverlay.Shelfly.MaterialYou" parent="" />
+
+</resources>

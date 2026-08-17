@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The point of the AMOLED overlay: a background an OLED panel can switch off.
+
+  Only the background is truly black. Cards and the raised surfaces step up in
+  near-black so they still read as separate from the page - a card at #000000 on
+  a #000000 background is not a card, and the app leans on that separation for
+  poster tiles and sheets. The separator colours are left alone; #303030 has
+  plenty of contrast against black.
+-->
+<resources>
+
+  <color name="amoledBackground">#000000</color>
+  <color name="amoledSurface">#000000</color>
+  <color name="amoledCard">#0E0E0E</color>
+  <color name="amoledElevated">#141414</color>
+  <color name="amoledPlaceholder">#0A0A0A</color>
+
+</resources>

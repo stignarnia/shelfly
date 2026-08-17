@@ -36,6 +36,7 @@
     <item name="colorTabIndicator">@color/themeAccent</item>
     <item name="colorButtonDisabled">@color/themeDisabled</item>
     <item name="colorAccentText">@color/themeAccentText</item>
+    <item name="colorAccentTrack">@color/themeAccentTrack</item>
 
     <item name="colorInverseSurface">@color/themeInverseSurface</item>
     <item name="textColorInverseSurface">@color/themeOnInverseSurface</item>
@@ -346,7 +347,7 @@
 
   <style name="ShelflySwitch.Overlay" parent="">
     <item name="colorPrimary">?attr/colorAccent</item>
-    <item name="colorPrimaryContainer">@color/themeAccentTrack</item>
+    <item name="colorPrimaryContainer">?attr/colorAccentTrack</item>
   </style>
 
   <style name="ShelflyChip" parent="Widget.Material3.Chip.Suggestion">
