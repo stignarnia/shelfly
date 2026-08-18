@@ -46,6 +46,7 @@
     <item name="colorBottomMenuIndicator">@color/themeNavIndicator</item>
 
     <item name="colorSearchViewBackground">@color/themeSurface</item>
+    <item name="colorSearchViewStroke">@color/themeSearchStroke</item>
     <item name="colorSearchViewControl">@color/themeTextSecondary</item>
 
     <item name="colorSearchLocalViewBackground">@color/themeElevated</item>

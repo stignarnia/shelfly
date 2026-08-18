@@ -8,7 +8,7 @@
     <item name="android:paddingStart">@dimen/spaceNormal</item>
     <item name="android:paddingEnd">@dimen/spaceNormal</item>
     <item name="android:layout_marginTop">@dimen/spaceBig</item>
-    <item name="android:textColor">?attr/colorAccent</item>
+    <item name="android:textColor">?attr/colorAccentText</item>
     <item name="android:textSize">14sp</item>
     <item name="android:textStyle">bold</item>
   </style>

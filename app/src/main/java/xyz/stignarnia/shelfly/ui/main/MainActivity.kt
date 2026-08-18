@@ -490,7 +490,9 @@ class MainActivity :
 
   private fun restoreState(savedInstanceState: Bundle?) {
     val isNavigationVisible = savedInstanceState?.getBoolean(ARG_NAVIGATION_VISIBLE, true) ?: true
-    if (!isNavigationVisible) hideNavigation(true)
+    // Not animated.
+    // The bar starts visible in the layout, so animating it away means it is on screen for the length of the transition - a flash of navigation over a screen that had none before the Activity was recreated.
+    if (!isNavigationVisible) hideNavigation(false)
   }
 
   private fun doForFragments(action: (Fragment) -> Unit) {

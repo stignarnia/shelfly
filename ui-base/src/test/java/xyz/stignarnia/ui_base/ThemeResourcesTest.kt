@@ -93,6 +93,7 @@ class ThemeResourcesTest {
       "amoledCard" to "themeCard",
       "amoledElevated" to "themeElevated",
       "amoledPlaceholder" to "themePlaceholder",
+      "amoledSearchStroke" to "themeSearchStroke",
     )
 
     assertThat(amoled.keys).isEqualTo(equivalents.keys)
@@ -103,8 +104,8 @@ class ThemeResourcesTest {
 
   @Test
   fun `material you overlays set the same attributes in light and dark`() {
-    val light = items("values-v31/themes_overlay.xml")
-    val dark = items("values-night-v31/themes_overlay.xml")
+    val light = items("values-v34/themes_overlay.xml")
+    val dark = items("values-night-v34/themes_overlay.xml")
 
     assertThat(light.keys).isEqualTo(dark.keys)
     assertThat(light).isNotEmpty()
@@ -120,15 +121,16 @@ class ThemeResourcesTest {
     val indirect = appTheme.filterValues { it.startsWith("?") }.keys
     val expected = appTheme.keys - heldFixed - notAColour - indirect
 
-    assertThat(items("values-v31/themes_overlay.xml").keys).containsAtLeastElementsIn(expected)
+    assertThat(items("values-v34/themes_overlay.xml").keys)
+      .containsAtLeastElementsIn(expected)
   }
 
   @Test
   fun `overlays never override an attribute held fixed across themes`() {
     listOf(
       "values/themes_overlay.xml",
-      "values-v31/themes_overlay.xml",
-      "values-night-v31/themes_overlay.xml",
+      "values-v34/themes_overlay.xml",
+      "values-night-v34/themes_overlay.xml",
     ).forEach { path ->
       assertThat(items(path).keys.intersect(heldFixed)).isEmpty()
     }

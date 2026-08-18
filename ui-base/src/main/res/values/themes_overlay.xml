@@ -24,6 +24,7 @@
     <item name="colorPrimary">@color/amoledSurface</item>
     <item name="colorBottomMenuBackground">@color/amoledSurface</item>
     <item name="colorSearchViewBackground">@color/amoledSurface</item>
+    <item name="colorSearchViewStroke">@color/amoledSearchStroke</item>
     <item name="colorSheetBackground">@color/amoledSurface</item>
 
     <item name="colorCardBackground">@color/amoledCard</item>
@@ -33,8 +34,8 @@
   </style>
 
   <!--
-    Material You needs the system palette, which arrives in API 31.
-    The real overlay lives in values-v31 and values-night-v31; this empty one keeps the name resolvable on API 23 to 30, where the picker does not offer the option in the first place.
+    Material You needs the surface roles, which arrive in API 34.
+    The real overlay lives in values-v31 and values-night-v31; this empty one keeps the name resolvable below API 34, where the picker does not offer the option in the first place.
   -->
   <style name="ThemeOverlay.Shelfly.MaterialYou" parent="" />
 

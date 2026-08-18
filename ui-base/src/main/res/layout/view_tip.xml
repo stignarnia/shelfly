@@ -15,7 +15,7 @@
     android:scaleX="0.9"
     android:scaleY="0.9"
     app:srcCompat="@drawable/ic_circle"
-    app:tint="?attr/colorInverseSurface"
+    app:tint="@color/colorWhite"
     />
 
 

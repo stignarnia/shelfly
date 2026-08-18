@@ -32,21 +32,21 @@ enum class AppTheme(
     displayName = R.string.textThemeMaterialYou,
     nightMode = MODE_NIGHT_FOLLOW_SYSTEM,
     isDynamic = true,
-    minSdk = Build.VERSION_CODES.S,
+    minSdk = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
   ),
   DYNAMIC_LIGHT(
     id = "DYNAMIC_LIGHT",
     displayName = R.string.textThemeMaterialYouLight,
     nightMode = MODE_NIGHT_NO,
     isDynamic = true,
-    minSdk = Build.VERSION_CODES.S,
+    minSdk = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
   ),
   DYNAMIC_DARK(
     id = "DYNAMIC_DARK",
     displayName = R.string.textThemeMaterialYouDark,
     nightMode = MODE_NIGHT_YES,
     isDynamic = true,
-    minSdk = Build.VERSION_CODES.S,
+    minSdk = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
   ),
   ;
 
@@ -63,7 +63,7 @@ enum class AppTheme(
   companion object {
     /**
      * The entries this device can actually show.
-     * Material You needs the system palette from API 31.
+     * Material You needs the API 34 surface roles: the tonal ramp available from 31 has no dark ground between a washed out #0A1A3D and flat black.
      */
     fun supported() = entries.filter { it.isSupported }
 

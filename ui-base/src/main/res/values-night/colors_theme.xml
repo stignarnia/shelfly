@@ -27,6 +27,7 @@
   <!-- Lines and strokes -->
   <color name="themeSeparator">#303030</color>
   <color name="themeMenuSeparator">#464646</color>
+  <color name="themeSearchStroke">#00000000</color>
   <color name="themeStroke">#66AAAAAA</color>
   <color name="themeProgressTrack">#3C3C3C</color>
 

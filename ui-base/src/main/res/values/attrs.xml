@@ -12,6 +12,11 @@
   <attr name="colorBottomMenuIndicator" format="color" />
 
   <attr name="colorSearchViewBackground" format="color" />
+  <!--
+    Outline for the search card.
+    It is needed wherever the card and the page behind it are the same value - white on near white in the light theme, black on black under AMOLED - and is transparent in the plain dark theme, where the card is already a step lighter than the page.
+  -->
+  <attr name="colorSearchViewStroke" format="color" />
   <attr name="colorSearchViewControl" format="color" />
 
   <attr name="colorSearchLocalViewBackground" format="color" />

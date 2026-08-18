@@ -89,7 +89,8 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
 
         if (restartApp) restartApp()
         // A theme lands while the Activity is being created, so the change needs a fresh one.
-        if (recreateActivity) requireActivity().recreate()
+        // Consumed rather than read: recreate() is a configuration change, so this ViewModel outlives it and a flag left standing would recreate on every render.
+        if (recreateActivity?.consume() == true) requireActivity().recreate()
       }
     }
   }

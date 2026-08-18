@@ -35,14 +35,25 @@ object ThemeApplier {
     fun settingsRepository(): SettingsRepository
   }
 
+  private fun settings(activity: Activity) =
+    EntryPointAccessors
+      .fromApplication(activity.applicationContext, ThemeEntryPoint::class.java)
+      .settingsRepository()
+
   /**
    * Applies the night mode for the stored theme.
-   * Belongs in Application.onCreate: AppCompat resolves it once per process, and doing it later costs a recreate.
+   *
+   * Call before super.onCreate, and from Application.onCreate for the first launch of a process.
+   * By this point the settings screen has already set it, so it is normally a no-op; the guard keeps it that way rather than letting a redundant set trigger AppCompat's own recreate.
    */
   fun applyNightMode(settingsRepository: SettingsRepository) {
     val theme = AppTheme.fromId(settingsRepository.themeId)
-    AppCompatDelegate.setDefaultNightMode(theme.nightMode)
+    if (AppCompatDelegate.getDefaultNightMode() != theme.nightMode) {
+      AppCompatDelegate.setDefaultNightMode(theme.nightMode)
+    }
   }
+
+  fun applyNightMode(activity: Activity) = applyNightMode(settings(activity))
 
   /**
    * Applies the overlays.
@@ -53,9 +64,7 @@ object ThemeApplier {
    * By day it therefore resolves to a no-op.
    */
   fun applyOverlays(activity: Activity) {
-    val settingsRepository = EntryPointAccessors
-      .fromApplication(activity.applicationContext, ThemeEntryPoint::class.java)
-      .settingsRepository()
+    val settingsRepository = settings(activity)
 
     if (AppTheme.fromId(settingsRepository.themeId).isDynamic) {
       // Not every API 31 device ships wallpaper colours.

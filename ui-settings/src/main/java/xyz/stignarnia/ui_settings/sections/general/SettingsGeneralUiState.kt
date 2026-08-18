@@ -3,6 +3,7 @@ package xyz.stignarnia.ui_settings.sections.general
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.ui_base.common.AppCountry
 import xyz.stignarnia.ui_base.dates.AppDateFormat
+import xyz.stignarnia.ui_base.utilities.events.Event
 import xyz.stignarnia.ui_model.ProgressDateSelectionType
 import xyz.stignarnia.ui_model.ProgressNextEpisodeType
 import xyz.stignarnia.ui_model.Settings
@@ -14,7 +15,7 @@ data class SettingsGeneralUiState(
   val language: AppLanguage = AppLanguage.ENGLISH,
   val theme: AppTheme = AppTheme.DARK,
   val amoled: Boolean = false,
-  val recreateActivity: Boolean = false,
+  val recreateActivity: Event<Boolean>? = null,
   val country: AppCountry? = null,
   val dateFormat: AppDateFormat? = null,
   val moviesEnabled: Boolean = true,

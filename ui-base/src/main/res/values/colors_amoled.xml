@@ -16,4 +16,6 @@
   <color name="amoledElevated">#EBEBEB</color>
   <color name="amoledPlaceholder">#EDEDED</color>
 
+  <color name="amoledSearchStroke">#E0E0E0</color>
+
 </resources>

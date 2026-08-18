@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.ui_base.common.AppCountry
 import xyz.stignarnia.ui_base.dates.AppDateFormat
+import xyz.stignarnia.ui_base.utilities.events.Event
 import xyz.stignarnia.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import xyz.stignarnia.ui_base.utilities.extensions.combine
 import xyz.stignarnia.ui_model.ProgressDateSelectionType
@@ -39,7 +40,7 @@ class SettingsGeneralViewModel @Inject constructor(
   private val streamingsEnabledState = MutableStateFlow(true)
   private val themeState = MutableStateFlow(AppTheme.DARK)
   private val amoledState = MutableStateFlow(false)
-  private val recreateActivityState = MutableStateFlow(false)
+  private val recreateActivityState = MutableStateFlow<Event<Boolean>?>(null)
   private val restartAppState = MutableStateFlow(false)
   private val progressTypeState = MutableStateFlow<ProgressNextEpisodeType?>(null)
   private val progressDateSelectionState = MutableStateFlow<ProgressDateSelectionType?>(null)
@@ -107,27 +108,19 @@ class SettingsGeneralViewModel @Inject constructor(
 
   fun setTheme(theme: AppTheme) {
     viewModelScope.launch {
-      val previous = mainCase.getTheme()
       mainCase.setTheme(theme)
-      if (previous.nightMode != theme.nightMode) {
-        // AppCompat recreates every live Activity itself when the night mode changes, so asking for one here would relaunch twice.
-        AppCompatDelegate.setDefaultNightMode(theme.nightMode)
-      } else {
-        // Same night mode, different overlay - dark to Material You dark, say.
-        // Nothing recreates on its own, and an overlay only lands while a theme is being applied.
-        recreateActivityState.value = true
-      }
+      // The night mode goes on here rather than in BaseActivity so that the Activity being built next already has it, and AppCompat has no reason to re-apply its theme mid-creation and flatten the overlays.
+      AppCompatDelegate.setDefaultNightMode(theme.nightMode)
+      // Asked for unconditionally: AppCompat only recreates when the resolved configuration changes, so dark to follow-system on an already dark phone would otherwise change nothing.
+      recreateActivityState.value = Event(true)
       refreshSettings()
     }
   }
 
-  /**
-   * The AMOLED switch never changes the night mode, so it always needs the recreate asking for.
-   */
   fun setAmoled(enabled: Boolean) {
     viewModelScope.launch {
       mainCase.setAmoled(enabled)
-      recreateActivityState.value = true
+      recreateActivityState.value = Event(true)
       refreshSettings()
     }
   }

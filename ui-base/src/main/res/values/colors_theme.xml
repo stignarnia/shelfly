@@ -30,6 +30,7 @@
   <!-- Lines and strokes -->
   <color name="themeSeparator">#E0E0E0</color>
   <color name="themeMenuSeparator">#D6D6D6</color>
+  <color name="themeSearchStroke">#E0E0E0</color>
   <color name="themeStroke">#66666666</color>
   <color name="themeProgressTrack">#DCDCDC</color>
 

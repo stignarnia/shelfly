@@ -15,7 +15,10 @@ import xyz.stignarnia.ui_widgets.search.SearchWidgetProvider
 abstract class BaseActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    // Before super, so the AMOLED and Material You overlays are on the theme by the time anything is inflated against it.
+    // Everything before super, so the theme is final before a single resource is read against it.
+    // Mutating it later left cached colour state lists from the previous configuration in place, which is what put black chips on a light page.
+    // The night mode is already correct by now - the settings screen sets it before asking for the recreate - so super has no theme of its own to re-apply over these.
+    ThemeApplier.applyNightMode(this)
     ThemeApplier.applyOverlays(this)
     super.onCreate(savedInstanceState)
   }
