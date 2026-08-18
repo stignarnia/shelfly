@@ -84,6 +84,9 @@ class App :
             StrictMode.VmPolicy
               .Builder()
               .detectUnsafeIntentLaunch()
+              // Logged as well as fatal.
+              // Death on its own leaves a SIGKILL with nothing to read - no trace, no crash record - which is indistinguishable from the app simply vanishing.
+              .penaltyLog()
               .penaltyDeath()
               .build(),
           )
