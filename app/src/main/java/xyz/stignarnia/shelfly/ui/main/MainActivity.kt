@@ -17,6 +17,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
@@ -78,6 +79,12 @@ class MainActivity :
   companion object {
     private const val NAVIGATION_TRANSITION_DURATION_MS = 250L
     private const val ARG_NAVIGATION_VISIBLE = "ARG_NAVIGATION_VISIBLE"
+
+    // Declared by the launcher shortcuts in res/xml/shortcuts.xml.
+    private const val ARG_SHORTCUT_PROGRESS = "extraShortcutProgress"
+    private const val ARG_SHORTCUT_DISCOVER = "extraShortcutDiscover"
+    private const val ARG_SHORTCUT_COLLECTION = "extraShortcutCollection"
+    private const val ARG_SHORTCUT_SEARCH = "extraShortcutSearch"
   }
 
   private val viewModel by viewModels<MainViewModel>()
@@ -134,6 +141,9 @@ class MainActivity :
 
   override fun onNewIntent(intent: Intent?) {
     super.onNewIntent(intent)
+    // Stored, so a recreation - a locale or a theme change - resumes from the intent that is actually on screen rather than the one the app was launched with.
+    // Every branch below takes what it acts on off the intent as it goes, so the replay that recreation triggers finds nothing left to do.
+    intent?.let { setIntent(it) }
     // Every one of these ends up at the navigation controller, and there is none while the welcome flow owns the screen.
     // The intent waits for it instead of being dropped.
     if (!isNavigationAttached) {
@@ -150,7 +160,7 @@ class MainActivity :
       return
     }
     handleAppShortcut(intent)
-    handleNotification(intent?.extras) { hideNavigation(false) }
+    handleNotification(intent) { hideNavigation(false) }
     handleDeepLink(intent)
   }
 
@@ -245,6 +255,8 @@ class MainActivity :
 
   private fun setupNavigation() {
     findNavControl()?.run {
+      // Added before the graph, so the start destination lights its own tab on the first pass.
+      addOnDestinationChangedListener { _, destination, _ -> syncBottomMenu(destination.id) }
       val graph = navInflater.inflate(R.navigation.navigation_graph).apply {
         val destination = when (viewModel.getMode()) {
           SHOWS -> R.id.progressMainFragment
@@ -257,7 +269,7 @@ class MainActivity :
     }
     with(binding.bottomMenuView.binding.bottomNavigationView) {
       setOnItemSelectedListener { item ->
-        if (selectedItemId == item.itemId) {
+        if (menuItemFor(findNavControl()?.currentDestination?.id) == item.itemId) {
           doForFragments { (it as? OnTabReselectedListener)?.onTabReselected() }
           return@setOnItemSelectedListener true
         }
@@ -269,34 +281,71 @@ class MainActivity :
           else -> throw IllegalStateException("Invalid menu item.")
         }
 
-        findNavControl()?.navigate(target)
-        showNavigation(true)
+        navigateToTab(target)
 
         return@setOnItemSelectedListener true
       }
     }
   }
 
+  /**
+   * The bar's checked item follows the destination rather than driving it.
+   * A tab tap, an app shortcut, a widget, a notification and the back button are then all one navigation call, and none of them has to reach into the bar and fake a tap to get the highlight to move.
+   */
+  private fun syncBottomMenu(destinationId: Int) {
+    val itemId = menuItemFor(destinationId) ?: return
+    with(binding.bottomMenuView.binding.bottomNavigationView.menu) {
+      // The others are cleared first and the target set last.
+      // An exclusively checkable group reads setChecked(false) as "check me instead", so only the last call can be relied on to decide the outcome - and this order lands on the same result whether the group is exclusive or not.
+      forEach { if (it.itemId != itemId) it.isChecked = false }
+      findItem(itemId)?.isChecked = true
+    }
+  }
+
+  /** The bar item standing for [destinationId], or null where the bar has no say - search, settings, details, dialogs. */
+  private fun menuItemFor(destinationId: Int?) =
+    when (destinationId) {
+      R.id.progressMainFragment, R.id.progressMoviesMainFragment -> R.id.menuProgress
+      R.id.discoverFragment, R.id.discoverMoviesFragment -> R.id.menuDiscover
+      R.id.followedShowsFragment, R.id.followedMoviesFragment, R.id.listsFragment -> R.id.menuCollection
+      else -> null
+    }
+
+  /** A tab's own top level action, which already clears the stack down to it. */
+  private fun navigateToTab(actionId: Int) {
+    findNavControl()?.navigate(actionId)
+    showNavigation(true)
+  }
+
+  /** Search draws no bottom bar of its own, so whoever opens it puts the bar away - what Discover does before handing over. */
+  private fun navigateToSearch() {
+    findNavControl()?.run {
+      try {
+        navigate(R.id.actionNavigateSearchFragment)
+        hideNavigation(false)
+      } catch (error: Throwable) {
+      }
+    }
+  }
+
   private fun setupBackPressed() {
-    with(binding) {
-      onBackPressedDispatcher.addCallback(this@MainActivity) {
-        if (viewModel.onWelcomeBack()) {
-          return@addCallback
-        }
-        findNavControl()?.run {
-          when (currentDestination?.id) {
-            R.id.discoverFragment,
-            R.id.discoverMoviesFragment,
-            R.id.followedShowsFragment,
-            R.id.followedMoviesFragment,
-            R.id.listsFragment,
-            -> {
-              bottomMenuView.binding.bottomNavigationView.selectedItemId = R.id.menuProgress
-            }
-            else -> {
-              remove()
-              super.onBackPressed()
-            }
+    onBackPressedDispatcher.addCallback(this@MainActivity) {
+      if (viewModel.onWelcomeBack()) {
+        return@addCallback
+      }
+      findNavControl()?.run {
+        when (currentDestination?.id) {
+          R.id.discoverFragment,
+          R.id.discoverMoviesFragment,
+          R.id.followedShowsFragment,
+          R.id.followedMoviesFragment,
+          R.id.listsFragment,
+          -> {
+            navigateToTab(getMenuProgressAction())
+          }
+          else -> {
+            remove()
+            super.onBackPressed()
           }
         }
       }
@@ -336,10 +385,7 @@ class MainActivity :
   }
 
   override fun navigateToDiscover() {
-    with(binding) {
-      bottomMenuView.isEnabled = true
-      bottomMenuView.binding.bottomNavigationView.selectedItemId = R.id.menuDiscover
-    }
+    navigateToTab(getMenuDiscoverAction())
   }
 
   override fun setMode(
@@ -348,15 +394,14 @@ class MainActivity :
   ) {
     if (force || viewModel.getMode() != mode) {
       viewModel.setMode(mode)
-      val target = when (binding.bottomMenuView.binding.bottomNavigationView.selectedItemId) {
+      // The mode menu only exists on the bar, and the bar only stands over a tab, so anywhere else there is no tab to swap.
+      val target = when (menuItemFor(findNavControl()?.currentDestination?.id)) {
         R.id.menuDiscover -> getMenuDiscoverAction()
         R.id.menuCollection -> getMenuCollectionAction()
         R.id.menuProgress -> getMenuProgressAction()
-        else -> 0
+        else -> return
       }
-      if (target != 0) {
-        findNavControl()?.navigate(target)
-      }
+      findNavControl()?.navigate(target)
     }
   }
 
@@ -390,10 +435,10 @@ class MainActivity :
           event.consume()?.let { bundle ->
             findNavHostFragment()?.findNavController()?.let { nav ->
               bundle.show?.let {
-                deepLinkResolver.resolveDestination(nav, bottomMenuView.binding.bottomNavigationView, it)
+                deepLinkResolver.resolveDestination(nav, it)
               }
               bundle.movie?.let {
-                deepLinkResolver.resolveDestination(nav, bottomMenuView.binding.bottomNavigationView, it)
+                deepLinkResolver.resolveDestination(nav, it)
               }
             }
           }
@@ -417,38 +462,18 @@ class MainActivity :
   /**
    * The WebDAV setup form already exists under Settings, so the welcome step and the sync failure notification hand the user over to it - opened, not just nearby - rather than growing a second copy of it.
    *
-   * Only the tab roots declare an action to Settings, and a notification is tapped from wherever the user last left the app - a show, a search, the gallery, Settings itself.
-   * Rather than give up there, walk back up the stack until a destination that can reach Settings is current.
-   * This terminates: every tab root can, and one of them is the start destination.
+   * Settings has a top level action of its own, so the notification opens it from wherever the user last left the app - a show, a search, the gallery, Settings itself - without unwinding anything to get there.
+   * Like search, it draws no bottom bar, so the bar goes away with the move, the same way every tab root puts it away before opening Settings.
    */
   private fun navigateToWebDavSetup() {
     findNavControl()?.run {
-      var target = settingsActionFrom(currentDestination?.id)
-      var popped = false
-      while (target == null) {
-        if (!popBackStack()) return
-        popped = true
-        target = settingsActionFrom(currentDestination?.id)
+      try {
+        navigate(R.id.actionNavigateSettingsFragment, bundleOf(SettingsBackupFragment.ARG_OPEN_WEB_DAV to true))
+        hideNavigation(false)
+      } catch (error: Throwable) {
       }
-      // The screen popped away may have hidden the bottom bar, and the root uncovered here is navigated away from before its onResume can restore it.
-      // Settings is always reached with the bar up, so put it up.
-      if (popped) showNavigation(false)
-      navigate(target, bundleOf(SettingsBackupFragment.ARG_OPEN_WEB_DAV to true))
     }
   }
-
-  /** The action from [destinationId] to Settings, or null if it declares none. */
-  private fun settingsActionFrom(destinationId: Int?): Int? =
-    when (destinationId) {
-      R.id.discoverFragment -> R.id.actionDiscoverFragmentToSettingsFragment
-      R.id.discoverMoviesFragment -> R.id.actionDiscoverMoviesFragmentToSettingsFragment
-      R.id.progressMainFragment -> R.id.actionProgressFragmentToSettingsFragment
-      R.id.progressMoviesMainFragment -> R.id.actionProgressMoviesFragmentToSettingsFragment
-      R.id.followedShowsFragment -> R.id.actionFollowedShowsFragmentToSettingsFragment
-      R.id.followedMoviesFragment -> R.id.actionFollowedMoviesFragmentToSettingsFragment
-      R.id.listsFragment -> R.id.actionListsFragmentToSettingsFragment
-      else -> null
-    }
 
   /**
    * The step is state, not an event, so this is safe to run on every emission and after a configuration change - including the restart that applying a new locale triggers midway through the flow.
@@ -517,54 +542,32 @@ class MainActivity :
   }
 
   private fun handleAppShortcut(intent: Intent?) {
+    val extras = intent?.extras ?: return
+    // The key comes off the intent rather than off the extras, which are a copy: onCreate replays the stored intent after a recreation, and a shortcut must not fire a second time.
     when {
-      intent == null -> {
-        return
+      extras.containsKey(ARG_SHORTCUT_PROGRESS) -> {
+        intent.removeExtra(ARG_SHORTCUT_PROGRESS)
+        navigateToTab(getMenuProgressAction())
       }
 
-      intent.extras?.containsKey("extraShortcutProgress") == true -> {
-        binding.bottomMenuView.binding.bottomNavigationView.selectedItemId = R.id.menuProgress
+      extras.containsKey(ARG_SHORTCUT_DISCOVER) -> {
+        intent.removeExtra(ARG_SHORTCUT_DISCOVER)
+        navigateToTab(getMenuDiscoverAction())
       }
 
-      intent.extras?.containsKey("extraShortcutDiscover") == true -> {
-        binding.bottomMenuView.binding.bottomNavigationView.selectedItemId = R.id.menuDiscover
+      extras.containsKey(ARG_SHORTCUT_COLLECTION) -> {
+        intent.removeExtra(ARG_SHORTCUT_COLLECTION)
+        navigateToTab(getMenuCollectionAction())
       }
 
-      intent.extras?.containsKey("extraShortcutCollection") == true -> {
-        binding.bottomMenuView.binding.bottomNavigationView.selectedItemId = R.id.menuCollection
-      }
-
-      intent.extras?.containsKey("extraShortcutSearch") == true -> {
-        binding.bottomMenuView.binding.bottomNavigationView.selectedItemId = R.id.menuDiscover
-        val action = when (viewModel.getMode()) {
-          SHOWS -> R.id.actionDiscoverFragmentToSearchFragment
-          MOVIES -> R.id.actionDiscoverMoviesFragmentToSearchFragment
-          else -> throw IllegalStateException()
-        }
-        findNavControl()?.navigate(action)
+      extras.containsKey(ARG_SHORTCUT_SEARCH) -> {
+        intent.removeExtra(ARG_SHORTCUT_SEARCH)
+        navigateToSearch()
       }
     }
   }
 
-  override fun handleSearchWidgetClick(bundle: Bundle?) {
-    findNavHostFragment()?.findNavController()?.run {
-      try {
-        when (currentDestination?.id) {
-          R.id.searchFragment -> return@run
-          R.id.showDetailsFragment, R.id.movieDetailsFragment -> navigateUp()
-        }
-        if (currentDestination?.id != R.id.discoverFragment) {
-          binding.bottomMenuView.binding.bottomNavigationView.selectedItemId = R.id.menuDiscover
-        }
-        when (currentDestination?.id) {
-          R.id.discoverFragment -> navigate(R.id.actionDiscoverFragmentToSearchFragment)
-          R.id.discoverMoviesFragment -> navigate(R.id.actionDiscoverMoviesFragmentToSearchFragment)
-        }
-        bundle?.clear()
-      } catch (error: Throwable) {
-      }
-    }
-  }
+  override fun handleSearchWidgetClick() = navigateToSearch()
 
   private fun getMenuDiscoverAction() =
     when (viewModel.getMode()) {
@@ -589,6 +592,8 @@ class MainActivity :
 
   private fun handleDeepLink(intent: Intent?) {
     deepLinkResolver.findSource(intent)?.let {
+      // Consumed for the same reason the extras are: the replay after a recreation must not open the link a second time.
+      intent?.data = null
       viewModel.openDeepLink(it)
     }
   }

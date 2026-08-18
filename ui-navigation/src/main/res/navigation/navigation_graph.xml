@@ -8,14 +8,37 @@
   tools:ignore="InvalidNavigation"
   >
 
+  <!--
+    Reached from anywhere - a notification, a widget, a link - so they carry the same fade the tabs' own actions to these destinations do.
+    Deliberately not single top: details opening over details is a step forward here, the same as actionShowDetailsFragmentToSelf.
+  -->
   <action
     android:id="@+id/actionNavigateShowDetailsFragment"
     app:destination="@id/showDetailsFragment"
+    app:enterAnim="@anim/anim_fade_in"
+    app:popExitAnim="@anim/anim_fade_out"
     />
 
   <action
     android:id="@+id/actionNavigateMovieDetailsFragment"
     app:destination="@id/movieDetailsFragment"
+    app:enterAnim="@anim/anim_fade_in"
+    app:popExitAnim="@anim/anim_fade_out"
+    />
+
+  <!--
+    Single top, so a second notification tap while Settings is already open re-delivers openWebDav rather than stacking a second copy of the screen.
+  -->
+  <action
+    android:id="@+id/actionNavigateSearchFragment"
+    app:destination="@id/searchFragment"
+    app:launchSingleTop="true"
+    />
+
+  <action
+    android:id="@+id/actionNavigateSettingsFragment"
+    app:destination="@id/settingsFragment"
+    app:launchSingleTop="true"
     />
 
   <action

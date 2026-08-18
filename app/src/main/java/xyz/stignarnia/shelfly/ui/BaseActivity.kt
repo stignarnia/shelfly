@@ -1,6 +1,7 @@
 package xyz.stignarnia.shelfly.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -30,31 +31,34 @@ abstract class BaseActivity : AppCompatActivity() {
 
   protected fun findNavHostFragment() = supportFragmentManager.findFragmentById(R.id.navigationHost) as? NavHostFragment
 
-  protected abstract fun handleSearchWidgetClick(bundle: Bundle?)
+  protected abstract fun handleSearchWidgetClick()
 
   fun handleNotification(
-    extras: Bundle?,
+    intent: Intent?,
     action: () -> Unit = {},
   ) {
-    if (extras == null) return
+    val extras = intent?.extras ?: return
     if (extras.containsKey(SearchWidgetProvider.EXTRA_WIDGET_SEARCH_CLICK)) {
-      handleSearchWidgetClick(extras)
+      intent.removeExtra(SearchWidgetProvider.EXTRA_WIDGET_SEARCH_CLICK)
+      handleSearchWidgetClick()
       return
     }
     actionKeys.forEach {
       if (extras.containsKey(it)) {
-        handleShowMovieExtra(extras, it, action)
+        handleShowMovieExtra(intent, it, action)
       }
     }
   }
 
   @SuppressLint("RestrictedApi")
   private fun handleShowMovieExtra(
-    extras: Bundle,
+    intent: Intent,
     key: String,
     action: () -> Unit,
   ) {
-    val itemId = extras.getString(key)?.toLong() ?: -1
+    // Taken off the intent rather than off the extras, which are a copy: onCreate replays the stored intent after a recreation - a locale or a theme change - and the notification must not open a second time.
+    val itemId = intent.getStringExtra(key)?.toLong() ?: -1
+    intent.removeExtra(key)
     val bundle = Bundle().apply {
       putLong(ARG_SHOW_ID, itemId)
       putLong(ARG_MOVIE_ID, itemId)
@@ -68,7 +72,6 @@ abstract class BaseActivity : AppCompatActivity() {
         } else {
           navigate(R.id.actionNavigateMovieDetailsFragment, bundle)
         }
-        extras.clear()
         action()
       } catch (error: Throwable) {
       }
