@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">Impossible d\'établir une connexion sécurisée. Le certificat du serveur n\'est pas approuvé.</string>
   <string name="textSettingsWebDavErrorUnreachable">Impossible de joindre le serveur. Vérifiez l\'adresse et votre connexion.</string>
   <string name="textSettingsWebDavErrorUnexpected">Le serveur a répondu de manière inattendue.</string>
+  <string name="errorNotificationSettingsUnavailable">Impossible d\'ouvrir les paramètres de notification.</string>
 </resources>

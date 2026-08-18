@@ -2,27 +2,28 @@ package xyz.stignarnia.ui_settings.sections.notifications
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS
-import android.provider.Settings.EXTRA_APP_PACKAGE
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import xyz.stignarnia.ui_base.BaseFragment
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import xyz.stignarnia.ui_base.utilities.events.Event
+import xyz.stignarnia.ui_base.utilities.events.MessageEvent
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
+import xyz.stignarnia.ui_base.utilities.extensions.openNotificationSettings
 import xyz.stignarnia.ui_base.utilities.viewBinding
 import xyz.stignarnia.ui_model.NotificationDelay
 import xyz.stignarnia.ui_model.Settings
 import xyz.stignarnia.ui_settings.R
 import xyz.stignarnia.ui_settings.databinding.FragmentSettingsNotificationsBinding
-import xyz.stignarnia.ui_settings.sections.notifications.SettingsNotificationsUiEvent.RequestNotificationsPermission
+import xyz.stignarnia.ui_settings.sections.notifications.SettingsNotificationsUiEvent.NotificationsBlocked
 import xyz.stignarnia.ui_settings.sections.notifications.views.NotificationsRationaleView
 import dagger.hilt.android.AndroidEntryPoint
 
-@SuppressLint("InlinedApi")
 @AndroidEntryPoint
 class SettingsNotificationsFragment :
   BaseFragment<SettingsNotificationsViewModel>(R.layout.fragment_settings_notifications) {
@@ -30,7 +31,21 @@ class SettingsNotificationsFragment :
   override val viewModel by viewModels<SettingsNotificationsViewModel>()
   private val binding by viewBinding(FragmentSettingsNotificationsBinding::bind)
 
-  private var notificationRationaleNotShown = false
+  /**
+   * The permission the switch may need, named once.
+   *
+   * POST_NOTIFICATIONS arrived in API 33 and is a String constant, so the compiler inlines its value and referencing it below 33 is safe - it never looks the field up at runtime.
+   * That is exactly what InlinedApi points out, and suppressing it here, on the one declaration whose job is to name the constant, keeps the note off the methods that merely use it.
+   */
+  @SuppressLint("InlinedApi")
+  private val postNotificationsPermission = Manifest.permission.POST_NOTIFICATIONS
+
+  /**
+   * Set when a request goes out without a rationale first.
+   *
+   * shouldShowRequestPermissionRationale answers false both before the first ask and after a permanent refusal, so the two are told apart by what comes back: a refusal here means the system never prompted, and the only way forward is the settings screen.
+   */
+  private var requestedWithoutRationale = false
 
   override fun onViewCreated(
     view: View,
@@ -80,14 +95,41 @@ class SettingsNotificationsFragment :
 
   private fun handleEvent(event: Event<*>) {
     when (event) {
-      is RequestNotificationsPermission -> {
-        if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
-          showNotificationsRationaleDialog()
-        } else {
-          notificationRationaleNotShown = true
-          requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-        }
+      is NotificationsBlocked -> onNotificationsBlocked()
+    }
+  }
+
+  /**
+   * The switch was turned on while the system has notifications off.
+   *
+   * Two different states look the same from the switch: a permission that has not been granted, and notifications the user has turned off in system settings.
+   * Only the first is a permission the app can ask for, and it only exists from API 33 - so anywhere else, sending the user to settings is the one thing that can actually help.
+   * Asking regardless is what made this loop: the request returns granted immediately, the app tries to enable again, the system still says notifications are off, and round it goes.
+   */
+  private fun onNotificationsBlocked() {
+    val canAskForPermission = AndroidVersion.isAtLeastAndroid13 &&
+      ContextCompat.checkSelfPermission(
+        requireContext(),
+        postNotificationsPermission,
+      ) != PackageManager.PERMISSION_GRANTED
+
+    when {
+      !canAskForPermission -> {
+        openSystemNotificationSettings()
       }
+      shouldShowRequestPermissionRationale(postNotificationsPermission) -> {
+        showNotificationsRationaleDialog()
+      }
+      else -> {
+        requestedWithoutRationale = true
+        requestPermissionLauncher.launch(postNotificationsPermission)
+      }
+    }
+  }
+
+  private fun openSystemNotificationSettings() {
+    if (!openNotificationSettings()) {
+      showSnack(MessageEvent.Error(R.string.errorNotificationSettingsUnavailable))
     }
   }
 
@@ -97,21 +139,21 @@ class SettingsNotificationsFragment :
     modal()
       .setView(view)
       .setPositiveButton(R.string.textYes) { modal ->
-        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        requestPermissionLauncher.launch(postNotificationsPermission)
         modal.dismiss()
       }.setNegativeButton(R.string.textCancel)
       .show()
   }
 
   private val requestPermissionLauncher = registerForActivityResult(RequestPermission()) { isGranted ->
-    if (isGranted) {
-      viewModel.enableNotifications(true, requireAppContext())
-    } else if (notificationRationaleNotShown) {
-      val intent = Intent(ACTION_APP_NOTIFICATION_SETTINGS).apply {
-        putExtra(EXTRA_APP_PACKAGE, requireAppContext().packageName)
+    when {
+      isGranted -> {
+        viewModel.enableNotifications(true, requireAppContext())
       }
-      runCatching { startActivity(intent) }
-      notificationRationaleNotShown = false
+      requestedWithoutRationale -> {
+        requestedWithoutRationale = false
+        openSystemNotificationSettings()
+      }
     }
   }
 }

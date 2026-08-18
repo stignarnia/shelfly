@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">Nie można nawiązać bezpiecznego połączenia. Certyfikat serwera nie jest zaufany.</string>
   <string name="textSettingsWebDavErrorUnreachable">Nie można połączyć się z serwerem. Sprawdź adres i połączenie sieciowe.</string>
   <string name="textSettingsWebDavErrorUnexpected">Serwer odpowiedział w nieoczekiwany sposób.</string>
+  <string name="errorNotificationSettingsUnavailable">Nie można otworzyć ustawień powiadomień.</string>
 </resources>

@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">No se pudo establecer una conexión segura. El certificado del servidor no es de confianza.</string>
   <string name="textSettingsWebDavErrorUnreachable">No se pudo conectar con el servidor. Comprueba la dirección y tu conexión.</string>
   <string name="textSettingsWebDavErrorUnexpected">El servidor respondió de manera inesperada.</string>
+  <string name="errorNotificationSettingsUnavailable">No se pudieron abrir los ajustes de notificaciones.</string>
 </resources>

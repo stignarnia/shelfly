@@ -2,8 +2,6 @@ package xyz.stignarnia.shelfly.ui
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatDelegate
-import com.google.android.material.color.DynamicColors
-import com.google.android.material.color.DynamicColorsOptions
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
@@ -59,6 +57,9 @@ object ThemeApplier {
    * Applies the overlays.
    * Call before super.onCreate, so the theme is settled before anything inflates against it.
    *
+   * Both go on with applyStyle rather than through DynamicColors.applyToActivityIfAvailable.
+   * That helper gates on a manufacturer and brand allowlist and skips in silence when it does not recognise the device; the overlay names @android:color/system_* directly, and those are framework resources on every API 34 device, so there is nothing to detect and nothing to be excluded from.
+   *
    * The AMOLED overlay is applied whenever the switch is on, without asking whether the app is currently dark.
    * It cannot ask - under "Follow system" that answer belongs to the configuration, not to us - so instead the overlay's own colours are qualified, carrying the ordinary light surfaces in values/ and black in values-night/.
    * By day it therefore resolves to a no-op.
@@ -67,15 +68,7 @@ object ThemeApplier {
     val settingsRepository = settings(activity)
 
     if (AppTheme.fromId(settingsRepository.themeId).isDynamic) {
-      // Not every API 31 device ships wallpaper colours.
-      // This no-ops where they are missing, leaving the static palette rather than a half applied one.
-      DynamicColors.applyToActivityIfAvailable(
-        activity,
-        DynamicColorsOptions
-          .Builder()
-          .setThemeOverlay(R.style.ThemeOverlay_Shelfly_MaterialYou)
-          .build(),
-      )
+      activity.theme.applyStyle(R.style.ThemeOverlay_Shelfly_MaterialYou, true)
     }
 
     if (settingsRepository.isAmoled) {

@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">Nu s-a putut stabili o conexiune securizată. Certificatul serverului nu este de încredere.</string>
   <string name="textSettingsWebDavErrorUnreachable">Serverul nu a putut fi contactat. Verificați adresa și conexiunea.</string>
   <string name="textSettingsWebDavErrorUnexpected">Serverul a răspuns neașteptat.</string>
+  <string name="errorNotificationSettingsUnavailable">Nu s-au putut deschide setările de notificări.</string>
 </resources>

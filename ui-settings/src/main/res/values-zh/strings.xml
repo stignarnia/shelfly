@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">无法建立安全连接。服务器证书不受信任。</string>
   <string name="textSettingsWebDavErrorUnreachable">无法连接到服务器。请检查地址和网络连接。</string>
   <string name="textSettingsWebDavErrorUnexpected">服务器返回了意外响应。</string>
+  <string name="errorNotificationSettingsUnavailable">无法打开通知设置。</string>
 </resources>

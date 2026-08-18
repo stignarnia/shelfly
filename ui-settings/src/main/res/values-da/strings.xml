@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">Kunne ikke etablere en sikker forbindelse. Serverens certifikat blev ikke betroet.</string>
   <string name="textSettingsWebDavErrorUnreachable">Kunne ikke nå serveren. Tjek adressen og din forbindelse.</string>
   <string name="textSettingsWebDavErrorUnexpected">Serveren svarede uventet.</string>
+  <string name="errorNotificationSettingsUnavailable">Kunne ikke åbne notifikationsindstillingerne.</string>
 </resources>

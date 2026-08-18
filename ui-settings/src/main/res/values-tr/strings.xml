@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">Güvenli bağlantı kurulamadı. Sunucu sertifikasına güvenilmiyor.</string>
   <string name="textSettingsWebDavErrorUnreachable">Sunucuya ulaşılamadı. Adresi ve bağlantınızı kontrol edin.</string>
   <string name="textSettingsWebDavErrorUnexpected">Sunucu beklenmedik bir yanıt verdi.</string>
+  <string name="errorNotificationSettingsUnavailable">Bildirim ayarları açılamadı.</string>
 </resources>

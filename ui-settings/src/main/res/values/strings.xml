@@ -163,4 +163,5 @@
   <string name="textSettingsBackupRetentionKeepAll">Keep all</string>
   <string name="textSettingsBackupRetentionValue">%1$d most recent</string>
   <string name="textSettingsBackupRetentionInvalid">Enter a whole number of 0 or more.</string>
+  <string name="errorNotificationSettingsUnavailable">Couldn\'t open notification settings.</string>
 </resources>

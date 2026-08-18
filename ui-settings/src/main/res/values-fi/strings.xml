@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">Suojattua yhteyttä ei voitu muodostaa. Palvelimen varmenteeseen ei luoteta.</string>
   <string name="textSettingsWebDavErrorUnreachable">Palvelimeen ei saatu yhteyttä. Tarkista osoite ja verkkoyhteys.</string>
   <string name="textSettingsWebDavErrorUnexpected">Palvelin vastasi odottamattomasti.</string>
+  <string name="errorNotificationSettingsUnavailable">Ilmoitusasetuksia ei voitu avata.</string>
 </resources>

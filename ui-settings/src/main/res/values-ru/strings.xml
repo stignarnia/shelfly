@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">Не удалось установить защищенное соединение. Сертификат сервера не является доверенным.</string>
   <string name="textSettingsWebDavErrorUnreachable">Не удалось подключиться к серверу. Проверьте адрес и соединение.</string>
   <string name="textSettingsWebDavErrorUnexpected">Сервер вернул неожиданный ответ.</string>
+  <string name="errorNotificationSettingsUnavailable">Не удалось открыть настройки уведомлений.</string>
 </resources>

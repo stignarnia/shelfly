@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">Не вдалося встановити захищене з\'єднання. Сертифікат сервера не є довіреним.</string>
   <string name="textSettingsWebDavErrorUnreachable">Не вдалося підключитися до сервера. Перевірте адресу та з\'єднання.</string>
   <string name="textSettingsWebDavErrorUnexpected">Сервер повернув неочікувану відповідь.</string>
+  <string name="errorNotificationSettingsUnavailable">Не вдалося відкрити налаштування сповіщень.</string>
 </resources>

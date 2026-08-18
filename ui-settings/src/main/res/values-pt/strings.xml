@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">Não foi possível estabelecer uma ligação segura. O certificado do servidor não é fidedigno.</string>
   <string name="textSettingsWebDavErrorUnreachable">Não foi possível contactar o servidor. Verifique o endereço e a sua ligação.</string>
   <string name="textSettingsWebDavErrorUnexpected">O servidor respondeu de forma inesperada.</string>
+  <string name="errorNotificationSettingsUnavailable">Não foi possível abrir as definições de notificações.</string>
 </resources>

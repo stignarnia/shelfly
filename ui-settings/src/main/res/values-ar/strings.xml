@@ -130,4 +130,5 @@
   <string name="textSettingsWebDavErrorTls">تعذر إنشاء اتصال آمن. لم يتم الوثوق بشهادة الخادم.</string>
   <string name="textSettingsWebDavErrorUnreachable">تعذر الوصول إلى الخادم. تحقق من العنوان واتصالك.</string>
   <string name="textSettingsWebDavErrorUnexpected">استجاب الخادم بشكل غير متوقع.</string>
+  <string name="errorNotificationSettingsUnavailable">تعذّر فتح إعدادات الإشعارات.</string>
 </resources>

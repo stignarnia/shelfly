@@ -9,7 +9,7 @@ import xyz.stignarnia.ui_base.viewmodel.ChannelsDelegate
 import xyz.stignarnia.ui_base.viewmodel.DefaultChannelsDelegate
 import xyz.stignarnia.ui_model.NotificationDelay
 import xyz.stignarnia.ui_model.Settings
-import xyz.stignarnia.ui_settings.sections.notifications.SettingsNotificationsUiEvent.RequestNotificationsPermission
+import xyz.stignarnia.ui_settings.sections.notifications.SettingsNotificationsUiEvent.NotificationsBlocked
 import xyz.stignarnia.ui_settings.sections.notifications.cases.SettingsNotificationsMainCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,7 +30,7 @@ class SettingsNotificationsViewModel @Inject constructor(
 
   fun loadSettings(context: Context) {
     viewModelScope.launch {
-      ensureNotificationsPermission(context)
+      areNotificationsAllowed(context)
       refreshSettings()
     }
   }
@@ -40,8 +40,8 @@ class SettingsNotificationsViewModel @Inject constructor(
     context: Context,
   ) {
     viewModelScope.launch {
-      if (enable && !ensureNotificationsPermission(context)) {
-        eventChannel.send(RequestNotificationsPermission)
+      if (enable && !areNotificationsAllowed(context)) {
+        eventChannel.send(NotificationsBlocked)
         return@launch
       }
       mainCase.enableNotifications(enable)
@@ -60,7 +60,13 @@ class SettingsNotificationsViewModel @Inject constructor(
     settingsState.value = mainCase.getSettings()
   }
 
-  private suspend fun ensureNotificationsPermission(context: Context): Boolean {
+  /**
+   * Whether the system currently lets this app post notifications.
+   *
+   * areNotificationsEnabled covers every version and both reasons it can be false - a permission never granted on API 33 and up, or the user switching notifications off in system settings - so the app never claims they are on while the system has them off.
+   * When it says no, the stored setting is brought back in line rather than left showing a promise the system will not keep.
+   */
+  private suspend fun areNotificationsAllowed(context: Context): Boolean {
     val areNotificationsEnabled = NotificationManagerCompat
       .from(context.applicationContext)
       .areNotificationsEnabled()
