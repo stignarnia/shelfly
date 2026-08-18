@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import androidx.appcompat.view.ContextThemeWrapper
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -16,14 +15,17 @@ abstract class BaseBottomSheetFragment(
   @LayoutRes val layoutResId: Int,
 ) : BottomSheetDialogFragment() {
 
+  /**
+   * Inflated against the Activity itself rather than against @style/AppTheme.
+   *
+   * The Activity's theme is AppTheme with the selected overlays already composed onto it - Material You, AMOLED - and those live on its Theme object, not in the style resource.
+   * Wrapping it in the bare style put them back: ContextThemeWrapper copies the base theme and then applies the given resource with force, so AppTheme's own colours overwrote exactly the attributes the overlays were there to replace, and every sheet came up in plain light or dark.
+   */
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?,
-  ): View {
-    val contextThemeWrapper = ContextThemeWrapper(requireActivity(), R.style.AppTheme)
-    return inflater.cloneInContext(contextThemeWrapper).inflate(layoutResId, container, false)
-  }
+  ): View = inflater.cloneInContext(requireActivity()).inflate(layoutResId, container, false)
 
   override fun onViewCreated(
     view: View,
