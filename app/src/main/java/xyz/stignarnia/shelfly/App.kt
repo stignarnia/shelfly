@@ -2,31 +2,31 @@ package xyz.stignarnia.shelfly
 
 import android.app.Application
 import android.app.NotificationChannel
-import android.os.Build
 import android.os.StrictMode
 import androidx.appcompat.app.AppCompatDelegate
-import xyz.stignarnia.shelfly.ui.ThemeApplier
 import androidx.core.os.LocaleListCompat
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import com.jakewharton.processphoenix.ProcessPhoenix
+import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import timber.log.Timber
 import xyz.stignarnia.repository.settings.SettingsRepository
+import xyz.stignarnia.shelfly.ui.ThemeApplier
 import xyz.stignarnia.ui_base.common.AppScopeProvider
 import xyz.stignarnia.ui_base.common.WidgetsProvider
+import xyz.stignarnia.ui_base.notifications.NotificationChannel as AppNotificationChannel
 import xyz.stignarnia.ui_base.notifications.SyncNotificationManager
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import xyz.stignarnia.ui_base.utilities.extensions.notificationManager
 import xyz.stignarnia.ui_model.Settings
 import xyz.stignarnia.ui_widgets.calendar.CalendarWidgetProvider
 import xyz.stignarnia.ui_widgets.calendar_movies.CalendarMoviesWidgetProvider
 import xyz.stignarnia.ui_widgets.progress.ProgressWidgetProvider
 import xyz.stignarnia.ui_widgets.progress_movies.ProgressMoviesWidgetProvider
-import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import timber.log.Timber
-import javax.inject.Inject
-import xyz.stignarnia.ui_base.notifications.NotificationChannel as AppNotificationChannel
 
 @HiltAndroidApp
 class App :
@@ -79,7 +79,7 @@ class App :
               .penaltyLog()
               .build(),
           )
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (AndroidVersion.isAtLeastAndroid12) {
           StrictMode.setVmPolicy(
             StrictMode.VmPolicy
               .Builder()
@@ -92,7 +92,7 @@ class App :
     }
 
     fun setupNotificationChannels() {
-      if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
+      if (!AndroidVersion.isAtLeastAndroid8) return
 
       fun createChannel(channel: AppNotificationChannel) =
         NotificationChannel(

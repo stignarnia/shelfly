@@ -7,19 +7,19 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.LocaleManagerCompat
 import androidx.core.content.edit
 import androidx.core.os.LocaleListCompat
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ViewModelScoped
+import javax.inject.Inject
+import javax.inject.Named
+import timber.log.Timber
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.extensions.nowUtc
 import xyz.stignarnia.common.extensions.nowUtcMillis
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.shelfly.BuildConfig
 import xyz.stignarnia.ui_base.common.AppCountry
-import xyz.stignarnia.ui_base.utilities.extensions.withApiAtLeast
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import xyz.stignarnia.ui_settings.helpers.AppLanguage
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
-import timber.log.Timber
-import javax.inject.Inject
-import javax.inject.Named
 
 @ViewModelScoped
 class MainInitialsCase @Inject constructor(
@@ -66,7 +66,7 @@ class MainInitialsCase @Inject constructor(
   }
 
   suspend fun setInitialNotifications() {
-    withApiAtLeast(33) {
+    if (AndroidVersion.isAtLeastAndroid13) {
       val settings = settingsRepository.load()
       settings.let {
         settingsRepository.update(it.copy(episodesNotificationsEnabled = false))

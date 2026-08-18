@@ -10,15 +10,15 @@ import android.net.NetworkCapabilities.TRANSPORT_ETHERNET
 import android.net.NetworkCapabilities.TRANSPORT_VPN
 import android.net.NetworkCapabilities.TRANSPORT_WIFI
 import android.net.NetworkRequest
-import android.os.Build
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import timber.log.Timber
-import javax.inject.Inject
-import javax.inject.Singleton
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 
 @Singleton
 class NetworkStatusProvider @Inject constructor(
@@ -46,7 +46,7 @@ class NetworkStatusProvider @Inject constructor(
       .build()
 
     connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    if (AndroidVersion.isAtLeastAndroid8) {
       connectivityManager.requestNetwork(networkRequest, networkCallback, 1000)
     }
 

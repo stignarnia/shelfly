@@ -1,10 +1,10 @@
 package xyz.stignarnia.ui_settings.helpers
 
-import android.os.Build
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import xyz.stignarnia.ui_settings.R
 
 /**
@@ -21,7 +21,6 @@ enum class AppTheme(
   @StringRes val displayName: Int,
   val nightMode: Int,
   val isDynamic: Boolean = false,
-  val minSdk: Int = Build.VERSION_CODES.M,
 ) {
   SYSTEM("SYSTEM", R.string.textThemeSystem, MODE_NIGHT_FOLLOW_SYSTEM),
   LIGHT("LIGHT", R.string.textThemeLight, MODE_NIGHT_NO),
@@ -32,21 +31,18 @@ enum class AppTheme(
     displayName = R.string.textThemeMaterialYou,
     nightMode = MODE_NIGHT_FOLLOW_SYSTEM,
     isDynamic = true,
-    minSdk = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
   ),
   DYNAMIC_LIGHT(
     id = "DYNAMIC_LIGHT",
     displayName = R.string.textThemeMaterialYouLight,
     nightMode = MODE_NIGHT_NO,
     isDynamic = true,
-    minSdk = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
   ),
   DYNAMIC_DARK(
     id = "DYNAMIC_DARK",
     displayName = R.string.textThemeMaterialYouDark,
     nightMode = MODE_NIGHT_YES,
     isDynamic = true,
-    minSdk = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
   ),
   ;
 
@@ -57,8 +53,12 @@ enum class AppTheme(
   val canBeDark: Boolean
     get() = nightMode != MODE_NIGHT_NO
 
+  /**
+   * Whether this device can honour the theme.
+   * Only the dynamic ones are version-dependent, and they need the API 34 surface roles - see values-night-v34.
+   */
   val isSupported: Boolean
-    get() = Build.VERSION.SDK_INT >= minSdk
+    get() = !isDynamic || AndroidVersion.isAtLeastAndroid14
 
   companion object {
     /**

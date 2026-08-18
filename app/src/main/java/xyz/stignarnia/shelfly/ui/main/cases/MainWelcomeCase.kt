@@ -4,19 +4,19 @@ import android.Manifest
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ViewModelScoped
+import javax.inject.Inject
+import javax.inject.Named
 import xyz.stignarnia.data_remote.apikey.ApiKeyProvider
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.shelfly.BuildConfig
 import xyz.stignarnia.shelfly.ui.main.welcome.WelcomeStep
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import xyz.stignarnia.ui_settings.helpers.AppLanguage
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
-import javax.inject.Inject
-import javax.inject.Named
 
 /**
  * Owns every "should this welcome screen appear" decision.
@@ -95,7 +95,7 @@ class MainWelcomeCase @Inject constructor(
   fun currentLanguage(): AppLanguage = AppLanguage.fromCode(settingsRepository.language)
 
   private fun needsNotificationsPermission(): Boolean {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return false
+    if (!AndroidVersion.isAtLeastAndroid13) return false
     val granted = ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
     return granted != PackageManager.PERMISSION_GRANTED
   }

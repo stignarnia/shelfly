@@ -1,10 +1,10 @@
 package xyz.stignarnia.ui_base.utilities.extensions
 
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import java.io.Serializable
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 
 fun Fragment.requireString(
   key: String?,
@@ -27,18 +27,18 @@ fun <T : Parcelable> Fragment.optionalParcelable(key: String?) = requireArgument
 
 inline fun <reified T : Parcelable> Bundle.requireParcelable(key: String): T =
   when {
-    Build.VERSION.SDK_INT >= 33 -> getParcelable(key, T::class.java)!!
+    AndroidVersion.isAtLeastAndroid13 -> getParcelable(key, T::class.java)!!
     else -> @Suppress("DEPRECATION") (getParcelable(key) as? T)!!
   }
 
 inline fun <reified T : Parcelable> Bundle.optionalParcelable(key: String): T? =
   when {
-    Build.VERSION.SDK_INT >= 33 -> getParcelable(key, T::class.java)
+    AndroidVersion.isAtLeastAndroid13 -> getParcelable(key, T::class.java)
     else -> @Suppress("DEPRECATION") (getParcelable(key) as? T)
   }
 
 inline fun <reified T : Serializable> Bundle.requireSerializable(key: String): T =
   when {
-    Build.VERSION.SDK_INT >= 33 -> getSerializable(key, T::class.java)!!
+    AndroidVersion.isAtLeastAndroid13 -> getSerializable(key, T::class.java)!!
     else -> @Suppress("DEPRECATION") (getSerializable(key) as? T)!!
   }

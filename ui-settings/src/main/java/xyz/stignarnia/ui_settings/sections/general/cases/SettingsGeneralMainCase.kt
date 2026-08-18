@@ -1,9 +1,10 @@
 package xyz.stignarnia.ui_settings.sections.general.cases
 
 import android.content.Context
-import android.os.Build
-import android.os.Build.VERSION_CODES.TIRAMISU
 import androidx.appcompat.app.AppCompatDelegate
+import dagger.hilt.android.scopes.ViewModelScoped
+import javax.inject.Inject
+import kotlinx.coroutines.withContext
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.common.dispatchers.CoroutineDispatchers
@@ -12,14 +13,12 @@ import xyz.stignarnia.ui_base.common.AppCountry
 import xyz.stignarnia.ui_base.common.WidgetsProvider
 import xyz.stignarnia.ui_base.dates.AppDateFormat
 import xyz.stignarnia.ui_base.notifications.AnnouncementManager
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import xyz.stignarnia.ui_model.ProgressDateSelectionType
 import xyz.stignarnia.ui_model.ProgressNextEpisodeType
 import xyz.stignarnia.ui_model.Settings
 import xyz.stignarnia.ui_settings.helpers.AppLanguage
 import xyz.stignarnia.ui_settings.helpers.AppTheme
-import dagger.hilt.android.scopes.ViewModelScoped
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 @ViewModelScoped
 class SettingsGeneralMainCase @Inject constructor(
@@ -72,7 +71,7 @@ class SettingsGeneralMainCase @Inject constructor(
   }
 
   suspend fun getLanguage(): AppLanguage {
-    if (Build.VERSION.SDK_INT >= TIRAMISU) {
+    if (AndroidVersion.isAtLeastAndroid13) {
       val locales = AppCompatDelegate.getApplicationLocales()
       if (!locales.isEmpty) {
         val locale = locales.get(0)!!.language

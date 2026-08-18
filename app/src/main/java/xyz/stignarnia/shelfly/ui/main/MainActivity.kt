@@ -4,16 +4,15 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color.TRANSPARENT
-import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewTreeObserver
 import android.view.animation.DecelerateInterpolator
 import androidx.activity.SystemBarStyle
-import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -27,6 +26,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.work.WorkManager
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.common.Mode.MOVIES
 import xyz.stignarnia.common.Mode.SHOWS
@@ -38,7 +44,6 @@ import xyz.stignarnia.shelfly.ui.main.delegates.TipsDelegate
 import xyz.stignarnia.shelfly.ui.main.welcome.WelcomeState
 import xyz.stignarnia.shelfly.ui.views.welcome.WelcomeView
 import xyz.stignarnia.shelfly.utilities.deeplink.DeepLinkResolver
-import xyz.stignarnia.ui_settings.sections.backup.SettingsBackupFragment
 import xyz.stignarnia.ui_base.common.OnShowsMoviesSyncedListener
 import xyz.stignarnia.ui_base.common.OnTabReselectedListener
 import xyz.stignarnia.ui_base.events.Event
@@ -47,6 +52,7 @@ import xyz.stignarnia.ui_base.events.ShowsMoviesSyncComplete
 import xyz.stignarnia.ui_base.network.NetworkStatusProvider
 import xyz.stignarnia.ui_base.notifications.SyncNotificationManager
 import xyz.stignarnia.ui_base.sync.ShowsMoviesSyncWorker
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import xyz.stignarnia.ui_base.utilities.ModeHost
 import xyz.stignarnia.ui_base.utilities.MoviesStatusHost
 import xyz.stignarnia.ui_base.utilities.NavigationHost
@@ -58,13 +64,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.gone
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.visible
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.launch
-import timber.log.Timber
-import javax.inject.Inject
-import kotlin.time.Duration.Companion.seconds
+import xyz.stignarnia.ui_settings.sections.backup.SettingsBackupFragment
 
 @AndroidEntryPoint
 class MainActivity :
@@ -407,7 +407,7 @@ class MainActivity :
   }
 
   private fun requestNotificationsPermission() {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+    if (!AndroidVersion.isAtLeastAndroid13) {
       viewModel.onNotificationsPermissionResult(true)
       return
     }
