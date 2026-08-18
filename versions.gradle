@@ -1,10 +1,10 @@
 ext.versions = [
-    versionCode: 5,
-    versionName: '4.0.4',
+    versionCode: 6,
+    versionName: '4.0.5',
 
     minSdk     : 23,
     compileSdk : 37,
-    targetSdk  : 36,
+    targetSdk  : 37,
 
     buildTools : '37.0.0',
     // Bytecode target.
