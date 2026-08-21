@@ -84,10 +84,14 @@ class App :
             StrictMode.VmPolicy
               .Builder()
               .detectUnsafeIntentLaunch()
-              // Logged as well as fatal.
-              // Death on its own leaves a SIGKILL with nothing to read - no trace, no crash record - which is indistinguishable from the app simply vanishing.
+              // Reported, not fatal.
+              //
+              // The violation that made it fatal is the framework's own: AppWidgetManager binds a collection widget's RemoteViewsService with an intent it unparcelled itself, and prepareToLeaveProcess refuses it on that provenance alone.
+              // The intent's contents are not what is flagged - stripped to nothing, neither data nor extras, it is refused just the same - so nothing on this side clears it while the widgets keep their scrolling lists.
+              //
+              // penaltyDeath on that SIGKILLs the process on a widget update, and a SIGKILL leaves nothing to read: no stack, no crash record, no tombstone, so it presents as the app vanishing on launch rather than as a policy violation.
+              // Reporting keeps every violation visible - that one and any other - without one of them taking the process down unread.
               .penaltyLog()
-              .penaltyDeath()
               .build(),
           )
         }
