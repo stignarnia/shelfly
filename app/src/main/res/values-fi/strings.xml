@@ -21,6 +21,8 @@
   <string name="textWidgetConfigThemeApp">Sama kuin sovellus</string>
   <string name="textWidgetConfigThemeSummary">Värit, joilla tämä widget piirretään.</string>
   <string name="textWidgetConfigAmoledSummary">Käytä täysin mustia taustoja, kun tämä widget on tumma.</string>
+  <string name="textWidgetConfigTransparencyTitle">Läpinäkyvyys</string>
+  <string name="textWidgetConfigTransparencySummary">Säädä tämän widgetin taustan läpinäkyvyyttä.</string>
   <string name="textWidgetConfigDone">Valmis</string>
   <string name="textWelcomeStepIndicator">Vaihe %1$d / %2$d</string>
   <string name="textBack">Takaisin</string>

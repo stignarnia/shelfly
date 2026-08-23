@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.slider.Slider
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.shelfly.R
 import xyz.stignarnia.shelfly.databinding.ActivityWidgetConfigBinding
@@ -62,12 +63,32 @@ class WidgetConfigActivity : AppCompatActivity() {
       finish()
     }
 
+    with(binding.widgetConfigTransparencySlider) {
+      addOnChangeListener { _, value, fromUser ->
+        if (fromUser) {
+          binding.widgetConfigTransparencyValue.text = "${value.toInt()}%"
+        }
+      }
+      addOnSliderTouchListener(
+        object : Slider.OnSliderTouchListener {
+          override fun onStartTrackingTouch(slider: Slider) = Unit
+
+          override fun onStopTrackingTouch(slider: Slider) {
+            val transparency = slider.value.toInt()
+            settingsRepository.widgets.setWidgetTransparency(widgetId, transparency)
+            onChanged()
+          }
+        },
+      )
+    }
+
     render()
   }
 
   private fun render() {
     val theme = settingsRepository.widgets.getWidgetTheme(widgetId)
     val amoled = settingsRepository.widgets.getWidgetAmoled(widgetId)
+    val transparency = settingsRepository.widgets.getWidgetTransparency(widgetId)
 
     // A widget on the app's theme is on the app's switch as well, so the switch is the app's to set and shows what the app says.
     val followsApp = theme == WidgetTheme.FOLLOW_APP
@@ -88,6 +109,11 @@ class WidgetConfigActivity : AppCompatActivity() {
         // Touching the switch pins it: from here the widget keeps this answer whatever the app's own switch is set to.
         settingsRepository.widgets.setWidgetAmoled(widgetId, if (amoled.isOn()) WidgetAmoled.OFF else WidgetAmoled.ON)
         onChanged()
+      }
+
+      widgetConfigTransparencyValue.text = "$transparency%"
+      if (widgetConfigTransparencySlider.value.toInt() != transparency) {
+        widgetConfigTransparencySlider.value = transparency.toFloat()
       }
     }
   }

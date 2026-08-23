@@ -21,6 +21,8 @@
   <string name="textWidgetConfigThemeApp">与应用一致</string>
   <string name="textWidgetConfigThemeSummary">此小部件使用的颜色。</string>
   <string name="textWidgetConfigAmoledSummary">此小部件处于深色模式时使用纯黑背景。</string>
+  <string name="textWidgetConfigTransparencyTitle">透明度</string>
+  <string name="textWidgetConfigTransparencySummary">调整此小部件的背景透明度。</string>
   <string name="textWidgetConfigDone">完成</string>
   <string name="textWelcomeStepIndicator">第 %1$d 步，共 %2$d 步</string>
   <string name="textBack">返回</string>

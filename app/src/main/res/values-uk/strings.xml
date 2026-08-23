@@ -21,6 +21,8 @@
   <string name="textWidgetConfigThemeApp">Як у застосунку</string>
   <string name="textWidgetConfigThemeSummary">Кольори, якими малюється цей віджет.</string>
   <string name="textWidgetConfigAmoledSummary">Використовувати чисто чорний фон, коли віджет темний.</string>
+  <string name="textWidgetConfigTransparencyTitle">Прозорість</string>
+  <string name="textWidgetConfigTransparencySummary">Налаштуйте прозорість фону цього віджета.</string>
   <string name="textWidgetConfigDone">Готово</string>
   <string name="textWelcomeStepIndicator">Крок %1$d з %2$d</string>
   <string name="textBack">Назад</string>

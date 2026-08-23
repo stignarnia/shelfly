@@ -113,6 +113,64 @@
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/widgetConfigTransparency"
+    style="@style/Settings.ItemLayoutNoRipple"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/widgetConfigAmoled"
+    >
+
+    <TextView
+      android:id="@+id/widgetConfigTransparencyTitle"
+      style="@style/Settings.Title"
+      android:text="@string/textWidgetConfigTransparencyTitle"
+      app:layout_constraintBottom_toTopOf="@id/widgetConfigTransparencyDescription"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      />
+
+    <TextView
+      android:id="@+id/widgetConfigTransparencyDescription"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceNormal"
+      android:text="@string/textWidgetConfigTransparencySummary"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toTopOf="@id/widgetConfigTransparencySlider"
+      app:layout_constraintEnd_toStartOf="@id/widgetConfigTransparencyValue"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/widgetConfigTransparencyTitle"
+      />
+
+    <TextView
+      android:id="@+id/widgetConfigTransparencyValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="?attr/colorAccentText"
+      app:layout_constraintBottom_toBottomOf="@id/widgetConfigTransparencyTitle"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/widgetConfigTransparencyTitle"
+      tools:text="0%"
+      />
+
+    <com.google.android.material.slider.Slider
+      android:id="@+id/widgetConfigTransparencySlider"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/spaceSmall"
+      android:valueFrom="0.0"
+      android:valueTo="100.0"
+      android:stepSize="1.0"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/widgetConfigTransparencyDescription"
+      />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
   <com.google.android.material.button.MaterialButton
     android:id="@+id/widgetConfigDoneButton"
     style="@style/PrimaryMaterialButton"

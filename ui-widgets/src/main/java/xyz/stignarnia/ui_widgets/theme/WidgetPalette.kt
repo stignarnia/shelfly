@@ -3,11 +3,13 @@ package xyz.stignarnia.ui_widgets.theme
 import android.content.Context
 import android.content.res.Configuration.UI_MODE_NIGHT_MASK
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.graphics.Color
 import android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import xyz.stignarnia.ui_widgets.R
@@ -55,6 +57,7 @@ object WidgetPalettes {
 
     val storedTheme = settingsRepository.widgets.getWidgetTheme(widgetId)
     val storedAmoled = settingsRepository.widgets.getWidgetAmoled(widgetId)
+    val storedTransparency = settingsRepository.widgets.getWidgetTransparency(widgetId)
 
     val kind = WidgetPaletteChoice.of(
       storedTheme = storedTheme,
@@ -68,22 +71,37 @@ object WidgetPalettes {
     // What this widget was drawn as, and what decided it.
     // A widget that looks wrong looks exactly like a widget that was never redrawn, and this line is what tells the two apart.
     Timber.d(
-      "Widget %d palette=%s stored=%s/%s app=%s/%s",
+      "Widget %d palette=%s stored=%s/%s/%d%% app=%s/%s",
       widgetId,
       kind,
       storedTheme,
       storedAmoled,
+      storedTransparency,
       settingsRepository.themeId,
       settingsRepository.isAmoled,
     )
 
-    return when (kind) {
+    val palette = when (kind) {
       WidgetPaletteKind.LIGHT -> light(context)
       WidgetPaletteKind.DARK -> dark(context)
       WidgetPaletteKind.BLACK -> black(context)
       // A dynamic kind is only ever chosen from API 34; the check restates that where lint can see it, and the fallback is the one the choice would have made without Material You.
       else -> if (AndroidVersion.isAtLeastAndroid14) dynamic(context, kind) else dark(context)
     }
+
+    return palette.withTransparency(storedTransparency)
+  }
+
+  private fun WidgetPalette.withTransparency(transparencyPercent: Int): WidgetPalette {
+    if (transparencyPercent <= 0) return this
+    val percent = transparencyPercent.coerceIn(0, 100)
+    val alpha = ((100 - percent) * 255 / 100).coerceIn(0, 255)
+    val statusAlpha = (Color.alpha(statusBackground) * (100 - percent) / 100).coerceIn(0, 255)
+    return copy(
+      background = ColorUtils.setAlphaComponent(background, alpha),
+      searchBackground = ColorUtils.setAlphaComponent(searchBackground, alpha),
+      statusBackground = ColorUtils.setAlphaComponent(statusBackground, statusAlpha),
+    )
   }
 
   @RequiresApi(UPSIDE_DOWN_CAKE)

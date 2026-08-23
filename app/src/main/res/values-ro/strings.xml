@@ -21,6 +21,8 @@
   <string name="textWidgetConfigThemeApp">La fel ca aplicația</string>
   <string name="textWidgetConfigThemeSummary">Culorile cu care este desenat acest widget.</string>
   <string name="textWidgetConfigAmoledSummary">Folosește fundaluri complet negre când acest widget este întunecat.</string>
+  <string name="textWidgetConfigTransparencyTitle">Transparență</string>
+  <string name="textWidgetConfigTransparencySummary">Ajustează transparența fundalului acestui widget.</string>
   <string name="textWidgetConfigDone">Gata</string>
   <string name="textWelcomeStepIndicator">Pasul %1$d din %2$d</string>
   <string name="textBack">Înapoi</string>

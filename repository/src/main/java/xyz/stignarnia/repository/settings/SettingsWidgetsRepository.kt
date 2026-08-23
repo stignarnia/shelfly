@@ -26,6 +26,8 @@ class SettingsWidgetsRepository @Inject constructor(
     private const val WIDGET_CALENDAR_MOVIES_MODE = "WIDGET_CALENDAR_MOVIES_MODE"
     private const val WIDGET_THEME = "WIDGET_THEME"
     private const val WIDGET_AMOLED = "WIDGET_AMOLED"
+    private const val WIDGET_TRANSPARENCY = "WIDGET_TRANSPARENCY"
+    const val DEFAULT_WIDGET_TRANSPARENCY = 0
   }
 
   fun getWidgetCalendarMode(
@@ -77,6 +79,16 @@ class SettingsWidgetsRepository @Inject constructor(
     preferences.edit(true) { putString("$WIDGET_AMOLED$widgetId", amoled.name) }
   }
 
+  fun getWidgetTransparency(widgetId: Int): Int =
+    preferences.getInt("$WIDGET_TRANSPARENCY$widgetId", DEFAULT_WIDGET_TRANSPARENCY)
+
+  fun setWidgetTransparency(
+    widgetId: Int,
+    transparency: Int,
+  ) {
+    preferences.edit(true) { putInt("$WIDGET_TRANSPARENCY$widgetId", transparency.coerceIn(0, 100)) }
+  }
+
   /**
    * Forgets everything stored for a widget the launcher has just removed.
    * Every key this class writes has to be listed here, or it outlives the widget it belonged to.
@@ -87,6 +99,7 @@ class SettingsWidgetsRepository @Inject constructor(
       remove("$WIDGET_CALENDAR_MOVIES_MODE$widgetId")
       remove("$WIDGET_THEME$widgetId")
       remove("$WIDGET_AMOLED$widgetId")
+      remove("$WIDGET_TRANSPARENCY$widgetId")
     }
   }
 }

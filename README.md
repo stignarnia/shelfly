@@ -33,7 +33,7 @@ I think there is little chance this gets merged upstream given the repository's 
 - Episode notifications fire on the air date rather than at the exact airtime. TMDB exposes a date but no time of day, so the precision is not available.
 - Discover filters by streaming service rather than by TV network. TMDB's `with_networks` wants numeric ids that do not map from channel names, and it does not apply to films at all, so the filter asks for availability instead: the services listed for the country set in Settings, which is the same region the details screen uses. It works on shows and on movies.
 - **Themes**, plus a pure-black switch. Light, dark and follow-system, each also available in Material You on Android 14 and later, and AMOLED backgrounds can be turned on for whichever of them ends up dark.
-- **Themed widgets.** The widgets follow the app's theme and pure-black switch instead of being fixed dark, and each one can be set to a theme of its own from its settings on the home screen: hold the widget, tap the settings button, pick a theme for that widget alone. Needs Android 12, where `RemoteViews` gained the tinting the widgets are painted with; below that they stay dark as before.
+- **Themed widgets.** The widgets follow the app's theme and pure-black switch instead of being fixed dark, and each one can be customized on its own from its settings on the home screen: hold the widget, tap the settings button to pick a theme or adjust background transparency for that widget alone. Needs Android 12, where `RemoteViews` gained the tinting the widgets are painted with; below that they stay dark as before.
 - The launcher icon and in-app logo are still upstream artwork, pending a replacement.
 
 ## Project setup

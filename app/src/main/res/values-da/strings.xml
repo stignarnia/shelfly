@@ -21,6 +21,8 @@
   <string name="textWidgetConfigThemeApp">Samme som appen</string>
   <string name="textWidgetConfigThemeSummary">Farverne denne widget tegnes med.</string>
   <string name="textWidgetConfigAmoledSummary">Brug helt sorte baggrunde, når denne widget er mørk.</string>
+  <string name="textWidgetConfigTransparencyTitle">Gennemsigtighed</string>
+  <string name="textWidgetConfigTransparencySummary">Juster baggrundens gennemsigtighed for denne widget.</string>
   <string name="textWidgetConfigDone">Færdig</string>
   <string name="textWelcomeStepIndicator">Trin %1$d af %2$d</string>
   <string name="textBack">Tilbage</string>

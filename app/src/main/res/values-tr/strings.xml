@@ -21,6 +21,8 @@
   <string name="textWidgetConfigThemeApp">Uygulamayla aynı</string>
   <string name="textWidgetConfigThemeSummary">Bu widget\'ın çizildiği renkler.</string>
   <string name="textWidgetConfigAmoledSummary">Bu widget koyu olduğunda saf siyah arka plan kullan.</string>
+  <string name="textWidgetConfigTransparencyTitle">Şeffaflık</string>
+  <string name="textWidgetConfigTransparencySummary">Bu widget\'ın arka plan şeffaflığını ayarlayın.</string>
   <string name="textWidgetConfigDone">Bitti</string>
   <string name="textWelcomeStepIndicator">Adım %1$d / %2$d</string>
   <string name="textBack">Geri</string>

@@ -21,6 +21,8 @@
   <string name="textWidgetConfigThemeApp">Come l\'app</string>
   <string name="textWidgetConfigThemeSummary">Colori con cui viene disegnato questo widget.</string>
   <string name="textWidgetConfigAmoledSummary">Usa sfondi neri puri quando questo widget è scuro.</string>
+  <string name="textWidgetConfigTransparencyTitle">Trasparenza</string>
+  <string name="textWidgetConfigTransparencySummary">Regola la trasparenza dello sfondo di questo widget.</string>
   <string name="textWidgetConfigDone">Fatto</string>
   <string name="textWelcomeStepIndicator">Passo %1$d di %2$d</string>
   <string name="textBack">Indietro</string>

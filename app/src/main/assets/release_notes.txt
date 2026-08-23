@@ -6,3 +6,4 @@ Shelfly 4.0.5
 • Sheets that slide up from the bottom - an actor, the links, the sort order - now follow your theme. They ignored the pure black and Material You settings and always came up in plain light or dark.
 • The widgets follow your theme instead of always being dark, pure black and Material You included. They change with the app, so there is nothing to set up.
 • Each widget can also be themed on its own, from its settings on the home screen: hold the widget, tap the settings button and pick a theme for that one. Widget themes need Android 12, and Material You for widgets needs Android 14.
+• Each widget has a transparency slider in its home screen settings to adjust its background opacity.
