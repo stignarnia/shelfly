@@ -31,7 +31,7 @@
         android:id="@+id/networksTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/textNetworks"
+        android:text="@string/textDiscoverFilterProviders"
         android:textAllCaps="true"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="18sp"

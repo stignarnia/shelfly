@@ -3,11 +3,13 @@ package xyz.stignarnia.ui_my_shows.common.filters.network
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import xyz.stignarnia.common.dispatchers.CoroutineDispatchers
+import xyz.stignarnia.repository.WatchProvidersRepository
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.repository.shows.ShowsRepository
 import xyz.stignarnia.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import xyz.stignarnia.ui_base.viewmodel.ChannelsDelegate
 import xyz.stignarnia.ui_base.viewmodel.DefaultChannelsDelegate
+import xyz.stignarnia.ui_model.StreamingProvider
 import xyz.stignarnia.ui_my_shows.common.filters.CollectionFiltersOrigin
 import xyz.stignarnia.ui_my_shows.common.filters.CollectionFiltersOrigin.HIDDEN_SHOWS
 import xyz.stignarnia.ui_my_shows.common.filters.CollectionFiltersOrigin.MY_SHOWS
@@ -27,11 +29,12 @@ import javax.inject.Inject
 internal class CollectionFiltersNetworkViewModel @Inject constructor(
   private val settingsRepository: SettingsRepository,
   private val showsRepository: ShowsRepository,
+  private val watchProvidersRepository: WatchProvidersRepository,
   private val dispatchers: CoroutineDispatchers,
 ) : ViewModel(),
   ChannelsDelegate by DefaultChannelsDelegate() {
 
-  private val availableState = MutableStateFlow<List<String>?>(null)
+  private val availableState = MutableStateFlow<List<StreamingProvider>?>(null)
   private val selectedState = MutableStateFlow(emptyList<String>())
   private val loadingState = MutableStateFlow(false)
 
@@ -42,18 +45,45 @@ internal class CollectionFiltersNetworkViewModel @Inject constructor(
     viewModelScope.launch {
       selectedState.value = selectedNetworks()
       loadingState.value = true
-      // The offered networks are the ones the collection actually holds rather than a fixed list, so a filter is never offered that matches nothing and no broadcaster is missing because it was never enumerated.
+      // The offered networks are the ones the collection actually holds rather than a fixed list, matched against region providers for 1:1 badge icons.
       availableState.value = withContext(dispatchers.IO) {
         val shows = when (origin) {
           MY_SHOWS -> showsRepository.myShows.loadAll()
           WATCHLIST_SHOWS -> showsRepository.watchlistShows.loadAll()
           HIDDEN_SHOWS -> showsRepository.hiddenShows.loadAll()
         }
-        shows
+        val distinctNetworks = shows
           .map { it.network }
           .filter { it.isNotBlank() }
           .distinct()
           .sorted()
+
+        val country = settingsRepository.country
+        val providers = runCatching {
+          watchProvidersRepository.loadProviders(isMovie = false, countryCode = country)
+        }.getOrDefault(emptyList())
+
+        distinctNetworks.map { networkName ->
+          val normNet = networkName.filter { it.isLetterOrDigit() }.lowercase()
+          val matchedProvider = providers.firstOrNull { provider ->
+            val normProv = provider.name.filter { it.isLetterOrDigit() }.lowercase()
+            normNet == normProv ||
+              (normNet.length >= 4 && normProv.contains(normNet)) ||
+              (normProv.length >= 4 && normNet.contains(normProv)) ||
+              (normNet == "hbo" && normProv.contains("max")) ||
+              (normNet == "hbomax" && normProv.contains("max")) ||
+              (normNet.startsWith("disney") && normProv.contains("disney")) ||
+              (normNet.startsWith("apple") && normProv.contains("apple")) ||
+              (normNet.startsWith("amazon") && normProv.contains("amazon")) ||
+              (normNet.startsWith("paramount") && normProv.contains("paramount")) ||
+              (normNet.startsWith("rai") && normProv.contains("rai"))
+          }
+          StreamingProvider(
+            id = matchedProvider?.id ?: networkName.hashCode().toLong(),
+            name = networkName,
+            logoPath = matchedProvider?.logoPath.orEmpty(),
+          )
+        }
       }
       loadingState.value = false
     }

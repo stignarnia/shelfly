@@ -58,6 +58,7 @@ data class TmdbGenre(
 data class TmdbNetwork(
   val id: Long?,
   val name: String?,
+  val logo_path: String? = null,
 )
 
 data class TmdbExternalIds(

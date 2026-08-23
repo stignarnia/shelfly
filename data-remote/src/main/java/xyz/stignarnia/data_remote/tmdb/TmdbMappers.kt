@@ -37,6 +37,7 @@ internal fun TmdbShow.toShow(): Show =
       ?.firstOrNull { it.iso_3166_1 == CERTIFICATION_COUNTRY }
       ?.rating,
     network = networks?.firstOrNull()?.name,
+    network_logo_path = networks?.firstOrNull()?.logo_path,
     country = origin_country?.firstOrNull()?.lowercase(),
     trailer = videos.toTrailerUrl(),
     homepage = homepage,

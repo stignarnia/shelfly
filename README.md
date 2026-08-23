@@ -1,5 +1,7 @@
 # Shelfly
 
+<img src="fastlane/metadata/android/en-US/images/icon.png" align="left" width="180" hspace="0" vspace="80" />
+
 > **Heads up:** this fork was built almost entirely by an AI coding agent, with a human directing it and reviewing the results. Read the code before you trust it with anything you care about, and keep your own backups.
 
 Shelfly is a fork of [Showly](https://github.com/trakt/showly) (a TV shows and movies tracker for Android) that syncs to infrastructure you control.
@@ -31,11 +33,11 @@ I think there is little chance this gets merged upstream given the repository's 
 - **You supply the API keys**, at runtime, rather than the build shipping someone else's.
 - The paid tier has been removed, and I aim to reimplement what is possible from scratch and make it open source.
 - Episode notifications fire on the air date rather than at the exact airtime. TMDB exposes a date but no time of day, so the precision is not available.
-- Discover filters by streaming service rather than by TV network. TMDB's `with_networks` wants numeric ids that do not map from channel names, and it does not apply to films at all, so the filter asks for availability instead: the services listed for the country set in Settings, which is the same region the details screen uses. It works on shows and on movies.
+- **Streaming service filters.** Filters across Discover and your collection use TMDB watch providers for your region rather than fixed TV networks, so availability matches what is actually streamable and works on shows and movies alike.
 - **Themes**, plus a pure-black switch. Light, dark and follow-system, each also available in Material You on Android 14 and later, and AMOLED backgrounds can be turned on for whichever of them ends up dark.
 - **Themed widgets.** The widgets follow the app's theme and pure-black switch instead of being fixed dark, and each one can be customized on its own from its settings on the home screen: hold the widget, tap the settings button to pick a theme or adjust background transparency for that widget alone.
 - **Widgets need Android 12**, and are not offered below it. Their rows are carried inside the widget's own views rather than served by a `RemoteViewsService`: recent Android versions never deliver an update for views that name such a service, only announce it, which leaves a widget that cannot repaint - no theme change, no labels toggle, no calendar mode. The collection API that replaces it, and the `RemoteViews` tinting the themes are painted with, both arrive in Android 12. Carrying the rows along means they all travel at once, so a long list is measured against the framework's own budgets as it is built and cut where they run out.
-- The launcher icon and in-app logo are still upstream artwork, pending a replacement.
+- **Original branding and iconography.** Custom 3D isometric shelf logo, adaptive launcher icons, and themed widget assets replace upstream artwork.
 
 ## Project setup
 

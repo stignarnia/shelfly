@@ -23,7 +23,6 @@
   <string name="textSeasonEpisode">S.%02d E.%02d</string>
   <string name="textSortBy">Ordenar por:</string>
   <string name="textNetwork">%1$s (%2$s)</string>
-  <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Rede de televisão:</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Streaming</string>
   <string name="textDiscoverFilterProvidersRegion">Disponível em %1$s</string>
   <string name="textDiscoverFilterProvidersError">Não foi possível carregar os serviços de streaming da sua região.</string>

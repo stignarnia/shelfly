@@ -4,7 +4,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.execSQL
 
-const val DATABASE_VERSION = 44
+const val DATABASE_VERSION = 45
 const val DATABASE_NAME = "SHELFLY_DB"
 
 /**
@@ -90,5 +90,14 @@ val MIGRATION_43_44 = object : Migration(43, 44) {
     connection.execSQL(
       "CREATE INDEX IF NOT EXISTS `index_ratings_id_tmdb_type` ON `ratings` (`id_tmdb`, `type`)",
     )
+  }
+}
+
+/**
+ * Adds the network_logo_path column to the shows table.
+ */
+val MIGRATION_44_45 = object : Migration(44, 45) {
+  override fun migrate(connection: SQLiteConnection) {
+    connection.execSQL("ALTER TABLE `shows` ADD COLUMN `network_logo_path` TEXT NOT NULL DEFAULT ''")
   }
 }

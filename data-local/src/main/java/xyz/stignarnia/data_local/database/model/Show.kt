@@ -21,6 +21,7 @@ data class Show(
   @ColumnInfo(name = "airtime_timezone", defaultValue = "") val airtimeTimezone: String,
   @ColumnInfo(name = "certification", defaultValue = "") val certification: String,
   @ColumnInfo(name = "network", defaultValue = "") val network: String,
+  @ColumnInfo(name = "network_logo_path", defaultValue = "") val networkLogoPath: String = "",
   @ColumnInfo(name = "country", defaultValue = "") val country: String,
   @ColumnInfo(name = "trailer", defaultValue = "") val trailer: String,
   @ColumnInfo(name = "homepage", defaultValue = "") val homepage: String,

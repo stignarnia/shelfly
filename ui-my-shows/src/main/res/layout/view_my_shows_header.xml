@@ -70,7 +70,7 @@
           android:id="@+id/myShowsNetworksChip"
           style="@style/ShelflyChip.Filter"
           android:checkable="false"
-          android:text="@string/textNetworks"
+          android:text="@string/textDiscoverFilterProviders"
           android:visibility="gone"
           tools:visibility="visible"
           />

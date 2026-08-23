@@ -31,6 +31,7 @@ interface WatchlistShowsDao : WatchlistShowsLocalDataSource {
       "shows.airtime_timezone, " +
       "shows.certification, " +
       "shows.network, " +
+      "shows.network_logo_path, " +
       "shows.country, " +
       "shows.trailer, " +
       "shows.homepage, " +

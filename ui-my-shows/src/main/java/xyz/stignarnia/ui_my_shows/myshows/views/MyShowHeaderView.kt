@@ -72,7 +72,7 @@ class MyShowHeaderView : FrameLayout {
         myShowsNetworksChip.isSelected = networks.isNotEmpty()
         myShowsNetworksChip.onClick { networksClickListener?.invoke() }
         myShowsNetworksChip.text = when {
-          networks.isEmpty() -> context.getString(R.string.textNetworks).filter { it.isLetter() }
+          networks.isEmpty() -> context.getString(R.string.textDiscoverFilterProviders)
           networks.size == 1 -> networks[0]
           else -> context.getString(
             R.string.textDiscoverFilterProvidersCount,

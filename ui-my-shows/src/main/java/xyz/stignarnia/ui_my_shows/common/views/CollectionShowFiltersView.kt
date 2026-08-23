@@ -61,7 +61,7 @@ class CollectionShowFiltersView : FrameLayout {
 
       followedShowsNetworksChip.isSelected = item.networks.isNotEmpty()
       followedShowsNetworksChip.text = when {
-        item.networks.isEmpty() -> context.getString(R.string.textNetworks).filter { it.isLetter() }
+        item.networks.isEmpty() -> context.getString(R.string.textDiscoverFilterProviders)
         item.networks.size == 1 -> item.networks[0]
         else -> context.getString(
           R.string.textDiscoverFilterProvidersCount,

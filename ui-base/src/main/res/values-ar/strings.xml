@@ -23,7 +23,6 @@
   <string name="textSeasonEpisode">S.%02d E.%02d</string>
   <string name="textSortBy">ترتيب حسب:</string>
   <string name="textNetwork">(%2$s) %1$s</string>
-  <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">الشبكة التلفزيونية:</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">البث</string>
   <string name="textDiscoverFilterProvidersRegion">متاح في %1$s</string>
   <string name="textDiscoverFilterProvidersError">تعذّر تحميل خدمات البث لمنطقتك.</string>

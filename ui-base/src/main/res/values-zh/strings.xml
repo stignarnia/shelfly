@@ -23,7 +23,6 @@
   <string name="textSeasonEpisode">%02d 季 %02d 集</string>
   <string name="textSortBy">排序：</string>
   <string name="textNetwork">%1$s (%2$s)</string>
-  <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">流媒体：</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">流媒体</string>
   <string name="textDiscoverFilterProvidersRegion">%1$s 可用</string>
   <string name="textDiscoverFilterProvidersError">无法加载你所在区域的流媒体服务。</string>

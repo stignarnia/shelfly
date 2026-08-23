@@ -10,6 +10,7 @@ data class Show(
   val airs: AirTime?,
   val certification: String?,
   val network: String?,
+  val network_logo_path: String? = null,
   val country: String?,
   val trailer: String?,
   val homepage: String?,
