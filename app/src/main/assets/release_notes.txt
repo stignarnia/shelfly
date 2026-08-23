@@ -1,4 +1,5 @@
 Shelfly 4.0.6
 
 • New brand accent color across the app, widgets, and launcher icon.
+• New app icon and branding.
 • Opening Settings now fades in smoothly from Discover and across the app.
