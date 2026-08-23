@@ -1,1 +1,0 @@
-eine Open-Source Serien &amp; Filme Tracker App, offline und mit eigenem WebDAV-Backup
