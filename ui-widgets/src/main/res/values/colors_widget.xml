@@ -18,8 +18,8 @@
   <color name="widgetLightBackground">#FAFAFA</color>
   <color name="widgetLightTextPrimary">#1A1A1A</color>
   <color name="widgetLightTextSecondary">#5F5F5F</color>
-  <color name="widgetLightAccent">#F44336</color>
-  <color name="widgetLightAccentText">#D32F2F</color>
+  <color name="widgetLightAccent">#005EB2</color>
+  <color name="widgetLightAccentText">#005EB2</color>
   <color name="widgetLightBadge">#EBEBEB</color>
   <color name="widgetLightPlaceholderInk">#9E9E9E</color>
   <color name="widgetLightSearchBackground">#FFFFFF</color>
@@ -34,8 +34,8 @@
   <color name="widgetDarkBackground">#131313</color>
   <color name="widgetDarkTextPrimary">#FFFFFF</color>
   <color name="widgetDarkTextSecondary">#AAAAAA</color>
-  <color name="widgetDarkAccent">#F44336</color>
-  <color name="widgetDarkAccentText">#F44336</color>
+  <color name="widgetDarkAccent">#005EB2</color>
+  <color name="widgetDarkAccentText">#005EB2</color>
   <color name="widgetDarkBadge">#303030</color>
   <color name="widgetDarkPlaceholderInk">#6A6A6A</color>
   <color name="widgetDarkSearchBackground">#222327</color>
@@ -46,8 +46,8 @@
   <color name="widgetBlackBackground">#000000</color>
   <color name="widgetBlackTextPrimary">#FFFFFF</color>
   <color name="widgetBlackTextSecondary">#AAAAAA</color>
-  <color name="widgetBlackAccent">#F44336</color>
-  <color name="widgetBlackAccentText">#F44336</color>
+  <color name="widgetBlackAccent">#005EB2</color>
+  <color name="widgetBlackAccentText">#005EB2</color>
   <color name="widgetBlackBadge">#141414</color>
   <color name="widgetBlackPlaceholderInk">#6A6A6A</color>
   <color name="widgetBlackSearchBackground">#000000</color>

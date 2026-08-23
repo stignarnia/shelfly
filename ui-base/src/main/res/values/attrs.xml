@@ -44,8 +44,7 @@
 
   <!--
     The accent at text size.
-    #F44336 clears 3:1 on a light ground - enough for a fill or an icon, thin for a 12sp label - so the light theme darkens this one and leaves colorAccent alone.
-    On dark the two are the same value.
+    Used for small labels and text requiring accent coloring across themes.
   -->
   <attr name="colorAccentText" format="color" />
 

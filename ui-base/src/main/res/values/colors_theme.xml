@@ -36,12 +36,12 @@
 
   <!--
     Accent.
-    Held at the brand red in both themes; only the text-sized use is darkened, because #F44336 on a light ground is 3:1 - fine for fills and icons, thin for a 12sp label.
+    Held at the brand blue in both themes; on a light ground the 6:1 contrast ratio against #FAFAFA clears WCAG AA for normal text.
   -->
-  <color name="themeAccent">#F44336</color>
+  <color name="themeAccent">#005EB2</color>
   <!-- The switch track when checked: the accent at 30% -->
-  <color name="themeAccentTrack">#4DF44336</color>
-  <color name="themeAccentText">#D32F2F</color>
+  <color name="themeAccentTrack">#4D005EB2</color>
+  <color name="themeAccentText">#005EB2</color>
 
   <!-- Bottom navigation active indicator -->
   <color name="themeNavIndicator">#E6E3E4E8</color>

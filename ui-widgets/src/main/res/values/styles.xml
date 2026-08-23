@@ -19,7 +19,7 @@
     <item name="android:textColorSecondary">@color/colorGrayLight</item>
     <item name="colorPlaceholderIcon">#6A6A6A</item>
     <item name="colorPlaceholderStroke">#6A6A6A</item>
-    <item name="colorAccent">#F44336</item>
+    <item name="colorAccent">#005EB2</item>
     <item name="colorBadgeBackground">@color/colorGrayDark</item>
     <item name="colorWidgetStatusBackground">@color/colorBlackTranslucent</item>
   </style>

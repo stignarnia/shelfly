@@ -6,7 +6,7 @@
     These are the values that must stay put: the widget palette, and the whites and black scrims that sit on poster artwork whatever the app is doing.
   -->
 
-  <color name="colorAccent">#F44336</color>
+  <color name="colorAccent">#005EB2</color>
   <color name="colorError">#F44336</color>
 
   <color name="colorTransparent">#00000000</color>
@@ -18,6 +18,6 @@
   <color name="colorGray">#636363</color>
   <color name="colorGrayDark">#303030</color>
 
-  <color name="colorNotificationDark">#F44336</color>
+  <color name="colorNotificationDark">#005EB2</color>
 
 </resources>
