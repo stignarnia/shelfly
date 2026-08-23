@@ -7,6 +7,7 @@
   android:minWidth="80dp"
   android:minHeight="@dimen/searchViewHeight"
   android:previewImage="@drawable/ic_app_round"
+  android:previewLayout="@layout/widget_search"
   android:resizeMode="horizontal"
   android:updatePeriodMillis="1800000"
   android:widgetCategory="home_screen"

@@ -9,3 +9,4 @@ Shelfly 4.0.5
 • Widgets now change as soon as you change something, instead of waiting for a refresh that could take until the next restart. Very long lists are cut to what a widget is allowed to hold.
 • Widgets need Android 12 and are no longer offered below it. The older way of filling them stopped being updated by Android, leaving widgets that could not repaint at all.
 • Each widget has a transparency slider in its home screen settings to adjust its background opacity.
+• The home screen widget picker now shows previews of what each widget looks like before you add it.

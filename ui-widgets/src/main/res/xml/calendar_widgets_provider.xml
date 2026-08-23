@@ -8,6 +8,7 @@
   android:minResizeWidth="30dp"
   android:minResizeHeight="20dp"
   android:previewImage="@drawable/ic_app_round"
+  android:previewLayout="@layout/preview_widget_calendar"
   android:resizeMode="horizontal|vertical"
   android:updatePeriodMillis="900000"
   android:widgetCategory="home_screen"

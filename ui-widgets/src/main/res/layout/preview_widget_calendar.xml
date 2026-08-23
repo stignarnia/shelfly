@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/bg_widget"
+  android:theme="@style/AppTheme.Widget.Dark"
+  tools:ignore="HardcodedText,SmallSp"
+  >
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/widgetPaddingTop"
+    android:paddingBottom="@dimen/spaceTiny"
+    >
+
+    <!-- Date Group Header -->
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+      <TextView
+        android:layout_width="@dimen/spaceMedium"
+        android:layout_height="0dp"
+        />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spaceTiny"
+        android:layout_marginBottom="@dimen/spaceTiny"
+        android:text="Wednesday, 23 August"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+
+    </LinearLayout>
+
+    <!-- Calendar Item 1 -->
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipChildren="false"
+      android:orientation="horizontal"
+      >
+
+      <FrameLayout
+        android:layout_width="@dimen/widgetImageWidth"
+        android:layout_height="@dimen/widgetImageHeight"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/spaceMedium"
+        android:layout_marginTop="@dimen/spaceSmall"
+        android:layout_marginEnd="@dimen/spaceMedium"
+        android:layout_marginBottom="@dimen/spaceSmall"
+        android:background="@drawable/bg_widget_media_view_elevation"
+        android:elevation="@dimen/elevationSmall"
+        >
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="@dimen/spaceSmall"
+          android:src="@drawable/ic_television"
+          android:tint="?attr/colorPlaceholderIcon"
+          app:tint="?attr/colorPlaceholderIcon"
+          tools:ignore="UseAppTint"
+          />
+
+      </FrameLayout>
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/spaceMedium"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+          android:id="@+id/previewCalTitle1"
+          style="@style/WidgetItem.Title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/spaceTiny"
+          android:text="House of the Dragon"
+          />
+
+        <TextView
+          android:id="@+id/previewCalBadge1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/previewCalTitle1"
+          android:layout_marginBottom="@dimen/spaceTiny"
+          android:background="@drawable/bg_badge"
+          android:elevation="@dimen/elevationTiny"
+          android:ellipsize="end"
+          android:includeFontPadding="false"
+          android:maxLines="1"
+          android:paddingStart="6dp"
+          android:paddingTop="2dp"
+          android:paddingEnd="6dp"
+          android:paddingBottom="2dp"
+          android:text="S.02 E.08"
+          android:textColor="?android:attr/textColorPrimary"
+          android:textSize="12sp"
+          />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/previewCalTitle1"
+          android:layout_alignBaseline="@id/previewCalBadge1"
+          android:layout_marginStart="@dimen/spaceSmall"
+          android:layout_marginTop="@dimen/spaceMicro"
+          android:layout_marginBottom="@dimen/spaceTiny"
+          android:layout_toEndOf="@id/previewCalBadge1"
+          android:ellipsize="end"
+          android:includeFontPadding="false"
+          android:maxLines="1"
+          android:text="The Queen Who Ever Was"
+          android:textColor="?android:attr/textColorPrimary"
+          android:textSize="12sp"
+          />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/previewCalBadge1"
+          android:gravity="start|center_vertical"
+          android:text="21:00 • HBO"
+          android:textAlignment="viewStart"
+          android:textColor="?android:attr/textColorSecondary"
+          android:textSize="11sp"
+          />
+
+      </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- Calendar Item 2 -->
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipChildren="false"
+      android:orientation="horizontal"
+      >
+
+      <FrameLayout
+        android:layout_width="@dimen/widgetImageWidth"
+        android:layout_height="@dimen/widgetImageHeight"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/spaceMedium"
+        android:layout_marginTop="@dimen/spaceSmall"
+        android:layout_marginEnd="@dimen/spaceMedium"
+        android:layout_marginBottom="@dimen/spaceSmall"
+        android:background="@drawable/bg_widget_media_view_elevation"
+        android:elevation="@dimen/elevationSmall"
+        >
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="@dimen/spaceSmall"
+          android:src="@drawable/ic_television"
+          android:tint="?attr/colorPlaceholderIcon"
+          app:tint="?attr/colorPlaceholderIcon"
+          tools:ignore="UseAppTint"
+          />
+
+      </FrameLayout>
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/spaceMedium"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+          android:id="@+id/previewCalTitle2"
+          style="@style/WidgetItem.Title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/spaceTiny"
+          android:text="The Boys"
+          />
+
+        <TextView
+          android:id="@+id/previewCalBadge2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/previewCalTitle2"
+          android:layout_marginBottom="@dimen/spaceTiny"
+          android:background="@drawable/bg_badge"
+          android:elevation="@dimen/elevationTiny"
+          android:ellipsize="end"
+          android:includeFontPadding="false"
+          android:maxLines="1"
+          android:paddingStart="6dp"
+          android:paddingTop="2dp"
+          android:paddingEnd="6dp"
+          android:paddingBottom="2dp"
+          android:text="S.04 E.08"
+          android:textColor="?android:attr/textColorPrimary"
+          android:textSize="12sp"
+          />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/previewCalTitle2"
+          android:layout_alignBaseline="@id/previewCalBadge2"
+          android:layout_marginStart="@dimen/spaceSmall"
+          android:layout_marginTop="@dimen/spaceMicro"
+          android:layout_marginBottom="@dimen/spaceTiny"
+          android:layout_toEndOf="@id/previewCalBadge2"
+          android:ellipsize="end"
+          android:includeFontPadding="false"
+          android:maxLines="1"
+          android:text="Season Finale"
+          android:textColor="?android:attr/textColorPrimary"
+          android:textSize="12sp"
+          />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/previewCalBadge2"
+          android:gravity="start|center_vertical"
+          android:text="Tomorrow • Prime Video"
+          android:textAlignment="viewStart"
+          android:textColor="?android:attr/textColorSecondary"
+          android:textSize="11sp"
+          />
+
+      </RelativeLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <!-- Header Label -->
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/widgetLabelHeight"
+    android:background="@drawable/bg_widget_toolbar"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/spaceTiny"
+    android:paddingBottom="@dimen/spaceTiny"
+    >
+
+    <ImageView
+      android:layout_width="14dp"
+      android:layout_height="14dp"
+      android:layout_marginStart="@dimen/spaceTiny"
+      android:layout_marginEnd="@dimen/spaceTiny"
+      android:src="@drawable/ic_app_round"
+      />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="start"
+      android:text="Shows Calendar"
+      android:textAlignment="viewStart"
+      android:textColor="@color/colorWhite"
+      android:textSize="10sp"
+      />
+
+  </LinearLayout>
+
+</FrameLayout>

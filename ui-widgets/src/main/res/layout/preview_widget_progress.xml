@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/bg_widget"
+  android:theme="@style/AppTheme.Widget.Dark"
+  tools:ignore="HardcodedText,SmallSp"
+  >
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/widgetPaddingTop"
+    android:paddingBottom="@dimen/spaceTiny"
+    >
+
+    <!-- Item 1 -->
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipChildren="false"
+      android:orientation="horizontal"
+      >
+
+      <FrameLayout
+        android:layout_width="@dimen/widgetImageWidth"
+        android:layout_height="@dimen/widgetImageHeight"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/spaceMedium"
+        android:layout_marginTop="@dimen/spaceSmall"
+        android:layout_marginEnd="@dimen/spaceMedium"
+        android:layout_marginBottom="@dimen/spaceSmall"
+        android:background="@drawable/bg_widget_media_view_elevation"
+        android:elevation="@dimen/elevationTiny"
+        >
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="@dimen/spaceSmall"
+          android:src="@drawable/ic_television"
+          android:tint="?attr/colorPlaceholderIcon"
+          app:tint="?attr/colorPlaceholderIcon"
+          tools:ignore="UseAppTint"
+          />
+
+      </FrameLayout>
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+          android:id="@+id/previewTitle1"
+          style="@style/WidgetItem.Title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentStart="true"
+          android:layout_marginEnd="@dimen/spaceTiny"
+          android:layout_marginBottom="@dimen/spaceTiny"
+          android:text="Severance"
+          />
+
+        <TextView
+          android:id="@+id/previewBadge1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/previewTitle1"
+          android:background="@drawable/bg_badge"
+          android:elevation="@dimen/elevationTiny"
+          android:ellipsize="end"
+          android:includeFontPadding="false"
+          android:maxLines="1"
+          android:paddingStart="6dp"
+          android:paddingTop="2dp"
+          android:paddingEnd="6dp"
+          android:paddingBottom="2dp"
+          android:text="S.02 E.01"
+          android:textColor="?android:attr/textColorPrimary"
+          android:textSize="12sp"
+          />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBaseline="@id/previewBadge1"
+          android:layout_marginStart="6dp"
+          android:layout_marginBottom="@dimen/spaceTiny"
+          android:layout_toStartOf="@id/previewCheck1"
+          android:layout_toEndOf="@id/previewBadge1"
+          android:ellipsize="end"
+          android:includeFontPadding="false"
+          android:maxLines="1"
+          android:text="Hello, Ms. Cobel"
+          android:textColor="?android:attr/textColorPrimary"
+          android:textSize="12sp"
+          />
+
+        <TextView
+          android:id="@+id/previewProgressText1"
+          style="@style/WidgetItem.Subtitle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/previewBadge1"
+          android:layout_marginTop="@dimen/spaceTiny"
+          android:gravity="start|center_vertical"
+          android:maxLines="1"
+          android:text="9/10"
+          />
+
+        <ProgressBar
+          style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignTop="@id/previewProgressText1"
+          android:layout_alignBottom="@id/previewProgressText1"
+          android:layout_alignParentEnd="true"
+          android:layout_marginStart="@dimen/spaceSmall"
+          android:layout_toEndOf="@id/previewProgressText1"
+          android:max="10"
+          android:paddingStart="0dp"
+          android:paddingEnd="@dimen/widgetCheckButtonWidth"
+          android:progress="9"
+          android:progressBackgroundTint="?android:attr/textColorSecondary"
+          android:progressTint="?attr/colorAccent"
+          android:scaleY="0.75"
+          android:translationY="1dp"
+          />
+
+        <ImageButton
+          android:id="@+id/previewCheck1"
+          style="@style/WidgetItem.CheckButton"
+          android:layout_alignParentTop="true"
+          android:layout_alignParentEnd="true"
+          />
+
+      </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- Item 2 -->
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipChildren="false"
+      android:orientation="horizontal"
+      >
+
+      <FrameLayout
+        android:layout_width="@dimen/widgetImageWidth"
+        android:layout_height="@dimen/widgetImageHeight"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/spaceMedium"
+        android:layout_marginTop="@dimen/spaceSmall"
+        android:layout_marginEnd="@dimen/spaceMedium"
+        android:layout_marginBottom="@dimen/spaceSmall"
+        android:background="@drawable/bg_widget_media_view_elevation"
+        android:elevation="@dimen/elevationTiny"
+        >
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="@dimen/spaceSmall"
+          android:src="@drawable/ic_television"
+          android:tint="?attr/colorPlaceholderIcon"
+          app:tint="?attr/colorPlaceholderIcon"
+          tools:ignore="UseAppTint"
+          />
+
+      </FrameLayout>
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+          android:id="@+id/previewTitle2"
+          style="@style/WidgetItem.Title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentStart="true"
+          android:layout_marginEnd="@dimen/spaceTiny"
+          android:layout_marginBottom="@dimen/spaceTiny"
+          android:text="The Bear"
+          />
+
+        <TextView
+          android:id="@+id/previewBadge2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/previewTitle2"
+          android:background="@drawable/bg_badge"
+          android:elevation="@dimen/elevationTiny"
+          android:ellipsize="end"
+          android:includeFontPadding="false"
+          android:maxLines="1"
+          android:paddingStart="6dp"
+          android:paddingTop="2dp"
+          android:paddingEnd="6dp"
+          android:paddingBottom="2dp"
+          android:text="S.03 E.01"
+          android:textColor="?android:attr/textColorPrimary"
+          android:textSize="12sp"
+          />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBaseline="@id/previewBadge2"
+          android:layout_marginStart="6dp"
+          android:layout_marginBottom="@dimen/spaceTiny"
+          android:layout_toStartOf="@id/previewCheck2"
+          android:layout_toEndOf="@id/previewBadge2"
+          android:ellipsize="end"
+          android:includeFontPadding="false"
+          android:maxLines="1"
+          android:text="Tomorrow"
+          android:textColor="?android:attr/textColorPrimary"
+          android:textSize="12sp"
+          />
+
+        <TextView
+          android:id="@+id/previewProgressText2"
+          style="@style/WidgetItem.Subtitle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/previewBadge2"
+          android:layout_marginTop="@dimen/spaceTiny"
+          android:gravity="start|center_vertical"
+          android:maxLines="1"
+          android:text="8/10"
+          />
+
+        <ProgressBar
+          style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignTop="@id/previewProgressText2"
+          android:layout_alignBottom="@id/previewProgressText2"
+          android:layout_alignParentEnd="true"
+          android:layout_marginStart="@dimen/spaceSmall"
+          android:layout_toEndOf="@id/previewProgressText2"
+          android:max="10"
+          android:paddingStart="0dp"
+          android:paddingEnd="@dimen/widgetCheckButtonWidth"
+          android:progress="8"
+          android:progressBackgroundTint="?android:attr/textColorSecondary"
+          android:progressTint="?attr/colorAccent"
+          android:scaleY="0.75"
+          android:translationY="1dp"
+          />
+
+        <ImageButton
+          android:id="@+id/previewCheck2"
+          style="@style/WidgetItem.CheckButton"
+          android:layout_alignParentTop="true"
+          android:layout_alignParentEnd="true"
+          />
+
+      </RelativeLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <!-- Header Label -->
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/widgetLabelHeight"
+    android:background="@drawable/bg_widget_toolbar"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/spaceTiny"
+    android:paddingBottom="@dimen/spaceTiny"
+    >
+
+    <ImageView
+      android:layout_width="14dp"
+      android:layout_height="14dp"
+      android:layout_marginStart="@dimen/spaceTiny"
+      android:layout_marginEnd="@dimen/spaceTiny"
+      android:src="@drawable/ic_app_round"
+      />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="start"
+      android:text="Shows Progress"
+      android:textAlignment="viewStart"
+      android:textColor="@color/colorWhite"
+      android:textSize="10sp"
+      />
+
+  </LinearLayout>
+
+</FrameLayout>

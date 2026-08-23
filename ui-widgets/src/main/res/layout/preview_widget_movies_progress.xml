@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/bg_widget"
+  android:theme="@style/AppTheme.Widget.Dark"
+  tools:ignore="HardcodedText,SmallSp"
+  >
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/widgetPaddingTop"
+    android:paddingBottom="@dimen/spaceTiny"
+    >
+
+    <!-- Movie Item 1 -->
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+      <FrameLayout
+        android:layout_width="@dimen/widgetImageWidth"
+        android:layout_height="@dimen/widgetImageHeight"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/spaceMedium"
+        android:layout_marginTop="@dimen/spaceSmall"
+        android:layout_marginEnd="@dimen/spaceMedium"
+        android:layout_marginBottom="@dimen/spaceSmall"
+        android:background="@drawable/bg_widget_media_view_elevation"
+        android:elevation="@dimen/elevationSmall"
+        >
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="@dimen/spaceSmall"
+          android:src="@drawable/ic_film"
+          android:tint="?attr/colorPlaceholderIcon"
+          app:tint="?attr/colorPlaceholderIcon"
+          tools:ignore="UseAppTint"
+          />
+
+      </FrameLayout>
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        >
+
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentStart="true"
+          android:layout_centerVertical="true"
+          android:layout_toStartOf="@id/previewMovieCheck1"
+          android:orientation="vertical"
+          >
+
+          <TextView
+            style="@style/WidgetItem.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spaceMicro"
+            android:text="Dune: Part Two"
+            />
+
+          <TextView
+            style="@style/WidgetItem.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Watched on 15 March 2024"
+            />
+
+        </LinearLayout>
+
+        <ImageButton
+          android:id="@+id/previewMovieCheck1"
+          style="@style/WidgetItem.CheckButton"
+          android:layout_width="@dimen/widgetCheckButtonWidth"
+          android:layout_height="@dimen/widgetImageHeight"
+          android:layout_alignParentEnd="true"
+          android:layout_centerVertical="true"
+          />
+
+      </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- Movie Item 2 -->
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+      <FrameLayout
+        android:layout_width="@dimen/widgetImageWidth"
+        android:layout_height="@dimen/widgetImageHeight"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/spaceMedium"
+        android:layout_marginTop="@dimen/spaceSmall"
+        android:layout_marginEnd="@dimen/spaceMedium"
+        android:layout_marginBottom="@dimen/spaceSmall"
+        android:background="@drawable/bg_widget_media_view_elevation"
+        android:elevation="@dimen/elevationSmall"
+        >
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="@dimen/spaceSmall"
+          android:src="@drawable/ic_film"
+          android:tint="?attr/colorPlaceholderIcon"
+          app:tint="?attr/colorPlaceholderIcon"
+          tools:ignore="UseAppTint"
+          />
+
+      </FrameLayout>
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        >
+
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentStart="true"
+          android:layout_centerVertical="true"
+          android:layout_toStartOf="@id/previewMovieCheck2"
+          android:orientation="vertical"
+          >
+
+          <TextView
+            style="@style/WidgetItem.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spaceMicro"
+            android:text="Oppenheimer"
+            />
+
+          <TextView
+            style="@style/WidgetItem.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Watched on 21 July 2023"
+            />
+
+        </LinearLayout>
+
+        <ImageButton
+          android:id="@+id/previewMovieCheck2"
+          style="@style/WidgetItem.CheckButton"
+          android:layout_width="@dimen/widgetCheckButtonWidth"
+          android:layout_height="@dimen/widgetImageHeight"
+          android:layout_alignParentEnd="true"
+          android:layout_centerVertical="true"
+          />
+
+      </RelativeLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <!-- Header Label -->
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/widgetLabelHeight"
+    android:background="@drawable/bg_widget_toolbar"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/spaceTiny"
+    android:paddingBottom="@dimen/spaceTiny"
+    >
+
+    <ImageView
+      android:layout_width="14dp"
+      android:layout_height="14dp"
+      android:layout_marginStart="@dimen/spaceTiny"
+      android:layout_marginEnd="@dimen/spaceTiny"
+      android:src="@drawable/ic_app_round"
+      />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="start"
+      android:text="Movies Progress"
+      android:textAlignment="viewStart"
+      android:textColor="@color/colorWhite"
+      android:textSize="10sp"
+      />
+
+  </LinearLayout>
+
+</FrameLayout>
