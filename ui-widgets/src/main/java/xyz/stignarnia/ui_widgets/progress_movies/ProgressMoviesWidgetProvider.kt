@@ -62,18 +62,7 @@ class ProgressMoviesWidgetProvider : BaseWidgetProvider() {
       data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
     }
 
-    val remoteViews = RemoteViews(context.packageName, getLayoutResId()).apply {
-      setRemoteAdapter(R.id.progressWidgetMoviesList, intent)
-      setEmptyView(R.id.progressWidgetMoviesList, R.id.progressWidgetMoviesEmptyView)
-
-      val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
-      val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
-      val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
-      setViewPadding(R.id.progressWidgetMoviesList, 0, paddingTop, 0, spaceTiny)
-      setViewVisibility(R.id.progressWidgetMoviesLabel, labelVisibility)
-
-      setInt(R.id.progressWidgetMoviesNightRoot, "setBackgroundResource", R.drawable.bg_widget)
-    }
+    val palette = palette(context, widgetId)
 
     val mainIntent = PendingIntent.getActivity(
       context,
@@ -81,17 +70,41 @@ class ProgressMoviesWidgetProvider : BaseWidgetProvider() {
       Intent().apply { setClassName(context, Config.HOST_ACTIVITY_NAME) },
       FLAG_IMMUTABLE or FLAG_UPDATE_CURRENT,
     )
-    remoteViews.setOnClickPendingIntent(R.id.progressWidgetMoviesLabel, mainIntent)
 
     val listClickIntent = Intent(context, ProgressMoviesWidgetProvider::class.java).apply {
       action = ACTION_CLICK
       data = Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME))
     }
-
     val listIntent = PendingIntent.getBroadcast(context, 0, listClickIntent, FLAG_MUTABLE or FLAG_UPDATE_CURRENT)
-    remoteViews.setPendingIntentTemplate(R.id.progressWidgetMoviesList, listIntent)
 
-    appWidgetManager.updateAppWidget(widgetId, remoteViews)
+    // Everything but the adapter, so the same frame can be sent with it and without - see updateWidget.
+    fun buildViews(withAdapter: Boolean) =
+      RemoteViews(context.packageName, getLayoutResId()).apply {
+        if (withAdapter) setRemoteAdapter(R.id.progressWidgetMoviesList, intent)
+        setEmptyView(R.id.progressWidgetMoviesList, R.id.progressWidgetMoviesEmptyView)
+
+        val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
+        val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
+        val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
+        setViewPadding(R.id.progressWidgetMoviesList, 0, paddingTop, 0, spaceTiny)
+        setViewVisibility(R.id.progressWidgetMoviesLabel, labelVisibility)
+
+        applyWidgetChrome(
+          palette,
+          R.id.progressWidgetMoviesNightRoot,
+          R.id.progressWidgetMoviesLabel,
+          R.id.progressWidgetMoviesLabelText,
+        )
+        palette?.let {
+          setTextColor(R.id.progressWidgetMoviesEmptyViewTitle, it.textPrimary)
+          setTextColor(R.id.progressWidgetMoviesEmptyViewSubtitle, it.textSecondary)
+        }
+
+        setOnClickPendingIntent(R.id.progressWidgetMoviesLabel, mainIntent)
+        setPendingIntentTemplate(R.id.progressWidgetMoviesList, listIntent)
+      }
+
+    appWidgetManager.updateWidget(widgetId, palette, ::buildViews)
     appWidgetManager.notifyAppWidgetViewDataChanged(widgetId, R.id.progressWidgetMoviesList)
   }
 

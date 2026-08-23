@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The widget palettes, spelled out.
+
+  A widget cannot read the app's theme.
+  It is drawn by the launcher, against the launcher's configuration, and a theme lives on an Activity - so the colours below are resolved in Kotlin at update time and pushed onto the RemoteViews.
+  See WidgetPalette.
+
+  That is also why none of these names are qualified with -night: a widget set to Light has to stay light while the system is dark, so light and dark have to be different names rather than the same name in two folders.
+  The light set is values/colors_theme.xml, the dark set is values-night/colors_theme.xml, and the black set is the dark one with the surfaces from values-night/colors_amoled.xml over it - exactly what @style/ThemeOverlay.Shelfly.Amoled does to the app.
+  WidgetPaletteResourcesTest holds the three in step with those files; if a theme colour changes there and not here, that test fails rather than the widget quietly drifting from the app beside it.
+
+  Material You has no entry here: those palettes are read from @android:color/system_* at runtime, and exist only from API 34 - see AppTheme.isSupported.
+-->
+<resources>
+
+  <!-- Light -->
+  <color name="widgetLightBackground">#FAFAFA</color>
+  <color name="widgetLightTextPrimary">#1A1A1A</color>
+  <color name="widgetLightTextSecondary">#5F5F5F</color>
+  <color name="widgetLightAccent">#F44336</color>
+  <color name="widgetLightAccentText">#D32F2F</color>
+  <color name="widgetLightBadge">#EBEBEB</color>
+  <color name="widgetLightPlaceholderInk">#9E9E9E</color>
+  <color name="widgetLightSearchBackground">#FFFFFF</color>
+  <!--
+    The label bar is a scrim: the list scrolls under it rather than stopping at it.
+    On a light widget that scrim inverts - translucent white over light content, with the label in the ordinary secondary text colour instead of white.
+  -->
+  <color name="widgetLightStatusBackground">#B2FFFFFF</color>
+  <color name="widgetLightStatusText">#5F5F5F</color>
+
+  <!-- Dark -->
+  <color name="widgetDarkBackground">#131313</color>
+  <color name="widgetDarkTextPrimary">#FFFFFF</color>
+  <color name="widgetDarkTextSecondary">#AAAAAA</color>
+  <color name="widgetDarkAccent">#F44336</color>
+  <color name="widgetDarkAccentText">#F44336</color>
+  <color name="widgetDarkBadge">#303030</color>
+  <color name="widgetDarkPlaceholderInk">#6A6A6A</color>
+  <color name="widgetDarkSearchBackground">#222327</color>
+  <color name="widgetDarkStatusBackground">#B2000000</color>
+  <color name="widgetDarkStatusText">#FFFFFF</color>
+
+  <!-- Black, for the pure black switch -->
+  <color name="widgetBlackBackground">#000000</color>
+  <color name="widgetBlackTextPrimary">#FFFFFF</color>
+  <color name="widgetBlackTextSecondary">#AAAAAA</color>
+  <color name="widgetBlackAccent">#F44336</color>
+  <color name="widgetBlackAccentText">#F44336</color>
+  <color name="widgetBlackBadge">#141414</color>
+  <color name="widgetBlackPlaceholderInk">#6A6A6A</color>
+  <color name="widgetBlackSearchBackground">#000000</color>
+  <color name="widgetBlackStatusBackground">#B2000000</color>
+  <color name="widgetBlackStatusText">#FFFFFF</color>
+
+</resources>

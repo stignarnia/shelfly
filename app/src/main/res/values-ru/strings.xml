@@ -17,6 +17,11 @@
   <string name="textOnboardingApiKeyMessage">Это приложение использует ваш собственный ключ TMDB, поэтому никакой ключ не встроен в приложение, а ваши данные никому не передаются.\n\nСоздайте бесплатный аккаунт на themoviedb.org/settings/api, скопируйте ключ API (v3 auth) из Настройки → API и вставьте его ниже. Вы сможете изменить его позже в Настройках.</string>
   <string name="textOnboardingApiKeyHint">Ключ API (аутентификация v3)</string>
 
+  <string name="textWidgetConfigTitle">Виджет</string>
+  <string name="textWidgetConfigThemeApp">Как в приложении</string>
+  <string name="textWidgetConfigThemeSummary">Цвета, в которых отрисовывается этот виджет.</string>
+  <string name="textWidgetConfigAmoledSummary">Использовать чисто чёрный фон, когда виджет тёмный.</string>
+  <string name="textWidgetConfigDone">Готово</string>
   <string name="textWelcomeStepIndicator">Шаг %1$d из %2$d</string>
   <string name="textBack">Назад</string>
   <string name="textContinue">Продолжить</string>

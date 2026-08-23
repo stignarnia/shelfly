@@ -27,6 +27,7 @@ import xyz.stignarnia.ui_widgets.calendar.CalendarWidgetProvider
 import xyz.stignarnia.ui_widgets.calendar_movies.CalendarMoviesWidgetProvider
 import xyz.stignarnia.ui_widgets.progress.ProgressWidgetProvider
 import xyz.stignarnia.ui_widgets.progress_movies.ProgressMoviesWidgetProvider
+import xyz.stignarnia.ui_widgets.search.SearchWidgetProvider
 
 @HiltAndroidApp
 class App :
@@ -40,6 +41,9 @@ class App :
   @Inject lateinit var workerFactory: HiltWorkerFactory
   @Inject lateinit var settingsRepository: SettingsRepository
   @Inject lateinit var syncNotificationManager: SyncNotificationManager
+
+  /** The night mode the widgets were last drawn against - see [onConfigurationChanged]. */
+  private var lastNightMode = android.content.res.Configuration.UI_MODE_NIGHT_UNDEFINED
 
   override val workManagerConfiguration: Configuration
     get() = Configuration
@@ -133,6 +137,7 @@ class App :
     setupSettings()
     setupLanguage()
     ThemeApplier.applyNightMode(settingsRepository)
+    lastNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
     setupStrictMode()
     setupNotificationChannels()
     syncNotificationManager.cancelStaleProgress()
@@ -150,5 +155,26 @@ class App :
       ProgressMoviesWidgetProvider.requestUpdate(applicationContext)
       CalendarMoviesWidgetProvider.requestUpdate(applicationContext)
     }
+  }
+
+  override fun requestAllWidgetsUpdate() {
+    requestShowsWidgetsUpdate()
+    requestMoviesWidgetsUpdate()
+    appScope.launch { SearchWidgetProvider.requestUpdate(applicationContext) }
+  }
+
+  /**
+   * Repaints the widgets when the system flips between light and dark.
+   *
+   * A widget under "Follow system" has its colours resolved when it is drawn and pushed into the launcher as values, so nothing about a configuration change corrects them by itself.
+   * This catches the case where the app happens to be running; where it is not, the widget's own update period does, within fifteen minutes.
+   * A manifest receiver is not an option - ACTION_CONFIGURATION_CHANGED has not been deliverable to one since Android 8.
+   */
+  override fun onConfigurationChanged(newConfig: android.content.res.Configuration) {
+    super.onConfigurationChanged(newConfig)
+    val nightMode = newConfig.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+    if (nightMode == lastNightMode) return
+    lastNightMode = nightMode
+    requestAllWidgetsUpdate()
   }
 }

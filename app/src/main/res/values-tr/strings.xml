@@ -17,6 +17,11 @@
   <string name="textOnboardingApiKeyMessage">Bu uygulama kendi TMDB anahtarınızı kullanır, bu nedenle içine hiçbir anahtar dahil edilmez ve kullanımınız başkalarıyla paylaşılmaz.\n\nthemoviedb.org/settings/api adresinde ücretsiz bir hesap oluşturun, ardından Ayarlar → API bölümünden API anahtarını (v3 doğrulaması) kopyalayın ve aşağıya yapıştırın. Daha sonra Ayarlar\'dan değiştirebilirsiniz.</string>
   <string name="textOnboardingApiKeyHint">API anahtarı (v3 kimlik doğrulama)</string>
 
+  <string name="textWidgetConfigTitle">Widget</string>
+  <string name="textWidgetConfigThemeApp">Uygulamayla aynı</string>
+  <string name="textWidgetConfigThemeSummary">Bu widget\'ın çizildiği renkler.</string>
+  <string name="textWidgetConfigAmoledSummary">Bu widget koyu olduğunda saf siyah arka plan kullan.</string>
+  <string name="textWidgetConfigDone">Bitti</string>
   <string name="textWelcomeStepIndicator">Adım %1$d / %2$d</string>
   <string name="textBack">Geri</string>
   <string name="textContinue">Devam et</string>

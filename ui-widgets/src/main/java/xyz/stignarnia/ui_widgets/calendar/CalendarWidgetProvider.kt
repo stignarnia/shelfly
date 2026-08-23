@@ -20,6 +20,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_model.CalendarMode
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider
 import xyz.stignarnia.ui_widgets.R
+import xyz.stignarnia.ui_widgets.theme.setIconTint
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -63,30 +64,7 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
       data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
     }
 
-    val remoteViews = RemoteViews(context.packageName, getLayoutResId()).apply {
-      setRemoteAdapter(R.id.calendarWidgetList, intent)
-      setEmptyView(R.id.calendarWidgetList, R.id.calendarWidgetEmptyView)
-
-      val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
-      val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
-      val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
-      setViewPadding(R.id.calendarWidgetList, 0, paddingTop, 0, spaceTiny)
-      setViewPadding(R.id.calendarWidgetEmptyView, 0, paddingTop, 0, 0)
-      setViewVisibility(R.id.calendarWidgetLabel, labelVisibility)
-
-      setInt(R.id.calendarWidgetNightRoot, "setBackgroundResource", R.drawable.bg_widget)
-
-      when (settingsRepository.widgets.getWidgetCalendarMode(Mode.SHOWS, widgetId)) {
-        CalendarMode.PRESENT_FUTURE -> {
-          setImageViewResource(R.id.calendarWidgetEmptyViewIcon, R.drawable.ic_history)
-          setTextViewText(R.id.calendarWidgetEmptyViewSubtitle, context.getString(R.string.textCalendarEmpty))
-        }
-        CalendarMode.RECENTS -> {
-          setImageViewResource(R.id.calendarWidgetEmptyViewIcon, R.drawable.ic_calendar)
-          setTextViewText(R.id.calendarWidgetEmptyViewSubtitle, context.getString(R.string.textRecentsEmpty))
-        }
-      }
-    }
+    val palette = palette(context, widgetId)
 
     val mainIntent = PendingIntent.getActivity(
       context,
@@ -94,8 +72,6 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
       Intent().apply { setClassName(context, Config.HOST_ACTIVITY_NAME) },
       FLAG_IMMUTABLE or FLAG_UPDATE_CURRENT,
     )
-    remoteViews.setOnClickPendingIntent(R.id.calendarWidgetLabelImage, mainIntent)
-    remoteViews.setOnClickPendingIntent(R.id.calendarWidgetLabelText, mainIntent)
 
     val modeClickIntent = PendingIntent.getBroadcast(
       context,
@@ -107,17 +83,51 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
       },
       FLAG_MUTABLE or FLAG_UPDATE_CURRENT,
     )
-    remoteViews.setOnClickPendingIntent(R.id.calendarWidgetEmptyViewIcon, modeClickIntent)
 
     val listClickIntent = Intent(context, CalendarWidgetProvider::class.java).apply {
       action = ACTION_CLICK
       data = Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME))
     }
-
     val listIntent = PendingIntent.getBroadcast(context, 0, listClickIntent, FLAG_MUTABLE or FLAG_UPDATE_CURRENT)
-    remoteViews.setPendingIntentTemplate(R.id.calendarWidgetList, listIntent)
 
-    appWidgetManager.updateAppWidget(widgetId, remoteViews)
+    // Everything but the adapter, so the same frame can be sent with it and without - see updateWidget.
+    fun buildViews(withAdapter: Boolean) =
+      RemoteViews(context.packageName, getLayoutResId()).apply {
+        if (withAdapter) setRemoteAdapter(R.id.calendarWidgetList, intent)
+        setEmptyView(R.id.calendarWidgetList, R.id.calendarWidgetEmptyView)
+
+        val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
+        val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
+        val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
+        setViewPadding(R.id.calendarWidgetList, 0, paddingTop, 0, spaceTiny)
+        setViewPadding(R.id.calendarWidgetEmptyView, 0, paddingTop, 0, 0)
+        setViewVisibility(R.id.calendarWidgetLabel, labelVisibility)
+
+        applyWidgetChrome(palette, R.id.calendarWidgetNightRoot, R.id.calendarWidgetLabel, R.id.calendarWidgetLabelText)
+        palette?.let {
+          setTextColor(R.id.calendarWidgetEmptyViewTitle, it.textPrimary)
+          setTextColor(R.id.calendarWidgetEmptyViewSubtitle, it.textSecondary)
+          setIconTint(R.id.calendarWidgetEmptyViewIcon, it.textPrimary)
+        }
+
+        when (settingsRepository.widgets.getWidgetCalendarMode(Mode.SHOWS, widgetId)) {
+          CalendarMode.PRESENT_FUTURE -> {
+            setImageViewResource(R.id.calendarWidgetEmptyViewIcon, R.drawable.ic_history)
+            setTextViewText(R.id.calendarWidgetEmptyViewSubtitle, context.getString(R.string.textCalendarEmpty))
+          }
+          CalendarMode.RECENTS -> {
+            setImageViewResource(R.id.calendarWidgetEmptyViewIcon, R.drawable.ic_calendar)
+            setTextViewText(R.id.calendarWidgetEmptyViewSubtitle, context.getString(R.string.textRecentsEmpty))
+          }
+        }
+
+        setOnClickPendingIntent(R.id.calendarWidgetLabelImage, mainIntent)
+        setOnClickPendingIntent(R.id.calendarWidgetLabelText, mainIntent)
+        setOnClickPendingIntent(R.id.calendarWidgetEmptyViewIcon, modeClickIntent)
+        setPendingIntentTemplate(R.id.calendarWidgetList, listIntent)
+      }
+
+    appWidgetManager.updateWidget(widgetId, palette, ::buildViews)
     appWidgetManager.notifyAppWidgetViewDataChanged(widgetId, R.id.calendarWidgetList)
   }
 

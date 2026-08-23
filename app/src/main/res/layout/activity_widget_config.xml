@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The screen the launcher opens from a widget's settings.
+
+  It reads as a short page of the app's own Settings rather than a dialog: the same rows, the same styles, so the theme picker here and the one in Settings > General are recognisably the same control.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/widgetConfigContent"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?attr/colorAppBackground"
+  android:fitsSystemWindows="true"
+  tools:theme="@style/AppTheme"
+  >
+
+  <TextView
+    android:id="@+id/widgetConfigCategory"
+    style="@style/Settings.Category"
+    android:text="@string/textWidgetConfigTitle"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/widgetConfigTheme"
+    style="@style/Settings.ItemLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/widgetConfigCategory"
+    >
+
+    <TextView
+      android:id="@+id/widgetConfigThemeTitle"
+      style="@style/Settings.Title"
+      android:text="@string/textSettingsThemeTitle"
+      app:layout_constraintBottom_toTopOf="@id/widgetConfigThemeDescription"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      />
+
+    <TextView
+      android:id="@+id/widgetConfigThemeDescription"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceNormal"
+      android:text="@string/textWidgetConfigThemeSummary"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/widgetConfigThemeValue"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/widgetConfigThemeTitle"
+      />
+
+    <TextView
+      android:id="@+id/widgetConfigThemeValue"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:textColor="?attr/colorAccentText"
+      app:layout_constraintBottom_toBottomOf="@id/widgetConfigTheme"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/widgetConfigTheme"
+      tools:text="Same as app"
+      />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <!-- Greyed out, not hidden, wherever the chosen theme can never resolve to dark - as in Settings. -->
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/widgetConfigAmoled"
+    style="@style/Settings.ItemLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/widgetConfigTheme"
+    >
+
+    <TextView
+      android:id="@+id/widgetConfigAmoledTitle"
+      style="@style/Settings.Title"
+      android:text="@string/textSettingsAmoledTitle"
+      app:layout_constraintBottom_toTopOf="@id/widgetConfigAmoledDescription"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      />
+
+    <TextView
+      android:id="@+id/widgetConfigAmoledDescription"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceSmall"
+      android:text="@string/textWidgetConfigAmoledSummary"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/widgetConfigAmoledSwitch"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/widgetConfigAmoledTitle"
+      />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+      android:id="@+id/widgetConfigAmoledSwitch"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:background="@null"
+      android:clickable="false"
+      app:layout_constraintBottom_toBottomOf="@id/widgetConfigAmoled"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/widgetConfigAmoled"
+      />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/widgetConfigDoneButton"
+    style="@style/PrimaryMaterialButton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spaceNormal"
+    android:layout_marginEnd="@dimen/spaceNormal"
+    android:layout_marginBottom="@dimen/spaceNormal"
+    android:text="@string/textWidgetConfigDone"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

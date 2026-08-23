@@ -17,6 +17,11 @@
   <string name="textOnboardingApiKeyMessage">Ta aplikacja korzysta z Twojego własnego klucza TMDB, więc żaden klucz nie jest w niej zawarty, a Twoje użycie nie jest nikomu udostępniane.\n\nZałóż darmowe konto na themoviedb.org/settings/api, skopiuj klucz API (uwierzytelnianie v3) z Ustawienia → API i wklej go poniżej. Możesz go zmienić później w Ustawieniach.</string>
   <string name="textOnboardingApiKeyHint">Klucz API (uwierzytelnianie v3)</string>
 
+  <string name="textWidgetConfigTitle">Widżet</string>
+  <string name="textWidgetConfigThemeApp">Tak jak aplikacja</string>
+  <string name="textWidgetConfigThemeSummary">Kolory, którymi rysowany jest ten widżet.</string>
+  <string name="textWidgetConfigAmoledSummary">Używaj czarnego tła, gdy ten widżet jest ciemny.</string>
+  <string name="textWidgetConfigDone">Gotowe</string>
   <string name="textWelcomeStepIndicator">Krok %1$d z %2$d</string>
   <string name="textBack">Wstecz</string>
   <string name="textContinue">Dalej</string>

@@ -17,6 +17,11 @@
   <string name="textOnboardingApiKeyMessage">يستخدم هذا التطبيق مفتاح TMDB الخاص بك، لذلك لا يتم تضمين أي مفتاح داخله ولا تتم مشاركة استخدامك مع أي شخص آخر.\n\nأنشئ حساباً مجانياً على themoviedb.org/settings/api، ثم انسخ مفتاح API (مصادقة v3) من الإعدادات ← API والصقه أدناه. يمكنك تغييره لاحقاً في الإعدادات.</string>
   <string name="textOnboardingApiKeyHint">مفتاح API (مصادقة v3)</string>
 
+  <string name="textWidgetConfigTitle">عنصر واجهة</string>
+  <string name="textWidgetConfigThemeApp">كما في التطبيق</string>
+  <string name="textWidgetConfigThemeSummary">الألوان التي يُرسم بها عنصر الواجهة هذا.</string>
+  <string name="textWidgetConfigAmoledSummary">استخدم خلفيات سوداء نقية عندما يكون عنصر الواجهة داكناً.</string>
+  <string name="textWidgetConfigDone">تم</string>
   <string name="textWelcomeStepIndicator">الخطوة %1$d من %2$d</string>
   <string name="textBack">رجوع</string>
   <string name="textContinue">متابعة</string>

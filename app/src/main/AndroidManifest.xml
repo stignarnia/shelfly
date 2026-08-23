@@ -82,6 +82,22 @@
 
     </activity>
 
+    <!--
+      A widget's own settings, opened by the launcher rather than from inside the app.
+      Exported because the launcher starts it; it is named as the configure Activity by the widget providers in res/xml-v34, and it acts on the widget id the launcher hands it and on nothing else.
+      Kept out of recents: it belongs to the home screen it was opened from, not to the app's task history.
+    -->
+    <activity
+      android:name=".ui.widgets.WidgetConfigActivity"
+      android:excludeFromRecents="true"
+      android:exported="true"
+      android:label="@string/textWidgetConfigTitle"
+      >
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+      </intent-filter>
+    </activity>
+
     <!--  Work Manager  -->
 
     <provider

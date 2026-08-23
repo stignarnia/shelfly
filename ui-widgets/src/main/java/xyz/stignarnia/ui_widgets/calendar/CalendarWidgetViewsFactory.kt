@@ -26,6 +26,10 @@ import xyz.stignarnia.ui_progress.calendar.recycler.CalendarListItem
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider.Companion.EXTRA_MODE_CLICK
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider.Companion.EXTRA_SHOW_ID
 import xyz.stignarnia.ui_widgets.R
+import xyz.stignarnia.ui_widgets.theme.WidgetPalette
+import xyz.stignarnia.ui_widgets.theme.WidgetPalettes
+import xyz.stignarnia.ui_widgets.theme.setBackgroundTint
+import xyz.stignarnia.ui_widgets.theme.setIconTint
 import kotlinx.coroutines.runBlocking
 import java.util.Locale
 
@@ -41,10 +45,12 @@ class CalendarWidgetViewsFactory(
   private val imageWidth by lazy { context.dimenToPx(R.dimen.widgetImageWidth) }
   private val imageHeight by lazy { context.dimenToPx(R.dimen.widgetImageHeight) }
   private var mode = PRESENT_FUTURE
+  private var palette: WidgetPalette? = null
 
   private val adapterItems = mutableListOf<CalendarListItem>()
 
   override fun onDataSetChanged() {
+    palette = WidgetPalettes.resolve(context, widgetId, settingsRepository)
     runBlocking {
       mode = settingsRepository.widgets.getWidgetCalendarMode(Mode.SHOWS, widgetId)
       val items = when (mode) {
@@ -82,6 +88,12 @@ class CalendarWidgetViewsFactory(
       setOnClickFillInIntent(R.id.progressWidgetHeaderIcon, fillIntent)
     } else {
       setViewVisibility(R.id.progressWidgetHeaderIcon, GONE)
+    }
+
+    palette?.let {
+      setTextColor(R.id.progressWidgetHeaderTitle, it.textPrimary)
+      setIconTint(R.id.progressWidgetHeaderTitleIcon, it.textPrimary)
+      setIconTint(R.id.progressWidgetHeaderIcon, it.textPrimary)
     }
   }
 
@@ -142,6 +154,16 @@ class CalendarWidgetViewsFactory(
       setOnClickFillInIntent(R.id.calendarWidgetItem, fillIntent)
 
       setViewVisibility(R.id.calendarWidgetItemImageBadge, if (item.isWatchlist) VISIBLE else GONE)
+
+      palette?.let {
+        setInt(R.id.calendarWidgetItemFrame, "setBackgroundResource", it.mediaFrame)
+        setIconTint(R.id.calendarWidgetItemPlaceholder, it.placeholderInk)
+        setTextColor(R.id.calendarWidgetItemTitle, it.textPrimary)
+        setTextColor(R.id.calendarWidgetItemOverview, it.textPrimary)
+        setTextColor(R.id.calendarWidgetItemBadge, it.textPrimary)
+        setBackgroundTint(R.id.calendarWidgetItemBadge, it.badge)
+        setTextColor(R.id.calendarWidgetItemDate, it.textSecondary)
+      }
     }
 
     if (item.image.status != ImageStatus.AVAILABLE) {

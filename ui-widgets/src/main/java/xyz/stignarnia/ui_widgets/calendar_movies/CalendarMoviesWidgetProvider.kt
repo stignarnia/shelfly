@@ -20,6 +20,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_model.CalendarMode
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider
 import xyz.stignarnia.ui_widgets.R
+import xyz.stignarnia.ui_widgets.theme.setIconTint
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -64,40 +65,13 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
       data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
     }
 
-    val remoteViews = RemoteViews(context.packageName, getLayoutResId()).apply {
-      setRemoteAdapter(R.id.calendarWidgetMoviesList, intent)
-      setEmptyView(R.id.calendarWidgetMoviesList, R.id.calendarWidgetMoviesEmptyView)
-
-      val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
-      val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
-      setViewPadding(R.id.calendarWidgetMoviesList, 0, paddingTop, 0, spaceTiny)
-      setViewPadding(R.id.calendarWidgetMoviesEmptyView, 0, paddingTop, 0, 0)
-      setViewVisibility(R.id.calendarWidgetMoviesLabel, labelVisibility)
-
-      setInt(R.id.calendarWidgetMoviesNightRoot, "setBackgroundResource", R.drawable.bg_widget)
-
-      when (settingsRepository.widgets.getWidgetCalendarMode(Mode.MOVIES, widgetId)) {
-        CalendarMode.PRESENT_FUTURE -> {
-          setImageViewResource(R.id.calendarWidgetMoviesEmptyViewIcon, R.drawable.ic_history)
-          setTextViewText(
-            R.id.calendarWidgetMoviesEmptyViewSubtitle,
-            context.getString(R.string.textMoviesCalendarEmpty),
-          )
-        }
-        CalendarMode.RECENTS -> {
-          setImageViewResource(R.id.calendarWidgetMoviesEmptyViewIcon, R.drawable.ic_calendar)
-          setTextViewText(
-            R.id.calendarWidgetMoviesEmptyViewSubtitle,
-            context.getString(R.string.textMoviesCalendarRecentsEmpty),
-          )
-        }
-      }
-    }
+    val palette = palette(context, widgetId)
 
     val listClickIntent = Intent(context, CalendarMoviesWidgetProvider::class.java).apply {
       action = ACTION_CLICK
       data = Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME))
     }
+    val listIntent = PendingIntent.getBroadcast(context, 0, listClickIntent, FLAG_MUTABLE or FLAG_UPDATE_CURRENT)
 
     val mainIntent = PendingIntent.getActivity(
       context,
@@ -105,8 +79,6 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
       Intent().apply { setClassName(context, Config.HOST_ACTIVITY_NAME) },
       FLAG_IMMUTABLE or FLAG_UPDATE_CURRENT,
     )
-    remoteViews.setOnClickPendingIntent(R.id.calendarWidgetMoviesLabelImage, mainIntent)
-    remoteViews.setOnClickPendingIntent(R.id.calendarWidgetMoviesLabelText, mainIntent)
 
     val modeClickIntent = PendingIntent.getBroadcast(
       context,
@@ -118,12 +90,55 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
       },
       FLAG_MUTABLE or FLAG_UPDATE_CURRENT,
     )
-    remoteViews.setOnClickPendingIntent(R.id.calendarWidgetMoviesEmptyViewIcon, modeClickIntent)
 
-    val listIntent = PendingIntent.getBroadcast(context, 0, listClickIntent, FLAG_MUTABLE or FLAG_UPDATE_CURRENT)
-    remoteViews.setPendingIntentTemplate(R.id.calendarWidgetMoviesList, listIntent)
+    // Everything but the adapter, so the same frame can be sent with it and without - see updateWidget.
+    fun buildViews(withAdapter: Boolean) =
+      RemoteViews(context.packageName, getLayoutResId()).apply {
+        if (withAdapter) setRemoteAdapter(R.id.calendarWidgetMoviesList, intent)
+        setEmptyView(R.id.calendarWidgetMoviesList, R.id.calendarWidgetMoviesEmptyView)
 
-    appWidgetManager.updateAppWidget(widgetId, remoteViews)
+        val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
+        val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
+        setViewPadding(R.id.calendarWidgetMoviesList, 0, paddingTop, 0, spaceTiny)
+        setViewPadding(R.id.calendarWidgetMoviesEmptyView, 0, paddingTop, 0, 0)
+        setViewVisibility(R.id.calendarWidgetMoviesLabel, labelVisibility)
+
+        applyWidgetChrome(
+          palette,
+          R.id.calendarWidgetMoviesNightRoot,
+          R.id.calendarWidgetMoviesLabel,
+          R.id.calendarWidgetMoviesLabelText,
+        )
+        palette?.let {
+          setTextColor(R.id.calendarWidgetMoviesEmptyViewTitle, it.textPrimary)
+          setTextColor(R.id.calendarWidgetMoviesEmptyViewSubtitle, it.textSecondary)
+          setIconTint(R.id.calendarWidgetMoviesEmptyViewIcon, it.textPrimary)
+        }
+
+        when (settingsRepository.widgets.getWidgetCalendarMode(Mode.MOVIES, widgetId)) {
+          CalendarMode.PRESENT_FUTURE -> {
+            setImageViewResource(R.id.calendarWidgetMoviesEmptyViewIcon, R.drawable.ic_history)
+            setTextViewText(
+              R.id.calendarWidgetMoviesEmptyViewSubtitle,
+              context.getString(R.string.textMoviesCalendarEmpty),
+            )
+          }
+          CalendarMode.RECENTS -> {
+            setImageViewResource(R.id.calendarWidgetMoviesEmptyViewIcon, R.drawable.ic_calendar)
+            setTextViewText(
+              R.id.calendarWidgetMoviesEmptyViewSubtitle,
+              context.getString(R.string.textMoviesCalendarRecentsEmpty),
+            )
+          }
+        }
+
+        setOnClickPendingIntent(R.id.calendarWidgetMoviesLabelImage, mainIntent)
+        setOnClickPendingIntent(R.id.calendarWidgetMoviesLabelText, mainIntent)
+        setOnClickPendingIntent(R.id.calendarWidgetMoviesEmptyViewIcon, modeClickIntent)
+        setPendingIntentTemplate(R.id.calendarWidgetMoviesList, listIntent)
+      }
+
+    appWidgetManager.updateWidget(widgetId, palette, ::buildViews)
     appWidgetManager.notifyAppWidgetViewDataChanged(widgetId, R.id.calendarWidgetMoviesList)
   }
 

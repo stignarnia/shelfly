@@ -24,6 +24,9 @@ import xyz.stignarnia.ui_progress_movies.calendar.recycler.CalendarMovieListItem
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider.Companion.EXTRA_MOVIE_ID
 import xyz.stignarnia.ui_widgets.R
+import xyz.stignarnia.ui_widgets.theme.WidgetPalette
+import xyz.stignarnia.ui_widgets.theme.WidgetPalettes
+import xyz.stignarnia.ui_widgets.theme.setIconTint
 import kotlinx.coroutines.runBlocking
 
 class CalendarMoviesWidgetViewsFactory(
@@ -38,10 +41,12 @@ class CalendarMoviesWidgetViewsFactory(
   private val imageWidth by lazy { context.dimenToPx(R.dimen.widgetImageWidth) }
   private val imageHeight by lazy { context.dimenToPx(R.dimen.widgetImageHeight) }
   private var mode = CalendarMode.PRESENT_FUTURE
+  private var palette: WidgetPalette? = null
 
   private val adapterItems = mutableListOf<CalendarMovieListItem>()
 
   override fun onDataSetChanged() {
+    palette = WidgetPalettes.resolve(context, widgetId, settingsRepository)
     runBlocking {
       mode = settingsRepository.widgets.getWidgetCalendarMode(Mode.MOVIES, widgetId)
       val items = when (mode) {
@@ -80,6 +85,12 @@ class CalendarMoviesWidgetViewsFactory(
     } else {
       setViewVisibility(R.id.progressWidgetHeaderIcon, GONE)
     }
+
+    palette?.let {
+      setTextColor(R.id.progressWidgetHeaderTitle, it.textPrimary)
+      setIconTint(R.id.progressWidgetHeaderTitleIcon, it.textPrimary)
+      setIconTint(R.id.progressWidgetHeaderIcon, it.textPrimary)
+    }
   }
 
   private fun createItemRemoteView(item: CalendarMovieListItem.MovieItem): RemoteViews {
@@ -115,6 +126,14 @@ class CalendarMoviesWidgetViewsFactory(
         putExtras(bundleOf(EXTRA_MOVIE_ID to item.movie.tmdbId))
       }
       setOnClickFillInIntent(R.id.calendarMoviesWidgetItem, fillIntent)
+
+      palette?.let {
+        setInt(R.id.calendarMoviesWidgetItemFrame, "setBackgroundResource", it.mediaFrame)
+        setIconTint(R.id.calendarMoviesWidgetItemPlaceholder, it.placeholderInk)
+        setTextColor(R.id.calendarMoviesWidgetItemTitle, it.textPrimary)
+        setTextColor(R.id.calendarMoviesWidgetItemOverview, it.textPrimary)
+        setTextColor(R.id.calendarMoviesWidgetItemDate, it.textSecondary)
+      }
     }
 
     if (item.image.status != ImageStatus.AVAILABLE) {

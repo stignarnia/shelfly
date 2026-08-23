@@ -10,6 +10,7 @@ import android.widget.RemoteViewsService
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.ui_base.utilities.DurationPrinter
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_base.utilities.extensions.replace
@@ -21,13 +22,20 @@ import xyz.stignarnia.ui_widgets.BaseWidgetProvider.Companion.EXTRA_SHOW_ID
 import xyz.stignarnia.ui_widgets.R
 import xyz.stignarnia.ui_widgets.progress.ProgressWidgetProvider.Companion.EXTRA_EPISODE_ID
 import xyz.stignarnia.ui_widgets.progress.ProgressWidgetProvider.Companion.EXTRA_SEASON_ID
+import xyz.stignarnia.ui_widgets.theme.WidgetPalette
+import xyz.stignarnia.ui_widgets.theme.WidgetPalettes
+import xyz.stignarnia.ui_widgets.theme.setBackgroundTint
+import xyz.stignarnia.ui_widgets.theme.setIconTint
+import xyz.stignarnia.ui_widgets.theme.setProgressTint
 import kotlinx.coroutines.runBlocking
 import java.util.Locale.ENGLISH
 import kotlin.math.roundToInt
 
 class ProgressWidgetViewsFactory(
+  private val widgetId: Int,
   private val context: Context,
   private val itemsCase: ProgressItemsCase,
+  private val settingsRepository: SettingsRepository,
 ) : RemoteViewsService.RemoteViewsFactory {
 
   private val imageCorner by lazy { context.dimenToPx(R.dimen.mediaTileCorner) }
@@ -38,7 +46,13 @@ class ProgressWidgetViewsFactory(
   private val adapterItems by lazy { mutableListOf<ProgressListItem>() }
   private val durationPrinter by lazy { DurationPrinter(context.applicationContext) }
 
+  /**
+   * Re-read on every refresh rather than held from construction: a theme picked in the launcher changes nothing about the data, and notifyAppWidgetViewDataChanged is the only thing that runs afterwards.
+   */
+  private var palette: WidgetPalette? = null
+
   override fun onDataSetChanged() {
+    palette = WidgetPalettes.resolve(context, widgetId, settingsRepository)
     runBlocking {
       val items = itemsCase
         .loadWidgetItems()
@@ -145,6 +159,20 @@ class ProgressWidgetViewsFactory(
         )
       }
       setOnClickFillInIntent(R.id.progressWidgetItemCheckButton, checkFillIntent)
+
+      palette?.let {
+        setInt(R.id.progressWidgetItemFrame, "setBackgroundResource", it.mediaFrame)
+        setIconTint(R.id.progressWidgetItemPlaceholder, it.placeholderInk)
+        setTextColor(R.id.progressWidgetItemTitle, it.textPrimary)
+        setTextColor(R.id.progressWidgetItemBadge, it.accentText)
+        setTextColor(R.id.progressWidgetItemSubtitle, it.textPrimary)
+        setBackgroundTint(R.id.progressWidgetItemSubtitle, it.badge)
+        setTextColor(R.id.progressWidgetItemSubtitle2, it.textPrimary)
+        setTextColor(R.id.progressWidgetItemProgressText, it.textSecondary)
+        setProgressTint(R.id.progressWidgetItemProgress, it.accent, it.textSecondary)
+        setIconTint(R.id.progressWidgetItemCheckButton, it.textPrimary)
+        setTextColor(R.id.progressWidgetItemDateButton, it.textSecondary)
+      }
     }
 
     if (item.image.status != ImageStatus.AVAILABLE) {
@@ -178,6 +206,11 @@ class ProgressWidgetViewsFactory(
   private fun createHeaderRemoteView(item: ProgressListItem.Header) =
     RemoteViews(context.packageName, getHeaderLayout()).apply {
       setTextViewText(R.id.progressWidgetHeaderTitle, context.getString(item.textResId))
+      palette?.let {
+        setTextColor(R.id.progressWidgetHeaderTitle, it.textPrimary)
+        setIconTint(R.id.progressWidgetHeaderTitleIcon, it.textPrimary)
+        setIconTint(R.id.progressWidgetHeaderIcon, it.textPrimary)
+      }
     }
 
   private fun getItemLayout(): Int = R.layout.widget_progress_item_night

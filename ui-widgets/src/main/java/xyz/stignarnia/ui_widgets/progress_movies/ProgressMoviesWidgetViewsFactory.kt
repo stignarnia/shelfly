@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_base.utilities.extensions.replace
 import xyz.stignarnia.ui_model.ImageStatus
@@ -18,19 +19,26 @@ import xyz.stignarnia.ui_progress_movies.progress.recycler.ProgressMovieListItem
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider.Companion.EXTRA_MOVIE_ID
 import xyz.stignarnia.ui_widgets.R
 import xyz.stignarnia.ui_widgets.progress_movies.ProgressMoviesWidgetProvider.Companion.EXTRA_CHECK_MOVIE_ID
+import xyz.stignarnia.ui_widgets.theme.WidgetPalette
+import xyz.stignarnia.ui_widgets.theme.WidgetPalettes
+import xyz.stignarnia.ui_widgets.theme.setIconTint
 import kotlinx.coroutines.runBlocking
 
 class ProgressMoviesWidgetViewsFactory(
+  private val widgetId: Int,
   private val context: Context,
   private val loadItemsCase: ProgressMoviesItemsCase,
+  private val settingsRepository: SettingsRepository,
 ) : RemoteViewsService.RemoteViewsFactory {
 
   private val imageCorner by lazy { context.dimenToPx(R.dimen.mediaTileCorner) }
   private val imageWidth by lazy { context.dimenToPx(R.dimen.widgetImageWidth) }
   private val imageHeight by lazy { context.dimenToPx(R.dimen.widgetImageHeight) }
   private val adapterItems by lazy { mutableListOf<ProgressMovieListItem>() }
+  private var palette: WidgetPalette? = null
 
   override fun onDataSetChanged() {
+    palette = WidgetPalettes.resolve(context, widgetId, settingsRepository)
     runBlocking {
       val items = loadItemsCase
         .loadItems("")
@@ -74,6 +82,14 @@ class ProgressMoviesWidgetViewsFactory(
         putExtras(bundleOf(EXTRA_CHECK_MOVIE_ID to item.movie.tmdbId))
       }
       setOnClickFillInIntent(R.id.progressMoviesWidgetItemCheckButton, checkFillIntent)
+
+      palette?.let {
+        setInt(R.id.progressMoviesWidgetItemFrame, "setBackgroundResource", it.mediaFrame)
+        setIconTint(R.id.progressMoviesWidgetItemPlaceholder, it.placeholderInk)
+        setTextColor(R.id.progressMoviesWidgetItemTitle, it.textPrimary)
+        setTextColor(R.id.progressMoviesWidgetItemSubtitle2, it.textSecondary)
+        setIconTint(R.id.progressMoviesWidgetItemCheckButton, it.textPrimary)
+      }
     }
 
     if (item.image.status != ImageStatus.AVAILABLE) {

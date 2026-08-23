@@ -3,8 +3,14 @@
   <!-- Widgets -->
 
   <!--
-    Widgets do not follow the app's theme.
-    They are drawn by the launcher, in its process and against its configuration, so the night mode the user picked in Shelfly has no bearing on them - and a widget that flipped to light because the launcher did would look nothing like the app beside it.
+    What a widget looks like before anything is pushed onto it.
+
+    A widget is drawn by the launcher, in its process and against its configuration, and android:theme is fixed in the layout XML at build time - so a per widget theme cannot be a style at all.
+    It is resolved in Kotlin and pushed onto the RemoteViews as colours; see WidgetPalette.
+
+    This style is what is left underneath.
+    Below API 31, where RemoteViews cannot tint a background, it is the whole appearance and widgets stay dark exactly as they always were.
+    From 31 the palette covers it, and it only answers for anything the palette does not push.
     The parent is DayNight, so every colour a widget layout reads is spelled out here rather than inherited.
   -->
   <style name="AppTheme.Widget.Dark" parent="AppTheme">

@@ -124,7 +124,7 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
       settingsAmoledSwitch.isEnabled = canBeDark
       settingsAmoled.alpha = if (canBeDark) 1F else DISABLED_ALPHA
       settingsAmoledSwitch.isChecked = amoled
-      settingsAmoled.onClick { if (canBeDark) viewModel.setAmoled(!amoled) }
+      settingsAmoled.onClick { if (canBeDark) viewModel.setAmoled(!amoled, requireAppContext()) }
     }
   }
 
@@ -196,7 +196,7 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
 
   private fun showThemeDialog(theme: AppTheme) =
     showSingleChoiceModal(AppTheme.supported(), theme, { getString(it.displayName) }) {
-      if (it != theme) viewModel.setTheme(it)
+      if (it != theme) viewModel.setTheme(it, requireAppContext())
     }
 
   private fun showLanguageDialog(language: AppLanguage) =

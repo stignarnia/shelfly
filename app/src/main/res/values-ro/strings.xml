@@ -17,6 +17,11 @@
   <string name="textOnboardingApiKeyMessage">Această aplicație folosește propria cheie TMDB, astfel încât nicio cheie nu este inclusă în aplicație și utilizarea nu este partajată cu nimeni altcineva.\n\nCreați un cont gratuit pe themoviedb.org/settings/api, copiați cheia API (autentificare v3) din Setări → API și inserați-o mai jos. O puteți schimba ulterior în Setări.</string>
   <string name="textOnboardingApiKeyHint">Cheie API (autentificare v3)</string>
 
+  <string name="textWidgetConfigTitle">Widget</string>
+  <string name="textWidgetConfigThemeApp">La fel ca aplicația</string>
+  <string name="textWidgetConfigThemeSummary">Culorile cu care este desenat acest widget.</string>
+  <string name="textWidgetConfigAmoledSummary">Folosește fundaluri complet negre când acest widget este întunecat.</string>
+  <string name="textWidgetConfigDone">Gata</string>
   <string name="textWelcomeStepIndicator">Pasul %1$d din %2$d</string>
   <string name="textBack">Înapoi</string>
   <string name="textContinue">Continuă</string>

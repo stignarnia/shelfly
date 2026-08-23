@@ -17,6 +17,11 @@
   <string name="textOnboardingApiKeyMessage">Tämä sovellus käyttää omaa TMDB-avaintasi, joten avainta ei toimiteta sovelluksen mukana eikä käyttöäsi jaeta kenenkään kanssa.\n\nLuo ilmainen tili osoitteessa themoviedb.org/settings/api, kopioi API-avain (v3-todennus) kohdasta Asetukset → API ja liitä se alle. Voit muuttaa sitä myöhemmin Asetuksissa.</string>
   <string name="textOnboardingApiKeyHint">API-avain (v3-todennus)</string>
 
+  <string name="textWidgetConfigTitle">Widget</string>
+  <string name="textWidgetConfigThemeApp">Sama kuin sovellus</string>
+  <string name="textWidgetConfigThemeSummary">Värit, joilla tämä widget piirretään.</string>
+  <string name="textWidgetConfigAmoledSummary">Käytä täysin mustia taustoja, kun tämä widget on tumma.</string>
+  <string name="textWidgetConfigDone">Valmis</string>
   <string name="textWelcomeStepIndicator">Vaihe %1$d / %2$d</string>
   <string name="textBack">Takaisin</string>
   <string name="textContinue">Jatka</string>

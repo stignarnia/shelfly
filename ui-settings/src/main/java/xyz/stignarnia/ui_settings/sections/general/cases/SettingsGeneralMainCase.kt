@@ -100,12 +100,24 @@ class SettingsGeneralMainCase @Inject constructor(
 
   fun isAmoled() = settingsRepository.isAmoled
 
-  fun setAmoled(enabled: Boolean) {
+  /**
+   * The widgets follow the app's theme unless they were configured otherwise, so a change here has to reach them.
+   * They are drawn with colours pushed into the launcher rather than resolved from a theme, so nothing repaints them on its own.
+   */
+  fun setAmoled(
+    enabled: Boolean,
+    context: Context,
+  ) {
     settingsRepository.isAmoled = enabled
+    (context.applicationContext as WidgetsProvider).requestAllWidgetsUpdate()
   }
 
-  fun setTheme(theme: AppTheme) {
+  fun setTheme(
+    theme: AppTheme,
+    context: Context,
+  ) {
     settingsRepository.themeId = theme.id
+    (context.applicationContext as WidgetsProvider).requestAllWidgetsUpdate()
   }
 
   fun getCountry() = AppCountry.fromCode(settingsRepository.country)

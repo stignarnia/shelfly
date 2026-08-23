@@ -17,6 +17,11 @@
   <string name="textOnboardingApiKeyMessage">Denne app bruger din egen TMDB-nøgle, så ingen nøgle leveres i appen, og dit forbrug deles ikke med andre.\n\nOpret en gratis konto på themoviedb.org/settings/api, kopiér API-nøglen (v3-godkendelse) fra Indstillinger → API og indsæt den nedenfor. Du kan ændre den senere i Indstillinger.</string>
   <string name="textOnboardingApiKeyHint">API-nøgle (v3-godkendelse)</string>
 
+  <string name="textWidgetConfigTitle">Widget</string>
+  <string name="textWidgetConfigThemeApp">Samme som appen</string>
+  <string name="textWidgetConfigThemeSummary">Farverne denne widget tegnes med.</string>
+  <string name="textWidgetConfigAmoledSummary">Brug helt sorte baggrunde, når denne widget er mørk.</string>
+  <string name="textWidgetConfigDone">Færdig</string>
   <string name="textWelcomeStepIndicator">Trin %1$d af %2$d</string>
   <string name="textBack">Tilbage</string>
   <string name="textContinue">Fortsæt</string>

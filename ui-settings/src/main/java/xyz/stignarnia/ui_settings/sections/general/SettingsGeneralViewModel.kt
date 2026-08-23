@@ -106,9 +106,12 @@ class SettingsGeneralViewModel @Inject constructor(
     }
   }
 
-  fun setTheme(theme: AppTheme) {
+  fun setTheme(
+    theme: AppTheme,
+    context: Context,
+  ) {
     viewModelScope.launch {
-      mainCase.setTheme(theme)
+      mainCase.setTheme(theme, context)
       // The night mode goes on here rather than in BaseActivity so that the Activity being built next already has it, and AppCompat has no reason to re-apply its theme mid-creation and flatten the overlays.
       AppCompatDelegate.setDefaultNightMode(theme.nightMode)
       // Asked for unconditionally: AppCompat only recreates when the resolved configuration changes, so dark to follow-system on an already dark phone would otherwise change nothing.
@@ -117,9 +120,12 @@ class SettingsGeneralViewModel @Inject constructor(
     }
   }
 
-  fun setAmoled(enabled: Boolean) {
+  fun setAmoled(
+    enabled: Boolean,
+    context: Context,
+  ) {
     viewModelScope.launch {
-      mainCase.setAmoled(enabled)
+      mainCase.setAmoled(enabled, context)
       recreateActivityState.value = Event(true)
       refreshSettings()
     }

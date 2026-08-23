@@ -38,6 +38,12 @@
   <string name="textOnboardingSyncMessage">Shelfly can back your collection up to your own WebDAV server, so the same progress follows you onto another device. Nothing is sent anywhere else.\n\nIf you already sync from another device, setting up the same server here restores that collection.</string>
   <string name="textOnboardingSyncSetUp">Set up</string>
 
+  <string name="textWidgetConfigTitle">Widget</string>
+  <string name="textWidgetConfigThemeApp">Same as app</string>
+  <string name="textWidgetConfigThemeSummary">Colours this widget is drawn in.</string>
+  <string name="textWidgetConfigAmoledSummary">Use pure black backgrounds when this widget is dark.</string>
+  <string name="textWidgetConfigDone">Done</string>
+
   <string name="textWelcomeStepIndicator">Step %1$d of %2$d</string>
   <string name="textBack">Back</string>
   <string name="textContinue">Continue</string>

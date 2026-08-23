@@ -17,6 +17,11 @@
   <string name="textOnboardingApiKeyMessage">Cette application utilise votre propre clé TMDB, aucune clé n\'est intégrée et votre utilisation n\'est partagée avec personne.\n\nCréez un compte gratuit sur themoviedb.org/settings/api, copiez la clé API (auth v3) depuis Paramètres → API et collez-la ci-dessous. Vous pourrez la modifier ultérieurement dans les Paramètres.</string>
   <string name="textOnboardingApiKeyHint">Clé API (auth v3)</string>
 
+  <string name="textWidgetConfigTitle">Widget</string>
+  <string name="textWidgetConfigThemeApp">Comme l\'application</string>
+  <string name="textWidgetConfigThemeSummary">Couleurs avec lesquelles ce widget est dessiné.</string>
+  <string name="textWidgetConfigAmoledSummary">Utiliser des fonds noirs purs quand ce widget est sombre.</string>
+  <string name="textWidgetConfigDone">Terminé</string>
   <string name="textWelcomeStepIndicator">Étape %1$d sur %2$d</string>
   <string name="textBack">Retour</string>
   <string name="textContinue">Continuer</string>

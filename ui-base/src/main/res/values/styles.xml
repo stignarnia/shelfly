@@ -67,7 +67,7 @@
 
       The first two are burned over poster and backdrop artwork, which is dark whatever the app is doing, so they stay white with their black shadow.
       The error snackbar is white on the brand red in both.
-      The widget status scrim sits on artwork too, and widgets do not follow the app theme at all.
+      The widget status scrim is read only by widgets below API 31, which are not themed and are always dark - above it the scrim comes from the widget's palette instead.
     -->
     <item name="textColorOnSurface">@color/colorWhite</item>
     <item name="textColorGridTitle">@color/colorWhite</item>

@@ -22,6 +22,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_model.IdTmdb
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider
 import xyz.stignarnia.ui_widgets.R
+import xyz.stignarnia.ui_widgets.theme.WidgetPalette
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -66,18 +67,7 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
       data = Uri.parse(toUri(URI_INTENT_SCHEME))
     }
 
-    val remoteViews = RemoteViews(context.packageName, getLayoutResId()).apply {
-      setRemoteAdapter(R.id.progressWidgetList, intent)
-      setEmptyView(R.id.progressWidgetList, R.id.progressWidgetEmptyView)
-
-      val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
-      val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
-      val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
-      setViewPadding(R.id.progressWidgetList, 0, paddingTop, 0, spaceTiny)
-      setViewVisibility(R.id.progressWidgetLabel, labelVisibility)
-
-      setInt(R.id.progressWidgetNightRoot, "setBackgroundResource", R.drawable.bg_widget)
-    }
+    val palette = palette(context, widgetId)
 
     val mainIntent = PendingIntent.getActivity(
       context,
@@ -85,7 +75,6 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
       Intent().apply { setClassName(context, HOST_ACTIVITY_NAME) },
       FLAG_IMMUTABLE or FLAG_UPDATE_CURRENT,
     )
-    remoteViews.setOnClickPendingIntent(R.id.progressWidgetLabel, mainIntent)
 
     val listClickIntent = Intent(context, ProgressWidgetProvider::class.java).apply {
       action = ACTION_CLICK
@@ -97,9 +86,30 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
       listClickIntent,
       FLAG_MUTABLE or FLAG_UPDATE_CURRENT,
     )
-    remoteViews.setPendingIntentTemplate(R.id.progressWidgetList, showDetailsPendingIntent)
 
-    appWidgetManager.updateAppWidget(widgetId, remoteViews)
+    // Everything but the adapter, so the same frame can be sent with it and without - see updateWidget.
+    fun buildViews(withAdapter: Boolean) =
+      RemoteViews(context.packageName, getLayoutResId()).apply {
+        if (withAdapter) setRemoteAdapter(R.id.progressWidgetList, intent)
+        setEmptyView(R.id.progressWidgetList, R.id.progressWidgetEmptyView)
+
+        val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
+        val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
+        val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
+        setViewPadding(R.id.progressWidgetList, 0, paddingTop, 0, spaceTiny)
+        setViewVisibility(R.id.progressWidgetLabel, labelVisibility)
+
+        applyWidgetChrome(palette, R.id.progressWidgetNightRoot, R.id.progressWidgetLabel, R.id.progressWidgetLabelText)
+        palette?.let {
+          setTextColor(R.id.progressWidgetEmptyViewTitle, it.textPrimary)
+          setTextColor(R.id.progressWidgetEmptyViewSubtitle, it.textSecondary)
+        }
+
+        setOnClickPendingIntent(R.id.progressWidgetLabel, mainIntent)
+        setPendingIntentTemplate(R.id.progressWidgetList, showDetailsPendingIntent)
+      }
+
+    appWidgetManager.updateWidget(widgetId, palette, ::buildViews)
     appWidgetManager.notifyAppWidgetViewDataChanged(widgetId, R.id.progressWidgetList)
   }
 

@@ -17,6 +17,11 @@
   <string name="textOnboardingApiKeyMessage">Diese App verwendet Ihren eigenen TMDB-Schlüssel. Es ist kein Schlüssel in der App enthalten und Ihre Nutzung wird mit niemandem geteilt.\n\nErstellen Sie ein kostenloses Konto auf themoviedb.org/settings/api, kopieren Sie den API-Schlüssel (v3 Auth) aus Einstellungen → API und fügen Sie ihn unten ein. Sie können ihn später in den Einstellungen ändern.</string>
   <string name="textOnboardingApiKeyHint">API-Schlüssel (v3 Auth)</string>
 
+  <string name="textWidgetConfigTitle">Widget</string>
+  <string name="textWidgetConfigThemeApp">Wie die App</string>
+  <string name="textWidgetConfigThemeSummary">Farben, in denen dieses Widget gezeichnet wird.</string>
+  <string name="textWidgetConfigAmoledSummary">Reinschwarze Hintergründe verwenden, wenn dieses Widget dunkel ist.</string>
+  <string name="textWidgetConfigDone">Fertig</string>
   <string name="textWelcomeStepIndicator">Schritt %1$d von %2$d</string>
   <string name="textBack">Zurück</string>
   <string name="textContinue">Weiter</string>
