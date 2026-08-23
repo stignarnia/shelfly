@@ -16,7 +16,7 @@ import android.widget.RemoteViews
  * - Bitmaps: the service allows 6 x the display's pixels, and hands out 90% of that.
  * - Everything else: 800,000 bytes, being 80% of a binder transaction.
  *
- * How much of the second a row costs is measured; how much of the first is [posterCost] for that row, given rather than measured - and zero for a row that carries no poster at all, such as a date header.
+ * How much of the second the list costs is measured on the assembled collection; how much of the first is [posterCost] for each row, given rather than measured - and zero for a row that carries no poster at all, such as a date header.
  * That is deliberate: rows are counted on a pass that carries no posters yet - see [fill] - and a poster's cost is known from its dimensions without having it in hand.
  *
  * Neither budget is discounted again here. Both already carry the framework's own slack - 80% of a transaction, 90% of the bitmap memory - and cutting twice only makes the list shorter than the platform itself would allow.
@@ -32,6 +32,9 @@ object WidgetCollection {
   /** Bitmap memory is 6 x the display's pixels in AppWidgetServiceImpl, of which AppWidgetManager spends 90%. */
   private const val BITMAP_PIXEL_FACTOR = 6
 
+  /** How often the assembled collection is measured while rows are being added. */
+  private const val CHUNK = 16
+
   /** The id of the row that stands for everything that did not fit; far outside anything a show or film would use. */
   private const val MORE_ID = Long.MAX_VALUE
 
@@ -39,7 +42,11 @@ object WidgetCollection {
    * Decides how many of [count] rows fit, and builds them.
    *
    * [rows] is expected to return rows without their posters: this is the pass that decides the length of the list, and it must not wait on the network to do it.
-   * Feed the same [taken] back through [build] once the posters are in hand.
+   * Feed the same taken count back through [build] once the posters are in hand.
+   *
+   * Rows are measured as an assembled collection rather than one at a time.
+   * A RemoteViews written to a parcel on its own carries its whole ApplicationInfo with it, and inside a collection it does not - so measuring row by row charges each one for something it will never send, and cuts the list to a fraction of what fits.
+   * Measuring the collection every [CHUNK] rows costs a handful of parcels and is what the budget is actually spent on.
    */
   fun fill(
     context: Context,
@@ -50,32 +57,37 @@ object WidgetCollection {
     rows: (Int) -> Pair<Long, RemoteViews>,
   ): Pair<RemoteViews.RemoteCollectionItems, Int> {
     var bitmaps = bitmapBudget(context)
-    var structure = PARCEL_BUDGET
-    var taken = 0
-
     val built = mutableListOf<Pair<Long, RemoteViews>>()
+
+    for (position in 0 until count) {
+      val poster = posterCost(position)
+      if (poster > bitmaps) break
+      bitmaps -= poster
+      built += rows(position)
+
+      if (built.size % CHUNK == 0 && sizeOf(build(built, count, viewTypeCount, moreRow)) > PARCEL_BUDGET) break
+    }
+
+    // Back off to what fits, proportionally: the first guess is usually the last one.
+    var taken = built.size
+    while (taken > 0) {
+      val items = build(built.take(taken), count, viewTypeCount, moreRow)
+      val size = sizeOf(items)
+      if (size <= PARCEL_BUDGET) return items to taken
+      taken = minOf(taken - 1, (taken * PARCEL_BUDGET / size).toInt())
+    }
+
+    return build(emptyList(), count, viewTypeCount, moreRow) to 0
+  }
+
+  private fun sizeOf(items: RemoteViews.RemoteCollectionItems): Long {
     val parcel = Parcel.obtain()
-    try {
-      for (position in 0 until count) {
-        val row = rows(position)
-
-        parcel.setDataPosition(0)
-        parcel.setDataSize(0)
-        row.second.writeToParcel(parcel, 0)
-
-        val poster = posterCost(position)
-        if (parcel.dataSize() > structure || poster > bitmaps) break
-
-        structure -= parcel.dataSize()
-        bitmaps -= poster
-        built += row
-        taken++
-      }
+    return try {
+      items.writeToParcel(parcel, 0)
+      parcel.dataSize().toLong()
     } finally {
       parcel.recycle()
     }
-
-    return build(built, count, viewTypeCount, moreRow) to taken
   }
 
   /** Assembles rows that have already been counted, so the second pass costs no measurement. */
