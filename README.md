@@ -67,12 +67,8 @@ I think there is little chance this gets merged upstream given the repository's 
 ### Verifying a change
 
 ```bash
-./gradlew :app:assembleDebug
-./gradlew :app:testDebugUnitTest :repository:testDebugUnitTest \
-  :ui-discover:testDebugUnitTest :ui-statistics:testDebugUnitTest \
-  :ui-statistics-movies:testDebugUnitTest :ui-search:testDebugUnitTest \
-  :ui-progress-movies:testDebugUnitTest :data-remote:testDebugUnitTest \
-  :ui-backup:testDebugUnitTest :data-webdav:testDebugUnitTest
+./gradlew assembleDebug
+./gradlew testDebugUnitTest
 ./ktlint
 ```
 
