@@ -101,57 +101,73 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
         settingsRepository,
       )
       rows.load()
-      val (items, taken) = WidgetCollection.fill(context, rows.count, rows.viewTypeCount, rows::moreView) { position ->
-        rows.itemId(position) to rows.viewAt(position)
-      }
-      Timber.d("Widget $widgetId built $taken of ${rows.count} rows.")
+      // First pass: no posters yet, so it costs nothing to wait for. This is what decides how many rows fit.
+      val (placeholders, taken) = WidgetCollection.fill(
+        context,
+        rows.count,
+        rows.viewTypeCount,
+        rows::posterCost,
+        rows::moreView,
+      ) { position -> rows.itemId(position) to rows.viewAt(position) }
+      Timber.d("Widget $widgetId building $taken of ${rows.count} rows.")
 
-      val remoteViews = RemoteViews(context.packageName, getLayoutResId()).apply {
-        setRemoteAdapter(R.id.calendarWidgetMoviesList, items)
-        setEmptyView(R.id.calendarWidgetMoviesList, R.id.calendarWidgetMoviesEmptyView)
+      fun remoteViews(items: RemoteViews.RemoteCollectionItems) =
+        RemoteViews(context.packageName, getLayoutResId()).apply {
+          setRemoteAdapter(R.id.calendarWidgetMoviesList, items)
+          setEmptyView(R.id.calendarWidgetMoviesList, R.id.calendarWidgetMoviesEmptyView)
 
-        val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
-        val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
-        setViewPadding(R.id.calendarWidgetMoviesList, 0, paddingTop, 0, spaceTiny)
-        setViewPadding(R.id.calendarWidgetMoviesEmptyView, 0, paddingTop, 0, 0)
-        setViewVisibility(R.id.calendarWidgetMoviesLabel, labelVisibility)
+          val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
+          val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
+          setViewPadding(R.id.calendarWidgetMoviesList, 0, paddingTop, 0, spaceTiny)
+          setViewPadding(R.id.calendarWidgetMoviesEmptyView, 0, paddingTop, 0, 0)
+          setViewVisibility(R.id.calendarWidgetMoviesLabel, labelVisibility)
 
-        applyWidgetChrome(
-          palette,
-          R.id.calendarWidgetMoviesNightRoot,
-          R.id.calendarWidgetMoviesLabel,
-          R.id.calendarWidgetMoviesLabelText,
-        )
-        palette?.let {
-          setTextColor(R.id.calendarWidgetMoviesEmptyViewTitle, it.textPrimary)
-          setTextColor(R.id.calendarWidgetMoviesEmptyViewSubtitle, it.textSecondary)
-          setIconTint(R.id.calendarWidgetMoviesEmptyViewIcon, it.textPrimary)
+          applyWidgetChrome(
+            palette,
+            R.id.calendarWidgetMoviesNightRoot,
+            R.id.calendarWidgetMoviesLabel,
+            R.id.calendarWidgetMoviesLabelText,
+          )
+          palette?.let {
+            setTextColor(R.id.calendarWidgetMoviesEmptyViewTitle, it.textPrimary)
+            setTextColor(R.id.calendarWidgetMoviesEmptyViewSubtitle, it.textSecondary)
+            setIconTint(R.id.calendarWidgetMoviesEmptyViewIcon, it.textPrimary)
+          }
+
+          when (settingsRepository.widgets.getWidgetCalendarMode(Mode.MOVIES, widgetId)) {
+            CalendarMode.PRESENT_FUTURE -> {
+              setImageViewResource(R.id.calendarWidgetMoviesEmptyViewIcon, R.drawable.ic_history)
+              setTextViewText(
+                R.id.calendarWidgetMoviesEmptyViewSubtitle,
+                context.getString(R.string.textMoviesCalendarEmpty),
+              )
+            }
+            CalendarMode.RECENTS -> {
+              setImageViewResource(R.id.calendarWidgetMoviesEmptyViewIcon, R.drawable.ic_calendar)
+              setTextViewText(
+                R.id.calendarWidgetMoviesEmptyViewSubtitle,
+                context.getString(R.string.textMoviesCalendarRecentsEmpty),
+              )
+            }
+          }
+
+          setOnClickPendingIntent(R.id.calendarWidgetMoviesLabelImage, mainIntent)
+          setOnClickPendingIntent(R.id.calendarWidgetMoviesLabelText, mainIntent)
+          setOnClickPendingIntent(R.id.calendarWidgetMoviesEmptyViewIcon, modeClickIntent)
+          setPendingIntentTemplate(R.id.calendarWidgetMoviesList, listIntent)
         }
 
-        when (settingsRepository.widgets.getWidgetCalendarMode(Mode.MOVIES, widgetId)) {
-          CalendarMode.PRESENT_FUTURE -> {
-            setImageViewResource(R.id.calendarWidgetMoviesEmptyViewIcon, R.drawable.ic_history)
-            setTextViewText(
-              R.id.calendarWidgetMoviesEmptyViewSubtitle,
-              context.getString(R.string.textMoviesCalendarEmpty),
-            )
-          }
-          CalendarMode.RECENTS -> {
-            setImageViewResource(R.id.calendarWidgetMoviesEmptyViewIcon, R.drawable.ic_calendar)
-            setTextViewText(
-              R.id.calendarWidgetMoviesEmptyViewSubtitle,
-              context.getString(R.string.textMoviesCalendarRecentsEmpty),
-            )
-          }
-        }
+      appWidgetManager.updateAppWidget(widgetId, remoteViews(placeholders))
 
-        setOnClickPendingIntent(R.id.calendarWidgetMoviesLabelImage, mainIntent)
-        setOnClickPendingIntent(R.id.calendarWidgetMoviesLabelText, mainIntent)
-        setOnClickPendingIntent(R.id.calendarWidgetMoviesEmptyViewIcon, modeClickIntent)
-        setPendingIntentTemplate(R.id.calendarWidgetMoviesList, listIntent)
-      }
-
-      appWidgetManager.updateAppWidget(widgetId, remoteViews)
+      // Second pass: the posters, fetched together, and the same rows sent again with them in place.
+      rows.loadPosters(taken)
+      val withPosters = WidgetCollection.build(
+        (0 until taken).map { position -> rows.itemId(position) to rows.viewAt(position) },
+        rows.count,
+        rows.viewTypeCount,
+        rows::moreView,
+      )
+      appWidgetManager.updateAppWidget(widgetId, remoteViews(withPosters))
     }
   }
 

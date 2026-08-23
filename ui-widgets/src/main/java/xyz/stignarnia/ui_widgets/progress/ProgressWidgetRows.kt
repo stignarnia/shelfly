@@ -25,6 +25,7 @@ import xyz.stignarnia.ui_widgets.progress.ProgressWidgetProvider.Companion.EXTRA
 import xyz.stignarnia.ui_widgets.progress.ProgressWidgetProvider.Companion.EXTRA_SEASON_ID
 import xyz.stignarnia.ui_widgets.theme.WidgetPalette
 import xyz.stignarnia.ui_widgets.theme.WidgetPalettes
+import xyz.stignarnia.ui_widgets.theme.WidgetPosters
 import xyz.stignarnia.ui_widgets.theme.setBackgroundTint
 import xyz.stignarnia.ui_widgets.theme.setIconTint
 import xyz.stignarnia.ui_widgets.theme.setProgressTint
@@ -57,6 +58,30 @@ class ProgressWidgetRows(
    * Re-read on every refresh rather than held from construction: a theme picked in the launcher changes nothing about the data, and notifyAppWidgetViewDataChanged is the only thing that runs afterwards.
    */
   private var palette: WidgetPalette? = null
+  private var posters: Map<Long, android.graphics.Bitmap> = emptyMap()
+
+  /**
+   * What the row at [position] costs the widget's bitmap budget, known from the poster's size without having fetched it.
+   * A row with no poster - a header, or an entry whose image is missing - costs nothing, and charging it one would shorten the list for nothing.
+   */
+  fun posterCost(position: Int): Long {
+    val item = adapterItems.getOrNull(position) ?: return 0
+    val image = imageOf(item) ?: return 0
+    if (image.status != ImageStatus.AVAILABLE) return 0
+    return WidgetPosters.costOf(imageWidth, imageHeight)
+  }
+
+  /** Fetches the posters for the rows that were counted, together rather than one at a time - see [WidgetPosters]. */
+  suspend fun loadPosters(upTo: Int) {
+    val urls = (0 until minOf(upTo, adapterItems.size))
+      .mapNotNull { position ->
+        val item = adapterItems[position]
+        val image = imageOf(item) ?: return@mapNotNull null
+        if (image.status != ImageStatus.AVAILABLE) return@mapNotNull null
+        idOf(item)?.let { it to image.fullFileUrl }
+      }.toMap()
+    posters = WidgetPosters.fetch(context, imageWidth, imageHeight, imageCorner, urls)
+  }
 
   suspend fun load() {
     palette = WidgetPalettes.resolve(context, widgetId, settingsRepository)
@@ -186,25 +211,15 @@ class ProgressWidgetRows(
       return remoteView
     }
 
-    try {
-      remoteView.setViewVisibility(R.id.progressWidgetItemImage, GONE)
-      remoteView.setViewVisibility(R.id.progressWidgetItemPlaceholder, GONE)
-
-      val bitmap = Glide
-        .with(context)
-        .asBitmap()
-        .load(imageUrl)
-        .transform(CenterCrop(), RoundedCorners(imageCorner))
-        .submit(imageWidth, imageHeight)
-        // Time boxed: every row's poster is fetched before the widget can be sent, so one slow image must not hold the whole list up.
-        // A miss falls through to the placeholder and is picked up on the next update, by which point Glide has it cached.
-        .get(POSTER_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-
-      remoteView.setImageViewBitmap(R.id.progressWidgetItemImage, bitmap)
-      remoteView.setViewVisibility(R.id.progressWidgetItemImage, VISIBLE)
-    } catch (t: Throwable) {
+    // The poster, if it has arrived. The counting pass runs before any of them are fetched, so a row without one keeps its placeholder and is filled in by the pass that follows.
+    val bitmap = posters[item.show.tmdbId]
+    if (bitmap == null) {
       remoteView.setViewVisibility(R.id.progressWidgetItemImage, GONE)
       remoteView.setViewVisibility(R.id.progressWidgetItemPlaceholder, VISIBLE)
+    } else {
+      remoteView.setImageViewBitmap(R.id.progressWidgetItemImage, bitmap)
+      remoteView.setViewVisibility(R.id.progressWidgetItemImage, VISIBLE)
+      remoteView.setViewVisibility(R.id.progressWidgetItemPlaceholder, GONE)
     }
 
     return remoteView
@@ -233,6 +248,10 @@ class ProgressWidgetRows(
         Intent().putExtras(bundleOf(BaseWidgetProvider.EXTRA_MORE_CLICK to true)),
       )
     }
+
+  private fun imageOf(item: ProgressListItem) = (item as? ProgressListItem.Episode)?.image
+
+  private fun idOf(item: ProgressListItem) = (item as? ProgressListItem.Episode)?.show?.tmdbId
 
   fun itemId(position: Int) = adapterItems[position].show.tmdbId
 

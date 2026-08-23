@@ -79,37 +79,53 @@ class ProgressMoviesWidgetProvider : BaseWidgetProvider() {
     context.updateAsync {
       val rows = ProgressMoviesWidgetRows(widgetId, context, progressMoviesItemsCase, settingsRepository)
       rows.load()
-      val (items, taken) = WidgetCollection.fill(context, rows.count, rows.viewTypeCount, rows::moreView) { position ->
-        rows.itemId(position) to rows.viewAt(position)
-      }
-      Timber.d("Widget $widgetId built $taken of ${rows.count} rows.")
+      // First pass: no posters yet, so it costs nothing to wait for. This is what decides how many rows fit.
+      val (placeholders, taken) = WidgetCollection.fill(
+        context,
+        rows.count,
+        rows.viewTypeCount,
+        rows::posterCost,
+        rows::moreView,
+      ) { position -> rows.itemId(position) to rows.viewAt(position) }
+      Timber.d("Widget $widgetId building $taken of ${rows.count} rows.")
 
-      val remoteViews = RemoteViews(context.packageName, getLayoutResId()).apply {
-        setRemoteAdapter(R.id.progressWidgetMoviesList, items)
-        setEmptyView(R.id.progressWidgetMoviesList, R.id.progressWidgetMoviesEmptyView)
+      fun remoteViews(items: RemoteViews.RemoteCollectionItems) =
+        RemoteViews(context.packageName, getLayoutResId()).apply {
+          setRemoteAdapter(R.id.progressWidgetMoviesList, items)
+          setEmptyView(R.id.progressWidgetMoviesList, R.id.progressWidgetMoviesEmptyView)
 
-        val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
-        val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
-        val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
-        setViewPadding(R.id.progressWidgetMoviesList, 0, paddingTop, 0, spaceTiny)
-        setViewVisibility(R.id.progressWidgetMoviesLabel, labelVisibility)
+          val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
+          val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
+          val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
+          setViewPadding(R.id.progressWidgetMoviesList, 0, paddingTop, 0, spaceTiny)
+          setViewVisibility(R.id.progressWidgetMoviesLabel, labelVisibility)
 
-        applyWidgetChrome(
-          palette,
-          R.id.progressWidgetMoviesNightRoot,
-          R.id.progressWidgetMoviesLabel,
-          R.id.progressWidgetMoviesLabelText,
-        )
-        palette?.let {
-          setTextColor(R.id.progressWidgetMoviesEmptyViewTitle, it.textPrimary)
-          setTextColor(R.id.progressWidgetMoviesEmptyViewSubtitle, it.textSecondary)
+          applyWidgetChrome(
+            palette,
+            R.id.progressWidgetMoviesNightRoot,
+            R.id.progressWidgetMoviesLabel,
+            R.id.progressWidgetMoviesLabelText,
+          )
+          palette?.let {
+            setTextColor(R.id.progressWidgetMoviesEmptyViewTitle, it.textPrimary)
+            setTextColor(R.id.progressWidgetMoviesEmptyViewSubtitle, it.textSecondary)
+          }
+
+          setOnClickPendingIntent(R.id.progressWidgetMoviesLabel, mainIntent)
+          setPendingIntentTemplate(R.id.progressWidgetMoviesList, listIntent)
         }
 
-        setOnClickPendingIntent(R.id.progressWidgetMoviesLabel, mainIntent)
-        setPendingIntentTemplate(R.id.progressWidgetMoviesList, listIntent)
-      }
+      appWidgetManager.updateAppWidget(widgetId, remoteViews(placeholders))
 
-      appWidgetManager.updateAppWidget(widgetId, remoteViews)
+      // Second pass: the posters, fetched together, and the same rows sent again with them in place.
+      rows.loadPosters(taken)
+      val withPosters = WidgetCollection.build(
+        (0 until taken).map { position -> rows.itemId(position) to rows.viewAt(position) },
+        rows.count,
+        rows.viewTypeCount,
+        rows::moreView,
+      )
+      appWidgetManager.updateAppWidget(widgetId, remoteViews(withPosters))
     }
   }
 

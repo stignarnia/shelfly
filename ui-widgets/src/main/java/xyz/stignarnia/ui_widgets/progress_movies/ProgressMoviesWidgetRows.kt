@@ -21,6 +21,7 @@ import xyz.stignarnia.ui_widgets.R
 import xyz.stignarnia.ui_widgets.progress_movies.ProgressMoviesWidgetProvider.Companion.EXTRA_CHECK_MOVIE_ID
 import xyz.stignarnia.ui_widgets.theme.WidgetPalette
 import xyz.stignarnia.ui_widgets.theme.WidgetPalettes
+import xyz.stignarnia.ui_widgets.theme.WidgetPosters
 import xyz.stignarnia.ui_widgets.theme.setIconTint
 import java.util.concurrent.TimeUnit
 
@@ -42,6 +43,30 @@ class ProgressMoviesWidgetRows(
   private val imageHeight by lazy { context.dimenToPx(R.dimen.widgetImageHeight) }
   private val adapterItems by lazy { mutableListOf<ProgressMovieListItem>() }
   private var palette: WidgetPalette? = null
+  private var posters: Map<Long, android.graphics.Bitmap> = emptyMap()
+
+  /**
+   * What the row at [position] costs the widget's bitmap budget, known from the poster's size without having fetched it.
+   * A row with no poster - a header, or an entry whose image is missing - costs nothing, and charging it one would shorten the list for nothing.
+   */
+  fun posterCost(position: Int): Long {
+    val item = adapterItems.getOrNull(position) ?: return 0
+    val image = imageOf(item) ?: return 0
+    if (image.status != ImageStatus.AVAILABLE) return 0
+    return WidgetPosters.costOf(imageWidth, imageHeight)
+  }
+
+  /** Fetches the posters for the rows that were counted, together rather than one at a time - see [WidgetPosters]. */
+  suspend fun loadPosters(upTo: Int) {
+    val urls = (0 until minOf(upTo, adapterItems.size))
+      .mapNotNull { position ->
+        val item = adapterItems[position]
+        val image = imageOf(item) ?: return@mapNotNull null
+        if (image.status != ImageStatus.AVAILABLE) return@mapNotNull null
+        idOf(item)?.let { it to image.fullFileUrl }
+      }.toMap()
+    posters = WidgetPosters.fetch(context, imageWidth, imageHeight, imageCorner, urls)
+  }
 
   suspend fun load() {
     palette = WidgetPalettes.resolve(context, widgetId, settingsRepository)
@@ -102,25 +127,15 @@ class ProgressMoviesWidgetRows(
       return remoteView
     }
 
-    try {
-      remoteView.setViewVisibility(R.id.progressMoviesWidgetItemImage, GONE)
-      remoteView.setViewVisibility(R.id.progressMoviesWidgetItemPlaceholder, GONE)
-
-      val bitmap = Glide
-        .with(context)
-        .asBitmap()
-        .load(item.image.fullFileUrl)
-        .transform(CenterCrop(), RoundedCorners(imageCorner))
-        .submit(imageWidth, imageHeight)
-        // Time boxed: every row's poster is fetched before the widget can be sent, so one slow image must not hold the whole list up.
-        // A miss falls through to the placeholder and is picked up on the next update, by which point Glide has it cached.
-        .get(POSTER_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-
-      remoteView.setImageViewBitmap(R.id.progressMoviesWidgetItemImage, bitmap)
-      remoteView.setViewVisibility(R.id.progressMoviesWidgetItemImage, VISIBLE)
-    } catch (t: Throwable) {
+    // The poster, if it has arrived. The counting pass runs before any of them are fetched, so a row without one keeps its placeholder and is filled in by the pass that follows.
+    val bitmap = posters[item.movie.tmdbId]
+    if (bitmap == null) {
       remoteView.setViewVisibility(R.id.progressMoviesWidgetItemImage, GONE)
       remoteView.setViewVisibility(R.id.progressMoviesWidgetItemPlaceholder, VISIBLE)
+    } else {
+      remoteView.setImageViewBitmap(R.id.progressMoviesWidgetItemImage, bitmap)
+      remoteView.setViewVisibility(R.id.progressMoviesWidgetItemImage, VISIBLE)
+      remoteView.setViewVisibility(R.id.progressMoviesWidgetItemPlaceholder, GONE)
     }
 
     return remoteView
@@ -137,6 +152,10 @@ class ProgressMoviesWidgetRows(
         Intent().putExtras(bundleOf(BaseWidgetProvider.EXTRA_MORE_CLICK to true)),
       )
     }
+
+  private fun imageOf(item: ProgressMovieListItem) = (item as? ProgressMovieListItem.MovieItem)?.image
+
+  private fun idOf(item: ProgressMovieListItem) = (item as? ProgressMovieListItem.MovieItem)?.movie?.tmdbId
 
   fun itemId(position: Int) = adapterItems[position].movie.tmdbId
 

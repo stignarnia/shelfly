@@ -16,90 +16,89 @@ import android.widget.RemoteViews
  * - Bitmaps: the service allows 6 x the display's pixels, and hands out 90% of that.
  * - Everything else: 800,000 bytes, being 80% of a binder transaction.
  *
- * Rows are measured as they are added and the list stops when either would be spent, so a long collection is cut deliberately rather than thrown.
- * Both budgets are then cut again by [SAFETY], because a row measured on its own parcel is not the identical cost of that row inside the collection - the framework leaves itself the same kind of slack for the same reason.
+ * How much of the second a row costs is measured; how much of the first is [posterCost] for that row, given rather than measured - and zero for a row that carries no poster at all, such as a date header.
+ * That is deliberate: rows are counted on a pass that carries no posters yet - see [fill] - and a poster's cost is known from its dimensions without having it in hand.
+ *
+ * Neither budget is discounted again here. Both already carry the framework's own slack - 80% of a transaction, 90% of the bitmap memory - and cutting twice only makes the list shorter than the platform itself would allow.
  */
 object WidgetCollection {
 
   /**
-   * How many rows are worth building at all.
-   *
-   * The budgets below are what the framework will accept; this is what is sensible to spend getting there.
-   * Every row's poster is fetched before the widget can be sent - inline rows have no way to be lazy - so the list's length is paid in blocking image loads inside a broadcast, and a few hundred of those is minutes.
-   * A widget nobody has scrolled a hundred rows into does not need the hundred and first.
+   * The framework's own cap on the non bitmap half, from RemoteViews.MAX_SINGLE_PARCEL_SIZE.
+   * Already 80% of a binder transaction, the remaining fifth being the slack they keep for what measuring a row alone does not see - so it is spent whole here rather than discounted twice.
    */
-  private const val MAX_ROWS = 100
-
-  /** The framework's own cap on the non bitmap half, from RemoteViews.MAX_SINGLE_PARCEL_SIZE. */
-  private const val PARCEL_BUDGET = 800_000
+  private const val PARCEL_BUDGET = 800_000L
 
   /** Bitmap memory is 6 x the display's pixels in AppWidgetServiceImpl, of which AppWidgetManager spends 90%. */
   private const val BITMAP_PIXEL_FACTOR = 6
 
-  /**
-   * What is left after measurement error.
-   * Measuring a row alone misses what the collection adds around it, and being under costs a row while being over costs the home screen.
-   */
-  private const val SAFETY = 0.7
+  /** The id of the row that stands for everything that did not fit; far outside anything a show or film would use. */
+  private const val MORE_ID = Long.MAX_VALUE
 
   /**
-   * Fills [builder] from [rows] until a budget is spent, and says how many were taken.
+   * Decides how many of [count] rows fit, and builds them.
    *
-   * [rows] is asked for one row at a time so nothing beyond the budget is ever built: a row that would not fit is the last one loaded, not one of many already in memory.
+   * [rows] is expected to return rows without their posters: this is the pass that decides the length of the list, and it must not wait on the network to do it.
+   * Feed the same [taken] back through [build] once the posters are in hand.
    */
   fun fill(
     context: Context,
     count: Int,
     viewTypeCount: Int,
+    posterCost: (Int) -> Long,
     moreRow: () -> RemoteViews,
     rows: (Int) -> Pair<Long, RemoteViews>,
   ): Pair<RemoteViews.RemoteCollectionItems, Int> {
-    val builder = RemoteViews.RemoteCollectionItems
-      .Builder()
-      .setHasStableIds(true)
-      .setViewTypeCount(viewTypeCount)
-
-    var budget = (bitmapBudget(context) * SAFETY).toLong()
-    var structure = (PARCEL_BUDGET * SAFETY).toLong()
+    var bitmaps = bitmapBudget(context)
+    var structure = PARCEL_BUDGET
     var taken = 0
 
+    val built = mutableListOf<Pair<Long, RemoteViews>>()
     val parcel = Parcel.obtain()
     try {
-      for (position in 0 until minOf(count, MAX_ROWS)) {
-        val (id, views) = rows(position)
+      for (position in 0 until count) {
+        val row = rows(position)
 
         parcel.setDataPosition(0)
         parcel.setDataSize(0)
-        views.writeToParcel(parcel, 0)
-        val size = parcel.dataSize().toLong()
+        row.second.writeToParcel(parcel, 0)
 
-        // The measured size carries the row's bitmaps with it, which is the half that runs out first; what is left over is charged to the parcel.
-        if (size > budget || size > structure) break
+        val poster = posterCost(position)
+        if (parcel.dataSize() > structure || poster > bitmaps) break
 
-        budget -= size
-        structure -= ROW_STRUCTURE_ESTIMATE
-        if (structure <= 0) break
-
-        builder.addItem(id, views)
+        structure -= parcel.dataSize()
+        bitmaps -= poster
+        built += row
         taken++
       }
     } finally {
       parcel.recycle()
     }
 
+    return build(built, count, viewTypeCount, moreRow) to taken
+  }
+
+  /** Assembles rows that have already been counted, so the second pass costs no measurement. */
+  fun build(
+    rows: List<Pair<Long, RemoteViews>>,
+    count: Int,
+    viewTypeCount: Int,
+    moreRow: () -> RemoteViews,
+  ): RemoteViews.RemoteCollectionItems {
+    val builder = RemoteViews.RemoteCollectionItems
+      .Builder()
+      .setHasStableIds(true)
+      .setViewTypeCount(viewTypeCount)
+
+    rows.forEach { (id, views) -> builder.addItem(id, views) }
+
     // Say so rather than stopping silently: a list that just ends looks like a list that has nothing more in it.
-    if (taken < count) {
+    if (rows.size < count) {
       builder.addItem(MORE_ID, moreRow())
     }
 
-    return builder.build() to taken
+    return builder.build()
   }
-
-  /** The id of the row that stands for everything that did not fit; far outside anything a show or film would use. */
-  private const val MORE_ID = Long.MAX_VALUE
-
-  /** What a row costs the parcel once its bitmaps are counted elsewhere: text, ids and flags, an order of magnitude under a kilobyte. */
-  private const val ROW_STRUCTURE_ESTIMATE = 1_500L
 
   private fun bitmapBudget(context: Context): Long {
     val bounds = context

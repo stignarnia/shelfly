@@ -94,47 +94,68 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
     context.updateAsync {
       val rows = CalendarWidgetRows(widgetId, context, calendarFutureCase, calendarRecentsCase, settingsRepository)
       rows.load()
-      val (items, taken) = WidgetCollection.fill(context, rows.count, rows.viewTypeCount, rows::moreView) { position ->
-        rows.itemId(position) to rows.viewAt(position)
-      }
-      Timber.d("Widget $widgetId built $taken of ${rows.count} rows.")
+      // First pass: no posters yet, so it costs nothing to wait for. This is what decides how many rows fit.
+      val (placeholders, taken) = WidgetCollection.fill(
+        context,
+        rows.count,
+        rows.viewTypeCount,
+        rows::posterCost,
+        rows::moreView,
+      ) { position -> rows.itemId(position) to rows.viewAt(position) }
+      Timber.d("Widget $widgetId building $taken of ${rows.count} rows.")
 
-      val remoteViews = RemoteViews(context.packageName, getLayoutResId()).apply {
-        setRemoteAdapter(R.id.calendarWidgetList, items)
-        setEmptyView(R.id.calendarWidgetList, R.id.calendarWidgetEmptyView)
+      fun remoteViews(items: RemoteViews.RemoteCollectionItems) =
+        RemoteViews(context.packageName, getLayoutResId()).apply {
+          setRemoteAdapter(R.id.calendarWidgetList, items)
+          setEmptyView(R.id.calendarWidgetList, R.id.calendarWidgetEmptyView)
 
-        val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
-        val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
-        val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
-        setViewPadding(R.id.calendarWidgetList, 0, paddingTop, 0, spaceTiny)
-        setViewPadding(R.id.calendarWidgetEmptyView, 0, paddingTop, 0, 0)
-        setViewVisibility(R.id.calendarWidgetLabel, labelVisibility)
+          val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
+          val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
+          val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
+          setViewPadding(R.id.calendarWidgetList, 0, paddingTop, 0, spaceTiny)
+          setViewPadding(R.id.calendarWidgetEmptyView, 0, paddingTop, 0, 0)
+          setViewVisibility(R.id.calendarWidgetLabel, labelVisibility)
 
-        applyWidgetChrome(palette, R.id.calendarWidgetNightRoot, R.id.calendarWidgetLabel, R.id.calendarWidgetLabelText)
-        palette?.let {
-          setTextColor(R.id.calendarWidgetEmptyViewTitle, it.textPrimary)
-          setTextColor(R.id.calendarWidgetEmptyViewSubtitle, it.textSecondary)
-          setIconTint(R.id.calendarWidgetEmptyViewIcon, it.textPrimary)
+          applyWidgetChrome(
+            palette,
+            R.id.calendarWidgetNightRoot,
+            R.id.calendarWidgetLabel,
+            R.id.calendarWidgetLabelText,
+          )
+          palette?.let {
+            setTextColor(R.id.calendarWidgetEmptyViewTitle, it.textPrimary)
+            setTextColor(R.id.calendarWidgetEmptyViewSubtitle, it.textSecondary)
+            setIconTint(R.id.calendarWidgetEmptyViewIcon, it.textPrimary)
+          }
+
+          when (settingsRepository.widgets.getWidgetCalendarMode(Mode.SHOWS, widgetId)) {
+            CalendarMode.PRESENT_FUTURE -> {
+              setImageViewResource(R.id.calendarWidgetEmptyViewIcon, R.drawable.ic_history)
+              setTextViewText(R.id.calendarWidgetEmptyViewSubtitle, context.getString(R.string.textCalendarEmpty))
+            }
+            CalendarMode.RECENTS -> {
+              setImageViewResource(R.id.calendarWidgetEmptyViewIcon, R.drawable.ic_calendar)
+              setTextViewText(R.id.calendarWidgetEmptyViewSubtitle, context.getString(R.string.textRecentsEmpty))
+            }
+          }
+
+          setOnClickPendingIntent(R.id.calendarWidgetLabelImage, mainIntent)
+          setOnClickPendingIntent(R.id.calendarWidgetLabelText, mainIntent)
+          setOnClickPendingIntent(R.id.calendarWidgetEmptyViewIcon, modeClickIntent)
+          setPendingIntentTemplate(R.id.calendarWidgetList, listIntent)
         }
 
-        when (settingsRepository.widgets.getWidgetCalendarMode(Mode.SHOWS, widgetId)) {
-          CalendarMode.PRESENT_FUTURE -> {
-            setImageViewResource(R.id.calendarWidgetEmptyViewIcon, R.drawable.ic_history)
-            setTextViewText(R.id.calendarWidgetEmptyViewSubtitle, context.getString(R.string.textCalendarEmpty))
-          }
-          CalendarMode.RECENTS -> {
-            setImageViewResource(R.id.calendarWidgetEmptyViewIcon, R.drawable.ic_calendar)
-            setTextViewText(R.id.calendarWidgetEmptyViewSubtitle, context.getString(R.string.textRecentsEmpty))
-          }
-        }
+      appWidgetManager.updateAppWidget(widgetId, remoteViews(placeholders))
 
-        setOnClickPendingIntent(R.id.calendarWidgetLabelImage, mainIntent)
-        setOnClickPendingIntent(R.id.calendarWidgetLabelText, mainIntent)
-        setOnClickPendingIntent(R.id.calendarWidgetEmptyViewIcon, modeClickIntent)
-        setPendingIntentTemplate(R.id.calendarWidgetList, listIntent)
-      }
-
-      appWidgetManager.updateAppWidget(widgetId, remoteViews)
+      // Second pass: the posters, fetched together, and the same rows sent again with them in place.
+      rows.loadPosters(taken)
+      val withPosters = WidgetCollection.build(
+        (0 until taken).map { position -> rows.itemId(position) to rows.viewAt(position) },
+        rows.count,
+        rows.viewTypeCount,
+        rows::moreView,
+      )
+      appWidgetManager.updateAppWidget(widgetId, remoteViews(withPosters))
     }
   }
 
