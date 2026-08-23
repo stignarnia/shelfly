@@ -20,7 +20,11 @@ object AndroidVersion {
   val isAtLeastAndroid8: Boolean
     get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 
-  /** API 31. StrictMode's unsafe intent launch detection. */
+  /**
+   * API 31.
+   * StrictMode's unsafe intent launch detection, and everything the widgets rest on: the collection API that carries their rows, the RemoteViews tinting their themes are painted with, and the launcher's own settings button.
+   * Below it the widget receivers are disabled outright - see App.setupWidgets.
+   */
   @get:ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S)
   val isAtLeastAndroid12: Boolean
     get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
@@ -30,7 +34,7 @@ object AndroidVersion {
   val isAtLeastAndroid13: Boolean
     get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
 
-  /** API 34. The dynamic colour surface roles Material You is drawn from. */
+  /** API 34. The dynamic colour surface roles Material You is drawn from, in the app and in the widgets alike. */
   @get:ChecksSdkIntAtLeast(api = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
   val isAtLeastAndroid14: Boolean
     get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE
