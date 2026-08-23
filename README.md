@@ -1,16 +1,21 @@
+<div align="center">
+
+<img src="fastlane/metadata/android/en-US/images/featureGraphic.png" alt="Shelfly Banner" width="100%" />
+
 # Shelfly
 
-<img src="fastlane/metadata/android/en-US/images/icon.png" align="left" width="180" hspace="0" vspace="80" />
+**A TV shows and movies tracker for Android that syncs to infrastructure you control.**
 
+<br>
+
+[![Get it on Obtainium](https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png)](https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22xyz.stignarnia.shelfly%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2Fstignarnia%2Fshelfly%22%2C%22author%22%3A%22stignarnia%22%2C%22name%22%3A%22Shelfly%22%2C%22preferredApkIndex%22%3A0%2C%22additionalSettings%22%3A%22%7B%5C%22includePrereleases%5C%22%3Afalse%2C%5C%22fallbackToOlderReleases%5C%22%3Atrue%2C%5C%22verifyLatestTag%5C%22%3Afalse%2C%5C%22autoApkFilterByArch%5C%22%3Atrue%2C%5C%22appName%5C%22%3A%5C%22Shelfly%5C%22%7D%22%7D)
+
+</div>
+
+> [!WARNING]
 > **Heads up:** this fork was built almost entirely by an AI coding agent, with a human directing it and reviewing the results. Read the code before you trust it with anything you care about, and keep your own backups.
 
-Shelfly is a fork of [Showly](https://github.com/trakt/showly) (a TV shows and movies tracker for Android) that syncs to infrastructure you control.
-
-## Install
-
-[<img src="https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" height="54">](https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22xyz.stignarnia.shelfly%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2Fstignarnia%2Fshelfly%22%2C%22author%22%3A%22stignarnia%22%2C%22name%22%3A%22Shelfly%22%2C%22preferredApkIndex%22%3A0%2C%22additionalSettings%22%3A%22%7B%5C%22includePrereleases%5C%22%3Afalse%2C%5C%22fallbackToOlderReleases%5C%22%3Atrue%2C%5C%22verifyLatestTag%5C%22%3Afalse%2C%5C%22autoApkFilterByArch%5C%22%3Atrue%2C%5C%22appName%5C%22%3A%5C%22Shelfly%5C%22%7D%22%7D)
-
-Obtainium tracks this repository's GitHub releases and updates the app as new ones are published. You can also grab the APK straight from the [latest release](https://github.com/stignarnia/shelfly/releases/latest).
+Shelfly is a fork of [Showly](https://github.com/trakt/showly) (a TV shows and movies tracker for Android) that syncs to infrastructure you control. Obtainium tracks this repository's GitHub releases and updates the app as new ones are published. You can also grab the APK straight from the [latest release](https://github.com/stignarnia/shelfly/releases/latest).
 
 ## Why this exists
 
