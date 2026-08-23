@@ -3,4 +3,6 @@
 
   <string name="menuProgress">Progres</string>
   <string name="menuCalendar">Calendar</string>
+
+  <string name="textWidgetMore">Arată tot</string>
 </resources>

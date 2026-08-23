@@ -2,4 +2,5 @@
 <resources>
   <string name="menuProgress">Progressi</string>
   <string name="menuCalendar">Calendario</string>
+  <string name="textWidgetMore">Mostra tutto</string>
 </resources>

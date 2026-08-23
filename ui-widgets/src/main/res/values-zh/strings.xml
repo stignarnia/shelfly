@@ -3,4 +3,6 @@
 
   <string name="menuProgress">进度</string>
   <string name="menuCalendar">日历</string>
+
+  <string name="textWidgetMore">查看全部</string>
 </resources>

@@ -94,7 +94,7 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
     context.updateAsync {
       val rows = CalendarWidgetRows(widgetId, context, calendarFutureCase, calendarRecentsCase, settingsRepository)
       rows.load()
-      val (items, taken) = WidgetCollection.fill(context, rows.count, rows.viewTypeCount) { position ->
+      val (items, taken) = WidgetCollection.fill(context, rows.count, rows.viewTypeCount, rows::moreView) { position ->
         rows.itemId(position) to rows.viewAt(position)
       }
       Timber.d("Widget $widgetId built $taken of ${rows.count} rows.")
@@ -172,6 +172,15 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
     super.onReceive(context, intent)
     if (intent.action == ACTION_CLICK) {
       when {
+        intent.extras?.containsKey(EXTRA_MORE_CLICK) == true -> {
+          // The row standing in for what did not fit: open the app where the header does.
+          context.startActivity(
+            Intent().apply {
+              setClassName(context, Config.HOST_ACTIVITY_NAME)
+              flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            },
+          )
+        }
         intent.extras?.containsKey(EXTRA_SHOW_ID) == true -> {
           onListItemClick()
         }

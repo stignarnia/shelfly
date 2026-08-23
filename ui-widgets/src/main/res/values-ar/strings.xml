@@ -3,4 +3,5 @@
   <string name="menuProgress">مستوى التقدم</string>
   <string name="menuCalendar">تقويم الأفلام</string>
 
-  </resources>
+    <string name="textWidgetMore">عرض الكل</string>
+</resources>

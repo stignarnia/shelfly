@@ -3,4 +3,6 @@
 
   <string name="menuProgress">İlerleme</string>
   <string name="menuCalendar">Takvim</string>
+
+  <string name="textWidgetMore">Tümünü göster</string>
 </resources>

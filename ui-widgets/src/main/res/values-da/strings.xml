@@ -3,4 +3,6 @@
 
   <string name="menuProgress">Fremgang</string>
   <string name="menuCalendar">Kalender</string>
+
+  <string name="textWidgetMore">Vis alle</string>
 </resources>

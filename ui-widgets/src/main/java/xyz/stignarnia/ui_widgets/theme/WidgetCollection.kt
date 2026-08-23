@@ -21,6 +21,15 @@ import android.widget.RemoteViews
  */
 object WidgetCollection {
 
+  /**
+   * How many rows are worth building at all.
+   *
+   * The budgets below are what the framework will accept; this is what is sensible to spend getting there.
+   * Every row's poster is fetched before the widget can be sent - inline rows have no way to be lazy - so the list's length is paid in blocking image loads inside a broadcast, and a few hundred of those is minutes.
+   * A widget nobody has scrolled a hundred rows into does not need the hundred and first.
+   */
+  private const val MAX_ROWS = 100
+
   /** The framework's own cap on the non bitmap half, from RemoteViews.MAX_SINGLE_PARCEL_SIZE. */
   private const val PARCEL_BUDGET = 800_000
 
@@ -42,6 +51,7 @@ object WidgetCollection {
     context: Context,
     count: Int,
     viewTypeCount: Int,
+    moreRow: () -> RemoteViews,
     rows: (Int) -> Pair<Long, RemoteViews>,
   ): Pair<RemoteViews.RemoteCollectionItems, Int> {
     val builder = RemoteViews.RemoteCollectionItems
@@ -55,7 +65,7 @@ object WidgetCollection {
 
     val parcel = Parcel.obtain()
     try {
-      for (position in 0 until count) {
+      for (position in 0 until minOf(count, MAX_ROWS)) {
         val (id, views) = rows(position)
 
         parcel.setDataPosition(0)
@@ -77,8 +87,16 @@ object WidgetCollection {
       parcel.recycle()
     }
 
+    // Say so rather than stopping silently: a list that just ends looks like a list that has nothing more in it.
+    if (taken < count) {
+      builder.addItem(MORE_ID, moreRow())
+    }
+
     return builder.build() to taken
   }
+
+  /** The id of the row that stands for everything that did not fit; far outside anything a show or film would use. */
+  private const val MORE_ID = Long.MAX_VALUE
 
   /** What a row costs the parcel once its bitmaps are counted elsewhere: text, ids and flags, an order of magnitude under a kilobyte. */
   private const val ROW_STRUCTURE_ESTIMATE = 1_500L

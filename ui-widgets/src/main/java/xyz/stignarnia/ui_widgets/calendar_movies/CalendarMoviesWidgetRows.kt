@@ -26,6 +26,7 @@ import xyz.stignarnia.ui_widgets.R
 import xyz.stignarnia.ui_widgets.theme.WidgetPalette
 import xyz.stignarnia.ui_widgets.theme.WidgetPalettes
 import xyz.stignarnia.ui_widgets.theme.setIconTint
+import java.util.concurrent.TimeUnit
 
 /**
  * The rows of the movies calendar widget, built to be carried inside the widget's own views.
@@ -154,7 +155,9 @@ class CalendarMoviesWidgetRows(
         .load(item.image.fullFileUrl)
         .transform(CenterCrop(), RoundedCorners(imageCorner))
         .submit(imageWidth, imageHeight)
-        .get()
+        // Time boxed: every row's poster is fetched before the widget can be sent, so one slow image must not hold the whole list up.
+        // A miss falls through to the placeholder and is picked up on the next update, by which point Glide has it cached.
+        .get(POSTER_TIMEOUT_SECONDS, TimeUnit.SECONDS)
 
       remoteView.setImageViewBitmap(R.id.calendarMoviesWidgetItemImage, bitmap)
       remoteView.setViewVisibility(R.id.calendarMoviesWidgetItemImage, VISIBLE)
@@ -170,9 +173,23 @@ class CalendarMoviesWidgetRows(
 
   private fun getHeaderLayout(): Int = R.layout.widget_header_night
 
+  /** The row that stands in for everything that did not fit, opening the app where the widget's header does. */
+  fun moreView(): RemoteViews =
+    RemoteViews(context.packageName, R.layout.widget_more_item).apply {
+      palette?.let { setTextColor(R.id.widgetMoreItemText, it.textSecondary) }
+      setOnClickFillInIntent(
+        R.id.widgetMoreItem,
+        Intent().putExtras(bundleOf(BaseWidgetProvider.EXTRA_MORE_CLICK to true)),
+      )
+    }
+
   fun itemId(position: Int) = adapterItems[position].movie.tmdbId
 
   val count get() = adapterItems.size
 
-  val viewTypeCount = 4
+  val viewTypeCount = 5
+
+  private companion object {
+    const val POSTER_TIMEOUT_SECONDS = 2L
+  }
 }

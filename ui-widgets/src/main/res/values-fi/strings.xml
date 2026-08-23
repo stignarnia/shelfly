@@ -3,4 +3,6 @@
 
   <string name="menuProgress">Edistyminen</string>
   <string name="menuCalendar">Kalenteri</string>
+
+  <string name="textWidgetMore">Näytä kaikki</string>
 </resources>

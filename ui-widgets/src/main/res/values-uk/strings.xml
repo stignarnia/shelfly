@@ -3,4 +3,6 @@
 
   <string name="menuProgress">Прогрес</string>
   <string name="menuCalendar">Календар</string>
+
+  <string name="textWidgetMore">Показати все</string>
 </resources>

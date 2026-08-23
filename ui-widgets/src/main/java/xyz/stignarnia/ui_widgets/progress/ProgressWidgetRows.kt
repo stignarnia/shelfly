@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
+import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -18,6 +19,7 @@ import xyz.stignarnia.ui_model.Season
 import xyz.stignarnia.ui_progress.progress.cases.ProgressItemsCase
 import xyz.stignarnia.ui_progress.progress.recycler.ProgressListItem
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider.Companion.EXTRA_SHOW_ID
+import xyz.stignarnia.ui_widgets.BaseWidgetProvider
 import xyz.stignarnia.ui_widgets.R
 import xyz.stignarnia.ui_widgets.progress.ProgressWidgetProvider.Companion.EXTRA_EPISODE_ID
 import xyz.stignarnia.ui_widgets.progress.ProgressWidgetProvider.Companion.EXTRA_SEASON_ID
@@ -27,6 +29,7 @@ import xyz.stignarnia.ui_widgets.theme.setBackgroundTint
 import xyz.stignarnia.ui_widgets.theme.setIconTint
 import xyz.stignarnia.ui_widgets.theme.setProgressTint
 import java.util.Locale.ENGLISH
+import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
 /**
@@ -193,7 +196,9 @@ class ProgressWidgetRows(
         .load(imageUrl)
         .transform(CenterCrop(), RoundedCorners(imageCorner))
         .submit(imageWidth, imageHeight)
-        .get()
+        // Time boxed: every row's poster is fetched before the widget can be sent, so one slow image must not hold the whole list up.
+        // A miss falls through to the placeholder and is picked up on the next update, by which point Glide has it cached.
+        .get(POSTER_TIMEOUT_SECONDS, TimeUnit.SECONDS)
 
       remoteView.setImageViewBitmap(R.id.progressWidgetItemImage, bitmap)
       remoteView.setViewVisibility(R.id.progressWidgetItemImage, VISIBLE)
@@ -219,9 +224,23 @@ class ProgressWidgetRows(
 
   private fun getHeaderLayout(): Int = R.layout.widget_header_night
 
+  /** The row that stands in for everything that did not fit, opening the app where the widget's header does. */
+  fun moreView(): RemoteViews =
+    RemoteViews(context.packageName, R.layout.widget_more_item).apply {
+      palette?.let { setTextColor(R.id.widgetMoreItemText, it.textSecondary) }
+      setOnClickFillInIntent(
+        R.id.widgetMoreItem,
+        Intent().putExtras(bundleOf(BaseWidgetProvider.EXTRA_MORE_CLICK to true)),
+      )
+    }
+
   fun itemId(position: Int) = adapterItems[position].show.tmdbId
 
   val count get() = adapterItems.size
 
-  val viewTypeCount = 4
+  val viewTypeCount = 5
+
+  private companion object {
+    const val POSTER_TIMEOUT_SECONDS = 2L
+  }
 }

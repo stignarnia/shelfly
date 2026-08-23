@@ -24,6 +24,7 @@ abstract class BaseWidgetProvider : AppWidgetProvider() {
   companion object {
     const val ACTION_CLICK = "ACTION_CLICK"
     const val EXTRA_MODE_CLICK = "EXTRA_MODE_CLICK"
+    const val EXTRA_MORE_CLICK = "EXTRA_MORE_CLICK"
     const val EXTRA_SHOW_ID = "EXTRA_SHOW_ID"
     const val EXTRA_MOVIE_ID = "EXTRA_MOVIE_ID"
   }

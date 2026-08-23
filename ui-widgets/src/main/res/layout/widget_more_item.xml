@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The last row of a list that did not fit.
+
+  A widget carries its rows inside itself and there is a limit to how many - see WidgetCollection - so a long list stops somewhere.
+  This says so, and opens the app where the widget's own header does, which is where the rest of them are.
+-->
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/widgetMoreItem"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:gravity="center"
+  android:orientation="horizontal"
+  android:paddingTop="@dimen/spaceSmall"
+  android:paddingBottom="@dimen/spaceMedium"
+  android:theme="@style/AppTheme.Widget.Dark"
+  >
+
+  <TextView
+    android:id="@+id/widgetMoreItemText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/textWidgetMore"
+    android:textColor="?android:attr/textColorSecondary"
+    android:textSize="16sp"
+    />
+
+</LinearLayout>
