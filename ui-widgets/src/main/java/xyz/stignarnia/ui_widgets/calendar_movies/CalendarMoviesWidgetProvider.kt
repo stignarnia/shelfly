@@ -18,14 +18,21 @@ import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_model.CalendarMode
+import xyz.stignarnia.ui_progress_movies.calendar.cases.items.CalendarMoviesFutureCase
+import xyz.stignarnia.ui_progress_movies.calendar.cases.items.CalendarMoviesRecentsCase
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider
 import xyz.stignarnia.ui_widgets.R
+import xyz.stignarnia.ui_widgets.theme.WidgetCollection
 import xyz.stignarnia.ui_widgets.theme.setIconTint
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
+
+  @Inject lateinit var calendarMoviesFutureCase: CalendarMoviesFutureCase
+  @Inject lateinit var calendarMoviesRecentsCase: CalendarMoviesRecentsCase
 
   companion object {
     fun requestUpdate(context: Context) {
@@ -60,16 +67,10 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
   ) {
     val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
 
-    val intent = Intent(context, CalendarMoviesWidgetService::class.java).apply {
-      putExtra(EXTRA_APPWIDGET_ID, widgetId)
-      data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
-    }
-
     val palette = palette(context, widgetId)
 
     val listClickIntent = Intent(context, CalendarMoviesWidgetProvider::class.java).apply {
       action = ACTION_CLICK
-      data = Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME))
     }
     val listIntent = PendingIntent.getBroadcast(context, 0, listClickIntent, FLAG_MUTABLE or FLAG_UPDATE_CURRENT)
 
@@ -91,10 +92,22 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
       FLAG_MUTABLE or FLAG_UPDATE_CURRENT,
     )
 
-    // Everything but the adapter, so the same frame can be sent with it and without - see updateWidget.
-    fun buildViews(withAdapter: Boolean) =
-      RemoteViews(context.packageName, getLayoutResId()).apply {
-        if (withAdapter) setRemoteAdapter(R.id.calendarWidgetMoviesList, intent)
+    context.updateAsync {
+      val rows = CalendarMoviesWidgetRows(
+        widgetId,
+        context,
+        calendarMoviesFutureCase,
+        calendarMoviesRecentsCase,
+        settingsRepository,
+      )
+      rows.load()
+      val (items, taken) = WidgetCollection.fill(context, rows.count, rows.viewTypeCount) { position ->
+        rows.itemId(position) to rows.viewAt(position)
+      }
+      Timber.d("Widget $widgetId built $taken of ${rows.count} rows.")
+
+      val remoteViews = RemoteViews(context.packageName, getLayoutResId()).apply {
+        setRemoteAdapter(R.id.calendarWidgetMoviesList, items)
         setEmptyView(R.id.calendarWidgetMoviesList, R.id.calendarWidgetMoviesEmptyView)
 
         val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
@@ -138,8 +151,8 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
         setPendingIntentTemplate(R.id.calendarWidgetMoviesList, listIntent)
       }
 
-    appWidgetManager.updateWidget(widgetId, palette, ::buildViews)
-    appWidgetManager.notifyAppWidgetViewDataChanged(widgetId, R.id.calendarWidgetMoviesList)
+      appWidgetManager.updateAppWidget(widgetId, remoteViews)
+    }
   }
 
   private fun toggleCalendarMode(widgetId: Int) {

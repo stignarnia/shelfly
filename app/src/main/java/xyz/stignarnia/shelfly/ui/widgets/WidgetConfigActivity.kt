@@ -18,7 +18,6 @@ import xyz.stignarnia.ui_model.WidgetAmoled
 import xyz.stignarnia.ui_model.WidgetTheme
 import xyz.stignarnia.ui_settings.helpers.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -135,7 +134,6 @@ class WidgetConfigActivity : AppCompatActivity() {
   }
 
   private fun onChanged() {
-    Timber.d("Widget $widgetId configured. Requesting update.")
     (applicationContext as WidgetsProvider).requestAllWidgetsUpdate()
     render()
   }

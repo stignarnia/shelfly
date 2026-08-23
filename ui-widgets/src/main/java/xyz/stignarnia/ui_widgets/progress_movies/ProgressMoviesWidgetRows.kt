@@ -5,7 +5,6 @@ import android.content.Intent
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
-import android.widget.RemoteViewsService
 import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -22,14 +21,19 @@ import xyz.stignarnia.ui_widgets.progress_movies.ProgressMoviesWidgetProvider.Co
 import xyz.stignarnia.ui_widgets.theme.WidgetPalette
 import xyz.stignarnia.ui_widgets.theme.WidgetPalettes
 import xyz.stignarnia.ui_widgets.theme.setIconTint
-import kotlinx.coroutines.runBlocking
 
-class ProgressMoviesWidgetViewsFactory(
+/**
+ * The rows of the shows movies progress widget, built to be carried inside the widget's own views.
+ *
+ * Was a RemoteViewsFactory behind a RemoteViewsService, which the launcher called back into per row.
+ * The framework never delivers views that name such a service - see WidgetCollection - so the rows are built here instead and travel with the frame.
+ */
+class ProgressMoviesWidgetRows(
   private val widgetId: Int,
   private val context: Context,
   private val loadItemsCase: ProgressMoviesItemsCase,
   private val settingsRepository: SettingsRepository,
-) : RemoteViewsService.RemoteViewsFactory {
+) {
 
   private val imageCorner by lazy { context.dimenToPx(R.dimen.mediaTileCorner) }
   private val imageWidth by lazy { context.dimenToPx(R.dimen.widgetImageWidth) }
@@ -37,17 +41,15 @@ class ProgressMoviesWidgetViewsFactory(
   private val adapterItems by lazy { mutableListOf<ProgressMovieListItem>() }
   private var palette: WidgetPalette? = null
 
-  override fun onDataSetChanged() {
+  suspend fun load() {
     palette = WidgetPalettes.resolve(context, widgetId, settingsRepository)
-    runBlocking {
-      val items = loadItemsCase
-        .loadItems("")
-        .filterIsInstance<ProgressMovieListItem.MovieItem>()
-      adapterItems.replace(items)
-    }
+    val items = loadItemsCase
+      .loadItems("")
+      .filterIsInstance<ProgressMovieListItem.MovieItem>()
+    adapterItems.replace(items)
   }
 
-  override fun getViewAt(position: Int): RemoteViews {
+  fun viewAt(position: Int): RemoteViews {
     val item = adapterItems[position] as ProgressMovieListItem.MovieItem
     return createItemRemoteView(item)
   }
@@ -122,17 +124,9 @@ class ProgressMoviesWidgetViewsFactory(
 
   private fun getItemLayout(): Int = R.layout.widget_movies_progress_item_night
 
-  override fun getItemId(position: Int) = adapterItems[position].movie.tmdbId
+  fun itemId(position: Int) = adapterItems[position].movie.tmdbId
 
-  override fun getLoadingView() = RemoteViews(context.packageName, R.layout.widget_loading_item)
+  val count get() = adapterItems.size
 
-  override fun getCount() = adapterItems.size
-
-  override fun hasStableIds() = true
-
-  override fun getViewTypeCount() = 2
-
-  override fun onCreate() = Unit
-
-  override fun onDestroy() = Unit
+  val viewTypeCount = 2
 }

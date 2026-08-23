@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  The same widget as res/xml, with its own settings screen.
+
+  Everything below android:configure is what the plain copy in res/xml leaves out, and -v31 is where the two part company:
+
+  - reconfigurable is what puts the settings button on the widget in the launcher, so the choice can be changed after the widget has been placed rather than only while placing it.
+  - configuration_optional keeps the screen out of the way when the widget is added: it appears already themed, following the app, and is configured only if the user asks.
+
+  Both flags arrive in API 31, which is also where a widget can be themed at all - RemoteViews has no way to tint a background before then, see WidgetPalettes.
+  So the two gates are the same one: where there is nothing to theme there is nothing to configure.
+
+  Material You is gated further up, at 34, but that is a question for the picker rather than for this file: AppTheme.supported() leaves the dynamic entries out on a device that cannot honour them, and the rest of the screen is unaffected.
+-->
 <appwidget-provider
   xmlns:android="http://schemas.android.com/apk/res/android"
+  android:configure="xyz.stignarnia.shelfly.ui.widgets.WidgetConfigActivity"
   android:minWidth="300dp"
   android:minHeight="200dp"
   android:minResizeWidth="30dp"
@@ -9,4 +23,5 @@
   android:resizeMode="horizontal|vertical"
   android:updatePeriodMillis="900000"
   android:widgetCategory="home_screen"
+  android:widgetFeatures="reconfigurable|configuration_optional"
   />

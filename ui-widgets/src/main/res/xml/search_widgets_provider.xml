@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- The same widget as res/xml, with its own settings screen. See xml-v31/progress_widgets_provider.xml for why this copy exists. -->
 <appwidget-provider
   xmlns:android="http://schemas.android.com/apk/res/android"
+  android:configure="xyz.stignarnia.shelfly.ui.widgets.WidgetConfigActivity"
   android:initialLayout="@layout/widget_search"
   android:minWidth="80dp"
   android:minHeight="@dimen/searchViewHeight"
@@ -8,4 +10,5 @@
   android:resizeMode="horizontal"
   android:updatePeriodMillis="1800000"
   android:widgetCategory="home_screen"
+  android:widgetFeatures="reconfigurable|configuration_optional"
   />

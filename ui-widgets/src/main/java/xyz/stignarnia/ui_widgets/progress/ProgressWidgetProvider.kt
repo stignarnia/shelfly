@@ -21,13 +21,17 @@ import xyz.stignarnia.common.Config.HOST_ACTIVITY_NAME
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_model.IdTmdb
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider
+import xyz.stignarnia.ui_progress.progress.cases.ProgressItemsCase
 import xyz.stignarnia.ui_widgets.R
-import xyz.stignarnia.ui_widgets.theme.WidgetPalette
+import xyz.stignarnia.ui_widgets.theme.WidgetCollection
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProgressWidgetProvider : BaseWidgetProvider() {
+
+  @Inject lateinit var progressItemsCase: ProgressItemsCase
 
   companion object {
     const val EXTRA_SEASON_ID = "EXTRA_SEASON_ID"
@@ -62,11 +66,6 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
     appWidgetManager: AppWidgetManager,
     widgetId: Int,
   ) {
-    val intent = Intent(context, ProgressWidgetService::class.java).apply {
-      putExtra(EXTRA_APPWIDGET_ID, widgetId)
-      data = Uri.parse(toUri(URI_INTENT_SCHEME))
-    }
-
     val palette = palette(context, widgetId)
 
     val mainIntent = PendingIntent.getActivity(
@@ -78,7 +77,6 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
 
     val listClickIntent = Intent(context, ProgressWidgetProvider::class.java).apply {
       action = ACTION_CLICK
-      data = Uri.parse(intent.toUri(URI_INTENT_SCHEME))
     }
     val showDetailsPendingIntent = PendingIntent.getBroadcast(
       context,
@@ -87,10 +85,16 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
       FLAG_MUTABLE or FLAG_UPDATE_CURRENT,
     )
 
-    // Everything but the adapter, so the same frame can be sent with it and without - see updateWidget.
-    fun buildViews(withAdapter: Boolean) =
-      RemoteViews(context.packageName, getLayoutResId()).apply {
-        if (withAdapter) setRemoteAdapter(R.id.progressWidgetList, intent)
+    context.updateAsync {
+      val rows = ProgressWidgetRows(widgetId, context, progressItemsCase, settingsRepository)
+      rows.load()
+      val (items, taken) = WidgetCollection.fill(context, rows.count, rows.viewTypeCount) { position ->
+        rows.itemId(position) to rows.viewAt(position)
+      }
+      Timber.d("Widget $widgetId built $taken of ${rows.count} rows.")
+
+      val remoteViews = RemoteViews(context.packageName, getLayoutResId()).apply {
+        setRemoteAdapter(R.id.progressWidgetList, items)
         setEmptyView(R.id.progressWidgetList, R.id.progressWidgetEmptyView)
 
         val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
@@ -109,8 +113,8 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
         setPendingIntentTemplate(R.id.progressWidgetList, showDetailsPendingIntent)
       }
 
-    appWidgetManager.updateWidget(widgetId, palette, ::buildViews)
-    appWidgetManager.notifyAppWidgetViewDataChanged(widgetId, R.id.progressWidgetList)
+      appWidgetManager.updateAppWidget(widgetId, remoteViews)
+    }
   }
 
   override fun onReceive(

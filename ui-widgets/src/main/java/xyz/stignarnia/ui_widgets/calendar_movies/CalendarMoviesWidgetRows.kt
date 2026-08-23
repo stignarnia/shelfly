@@ -6,7 +6,6 @@ import android.content.Intent
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
-import android.widget.RemoteViewsService
 import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -27,15 +26,20 @@ import xyz.stignarnia.ui_widgets.R
 import xyz.stignarnia.ui_widgets.theme.WidgetPalette
 import xyz.stignarnia.ui_widgets.theme.WidgetPalettes
 import xyz.stignarnia.ui_widgets.theme.setIconTint
-import kotlinx.coroutines.runBlocking
 
-class CalendarMoviesWidgetViewsFactory(
+/**
+ * The rows of the movies calendar widget, built to be carried inside the widget's own views.
+ *
+ * Was a RemoteViewsFactory behind a RemoteViewsService, which the launcher called back into per row.
+ * The framework never delivers views that name such a service - see WidgetCollection - so the rows are built here instead and travel with the frame.
+ */
+class CalendarMoviesWidgetRows(
   private val widgetId: Int,
   private val context: Context,
   private val futureItemsCase: CalendarMoviesFutureCase,
   private val recentItemsCase: CalendarMoviesRecentsCase,
   private val settingsRepository: SettingsRepository,
-) : RemoteViewsService.RemoteViewsFactory {
+) {
 
   private val imageCorner by lazy { context.dimenToPx(R.dimen.mediaTileCorner) }
   private val imageWidth by lazy { context.dimenToPx(R.dimen.widgetImageWidth) }
@@ -45,19 +49,17 @@ class CalendarMoviesWidgetViewsFactory(
 
   private val adapterItems = mutableListOf<CalendarMovieListItem>()
 
-  override fun onDataSetChanged() {
+  suspend fun load() {
     palette = WidgetPalettes.resolve(context, widgetId, settingsRepository)
-    runBlocking {
-      mode = settingsRepository.widgets.getWidgetCalendarMode(Mode.MOVIES, widgetId)
-      val items = when (mode) {
-        CalendarMode.PRESENT_FUTURE -> futureItemsCase.loadItems(withFilters = false)
-        CalendarMode.RECENTS -> recentItemsCase.loadItems(withFilters = false)
-      }
-      adapterItems.replace(items)
+    mode = settingsRepository.widgets.getWidgetCalendarMode(Mode.MOVIES, widgetId)
+    val items = when (mode) {
+      CalendarMode.PRESENT_FUTURE -> futureItemsCase.loadItems(withFilters = false)
+      CalendarMode.RECENTS -> recentItemsCase.loadItems(withFilters = false)
     }
+    adapterItems.replace(items)
   }
 
-  override fun getViewAt(position: Int) =
+  fun viewAt(position: Int) =
     when (val item = adapterItems[position]) {
       is CalendarMovieListItem.MovieItem -> createItemRemoteView(item)
       is CalendarMovieListItem.Header -> createHeaderRemoteView(item, showIcon = position == 0)
@@ -168,17 +170,9 @@ class CalendarMoviesWidgetViewsFactory(
 
   private fun getHeaderLayout(): Int = R.layout.widget_header_night
 
-  override fun getItemId(position: Int) = adapterItems[position].movie.tmdbId
+  fun itemId(position: Int) = adapterItems[position].movie.tmdbId
 
-  override fun getLoadingView() = RemoteViews(context.packageName, R.layout.widget_loading_item)
+  val count get() = adapterItems.size
 
-  override fun getCount() = adapterItems.size
-
-  override fun hasStableIds() = true
-
-  override fun getViewTypeCount() = 4
-
-  override fun onCreate() = Unit
-
-  override fun onDestroy() = Unit
+  val viewTypeCount = 4
 }

@@ -5,12 +5,18 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.widget.RemoteViews
 import xyz.stignarnia.repository.settings.SettingsRepository
+import xyz.stignarnia.ui_base.common.AppScopeProvider
 import xyz.stignarnia.ui_model.Settings
+import xyz.stignarnia.ui_widgets.theme.WidgetCollection
 import xyz.stignarnia.ui_widgets.theme.WidgetPalette
 import xyz.stignarnia.ui_widgets.theme.WidgetPalettes
 import xyz.stignarnia.ui_widgets.theme.setBackground
 import xyz.stignarnia.ui_widgets.theme.setBackgroundTint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 abstract class BaseWidgetProvider : AppWidgetProvider() {
@@ -66,29 +72,22 @@ abstract class BaseWidgetProvider : AppWidgetProvider() {
   }
 
   /**
-   * Sends the widget's views in two parts, because a widget with a scrolling list cannot be updated in one.
+   * Runs the update off the broadcast thread, and holds the broadcast open until it is done.
    *
-   * The framework decides per RemoteViews whether to hand it to the host or merely to tell the host that something changed: RemoteViews carrying a collection bound the old way - setRemoteAdapter with an Intent, which is what a RemoteViewsService is - are never delivered, only announced, and the host picks them up whenever it next inflates the widget.
-   * That is why a themed widget appeared to ignore every change and then come back correct after an app update, and why the labels switch and the calendar's empty state looked equally stuck.
-   *
-   * Nothing requires every update to carry the adapter, though. [buildViews] is asked for the views twice:
-   *
-   * 1. Without the adapter. That is the whole frame - colours, the label bar, the paddings, the empty state - and with no adapter on it, it is handed to the host. It names the layout the host is already showing, so the host re-applies onto that view tree rather than building a new one, and the list keeps the adapter it already has.
-   * 2. With it, restoring the stored copy the host reads when it does inflate again - after a reboot, or when the launcher restarts. Its own announcement is ignored, which no longer matters.
-   *
-   * The order is the point. Reversed, the stored copy is left without its adapter and the list comes back empty the next time the widget is inflated.
-   *
-   * Only where there is a palette, which is to say from API 31 - see [WidgetPalettes]. Below that the widget is not themed and this is not its problem to solve: it keeps the single update it has always sent.
+   * The rows travel inside the views now - see [WidgetCollection] - so building them means loading from the database and decoding posters, which is far too much for onUpdate to do inline.
+   * goAsync is what keeps the receiver alive across that; the application's scope is what it runs in, since the receiver itself is gone the moment onReceive returns.
    */
-  protected fun AppWidgetManager.updateWidget(
-    widgetId: Int,
-    palette: WidgetPalette?,
-    buildViews: (withAdapter: Boolean) -> RemoteViews,
-  ) {
-    if (palette != null) {
-      updateAppWidget(widgetId, buildViews(false))
+  protected fun Context.updateAsync(block: suspend () -> Unit) {
+    val pendingResult = goAsync()
+    (applicationContext as AppScopeProvider).appScope.launch {
+      try {
+        withContext(Dispatchers.IO) { block() }
+      } catch (error: Throwable) {
+        Timber.e(error, "Widget update failed.")
+      } finally {
+        pendingResult.finish()
+      }
     }
-    updateAppWidget(widgetId, buildViews(true))
   }
 
   /**

@@ -18,14 +18,21 @@ import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_model.CalendarMode
+import xyz.stignarnia.ui_progress.calendar.cases.items.CalendarFutureCase
+import xyz.stignarnia.ui_progress.calendar.cases.items.CalendarRecentsCase
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider
 import xyz.stignarnia.ui_widgets.R
+import xyz.stignarnia.ui_widgets.theme.WidgetCollection
 import xyz.stignarnia.ui_widgets.theme.setIconTint
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CalendarWidgetProvider : BaseWidgetProvider() {
+
+  @Inject lateinit var calendarFutureCase: CalendarFutureCase
+  @Inject lateinit var calendarRecentsCase: CalendarRecentsCase
 
   companion object {
     fun requestUpdate(context: Context) {
@@ -59,11 +66,6 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
     appWidgetManager: AppWidgetManager,
     widgetId: Int,
   ) {
-    val intent = Intent(context, CalendarWidgetService::class.java).apply {
-      putExtra(EXTRA_APPWIDGET_ID, widgetId)
-      data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
-    }
-
     val palette = palette(context, widgetId)
 
     val mainIntent = PendingIntent.getActivity(
@@ -86,14 +88,19 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
 
     val listClickIntent = Intent(context, CalendarWidgetProvider::class.java).apply {
       action = ACTION_CLICK
-      data = Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME))
     }
     val listIntent = PendingIntent.getBroadcast(context, 0, listClickIntent, FLAG_MUTABLE or FLAG_UPDATE_CURRENT)
 
-    // Everything but the adapter, so the same frame can be sent with it and without - see updateWidget.
-    fun buildViews(withAdapter: Boolean) =
-      RemoteViews(context.packageName, getLayoutResId()).apply {
-        if (withAdapter) setRemoteAdapter(R.id.calendarWidgetList, intent)
+    context.updateAsync {
+      val rows = CalendarWidgetRows(widgetId, context, calendarFutureCase, calendarRecentsCase, settingsRepository)
+      rows.load()
+      val (items, taken) = WidgetCollection.fill(context, rows.count, rows.viewTypeCount) { position ->
+        rows.itemId(position) to rows.viewAt(position)
+      }
+      Timber.d("Widget $widgetId built $taken of ${rows.count} rows.")
+
+      val remoteViews = RemoteViews(context.packageName, getLayoutResId()).apply {
+        setRemoteAdapter(R.id.calendarWidgetList, items)
         setEmptyView(R.id.calendarWidgetList, R.id.calendarWidgetEmptyView)
 
         val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
@@ -127,8 +134,8 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
         setPendingIntentTemplate(R.id.calendarWidgetList, listIntent)
       }
 
-    appWidgetManager.updateWidget(widgetId, palette, ::buildViews)
-    appWidgetManager.notifyAppWidgetViewDataChanged(widgetId, R.id.calendarWidgetList)
+      appWidgetManager.updateAppWidget(widgetId, remoteViews)
+    }
   }
 
   private fun toggleCalendarMode(widgetId: Int) {

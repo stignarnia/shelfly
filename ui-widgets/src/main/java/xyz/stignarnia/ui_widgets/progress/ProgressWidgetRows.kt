@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
-import android.widget.RemoteViewsService
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -27,16 +26,21 @@ import xyz.stignarnia.ui_widgets.theme.WidgetPalettes
 import xyz.stignarnia.ui_widgets.theme.setBackgroundTint
 import xyz.stignarnia.ui_widgets.theme.setIconTint
 import xyz.stignarnia.ui_widgets.theme.setProgressTint
-import kotlinx.coroutines.runBlocking
 import java.util.Locale.ENGLISH
 import kotlin.math.roundToInt
 
-class ProgressWidgetViewsFactory(
+/**
+ * The rows of the shows progress widget, built to be carried inside the widget's own views.
+ *
+ * Was a RemoteViewsFactory behind a RemoteViewsService, which the launcher called back into per row.
+ * The framework never delivers views that name such a service - see WidgetCollection - so the rows are built here instead and travel with the frame.
+ */
+class ProgressWidgetRows(
   private val widgetId: Int,
   private val context: Context,
   private val itemsCase: ProgressItemsCase,
   private val settingsRepository: SettingsRepository,
-) : RemoteViewsService.RemoteViewsFactory {
+) {
 
   private val imageCorner by lazy { context.dimenToPx(R.dimen.mediaTileCorner) }
   private val imageWidth by lazy { context.dimenToPx(R.dimen.widgetImageWidth) }
@@ -51,17 +55,15 @@ class ProgressWidgetViewsFactory(
    */
   private var palette: WidgetPalette? = null
 
-  override fun onDataSetChanged() {
+  suspend fun load() {
     palette = WidgetPalettes.resolve(context, widgetId, settingsRepository)
-    runBlocking {
-      val items = itemsCase
-        .loadWidgetItems()
-        .filterNot { it is ProgressListItem.Filters }
-      adapterItems.replace(items)
-    }
+    val items = itemsCase
+      .loadWidgetItems()
+      .filterNot { it is ProgressListItem.Filters }
+    adapterItems.replace(items)
   }
 
-  override fun getViewAt(position: Int) =
+  fun viewAt(position: Int) =
     when (val item = adapterItems[position]) {
       is ProgressListItem.Episode -> createItemRemoteView(item)
       is ProgressListItem.Header -> createHeaderRemoteView(item)
@@ -217,17 +219,9 @@ class ProgressWidgetViewsFactory(
 
   private fun getHeaderLayout(): Int = R.layout.widget_header_night
 
-  override fun getItemId(position: Int) = adapterItems[position].show.tmdbId
+  fun itemId(position: Int) = adapterItems[position].show.tmdbId
 
-  override fun getLoadingView() = RemoteViews(context.packageName, R.layout.widget_loading_item)
+  val count get() = adapterItems.size
 
-  override fun getCount() = adapterItems.size
-
-  override fun hasStableIds() = true
-
-  override fun getViewTypeCount() = 4
-
-  override fun onCreate() = Unit
-
-  override fun onDestroy() = Unit
+  val viewTypeCount = 4
 }

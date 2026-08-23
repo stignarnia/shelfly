@@ -2,6 +2,8 @@ package xyz.stignarnia.shelfly
 
 import android.app.Application
 import android.app.NotificationChannel
+import android.content.ComponentName
+import android.content.pm.PackageManager
 import android.os.StrictMode
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
@@ -88,14 +90,10 @@ class App :
             StrictMode.VmPolicy
               .Builder()
               .detectUnsafeIntentLaunch()
-              // Reported, not fatal.
-              //
-              // The violation that made it fatal is the framework's own: AppWidgetManager binds a collection widget's RemoteViewsService with an intent it unparcelled itself, and prepareToLeaveProcess refuses it on that provenance alone.
-              // The intent's contents are not what is flagged - stripped to nothing, neither data nor extras, it is refused just the same - so nothing on this side clears it while the widgets keep their scrolling lists.
-              //
-              // penaltyDeath on that SIGKILLs the process on a widget update, and a SIGKILL leaves nothing to read: no stack, no crash record, no tombstone, so it presents as the app vanishing on launch rather than as a policy violation.
-              // Reporting keeps every violation visible - that one and any other - without one of them taking the process down unread.
+              // Logged as well as fatal.
+              // Death on its own leaves a SIGKILL with nothing to read - no trace, no crash record - which is indistinguishable from the app simply vanishing.
               .penaltyLog()
+              .penaltyDeath()
               .build(),
           )
         }
@@ -136,11 +134,39 @@ class App :
 
     setupSettings()
     setupLanguage()
+    setupWidgets()
     ThemeApplier.applyNightMode(settingsRepository)
     lastNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
     setupStrictMode()
     setupNotificationChannels()
     syncNotificationManager.cancelStaleProgress()
+  }
+
+  /**
+   * Takes the widgets off devices that cannot draw them properly.
+   *
+   * A widget's rows travel inside its views - see WidgetCollection - which needs the collection API that arrives in Android 12, and the same version is where RemoteViews learned to tint a background, which is what themes them.
+   * The alternative, a RemoteViewsService serving rows one at a time, is the one the framework has stopped delivering updates for: it leaves a widget that cannot repaint and cannot be themed.
+   *
+   * Disabling the receivers is what removes them from the launcher's picker; a widget already on a home screen from an older build stops being offered and is dropped by the launcher.
+   */
+  private fun setupWidgets() {
+    if (AndroidVersion.isAtLeastAndroid12) return
+
+    val providers = listOf(
+      ProgressWidgetProvider::class.java,
+      ProgressMoviesWidgetProvider::class.java,
+      CalendarWidgetProvider::class.java,
+      CalendarMoviesWidgetProvider::class.java,
+      SearchWidgetProvider::class.java,
+    )
+    providers.forEach {
+      packageManager.setComponentEnabledSetting(
+        ComponentName(this, it),
+        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+        PackageManager.DONT_KILL_APP,
+      )
+    }
   }
 
   override fun requestShowsWidgetsUpdate() {

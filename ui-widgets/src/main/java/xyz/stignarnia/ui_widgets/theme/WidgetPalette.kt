@@ -13,7 +13,6 @@ import androidx.core.graphics.ColorUtils
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import xyz.stignarnia.ui_widgets.R
-import timber.log.Timber
 
 /**
  * The colours one widget is drawn in.
@@ -66,19 +65,6 @@ object WidgetPalettes {
       appAmoled = settingsRepository.isAmoled,
       isSystemDark = context.isSystemDark(),
       isDynamicSupported = AndroidVersion.isAtLeastAndroid14,
-    )
-
-    // What this widget was drawn as, and what decided it.
-    // A widget that looks wrong looks exactly like a widget that was never redrawn, and this line is what tells the two apart.
-    Timber.d(
-      "Widget %d palette=%s stored=%s/%s/%d%% app=%s/%s",
-      widgetId,
-      kind,
-      storedTheme,
-      storedAmoled,
-      storedTransparency,
-      settingsRepository.themeId,
-      settingsRepository.isAmoled,
     )
 
     val palette = when (kind) {
