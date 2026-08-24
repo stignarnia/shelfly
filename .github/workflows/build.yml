@@ -43,10 +43,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      # First, because it needs no toolchain and fails in under a second.
+      # First, because these need no toolchain and fail in under a second.
       # The release step in the build job publishes release_notes.txt as the GitHub Release body, so a heading left on the previous version would ship as the public description of this one.
       - name: Check release notes
         run: ./scripts/check-release-notes.sh
+
+      # On a tag build this is what catches a tag that disagrees with versionName, which would otherwise publish a mislabelled release.
+      - name: Check version and locale configuration
+        run: ./scripts/check-config.sh
 
       - name: Setup JDK
         uses: actions/setup-java@v5

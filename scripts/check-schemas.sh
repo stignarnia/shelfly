@@ -39,8 +39,14 @@ fi
 # Compare against the last release rather than the previous commit, so the check describes what users actually have installed.
 baseline="$(git describe --tags --abbrev=0 2>/dev/null || true)"
 if [ -z "$baseline" ]; then
-  echo "no tags found, skipping the history check (drift check passed)"
-  echo "CI needs fetch-depth: 0 for tags to be present."
+  # Failing rather than skipping, because the history check is the half that closes the hole.
+  # Silently degrading to drift-only would report success while the check that matters had not run - exactly the kind of green this repository does not want.
+  # A shallow clone is the usual cause; CI passes fetch-depth: 0 for that reason.
+  echo "error: no reachable tag, so the history check cannot run." >&2
+  echo "This is usually a shallow clone - fetch tags with: git fetch --tags --unshallow" >&2
+  echo "Set SHELFLY_ALLOW_NO_TAGS=1 to accept drift checking alone." >&2
+  [ "${SHELFLY_ALLOW_NO_TAGS:-}" = "1" ] || exit 1
+  echo "SHELFLY_ALLOW_NO_TAGS=1 set, continuing with the drift check alone." >&2
   exit 0
 fi
 

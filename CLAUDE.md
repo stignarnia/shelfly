@@ -93,18 +93,23 @@ Each tier below is additive: it assumes the tiers above it also ran.
 `ktlint` is a self-executing jar, not a Gradle plugin.
 No Gradle task runs it, so `check` will never catch a formatting violation - it has to be invoked separately.
 
-`check-format.sh` covers the file types ktlint cannot read - Gradle scripts, resources, manifests, workflows, R8 rules, shell, properties - checking for CRLF, hard tabs, and trailing whitespace.
-It is a whitespace check, not a formatter: it will not reindent XML or wrap long lines.
+`check-format.sh` checks CRLF, hard tabs, and trailing whitespace across the tracked text files ktlint cannot read: Gradle scripts, resources, manifests, workflows, R8 rules, shell, properties, the version catalog, JSON, Markdown, the fastlane metadata, `.editorconfig`, `.gitignore` and `LICENSE`.
+Binaries are excluded because the rules are meaningless for them, and `gradlew` / `gradlew.bat` because Gradle regenerates them.
+It is a whitespace check rather than a formatter: it will not reindent XML or wrap long lines.
 `insert_final_newline` is declared in `.editorconfig` but deliberately not enforced, because 335 files would fail it today.
 
 ### Tier 2 - resources, layouts, manifest, strings
 
 ```
-./gradlew lintDebug
+./gradlew lintDebug && ./scripts/check-config.sh
 ```
 
 Android Lint is the only thing that checks XML, translations, and accessibility.
 The Kotlin compiler cannot see any of it.
+
+`check-config.sh` covers the one localization mistake Lint cannot see.
+`resourceConfigurations` in `app/build.gradle` pins which locales survive into the APK, so adding `res/values-nb` without adding `nb` to that list strips the translation at build time - and `MissingTranslation` stays quiet, because it only reasons about locales that are already configured.
+A complete, correct, silently discarded translation looks exactly like a healthy one.
 
 `lint.checkTestSources` is on in the root `build.gradle`, so `test/` and `androidTest/` sources are linted too - they are skipped by default.
 It does not guard against test sources failing to *compile*, which is a Kotlin error rather than a Lint finding - that is what Tier 3 covers.
@@ -141,19 +146,34 @@ Keep rules for Room, Hilt, Moshi, and WorkManager are only exercised here, and a
 
 ### Everything - before tagging a release
 
+Run in two parts, because the device half is the only one that needs hardware.
+
 ```
-./ktlint && ./scripts/check-format.sh && ./scripts/check-release-notes.sh && SHELFLY_V2_BACKUP=/path/to/showly_export.json ./gradlew \
-  clean \
-  testDebugUnitTest \
-  lintDebug \
-  :data-local:connectedDebugAndroidTest \
-  :app:assembleRelease \
-  :app:assembleDebug \
-  --warning-mode all \
+./ktlint \
+  && ./scripts/check-format.sh \
+  && ./scripts/check-config.sh \
+  && ./scripts/check-release-notes.sh \
+  && SHELFLY_V2_BACKUP=/path/to/showly_export.json ./gradlew \
+    clean \
+    testDebugUnitTest \
+    lintDebug \
+    :app:assembleRelease \
+    :app:assembleDebug \
+    --warning-mode all \
   && ./scripts/check-schemas.sh
 ```
 
-`check-schemas.sh` comes last because its drift half reads the schemas the build just regenerated; the other two scripts come first because they need no build at all.
+Then, with a device attached:
+
+```
+./gradlew :data-local:connectedDebugAndroidTest
+```
+
+Keeping them apart matters more than it looks.
+In a single `&&` chain the first failure hides every later signal, and `connectedDebugAndroidTest` fails immediately when nothing is plugged in - so an unplugged phone would silently cost you the release build, the debug build and the schema check, none of which need a device.
+Splitting also means the long half can run while the phone is elsewhere.
+
+`check-schemas.sh` comes after the build because its drift half reads the schemas the build just regenerated; the other three scripts come first because they need no build at all.
 
 `clean` is what forces every task - and every Lint SARIF report - to regenerate.
 Without it, Lint tasks go `UP-TO-DATE` and the reports on disk are from a previous run.
@@ -172,11 +192,12 @@ Unit tests never run R8, so the release variant only re-executes the same source
 
 ### Enforced conventions
 
-Two of the rules in this file are checked by tooling rather than by review.
+These rules are checked by tooling rather than by review.
 
 - **Conventional Commits**: `scripts/hooks/commit-msg` rejects any subject that is not `<type>(<scope>): <description>` with a type from the list above. Merges, reverts and rebase scratch commits are left alone, and `--no-verify` bypasses it. Enable it once per clone with `git config core.hooksPath scripts/hooks`.
 - **Release notes**: `scripts/check-release-notes.sh` fails when the first line of `release_notes.txt` is not `Shelfly <versionName>` from `versions.gradle`, or when the heading has no notes beneath it. Run it before tagging.
-- **Non-Kotlin whitespace**: `scripts/check-format.sh` fails on CRLF, hard tabs, or trailing whitespace in the file types ktlint does not parse.
+- **Non-Kotlin whitespace**: `scripts/check-format.sh` fails on CRLF, hard tabs, or trailing whitespace across the tracked text files ktlint does not parse, excluding binaries and the generated Gradle wrapper scripts.
+- **Version and locale configuration**: `scripts/check-config.sh` fails when a tag on HEAD disagrees with `versionName`, and when the locale directories and `resourceConfigurations` disagree in either direction.
 - **Room schemas**: `scripts/check-schemas.sh` fails on uncommitted schema drift, and on any schema released in the last tag having been modified rather than superseded.
 - **Translation completeness**: Android Lint's `MissingTranslation` is error severity, so `lintDebug` already fails when a string is added to `values/strings.xml` without reaching every other locale. This needs no extra tooling - it is why the localization rule holds.
 

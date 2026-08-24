@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-# Check whitespace hygiene in the files ktlint does not read.
+# Check whitespace hygiene in the tracked text files ktlint does not read.
 #
-# ktlint covers .kt and .kts. Everything else - Gradle scripts, resources, manifests, workflows, R8 rules, shell, properties - had no automated check at all.
+# ktlint covers .kt and .kts and nothing else, so everything below had no automated check at all.
+#
+# The glob list is the scope, and it is deliberately explicit rather than "everything else":
+# binaries (.png, .webp, .jar, fonts) are excluded because the rules are meaningless for them, and gradlew / gradlew.bat are excluded because Gradle regenerates them - a wrapper upgrade that emitted a tab would otherwise fail a build over a vendor file nobody should hand-edit.
 #
 # This is a whitespace check, not a formatter.
 # It will not reindent XML, reorder attributes, or wrap long lines; real formatting would need xmllint --format or an editorconfig-checker binary, which are heavier and pull in a download.
@@ -22,7 +25,11 @@ set -uo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-GLOBS=('*.gradle' '*.xml' '*.yml' '*.yaml' '*.pro' '*.sh' '*.properties')
+GLOBS=(
+  '*.gradle' '*.xml' '*.yml' '*.yaml' '*.pro' '*.sh' '*.properties'
+  '*.toml' '*.json' '*.md' '*.txt'
+  '.editorconfig' '.gitignore' '*/.gitignore' 'LICENSE'
+)
 
 crlf=()
 tabs=()
