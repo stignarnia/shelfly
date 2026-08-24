@@ -54,7 +54,9 @@
       android:layout_width="36dp"
       android:layout_height="36dp"
       android:layout_gravity="end"
+      android:contentDescription="@null"
       android:paddingStart="14dp"
+      android:paddingEnd="14dp"
       app:srcCompat="@drawable/ic_search"
       app:tint="?android:attr/textColorPrimary"
       />
@@ -65,9 +67,9 @@
     android:id="@+id/followedShowsSearchLocalView"
     android:layout_width="match_parent"
     android:layout_height="@dimen/searchLocalViewHeight"
-    android:layout_marginLeft="@dimen/screenMarginHorizontal"
+    android:layout_marginStart="@dimen/screenMarginHorizontal"
     android:layout_marginTop="@dimen/myShowsSearchLocalViewPadding"
-    android:layout_marginRight="@dimen/screenMarginHorizontal"
+    android:layout_marginEnd="@dimen/screenMarginHorizontal"
     android:visibility="gone"
     tools:visibility="visible"
     />

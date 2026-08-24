@@ -6,11 +6,10 @@
   android:id="@+id/rootLayout"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@drawable/bg_bottom_sheet_secondary"
   android:clipToPadding="false"
   android:focusableInTouchMode="true"
-
-  tools:theme="@style/CustomBottomSheetDialog">
+  tools:theme="@style/CustomBottomSheetDialog"
+  >
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/itemsRecycler"

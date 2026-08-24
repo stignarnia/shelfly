@@ -12,6 +12,7 @@
   <ImageView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:contentDescription="@null"
     android:scaleX="0.9"
     android:scaleY="0.9"
     app:srcCompat="@drawable/ic_circle"
@@ -23,6 +24,7 @@
     android:id="@+id/tutorialTipIcon"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:contentDescription="@null"
     app:srcCompat="@drawable/ic_info"
     app:tint="?attr/colorAccent"
     />

@@ -25,6 +25,7 @@
       android:layout_width="@dimen/streamingImageSize"
       android:layout_height="@dimen/streamingImageSize"
       android:adjustViewBounds="true"
+      android:contentDescription="@null"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"

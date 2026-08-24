@@ -56,6 +56,7 @@
         android:id="@+id/movieDetailsImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:contentDescription="@null"
         app:layout_constraintBottom_toTopOf="@id/movieDetailsImageGuideline"
         app:layout_constraintTop_toTopOf="parent"
         />
@@ -65,6 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorPlaceholderBackground"
+        android:contentDescription="@null"
         android:padding="74dp"
         android:src="@drawable/ic_film"
         android:visibility="gone"
@@ -381,6 +383,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_gravity="center"
+      android:contentDescription="@null"
       android:padding="8dp"
       app:srcCompat="@drawable/ic_circle"
       app:tint="@color/colorBlackTranslucentMedium"
@@ -389,6 +392,7 @@
     <ImageView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:contentDescription="@null"
       android:padding="@dimen/backArrowPadding"
       app:srcCompat="@drawable/ic_arrow_back"
       />

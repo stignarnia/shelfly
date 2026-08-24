@@ -19,6 +19,7 @@
       android:id="@+id/myMovieFanartImage"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:contentDescription="@null"
       />
 
     <ImageView
@@ -27,6 +28,7 @@
       android:layout_height="match_parent"
       android:layout_gravity="center"
       android:background="@drawable/bg_media_view_placeholder"
+      android:contentDescription="@null"
       android:padding="42dp"
       android:visibility="gone"
       app:srcCompat="@drawable/ic_film"

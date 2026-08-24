@@ -66,6 +66,7 @@
         <ImageView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
+          android:contentDescription="@null"
           android:padding="@dimen/spaceSmall"
           android:src="@drawable/ic_television"
           android:tint="?attr/colorPlaceholderIcon"
@@ -166,6 +167,7 @@
         <ImageView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
+          android:contentDescription="@null"
           android:padding="@dimen/spaceSmall"
           android:src="@drawable/ic_television"
           android:tint="?attr/colorPlaceholderIcon"
@@ -261,6 +263,7 @@
       android:layout_height="14dp"
       android:layout_marginStart="@dimen/spaceTiny"
       android:layout_marginEnd="@dimen/spaceTiny"
+      android:contentDescription="@null"
       android:src="@drawable/ic_app_round"
       />
 

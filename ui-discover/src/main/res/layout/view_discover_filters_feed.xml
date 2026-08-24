@@ -6,8 +6,8 @@
   android:id="@+id/rootLayout"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@drawable/bg_filters_sheet"
   android:orientation="vertical"
+  tools:parentTag="android.widget.FrameLayout"
   tools:theme="@style/CustomBottomSheetDialog"
   >
 

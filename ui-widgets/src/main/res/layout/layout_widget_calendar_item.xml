@@ -27,6 +27,7 @@
       android:id="@+id/calendarWidgetItemImage"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:contentDescription="@null"
       android:visibility="gone"
       tools:visibility="visible"
       />
@@ -35,6 +36,7 @@
       android:id="@+id/calendarWidgetItemPlaceholder"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:contentDescription="@null"
       android:padding="@dimen/spaceSmall"
       android:src="@drawable/ic_television"
       android:tint="?attr/colorPlaceholderIcon"
@@ -50,6 +52,7 @@
       android:layout_width="16dp"
       android:layout_height="16dp"
       android:layout_marginEnd="1dp"
+      android:contentDescription="@null"
       android:src="@drawable/ic_bookmark_full"
       android:translationY="-2dp"
       tools:visibility="visible"

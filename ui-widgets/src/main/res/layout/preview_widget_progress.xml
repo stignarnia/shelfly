@@ -41,6 +41,7 @@
         <ImageView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
+          android:contentDescription="@null"
           android:padding="@dimen/spaceSmall"
           android:src="@drawable/ic_television"
           android:tint="?attr/colorPlaceholderIcon"
@@ -139,6 +140,7 @@
           style="@style/WidgetItem.CheckButton"
           android:layout_alignParentTop="true"
           android:layout_alignParentEnd="true"
+          android:contentDescription="@null"
           />
 
       </RelativeLayout>
@@ -168,6 +170,7 @@
         <ImageView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
+          android:contentDescription="@null"
           android:padding="@dimen/spaceSmall"
           android:src="@drawable/ic_television"
           android:tint="?attr/colorPlaceholderIcon"
@@ -266,6 +269,7 @@
           style="@style/WidgetItem.CheckButton"
           android:layout_alignParentTop="true"
           android:layout_alignParentEnd="true"
+          android:contentDescription="@null"
           />
 
       </RelativeLayout>
@@ -290,6 +294,7 @@
       android:layout_height="14dp"
       android:layout_marginStart="@dimen/spaceTiny"
       android:layout_marginEnd="@dimen/spaceTiny"
+      android:contentDescription="@null"
       android:src="@drawable/ic_app_round"
       />
 

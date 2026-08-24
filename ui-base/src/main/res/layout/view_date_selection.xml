@@ -6,13 +6,13 @@
   android:id="@+id/viewCustomImagesRoot"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@drawable/bg_bottom_sheet_secondary"
   android:clipToPadding="false"
   android:paddingStart="@dimen/spaceNormal"
   android:paddingTop="@dimen/spaceMedium"
   android:paddingEnd="@dimen/spaceNormal"
   android:paddingBottom="@dimen/spaceBig"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
+  tools:theme="@style/CustomBottomSheetDialog"
   >
 
   <TextView

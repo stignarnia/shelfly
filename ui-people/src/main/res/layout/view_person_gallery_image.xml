@@ -14,6 +14,7 @@
     android:layout_height="0dp"
     android:layout_gravity="center"
     android:background="@drawable/bg_media_view_elevation"
+    android:contentDescription="@null"
     android:elevation="@dimen/elevationTiny"
     android:scaleType="fitCenter"
     app:layout_constraintBottom_toBottomOf="parent"

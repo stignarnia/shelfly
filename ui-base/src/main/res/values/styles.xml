@@ -65,12 +65,11 @@
     <!--
       Held fixed across every theme.
 
-      The first two are burned over poster and backdrop artwork, which is dark whatever the app is doing, so they stay white with their black shadow.
+      The first is burned over poster and backdrop artwork, which is dark whatever the app is doing, so it stays white with its black shadow.
       The error snackbar is white on the brand red in both.
       The widget status scrim is read only by widgets below API 31, which are not themed and are always dark - above it the scrim comes from the widget's palette instead.
     -->
     <item name="textColorOnSurface">@color/colorWhite</item>
-    <item name="textColorGridTitle">@color/colorWhite</item>
     <item name="colorErrorSnackbar">@color/colorError</item>
     <item name="textColorErrorSnackbar">@color/colorWhite</item>
     <item name="colorWidgetStatusBackground">@color/colorBlackTranslucent</item>
@@ -84,8 +83,13 @@
     <item name="android:navigationBarColor">@android:color/transparent</item>
   </style>
 
+  <!--
+    The sheet container owns its own background.
+    Content layouts used to paint a rounded 16dp drawable of their own on top of it, which duplicated the shape declared below and drew the same colour twice on every sheet in the app.
+  -->
   <style name="CustomBottomSheet" parent="Widget.Material3.BottomSheet">
     <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>
+    <item name="backgroundTint">?attr/colorSheetBackground</item>
   </style>
 
   <style name="CustomShapeAppearanceBottomSheetDialog" parent="">
@@ -147,10 +151,6 @@
 
   <!-- Toolbar -->
 
-  <style name="Toolbar.Button.Navigation.Tinted" parent="Widget.AppCompat.Toolbar.Button.Navigation">
-    <item name="tint">?android:attr/textColorPrimary</item>
-  </style>
-
   <!-- Other  -->
 
   <style name="ImageTitle">
@@ -159,12 +159,6 @@
     <item name="android:shadowDy">3</item>
     <item name="android:shadowRadius">1</item>
     <item name="android:textColor">?attr/textColorOnSurface</item>
-    <item name="android:ellipsize">end</item>
-  </style>
-
-  <style name="ImageTitleGrid" parent="ImageTitle">
-    <item name="android:shadowColor">@color/colorBlack</item>
-    <item name="android:textColor">?attr/textColorGridTitle</item>
     <item name="android:ellipsize">end</item>
   </style>
 
@@ -436,7 +430,4 @@
     <item name="android:textColor">?android:textColorPrimary</item>
   </style>
 
-  <style name="ShelflyTimePicker.Button.Negative" parent="Widget.MaterialComponents.Button.TextButton">
-    <item name="android:textColor">?android:textColorSecondary</item>
-  </style>
 </resources>

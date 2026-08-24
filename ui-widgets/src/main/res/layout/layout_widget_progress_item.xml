@@ -27,6 +27,7 @@
       android:id="@+id/progressWidgetItemImage"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:contentDescription="@null"
       android:visibility="gone"
       tools:visibility="visible"
       />
@@ -35,6 +36,7 @@
       android:id="@+id/progressWidgetItemPlaceholder"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:contentDescription="@null"
       android:padding="@dimen/spaceSmall"
       android:src="@drawable/ic_television"
       android:tint="?attr/colorPlaceholderIcon"
@@ -156,6 +158,7 @@
       style="@style/WidgetItem.CheckButton"
       android:layout_alignParentTop="true"
       android:layout_alignParentEnd="true"
+      android:contentDescription="@null"
       />
 
     <TextView

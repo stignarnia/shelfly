@@ -13,6 +13,7 @@
     android:layout_height="@dimen/galleryPosterHeight"
     android:layout_gravity="center"
     android:background="@drawable/bg_media_view_elevation"
+    android:contentDescription="@null"
     android:elevation="@dimen/elevationTiny"
     android:scaleType="fitCenter"
     />

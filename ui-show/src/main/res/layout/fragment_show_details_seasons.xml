@@ -50,6 +50,7 @@
     android:layout_gravity="center_vertical|end"
     android:layout_marginEnd="@dimen/spaceMedium"
     android:background="?android:attr/selectableItemBackgroundBorderless"
+    android:contentDescription="@null"
     android:src="@drawable/ic_quick_setup"
     android:translationY="1dp"
     android:visibility="gone"

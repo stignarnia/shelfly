@@ -16,6 +16,7 @@
     android:layout_width="80dp"
     android:layout_height="80dp"
     android:adjustViewBounds="true"
+    android:contentDescription="@null"
     app:srcCompat="@drawable/ic_search"
     app:tint="?android:attr/textColorPrimary"
     />

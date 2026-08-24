@@ -29,6 +29,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_gravity="center"
+      android:contentDescription="@null"
       android:padding="8dp"
       app:srcCompat="@drawable/ic_circle"
       app:tint="@color/colorBlackTranslucentMedium"
@@ -37,6 +38,7 @@
     <ImageView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:contentDescription="@null"
       android:padding="@dimen/backArrowPadding"
       app:srcCompat="@drawable/ic_arrow_back"
       />
@@ -87,6 +89,7 @@
     android:id="@+id/personGalleryBrowserIcon"
     android:layout_width="@dimen/backArrowSize"
     android:layout_height="@dimen/backArrowSize"
+    android:contentDescription="@null"
     android:padding="16dp"
     android:visibility="gone"
     app:layout_constraintEnd_toEndOf="parent"

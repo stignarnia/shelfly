@@ -26,6 +26,7 @@
       android:id="@+id/progressMoviesWidgetItemImage"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:contentDescription="@null"
       android:visibility="gone"
       tools:visibility="visible"
       />
@@ -34,6 +35,7 @@
       android:id="@+id/progressMoviesWidgetItemPlaceholder"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:contentDescription="@null"
       android:padding="@dimen/spaceSmall"
       android:src="@drawable/ic_film"
       android:tint="?attr/colorPlaceholderIcon"
@@ -87,6 +89,7 @@
       android:layout_height="@dimen/widgetImageHeight"
       android:layout_alignParentEnd="true"
       android:layout_centerVertical="true"
+      android:contentDescription="@null"
       />
 
   </RelativeLayout>

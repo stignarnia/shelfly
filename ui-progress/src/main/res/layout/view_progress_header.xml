@@ -30,6 +30,7 @@
     android:layout_marginTop="@dimen/spaceNormal"
     android:layout_marginEnd="@dimen/spaceMedium"
     android:layout_marginBottom="@dimen/spaceNormal"
+    android:contentDescription="@null"
     android:rotation="90"
     app:srcCompat="@drawable/ic_arrow_right"
     app:tint="?android:attr/textColorPrimary"

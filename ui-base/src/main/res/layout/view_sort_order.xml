@@ -6,12 +6,12 @@
   android:id="@+id/viewSortOrderRoot"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@drawable/bg_filters_sheet"
   android:clipToPadding="false"
   android:focusableInTouchMode="true"
   android:paddingTop="@dimen/spaceMedium"
   android:paddingBottom="@dimen/spaceNormal"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
+  tools:theme="@style/CustomBottomSheetDialog"
   >
 
   <TextView

@@ -6,15 +6,15 @@
   android:id="@+id/episodeDetailsRoot"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@drawable/bg_bottom_sheet_secondary"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
-
-  tools:theme="@style/CustomBottomSheetDialog">
+  tools:theme="@style/CustomBottomSheetDialog"
+  >
 
   <ImageView
     android:id="@+id/episodeDetailsImage"
     android:layout_width="match_parent"
     android:layout_height="@dimen/episodeDetailsImageHeight"
+    android:contentDescription="@null"
     app:layout_constraintBottom_toTopOf="@id/episodeDetailsSeparator"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +28,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/episodeDetailsImageHeight"
     android:background="@drawable/bg_bottom_sheet_placeholder"
+    android:contentDescription="@null"
     android:paddingLeft="70dp"
     android:paddingTop="70dp"
     android:paddingRight="70dp"

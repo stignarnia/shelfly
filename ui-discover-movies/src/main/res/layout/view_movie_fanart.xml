@@ -22,6 +22,7 @@
       android:id="@+id/movieFanartImage"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:contentDescription="@null"
       />
 
     <ImageView
@@ -29,6 +30,7 @@
       android:layout_width="@dimen/movieTilePlaceholder"
       android:layout_height="@dimen/movieTilePlaceholder"
       android:layout_gravity="center"
+      android:contentDescription="@null"
       android:visibility="gone"
       app:srcCompat="@drawable/ic_film"
       app:tint="?attr/colorPlaceholderIcon"
@@ -63,6 +65,7 @@
   <ImageView
     android:id="@+id/movieFanartBadge"
     style="@style/Badge"
+    android:contentDescription="@null"
     app:srcCompat="@drawable/ic_bookmark_full"
     tools:visibility="visible"
     />
@@ -70,6 +73,7 @@
   <ImageView
     android:id="@+id/movieFanartBadgeLater"
     style="@style/Badge.Watchlist"
+    android:contentDescription="@null"
     app:srcCompat="@drawable/ic_bookmark_full"
     tools:visibility="visible"
     />

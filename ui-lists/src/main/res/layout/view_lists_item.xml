@@ -34,6 +34,7 @@
       android:id="@+id/listsItemImages"
       android:layout_width="0dp"
       android:layout_height="@dimen/listsImageHeight"
+      android:contentDescription="@null"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toStartOf="@id/listsItemGuideline"
       app:layout_constraintStart_toStartOf="parent"

@@ -6,7 +6,6 @@
   android:id="@+id/rootLayout"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@drawable/bg_filters_sheet"
   android:orientation="vertical"
   tools:theme="@style/CustomBottomSheetDialog"
   >
@@ -75,6 +74,7 @@
       android:layout_height="wrap_content"
       android:layout_gravity="center_vertical"
       android:layout_marginEnd="@dimen/spaceNormal"
+      android:contentDescription="@null"
       android:visibility="gone"
       app:srcCompat="@drawable/ic_delete"
       app:tint="?android:textColorSecondary"

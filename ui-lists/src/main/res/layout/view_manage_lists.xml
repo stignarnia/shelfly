@@ -6,14 +6,13 @@
   android:id="@+id/viewManageListsRoot"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@drawable/bg_bottom_sheet_secondary"
   android:clipToPadding="false"
   android:focusableInTouchMode="true"
   android:paddingTop="@dimen/spaceMedium"
   android:paddingBottom="@dimen/spaceNormal"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
-
-  tools:theme="@style/CustomBottomSheetDialog">
+  tools:theme="@style/CustomBottomSheetDialog"
+  >
 
   <ImageView
     android:id="@+id/viewManageListsCreateButton"
@@ -21,6 +20,7 @@
     android:layout_height="26dp"
     android:layout_marginStart="@dimen/spaceNormal"
     android:layout_marginEnd="@dimen/spaceNormal"
+    android:contentDescription="@string/textCreateList"
     app:layout_constraintBottom_toBottomOf="@id/viewManageListsSubtitle"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="@id/viewManageListsTitle"

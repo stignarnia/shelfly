@@ -22,6 +22,7 @@
       android:id="@+id/showPosterImage"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:contentDescription="@null"
       />
 
     <ImageView
@@ -29,6 +30,7 @@
       android:layout_width="@dimen/showTilePlaceholder"
       android:layout_height="@dimen/showTilePlaceholder"
       android:layout_gravity="center"
+      android:contentDescription="@null"
       android:visibility="gone"
       app:srcCompat="@drawable/ic_television"
       app:tint="?attr/colorPlaceholderIcon"
@@ -65,6 +67,7 @@
   <ImageView
     android:id="@+id/showPosterBadge"
     style="@style/Badge"
+    android:contentDescription="@null"
     app:srcCompat="@drawable/ic_bookmark_full"
     tools:visibility="visible"
     />
@@ -72,6 +75,7 @@
   <ImageView
     android:id="@+id/showPosterLaterBadge"
     style="@style/Badge.Watchlist"
+    android:contentDescription="@null"
     android:elevation="@dimen/elevationSmall"
     app:srcCompat="@drawable/ic_bookmark_full"
     tools:visibility="visible"

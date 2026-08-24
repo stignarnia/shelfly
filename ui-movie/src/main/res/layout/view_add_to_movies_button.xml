@@ -86,6 +86,7 @@
       android:layout_height="48dp"
       android:layout_marginStart="8dp"
       android:background="@drawable/bg_check_ripple"
+      android:contentDescription="@null"
       android:visibility="gone"
       app:srcCompat="@drawable/ic_check_big"
       app:tint="?android:textColorPrimary"

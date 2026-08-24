@@ -20,6 +20,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:background="@drawable/bg_media_view_elevation"
+      android:contentDescription="@null"
       android:elevation="@dimen/elevationSmall"
       />
 
@@ -29,6 +30,7 @@
       android:layout_height="match_parent"
       android:layout_gravity="center"
       android:background="@drawable/bg_media_view_placeholder"
+      android:contentDescription="@null"
       android:elevation="@dimen/elevationSmall"
       android:padding="@dimen/relatedTileMoviePlaceholder"
       android:visibility="gone"
@@ -61,6 +63,7 @@
       android:layout_width="22dp"
       android:layout_height="22dp"
       android:layout_marginEnd="@dimen/spaceMicro"
+      android:contentDescription="@null"
       android:elevation="@dimen/elevationSmall"
       android:translationY="-3dp"
       app:srcCompat="@drawable/ic_bookmark_full"

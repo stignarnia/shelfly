@@ -27,6 +27,7 @@
         android:id="@+id/followedMoviesCountIcon"
         android:layout_width="14dp"
         android:layout_height="match_parent"
+        android:contentDescription="@null"
         app:srcCompat="@drawable/ic_folder"
         app:tint="?android:textColorPrimary"
         />

@@ -20,6 +20,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:background="@drawable/bg_media_view_elevation"
+      android:contentDescription="@null"
       android:elevation="@dimen/elevationSmall"
       />
 
@@ -29,6 +30,7 @@
       android:layout_height="match_parent"
       android:layout_gravity="center"
       android:background="@drawable/bg_media_view_placeholder"
+      android:contentDescription="@null"
       android:elevation="@dimen/elevationSmall"
       android:padding="@dimen/actorMovieTilePlaceholder"
       android:visibility="gone"
