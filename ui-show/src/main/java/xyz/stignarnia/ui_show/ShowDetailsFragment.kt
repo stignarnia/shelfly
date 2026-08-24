@@ -2,7 +2,6 @@ package xyz.stignarnia.ui_show
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.view.View
@@ -82,7 +81,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.util.Locale.ENGLISH
 
-@SuppressLint("SetTextI18n", "DefaultLocale", "SourceLockedOrientationActivity")
+@SuppressLint("SetTextI18n", "DefaultLocale")
 @AndroidEntryPoint
 class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment_show_details) {
 
@@ -108,7 +107,6 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
     savedInstanceState: Bundle?,
   ) {
     super.onViewCreated(view, savedInstanceState)
-    requireActivity().requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
     setupView()
     setupInsets()
 

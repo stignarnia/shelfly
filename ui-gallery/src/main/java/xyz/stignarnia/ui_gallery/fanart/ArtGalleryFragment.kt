@@ -1,8 +1,6 @@
 package xyz.stignarnia.ui_gallery.fanart
 
 import android.annotation.SuppressLint
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_FULL_USER
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
@@ -47,7 +45,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-@SuppressLint("SetTextI18n", "DefaultLocale", "SourceLockedOrientationActivity")
+@SuppressLint("SetTextI18n", "DefaultLocale")
 @AndroidEntryPoint
 class ArtGalleryFragment : BaseFragment<ArtGalleryViewModel>(R.layout.fragment_art_gallery) {
 
@@ -66,9 +64,6 @@ class ArtGalleryFragment : BaseFragment<ArtGalleryViewModel>(R.layout.fragment_a
     savedInstanceState: Bundle?,
   ) {
     super.onViewCreated(view, savedInstanceState)
-    if (type != POSTER) {
-      requireActivity().requestedOrientation = SCREEN_ORIENTATION_FULL_USER
-    }
     setupView()
     setupInsets()
 
@@ -85,7 +80,6 @@ class ArtGalleryFragment : BaseFragment<ArtGalleryViewModel>(R.layout.fragment_a
 
   override fun onDestroyView() {
     galleryAdapter = null
-    requireActivity().requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
     super.onDestroyView()
   }
 
