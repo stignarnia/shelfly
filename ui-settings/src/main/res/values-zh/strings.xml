@@ -103,7 +103,6 @@
   <string name="textSettingsBackupRetentionHint">保留数量 (0 表示保留全部)</string>
   <string name="textSettingsBackupRetentionKeepAll">保留所有备份</string>
   <plurals name="textSettingsBackupRetentionValue">
-    <item quantity="one">保留最近 %1$d 个备份</item>
     <item quantity="other">保留最近 %1$d 个备份</item>
   </plurals>
   <string name="textSettingsBackupRetentionInvalid">请输入有效的正整数</string>

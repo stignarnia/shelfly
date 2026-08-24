@@ -39,7 +39,6 @@
   <string name="textRateSaved">您的评分已发布。</string>
   <string name="textRateRemoved">您的评分已移除。</string>
   <plurals name="textDays">
-    <item quantity="one">%1$d 天</item>
     <item quantity="other">%1$d 天</item>
   </plurals>
   <string name="textSelectDate">选择日期</string>
