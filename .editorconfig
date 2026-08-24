@@ -5,6 +5,16 @@ ktlint = disabled
 [**/kspCaches/**]
 ktlint = disabled
 
+# Everything ktlint does not read.
+# ktlint only parses Kotlin, so nothing here is enforced by it; scripts/check-format.sh covers the three rules that the tree already satisfies.
+# insert_final_newline is declared but deliberately not enforced: 335 files would fail it today, so letting editors fix each file as it is genuinely edited beats one mechanical commit across the resource tree.
+[*.{gradle,xml,yml,yaml,pro,sh,properties}]
+indent_size = 2
+indent_style = space
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+
 [*.{kt,kts}]
 indent_size = 2
 insert_final_newline = true
