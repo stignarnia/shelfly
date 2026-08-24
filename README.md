@@ -41,6 +41,7 @@ I think there is little chance this gets merged upstream given the repository's 
 - **Themed widgets.** The widgets follow the app's theme and pure-black switch instead of being fixed dark, and each one can be customized on its own from its settings on the home screen: hold the widget, tap the settings button to pick a theme or adjust background transparency for that widget alone.
 - **Widgets need Android 12**, and are not offered below it. Their rows are carried inside the widget's own views rather than served by a `RemoteViewsService`: recent Android versions never deliver an update for views that name such a service, only announce it, which leaves a widget that cannot repaint - no theme change, no labels toggle, no calendar mode. The collection API that replaces it, and the `RemoteViews` tinting the themes are painted with, both arrive in Android 12. Carrying the rows along means they all travel at once, so a long list is measured against the framework's own budgets as it is built and cut where they run out.
 - **Original branding and iconography.** Custom 3D isometric shelf logo, adaptive launcher icons, and themed widget assets replace upstream artwork.
+- **Tablet, foldable, and landscape support.** Full screen rotation and responsive layouts across all screens, with no fixed portrait locks on large form factors.
 
 ## Project setup
 
