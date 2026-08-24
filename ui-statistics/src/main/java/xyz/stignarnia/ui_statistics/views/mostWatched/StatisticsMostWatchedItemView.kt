@@ -40,7 +40,7 @@ class StatisticsMostWatchedItemView : ShowView<StatisticsMostWatchedItem> {
         if (item.translation?.title.isNullOrBlank()) {
           item.show.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
       viewMostWatchedItemHoursValue.text = "${item.episodes.sumOf { it.runtime } / 60}"
       viewMostWatchedItemEpisodesValue.text = "${item.episodes.size}"

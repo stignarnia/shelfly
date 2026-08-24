@@ -48,7 +48,7 @@ class MyMovieFanartView : FrameLayout {
         if (item.translation?.title.isNullOrBlank()) {
           item.movie.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
     }
     onClick { clickListener(item) }

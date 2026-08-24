@@ -13,12 +13,12 @@ class CalendarItemDiffCallback : DiffUtil.ItemCallback<CalendarListItem>() {
     val areFilters = oldItem is CalendarListItem.Filters && newItem is CalendarListItem.Filters
     return when {
       areEpisodes -> areItemsTheSame(
-        (oldItem as CalendarListItem.Episode),
-        (newItem as CalendarListItem.Episode),
+        (oldItem),
+        (newItem),
       )
       areHeaders -> areItemsTheSame(
-        (oldItem as CalendarListItem.Header),
-        (newItem as CalendarListItem.Header),
+        (oldItem),
+        (newItem),
       )
       areFilters -> true
       else -> false

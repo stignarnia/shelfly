@@ -115,7 +115,7 @@ class ProgressMoviesWidgetProvider : BaseWidgetProvider() {
             R.id.progressWidgetMoviesLabel,
             R.id.progressWidgetMoviesLabelText,
           )
-          palette?.let {
+          palette.let {
             setTextColor(R.id.progressWidgetMoviesEmptyViewTitle, it.textPrimary)
             setTextColor(R.id.progressWidgetMoviesEmptyViewSubtitle, it.textSecondary)
           }

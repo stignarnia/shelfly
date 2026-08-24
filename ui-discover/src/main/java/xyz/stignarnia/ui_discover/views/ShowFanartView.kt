@@ -45,7 +45,7 @@ class ShowFanartView : ShowView<DiscoverListItem> {
         if (item.translation?.title.isNullOrBlank()) {
           item.show.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
       showFanartProgress.visibleIf(item.isLoading)
       showFanartBadge.visibleIf(item.isFollowed)

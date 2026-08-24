@@ -134,7 +134,7 @@ class HiddenFragment :
             gridSpanSize = tabletGridSpanSize,
           )
           adapter?.listViewMode = it
-          binding.hiddenMoviesRecycler?.let { recycler ->
+          binding.hiddenMoviesRecycler.let { recycler ->
             recycler.layoutManager = layoutManager
             recycler.adapter = adapter
           }

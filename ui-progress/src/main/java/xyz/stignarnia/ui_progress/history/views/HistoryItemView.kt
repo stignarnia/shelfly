@@ -61,7 +61,7 @@ internal class HistoryItemView : ShowView<HistoryListItem.Episode> {
         ) {
           item.show.title
         } else {
-          item.translations?.show?.title
+          item.translations.show.title
         }
 
       itemDate.text =

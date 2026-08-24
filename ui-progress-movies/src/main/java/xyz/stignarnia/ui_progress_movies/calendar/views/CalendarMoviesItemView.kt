@@ -54,7 +54,7 @@ class CalendarMoviesItemView : MovieView<CalendarMovieListItem.MovieItem> {
         if (item.translation?.title.isNullOrBlank()) {
           item.movie.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
 
       bindDescription(item)
@@ -85,7 +85,7 @@ class CalendarMoviesItemView : MovieView<CalendarMovieListItem.MovieItem> {
     var description = if (item.translation?.overview.isNullOrBlank()) {
       item.movie.overview.ifBlank { context.getString(R.string.textNoDescription) }
     } else {
-      item.translation?.overview
+      item.translation.overview
     }
 
     with(binding) {
@@ -94,7 +94,7 @@ class CalendarMoviesItemView : MovieView<CalendarMovieListItem.MovieItem> {
       val isNotCollectedHidden = item.spoilers.isNotCollectedMoviesHidden && (!item.isWatched && !item.isWatchlist)
       if (isMyHidden || isWatchlistHidden || isNotCollectedHidden) {
         progressMovieCalendarItemSubtitle.tag = description
-        description = SPOILERS_REGEX.replace(description.toString(), SPOILERS_HIDE_SYMBOL)
+        description = SPOILERS_REGEX.replace(description, SPOILERS_HIDE_SYMBOL)
 
         if (item.spoilers.isTapToReveal) {
           progressMovieCalendarItemSubtitle.onClick { view ->

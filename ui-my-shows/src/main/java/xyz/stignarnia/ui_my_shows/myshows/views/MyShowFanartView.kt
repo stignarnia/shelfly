@@ -49,7 +49,7 @@ class MyShowFanartView : FrameLayout {
         if (showItem.translation?.title.isNullOrBlank()) {
           showItem.show.title
         } else {
-          showItem.translation?.title
+          showItem.translation.title
         }
     }
     onClick { clickListener(showItem) }

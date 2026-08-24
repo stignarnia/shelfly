@@ -70,7 +70,7 @@ class CollectionMovieView : MovieView<CollectionListItem.MovieItem> {
         if (item.translation?.title.isNullOrBlank()) {
           item.movie.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
 
       bindDescription(item)
@@ -124,7 +124,7 @@ class CollectionMovieView : MovieView<CollectionListItem.MovieItem> {
         if (item.translation?.overview.isNullOrBlank()) {
           item.movie.overview
         } else {
-          item.translation?.overview
+          item.translation.overview
         }
 
       if (item.spoilers.isSpoilerHidden) {

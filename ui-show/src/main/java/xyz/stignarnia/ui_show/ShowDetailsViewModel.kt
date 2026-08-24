@@ -275,7 +275,6 @@ class ShowDetailsViewModel @Inject constructor(
     if (this::show.isInitialized) {
       seasonsCache.clear(show.ids.tmdb)
     }
-    super.onCleared()
   }
 
   val uiState = combine(

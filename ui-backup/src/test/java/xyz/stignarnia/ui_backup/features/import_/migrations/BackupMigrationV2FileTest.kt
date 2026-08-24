@@ -37,8 +37,14 @@ class BackupMigrationV2FileTest {
     System
       .getenv("SHELFLY_V2_BACKUP")
       ?.takeIf { it.isNotBlank() }
-      ?.let(::File)
-      ?.takeIf { it.exists() }
+      ?.let { path ->
+        val file = File(path)
+        when {
+          file.exists() -> file
+          File("../$path").exists() -> File("../$path")
+          else -> null
+        }
+      }
 
   @Test
   fun `Should account for every entry in a real export`() =

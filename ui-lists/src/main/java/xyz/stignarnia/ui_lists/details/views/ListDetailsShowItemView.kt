@@ -101,7 +101,7 @@ class ListDetailsShowItemView : ListDetailsItemView {
         if (item.translation?.title.isNullOrBlank()) {
           show.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
 
       bindDescription(item, show)
@@ -145,7 +145,7 @@ class ListDetailsShowItemView : ListDetailsItemView {
       item.translation?.overview.isNullOrBlank() -> show.overview.ifBlank {
         context.getString(R.string.textNoDescription)
       }
-      else -> item.translation?.overview
+      else -> item.translation.overview
     }
 
     val isMyHidden = item.spoilers.isMyShowsHidden && item.isWatched
@@ -153,7 +153,7 @@ class ListDetailsShowItemView : ListDetailsItemView {
     val isNotCollectedHidden = item.spoilers.isNotCollectedShowsHidden && (!item.isWatched && !item.isWatchlist)
     if (isMyHidden || isWatchlistHidden || isNotCollectedHidden) {
       binding.listDetailsShowDescription.tag = description
-      description = SPOILERS_REGEX.replace(description.toString(), SPOILERS_HIDE_SYMBOL)
+      description = SPOILERS_REGEX.replace(description, SPOILERS_HIDE_SYMBOL)
     }
 
     binding.listDetailsShowDescription.text = description

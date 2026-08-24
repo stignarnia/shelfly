@@ -14,12 +14,12 @@ internal class HistoryItemDiffCallback : DiffUtil.ItemCallback<HistoryListItem>(
     val areFilters = oldItem is HistoryListItem.Filters && newItem is HistoryListItem.Filters
     return when {
       areEpisodes -> areItemsTheSame(
-        (oldItem as HistoryListItem.Episode),
-        (newItem as HistoryListItem.Episode),
+        (oldItem),
+        (newItem),
       )
       areHeaders -> areItemsTheSame(
-        (oldItem as HistoryListItem.Header),
-        (newItem as HistoryListItem.Header),
+        (oldItem),
+        (newItem),
       )
       areFilters -> true
       else -> false

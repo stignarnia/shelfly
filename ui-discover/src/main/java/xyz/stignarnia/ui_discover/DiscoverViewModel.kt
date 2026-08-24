@@ -152,7 +152,6 @@ internal class DiscoverViewModel @Inject constructor(
       initialFilters = initialFilters,
       currentFilters = filtersState.value,
     )
-    super.onCleared()
   }
 
   val uiState = combine(

@@ -67,7 +67,7 @@ class CalendarItemView : ShowView<CalendarListItem.Episode> {
         ) {
           item.show.title
         } else {
-          item.translations?.show?.title
+          item.translations.show.title
         }
 
       calendarItemDateText.text =

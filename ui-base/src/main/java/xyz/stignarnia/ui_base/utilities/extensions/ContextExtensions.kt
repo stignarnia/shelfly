@@ -38,17 +38,6 @@ fun Context.colorStateListFromAttr(
   resolveRefs: Boolean = true,
 ): ColorStateList = ColorStateList.valueOf(colorFromAttr(attrColor, typedValue, resolveRefs))
 
-fun Context.getLocaleStringResource(
-  requestedLocale: Locale?,
-  resourceId: Int,
-): String {
-  val result: String
-  val config = Configuration(resources.configuration)
-  config.setLocale(requestedLocale)
-  result = createConfigurationContext(config).getText(resourceId).toString()
-  return result
-}
-
 fun Context.copyToClipboard(text: String) {
   val clip = ClipData.newPlainText("label", text)
   ContextCompat

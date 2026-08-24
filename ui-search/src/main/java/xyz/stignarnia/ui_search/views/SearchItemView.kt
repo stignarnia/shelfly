@@ -52,7 +52,7 @@ class SearchItemView : ShowView<SearchListItem> {
         if (item.translation?.title.isNullOrBlank()) {
           item.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
 
       bindDescription(item)
@@ -81,7 +81,7 @@ class SearchItemView : ShowView<SearchListItem> {
       var overview = if (item.translation?.overview.isNullOrBlank()) {
         item.overview
       } else {
-        item.translation?.overview
+        item.translation.overview
       }
 
       if (item.isShow) {
@@ -89,8 +89,8 @@ class SearchItemView : ShowView<SearchListItem> {
         val isWatchlistHidden = item.spoilers.isWatchlistShowsHidden && item.isWatchlist
         val isNotCollectedHidden = item.spoilers.isNotCollectedShowsHidden && (!item.isFollowed && !item.isWatchlist)
         if (isMyHidden || isWatchlistHidden || isNotCollectedHidden) {
-          showSearchDescription.tag = overview.toString()
-          overview = SPOILERS_REGEX.replace(overview.toString(), SPOILERS_HIDE_SYMBOL)
+          showSearchDescription.tag = overview
+          overview = SPOILERS_REGEX.replace(overview, SPOILERS_HIDE_SYMBOL)
           isSpoilerHidden = true
         }
       }
@@ -100,8 +100,8 @@ class SearchItemView : ShowView<SearchListItem> {
         val isWatchlistHidden = item.spoilers.isWatchlistMoviesHidden && item.isWatchlist
         val isNotCollectedHidden = item.spoilers.isNotCollectedMoviesHidden && (!item.isFollowed && !item.isWatchlist)
         if (isMyHidden || isWatchlistHidden || isNotCollectedHidden) {
-          showSearchDescription.tag = overview.toString()
-          overview = SPOILERS_REGEX.replace(overview.toString(), SPOILERS_HIDE_SYMBOL)
+          showSearchDescription.tag = overview
+          overview = SPOILERS_REGEX.replace(overview, SPOILERS_HIDE_SYMBOL)
           isSpoilerHidden = true
         }
       }

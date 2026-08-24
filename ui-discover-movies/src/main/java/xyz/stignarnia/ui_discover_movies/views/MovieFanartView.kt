@@ -45,7 +45,7 @@ class MovieFanartView : MovieView<DiscoverMovieListItem> {
         if (item.translation?.title.isNullOrBlank()) {
           item.movie.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
       movieFanartProgress.visibleIf(item.isLoading)
       movieFanartBadge.visibleIf(item.isCollected)

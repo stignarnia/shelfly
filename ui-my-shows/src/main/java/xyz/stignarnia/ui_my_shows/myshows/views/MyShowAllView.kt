@@ -66,7 +66,7 @@ class MyShowAllView : ShowView<MyShowsItem> {
         if (item.translation?.title.isNullOrBlank()) {
           item.show.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
 
       bindDescription(item)
@@ -96,12 +96,12 @@ class MyShowAllView : ShowView<MyShowsItem> {
         if (item.translation?.overview.isNullOrBlank()) {
           item.show.overview
         } else {
-          item.translation?.overview
+          item.translation.overview
         }
 
       if (item.spoilers.isSpoilerHidden) {
-        collectionShowDescription.tag = description.toString()
-        description = SPOILERS_REGEX.replace(description.toString(), SPOILERS_HIDE_SYMBOL)
+        collectionShowDescription.tag = description
+        description = SPOILERS_REGEX.replace(description, SPOILERS_HIDE_SYMBOL)
 
         if (item.spoilers.isSpoilerTapToReveal) {
           collectionShowDescription.onClick { view ->

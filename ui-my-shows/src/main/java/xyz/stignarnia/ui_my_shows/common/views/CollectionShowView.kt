@@ -69,7 +69,7 @@ class CollectionShowView : ShowView<CollectionListItem.ShowItem> {
         if (item.translation?.title.isNullOrBlank()) {
           item.show.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
 
       bindDescription(item)
@@ -110,7 +110,7 @@ class CollectionShowView : ShowView<CollectionListItem.ShowItem> {
         if (item.translation?.overview.isNullOrBlank()) {
           item.show.overview
         } else {
-          item.translation?.overview
+          item.translation.overview
         }
 
       if (item.spoilers.isSpoilerHidden) {

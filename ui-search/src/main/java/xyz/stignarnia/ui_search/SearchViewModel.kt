@@ -284,7 +284,6 @@ class SearchViewModel @Inject constructor(
 
   override fun onCleared() {
     suggestionsCase.clearCache()
-    super.onCleared()
   }
 
   val uiState = combine(

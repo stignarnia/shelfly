@@ -124,7 +124,7 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
             R.id.progressWidgetLabel,
             R.id.progressWidgetLabelText,
           )
-          palette?.let {
+          palette.let {
             setTextColor(R.id.progressWidgetEmptyViewTitle, it.textPrimary)
             setTextColor(R.id.progressWidgetEmptyViewSubtitle, it.textSecondary)
           }

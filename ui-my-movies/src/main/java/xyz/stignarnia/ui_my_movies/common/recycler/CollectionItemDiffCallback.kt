@@ -13,8 +13,8 @@ class CollectionItemDiffCallback : DiffUtil.ItemCallback<CollectionListItem>() {
 
     return when {
       areMovies -> areItemsTheSame(
-        (oldItem as CollectionListItem.MovieItem),
-        (newItem as CollectionListItem.MovieItem),
+        (oldItem),
+        (newItem),
       )
       areFilters -> true
       else -> false

@@ -318,7 +318,7 @@ class ListDetailsFragment :
             layoutManager = ListDetailsLayoutManagerProvider
               .provideLayoutManger(requireContext(), it, tabletGridSpanSize)
             adapter?.listViewMode = it
-            fragmentListDetailsRecycler?.let { recycler ->
+            fragmentListDetailsRecycler.let { recycler ->
               recycler.layoutManager = layoutManager
               recycler.adapter = adapter
             }

@@ -47,7 +47,7 @@ class CalendarFutureGrouper @Inject constructor() : CalendarGrouper {
         itemDays?.isBefore(nowDays.plusWeeks(1).with(next(DayOfWeek.MONDAY))) == true -> {
           itemsMap[R.string.textNextWeek]?.add(item)
         }
-        itemDays?.month == nowDays.month && itemDays?.year == nowDays.year -> {
+        itemDays?.month == nowDays.month && itemDays.year == nowDays.year -> {
           itemsMap[R.string.textThisMonth]?.add(item)
         }
         (itemDays?.monthValue == (nowDays.monthValue + 1) && itemDays.year == nowDays.year) ||

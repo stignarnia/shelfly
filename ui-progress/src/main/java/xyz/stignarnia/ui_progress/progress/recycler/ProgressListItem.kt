@@ -44,7 +44,7 @@ sealed class ProgressListItem(
 
     fun isNew() =
       episode?.firstAired?.isBefore(nowUtc()) ?: false &&
-        nowUtcMillis() - (episode?.firstAired?.toMillis() ?: 0) < Config.NEW_BADGE_DURATION
+        nowUtcMillis() - (episode.firstAired?.toMillis() ?: 0) < Config.NEW_BADGE_DURATION
 
     fun requireEpisode() = episode!!
 

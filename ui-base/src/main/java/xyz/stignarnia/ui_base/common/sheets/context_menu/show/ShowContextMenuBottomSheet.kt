@@ -90,7 +90,7 @@ class ShowContextMenuBottomSheet : ContextMenuBottomSheet() {
         if (item.translation?.title.isNullOrBlank()) {
           item.show.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
 
       renderItemDescription(item)
@@ -141,7 +141,7 @@ class ShowContextMenuBottomSheet : ContextMenuBottomSheet() {
         if (item.translation?.overview.isNullOrBlank()) {
           item.show.overview
         } else {
-          item.translation?.overview
+          item.translation.overview
         }
 
       val isMyShowHidden = item.spoilers.isMyShowsHidden && item.isMyShow

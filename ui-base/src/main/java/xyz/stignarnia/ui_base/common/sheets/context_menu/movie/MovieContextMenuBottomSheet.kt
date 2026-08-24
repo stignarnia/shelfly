@@ -87,7 +87,7 @@ class MovieContextMenuBottomSheet : ContextMenuBottomSheet() {
         if (item.translation?.title.isNullOrBlank()) {
           item.movie.title
         } else {
-          item.translation?.title
+          item.translation.title
         }
 
       renderItemDescription(item)
@@ -136,7 +136,7 @@ class MovieContextMenuBottomSheet : ContextMenuBottomSheet() {
         if (item.translation?.overview.isNullOrBlank()) {
           item.movie.overview
         } else {
-          item.translation?.overview
+          item.translation.overview
         }
 
       val isMyMovieHidden = item.spoilers.isMyMoviesHidden && item.isMyMovie

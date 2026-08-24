@@ -152,9 +152,7 @@ class MainViewModel @Inject constructor(
       is WelcomeStep.WebDavSync -> {
         openSettingsEvent.value = Event(true)
       }
-      else -> {
-        Unit
-      }
+      else -> { }
     }
     completeWelcomeStep(state)
   }
@@ -167,9 +165,7 @@ class MainViewModel @Inject constructor(
         welcomeCase.setLanguage(step.current)
       }
       // Declining is itself the answer; the step just needs to be recorded.
-      is WelcomeStep.ApiKey.Omdb, is WelcomeStep.Notifications, is WelcomeStep.WebDavSync -> {
-        Unit
-      }
+      is WelcomeStep.ApiKey.Omdb, is WelcomeStep.Notifications, is WelcomeStep.WebDavSync -> { }
       else -> {
         return
       }
@@ -259,7 +255,6 @@ class MainViewModel @Inject constructor(
 
   override fun onCleared() {
     clearingCase.clear()
-    super.onCleared()
   }
 
   val uiState = combine(

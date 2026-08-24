@@ -91,7 +91,7 @@ internal class OkHttpWebDavClient @Inject constructor(
 
       okHttpClient.newCall(request).execute().use { response ->
         if (!response.isSuccessful) throw response.toError()
-        response.body?.string() ?: throw WebDavError.UnexpectedResponse(response.code)
+        response.body.string()
       }
     }
 
@@ -104,7 +104,7 @@ internal class OkHttpWebDavClient @Inject constructor(
 
       okHttpClient.newCall(request).execute().use { response ->
         if (!response.isSuccessful && response.code != 207) throw response.toError()
-        val body = response.body?.string().orEmpty()
+        val body = response.body.string()
         WebDavResponseParser.parseFileListing(body)
       }
     }

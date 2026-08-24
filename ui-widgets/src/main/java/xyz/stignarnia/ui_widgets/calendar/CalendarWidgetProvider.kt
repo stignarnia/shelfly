@@ -125,7 +125,7 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
             R.id.calendarWidgetLabel,
             R.id.calendarWidgetLabelText,
           )
-          palette?.let {
+          palette.let {
             setTextColor(R.id.calendarWidgetEmptyViewTitle, it.textPrimary)
             setTextColor(R.id.calendarWidgetEmptyViewSubtitle, it.textSecondary)
             setIconTint(R.id.calendarWidgetEmptyViewIcon, it.textPrimary)

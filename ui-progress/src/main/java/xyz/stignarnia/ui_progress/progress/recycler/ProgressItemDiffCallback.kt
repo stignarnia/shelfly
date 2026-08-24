@@ -13,12 +13,12 @@ class ProgressItemDiffCallback : DiffUtil.ItemCallback<ProgressListItem>() {
     val areFilters = oldItem is ProgressListItem.Filters && newItem is ProgressListItem.Filters
     return when {
       areEpisodes -> areItemsTheSame(
-        (oldItem as ProgressListItem.Episode),
-        (newItem as ProgressListItem.Episode),
+        (oldItem),
+        (newItem),
       )
       areHeaders -> areItemsTheSame(
-        (oldItem as ProgressListItem.Header),
-        (newItem as ProgressListItem.Header),
+        (oldItem),
+        (newItem),
       )
       areFilters -> true
       else -> false

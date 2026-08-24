@@ -303,7 +303,6 @@ class ShowDetailsEpisodesViewModel @Inject constructor(
 
   override fun onCleared() {
     refreshSeasonsCache()
-    super.onCleared()
   }
 
   val uiState = combine(

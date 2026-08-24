@@ -97,15 +97,15 @@ class EpisodeView : ConstraintLayout {
         .plus(item.episode.numberAbs?.let { if (it > 0 && item.isAnime) " ($it)" else "" } ?: "")
 
       var overviewText = when {
-        !item.translation?.title.isNullOrBlank() -> item.translation?.title
+        !item.translation?.title.isNullOrBlank() -> item.translation.title
         item.episode.title.isEmpty() -> context.getString(R.string.textTba)
         item.episode.title == "Episode ${item.episode.number}" -> titleText
         else -> item.episode.title
       }
 
       if (!item.isWatched && item.spoilers.isEpisodeTitleHidden) {
-        episodeOverview.tag = overviewText.toString()
-        overviewText = SPOILERS_REGEX.replace(overviewText.toString(), SPOILERS_HIDE_SYMBOL)
+        episodeOverview.tag = overviewText
+        overviewText = SPOILERS_REGEX.replace(overviewText, SPOILERS_HIDE_SYMBOL)
 
         if (item.spoilers.isTapToReveal) {
           episodeOverview.onClick { view ->
