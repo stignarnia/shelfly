@@ -23,15 +23,42 @@
   <string name="textBackupExportLastTimestamp">上次备份: %s</string>
 
   <string name="textBackupImportSkipped">部分条目未匹配到 TMDB 数据，已跳过：</string>
-  <string name="textBackupImportSkippedShows">%1$d 部剧集 (%2$s)</string>
-  <string name="textBackupImportSkippedMovies">%1$d 部电影 (%2$s)</string>
-  <string name="textBackupImportSkippedSeasons">%1$d 个季</string>
-  <string name="textBackupImportSkippedEpisodes">%1$d 个已观看剧集</string>
-  <string name="textBackupImportSkippedShowRatings">%1$d 条剧集评分</string>
-  <string name="textBackupImportSkippedSeasonRatings">%1$d 条单季评分</string>
-  <string name="textBackupImportSkippedEpisodeRatings">%1$d 条单集评分</string>
-  <string name="textBackupImportSkippedMovieRatings">%1$d 条电影评分</string>
-  <string name="textBackupImportSkippedListItems">%1$d 个列表项</string>
+  <plurals name="textBackupImportSkippedShows">
+    <item quantity="one">%1$d 部剧集 (%2$s)</item>
+    <item quantity="other">%1$d 部剧集 (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovies">
+    <item quantity="one">%1$d 部电影 (%2$s)</item>
+    <item quantity="other">%1$d 部电影 (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasons">
+    <item quantity="one">%1$d 个季</item>
+    <item quantity="other">%1$d 个季</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodes">
+    <item quantity="one">%1$d 个已观看剧集</item>
+    <item quantity="other">%1$d 个已观看剧集</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedShowRatings">
+    <item quantity="one">%1$d 条剧集评分</item>
+    <item quantity="other">%1$d 条剧集评分</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasonRatings">
+    <item quantity="one">%1$d 条单季评分</item>
+    <item quantity="other">%1$d 条单季评分</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodeRatings">
+    <item quantity="one">%1$d 条单集评分</item>
+    <item quantity="other">%1$d 条单集评分</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovieRatings">
+    <item quantity="one">%1$d 条电影评分</item>
+    <item quantity="other">%1$d 条电影评分</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedListItems">
+    <item quantity="one">%1$d 个列表项</item>
+    <item quantity="other">%1$d 个列表项</item>
+  </plurals>
   <string name="textSyncLastTimestamp">上次同步：%s</string>
   <string name="textSyncNever">尚未与其他任何设备同步</string>
   <string name="textSyncFailed">同步失败：%s</string>

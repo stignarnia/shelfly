@@ -102,7 +102,12 @@
   <string name="textSettingsBackupRetentionDescription">Кількість файлів автоматичних резервних копій на сервері WebDAV</string>
   <string name="textSettingsBackupRetentionHint">Кількість резервних копій (0 зберігає всі)</string>
   <string name="textSettingsBackupRetentionKeepAll">Зберігати всі резервні копії</string>
-  <string name="textSettingsBackupRetentionValue">Зберігати останні %1$d резервних копій</string>
+  <plurals name="textSettingsBackupRetentionValue">
+    <item quantity="one">Зберігати останні %1$d резервних копій</item>
+    <item quantity="few">Зберігати останні %1$d резервних копій</item>
+    <item quantity="many">Зберігати останні %1$d резервних копій</item>
+    <item quantity="other">Зберігати останні %1$d резервних копій</item>
+  </plurals>
   <string name="textSettingsBackupRetentionInvalid">Будь ласка, введіть додатне число</string>
 
   <string name="textSettingsApiKeyNotSet">Не встановлено</string>

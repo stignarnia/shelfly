@@ -23,15 +23,51 @@
     <string name="textBackupExportLastTimestamp">Ultima copie de rezervă: %s</string>
 
   <string name="textBackupImportSkipped">Unele intrări nu au avut potrivire în TMDB și au fost omise:</string>
-  <string name="textBackupImportSkippedShows">%1$d seriale (%2$s)</string>
-  <string name="textBackupImportSkippedMovies">%1$d filme (%2$s)</string>
-  <string name="textBackupImportSkippedSeasons">%1$d sezoane</string>
-  <string name="textBackupImportSkippedEpisodes">%1$d episoade vizionate</string>
-  <string name="textBackupImportSkippedShowRatings">%1$d evaluări de seriale</string>
-  <string name="textBackupImportSkippedSeasonRatings">%1$d evaluări de sezoane</string>
-  <string name="textBackupImportSkippedEpisodeRatings">%1$d evaluări de episoade</string>
-  <string name="textBackupImportSkippedMovieRatings">%1$d evaluări de filme</string>
-  <string name="textBackupImportSkippedListItems">%1$d elemente de listă</string>
+  <plurals name="textBackupImportSkippedShows">
+    <item quantity="one">%1$d seriale (%2$s)</item>
+    <item quantity="few">%1$d seriale (%2$s)</item>
+    <item quantity="other">%1$d seriale (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovies">
+    <item quantity="one">%1$d filme (%2$s)</item>
+    <item quantity="few">%1$d filme (%2$s)</item>
+    <item quantity="other">%1$d filme (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasons">
+    <item quantity="one">%1$d sezoane</item>
+    <item quantity="few">%1$d sezoane</item>
+    <item quantity="other">%1$d sezoane</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodes">
+    <item quantity="one">%1$d episoade vizionate</item>
+    <item quantity="few">%1$d episoade vizionate</item>
+    <item quantity="other">%1$d episoade vizionate</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedShowRatings">
+    <item quantity="one">%1$d evaluări de seriale</item>
+    <item quantity="few">%1$d evaluări de seriale</item>
+    <item quantity="other">%1$d evaluări de seriale</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasonRatings">
+    <item quantity="one">%1$d evaluări de sezoane</item>
+    <item quantity="few">%1$d evaluări de sezoane</item>
+    <item quantity="other">%1$d evaluări de sezoane</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodeRatings">
+    <item quantity="one">%1$d evaluări de episoade</item>
+    <item quantity="few">%1$d evaluări de episoade</item>
+    <item quantity="other">%1$d evaluări de episoade</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovieRatings">
+    <item quantity="one">%1$d evaluări de filme</item>
+    <item quantity="few">%1$d evaluări de filme</item>
+    <item quantity="other">%1$d evaluări de filme</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedListItems">
+    <item quantity="one">%1$d elemente de listă</item>
+    <item quantity="few">%1$d elemente de listă</item>
+    <item quantity="other">%1$d elemente de listă</item>
+  </plurals>
   <string name="textSyncLastTimestamp">Ultima sincronizare: %s</string>
   <string name="textSyncNever">Nu s-a sincronizat încă cu niciun alt dispozitiv</string>
   <string name="textSyncFailed">Sincronizarea a eșuat: %s</string>

@@ -10,15 +10,78 @@
   <string name="errorImportCancelled">تم إلغاء استيراد البيانات.</string>
 
   <string name="textBackupImportSkipped">بعض العناصر لم تتطابق مع TMDB وتم تخطيها:</string>
-  <string name="textBackupImportSkippedShows">%1$d مسلسلات (%2$s)</string>
-  <string name="textBackupImportSkippedMovies">%1$d أفلام (%2$s)</string>
-  <string name="textBackupImportSkippedSeasons">%1$d مواسم</string>
-  <string name="textBackupImportSkippedEpisodes">%1$d حلقات تمت مشاهدتها</string>
-  <string name="textBackupImportSkippedShowRatings">%1$d تقييمات مسلسلات</string>
-  <string name="textBackupImportSkippedSeasonRatings">%1$d تقييمات مواسم</string>
-  <string name="textBackupImportSkippedEpisodeRatings">%1$d تقييمات حلقات</string>
-  <string name="textBackupImportSkippedMovieRatings">%1$d تقييمات أفلام</string>
-  <string name="textBackupImportSkippedListItems">%1$d عناصر قائمة</string>
+  <plurals name="textBackupImportSkippedShows">
+    <item quantity="zero">%1$d مسلسلات (%2$s)</item>
+    <item quantity="one">%1$d مسلسلات (%2$s)</item>
+    <item quantity="two">%1$d مسلسلات (%2$s)</item>
+    <item quantity="few">%1$d مسلسلات (%2$s)</item>
+    <item quantity="many">%1$d مسلسلات (%2$s)</item>
+    <item quantity="other">%1$d مسلسلات (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovies">
+    <item quantity="zero">%1$d أفلام (%2$s)</item>
+    <item quantity="one">%1$d أفلام (%2$s)</item>
+    <item quantity="two">%1$d أفلام (%2$s)</item>
+    <item quantity="few">%1$d أفلام (%2$s)</item>
+    <item quantity="many">%1$d أفلام (%2$s)</item>
+    <item quantity="other">%1$d أفلام (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasons">
+    <item quantity="zero">%1$d مواسم</item>
+    <item quantity="one">%1$d مواسم</item>
+    <item quantity="two">%1$d مواسم</item>
+    <item quantity="few">%1$d مواسم</item>
+    <item quantity="many">%1$d مواسم</item>
+    <item quantity="other">%1$d مواسم</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodes">
+    <item quantity="zero">%1$d حلقات تمت مشاهدتها</item>
+    <item quantity="one">%1$d حلقات تمت مشاهدتها</item>
+    <item quantity="two">%1$d حلقات تمت مشاهدتها</item>
+    <item quantity="few">%1$d حلقات تمت مشاهدتها</item>
+    <item quantity="many">%1$d حلقات تمت مشاهدتها</item>
+    <item quantity="other">%1$d حلقات تمت مشاهدتها</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedShowRatings">
+    <item quantity="zero">%1$d تقييمات مسلسلات</item>
+    <item quantity="one">%1$d تقييمات مسلسلات</item>
+    <item quantity="two">%1$d تقييمات مسلسلات</item>
+    <item quantity="few">%1$d تقييمات مسلسلات</item>
+    <item quantity="many">%1$d تقييمات مسلسلات</item>
+    <item quantity="other">%1$d تقييمات مسلسلات</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasonRatings">
+    <item quantity="zero">%1$d تقييمات مواسم</item>
+    <item quantity="one">%1$d تقييمات مواسم</item>
+    <item quantity="two">%1$d تقييمات مواسم</item>
+    <item quantity="few">%1$d تقييمات مواسم</item>
+    <item quantity="many">%1$d تقييمات مواسم</item>
+    <item quantity="other">%1$d تقييمات مواسم</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodeRatings">
+    <item quantity="zero">%1$d تقييمات حلقات</item>
+    <item quantity="one">%1$d تقييمات حلقات</item>
+    <item quantity="two">%1$d تقييمات حلقات</item>
+    <item quantity="few">%1$d تقييمات حلقات</item>
+    <item quantity="many">%1$d تقييمات حلقات</item>
+    <item quantity="other">%1$d تقييمات حلقات</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovieRatings">
+    <item quantity="zero">%1$d تقييمات أفلام</item>
+    <item quantity="one">%1$d تقييمات أفلام</item>
+    <item quantity="two">%1$d تقييمات أفلام</item>
+    <item quantity="few">%1$d تقييمات أفلام</item>
+    <item quantity="many">%1$d تقييمات أفلام</item>
+    <item quantity="other">%1$d تقييمات أفلام</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedListItems">
+    <item quantity="zero">%1$d عناصر قائمة</item>
+    <item quantity="one">%1$d عناصر قائمة</item>
+    <item quantity="two">%1$d عناصر قائمة</item>
+    <item quantity="few">%1$d عناصر قائمة</item>
+    <item quantity="many">%1$d عناصر قائمة</item>
+    <item quantity="other">%1$d عناصر قائمة</item>
+  </plurals>
   <string name="textSyncLastTimestamp">آخر مزامنة: %s</string>
   <string name="textSyncNever">لم تتم المزامنة مع أي جهاز آخر بعد</string>
   <string name="textSyncFailed">فشلت المزامنة: %s</string>

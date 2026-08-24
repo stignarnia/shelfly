@@ -2,6 +2,7 @@ package xyz.stignarnia.ui_movie.sections.collections.details.recycler.views
 
 import android.content.Context
 import android.content.res.ColorStateList
+import java.util.Locale
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -68,8 +69,8 @@ class MovieDetailsCollectionItemView : FrameLayout {
     bindTitleDescription(item)
     bindBadge(item.isMyMovie, item.isWatchlist)
 
-    binding.headerText.text = String.format("%s", item.movie.released?.year ?: "TBA")
-    binding.rankText.text = item.rank.toString()
+    binding.headerText.text = String.format(Locale.getDefault(), "%s", item.movie.released?.year ?: "TBA")
+    binding.rankText.text = String.format(Locale.getDefault(), "%d", item.rank)
 
     if (!item.isLoading) loadImage(item)
   }

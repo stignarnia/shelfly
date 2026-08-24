@@ -102,7 +102,10 @@
   <string name="textSettingsBackupRetentionDescription">WebDAV-palvelimella säilytettävien automaattisten varmuuskopioiden määrä</string>
   <string name="textSettingsBackupRetentionHint">Varmuuskopioiden määrä (0 säilyttää kaikki)</string>
   <string name="textSettingsBackupRetentionKeepAll">Säilytä kaikki varmuuskopiot</string>
-  <string name="textSettingsBackupRetentionValue">Säilytä viimeiset %1$d varmuuskopiota</string>
+  <plurals name="textSettingsBackupRetentionValue">
+    <item quantity="one">Säilytä viimeiset %1$d varmuuskopiota</item>
+    <item quantity="other">Säilytä viimeiset %1$d varmuuskopiota</item>
+  </plurals>
   <string name="textSettingsBackupRetentionInvalid">Anna kelvollinen positiivinen numero</string>
 
   <string name="textSettingsApiKeyNotSet">Ei asetettu</string>

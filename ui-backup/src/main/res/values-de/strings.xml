@@ -23,15 +23,42 @@
   <string name="textBackupExportLastTimestamp">Letztes Backup: %s</string>
 
   <string name="textBackupImportSkipped">Einige Einträge hatten keine TMDB-Übereinstimmung und wurden übersprungen:</string>
-  <string name="textBackupImportSkippedShows">%1$d Serien (%2$s)</string>
-  <string name="textBackupImportSkippedMovies">%1$d Filme (%2$s)</string>
-  <string name="textBackupImportSkippedSeasons">%1$d Staffeln</string>
-  <string name="textBackupImportSkippedEpisodes">%1$d gesehene Episoden</string>
-  <string name="textBackupImportSkippedShowRatings">%1$d Serienbewertungen</string>
-  <string name="textBackupImportSkippedSeasonRatings">%1$d Staffelbewertungen</string>
-  <string name="textBackupImportSkippedEpisodeRatings">%1$d Episodenbewertungen</string>
-  <string name="textBackupImportSkippedMovieRatings">%1$d Filmbewertungen</string>
-  <string name="textBackupImportSkippedListItems">%1$d Listeneinträge</string>
+  <plurals name="textBackupImportSkippedShows">
+    <item quantity="one">%1$d Serien (%2$s)</item>
+    <item quantity="other">%1$d Serien (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovies">
+    <item quantity="one">%1$d Filme (%2$s)</item>
+    <item quantity="other">%1$d Filme (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasons">
+    <item quantity="one">%1$d Staffeln</item>
+    <item quantity="other">%1$d Staffeln</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodes">
+    <item quantity="one">%1$d gesehene Episoden</item>
+    <item quantity="other">%1$d gesehene Episoden</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedShowRatings">
+    <item quantity="one">%1$d Serienbewertungen</item>
+    <item quantity="other">%1$d Serienbewertungen</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasonRatings">
+    <item quantity="one">%1$d Staffelbewertungen</item>
+    <item quantity="other">%1$d Staffelbewertungen</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodeRatings">
+    <item quantity="one">%1$d Episodenbewertungen</item>
+    <item quantity="other">%1$d Episodenbewertungen</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovieRatings">
+    <item quantity="one">%1$d Filmbewertungen</item>
+    <item quantity="other">%1$d Filmbewertungen</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedListItems">
+    <item quantity="one">%1$d Listeneinträge</item>
+    <item quantity="other">%1$d Listeneinträge</item>
+  </plurals>
   <string name="textSyncLastTimestamp">Letzte Synchronisierung: %s</string>
   <string name="textSyncNever">Noch nicht mit einem anderen Gerät synchronisiert</string>
   <string name="textSyncFailed">Synchronisierung fehlgeschlagen: %s</string>

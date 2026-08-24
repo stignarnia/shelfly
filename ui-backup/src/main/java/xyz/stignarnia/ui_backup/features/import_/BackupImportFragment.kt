@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
+import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -126,27 +127,41 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
     buildList {
       with(report) {
         if (unmatchedShows.isNotEmpty()) {
-          add(getString(R.string.textBackupImportSkippedShows, unmatchedShows.size, unmatchedShows.preview()))
+          add(
+            resources.getQuantityString(
+              R.plurals.textBackupImportSkippedShows,
+              unmatchedShows.size,
+              unmatchedShows.size,
+              unmatchedShows.preview(),
+            ),
+          )
         }
         if (unmatchedMovies.isNotEmpty()) {
-          add(getString(R.string.textBackupImportSkippedMovies, unmatchedMovies.size, unmatchedMovies.preview()))
+          add(
+            resources.getQuantityString(
+              R.plurals.textBackupImportSkippedMovies,
+              unmatchedMovies.size,
+              unmatchedMovies.size,
+              unmatchedMovies.preview(),
+            ),
+          )
         }
-        addCount(skippedSeasons, R.string.textBackupImportSkippedSeasons)
-        addCount(skippedEpisodes, R.string.textBackupImportSkippedEpisodes)
-        addCount(skippedShowRatings, R.string.textBackupImportSkippedShowRatings)
-        addCount(skippedSeasonRatings, R.string.textBackupImportSkippedSeasonRatings)
-        addCount(skippedEpisodeRatings, R.string.textBackupImportSkippedEpisodeRatings)
-        addCount(skippedMovieRatings, R.string.textBackupImportSkippedMovieRatings)
-        addCount(skippedListItems, R.string.textBackupImportSkippedListItems)
+        addCount(skippedSeasons, R.plurals.textBackupImportSkippedSeasons)
+        addCount(skippedEpisodes, R.plurals.textBackupImportSkippedEpisodes)
+        addCount(skippedShowRatings, R.plurals.textBackupImportSkippedShowRatings)
+        addCount(skippedSeasonRatings, R.plurals.textBackupImportSkippedSeasonRatings)
+        addCount(skippedEpisodeRatings, R.plurals.textBackupImportSkippedEpisodeRatings)
+        addCount(skippedMovieRatings, R.plurals.textBackupImportSkippedMovieRatings)
+        addCount(skippedListItems, R.plurals.textBackupImportSkippedListItems)
       }
     }.joinToString(separator = "\n") { "• $it" }
 
   private fun MutableList<String>.addCount(
     count: Int,
-    @StringRes label: Int,
+    @PluralsRes label: Int,
   ) {
     if (count > 0) {
-      add(getString(label, count))
+      add(resources.getQuantityString(label, count, count))
     }
   }
 

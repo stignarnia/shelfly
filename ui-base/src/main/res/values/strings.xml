@@ -41,7 +41,10 @@
   <string name="textRateSaved">Your rating has been saved.</string>
   <string name="textRateRemoved">Your rating has been removed.</string>
   <string name="textCopiedToClipboard" translatable="false">Copied to clipboard</string>
-  <string name="textDays">%1$d days</string>
+  <plurals name="textDays">
+    <item quantity="one">%1$d days</item>
+    <item quantity="other">%1$d days</item>
+  </plurals>
   <string name="textSelectDate">Select Date</string>
   <string name="textDateSelectionTitle">Date Selection</string>
   <string name="textDateSelectionDescription">When did you watch it?</string>
@@ -137,5 +140,5 @@
   <string name="errorNoInternetConnection">No Internet. Please check your connection.</string>
   <string name="errorCouldNotFindApp" translatable="false">Sorry, we could not find app on this device that could handle this link.</string>
   <string name="errorAccountListsLimitsReached" translatable="false">Sorry, you have reached your TMDB account limit for personal lists!\n\nPlease contact us if you need more assistance.</string>
-
+  <string name="textPercentage">%1$d%%</string>
 </resources>

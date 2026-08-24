@@ -102,7 +102,10 @@
   <string name="textSettingsBackupRetentionDescription">Antal automatiske sikkerhedskopifiler, der skal beholdes på WebDAV-serveren</string>
   <string name="textSettingsBackupRetentionHint">Antal sikkerhedskopier (0 beholder alle)</string>
   <string name="textSettingsBackupRetentionKeepAll">Behold alle sikkerhedskopier</string>
-  <string name="textSettingsBackupRetentionValue">Behold de seneste %1$d sikkerhedskopier</string>
+  <plurals name="textSettingsBackupRetentionValue">
+    <item quantity="one">Behold de seneste %1$d sikkerhedskopier</item>
+    <item quantity="other">Behold de seneste %1$d sikkerhedskopier</item>
+  </plurals>
   <string name="textSettingsBackupRetentionInvalid">Indtast venligst et gyldigt positivt tal</string>
 
   <string name="textSettingsApiKeyNotSet">Ikke angivet</string>

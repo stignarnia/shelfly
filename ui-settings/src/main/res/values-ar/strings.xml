@@ -102,7 +102,14 @@
   <string name="textSettingsBackupRetentionDescription">عدد ملفات النسخ الاحتياطي التلقائي المحتفظ بها على خادم WebDAV</string>
   <string name="textSettingsBackupRetentionHint">عدد النسخ الاحتياطية (0 للاحتفاظ بالكل)</string>
   <string name="textSettingsBackupRetentionKeepAll">الاحتفاظ بجميع النسخ</string>
-  <string name="textSettingsBackupRetentionValue">الاحتفاظ بآخر %1$d نسخ احتياطية</string>
+  <plurals name="textSettingsBackupRetentionValue">
+    <item quantity="zero">الاحتفاظ بآخر %1$d نسخ احتياطية</item>
+    <item quantity="one">الاحتفاظ بآخر %1$d نسخ احتياطية</item>
+    <item quantity="two">الاحتفاظ بآخر %1$d نسخ احتياطية</item>
+    <item quantity="few">الاحتفاظ بآخر %1$d نسخ احتياطية</item>
+    <item quantity="many">الاحتفاظ بآخر %1$d نسخ احتياطية</item>
+    <item quantity="other">الاحتفاظ بآخر %1$d نسخ احتياطية</item>
+  </plurals>
   <string name="textSettingsBackupRetentionInvalid">يرجى إدخال رقم موجب صالح</string>
 
   <string name="textSettingsApiKeyNotSet">غير محدد</string>

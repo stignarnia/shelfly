@@ -37,7 +37,10 @@
   <string name="textLink">Link</string>
   <string name="textRateSaved">Deine Bewertung wurde gespeichert.</string>
   <string name="textRateRemoved">Deine Bewertung wurde gelöscht.</string>
-  <string name="textDays">%1$d Tage</string>
+  <plurals name="textDays">
+    <item quantity="one">%1$d Tage</item>
+    <item quantity="other">%1$d Tage</item>
+  </plurals>
   <string name="textSelectDate">Datum wählen</string>
   <string name="textDateSelectionTitle">Datumsauswahl</string>
   <string name="textDateSelectionDescription">Wann hast du das angesehen?</string>
@@ -116,4 +119,5 @@
   <string name="errorCouldNotLoadSearchResults">Wir können die Suchergebnisse aktuell nicht laden.\nBitte schreib uns, wenn dieser Fehler weiterhin passiert.</string>
   <string name="errorNoInternetConnection">Kein Internet. Bitte überprüfe deine Verbindung.</string>
   <string name="textDisabled">Deaktiviert</string>
+  <string name="textPercentage">%1$d%%</string>
 </resources>

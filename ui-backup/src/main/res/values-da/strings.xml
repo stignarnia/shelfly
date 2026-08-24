@@ -10,15 +10,42 @@
   <string name="errorImportCancelled">Dataimporten er blevet annulleret.</string>
 
   <string name="textBackupImportSkipped">Nogle elementer havde intet TMDB-match og blev sprunget over:</string>
-  <string name="textBackupImportSkippedShows">%1$d serier (%2$s)</string>
-  <string name="textBackupImportSkippedMovies">%1$d film (%2$s)</string>
-  <string name="textBackupImportSkippedSeasons">%1$d sæsoner</string>
-  <string name="textBackupImportSkippedEpisodes">%1$d sete episoder</string>
-  <string name="textBackupImportSkippedShowRatings">%1$d seriebedømmelser</string>
-  <string name="textBackupImportSkippedSeasonRatings">%1$d sæsonbedømmelser</string>
-  <string name="textBackupImportSkippedEpisodeRatings">%1$d episodebedømmelser</string>
-  <string name="textBackupImportSkippedMovieRatings">%1$d filmbedømmelser</string>
-  <string name="textBackupImportSkippedListItems">%1$d listeelementer</string>
+  <plurals name="textBackupImportSkippedShows">
+    <item quantity="one">%1$d serier (%2$s)</item>
+    <item quantity="other">%1$d serier (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovies">
+    <item quantity="one">%1$d film (%2$s)</item>
+    <item quantity="other">%1$d film (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasons">
+    <item quantity="one">%1$d sæsoner</item>
+    <item quantity="other">%1$d sæsoner</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodes">
+    <item quantity="one">%1$d sete episoder</item>
+    <item quantity="other">%1$d sete episoder</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedShowRatings">
+    <item quantity="one">%1$d seriebedømmelser</item>
+    <item quantity="other">%1$d seriebedømmelser</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasonRatings">
+    <item quantity="one">%1$d sæsonbedømmelser</item>
+    <item quantity="other">%1$d sæsonbedømmelser</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodeRatings">
+    <item quantity="one">%1$d episodebedømmelser</item>
+    <item quantity="other">%1$d episodebedømmelser</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovieRatings">
+    <item quantity="one">%1$d filmbedømmelser</item>
+    <item quantity="other">%1$d filmbedømmelser</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedListItems">
+    <item quantity="one">%1$d listeelementer</item>
+    <item quantity="other">%1$d listeelementer</item>
+  </plurals>
   <string name="textSyncLastTimestamp">Sidste synkronisering: %s</string>
   <string name="textSyncNever">Ikke synkroniseret med andre enheder endnu</string>
   <string name="textSyncFailed">Synkronisering mislykkedes: %s</string>

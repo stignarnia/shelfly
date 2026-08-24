@@ -14,15 +14,42 @@
   <string name="errorImportCancelled">Data import has been cancelled.</string>
 
   <string name="textBackupImportSkipped">Some entries had no TMDB match and were skipped:</string>
-  <string name="textBackupImportSkippedShows">%1$d shows (%2$s)</string>
-  <string name="textBackupImportSkippedMovies">%1$d movies (%2$s)</string>
-  <string name="textBackupImportSkippedSeasons">%1$d seasons</string>
-  <string name="textBackupImportSkippedEpisodes">%1$d watched episodes</string>
-  <string name="textBackupImportSkippedShowRatings">%1$d show ratings</string>
-  <string name="textBackupImportSkippedSeasonRatings">%1$d season ratings</string>
-  <string name="textBackupImportSkippedEpisodeRatings">%1$d episode ratings</string>
-  <string name="textBackupImportSkippedMovieRatings">%1$d movie ratings</string>
-  <string name="textBackupImportSkippedListItems">%1$d list items</string>
+  <plurals name="textBackupImportSkippedShows">
+    <item quantity="one">%1$d shows (%2$s)</item>
+    <item quantity="other">%1$d shows (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovies">
+    <item quantity="one">%1$d movies (%2$s)</item>
+    <item quantity="other">%1$d movies (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasons">
+    <item quantity="one">%1$d seasons</item>
+    <item quantity="other">%1$d seasons</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodes">
+    <item quantity="one">%1$d watched episodes</item>
+    <item quantity="other">%1$d watched episodes</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedShowRatings">
+    <item quantity="one">%1$d show ratings</item>
+    <item quantity="other">%1$d show ratings</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasonRatings">
+    <item quantity="one">%1$d season ratings</item>
+    <item quantity="other">%1$d season ratings</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodeRatings">
+    <item quantity="one">%1$d episode ratings</item>
+    <item quantity="other">%1$d episode ratings</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovieRatings">
+    <item quantity="one">%1$d movie ratings</item>
+    <item quantity="other">%1$d movie ratings</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedListItems">
+    <item quantity="one">%1$d list items</item>
+    <item quantity="other">%1$d list items</item>
+  </plurals>
 
   <string name="textBackupExportSchedule">Schedule</string>
   <string name="textBackupExportOptionOff">Off</string>

@@ -14,7 +14,7 @@
   <string name="textSelect">Seleccionar</string>
   <string name="textHide">Ocultar</string>
   <string name="textRemove">Eliminar</string>
-  <string name="textEmptyResults">No hay resultados...</string>
+  <string name="textEmptyResults">No hay resultados&#8230;</string>
   <string name="textSearchFor">Buscar</string>
   <string name="textTip">Consejo:</string>
   <string name="textSeason">Temporada %1$d</string>
@@ -38,7 +38,11 @@
   <string name="textDisabled">Deshabilitado</string>
   <string name="textRateSaved">Tu calificación se ha guardado.</string>
   <string name="textRateRemoved">Tu calificación ha sido eliminada.</string>
-  <string name="textDays">%1$d días</string>
+  <plurals name="textDays">
+    <item quantity="one">%1$d días</item>
+    <item quantity="other">%1$d días</item>
+    <item quantity="many">%1$d días</item>
+  </plurals>
   <string name="textSelectDate">Seleccionar Fecha</string>
   <string name="textDateSelectionTitle">Selección Fecha</string>
   <string name="textDateSelectionDescription">¿Cuándo lo has visto?</string>
@@ -48,12 +52,13 @@
   <plurals name="textEpisodesLeft" comment="Number of episodes left to see">
     <item quantity="one">%d restante</item>
     <item quantity="other">%d restantes</item>
+    <item quantity="many">%d restantes</item>
   </plurals>
   <string name="textPeople">Reparto &amp; Equipo</string>
   <string name="textDirecting">Dirección</string>
   <string name="textDirector">Director</string>
   <string name="textWriting">Escritores</string>
-  <string name="textScreenplay">Guión</string>
+  <string name="textScreenplay">Guion</string>
   <string name="textMusic">Música</string>
   <string name="textActing">Actuación</string>
   <string name="textAiredAlready">Emitido</string>
@@ -61,14 +66,17 @@
   <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Se emite mañana</item>
     <item quantity="other">Se emite en %d días</item>
+    <item quantity="many">Se emite en %d días</item>
   </plurals>
   <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Se emite en 1 hora</item>
     <item quantity="other">Se emite en %d horas</item>
+    <item quantity="many">Se emite en %d horas</item>
   </plurals>
   <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Se emite ahora</item>
     <item quantity="other">Se emite en %d minutos</item>
+    <item quantity="many">Se emite en %d minutos</item>
   </plurals>
   <string name="textToday">Hoy</string>
   <string name="textTomorrow">Mañana</string>
@@ -116,4 +124,5 @@
   <string name="errorCouldNotLoadMovie">No pudimos cargar los detalles de esta película en este momento.\nPor favor, contáctanos si esto sigue sucediendo.</string>
   <string name="errorCouldNotLoadSearchResults">No pudimos cargar los resultados de la búsqueda en este momento.\nPor favor, contáctanos si esto sigue sucediendo.</string>
   <string name="errorNoInternetConnection">Sin Internet. Por favor compruebe su conexión.</string>
-  </resources>
+  <string name="textPercentage">%1$d%%</string>
+</resources>

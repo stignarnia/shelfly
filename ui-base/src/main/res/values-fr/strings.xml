@@ -38,7 +38,11 @@
   <string name="textDisabled">Désactivé</string>
   <string name="textRateSaved">Votre note a été enregistrée.</string>
   <string name="textRateRemoved">Votre note a été supprimée.</string>
-  <string name="textDays">%1$d jours</string>
+  <plurals name="textDays">
+    <item quantity="one">%1$d jours</item>
+    <item quantity="other">%1$d jours</item>
+    <item quantity="many">%1$d jours</item>
+  </plurals>
   <string name="textSelectDate">Sélectionner la date</string>
   <string name="textDateSelectionTitle">Sélection de date</string>
   <string name="textDateSelectionDescription">Quand l\'avez-vous regardé ?</string>
@@ -48,6 +52,7 @@
   <plurals name="textEpisodesLeft" comment="Number of episodes left to see">
     <item quantity="one">%d restant</item>
     <item quantity="other">%d restants</item>
+    <item quantity="many">%d restants</item>
   </plurals>
   <string name="textPeople">Acteurs &amp; Équipe</string>
   <string name="textDirecting">Réalisation</string>
@@ -61,14 +66,17 @@
   <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Diffusé demain</item>
     <item quantity="other">Diffusé dans %d jours</item>
+    <item quantity="many">Diffusé dans %d jours</item>
   </plurals>
   <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Diffusé dans 1 heure</item>
     <item quantity="other">Diffusé dans %d heures</item>
+    <item quantity="many">Diffusé dans %d heures</item>
   </plurals>
   <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
     <item quantity="one">Diffusé maintenant</item>
     <item quantity="other">Diffusé dans %d minutes</item>
+    <item quantity="many">Diffusé dans %d minutes</item>
   </plurals>
   <string name="textToday">Aujourd\'hui</string>
   <string name="textTomorrow">Demain</string>
@@ -116,4 +124,5 @@
   <string name="errorCouldNotLoadMovie">Nous n\'avons pas pu charger les détails de ce film pour le moment.\nVeuillez nous contacter si cela se produit à nouveau.</string>
   <string name="errorCouldNotLoadSearchResults">Nous n\'avons pas pu charger les résultats de recherche pour le moment.\nVeuillez nous contacter si cela se produit à nouveau.</string>
   <string name="errorNoInternetConnection">Pas de connexion Internet. Vérifiez votre connexion.</string>
-  </resources>
+  <string name="textPercentage">%1$d%%</string>
+</resources>

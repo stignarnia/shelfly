@@ -102,7 +102,11 @@
   <string name="textSettingsBackupRetentionDescription">Número de ficheiros de cópias de segurança automáticas a manter no servidor WebDAV</string>
   <string name="textSettingsBackupRetentionHint">Número de cópias de segurança (0 mantém todas)</string>
   <string name="textSettingsBackupRetentionKeepAll">Manter todas as cópias</string>
-  <string name="textSettingsBackupRetentionValue">Manter as últimas %1$d cópias</string>
+  <plurals name="textSettingsBackupRetentionValue">
+    <item quantity="one">Manter as últimas %1$d cópias</item>
+    <item quantity="other">Manter as últimas %1$d cópias</item>
+    <item quantity="many">Manter as últimas %1$d cópias</item>
+  </plurals>
   <string name="textSettingsBackupRetentionInvalid">Introduza um número positivo válido</string>
 
   <string name="textSettingsApiKeyNotSet">Não definido</string>

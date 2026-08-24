@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import java.util.Locale
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
@@ -77,7 +78,11 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
       settingsBackupTargetValue.setText(uiState.backupTarget.displayName())
       settingsBackupRetentionValue.text = when (uiState.backupRetention) {
         SettingsWebDavRepository.RETENTION_KEEP_ALL -> getString(R.string.textSettingsBackupRetentionKeepAll)
-        else -> getString(R.string.textSettingsBackupRetentionValue, uiState.backupRetention)
+        else -> resources.getQuantityString(
+          R.plurals.textSettingsBackupRetentionValue,
+          uiState.backupRetention,
+          uiState.backupRetention,
+        )
       }
       // Choosing a destination is meaningless with nowhere to send it.
       settingsBackupTarget.visibleIf(uiState.isWebDavConfigured)
@@ -150,7 +155,7 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
   private fun showRetentionDialog() {
     val current = viewModel.uiState.value.backupRetention
     val inputBinding = ViewRetentionInputBinding.inflate(LayoutInflater.from(requireContext()))
-    inputBinding.retentionInput.setText(current.toString())
+    inputBinding.retentionInput.setText(String.format(Locale.getDefault(), "%d", current))
 
     modal()
       .setTitle(R.string.textSettingsBackupRetentionTitle)

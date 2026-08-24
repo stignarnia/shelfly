@@ -38,7 +38,12 @@
   <string name="textDisabled">Wyłączone</string>
   <string name="textRateSaved">Ocena została zapisana.</string>
   <string name="textRateRemoved">Ocena została usunięta.</string>
-  <string name="textDays">%1$d dni</string>
+  <plurals name="textDays">
+    <item quantity="one">%1$d dni</item>
+    <item quantity="few">%1$d dni</item>
+    <item quantity="many">%1$d dni</item>
+    <item quantity="other">%1$d dni</item>
+  </plurals>
   <string name="textSelectDate">Wybierz datę</string>
   <string name="textDateSelectionTitle">Wybór daty</string>
   <string name="textDateSelectionDescription">Kiedy skończyłeś/łaś oglądać?</string>
@@ -124,4 +129,5 @@
   <string name="errorCouldNotLoadMovie">W tej chwili nie można załadować informacji o filmie.\nSkontaktuj się z nami jeżeli błąd się powtarza.</string>
   <string name="errorCouldNotLoadSearchResults">W tej chwili nie można załadować wyników wyszukiwania.\nSkontaktuj się z nami jeżeli błąd się powtarza.</string>
   <string name="errorNoInternetConnection">Brak Internetu. Sprawdź swoje połączenie.</string>
-  </resources>
+  <string name="textPercentage">%1$d%%</string>
+</resources>

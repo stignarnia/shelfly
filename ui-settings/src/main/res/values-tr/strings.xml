@@ -102,7 +102,10 @@
   <string name="textSettingsBackupRetentionDescription">WebDAV sunucusunda tutulacak otomatik yedekleme dosyası sayısı</string>
   <string name="textSettingsBackupRetentionHint">Yedek sayısı (0 tümünü saklar)</string>
   <string name="textSettingsBackupRetentionKeepAll">Tüm yedekleri sakla</string>
-  <string name="textSettingsBackupRetentionValue">Son %1$d yedeği sakla</string>
+  <plurals name="textSettingsBackupRetentionValue">
+    <item quantity="one">Son %1$d yedeği sakla</item>
+    <item quantity="other">Son %1$d yedeği sakla</item>
+  </plurals>
   <string name="textSettingsBackupRetentionInvalid">Lütfen geçerli bir pozitif sayı girin</string>
 
   <string name="textSettingsApiKeyNotSet">Ayarlanmadı</string>

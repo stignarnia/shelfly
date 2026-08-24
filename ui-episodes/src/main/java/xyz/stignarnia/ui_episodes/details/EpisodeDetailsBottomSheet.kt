@@ -130,7 +130,12 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
       episodeDetailsRatingLayout.visibleIf(episode.votes > 0)
       episodeDetailsWatchedAt.visibleIf(episode.lastWatchedAt != null || isWatched)
       if (!showTabs) episodeDetailsTabs.gone()
-      episodeDetailsRating.text = String.format(ENGLISH, getString(R.string.textVotes), episode.rating, episode.votes)
+      episodeDetailsRating.text = resources.getQuantityString(
+        R.plurals.textVotes,
+        episode.votes,
+        episode.rating,
+        episode.votes,
+      )
       episodeDetailsLinksButton.onClick { openLinksSheet() }
     }
   }

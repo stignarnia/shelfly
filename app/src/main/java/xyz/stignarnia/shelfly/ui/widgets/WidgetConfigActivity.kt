@@ -65,7 +65,7 @@ class WidgetConfigActivity : AppCompatActivity() {
     with(binding.widgetConfigTransparencySlider) {
       addOnChangeListener { _, value, fromUser ->
         if (fromUser) {
-          binding.widgetConfigTransparencyValue.text = "${value.toInt()}%"
+          binding.widgetConfigTransparencyValue.text = getString(R.string.textPercentage, value.toInt())
         }
       }
       addOnSliderTouchListener(
@@ -110,7 +110,7 @@ class WidgetConfigActivity : AppCompatActivity() {
         onChanged()
       }
 
-      widgetConfigTransparencyValue.text = "$transparency%"
+      widgetConfigTransparencyValue.text = getString(R.string.textPercentage, transparency)
       if (widgetConfigTransparencySlider.value.toInt() != transparency) {
         widgetConfigTransparencySlider.value = transparency.toFloat()
       }

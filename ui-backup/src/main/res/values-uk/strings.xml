@@ -23,15 +23,60 @@
   <string name="textBackupExportLastTimestamp">Остання резервна копія: %s</string>
 
   <string name="textBackupImportSkipped">Деякі записи не знайдені в TMDB і були пропущені:</string>
-  <string name="textBackupImportSkippedShows">%1$d серіалів (%2$s)</string>
-  <string name="textBackupImportSkippedMovies">%1$d фільмів (%2$s)</string>
-  <string name="textBackupImportSkippedSeasons">%1$d сезонів</string>
-  <string name="textBackupImportSkippedEpisodes">%1$d переглянутих серій</string>
-  <string name="textBackupImportSkippedShowRatings">%1$d оцінок серіалів</string>
-  <string name="textBackupImportSkippedSeasonRatings">%1$d оцінок сезонів</string>
-  <string name="textBackupImportSkippedEpisodeRatings">%1$d оцінок серій</string>
-  <string name="textBackupImportSkippedMovieRatings">%1$d оцінок фільмів</string>
-  <string name="textBackupImportSkippedListItems">%1$d елементів списку</string>
+  <plurals name="textBackupImportSkippedShows">
+    <item quantity="one">%1$d серіалів (%2$s)</item>
+    <item quantity="few">%1$d серіалів (%2$s)</item>
+    <item quantity="many">%1$d серіалів (%2$s)</item>
+    <item quantity="other">%1$d серіалів (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovies">
+    <item quantity="one">%1$d фільмів (%2$s)</item>
+    <item quantity="few">%1$d фільмів (%2$s)</item>
+    <item quantity="many">%1$d фільмів (%2$s)</item>
+    <item quantity="other">%1$d фільмів (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasons">
+    <item quantity="one">%1$d сезонів</item>
+    <item quantity="few">%1$d сезонів</item>
+    <item quantity="many">%1$d сезонів</item>
+    <item quantity="other">%1$d сезонів</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodes">
+    <item quantity="one">%1$d переглянутих серій</item>
+    <item quantity="few">%1$d переглянутих серій</item>
+    <item quantity="many">%1$d переглянутих серій</item>
+    <item quantity="other">%1$d переглянутих серій</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedShowRatings">
+    <item quantity="one">%1$d оцінок серіалів</item>
+    <item quantity="few">%1$d оцінок серіалів</item>
+    <item quantity="many">%1$d оцінок серіалів</item>
+    <item quantity="other">%1$d оцінок серіалів</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasonRatings">
+    <item quantity="one">%1$d оцінок сезонів</item>
+    <item quantity="few">%1$d оцінок сезонів</item>
+    <item quantity="many">%1$d оцінок сезонів</item>
+    <item quantity="other">%1$d оцінок сезонів</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodeRatings">
+    <item quantity="one">%1$d оцінок серій</item>
+    <item quantity="few">%1$d оцінок серій</item>
+    <item quantity="many">%1$d оцінок серій</item>
+    <item quantity="other">%1$d оцінок серій</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovieRatings">
+    <item quantity="one">%1$d оцінок фільмів</item>
+    <item quantity="few">%1$d оцінок фільмів</item>
+    <item quantity="many">%1$d оцінок фільмів</item>
+    <item quantity="other">%1$d оцінок фільмів</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedListItems">
+    <item quantity="one">%1$d елементів списку</item>
+    <item quantity="few">%1$d елементів списку</item>
+    <item quantity="many">%1$d елементів списку</item>
+    <item quantity="other">%1$d елементів списку</item>
+  </plurals>
   <string name="textSyncLastTimestamp">Остання синхронізація: %s</string>
   <string name="textSyncNever">Ще не синхронізовано з жодним іншим пристроєм</string>
   <string name="textSyncFailed">Помилка синхронізації: %s</string>

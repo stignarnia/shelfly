@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="textSeasonEpisodeDate">الموسم %1$02d الحلقة %2$02d | %3$s</string>
-  <string name="textVotes">%1$.1f (%2$d تقييم)</string>
+  <plurals name="textVotes">
+    <item quantity="zero">%1$.1f (%2$d تقييم)</item>
+    <item quantity="one">%1$.1f (%2$d تقييم)</item>
+    <item quantity="two">%1$.1f (%2$d تقييم)</item>
+    <item quantity="few">%1$.1f (%2$d تقييم)</item>
+    <item quantity="many">%1$.1f (%2$d تقييم)</item>
+    <item quantity="other">%1$.1f (%2$d تقييم)</item>
+  </plurals>
 </resources>

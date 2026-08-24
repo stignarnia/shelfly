@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="textSeasonEpisodeDate">S.%1$02d E.%2$02d | %3$s</string>
-  <string name="textVotes">%1$.1f (%2$d votes)</string>
+  <plurals name="textVotes">
+    <item quantity="one">%1$.1f (%2$d votes)</item>
+    <item quantity="other">%1$.1f (%2$d votes)</item>
+    <item quantity="many">%1$.1f (%2$d votes)</item>
+  </plurals>
 </resources>

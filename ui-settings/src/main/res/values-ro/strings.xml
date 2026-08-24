@@ -102,7 +102,11 @@
   <string name="textSettingsBackupRetentionDescription">Numărul de fișiere de rezervă automate păstrate pe serverul WebDAV</string>
   <string name="textSettingsBackupRetentionHint">Număr de copii de rezervă (0 le păstrează pe toate)</string>
   <string name="textSettingsBackupRetentionKeepAll">Păstrează toate copiile</string>
-  <string name="textSettingsBackupRetentionValue">Păstrează ultimele %1$d copii de rezervă</string>
+  <plurals name="textSettingsBackupRetentionValue">
+    <item quantity="one">Păstrează ultimele %1$d copii de rezervă</item>
+    <item quantity="few">Păstrează ultimele %1$d copii de rezervă</item>
+    <item quantity="other">Păstrează ultimele %1$d copii de rezervă</item>
+  </plurals>
   <string name="textSettingsBackupRetentionInvalid">Introduceți un număr pozitiv valid</string>
 
   <string name="textSettingsApiKeyNotSet">Nesetat</string>

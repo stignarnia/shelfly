@@ -38,7 +38,10 @@
   <string name="textDisabled">Deaktiveret</string>
   <string name="textRateSaved">Din bedømmelse er blevet gemt.</string>
   <string name="textRateRemoved">Din bedømmelse er blevet fjernet.</string>
-  <string name="textDays">%1$d dage</string>
+  <plurals name="textDays">
+    <item quantity="one">%1$d dage</item>
+    <item quantity="other">%1$d dage</item>
+  </plurals>
   <string name="textSelectDate">Vælg dato</string>
   <string name="textDateSelectionTitle">Datovalg</string>
   <string name="textDateSelectionDescription">Hvornår så du det?</string>
@@ -116,4 +119,5 @@
   <string name="errorCouldNotLoadMovie">Vi kunne ikke indlæse denne films detaljer i øjeblikket.\nKontakt os venligst hvis dette fortsætter med at ske.</string>
   <string name="errorCouldNotLoadSearchResults">Vi kunne ikke indlæse søgeresultaterne i øjeblikket.\nKontakt os venligst hvis dette fortsætter med at ske.</string>
   <string name="errorNoInternetConnection">Ingen internetforbindelse. Tjek venligst din forbindelse.</string>
-  </resources>
+  <string name="textPercentage">%1$d%%</string>
+</resources>

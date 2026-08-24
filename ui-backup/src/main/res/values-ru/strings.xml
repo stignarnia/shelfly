@@ -10,15 +10,60 @@
   <string name="errorImportCancelled">Импорт данных был отменен.</string>
 
   <string name="textBackupImportSkipped">Некоторые элементы не найдены в TMDB и были пропущены:</string>
-  <string name="textBackupImportSkippedShows">%1$d сериалов (%2$s)</string>
-  <string name="textBackupImportSkippedMovies">%1$d фильмов (%2$s)</string>
-  <string name="textBackupImportSkippedSeasons">%1$d сезонов</string>
-  <string name="textBackupImportSkippedEpisodes">%1$d просмотренных серий</string>
-  <string name="textBackupImportSkippedShowRatings">%1$d оценок сериалов</string>
-  <string name="textBackupImportSkippedSeasonRatings">%1$d оценок сезонов</string>
-  <string name="textBackupImportSkippedEpisodeRatings">%1$d оценок серий</string>
-  <string name="textBackupImportSkippedMovieRatings">%1$d оценок фильмов</string>
-  <string name="textBackupImportSkippedListItems">%1$d элементов списка</string>
+  <plurals name="textBackupImportSkippedShows">
+    <item quantity="one">%1$d сериалов (%2$s)</item>
+    <item quantity="few">%1$d сериалов (%2$s)</item>
+    <item quantity="many">%1$d сериалов (%2$s)</item>
+    <item quantity="other">%1$d сериалов (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovies">
+    <item quantity="one">%1$d фильмов (%2$s)</item>
+    <item quantity="few">%1$d фильмов (%2$s)</item>
+    <item quantity="many">%1$d фильмов (%2$s)</item>
+    <item quantity="other">%1$d фильмов (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasons">
+    <item quantity="one">%1$d сезонов</item>
+    <item quantity="few">%1$d сезонов</item>
+    <item quantity="many">%1$d сезонов</item>
+    <item quantity="other">%1$d сезонов</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodes">
+    <item quantity="one">%1$d просмотренных серий</item>
+    <item quantity="few">%1$d просмотренных серий</item>
+    <item quantity="many">%1$d просмотренных серий</item>
+    <item quantity="other">%1$d просмотренных серий</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedShowRatings">
+    <item quantity="one">%1$d оценок сериалов</item>
+    <item quantity="few">%1$d оценок сериалов</item>
+    <item quantity="many">%1$d оценок сериалов</item>
+    <item quantity="other">%1$d оценок сериалов</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasonRatings">
+    <item quantity="one">%1$d оценок сезонов</item>
+    <item quantity="few">%1$d оценок сезонов</item>
+    <item quantity="many">%1$d оценок сезонов</item>
+    <item quantity="other">%1$d оценок сезонов</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodeRatings">
+    <item quantity="one">%1$d оценок серий</item>
+    <item quantity="few">%1$d оценок серий</item>
+    <item quantity="many">%1$d оценок серий</item>
+    <item quantity="other">%1$d оценок серий</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovieRatings">
+    <item quantity="one">%1$d оценок фильмов</item>
+    <item quantity="few">%1$d оценок фильмов</item>
+    <item quantity="many">%1$d оценок фильмов</item>
+    <item quantity="other">%1$d оценок фильмов</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedListItems">
+    <item quantity="one">%1$d элементов списка</item>
+    <item quantity="few">%1$d элементов списка</item>
+    <item quantity="many">%1$d элементов списка</item>
+    <item quantity="other">%1$d элементов списка</item>
+  </plurals>
   <string name="textSyncLastTimestamp">Последняя синхронизация: %s</string>
   <string name="textSyncNever">Ещё не синхронизировано ни с одним устройством</string>
   <string name="textSyncFailed">Ошибка синхронизации: %s</string>

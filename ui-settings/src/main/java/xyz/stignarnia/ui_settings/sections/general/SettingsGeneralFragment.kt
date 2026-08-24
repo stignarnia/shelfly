@@ -3,6 +3,7 @@ package xyz.stignarnia.ui_settings.sections.general
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import java.util.Locale
 import com.jakewharton.processphoenix.ProcessPhoenix
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.extensions.nowUtc
@@ -130,7 +131,7 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
 
   private fun renderTabletColumns(columns: Int) {
     with(binding) {
-      settingsTabletColumnsValue.text = columns.toString()
+      settingsTabletColumnsValue.text = String.format(Locale.getDefault(), "%d", columns)
       settingsTabletColumns.onClick {
         showTabletColumnsDialog(columns)
       }
@@ -149,7 +150,7 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
     if (progressUpcomingDays == null) return
     with(binding) {
       settingsUpcomingValue.text = if (progressUpcomingDays > 0L) {
-        getString(R.string.textDays, progressUpcomingDays)
+        resources.getQuantityString(R.plurals.textDays, progressUpcomingDays.toInt(), progressUpcomingDays)
       } else {
         getString(R.string.textDisabled)
       }
@@ -209,14 +210,14 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
     val selected = options.firstOrNull { it.toLong() == days }
 
     showSingleChoiceModal(options, selected, {
-      if (it == 0) getString(R.string.textDisabled) else getString(R.string.textDays, it)
+      if (it == 0) getString(R.string.textDisabled) else resources.getQuantityString(R.plurals.textDays, it, it)
     }) {
       if (it != selected) viewModel.setProgressUpcomingDays(it.toLong())
     }
   }
 
   private fun showTabletColumnsDialog(columns: Int) =
-    showSingleChoiceModal(listOf(1, 2), columns, { it.toString() }) {
+    showSingleChoiceModal(listOf(1, 2), columns, { String.format(Locale.getDefault(), "%d", it) }) {
       if (it != columns) viewModel.setTabletColumns(it)
     }
 

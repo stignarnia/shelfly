@@ -37,7 +37,12 @@
   <string name="textDisabled">Отключено</string>
   <string name="textRateSaved">Ваша оценка была сохранена.</string>
   <string name="textRateRemoved">Ваша оценка была удалена.</string>
-  <string name="textDays">%1$d дней</string>
+  <plurals name="textDays">
+    <item quantity="one">%1$d дней</item>
+    <item quantity="few">%1$d дней</item>
+    <item quantity="many">%1$d дней</item>
+    <item quantity="other">%1$d дней</item>
+  </plurals>
   <string name="textSelectDate">Выбрать дату</string>
   <string name="textDateSelectionTitle">Выбор даты</string>
   <string name="textDateSelectionDescription">Когда вы смотрели это?</string>
@@ -124,4 +129,5 @@
   <string name="errorCouldNotLoadSearchResults">Мы не смогли загрузить результаты поиска.\nПожалуйста, свяжитесь с нами, если это произойдет снова.</string>
   <string name="errorNoInternetConnection">Нет интернет соединения. Проверьте своё подключение.</string>
   <string name="textReleaseDay">День премьеры</string>
+  <string name="textPercentage">%1$d%%</string>
 </resources>

@@ -10,15 +10,42 @@
   <string name="errorImportCancelled">Veri içe aktarma iptal edildi.</string>
 
   <string name="textBackupImportSkipped">Bazı öğelerin TMDB eşleşmesi bulunamadı ve atlandı:</string>
-  <string name="textBackupImportSkippedShows">%1$d dizi (%2$s)</string>
-  <string name="textBackupImportSkippedMovies">%1$d film (%2$s)</string>
-  <string name="textBackupImportSkippedSeasons">%1$d sezon</string>
-  <string name="textBackupImportSkippedEpisodes">%1$d izlenen bölüm</string>
-  <string name="textBackupImportSkippedShowRatings">%1$d dizi puanı</string>
-  <string name="textBackupImportSkippedSeasonRatings">%1$d sezon puanı</string>
-  <string name="textBackupImportSkippedEpisodeRatings">%1$d bölüm puanı</string>
-  <string name="textBackupImportSkippedMovieRatings">%1$d film puanı</string>
-  <string name="textBackupImportSkippedListItems">%1$d liste öğesi</string>
+  <plurals name="textBackupImportSkippedShows">
+    <item quantity="one">%1$d dizi (%2$s)</item>
+    <item quantity="other">%1$d dizi (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovies">
+    <item quantity="one">%1$d film (%2$s)</item>
+    <item quantity="other">%1$d film (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasons">
+    <item quantity="one">%1$d sezon</item>
+    <item quantity="other">%1$d sezon</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodes">
+    <item quantity="one">%1$d izlenen bölüm</item>
+    <item quantity="other">%1$d izlenen bölüm</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedShowRatings">
+    <item quantity="one">%1$d dizi puanı</item>
+    <item quantity="other">%1$d dizi puanı</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasonRatings">
+    <item quantity="one">%1$d sezon puanı</item>
+    <item quantity="other">%1$d sezon puanı</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodeRatings">
+    <item quantity="one">%1$d bölüm puanı</item>
+    <item quantity="other">%1$d bölüm puanı</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovieRatings">
+    <item quantity="one">%1$d film puanı</item>
+    <item quantity="other">%1$d film puanı</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedListItems">
+    <item quantity="one">%1$d liste öğesi</item>
+    <item quantity="other">%1$d liste öğesi</item>
+  </plurals>
   <string name="textSyncLastTimestamp">Son senkronizasyon: %s</string>
   <string name="textSyncNever">Henüz başka bir cihazla senkronize edilmedi</string>
   <string name="textSyncFailed">Senkronizasyon başarısız: %s</string>

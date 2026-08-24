@@ -38,7 +38,11 @@
     <string name="textDisabled">Dezactivat</string>
     <string name="textRateSaved">Evaluarea ta a fost salvată.</string>
     <string name="textRateRemoved">Evaluarea ta a fost salvată.</string>
-    <string name="textDays">%1$d zile</string>
+  <plurals name="textDays">
+    <item quantity="one">%1$d zile</item>
+    <item quantity="few">%1$d zile</item>
+    <item quantity="other">%1$d zile</item>
+  </plurals>
     <string name="textSelectDate">Selectează data</string>
     <string name="textDateSelectionTitle">Selectarea datei</string>
     <string name="textDateSelectionDescription">Când l-ai vizionat?</string>
@@ -120,4 +124,5 @@
     <string name="errorCouldNotLoadMovie">Nu am putut încărca detaliile acestui film în acest moment.\nVă rugăm să ne contactați dacă această problemă persistă.</string>
     <string name="errorCouldNotLoadSearchResults">Nu am putut încărca rezultatele căutării în acest moment.\nVă rugăm să ne contactați dacă această problemă persistă.</string>
     <string name="errorNoInternetConnection">Nu există conexiune la Internet. Vă rugăm să verificați conexiunea.</string>
-    </resources>
+  <string name="textPercentage">%1$d%%</string>
+</resources>

@@ -23,15 +23,51 @@
   <string name="textBackupExportLastTimestamp">Dernière sauvegarde : %s</string>
 
   <string name="textBackupImportSkipped">Certains éléments n\'ont pas de correspondance TMDB et ont été ignorés :</string>
-  <string name="textBackupImportSkippedShows">%1$d séries (%2$s)</string>
-  <string name="textBackupImportSkippedMovies">%1$d films (%2$s)</string>
-  <string name="textBackupImportSkippedSeasons">%1$d saisons</string>
-  <string name="textBackupImportSkippedEpisodes">%1$d épisodes vus</string>
-  <string name="textBackupImportSkippedShowRatings">%1$d notes de séries</string>
-  <string name="textBackupImportSkippedSeasonRatings">%1$d notes de saisons</string>
-  <string name="textBackupImportSkippedEpisodeRatings">%1$d notes d\'épisodes</string>
-  <string name="textBackupImportSkippedMovieRatings">%1$d notes de films</string>
-  <string name="textBackupImportSkippedListItems">%1$d éléments de liste</string>
+  <plurals name="textBackupImportSkippedShows">
+    <item quantity="one">%1$d séries (%2$s)</item>
+    <item quantity="other">%1$d séries (%2$s)</item>
+    <item quantity="many">%1$d séries (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovies">
+    <item quantity="one">%1$d films (%2$s)</item>
+    <item quantity="other">%1$d films (%2$s)</item>
+    <item quantity="many">%1$d films (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasons">
+    <item quantity="one">%1$d saisons</item>
+    <item quantity="other">%1$d saisons</item>
+    <item quantity="many">%1$d saisons</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodes">
+    <item quantity="one">%1$d épisodes vus</item>
+    <item quantity="other">%1$d épisodes vus</item>
+    <item quantity="many">%1$d épisodes vus</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedShowRatings">
+    <item quantity="one">%1$d notes de séries</item>
+    <item quantity="other">%1$d notes de séries</item>
+    <item quantity="many">%1$d notes de séries</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasonRatings">
+    <item quantity="one">%1$d notes de saisons</item>
+    <item quantity="other">%1$d notes de saisons</item>
+    <item quantity="many">%1$d notes de saisons</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodeRatings">
+    <item quantity="one">%1$d notes d\'épisodes</item>
+    <item quantity="other">%1$d notes d\'épisodes</item>
+    <item quantity="many">%1$d notes d\'épisodes</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovieRatings">
+    <item quantity="one">%1$d notes de films</item>
+    <item quantity="other">%1$d notes de films</item>
+    <item quantity="many">%1$d notes de films</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedListItems">
+    <item quantity="one">%1$d éléments de liste</item>
+    <item quantity="other">%1$d éléments de liste</item>
+    <item quantity="many">%1$d éléments de liste</item>
+  </plurals>
   <string name="textSyncLastTimestamp">Dernière synchronisation : %s</string>
   <string name="textSyncNever">Pas encore synchronisé avec un autre appareil</string>
   <string name="textSyncFailed">Échec de synchronisation : %s</string>
@@ -41,6 +77,7 @@
   <plurals name="textSyncPeers">
     <item quantity="one">%d autre appareil</item>
     <item quantity="other">%d autres appareils</item>
+    <item quantity="many">%d autres appareils</item>
   </plurals>
 
   <string name="textSyncNotificationProgressTitle">Synchronisation WebDAV</string>

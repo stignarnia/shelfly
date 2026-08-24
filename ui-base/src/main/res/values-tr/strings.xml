@@ -38,7 +38,10 @@
   <string name="textDisabled">Devre dışı</string>
   <string name="textRateSaved">Oyunuz kaydedildi.</string>
   <string name="textRateRemoved">Verdiğiniz oy kaldırıldı.</string>
-  <string name="textDays">%1$d gün</string>
+  <plurals name="textDays">
+    <item quantity="one">%1$d gün</item>
+    <item quantity="other">%1$d gün</item>
+  </plurals>
   <string name="textSelectDate">Tarih Seçin</string>
   <string name="textDateSelectionTitle">Tarih Seçimi</string>
   <string name="textDateSelectionDescription">Bunu ne zaman izledin?</string>
@@ -116,4 +119,5 @@
   <string name="errorCouldNotLoadMovie">Bu filmin ayrıntılarını şu anda yükleyemiyoruz.\nBu durum devam ederse lütfen bizimle iletişime geçin.</string>
   <string name="errorCouldNotLoadSearchResults">Şu anda arama sonuçlarını yükleyemiyoruz.\nBu durum devam ederse lütfen bizimle iletişime geçin.</string>
   <string name="errorNoInternetConnection">İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.</string>
-  </resources>
+  <string name="textPercentage">%1$d%%</string>
+</resources>

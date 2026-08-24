@@ -43,18 +43,13 @@ I think there is little chance this gets merged upstream given the repository's 
 - **Original branding and iconography.** Custom 3D isometric shelf logo, adaptive launcher icons, and themed widget assets replace upstream artwork.
 - **Tablet, foldable, and landscape support.** Full screen rotation and responsive layouts across all screens, with no fixed portrait locks on large form factors.
 
-## Project setup
+## Building it yourself
 
-1. Clone the repository and open it in a recent Android Studio.
-2. Create `app/keystore.properties` with any values for a debug build:
+You need a JDK (any recent one) and either Android Studio or the command-line SDK tools. Gradle downloads the JDK 21 toolchain the build compiles against, so the JDK you launch it with does not have to match.
 
-   ```ini
-   keyAlias=github
-   keyPassword=github
-   storePassword=github
-   ```
+1. Clone the repository and open it in a recent Android Studio. A fresh clone builds as it is — there is no signing or key setup to do first.
 
-3. Optionally add API keys to `local.properties` in the project root. These only prefill debug builds; release builds ship without keys and ask the user for their own on first run:
+2. Optionally add API keys to `local.properties` in the project root. These only prefill debug builds; release builds ship without keys and ask for your own on first run:
 
    ```ini
    tmdbApiKey="your tmdb api key (v3 auth)"
@@ -63,17 +58,18 @@ I think there is little chance this gets merged upstream given the repository's 
 
    Get them from [TMDB](https://www.themoviedb.org/settings/api) and [OMDB](https://www.omdbapi.com/apikey.aspx). Both are free. OMDB is optional and only supplies IMDb ratings.
 
-4. Build and run.
+3. Build it:
 
-### Verifying a change
+   ```bash
+   ./gradlew :app:assembleDebug     # APK in app/build/outputs/apk/debug
+   ./gradlew :app:installDebug      # or straight onto a connected device
+   ```
 
-```bash
-./gradlew assembleDebug
-./gradlew testDebugUnitTest
-./ktlint
-```
+For a *signed* release build, put a keystore at `app/keystore` and its credentials in `app/keystore.properties` (`keyAlias`, `keyPassword`, `storePassword`). Both files are gitignored; with either one missing `:app:assembleRelease` still builds, just unsigned.
 
-Two suites are opt-in and self-skip, so a green run does not mean they ran. `TmdbLiveApiTest` in `:data-remote` hits the real TMDB API and skips when no key is compiled in. `BackupMigrationV2FileTest` in `:ui-backup` skips unless `SHELFLY_V2_BACKUP` points at a real Showly export.
+## Contributing
+
+[CLAUDE.md](CLAUDE.md) is the contributor guide: which checks to run for which kind of change, the commit and localization conventions, and the release checklist. Read it before sending a patch — several of the conventions are enforced by tooling rather than by review.
 
 ## Backing up to WebDAV
 

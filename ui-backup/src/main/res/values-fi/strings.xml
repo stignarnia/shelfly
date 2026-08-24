@@ -23,15 +23,42 @@
   <string name="textBackupExportLastTimestamp">Viimeksi varmuuskopioitu: %s</string>
 
   <string name="textBackupImportSkipped">Joillekin kohteille ei löytynyt TMDB-vastaavuutta ja ne ohitettiin:</string>
-  <string name="textBackupImportSkippedShows">%1$d sarjaa (%2$s)</string>
-  <string name="textBackupImportSkippedMovies">%1$d elokuvaa (%2$s)</string>
-  <string name="textBackupImportSkippedSeasons">%1$d kautta</string>
-  <string name="textBackupImportSkippedEpisodes">%1$d katsottua jaksoa</string>
-  <string name="textBackupImportSkippedShowRatings">%1$d sarja-arviota</string>
-  <string name="textBackupImportSkippedSeasonRatings">%1$d kausiarviota</string>
-  <string name="textBackupImportSkippedEpisodeRatings">%1$d jaksoarviota</string>
-  <string name="textBackupImportSkippedMovieRatings">%1$d elokuva-arviota</string>
-  <string name="textBackupImportSkippedListItems">%1$d listamerkintää</string>
+  <plurals name="textBackupImportSkippedShows">
+    <item quantity="one">%1$d sarjaa (%2$s)</item>
+    <item quantity="other">%1$d sarjaa (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovies">
+    <item quantity="one">%1$d elokuvaa (%2$s)</item>
+    <item quantity="other">%1$d elokuvaa (%2$s)</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasons">
+    <item quantity="one">%1$d kautta</item>
+    <item quantity="other">%1$d kautta</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodes">
+    <item quantity="one">%1$d katsottua jaksoa</item>
+    <item quantity="other">%1$d katsottua jaksoa</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedShowRatings">
+    <item quantity="one">%1$d sarja-arviota</item>
+    <item quantity="other">%1$d sarja-arviota</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedSeasonRatings">
+    <item quantity="one">%1$d kausiarviota</item>
+    <item quantity="other">%1$d kausiarviota</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedEpisodeRatings">
+    <item quantity="one">%1$d jaksoarviota</item>
+    <item quantity="other">%1$d jaksoarviota</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedMovieRatings">
+    <item quantity="one">%1$d elokuva-arviota</item>
+    <item quantity="other">%1$d elokuva-arviota</item>
+  </plurals>
+  <plurals name="textBackupImportSkippedListItems">
+    <item quantity="one">%1$d listamerkintää</item>
+    <item quantity="other">%1$d listamerkintää</item>
+  </plurals>
   <string name="textSyncLastTimestamp">Viimeisin synkronointi: %s</string>
   <string name="textSyncNever">Ei vielä synkronoitu toisen laitteen kanssa</string>
   <string name="textSyncFailed">Synkronointi epäonnistui: %s</string>

@@ -38,7 +38,14 @@
   <string name="textDisabled">تعطيل</string>
   <string name="textRateSaved">حُفظ تقييمك.</string>
   <string name="textRateRemoved">تم حذف تقييمك.</string>
-  <string name="textDays">%1$d يوم</string>
+  <plurals name="textDays">
+    <item quantity="zero">%1$d يوم</item>
+    <item quantity="one">%1$d يوم</item>
+    <item quantity="two">%1$d يوم</item>
+    <item quantity="few">%1$d يوم</item>
+    <item quantity="many">%1$d يوم</item>
+    <item quantity="other">%1$d يوم</item>
+  </plurals>
   <string name="textSelectDate">حدد تاريخ</string>
   <string name="textDateSelectionTitle">تحديد التاريخ</string>
   <string name="textDateSelectionDescription">متى شاهدته؟</string>
@@ -132,4 +139,5 @@
   <string name="errorCouldNotLoadMovie">لم نستطع تحميل معلومات هذا الفيلم.\nرجاءً تواصل معنا إذا إستمرت هذه المشكلة بالحدوث.</string>
   <string name="errorCouldNotLoadSearchResults">لم نستطع تحميل نتائج البحث.\nرجاءً تواصل معنا إذا استمرت هذه المشكلة بالحدوث.</string>
   <string name="errorNoInternetConnection">لا يوجد إتصال بالإنترنت. رجاءً تحقق من إتصالك.</string>
-  </resources>
+  <string name="textPercentage">%1$d%%</string>
+</resources>

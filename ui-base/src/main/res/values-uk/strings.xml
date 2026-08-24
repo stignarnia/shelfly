@@ -38,7 +38,12 @@
   <string name="textDisabled">Вимкнено</string>
   <string name="textRateSaved">Ваша оцінка була збережена.</string>
   <string name="textRateRemoved">Ваша оцінка була видалена.</string>
-  <string name="textDays">%1$d днів</string>
+  <plurals name="textDays">
+    <item quantity="one">%1$d днів</item>
+    <item quantity="few">%1$d днів</item>
+    <item quantity="many">%1$d днів</item>
+    <item quantity="other">%1$d днів</item>
+  </plurals>
   <string name="textSelectDate">Обрати дату</string>
   <string name="textDateSelectionTitle">Вибір дати</string>
   <string name="textDateSelectionDescription">Коли ви це дивилися?</string>
@@ -124,4 +129,5 @@
   <string name="errorCouldNotLoadMovie">Нам не вдалося завантажити інформацію про цей фільм.\nБудь ласка, зв\'яжіться з нами, якщо помилка не зникає.</string>
   <string name="errorCouldNotLoadSearchResults">Нам не вдалося завантажити результати пошуку.\nБудь ласка, зв\'яжіться з нами, якщо помилка не зникає.</string>
   <string name="errorNoInternetConnection">Немає доступу до інтернету. Перевірте підключення до мережі.</string>
-  </resources>
+  <string name="textPercentage">%1$d%%</string>
+</resources>

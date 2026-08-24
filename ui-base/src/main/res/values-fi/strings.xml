@@ -38,7 +38,10 @@
   <string name="textDisabled">Ei käytössä</string>
   <string name="textRateSaved">Arviosi tallennettiin.</string>
   <string name="textRateRemoved">Arviosi poistettiin.</string>
-  <string name="textDays">%1$d päivää</string>
+  <plurals name="textDays">
+    <item quantity="one">%1$d päivää</item>
+    <item quantity="other">%1$d päivää</item>
+  </plurals>
   <string name="textSelectDate">Valitse päivä</string>
   <string name="textDateSelectionTitle">Päiväyksen valinta</string>
   <string name="textDateSelectionDescription">Milloin katselit tämän?</string>
@@ -116,4 +119,5 @@
   <string name="errorCouldNotLoadMovie">Elokuvan tietoja ei voitu ladata.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorCouldNotLoadSearchResults">Hakutuloksia ei voitu ladata.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorNoInternetConnection">Ei Internet-yhteyttä. Tarkista yhteys.</string>
-  </resources>
+  <string name="textPercentage">%1$d%%</string>
+</resources>

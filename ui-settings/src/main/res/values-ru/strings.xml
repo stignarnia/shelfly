@@ -102,7 +102,12 @@
   <string name="textSettingsBackupRetentionDescription">Количество автоматических резервных копий, сохраняемых на сервере WebDAV</string>
   <string name="textSettingsBackupRetentionHint">Количество копий (0 сохраняет все)</string>
   <string name="textSettingsBackupRetentionKeepAll">Хранить все копии</string>
-  <string name="textSettingsBackupRetentionValue">Хранить последние %1$d резервных копий</string>
+  <plurals name="textSettingsBackupRetentionValue">
+    <item quantity="one">Хранить последние %1$d резервных копий</item>
+    <item quantity="few">Хранить последние %1$d резервных копий</item>
+    <item quantity="many">Хранить последние %1$d резервных копий</item>
+    <item quantity="other">Хранить последние %1$d резервных копий</item>
+  </plurals>
   <string name="textSettingsBackupRetentionInvalid">Пожалуйста, введите положительное число</string>
 
   <string name="textSettingsApiKeyNotSet">Не задан</string>
