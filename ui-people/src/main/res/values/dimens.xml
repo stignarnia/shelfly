@@ -13,7 +13,5 @@
   <dimen name="personCreditsImageGuide">65dp</dimen>
   <dimen name="personCreditsHeaderTextSize">20sp</dimen>
 
-  <dimen name="personGalleryBackArrowMargin">0dp</dimen>
-  <dimen name="personGalleryAdBannerHeight">48dp</dimen>
   <item name="personGalleryImageRatio" format="float" type="dimen">0.8</item>
 </resources>

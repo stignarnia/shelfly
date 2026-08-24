@@ -24,7 +24,6 @@ class ThemeResourcesTest {
   /** Attributes deliberately pinned across every theme - see @style/AppTheme. */
   private val heldFixed = setOf(
     "textColorOnSurface",
-    "textColorGridTitle",
     "colorErrorSnackbar",
     "textColorErrorSnackbar",
     "colorWidgetStatusBackground",

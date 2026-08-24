@@ -2,5 +2,4 @@
 <resources>
   <dimen name="galleryPosterHeight">200dp</dimen>
   <dimen name="galleryPosterWidth">133dp</dimen>
-  <dimen name="galleryBackArrowMargin">0dp</dimen>
 </resources>

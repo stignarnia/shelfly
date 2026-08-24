@@ -24,10 +24,7 @@
   <dimen name="backArrowPadding">16dp</dimen>
 
   <dimen name="gridSpacing">4dp</dimen>
-  <dimen name="gridListsSpacing">4dp</dimen>
   <dimen name="gridPadding">10dp</dimen>
-  <dimen name="gridListsPadding">9dp</dimen>
-  <dimen name="gridRecyclerPadding">9dp</dimen>
 
   <dimen name="mediaTileCorner">4dp</dimen>
   <dimen name="galleryImageCorner">8dp</dimen>
@@ -37,8 +34,6 @@
   <dimen name="bottomSheetCorner">16dp</dimen>
   <dimen name="relatedTileMoviePlaceholder">22dp</dimen>
   <dimen name="relatedTileShowPlaceholder">24dp</dimen>
-  <dimen name="collectionTileMoviePlaceholder">22dp</dimen>
-  <dimen name="collectionTileShowPlaceholder">24dp</dimen>
 
   <dimen name="searchViewHeight">48dp</dimen>
   <dimen name="searchViewCorner">24dp</dimen>
@@ -59,7 +54,6 @@
   <dimen name="linkItemImageWidth">50dp</dimen>
   <dimen name="linkItemImageHeight">26dp</dimen>
 
-
   <!--
     Shared by the chip styles and by anything positioning itself under a row of chips, so the two cannot drift apart.
   -->
@@ -68,7 +62,6 @@
   <dimen name="collectionTabsMargin">70dp</dimen>
   <dimen name="collectionFiltersMargin">106dp</dimen>
   <dimen name="collectionFiltersMarginNoTabs">66dp</dimen>
-  <dimen name="commentViewSpace">16dp</dimen>
   <dimen name="tutorialTipSize">28dp</dimen>
 
   <!--
@@ -84,7 +77,6 @@
   <dimen name="collectionItemImageHeight">120dp</dimen>
   <dimen name="collectionItemImageWidth">80dp</dimen>
   <dimen name="collectionItemRippleSpace">6dp</dimen>
-  <dimen name="collectionItemRippleSpaceSmall">4dp</dimen>
 
   <dimen name="overscrollActionPaddingTop">132dp</dimen>
   <dimen name="overscrollActionIcon">35dp</dimen>
