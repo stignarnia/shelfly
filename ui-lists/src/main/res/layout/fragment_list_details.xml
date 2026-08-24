@@ -51,11 +51,29 @@
 
     <ImageView
       android:id="@+id/fragmentListDetailsMoreButton"
-      android:contentDescription="@null"/>
+      android:layout_width="40dp"
+      android:layout_height="match_parent"
+      android:layout_gravity="end"
+      android:layout_marginEnd="@dimen/spaceTiny"
+      android:contentDescription="@null"
+      android:padding="8dp"
+      app:srcCompat="@drawable/ic_more"
+      app:tint="?android:attr/textColorPrimary"
+      />
 
     <ImageView
       android:id="@+id/fragmentListDetailsManageButton"
-      android:contentDescription="@string/textEditList"/>
+      android:layout_width="40dp"
+      android:layout_height="match_parent"
+      android:layout_gravity="end"
+      android:layout_marginEnd="@dimen/spaceTiny"
+      android:contentDescription="@string/textEditList"
+      android:padding="8dp"
+      android:visibility="gone"
+      app:srcCompat="@drawable/ic_reorder"
+      app:tint="?android:attr/textColorPrimary"
+      tools:visibility="visible"
+      />
 
   </com.google.android.material.appbar.MaterialToolbar>
 
