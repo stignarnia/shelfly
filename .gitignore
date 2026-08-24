@@ -12,3 +12,6 @@
 /app/keystore.properties
 /app/keystore
 .vscode
+*export*.json
+showly_export*.json
+*.backup

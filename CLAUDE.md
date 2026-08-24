@@ -160,7 +160,8 @@ Run in two parts, because the device half is the only one that needs hardware.
     :app:assembleRelease \
     :app:assembleDebug \
     --warning-mode all \
-  && ./scripts/check-schemas.sh
+  && ./scripts/check-schemas.sh \
+  && ./scripts/count-sarif.sh
 ```
 
 Then, with a device attached:
@@ -173,7 +174,7 @@ Keeping them apart matters more than it looks.
 In a single `&&` chain the first failure hides every later signal, and `connectedDebugAndroidTest` fails immediately when nothing is plugged in - so an unplugged phone would silently cost you the release build, the debug build and the schema check, none of which need a device.
 Splitting also means the long half can run while the phone is elsewhere.
 
-`check-schemas.sh` comes after the build because its drift half reads the schemas the build just regenerated; the other three scripts come first because they need no build at all.
+`check-schemas.sh` and `count-sarif.sh` come after the build because they read outputs the build just regenerated; the other three scripts come first because they need no build at all.
 
 `clean` is what forces every task - and every Lint SARIF report - to regenerate.
 Without it, Lint tasks go `UP-TO-DATE` and the reports on disk are from a previous run.
