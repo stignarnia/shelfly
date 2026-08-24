@@ -27,8 +27,11 @@ class EpisodesAdapter(
 
   fun clearItems() {
     isLocked = true
-    items.clear()
-    notifyDataSetChanged()
+    val count = items.size
+    if (count > 0) {
+      items.clear()
+      notifyItemRangeRemoved(0, count)
+    }
   }
 
   fun toggleEpisodesLock() {
