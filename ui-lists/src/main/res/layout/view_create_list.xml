@@ -14,7 +14,8 @@
   android:paddingEnd="@dimen/spaceNormal"
   android:paddingBottom="@dimen/spaceNormal"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
-  >
+
+  tools:theme="@style/CustomBottomSheetDialog">
 
   <TextView
     android:id="@+id/viewCreateListTitle"

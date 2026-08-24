@@ -5,8 +5,6 @@
   Identical to bg_widget_toolbar except that its fill is opaque.
   A background tint composites SRC_IN, which multiplies the tint's alpha by the drawable's, so tinting the translucent original would come out at half the scrim it asks for.
   The scrim's own translucency lives in the palette colour instead - see widgetDarkStatusBackground.
-
-  bg_widget_toolbar stays as it is: it is what widgets below API 31 still inflate, and those are not themed.
 -->
 <shape
   xmlns:android="http://schemas.android.com/apk/res/android"

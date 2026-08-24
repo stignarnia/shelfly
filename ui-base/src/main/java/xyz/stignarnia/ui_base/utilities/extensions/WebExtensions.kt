@@ -3,14 +3,13 @@ package xyz.stignarnia.ui_base.utilities.extensions
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.view.View
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import xyz.stignarnia.ui_model.IdImdb
 
 fun Context.openWebUrl(url: String): String? {
-  val i = Intent(Intent.ACTION_VIEW)
-  i.data = Uri.parse(url)
+  val i = Intent(Intent.ACTION_VIEW, url.toUri())
   return try {
     startActivity(i)
     url
@@ -20,8 +19,7 @@ fun Context.openWebUrl(url: String): String? {
 }
 
 fun Context.openImdbUrl(idImdb: IdImdb): String? {
-  val i = Intent(Intent.ACTION_VIEW)
-  i.data = Uri.parse("imdb:///title/${idImdb.id}")
+  val i = Intent(Intent.ACTION_VIEW, "imdb:///title/${idImdb.id}".toUri())
   return try {
     startActivity(i)
     i.data?.toString()

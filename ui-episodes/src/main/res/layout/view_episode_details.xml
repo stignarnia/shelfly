@@ -8,7 +8,8 @@
   android:layout_height="match_parent"
   android:background="@drawable/bg_bottom_sheet_secondary"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
-  >
+
+  tools:theme="@style/CustomBottomSheetDialog">
 
   <ImageView
     android:id="@+id/episodeDetailsImage"
@@ -139,37 +140,21 @@
           tools:text="S.01 E.99 | Thursday, 23 December 2019 at 15:00 | 23 mins"
           />
 
-        <LinearLayout
-          android:id="@+id/episodeDetailsRatingLayout"
+        <TextView
+          android:id="@+id/episodeDetailsRating"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/spaceMicro"
-          android:gravity="center_vertical|start"
-          android:orientation="horizontal"
+          android:drawablePadding="@dimen/spaceMicro"
+          android:ellipsize="end"
+          android:gravity="center_vertical"
+          android:textColor="?android:attr/textColorSecondary"
+          android:textSize="12sp"
           android:translationX="-1dp"
-          >
-
-          <ImageView
-            android:id="@+id/episodeDetailsRatingIcon"
-            android:layout_width="16dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/spaceMicro"
-            app:srcCompat="@drawable/ic_star"
-            app:tint="?attr/colorAccent"
-            />
-
-          <TextView
-            android:id="@+id/episodeDetailsRating"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="12sp"
-            tools:text="8.2 (1000 votes)"
-            />
-
-        </LinearLayout>
+          app:drawableStartCompat="@drawable/ic_star"
+          app:drawableTint="?attr/colorAccent"
+          tools:text="8.2 (1000 votes)"
+          />
 
         <TextView
           android:id="@+id/episodeDetailsWatchedAt"

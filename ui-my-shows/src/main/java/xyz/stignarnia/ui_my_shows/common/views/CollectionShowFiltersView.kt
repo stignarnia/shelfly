@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import androidx.core.content.ContextCompat
 import xyz.stignarnia.ui_base.common.ListViewMode
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
@@ -39,7 +40,7 @@ class CollectionShowFiltersView : FrameLayout {
   }
 
   var isUpcomingChipVisible: Boolean
-    get() = binding.followedShowsUpcomingChip.visibility == VISIBLE
+    get() = binding.followedShowsUpcomingChip.isVisible
     set(value) {
       binding.followedShowsUpcomingChip.visibleIf(value)
     }

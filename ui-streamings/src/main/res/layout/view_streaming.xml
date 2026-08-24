@@ -59,7 +59,7 @@
       android:maxLines="1"
       android:textAlignment="viewStart"
       android:textColor="?android:attr/textColorSecondary"
-      android:textSize="10sp"
+      android:textSize="11sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0"

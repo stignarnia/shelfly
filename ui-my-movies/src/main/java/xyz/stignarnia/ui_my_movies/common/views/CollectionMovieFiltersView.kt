@@ -7,6 +7,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import xyz.stignarnia.ui_base.common.ListViewMode
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
@@ -38,7 +39,7 @@ class CollectionMovieFiltersView : FrameLayout {
   }
 
   var isUpcomingChipVisible: Boolean
-    get() = binding.followedMoviesUpcomingChip.visibility == VISIBLE
+    get() = binding.followedMoviesUpcomingChip.isVisible
     set(value) {
       binding.followedMoviesUpcomingChip.visibleIf(value)
     }

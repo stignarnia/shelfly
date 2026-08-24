@@ -168,7 +168,7 @@
         android:paddingBottom="4dp"
         android:textAlignment="gravity"
         android:textColor="?colorAccent"
-        android:textSize="10sp"
+        android:textSize="11sp"
         android:translationY="-1dp"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/movieDetailsManageListsLabel"

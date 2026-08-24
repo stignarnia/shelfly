@@ -1,6 +1,7 @@
 package xyz.stignarnia.repository
 
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import xyz.stignarnia.ui_model.IdTmdb
 import xyz.stignarnia.ui_model.Show
 import javax.inject.Inject
@@ -16,11 +17,11 @@ class OnHoldItemsRepository @Inject constructor(
 
   fun addItem(show: Show) = addItem(IdTmdb(show.tmdbId))
 
-  fun addItem(showId: IdTmdb) = sharedPreferences.edit().putLong(showId.id.toString(), showId.id).apply()
+  fun addItem(showId: IdTmdb) = sharedPreferences.edit { putLong(showId.id.toString(), showId.id) }
 
   fun removeItem(show: Show) = removeItem(IdTmdb(show.tmdbId))
 
-  fun removeItem(showId: IdTmdb) = sharedPreferences.edit().remove(showId.id.toString()).apply()
+  fun removeItem(showId: IdTmdb) = sharedPreferences.edit { remove(showId.id.toString()) }
 
   fun isOnHold(show: Show) = sharedPreferences.contains(show.tmdbId.toString())
 }

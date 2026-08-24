@@ -8,7 +8,7 @@
   android:layout_height="wrap_content"
   android:background="@drawable/bg_filters_sheet"
   android:orientation="vertical"
-  tools:theme="@style/AppTheme"
+  tools:theme="@style/CustomBottomSheetDialog"
   >
 
   <androidx.core.widget.NestedScrollView

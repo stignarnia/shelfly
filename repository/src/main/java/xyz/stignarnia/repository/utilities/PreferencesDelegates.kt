@@ -1,6 +1,7 @@
 package xyz.stignarnia.repository.utilities
 
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -20,10 +21,7 @@ class StringPreference(
     property: KProperty<*>,
     value: String,
   ) {
-    sharedPreferences
-      .edit()
-      .putString(key, value)
-      .apply()
+    sharedPreferences.edit { putString(key, value) }
   }
 }
 
@@ -42,10 +40,9 @@ class BooleanPreference(
     thisRef: Any,
     property: KProperty<*>,
     value: Boolean,
-  ) = sharedPreferences
-    .edit()
-    .putBoolean(key, value)
-    .apply()
+  ) {
+    sharedPreferences.edit { putBoolean(key, value) }
+  }
 }
 
 class IntPreference(
@@ -63,10 +60,9 @@ class IntPreference(
     thisRef: Any,
     property: KProperty<*>,
     value: Int,
-  ) = sharedPreferences
-    .edit()
-    .putInt(key, value)
-    .apply()
+  ) {
+    sharedPreferences.edit { putInt(key, value) }
+  }
 }
 
 class LongPreference(
@@ -84,10 +80,9 @@ class LongPreference(
     thisRef: Any,
     property: KProperty<*>,
     value: Long,
-  ) = sharedPreferences
-    .edit()
-    .putLong(key, value)
-    .apply()
+  ) {
+    sharedPreferences.edit { putLong(key, value) }
+  }
 }
 
 class EnumPreference<T : Enum<T>>(
@@ -111,9 +106,6 @@ class EnumPreference<T : Enum<T>>(
     property: KProperty<*>,
     value: T,
   ) {
-    sharedPreferences
-      .edit()
-      .putString(key, value.name)
-      .apply()
+    sharedPreferences.edit { putString(key, value.name) }
   }
 }

@@ -3,6 +3,7 @@ package xyz.stignarnia.ui_base.common.sheets.links
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import androidx.core.net.toUri
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
@@ -152,8 +153,7 @@ class LinksBottomSheet : BaseBottomSheetFragment(R.layout.view_links) {
         isEnabled = false
       } else {
         onClick {
-          val i = Intent(Intent.ACTION_VIEW)
-          i.data = Uri.parse("imdb:///title/${ids.imdb.id}")
+          val i = Intent(Intent.ACTION_VIEW, "imdb:///title/${ids.imdb.id}".toUri())
           try {
             startActivity(i)
           } catch (e: ActivityNotFoundException) {

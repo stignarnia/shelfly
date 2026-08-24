@@ -9,7 +9,8 @@
   android:background="@drawable/bg_bottom_sheet_secondary"
   android:clipToPadding="false"
   android:focusableInTouchMode="true"
-  >
+
+  tools:theme="@style/CustomBottomSheetDialog">
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/itemsRecycler"

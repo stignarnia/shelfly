@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
+  xmlns:tools="http://schemas.android.com/tools"
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/viewPeopleListRoot"
   android:layout_width="match_parent"
@@ -7,7 +8,8 @@
   android:background="@drawable/bg_bottom_sheet_secondary"
   android:clipToPadding="false"
   android:focusableInTouchMode="true"
-  >
+
+  tools:theme="@style/CustomBottomSheetDialog">
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/viewPeopleListRecycler"

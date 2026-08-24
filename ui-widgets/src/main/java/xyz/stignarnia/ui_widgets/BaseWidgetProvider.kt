@@ -44,29 +44,24 @@ abstract class BaseWidgetProvider : AppWidgetProvider() {
   }
 
   /**
-   * The colours this widget is drawn in, or null where the version cannot be themed - see [WidgetPalettes].
+   * The colours this widget is drawn in - see [WidgetPalettes].
    * Resolved per widget id rather than once per provider, because two copies of the same widget are configured apart from each other.
    */
   protected fun palette(
     context: Context,
     widgetId: Int,
-  ): WidgetPalette? = WidgetPalettes.resolve(context, widgetId, settingsRepository)
+  ): WidgetPalette = WidgetPalettes.resolve(context, widgetId, settingsRepository)
 
   /**
    * The frame every list widget shares: the rounded ground and the label bar over it.
-   *
-   * The background resource is set whatever the palette, because that is what the widget did before it could be themed and it is still what an unthemed one needs.
-   * Everything after the guard is the theming.
    */
   protected fun RemoteViews.applyWidgetChrome(
-    palette: WidgetPalette?,
+    palette: WidgetPalette,
     rootId: Int,
     labelId: Int,
     labelTextId: Int,
   ) {
     setInt(rootId, "setBackgroundResource", R.drawable.bg_widget)
-    if (palette == null) return
-
     setBackgroundTint(rootId, palette.background)
     setBackground(labelId, R.drawable.bg_widget_toolbar_tintable, palette.statusBackground)
     setTextColor(labelTextId, palette.statusText)

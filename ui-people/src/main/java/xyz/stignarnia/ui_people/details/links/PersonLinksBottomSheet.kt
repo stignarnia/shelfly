@@ -2,7 +2,7 @@ package xyz.stignarnia.ui_people.details.links
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
+import androidx.core.net.toUri
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
@@ -108,8 +108,7 @@ class PersonLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_person_link
         isEnabled = false
       } else {
         onClick {
-          val i = Intent(Intent.ACTION_VIEW)
-          i.data = Uri.parse("imdb:///name/${ids.imdb.id}")
+          val i = Intent(Intent.ACTION_VIEW, "imdb:///name/${ids.imdb.id}".toUri())
           try {
             startActivity(i)
           } catch (e: ActivityNotFoundException) {

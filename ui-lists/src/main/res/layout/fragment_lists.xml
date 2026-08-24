@@ -59,6 +59,7 @@
       android:layout_height="36dp"
       android:layout_gravity="end"
       android:paddingStart="14dp"
+      android:paddingEnd="0dp"
       app:srcCompat="@drawable/ic_search"
       app:tint="?android:attr/textColorPrimary"
       />

@@ -51,9 +51,7 @@ object WidgetPalettes {
     context: Context,
     widgetId: Int,
     settingsRepository: SettingsRepository,
-  ): WidgetPalette? {
-    if (!AndroidVersion.isAtLeastAndroid12) return null
-
+  ): WidgetPalette {
     val storedTheme = settingsRepository.widgets.getWidgetTheme(widgetId)
     val storedAmoled = settingsRepository.widgets.getWidgetAmoled(widgetId)
     val storedTransparency = settingsRepository.widgets.getWidgetTransparency(widgetId)

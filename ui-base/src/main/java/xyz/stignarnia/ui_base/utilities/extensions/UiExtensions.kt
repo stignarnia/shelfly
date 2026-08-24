@@ -17,6 +17,8 @@ import androidx.annotation.Px
 import androidx.core.animation.doOnEnd
 import androidx.core.graphics.toRect
 import androidx.core.view.doOnLayout
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.view.updateMargins
 import androidx.fragment.app.Fragment
 import timber.log.Timber
@@ -64,11 +66,11 @@ fun View.fadeIn(
   withHardware: Boolean = false,
   endAction: () -> Unit = {},
 ): ViewPropertyAnimator? {
-  if (visibility == View.VISIBLE) {
+  if (isVisible) {
     endAction()
     return null
   }
-  visibility = View.VISIBLE
+  isVisible = true
   alpha = 0F
   val animation = animate()
     .alpha(1F)
@@ -85,7 +87,7 @@ fun View.fadeOut(
   withHardware: Boolean = false,
   endAction: () -> Unit = {},
 ): ViewPropertyAnimator? {
-  if (visibility == View.GONE) {
+  if (isGone) {
     endAction()
     return null
   }

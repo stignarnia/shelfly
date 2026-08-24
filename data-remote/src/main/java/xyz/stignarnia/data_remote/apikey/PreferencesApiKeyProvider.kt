@@ -1,6 +1,7 @@
 package xyz.stignarnia.data_remote.apikey
 
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import xyz.stignarnia.common.security.SecretCipher
 import xyz.stignarnia.data_remote.BuildConfig
 import javax.inject.Singleton
@@ -61,12 +62,12 @@ internal class PreferencesApiKeyProvider(
     key: String,
     value: String,
   ) {
-    val editor = sharedPreferences.edit()
-    if (value.isBlank()) {
-      editor.remove(key)
-    } else {
-      editor.putString(key, secretCipher.encrypt(value))
+    sharedPreferences.edit {
+      if (value.isBlank()) {
+        remove(key)
+      } else {
+        putString(key, secretCipher.encrypt(value))
+      }
     }
-    editor.apply()
   }
 }

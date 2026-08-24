@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- The same widget as res/xml, with its own settings screen. See xml-v31/progress_widgets_provider.xml for why this copy exists. -->
 <appwidget-provider
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
   android:configure="xyz.stignarnia.shelfly.ui.widgets.WidgetConfigActivity"
   android:minWidth="300dp"
   android:minHeight="200dp"
@@ -13,4 +13,5 @@
   android:updatePeriodMillis="900000"
   android:widgetCategory="home_screen"
   android:widgetFeatures="reconfigurable|configuration_optional"
+  tools:targetApi="31"
   />

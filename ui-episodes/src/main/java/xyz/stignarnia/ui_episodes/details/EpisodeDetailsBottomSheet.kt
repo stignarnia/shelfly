@@ -127,7 +127,7 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
         else -> episode.title
       }
       episodeDetailsOverview.text = episode.overview.ifBlank { getString(R.string.textNoDescription) }
-      episodeDetailsRatingLayout.visibleIf(episode.votes > 0)
+      episodeDetailsRating.visibleIf(episode.votes > 0)
       episodeDetailsWatchedAt.visibleIf(episode.lastWatchedAt != null || isWatched)
       if (!showTabs) episodeDetailsTabs.gone()
       episodeDetailsRating.text = resources.getQuantityString(

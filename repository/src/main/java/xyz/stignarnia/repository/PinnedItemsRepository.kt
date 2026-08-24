@@ -1,6 +1,7 @@
 package xyz.stignarnia.repository
 
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import xyz.stignarnia.ui_model.IdTmdb
 import xyz.stignarnia.ui_model.Movie
 import xyz.stignarnia.ui_model.Show
@@ -18,18 +19,17 @@ class PinnedItemsRepository @Inject constructor(
 
   fun addPinnedItem(movie: Movie) = addMoviePinnedItem(IdTmdb(movie.tmdbId))
 
-  fun addShowPinnedItem(showId: IdTmdb) = sharedPreferences.edit().putLong(showId.id.toString(), showId.id).apply()
+  fun addShowPinnedItem(showId: IdTmdb) = sharedPreferences.edit { putLong(showId.id.toString(), showId.id) }
 
-  fun addMoviePinnedItem(movieId: IdTmdb) =
-    sharedPreferencesMovies.edit().putLong(movieId.id.toString(), movieId.id).apply()
+  fun addMoviePinnedItem(movieId: IdTmdb) = sharedPreferencesMovies.edit { putLong(movieId.id.toString(), movieId.id) }
 
   fun removePinnedItem(show: Show) = removeShowPinnedItem(IdTmdb(show.tmdbId))
 
   fun removePinnedItem(movie: Movie) = removeMoviePinnedItem(IdTmdb(movie.tmdbId))
 
-  fun removeShowPinnedItem(showId: IdTmdb) = sharedPreferences.edit().remove(showId.id.toString()).apply()
+  fun removeShowPinnedItem(showId: IdTmdb) = sharedPreferences.edit { remove(showId.id.toString()) }
 
-  fun removeMoviePinnedItem(movieId: IdTmdb) = sharedPreferencesMovies.edit().remove(movieId.id.toString()).apply()
+  fun removeMoviePinnedItem(movieId: IdTmdb) = sharedPreferencesMovies.edit { remove(movieId.id.toString()) }
 
   fun isItemPinned(show: Show) = sharedPreferences.contains(show.tmdbId.toString())
 
