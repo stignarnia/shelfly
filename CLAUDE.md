@@ -96,6 +96,8 @@ No Gradle task runs it, so `check` will never catch a formatting violation - it 
 `check-format.sh` checks CRLF, hard tabs, and trailing whitespace across the tracked text files ktlint cannot read: Gradle scripts, resources, manifests, workflows, R8 rules, shell, properties, the version catalog, JSON, Markdown, the fastlane metadata, `.editorconfig`, `.gitignore` and `LICENSE`.
 Binaries are excluded because the rules are meaningless for them, and `gradlew` / `gradlew.bat` because Gradle regenerates them.
 It is a whitespace check rather than a formatter: it will not reindent XML or wrap long lines.
+It does validate that every tracked XML file is well formed, which nothing else does - `aapt` only parses the resources of the variant being built, so a malformed file in a locale or qualifier that variant skips goes unread until a device configuration selects it.
+A missing `xmllint` fails the run rather than skipping, because a check that quietly does nothing is worse than one that is absent; CI installs `libxml2-utils` for that reason.
 `insert_final_newline` is declared in `.editorconfig` but deliberately not enforced, because 335 files would fail it today.
 
 ### Tier 2 - resources, layouts, manifest, strings
@@ -207,6 +209,7 @@ Unit tests never run R8, so the release variant only re-executes the same source
 
 These rules are checked by tooling rather than by review.
 
+- **Layout attribute loss**: `scripts/hooks/pre-commit` rejects a commit in which a layout element that still exists lost an attribute it had at HEAD. Nothing else catches this: the file stays well-formed XML, `aapt` does not require `layout_width` at build time, the compiler never sees XML, and Lint has no check for it - a bulk edit once cut an `ImageView` from ten attributes to two, and the app built, installed, and died on launch. Bypass a deliberate removal with `--no-verify`.
 - **Conventional Commits**: `scripts/hooks/commit-msg` rejects any subject that is not `<type>(<scope>): <description>` with a type from the list above. Merges, reverts and rebase scratch commits are left alone, and `--no-verify` bypasses it. Enable it once per clone with `git config core.hooksPath scripts/hooks`.
 - **Release notes**: `scripts/check-release-notes.sh` fails when the first line of `release_notes.txt` is not `Shelfly <versionName>` from `versions.gradle.kts`, or when the heading has no notes beneath it. Run it before tagging.
 - **Non-Kotlin whitespace**: `scripts/check-format.sh` fails on CRLF, hard tabs, or trailing whitespace across the tracked text files ktlint does not parse, excluding binaries and the generated Gradle wrapper scripts.

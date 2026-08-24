@@ -9,6 +9,9 @@
 # This is a whitespace check, not a formatter.
 # It will not reindent XML, reorder attributes, or wrap long lines; real formatting would need xmllint --format or an editorconfig-checker binary, which are heavier and pull in a download.
 #
+# It does validate that every tracked XML file is well formed, which nothing else in the build does.
+# aapt only parses the resources of the variant being built, so a malformed file in a locale or qualifier that variant skips is not read at all until some device configuration selects it.
+#
 # Three rules, all of which the tree already satisfies, so this holds a clean state rather than starting a cleanup:
 #   - no CRLF line endings.
 #   - no hard tabs.
@@ -60,6 +63,22 @@ report "CRLF line endings" ${crlf+"${crlf[@]}"}
 report "hard tabs" ${tabs+"${tabs[@]}"}
 report "trailing whitespace" ${trailing+"${trailing[@]}"}
 
+# XML well-formedness.
+# Missing xmllint is an error rather than a skip: a check that quietly does nothing is worse than one that is absent, because the run still reports success.
+if ! command -v xmllint >/dev/null 2>&1; then
+  echo "error: xmllint not found. Install libxml2-utils (Debian/Ubuntu) or libxml2 (Arch)." >&2
+  exit 1
+fi
+
+malformed=()
+while IFS= read -r file; do
+  [ -f "$file" ] || continue
+  xmllint --noout "$file" >/dev/null 2>&1 || malformed+=("$file")
+done < <(git ls-files -- '*.xml')
+
+xml_count=$(git ls-files -- '*.xml' | wc -l)
+report "malformed XML" ${malformed+"${malformed[@]}"}
+
 if [ "$failed" -ne 0 ]; then
   echo "" >&2
   echo "Fix with: sed -i 's/[[:space:]]*\$//' <file>   (trailing whitespace)" >&2
@@ -67,4 +86,4 @@ if [ "$failed" -ne 0 ]; then
   exit 1
 fi
 
-echo "format OK: $scanned file(s), no CRLF, tabs, or trailing whitespace"
+echo "format OK: $scanned file(s), no CRLF, tabs, or trailing whitespace; $xml_count XML file(s) well formed"

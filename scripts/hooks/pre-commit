@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+# Refuse a commit in which a layout element silently loses attributes it had.
+#
+# This exists because of a real failure. A bulk edit across 109 layouts replaced four elements'
+# attribute lists instead of appending to them, so an ImageView went from ten attributes to two.
+# Every existing check passed: the files were still well-formed XML, aapt does not require
+# layout_width at build time, the Kotlin compiler never sees XML, and Lint has no check for it.
+# The app built, installed, and died on launch with "You must supply a layout_width attribute".
+#
+# It compares the staged version of each layout against HEAD, element by element, and fails when an
+# element present in both lost an attribute. Deliberately narrow: it does not judge whether a layout
+# is good, only whether the commit takes something away without saying so.
+#
+# Elements are keyed by android:id where they have one, and otherwise by tag plus their ordinal in
+# the file - the four that broke did have ids, but the attributes most worth protecting
+# (clipChildren, clipToPadding) usually sit on elements that do not.
+#
+# Removing an attribute on purpose is normal, so this is a guard rather than a prohibition:
+#   git commit --no-verify        to bypass it.
+set -uo pipefail
+
+changed="$(git diff --cached --name-only --diff-filter=M -- '*/res/layout*/*.xml')"
+[ -z "$changed" ] && exit 0
+
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
+
+# Emit one "<element key><TAB><attribute>" line per attribute.
+# Relies on the tree's one-attribute-per-line style; an element whose whole tag sits on one line
+# yields a single key and is compared as such, which is still sound because both sides are read
+# the same way.
+dump() {
+  awk '
+    function flush(   i, key) {
+      if (!open) return
+      key = (id != "") ? id : tag "#" ordinal[tag]
+      for (i = 1; i <= n; i++) print key "\t" attr[i]
+      open = 0; n = 0; id = ""
+    }
+    # An opening tag. Closing tags and comments are not elements.
+    /^[[:space:]]*<[A-Za-z]/ {
+      flush()
+      line = $0
+      sub(/^[[:space:]]*</, "", line)
+      sub(/[[:space:]>].*$/, "", line)
+      tag = line
+      ordinal[tag]++
+      open = 1; n = 0; id = ""
+    }
+    # An attribute line inside the tag we are reading.
+    open && match($0, /[A-Za-z_][A-Za-z0-9_.]*:[A-Za-z0-9_.]+[[:space:]]*=[[:space:]]*"/) {
+      a = substr($0, RSTART, RLENGTH)
+      sub(/[[:space:]]*=[[:space:]]*"$/, "", a)
+      attr[++n] = a
+      if (a == "android:id") {
+        v = $0
+        sub(/^[^"]*"/, "", v); sub(/".*$/, "", v)
+        id = v
+      }
+    }
+    # The tag header ends here.
+    open && /(\/>|[^-]>[[:space:]]*$)/ { flush() }
+    END { flush() }
+  ' "$1"
+}
+
+failed=0
+while IFS= read -r file; do
+  [ -n "$file" ] || continue
+  git show ":$file"     > "$tmp/new.xml" 2>/dev/null || continue
+  git show "HEAD:$file" > "$tmp/old.xml" 2>/dev/null || continue
+
+  dump "$tmp/old.xml" | sort -u > "$tmp/old.txt"
+  dump "$tmp/new.xml" | sort -u > "$tmp/new.txt"
+
+  # Keys that survive into the new version; an element that was deleted outright takes its
+  # attributes with it and is not this check's business.
+  cut -f1 "$tmp/new.txt" | sort -u > "$tmp/keys.txt"
+
+  while IFS=$'\t' read -r key attr; do
+    [ -n "$key" ] || continue
+    grep -qxF "$key" "$tmp/keys.txt" || continue
+    if [ "$failed" -eq 0 ]; then
+      echo "error: staged layouts drop attributes from elements that still exist:" >&2
+    fi
+    failed=1
+    printf '  %s\n      %s  loses  %s\n' "$file" "$key" "$attr" >&2
+  done < <(comm -23 "$tmp/old.txt" "$tmp/new.txt")
+done <<< "$changed"
+
+if [ "$failed" -ne 0 ]; then
+  echo "" >&2
+  echo "If the removal is intended, commit with --no-verify." >&2
+  exit 1
+fi
+
+exit 0

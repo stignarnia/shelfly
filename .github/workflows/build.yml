@@ -23,6 +23,12 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # check-format.sh validates XML well-formedness with xmllint, and treats a missing xmllint as an
+      # error rather than skipping - so install it rather than depend on what the runner image ships.
+      # The guard makes this a no-op when it is already present.
+      - name: Install xmllint
+        run: command -v xmllint >/dev/null || { sudo apt-get update && sudo apt-get install -y --no-install-recommends libxml2-utils; }
+
       # Covers the file types ktlint cannot read.
       # Needs no toolchain, so it runs first.
       - name: Check non-Kotlin formatting
