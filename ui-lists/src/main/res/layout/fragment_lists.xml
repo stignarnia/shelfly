@@ -111,6 +111,7 @@
       android:layout_height="wrap_content"
       android:layout_gravity="end"
       android:layout_margin="@dimen/listsFabPadding"
+      android:contentDescription="@string/textCreateList"
       android:elevation="@dimen/elevationSmall"
       android:visibility="gone"
       app:backgroundTint="?attr/colorAccent"
@@ -118,7 +119,6 @@
       app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
       app:srcCompat="@drawable/ic_list_create"
       app:tint="?attr/textColorOnSurface"
-      tools:ignore="ContentDescription"
       tools:visibility="visible"
       />
 
