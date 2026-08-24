@@ -159,6 +159,10 @@ Two of the rules in this file are checked by tooling rather than by review.
 
 - **Conventional Commits**: `scripts/hooks/commit-msg` rejects any subject that is not `<type>(<scope>): <description>` with a type from the list above. Merges, reverts and rebase scratch commits are left alone, and `--no-verify` bypasses it. Enable it once per clone with `git config core.hooksPath scripts/hooks`.
 - **Release notes**: `scripts/check-release-notes.sh` fails when the first line of `release_notes.txt` is not `Shelfly <versionName>` from `versions.gradle`, or when the heading has no notes beneath it. Run it before tagging.
+- **Translation completeness**: Android Lint's `MissingTranslation` is error severity, so `lintDebug` already fails when a string is added to `values/strings.xml` without reaching every other locale. This needs no extra tooling - it is why the localization rule holds.
+
+What none of them check is *content*: a commit can carry a valid prefix and still ramble, a release note can exist without describing the change that shipped, and a translation can be present but wrong.
+Those stay review-time concerns.
 
 The comment formatting rules are **not** enforced by anything.
 `ktlint` does not read comment prose, so sentence-per-line remains a review-time concern.
