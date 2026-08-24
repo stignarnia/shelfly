@@ -8,7 +8,10 @@ import xyz.stignarnia.data_local.LocalDataSource
 import xyz.stignarnia.repository.TranslationsRepository
 import xyz.stignarnia.repository.images.ShowImagesProvider
 import xyz.stignarnia.repository.mappers.Mappers
+import xyz.stignarnia.repository.shows.HiddenShowsRepository
+import xyz.stignarnia.repository.shows.MyShowsRepository
 import xyz.stignarnia.repository.shows.ShowsRepository
+import xyz.stignarnia.repository.shows.WatchlistShowsRepository
 import xyz.stignarnia.ui_base.utilities.events.MessageEvent
 import xyz.stignarnia.ui_model.Genre
 import xyz.stignarnia.ui_model.IdTmdb
@@ -24,6 +27,7 @@ import xyz.stignarnia.ui_statistics.views.ratings.recycler.StatisticsRatingItem
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.toList
@@ -35,16 +39,18 @@ import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@Suppress("EXPERIMENTAL_API_USAGE")
 class StatisticsViewModelTest : BaseMockTest() {
 
   @MockK lateinit var ratingsCase: StatisticsLoadRatingsCase
-  @MockK lateinit var showsRepository: ShowsRepository
+  @MockK lateinit var myShows: MyShowsRepository
+  @MockK lateinit var watchlistShows: WatchlistShowsRepository
+  @MockK lateinit var hiddenShows: HiddenShowsRepository
   @MockK lateinit var translationsRepository: TranslationsRepository
   @MockK lateinit var imagesProvider: ShowImagesProvider
   @RelaxedMockK lateinit var database: LocalDataSource
   @RelaxedMockK lateinit var mappers: Mappers
 
+  private lateinit var showsRepository: ShowsRepository
   private lateinit var SUT: StatisticsViewModel
 
   private val stateResult = mutableListOf<StatisticsUiState>()
@@ -53,6 +59,15 @@ class StatisticsViewModelTest : BaseMockTest() {
   @Before
   override fun setUp() {
     super.setUp()
+
+    showsRepository = ShowsRepository(
+      discoverShows = mockk(),
+      myShows = myShows,
+      watchlistShows = watchlistShows,
+      hiddenShows = hiddenShows,
+      relatedShows = mockk(),
+      detailsShow = mockk(),
+    )
 
     coEvery { translationsRepository.getLanguage() } returns "en"
     coEvery { imagesProvider.findCachedImage(any(), any()) } returns Image.createAvailable(
@@ -131,9 +146,9 @@ class StatisticsViewModelTest : BaseMockTest() {
         Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(9)), runtime = 3, genres = listOf("war", "animation")),
       )
 
-      coEvery { showsRepository.myShows.loadAll() } returns shows
-      coEvery { showsRepository.watchlistShows.loadAll() } returns shows2
-      coEvery { showsRepository.hiddenShows.loadAll() } returns shows3
+      coEvery { myShows.loadAll() } returns shows
+      coEvery { watchlistShows.loadAll() } returns shows2
+      coEvery { hiddenShows.loadAll() } returns shows3
 
       coEvery { database.episodes.getAllWatchedForShows(any()) } returns listOf(
         TestData.createEpisode().copy(idShowTmdb = 1, runtime = 5),

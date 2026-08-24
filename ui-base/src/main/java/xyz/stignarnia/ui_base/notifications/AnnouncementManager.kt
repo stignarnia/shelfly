@@ -24,7 +24,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AnnouncementManager @Inject constructor(
-  @ApplicationContext private val context: Context,
+  @param:ApplicationContext private val context: Context,
   private val mappers: Mappers,
   private val localSource: LocalDataSource,
   private val settingsRepository: SettingsRepository,

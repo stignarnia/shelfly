@@ -20,7 +20,7 @@
   <string name="textSeason">Kausi %1$d</string>
   <string name="textSpecials">Erikoisjaksot</string>
   <string name="textEpisode">Jakso %1$d</string>
-  <string name="textSeasonEpisode">K.%02d J.%02d</string>
+  <string name="textSeasonEpisode">K.%1$02d J.%2$02d</string>
   <string name="textSortBy">Järjestä:</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Suoratoisto</string>

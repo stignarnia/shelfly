@@ -4,7 +4,9 @@ import BaseMockTest
 import com.google.common.truth.Truth.assertThat
 import xyz.stignarnia.repository.RatingsRepository
 import xyz.stignarnia.repository.images.ShowImagesProvider
+import xyz.stignarnia.repository.shows.MyShowsRepository
 import xyz.stignarnia.repository.shows.ShowsRepository
+import xyz.stignarnia.repository.shows.ratings.ShowsRatingsRepository
 import xyz.stignarnia.ui_model.IdTmdb
 import xyz.stignarnia.ui_model.Ids
 import xyz.stignarnia.ui_model.Image
@@ -14,24 +16,40 @@ import xyz.stignarnia.ui_model.UserRating
 import xyz.stignarnia.ui_statistics.views.ratings.recycler.StatisticsRatingItem
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
-@Suppress("EXPERIMENTAL_API_USAGE")
 class StatisticsLoadRatingsCaseTest : BaseMockTest() {
 
-  @MockK lateinit var showsRepository: ShowsRepository
-  @MockK lateinit var ratingsRepository: RatingsRepository
+  @MockK lateinit var myShows: MyShowsRepository
+  @MockK lateinit var showsRatings: ShowsRatingsRepository
   @MockK lateinit var showImagesProvider: ShowImagesProvider
 
+  private lateinit var showsRepository: ShowsRepository
+  private lateinit var ratingsRepository: RatingsRepository
   private lateinit var SUT: StatisticsLoadRatingsCase
 
   @Before
   override fun setUp() {
     super.setUp()
+
+    showsRepository = ShowsRepository(
+      discoverShows = mockk(),
+      myShows = myShows,
+      watchlistShows = mockk(),
+      hiddenShows = mockk(),
+      relatedShows = mockk(),
+      detailsShow = mockk(),
+    )
+
+    ratingsRepository = RatingsRepository(
+      shows = showsRatings,
+      movies = mockk(),
+    )
 
     SUT = StatisticsLoadRatingsCase(
       showsRepository,
@@ -59,8 +77,8 @@ class StatisticsLoadRatingsCaseTest : BaseMockTest() {
 
       val image = Image.createUnknown(ImageType.POSTER)
 
-      coEvery { ratingsRepository.shows.loadShowsRatings() } returns ratings
-      coEvery { showsRepository.myShows.loadAll(any()) } returns shows
+      coEvery { showsRatings.loadShowsRatings() } returns ratings
+      coEvery { myShows.loadAll(any()) } returns shows
       coEvery { showImagesProvider.findCachedImage(any(), any()) } returns image
 
       val result = SUT.loadRatings()

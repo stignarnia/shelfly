@@ -30,6 +30,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.fadeIf
 import xyz.stignarnia.ui_base.utilities.extensions.fadeIn
 import xyz.stignarnia.ui_base.utilities.extensions.gone
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
+import xyz.stignarnia.ui_base.utilities.extensions.requireSerializable
 import xyz.stignarnia.ui_base.utilities.extensions.withSpanSizeLookup
 import xyz.stignarnia.ui_base.utilities.viewBinding
 import xyz.stignarnia.ui_model.ProgressDateSelectionType.ALWAYS_ASK
@@ -192,8 +193,8 @@ class ProgressMoviesFragment :
     val args = SortOrderBottomSheet.createBundle(options, order, type)
 
     requireParentFragment().setFragmentResultListener(REQUEST_SORT_ORDER) { _, bundle ->
-      val sortOrder = bundle.getSerializable(ARG_SELECTED_SORT_ORDER) as SortOrder
-      val sortType = bundle.getSerializable(ARG_SELECTED_SORT_TYPE) as SortType
+      val sortOrder = bundle.requireSerializable<SortOrder>(ARG_SELECTED_SORT_ORDER)
+      val sortType = bundle.requireSerializable<SortType>(ARG_SELECTED_SORT_TYPE)
       viewModel.setSortOrder(sortOrder, sortType)
     }
 

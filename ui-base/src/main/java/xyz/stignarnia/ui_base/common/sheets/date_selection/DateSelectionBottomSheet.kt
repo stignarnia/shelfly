@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.text.format.DateFormat
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -22,7 +21,7 @@ import xyz.stignarnia.ui_base.dates.DateFormatProvider
 import xyz.stignarnia.ui_base.utilities.TipsHost
 import xyz.stignarnia.ui_base.utilities.extensions.gone
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
-import xyz.stignarnia.ui_base.utilities.extensions.requireSerializable
+import xyz.stignarnia.ui_base.utilities.extensions.optionalSerializable
 import xyz.stignarnia.ui_base.utilities.extensions.visible
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
 import xyz.stignarnia.ui_base.utilities.viewBinding
@@ -42,13 +41,13 @@ class DateSelectionBottomSheet : BaseBottomSheetFragment(R.layout.view_date_sele
     const val RESULT_DATE_SELECTION = "RESULT_DATE_SELECTION"
 
     fun createBundle(releaseDate: ZonedDateTime?): Bundle =
-      bundleOf(
-        ARG_OPTIONS to releaseDate,
-      )
+      Bundle().apply {
+        putSerializable(ARG_OPTIONS, releaseDate)
+      }
   }
 
   private val binding by viewBinding(ViewDateSelectionBinding::bind)
-  private val releaseDate by lazy { requireSerializable<ZonedDateTime?>(ARG_OPTIONS) }
+  private val releaseDate by lazy { optionalSerializable<ZonedDateTime>(ARG_OPTIONS) }
 
   override fun getTheme(): Int = R.style.CustomBottomSheetDialog
 
@@ -68,7 +67,9 @@ class DateSelectionBottomSheet : BaseBottomSheetFragment(R.layout.view_date_sele
         closeSheet()
         setFragmentResult(
           requestKey = REQUEST_DATE_SELECTION,
-          result = bundleOf(RESULT_DATE_SELECTION to Result.Now),
+          result = Bundle().apply {
+            putParcelable(RESULT_DATE_SELECTION, Result.Now)
+          },
         )
       }
       dateCustomButton.onClick { openDateSelectionDialog() }
@@ -160,7 +161,9 @@ class DateSelectionBottomSheet : BaseBottomSheetFragment(R.layout.view_date_sele
 
     closeSheet()
 
-    val result = bundleOf(RESULT_DATE_SELECTION to Result.CustomDate(resultDate))
+    val result = Bundle().apply {
+      putParcelable(RESULT_DATE_SELECTION, Result.CustomDate(resultDate))
+    }
     setFragmentResult(REQUEST_DATE_SELECTION, result)
   }
 
@@ -176,9 +179,9 @@ class DateSelectionBottomSheet : BaseBottomSheetFragment(R.layout.view_date_sele
 
     setFragmentResult(
       requestKey = REQUEST_DATE_SELECTION,
-      result = bundleOf(
-        RESULT_DATE_SELECTION to Result.ReleaseDate(resultDate),
-      ),
+      result = Bundle().apply {
+        putParcelable(RESULT_DATE_SELECTION, Result.ReleaseDate(resultDate))
+      },
     )
   }
 

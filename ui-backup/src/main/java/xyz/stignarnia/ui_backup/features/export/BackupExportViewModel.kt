@@ -30,7 +30,7 @@ import javax.inject.Named
 
 @HiltViewModel
 class BackupExportViewModel @Inject constructor(
-  @Named("miscPreferences") private var miscPreferences: SharedPreferences,
+  @param:Named("miscPreferences") private var miscPreferences: SharedPreferences,
   private val createBackupJsonUseCase: CreateBackupJsonUseCase,
   private val createBackupSchemeFromJsonUseCase: CreateBackupSchemeFromJsonUseCase,
   private val workManager: WorkManager,

@@ -1,28 +1,22 @@
 apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
 apply plugin: 'dagger.hilt.android.plugin'
 apply from: '../versions.gradle'
 
 android {
-  kotlinOptions { jvmTarget = "21" }
   compileOptions {
-    coreLibraryDesugaringEnabled true
-    sourceCompatibility JavaVersion.VERSION_21
-    targetCompatibility JavaVersion.VERSION_21
+    coreLibraryDesugaringEnabled = true
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
   }
-
-  compileSdkVersion versions.compileSdk
 
   buildFeatures {
     buildConfig = true
   }
 
   defaultConfig {
-    minSdkVersion versions.minSdk
-    targetSdkVersion versions.targetSdk
-    compileSdkVersion versions.compileSdk
-
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    minSdk = versions.minSdk
+    targetSdk = versions.targetSdk
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles "consumer-rules.pro"
   }
 
@@ -46,17 +40,17 @@ android {
 
   buildTypes {
     debug {
-      minifyEnabled false
+      minifyEnabled = false
       buildConfigField("String", "TMDB_API_KEY", properties.getProperty("tmdbApiKey", '""'))
       buildConfigField("String", "OMDB_API_KEY", properties.getProperty("omdbApiKey", '""'))
     }
 
     release {
-      minifyEnabled false
+      minifyEnabled = false
     }
   }
 
-  namespace 'xyz.stignarnia.data_remote'
+  namespace = 'xyz.stignarnia.data_remote'
 }
 
 dependencies {

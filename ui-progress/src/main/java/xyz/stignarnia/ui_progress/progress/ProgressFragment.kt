@@ -31,6 +31,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.fadeIn
 import xyz.stignarnia.ui_base.utilities.extensions.gone
 import xyz.stignarnia.ui_base.utilities.extensions.navigateToSafe
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
+import xyz.stignarnia.ui_base.utilities.extensions.requireSerializable
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
 import xyz.stignarnia.ui_base.utilities.extensions.withSpanSizeLookup
 import xyz.stignarnia.ui_base.utilities.viewBinding
@@ -223,8 +224,8 @@ class ProgressFragment :
     val args = SortOrderBottomSheet.createBundle(options, order, type, newAtTop = Pair(true, newAtTop))
 
     requireParentFragment().setFragmentResultListener(REQUEST_SORT_ORDER) { _, bundle ->
-      val sortOrder = bundle.getSerializable(ARG_SELECTED_SORT_ORDER) as SortOrder
-      val sortType = bundle.getSerializable(ARG_SELECTED_SORT_TYPE) as SortType
+      val sortOrder = bundle.requireSerializable<SortOrder>(ARG_SELECTED_SORT_ORDER)
+      val sortType = bundle.requireSerializable<SortType>(ARG_SELECTED_SORT_TYPE)
       val newTop = bundle.getBoolean(ARG_SELECTED_NEW_AT_TOP)
       viewModel.setSortOrder(sortOrder, sortType, newTop)
     }

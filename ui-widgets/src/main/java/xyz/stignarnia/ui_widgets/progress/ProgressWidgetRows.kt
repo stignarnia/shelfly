@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
-import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -245,7 +244,7 @@ class ProgressWidgetRows(
       palette?.let { setTextColor(R.id.widgetMoreItemText, it.textSecondary) }
       setOnClickFillInIntent(
         R.id.widgetMoreItem,
-        Intent().putExtras(bundleOf(BaseWidgetProvider.EXTRA_MORE_CLICK to true)),
+        Intent().putExtra(BaseWidgetProvider.EXTRA_MORE_CLICK, true),
       )
     }
 

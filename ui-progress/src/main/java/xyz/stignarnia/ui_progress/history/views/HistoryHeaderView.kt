@@ -40,7 +40,7 @@ internal class HistoryHeaderView : FrameLayout {
 
   private fun initDateFormat(language: String) {
     if (!::dateFormat.isInitialized) {
-      dateFormat = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy", Locale(language))
+      dateFormat = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy", Locale.forLanguageTag(language))
     }
   }
 

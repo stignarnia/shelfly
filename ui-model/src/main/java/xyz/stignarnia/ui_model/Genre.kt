@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 
 enum class Genre(
   val slug: String,
-  @StringRes val displayName: Int,
+  @param:StringRes val displayName: Int,
 ) {
   ACTION("action", R.string.textGenreAction),
   ADVENTURE("adventure", R.string.textGenreAdventure),

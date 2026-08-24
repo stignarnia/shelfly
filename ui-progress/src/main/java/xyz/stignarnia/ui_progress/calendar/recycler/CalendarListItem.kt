@@ -36,7 +36,7 @@ sealed class CalendarListItem(
   }
 
   data class Header(
-    @StringRes val textResId: Int,
+    @get:StringRes val textResId: Int,
     val calendarMode: CalendarMode,
   ) : CalendarListItem(
       show = Show.EMPTY,

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.core.view.forEach
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
@@ -34,7 +33,7 @@ internal class CollectionFiltersGenreBottomSheet : BaseBottomSheetFragment(R.lay
     private const val ARG_ORIGIN = "ARG_ORIGIN"
     const val REQUEST_COLLECTION_FILTERS_GENRE = "REQUEST_COLLECTION_FILTERS_GENRE"
 
-    fun createBundle(origin: CollectionFiltersOrigin): Bundle = bundleOf(ARG_ORIGIN to origin)
+    fun createBundle(origin: CollectionFiltersOrigin): Bundle = Bundle().apply { putSerializable(ARG_ORIGIN, origin) }
   }
 
   private val viewModel by viewModels<CollectionFiltersGenreViewModel>()

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
-import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -103,12 +102,12 @@ class ProgressMoviesWidgetRows(
       setTextViewText(R.id.progressMoviesWidgetItemSubtitle2, description)
 
       val fillIntent = Intent().apply {
-        putExtras(bundleOf(EXTRA_MOVIE_ID to item.movie.tmdbId))
+        putExtra(EXTRA_MOVIE_ID, item.movie.tmdbId)
       }
       setOnClickFillInIntent(R.id.progressMoviesWidgetItem, fillIntent)
 
       val checkFillIntent = Intent().apply {
-        putExtras(bundleOf(EXTRA_CHECK_MOVIE_ID to item.movie.tmdbId))
+        putExtra(EXTRA_CHECK_MOVIE_ID, item.movie.tmdbId)
       }
       setOnClickFillInIntent(R.id.progressMoviesWidgetItemCheckButton, checkFillIntent)
 
@@ -149,7 +148,7 @@ class ProgressMoviesWidgetRows(
       palette?.let { setTextColor(R.id.widgetMoreItemText, it.textSecondary) }
       setOnClickFillInIntent(
         R.id.widgetMoreItem,
-        Intent().putExtras(bundleOf(BaseWidgetProvider.EXTRA_MORE_CLICK to true)),
+        Intent().putExtra(BaseWidgetProvider.EXTRA_MORE_CLICK, true),
       )
     }
 

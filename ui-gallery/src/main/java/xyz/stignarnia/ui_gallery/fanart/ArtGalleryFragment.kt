@@ -22,9 +22,11 @@ import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.gone
+import xyz.stignarnia.ui_base.utilities.extensions.navigateBack
 import xyz.stignarnia.ui_base.utilities.extensions.nextPage
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.openWebUrl
+import xyz.stignarnia.ui_base.utilities.extensions.requireSerializable
 import xyz.stignarnia.ui_base.utilities.extensions.updateTopMargin
 import xyz.stignarnia.ui_base.utilities.extensions.visible
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
@@ -54,8 +56,8 @@ class ArtGalleryFragment : BaseFragment<ArtGalleryViewModel>(R.layout.fragment_a
 
   private val showId by lazy { IdTmdb(arguments?.getLong(ARG_SHOW_ID, -1) ?: -1) }
   private val movieId by lazy { IdTmdb(arguments?.getLong(ARG_MOVIE_ID, -1) ?: -1) }
-  private val family by lazy { arguments?.getSerializable(ARG_FAMILY) as ImageFamily }
-  private val type by lazy { arguments?.getSerializable(ARG_TYPE) as ImageType }
+  private val family by lazy { requireSerializable<ImageFamily>(ARG_FAMILY) }
+  private val type by lazy { requireSerializable<ImageType>(ARG_TYPE) }
 
   private var galleryAdapter: ArtGalleryAdapter? = null
 
@@ -111,7 +113,7 @@ class ArtGalleryFragment : BaseFragment<ArtGalleryViewModel>(R.layout.fragment_a
   private fun setupView() {
     with(binding) {
       artGalleryBackArrow.onClick {
-        requireActivity().onBackPressed()
+        navigateBack()
       }
       artGalleryBrowserIcon.onClick {
         val currentIndex = artGalleryPager.currentItem

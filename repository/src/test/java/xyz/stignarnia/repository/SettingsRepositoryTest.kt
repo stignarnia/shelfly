@@ -82,7 +82,6 @@ class SettingsRepositoryTest : BaseMockTest() {
       val settings = Settings.createInitial()
       val settingsDb = mapper.toDatabase(settings)
 
-      coEvery { mappers.settings } returns mapper
       coEvery { settingsDao.getAll() } returns settingsDb
 
       val loaded = SUT.load()
@@ -100,7 +99,6 @@ class SettingsRepositoryTest : BaseMockTest() {
       val settings = Settings.createInitial()
       val settingsDb = mapper.toDatabase(settings)
 
-      coEvery { mappers.settings } returns mapper
       coEvery { settingsDao.upsert(settingsDb) } just Runs
 
       SUT.update(settings)

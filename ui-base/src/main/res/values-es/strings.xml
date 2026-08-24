@@ -20,7 +20,7 @@
   <string name="textSeason">Temporada %1$d</string>
   <string name="textSpecials">Especiales</string>
   <string name="textEpisode">Episodio %1$d</string>
-  <string name="textSeasonEpisode">T.%02d E.%02d</string>
+  <string name="textSeasonEpisode">T.%1$02d E.%2$02d</string>
   <string name="textSortBy">Ordenar por:</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">Streaming</string>

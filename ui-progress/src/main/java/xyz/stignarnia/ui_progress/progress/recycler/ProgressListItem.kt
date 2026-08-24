@@ -56,7 +56,7 @@ sealed class ProgressListItem(
     override val image: Image,
     override val isLoading: Boolean = false,
     val type: Type,
-    @StringRes val textResId: Int,
+    @get:StringRes val textResId: Int,
     val isCollapsed: Boolean,
   ) : ProgressListItem(show, image, isLoading) {
 

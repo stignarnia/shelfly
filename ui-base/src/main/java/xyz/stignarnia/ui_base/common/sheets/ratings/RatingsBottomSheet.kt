@@ -3,7 +3,6 @@ package xyz.stignarnia.ui_base.common.sheets.ratings
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import xyz.stignarnia.ui_base.BaseBottomSheetFragment
@@ -38,7 +37,7 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
       episodeNumber: Int? = null,
     ): Bundle {
       val options = Options(id, type, showId, seasonNumber, episodeNumber)
-      return bundleOf(NavigationArgs.ARG_OPTIONS to options)
+      return Bundle().apply { putParcelable(NavigationArgs.ARG_OPTIONS, options) }
     }
 
     private const val INITIAL_RATING = 5
@@ -138,7 +137,7 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
   }
 
   private fun closeWithSuccess(operation: Options.Operation) {
-    val result = bundleOf(NavigationArgs.RESULT to operation)
+    val result = Bundle().apply { putParcelable(NavigationArgs.RESULT, operation) }
     setFragmentResult(NavigationArgs.REQUEST_RATING, result)
     closeSheet()
   }

@@ -4,9 +4,8 @@ import androidx.annotation.StringRes
 
 const val HOUR_MS = 3_600_000L
 
-@Suppress("unused")
 enum class NotificationDelay(
-  @StringRes val stringRes: Int,
+  @param:StringRes val stringRes: Int,
   val delayMs: Long,
 ) {
   HOURS_12_NEG(R.string.textSettingsShowsNotificationsWhen12HoursBefore, -HOUR_MS * 12),

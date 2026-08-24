@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Singleton
 class OnHoldItemsRepository @Inject constructor(
-  @Named("progressOnHoldPreferences") private val sharedPreferences: SharedPreferences,
+  @param:Named("progressOnHoldPreferences") private val sharedPreferences: SharedPreferences,
 ) {
 
   fun getAll(): List<IdTmdb> = sharedPreferences.all.keys.map { IdTmdb(it.toLong()) }

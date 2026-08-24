@@ -19,10 +19,10 @@ interface MoviesDao :
   @Query("SELECT * FROM movies WHERE id_tmdb IN (:ids)")
   override suspend fun getAll(ids: List<Long>): List<Movie>
 
-  @Query("SELECT id_tmdb, id_tmdb FROM movies WHERE id_tmdb IN (:tmdbIds)")
+  @Query("SELECT id_tmdb AS key_id, id_tmdb AS value_id FROM movies WHERE id_tmdb IN (:tmdbIds)")
   override suspend fun getAllTmdbIds(
     tmdbIds: List<Long>,
-  ): Map<@MapColumn(columnName = "id_tmdb") Long, @MapColumn(columnName = "id_tmdb") Long>
+  ): Map<@MapColumn(columnName = "key_id") Long, @MapColumn(columnName = "value_id") Long>
 
   @Query("SELECT movies.id_tmdb, movies.title FROM movies")
   override suspend fun getAllForSearch(): List<MovieSearch>

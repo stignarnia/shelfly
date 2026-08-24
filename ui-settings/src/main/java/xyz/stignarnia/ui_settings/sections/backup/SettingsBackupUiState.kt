@@ -30,6 +30,6 @@ sealed interface ConnectionTest {
   data object Succeeded : ConnectionTest
 
   data class Failed(
-    @StringRes val reason: Int,
+    @get:StringRes val reason: Int,
   ) : ConnectionTest
 }

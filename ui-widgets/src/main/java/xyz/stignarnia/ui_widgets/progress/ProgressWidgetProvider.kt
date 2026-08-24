@@ -18,6 +18,9 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
 import xyz.stignarnia.common.Config.HOST_ACTIVITY_NAME
+import xyz.stignarnia.repository.EpisodesManager
+import xyz.stignarnia.ui_base.common.WidgetsProvider
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_model.IdTmdb
 import xyz.stignarnia.ui_widgets.BaseWidgetProvider
@@ -25,6 +28,9 @@ import xyz.stignarnia.ui_progress.progress.cases.ProgressItemsCase
 import xyz.stignarnia.ui_widgets.R
 import xyz.stignarnia.ui_widgets.theme.WidgetCollection
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -32,6 +38,7 @@ import javax.inject.Inject
 class ProgressWidgetProvider : BaseWidgetProvider() {
 
   @Inject lateinit var progressItemsCase: ProgressItemsCase
+  @Inject lateinit var episodesManager: EpisodesManager
 
   companion object {
     const val EXTRA_SEASON_ID = "EXTRA_SEASON_ID"
@@ -66,6 +73,8 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
     appWidgetManager: AppWidgetManager,
     widgetId: Int,
   ) {
+    if (!AndroidVersion.isAtLeastAndroid12) return
+
     val palette = palette(context, widgetId)
 
     val mainIntent = PendingIntent.getActivity(
@@ -158,12 +167,18 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
           val episodeId = intent.getLongExtra(EXTRA_EPISODE_ID, -1L)
           val seasonId = intent.getLongExtra(EXTRA_SEASON_ID, -1L)
           val showId = intent.getLongExtra(EXTRA_SHOW_ID, -1L)
-          ProgressWidgetEpisodeCheckService.initialize(
-            context.applicationContext,
-            episodeId,
-            seasonId,
-            IdTmdb(showId),
-          )
+          if (episodeId != -1L && seasonId != -1L && showId != -1L) {
+            val pendingResult = goAsync()
+            val appContext = context.applicationContext
+            CoroutineScope(Dispatchers.IO).launch {
+              try {
+                episodesManager.setEpisodeWatched(episodeId, seasonId, IdTmdb(showId), null)
+                (appContext as? WidgetsProvider)?.requestShowsWidgetsUpdate()
+              } finally {
+                pendingResult.finish()
+              }
+            }
+          }
         }
         intent.extras?.containsKey(EXTRA_SHOW_ID) == true -> {
           val showId = intent.getLongExtra(EXTRA_SHOW_ID, -1L)

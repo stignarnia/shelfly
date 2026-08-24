@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import androidx.core.os.bundleOf
 import xyz.stignarnia.ui_base.BaseBottomSheetFragment
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.openWebUrl
@@ -33,7 +32,7 @@ class PersonLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_person_link
   companion object {
     fun createBundle(person: Person): Bundle {
       val options = Options(person.ids, person.name, person.homepage)
-      return bundleOf(NavigationArgs.ARG_OPTIONS to options)
+      return Bundle().apply { putParcelable(NavigationArgs.ARG_OPTIONS, options) }
     }
   }
 

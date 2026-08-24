@@ -45,9 +45,8 @@ class DiscoverShowsRepositoryTest : BaseMockTest() {
   @Test
   fun `Should return true if cache is valid`() {
     runBlocking {
-      val discoverShow = mockk<DiscoverShow> {
-        every { createdAt } returns nowUtcMillis() - TimeUnit.HOURS.toMillis(6)
-      }
+      val discoverShow =
+        DiscoverShow(idTmdb = 10, createdAt = nowUtcMillis() - TimeUnit.HOURS.toMillis(6), updatedAt = 0)
       coEvery { discoverShowsDao.getMostRecent() } returns discoverShow
 
       assertThat(SUT.isCacheValid()).isTrue()
@@ -58,9 +57,8 @@ class DiscoverShowsRepositoryTest : BaseMockTest() {
   @Test
   fun `Should return false if cache is not valid`() {
     runBlocking {
-      val discoverShow = mockk<DiscoverShow> {
-        every { createdAt } returns nowUtcMillis() - TimeUnit.HOURS.toMillis(13)
-      }
+      val discoverShow =
+        DiscoverShow(idTmdb = 10, createdAt = nowUtcMillis() - TimeUnit.HOURS.toMillis(13), updatedAt = 0)
       coEvery { discoverShowsDao.getMostRecent() } returns discoverShow
 
       assertThat(SUT.isCacheValid()).isFalse()
@@ -71,16 +69,38 @@ class DiscoverShowsRepositoryTest : BaseMockTest() {
   @Test
   fun `Should load cached shows`() {
     runBlocking {
-      val discoverShow = mockk<DiscoverShow> {
-        every { idTmdb } returns 10
-      }
-      val showDb = mockk<ShowDb> {
-        every { idTmdb } returns 10
-      }
+      val discoverShow = DiscoverShow(idTmdb = 10, createdAt = nowUtcMillis(), updatedAt = 0)
+      val showDb = ShowDb(
+        idTmdb = 10,
+        idTvdb = 10,
+        idImdb = "10",
+        idSlug = "10",
+        idTvrage = 10,
+        title = "Show",
+        year = 2020,
+        overview = "",
+        firstAired = "",
+        runtime = 45,
+        airtimeDay = "",
+        airtimeTime = "",
+        airtimeTimezone = "",
+        certification = "",
+        network = "",
+        country = "",
+        trailer = "",
+        homepage = "",
+        status = "",
+        rating = 5f,
+        votes = 10,
+        commentCount = 0,
+        genres = "",
+        airedEpisodes = 10,
+        createdAt = 0,
+        updatedAt = 0,
+      )
 
       coEvery { discoverShowsDao.getAll() } returns listOf(discoverShow)
       coEvery { showsDao.getAll(any()) } returns listOf(showDb)
-      coEvery { mappers.show.fromDatabase(any()) } returns Show.EMPTY
 
       val shows = SUT.loadAllCached()
 

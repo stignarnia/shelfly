@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
+import xyz.stignarnia.ui_base.utilities.extensions.navigateBack
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
 import xyz.stignarnia.ui_base.utilities.viewBinding
 import xyz.stignarnia.ui_settings.databinding.FragmentSettingsBinding
@@ -64,7 +65,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel>(R.layout.fragment_setti
 
   private fun setupView() {
     with(binding) {
-      settingsToolbar.setOnClickListener { activity?.onBackPressed() }
+      settingsToolbar.setOnClickListener { navigateBack() }
       settingsFilters.onFilterClick = { viewModel.setFilter(it) }
     }
   }

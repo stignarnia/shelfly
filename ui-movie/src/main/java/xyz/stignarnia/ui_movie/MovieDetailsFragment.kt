@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateMargins
 import androidx.core.view.updatePadding
@@ -44,10 +43,12 @@ import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.fadeIf
 import xyz.stignarnia.ui_base.utilities.extensions.gone
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
+import xyz.stignarnia.ui_base.utilities.extensions.navigateBack
 import xyz.stignarnia.ui_base.utilities.extensions.navigateToSafe
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.onLongClick
 import xyz.stignarnia.ui_base.utilities.extensions.openWebUrl
+import xyz.stignarnia.ui_base.utilities.extensions.optionalParcelable
 import xyz.stignarnia.ui_base.utilities.extensions.requireLong
 import xyz.stignarnia.ui_base.utilities.extensions.requireParcelable
 import xyz.stignarnia.ui_base.utilities.extensions.screenHeight
@@ -136,13 +137,13 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
     with(binding) {
       hideNavigation()
       movieDetailsImageGuideline.setGuidelineBegin((imageHeight * imageRatio).toInt())
-      movieDetailsBackArrow.onClick { requireActivity().onBackPressed() }
+      movieDetailsBackArrow.onClick { navigateBack() }
       movieDetailsImage.onClick {
-        val bundle = bundleOf(
-          ARG_MOVIE_ID to movieId.id,
-          ARG_FAMILY to MOVIE,
-          ARG_TYPE to FANART,
-        )
+        val bundle = Bundle().apply {
+          putLong(ARG_MOVIE_ID, movieId.id)
+          putSerializable(ARG_FAMILY, MOVIE)
+          putSerializable(ARG_TYPE, FANART)
+        }
         navigateToSafe(R.id.actionMovieDetailsFragmentToArtGallery, bundle)
       }
       movieDetailsAddButton.run {
@@ -381,7 +382,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
     when (event) {
       is OpenDateSelectionSheet -> openDateSelectionSheet(event.movie)
       is RequestWidgetsUpdate -> (requireAppContext() as WidgetsProvider).requestMoviesWidgetsUpdate()
-      is Finish -> requireActivity().onBackPressed()
+      is Finish -> navigateBack()
     }
   }
 
@@ -413,7 +414,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
 
   private fun openRateDialog() {
     setFragmentResultListener(NavigationArgs.REQUEST_RATING) { _, bundle ->
-      when (bundle.getParcelable<Operation>(NavigationArgs.RESULT)) {
+      when (bundle.optionalParcelable<Operation>(NavigationArgs.RESULT)) {
         Operation.SAVE -> renderSnack(MessageEvent.Info(R.string.textRateSaved))
         Operation.REMOVE -> renderSnack(MessageEvent.Info(R.string.textRateRemoved))
         else -> Timber.w("Unknown result.")
@@ -426,10 +427,10 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
 
   private fun openListsDialog() {
     setFragmentResultListener(REQUEST_MANAGE_LISTS) { _, _ -> viewModel.loadListsCount() }
-    val bundle = bundleOf(
-      ARG_ID to movieId.id,
-      ARG_TYPE to Mode.MOVIES.type,
-    )
+    val bundle = Bundle().apply {
+      putLong(ARG_ID, movieId.id)
+      putSerializable(ARG_TYPE, Mode.MOVIES.type)
+    }
     navigateToSafe(R.id.actionMovieDetailsFragmentToManageLists, bundle)
   }
 

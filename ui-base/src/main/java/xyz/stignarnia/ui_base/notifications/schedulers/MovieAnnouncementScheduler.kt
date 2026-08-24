@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MovieAnnouncementScheduler @Inject constructor(
-  @ApplicationContext private val context: Context,
+  @param:ApplicationContext private val context: Context,
   private val settingsRepository: SettingsRepository,
   private val moviesImagesProvider: MovieImagesProvider,
   private val translationsRepository: TranslationsRepository,

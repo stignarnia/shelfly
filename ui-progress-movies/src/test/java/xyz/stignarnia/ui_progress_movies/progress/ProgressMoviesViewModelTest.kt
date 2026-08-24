@@ -7,7 +7,10 @@ import xyz.stignarnia.repository.TranslationsRepository
 import xyz.stignarnia.repository.images.MovieImagesProvider
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.ui_base.utilities.events.MessageEvent
+import xyz.stignarnia.ui_model.Image
+import xyz.stignarnia.ui_model.ImageType
 import xyz.stignarnia.ui_model.Movie
+import xyz.stignarnia.ui_model.SpoilersSettings
 import xyz.stignarnia.ui_progress_movies.BaseMockTest
 import xyz.stignarnia.ui_progress_movies.main.ProgressMoviesMainUiState
 import xyz.stignarnia.ui_progress_movies.progress.cases.ProgressMoviesItemsCase
@@ -41,7 +44,7 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
   @MockK lateinit var pinnedCase: ProgressMoviesPinnedCase
   @MockK lateinit var imagesProvider: MovieImagesProvider
   @MockK lateinit var workManager: WorkManager
-  @MockK lateinit var settingsRepository: SettingsRepository
+  private lateinit var settingsRepository: SettingsRepository
   @MockK lateinit var translationsRepository: TranslationsRepository
 
   private lateinit var SUT: ProgressMoviesViewModel
@@ -60,6 +63,21 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
     // Nothing here is about that indicator, so the work stream stays empty - without a stub the mock throws on the collect and takes down every test in the class.
     every { workManager.getWorkInfosForUniqueWorkFlow(any()) } returns emptyFlow()
 
+    settingsRepository = SettingsRepository(
+      sorting = mockk(),
+      filters = mockk(),
+      widgets = mockk(),
+      viewMode = mockk(),
+      spoilers = mockk(),
+      sync = mockk(),
+      webdav = mockk(),
+      dispatchers = testDispatchers,
+      localSource = mockk(),
+      transactions = mockk(),
+      mappers = mockk(),
+      preferences = mockk(),
+    )
+
     SUT = ProgressMoviesViewModel(
       itemsCase,
       sortCase,
@@ -70,6 +88,18 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
       translationsRepository,
     )
   }
+
+  private val movieItem = ProgressMovieListItem.MovieItem(
+    movie = Movie.EMPTY,
+    image = Image.createUnknown(ImageType.POSTER),
+    isLoading = false,
+    isPinned = false,
+    translation = null,
+    dateFormat = null,
+    sortOrder = null,
+    userRating = null,
+    spoilers = SpoilersSettings.INITIAL,
+  )
 
   @After
   fun tearDown() {
@@ -82,12 +112,11 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
   fun `Should load items if parent timestamp changed`() =
     runTest {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
-      val item = mockk<ProgressMovieListItem.MovieItem>()
-      coEvery { itemsCase.loadItems(any()) } returns listOf(item)
+      coEvery { itemsCase.loadItems(any()) } returns listOf(movieItem)
 
       SUT.onParentState(parentState.copy(timestamp = 123))
 
-      assertThat(stateResult.last().items).containsExactly(item)
+      assertThat(stateResult.last().items).containsExactly(movieItem)
       coVerify(exactly = 1) { itemsCase.loadItems(any()) }
       job.cancel()
     }
@@ -96,8 +125,7 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
   fun `Should not reload items if parent timestamp is the same`() =
     runTest {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
-      val item = mockk<ProgressMovieListItem.MovieItem>()
-      coEvery { itemsCase.loadItems(any()) } returns listOf(item)
+      coEvery { itemsCase.loadItems(any()) } returns listOf(movieItem)
 
       SUT.onParentState(parentState.copy(timestamp = 0))
 
@@ -110,12 +138,11 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
   fun `Should load items if search query changed`() =
     runTest {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
-      val item = mockk<ProgressMovieListItem.MovieItem>()
-      coEvery { itemsCase.loadItems(any()) } returns listOf(item)
+      coEvery { itemsCase.loadItems(any()) } returns listOf(movieItem)
 
       SUT.onParentState(parentState.copy(timestamp = 0, searchQuery = "test"))
 
-      assertThat(stateResult.last().items).containsExactly(item)
+      assertThat(stateResult.last().items).containsExactly(movieItem)
       coVerify(exactly = 1) { itemsCase.loadItems(any()) }
       job.cancel()
     }
@@ -124,13 +151,12 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
   fun `Should not reload items if parent search query is the same`() =
     runTest {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
-      val item = mockk<ProgressMovieListItem.MovieItem>()
-      coEvery { itemsCase.loadItems(any()) } returns listOf(item)
+      coEvery { itemsCase.loadItems(any()) } returns listOf(movieItem)
 
       SUT.onParentState(parentState.copy(timestamp = 0, searchQuery = "test"))
       SUT.onParentState(parentState.copy(timestamp = 0, searchQuery = "test"))
 
-      assertThat(stateResult.last().items).containsExactly(item)
+      assertThat(stateResult.last().items).containsExactly(movieItem)
       coVerify(exactly = 1) { itemsCase.loadItems(any()) }
       job.cancel()
     }
@@ -141,12 +167,19 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
       coEvery { pinnedCase.addPinnedItem(any()) } just Runs
       coEvery { pinnedCase.removePinnedItem(any()) } just Runs
-      coEvery { itemsCase.loadItems(any()) } returns listOf(mockk())
+      coEvery { itemsCase.loadItems(any()) } returns emptyList()
 
-      val item = mockk<ProgressMovieListItem.MovieItem> {
-        coEvery { isPinned } returns true
-        coEvery { movie } returns Movie.EMPTY
-      }
+      val item = ProgressMovieListItem.MovieItem(
+        movie = Movie.EMPTY,
+        image = Image.createUnknown(ImageType.POSTER),
+        isLoading = false,
+        isPinned = true,
+        translation = null,
+        dateFormat = null,
+        sortOrder = null,
+        userRating = null,
+        spoilers = SpoilersSettings.INITIAL,
+      )
 
       SUT.togglePinItem(item)
 
@@ -162,12 +195,19 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
       coEvery { pinnedCase.addPinnedItem(any()) } just Runs
       coEvery { pinnedCase.removePinnedItem(any()) } just Runs
-      coEvery { itemsCase.loadItems(any()) } returns listOf(mockk())
+      coEvery { itemsCase.loadItems(any()) } returns emptyList()
 
-      val item = mockk<ProgressMovieListItem.MovieItem> {
-        coEvery { isPinned } returns false
-        coEvery { movie } returns Movie.EMPTY
-      }
+      val item = ProgressMovieListItem.MovieItem(
+        movie = Movie.EMPTY,
+        image = Image.createUnknown(ImageType.POSTER),
+        isLoading = false,
+        isPinned = false,
+        translation = null,
+        dateFormat = null,
+        sortOrder = null,
+        userRating = null,
+        spoilers = SpoilersSettings.INITIAL,
+      )
 
       SUT.togglePinItem(item)
 

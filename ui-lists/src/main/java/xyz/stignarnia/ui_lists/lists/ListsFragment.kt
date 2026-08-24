@@ -6,7 +6,6 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.activity.addCallback
-import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.postDelayed
 import androidx.core.view.updateLayoutParams
@@ -41,6 +40,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.hideKeyboard
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
 import xyz.stignarnia.ui_base.utilities.extensions.navigateToSafe
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
+import xyz.stignarnia.ui_base.utilities.extensions.requireSerializable
 import xyz.stignarnia.ui_base.utilities.extensions.showKeyboard
 import xyz.stignarnia.ui_base.utilities.extensions.updateTopMargin
 import xyz.stignarnia.ui_base.utilities.extensions.visible
@@ -248,7 +248,7 @@ class ListsFragment :
         exitSearch()
       } else {
         isEnabled = false
-        activity?.onBackPressed()
+        dispatcher.onBackPressed()
       }
     }
   }
@@ -300,8 +300,8 @@ class ListsFragment :
     val args = SortOrderBottomSheet.createBundle(options, sortOrder, sortType)
 
     setFragmentResultListener(NavigationArgs.REQUEST_SORT_ORDER) { _, bundle ->
-      val order = bundle.getSerializable(NavigationArgs.ARG_SELECTED_SORT_ORDER) as SortOrder
-      val type = bundle.getSerializable(NavigationArgs.ARG_SELECTED_SORT_TYPE) as SortType
+      val order = bundle.requireSerializable<SortOrder>(NavigationArgs.ARG_SELECTED_SORT_ORDER)
+      val type = bundle.requireSerializable<SortType>(NavigationArgs.ARG_SELECTED_SORT_TYPE)
       viewModel.setSortOrder(order, type)
     }
 
@@ -343,7 +343,7 @@ class ListsFragment :
     hideNavigation()
     binding.fragmentListsRoot
       .fadeOut(150) {
-        val bundle = bundleOf(ARG_LIST to listItem.list)
+        val bundle = Bundle().apply { putParcelable(ARG_LIST, listItem.list) }
         navigateToSafe(R.id.actionListsFragmentToDetailsFragment, bundle)
         exitSearch()
       }.add(animations)
@@ -357,7 +357,7 @@ class ListsFragment :
 
   private fun openCreateList() {
     setFragmentResultListener(REQUEST_CREATE_LIST) { _, _ -> viewModel.loadItems(resetScroll = true) }
-    navigateToSafe(R.id.actionListsFragmentToCreateListDialog, bundleOf())
+    navigateToSafe(R.id.actionListsFragmentToCreateListDialog, Bundle())
   }
 
   private fun resetTranslations(duration: Long = TRANSLATION_DURATION) {

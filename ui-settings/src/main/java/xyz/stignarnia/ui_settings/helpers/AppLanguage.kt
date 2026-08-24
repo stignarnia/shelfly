@@ -7,7 +7,7 @@ import timber.log.Timber
 enum class AppLanguage(
   val code: String,
   val displayNameRaw: String,
-  @StringRes val displayName: Int,
+  @get:StringRes val displayName: Int,
 ) {
   ENGLISH("en", "English", R.string.textLanguageEnglish),
   GERMAN("de", "German", R.string.textLanguageGerman),

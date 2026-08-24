@@ -2,7 +2,6 @@ package xyz.stignarnia.ui_statistics_movies
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
@@ -12,6 +11,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.fadeIf
+import xyz.stignarnia.ui_base.utilities.extensions.navigateBack
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
 import xyz.stignarnia.ui_base.utilities.viewBinding
 import xyz.stignarnia.ui_navigation.java.NavigationArgs.ARG_MOVIE_ID
@@ -49,7 +49,7 @@ class StatisticsMoviesFragment : BaseFragment<StatisticsMoviesViewModel>(R.layou
 
   private fun setupView() {
     with(binding) {
-      statisticsMoviesToolbar.setOnClickListener { activity?.onBackPressed() }
+      statisticsMoviesToolbar.setOnClickListener { navigateBack() }
       statisticsMoviesRatings.onMovieClickListener = {
         openMovieDetails(it.movie.tmdbId)
       }
@@ -83,7 +83,7 @@ class StatisticsMoviesFragment : BaseFragment<StatisticsMoviesViewModel>(R.layou
   }
 
   private fun openMovieDetails(tmdbId: Long) {
-    val bundle = bundleOf(ARG_MOVIE_ID to tmdbId)
+    val bundle = Bundle().apply { putLong(ARG_MOVIE_ID, tmdbId) }
     navigateTo(R.id.actionStatisticsMoviesFragmentToMovieDetailsFragment, bundle)
   }
 }

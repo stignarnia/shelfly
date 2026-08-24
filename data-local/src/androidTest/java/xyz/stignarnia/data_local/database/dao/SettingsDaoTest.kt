@@ -23,11 +23,15 @@ class SettingsDaoTest : BaseDaoTest() {
     }
   }
 
+  // getAll() is declared non-null, so an empty table makes Room throw rather than return null.
+  // Callers are expected to guard with getCount() first, the way SettingsRepository.isInitialized() does.
   @Test
-  fun shouldReturnNullIfNoEntity() {
+  fun shouldReportEmptyCountIfNoEntity() {
     runBlocking {
-      val settings = database.settingsDao().getAll()
-      assertThat(settings).isNull()
+      assertThat(database.settingsDao().getCount()).isEqualTo(0)
+
+      val result = runCatching { database.settingsDao().getAll() }
+      assertThat(result.exceptionOrNull()).isInstanceOf(IllegalStateException::class.java)
     }
   }
 

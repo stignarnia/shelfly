@@ -52,8 +52,8 @@ class CollectionItemDiffCallback : DiffUtil.ItemCallback<CollectionListItem>() {
     newItem: CollectionListItem.FiltersItem,
   ): Boolean =
     oldItem.upcoming == newItem.upcoming &&
-      oldItem.networks == newItem.networks &&
-      oldItem.genres == newItem.genres &&
+      oldItem.networks.toTypedArray().contentEquals(newItem.networks.toTypedArray()) &&
+      oldItem.genres.toTypedArray().contentEquals(newItem.genres.toTypedArray()) &&
       oldItem.sortOrder == newItem.sortOrder &&
       oldItem.sortType == newItem.sortType &&
       oldItem.count == newItem.count

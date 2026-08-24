@@ -22,6 +22,10 @@ import androidx.fragment.app.Fragment
 import timber.log.Timber
 import java.util.Locale
 
+fun Fragment.navigateBack() {
+  activity?.onBackPressedDispatcher?.onBackPressed()
+}
+
 fun View.visible() {
   if (visibility != View.VISIBLE) visibility = View.VISIBLE
 }

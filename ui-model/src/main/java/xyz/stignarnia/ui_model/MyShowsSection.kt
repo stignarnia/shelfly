@@ -8,7 +8,7 @@ import xyz.stignarnia.ui_model.ShowStatus.PLANNED
 import xyz.stignarnia.ui_model.ShowStatus.RETURNING
 
 enum class MyShowsSection(
-  @StringRes val displayString: Int,
+  @param:StringRes val displayString: Int,
   val allowedStatuses: List<ShowStatus> = emptyList(),
 ) {
   RECENTS(

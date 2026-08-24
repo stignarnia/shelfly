@@ -8,13 +8,13 @@
   <string name="textShowQuickProgressSubTitle">Selecione o último episódio visto para atualizar rapidamente seu progresso.</string>
   <string name="textShowQuickProgressDone">Seu progresso foi atualizado.</string>
   <string name="textEpisodeDate">Episódio %1$d | %2$s</string>
-  <string name="textEpisodeTitle">S.%02d E.%02d - \'%s\'</string>
+  <string name="textEpisodeTitle">S.%1$02d E.%2$02d - \'%3$s\'</string>
   <string name="textActorsEmpty">Atores não estão disponíveis</string>
   <string name="textSeasons">Temporadas:</string>
   <string name="textSeasonsEmpty">Temporadas não disponíveis.</string>
   <string name="textTrailer">Trailer</string>
   <string name="textYouMayAlsoLike">Você também pode gostar</string>
-  <string name="textRuntimeLeftHours">~%sh %sm restantes</string>
+  <string name="textRuntimeLeftHours">~%1$sh %2$sm restantes</string>
   <string name="textRuntimeLeftMinutes">%sm restando</string>
   <string name="textShowManageLists">Gerenciar Listas</string>
   <string name="textShowManageListsCount">Gerenciar Listas (%d)</string>

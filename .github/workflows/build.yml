@@ -25,12 +25,12 @@ jobs:
 
       - name: Run ktlint
         run: |
-          curl -sSLO https://github.com/pinterest/ktlint/releases/download/1.8.0/ktlint
+          curl -sSLO https://github.com/pinterest/ktlint/releases/latest/download/ktlint
           chmod a+x ktlint
           ./ktlint
 
   test:
-    name: Unit tests
+    name: Tests and Verification
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -49,15 +49,18 @@ jobs:
       #
       # Debug variant only.
       # Unit tests never run R8, so ./gradlew test would just re-execute the same sources for the release variant - twice the tasks for the same signal.
-      - name: Run unit tests
-        run: ./gradlew testDebugUnitTest
+      # Runs full verification: all unit tests (testDebugUnitTest) and Android Lint (lintDebug) across all modules (no release-variant duplication).
+      - name: Run tests and lint
+        run: ./gradlew testDebugUnitTest lintDebug --warning-mode all
 
-      - name: Upload test reports
+      - name: Upload verification reports
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: test-reports
-          path: '**/build/reports/tests/'
+          name: verification-reports
+          path: |
+            **/build/reports/tests/
+            **/build/reports/lint-results-*
           retention-days: 7
 
   build:

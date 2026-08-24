@@ -23,12 +23,10 @@ import io.mockk.MockKAnnotations
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
-import io.mockk.impl.annotations.SpyK
 import io.mockk.mockkStatic
 import io.mockk.slot
 import org.junit.Before
 
-@Suppress("EXPERIMENTAL_API_USAGE")
 abstract class BaseMockTest {
 
   @MockK lateinit var database: LocalDataSource
@@ -37,15 +35,15 @@ abstract class BaseMockTest {
 
   protected val testDispatchers = UnconfinedCoroutineDispatchers()
   private val idsMapper = IdsMapper()
-  private val episodeMappers = EpisodeMapper(idsMapper)
+  private val episodeMapper = EpisodeMapper(idsMapper)
 
-  @SpyK var mappers = Mappers(
+  val mappers = Mappers(
     idsMapper,
     ImageMapper(),
     ShowMapper(idsMapper),
     MovieMapper(idsMapper),
-    episodeMappers,
-    SeasonMapper(idsMapper, episodeMappers),
+    episodeMapper,
+    SeasonMapper(idsMapper, episodeMapper),
     PersonMapper(),
     SettingsMapper(),
     TranslationMapper(idsMapper),

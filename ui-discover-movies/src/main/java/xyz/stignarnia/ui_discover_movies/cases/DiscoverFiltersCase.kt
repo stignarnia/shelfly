@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @ViewModelScoped
 class DiscoverFiltersCase @Inject constructor(
-  @ApplicationContext private val context: Context,
+  @param:ApplicationContext private val context: Context,
   private val dispatchers: CoroutineDispatchers,
   private val settingsRepository: SettingsRepository,
 ) {

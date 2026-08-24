@@ -2,7 +2,6 @@ package xyz.stignarnia.ui_statistics
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
@@ -12,6 +11,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.fadeIf
+import xyz.stignarnia.ui_base.utilities.extensions.navigateBack
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
 import xyz.stignarnia.ui_base.utilities.viewBinding
 import xyz.stignarnia.ui_navigation.java.NavigationArgs.ARG_SHOW_ID
@@ -50,7 +50,7 @@ class StatisticsFragment : BaseFragment<StatisticsViewModel>(R.layout.fragment_s
 
   private fun setupView() {
     with(binding) {
-      statisticsToolbar.setOnClickListener { activity?.onBackPressed() }
+      statisticsToolbar.setOnClickListener { navigateBack() }
       statisticsMostWatchedShows.run {
         onLoadMoreClickListener = { addLimit -> viewModel.loadData(addLimit) }
         onShowClickListener = {
@@ -92,7 +92,7 @@ class StatisticsFragment : BaseFragment<StatisticsViewModel>(R.layout.fragment_s
   }
 
   private fun openShowDetails(tmdbId: Long) {
-    val bundle = bundleOf(ARG_SHOW_ID to tmdbId)
+    val bundle = Bundle().apply { putLong(ARG_SHOW_ID, tmdbId) }
     navigateTo(R.id.actionStatisticsFragmentToShowDetailsFragment, bundle)
   }
 }

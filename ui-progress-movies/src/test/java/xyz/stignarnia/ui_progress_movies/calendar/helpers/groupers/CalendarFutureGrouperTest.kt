@@ -1,11 +1,13 @@
 package xyz.stignarnia.ui_progress_movies.calendar.helpers.groupers
 
 import com.google.common.truth.Truth.assertThat
+import xyz.stignarnia.ui_model.Image
+import xyz.stignarnia.ui_model.ImageType
+import xyz.stignarnia.ui_model.Movie
+import xyz.stignarnia.ui_model.SpoilersSettings
 import xyz.stignarnia.ui_progress_movies.BaseMockTest
 import xyz.stignarnia.ui_progress_movies.R
 import xyz.stignarnia.ui_progress_movies.calendar.recycler.CalendarMovieListItem
-import io.mockk.every
-import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -16,6 +18,18 @@ import java.time.ZonedDateTime
 class CalendarFutureGrouperTest : BaseMockTest() {
 
   private lateinit var SUT: CalendarFutureGrouper
+
+  private fun createMovieItem(releasedDate: LocalDate) =
+    CalendarMovieListItem.MovieItem(
+      movie = Movie.EMPTY.copy(released = releasedDate),
+      image = Image.createUnknown(ImageType.POSTER),
+      isLoading = false,
+      isWatched = false,
+      isWatchlist = false,
+      translation = null,
+      dateFormat = null,
+      spoilers = SpoilersSettings.INITIAL,
+    )
 
   @Before
   override fun setUp() {
@@ -28,46 +42,14 @@ class CalendarFutureGrouperTest : BaseMockTest() {
     runTest {
       val zonedNow = ZonedDateTime.parse("2021-10-11T12:00:00Z")
       val now = LocalDate.parse("2021-10-11") // Monday
-      val item1 = mockk<CalendarMovieListItem.MovieItem> {
-        every { movie } returns mockk {
-          every { released } returns now
-        }
-      }
-      val item2 = mockk<CalendarMovieListItem.MovieItem> {
-        every { movie } returns mockk {
-          every { released } returns now.plusDays(1)
-        }
-      }
-      val item3 = mockk<CalendarMovieListItem.MovieItem> {
-        every { movie } returns mockk {
-          every { released } returns now.plusDays(6)
-        }
-      }
-      val item4 = mockk<CalendarMovieListItem.MovieItem> {
-        every { movie } returns mockk {
-          every { released } returns now.plusDays(7)
-        }
-      }
-      val item5 = mockk<CalendarMovieListItem.MovieItem> {
-        every { movie } returns mockk {
-          every { released } returns now.plusDays(14)
-        }
-      }
-      val item6 = mockk<CalendarMovieListItem.MovieItem> {
-        every { movie } returns mockk {
-          every { released } returns now.plusDays(21)
-        }
-      }
-      val item7 = mockk<CalendarMovieListItem.MovieItem> {
-        every { movie } returns mockk {
-          every { released } returns now.plusDays(60)
-        }
-      }
-      val item8 = mockk<CalendarMovieListItem.MovieItem> {
-        every { movie } returns mockk {
-          every { released } returns now.plusDays(100)
-        }
-      }
+      val item1 = createMovieItem(now)
+      val item2 = createMovieItem(now.plusDays(1))
+      val item3 = createMovieItem(now.plusDays(6))
+      val item4 = createMovieItem(now.plusDays(7))
+      val item5 = createMovieItem(now.plusDays(14))
+      val item6 = createMovieItem(now.plusDays(21))
+      val item7 = createMovieItem(now.plusDays(60))
+      val item8 = createMovieItem(now.plusDays(100))
 
       val results = SUT.groupByTime(
         zonedNow,

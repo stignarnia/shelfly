@@ -14,7 +14,7 @@ import javax.inject.Named
 
 @ViewModelScoped
 class MainBackupCase @Inject constructor(
-  @Named("miscPreferences") private var miscPreferences: SharedPreferences,
+  @param:Named("miscPreferences") private var miscPreferences: SharedPreferences,
   private val webDavRepository: SettingsWebDavRepository,
   private val workManager: WorkManager,
 ) {

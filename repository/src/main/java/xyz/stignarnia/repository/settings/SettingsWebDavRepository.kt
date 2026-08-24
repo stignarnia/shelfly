@@ -19,7 +19,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class SettingsWebDavRepository @Inject constructor(
-  @Named("webdavPreferences") private val preferences: SharedPreferences,
+  @param:Named("webdavPreferences") private val preferences: SharedPreferences,
   private val secretCipher: SecretCipher,
 ) {
 

@@ -214,7 +214,7 @@ class ProgressMainFragment :
         exitSearch()
       } else {
         isEnabled = false
-        activity?.onBackPressed()
+        dispatcher.onBackPressed()
       }
     }
   }

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import xyz.stignarnia.ui_base.BaseBottomSheetFragment
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.openWebUrl
@@ -42,7 +41,7 @@ class EpisodeLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_li
         season = episode.season,
         episodeNumber = episode.number,
       )
-      return bundleOf(NavigationArgs.ARG_OPTIONS to options)
+      return Bundle().apply { putParcelable(NavigationArgs.ARG_OPTIONS, options) }
     }
   }
 

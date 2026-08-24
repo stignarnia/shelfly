@@ -31,7 +31,6 @@ data class Image(
       POSTER -> "${TMDB_IMAGE_BASE_POSTER_URL}$fileUrl"
       FANART, FANART_WIDE -> "${TMDB_IMAGE_BASE_FANART_URL}$fileUrl"
       PROFILE -> "${TMDB_IMAGE_BASE_PROFILE_URL}$fileUrl"
-      else -> ""
     }
     CUSTOM -> fileUrl
   }

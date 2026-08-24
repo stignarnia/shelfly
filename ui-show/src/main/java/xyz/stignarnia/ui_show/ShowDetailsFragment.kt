@@ -10,7 +10,6 @@ import android.view.ViewGroup.MarginLayoutParams
 import android.view.animation.DecelerateInterpolator
 import androidx.activity.addCallback
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateMargins
 import androidx.core.view.updatePadding
@@ -35,17 +34,21 @@ import xyz.stignarnia.ui_base.common.sheets.ratings.RatingsBottomSheet.Options.T
 import xyz.stignarnia.ui_base.utilities.SnackbarHost
 import xyz.stignarnia.ui_base.utilities.events.Event
 import xyz.stignarnia.ui_base.utilities.events.MessageEvent
+import xyz.stignarnia.ui_base.utilities.extensions.capitalizeWords
 import xyz.stignarnia.ui_base.utilities.extensions.copyToClipboard
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.fadeIf
 import xyz.stignarnia.ui_base.utilities.extensions.gone
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
+import xyz.stignarnia.ui_base.utilities.extensions.navigateBack
 import xyz.stignarnia.ui_base.utilities.extensions.navigateToSafe
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.onLongClick
 import xyz.stignarnia.ui_base.utilities.extensions.openWebUrl
+import xyz.stignarnia.ui_base.utilities.extensions.optionalParcelable
 import xyz.stignarnia.ui_base.utilities.extensions.requireLong
+import xyz.stignarnia.ui_base.utilities.extensions.requireParcelable
 import xyz.stignarnia.ui_base.utilities.extensions.screenHeight
 import xyz.stignarnia.ui_base.utilities.extensions.screenWidth
 import xyz.stignarnia.ui_base.utilities.extensions.showInfoSnackbar
@@ -65,6 +68,7 @@ import xyz.stignarnia.ui_model.Show
 import xyz.stignarnia.ui_model.SpoilersSettings
 import xyz.stignarnia.ui_model.Tip.SHOW_DETAILS_GALLERY
 import xyz.stignarnia.ui_model.Translation
+import xyz.stignarnia.ui_model.UserRating
 import xyz.stignarnia.ui_navigation.java.NavigationArgs
 import xyz.stignarnia.ui_navigation.java.NavigationArgs.ARG_FAMILY
 import xyz.stignarnia.ui_navigation.java.NavigationArgs.ARG_ID
@@ -125,13 +129,13 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
     with(binding) {
       hideNavigation()
       showDetailsImageGuideline.setGuidelineBegin((imageHeight * imageRatio).toInt())
-      showDetailsBackArrow.onClick { requireActivity().onBackPressed() }
+      showDetailsBackArrow.onClick { navigateBack() }
       showDetailsImage.onClick {
-        val bundle = bundleOf(
-          ARG_SHOW_ID to showId.id,
-          ARG_FAMILY to SHOW,
-          ARG_TYPE to FANART,
-        )
+        val bundle = Bundle().apply {
+          putLong(ARG_SHOW_ID, showId.id)
+          putSerializable(ARG_FAMILY, SHOW)
+          putSerializable(ARG_TYPE, FANART)
+        }
         navigateToSafe(R.id.actionShowDetailsFragmentToArtGallery, bundle)
       }
       showDetailsTipGallery.onClick {
@@ -176,7 +180,7 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
 
   private fun handleEvent(event: Event<*>) {
     when (event) {
-      is Finish -> requireActivity().onBackPressed()
+      is Finish -> navigateBack()
     }
   }
 
@@ -378,7 +382,7 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
 
   private fun openRateDialog() {
     setFragmentResultListener(NavigationArgs.REQUEST_RATING) { _, bundle ->
-      when (bundle.getParcelable<RatingsBottomSheet.Options.Operation>(NavigationArgs.RESULT)) {
+      when (bundle.optionalParcelable<RatingsBottomSheet.Options.Operation>(NavigationArgs.RESULT)) {
         SAVE -> renderSnack(MessageEvent.Info(R.string.textRateSaved))
         REMOVE -> renderSnack(MessageEvent.Info(R.string.textRateRemoved))
         else -> Timber.w("Unknown result")
@@ -394,10 +398,10 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
       return
     }
     setFragmentResultListener(REQUEST_MANAGE_LISTS) { _, _ -> viewModel.loadListsCount() }
-    val bundle = bundleOf(
-      ARG_ID to showId.id,
-      ARG_TYPE to Mode.SHOWS.type,
-    )
+    val bundle = Bundle().apply {
+      putLong(ARG_ID, showId.id)
+      putSerializable(ARG_TYPE, Mode.SHOWS.type)
+    }
     navigateToSafe(R.id.actionShowDetailsFragmentToManageLists, bundle)
   }
 

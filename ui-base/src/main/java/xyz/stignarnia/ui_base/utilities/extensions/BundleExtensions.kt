@@ -2,9 +2,9 @@ package xyz.stignarnia.ui_base.utilities.extensions
 
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.core.os.BundleCompat
 import androidx.fragment.app.Fragment
 import java.io.Serializable
-import xyz.stignarnia.ui_base.utilities.AndroidVersion
 
 fun Fragment.requireString(
   key: String?,
@@ -19,26 +19,25 @@ fun Fragment.requireLongArray(key: String?) = requireArguments().getLongArray(ke
 
 fun Fragment.requireBoolean(key: String?) = requireArguments().getBoolean(key)
 
-fun <T> Fragment.requireSerializable(key: String?) = requireArguments().getSerializable(key) as T
+inline fun <reified T : Serializable> Fragment.requireSerializable(key: String): T =
+  requireArguments().requireSerializable(key)
 
-fun <T : Parcelable> Fragment.requireParcelable(key: String?) = optionalParcelable<T>(key)!!
+inline fun <reified T : Serializable> Fragment.optionalSerializable(key: String): T? =
+  arguments?.optionalSerializable(key)
 
-fun <T : Parcelable> Fragment.optionalParcelable(key: String?) = requireArguments().getParcelable<T>(key)
+inline fun <reified T : Parcelable> Fragment.requireParcelable(key: String): T =
+  requireArguments().requireParcelable(key)
+
+inline fun <reified T : Parcelable> Fragment.optionalParcelable(key: String): T? = arguments?.optionalParcelable(key)
 
 inline fun <reified T : Parcelable> Bundle.requireParcelable(key: String): T =
-  when {
-    AndroidVersion.isAtLeastAndroid13 -> getParcelable(key, T::class.java)!!
-    else -> @Suppress("DEPRECATION") (getParcelable(key) as? T)!!
-  }
+  BundleCompat.getParcelable(this, key, T::class.java)!!
 
 inline fun <reified T : Parcelable> Bundle.optionalParcelable(key: String): T? =
-  when {
-    AndroidVersion.isAtLeastAndroid13 -> getParcelable(key, T::class.java)
-    else -> @Suppress("DEPRECATION") (getParcelable(key) as? T)
-  }
+  BundleCompat.getParcelable(this, key, T::class.java)
 
 inline fun <reified T : Serializable> Bundle.requireSerializable(key: String): T =
-  when {
-    AndroidVersion.isAtLeastAndroid13 -> getSerializable(key, T::class.java)!!
-    else -> @Suppress("DEPRECATION") (getSerializable(key) as? T)!!
-  }
+  BundleCompat.getSerializable(this, key, T::class.java)!!
+
+inline fun <reified T : Serializable> Bundle.optionalSerializable(key: String): T? =
+  BundleCompat.getSerializable(this, key, T::class.java)

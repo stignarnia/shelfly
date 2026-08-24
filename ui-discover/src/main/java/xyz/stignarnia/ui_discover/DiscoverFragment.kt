@@ -223,7 +223,7 @@ internal class DiscoverFragment :
     val dispatcher = requireActivity().onBackPressedDispatcher
     dispatcher.addCallback(viewLifecycleOwner) {
       isEnabled = false
-      activity?.onBackPressed()
+      dispatcher.onBackPressed()
     }
   }
 

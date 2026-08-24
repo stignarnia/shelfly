@@ -2,7 +2,6 @@ package xyz.stignarnia.ui_base.common.sheets.context_menu
 
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -41,13 +40,16 @@ abstract class ContextMenuBottomSheet : BaseBottomSheetFragment(R.layout.view_co
       idTmdb: IdTmdb,
       showPinButtons: Boolean = false,
       detailsEnabled: Boolean = true,
-    ) = bundleOf(
-      ARG_ID to idTmdb,
-      ARG_OPTIONS to bundleOf(
-        ARG_SHOW_PIN_BUTTONS to showPinButtons,
-        ARG_DETAILS_ENABLED to detailsEnabled,
-      ),
-    )
+    ) = Bundle().apply {
+      putParcelable(ARG_ID, idTmdb)
+      putBundle(
+        ARG_OPTIONS,
+        Bundle().apply {
+          putBoolean(ARG_SHOW_PIN_BUTTONS, showPinButtons)
+          putBoolean(ARG_DETAILS_ENABLED, detailsEnabled)
+        },
+      )
+    }
   }
 
   protected val binding by viewBinding(ViewContextMenuBinding::bind)

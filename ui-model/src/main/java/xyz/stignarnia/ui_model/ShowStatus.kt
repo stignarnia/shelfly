@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 
 enum class ShowStatus(
   val key: String,
-  @StringRes val displayName: Int,
+  @param:StringRes val displayName: Int,
 ) {
   RETURNING("returning series", R.string.textShowStatusReturning),
   UPCOMING("upcoming", R.string.textShowStatusUpcoming),

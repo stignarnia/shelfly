@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import xyz.stignarnia.ui_base.utilities.NavigationHost
 
 abstract class BaseBottomSheetFragment(
-  @LayoutRes val layoutResId: Int,
+  @param:LayoutRes val layoutResId: Int,
 ) : BottomSheetDialogFragment() {
 
   /**

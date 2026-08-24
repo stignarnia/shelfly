@@ -19,10 +19,10 @@ interface ShowsDao :
   @Query("SELECT * FROM shows WHERE id_tmdb IN (:ids)")
   override suspend fun getAll(ids: List<Long>): List<Show>
 
-  @Query("SELECT id_tmdb, id_tmdb FROM shows WHERE id_tmdb IN (:tmdbIds)")
+  @Query("SELECT id_tmdb AS key_id, id_tmdb AS value_id FROM shows WHERE id_tmdb IN (:tmdbIds)")
   override suspend fun getAllTmdbIds(
     tmdbIds: List<Long>,
-  ): Map<@MapColumn(columnName = "id_tmdb") Long, @MapColumn(columnName = "id_tmdb") Long>
+  ): Map<@MapColumn(columnName = "key_id") Long, @MapColumn(columnName = "value_id") Long>
 
   @Query("SELECT shows.id_tmdb, shows.title FROM shows")
   override suspend fun getAllForSearch(): List<ShowSearch>

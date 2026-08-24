@@ -26,12 +26,12 @@ import xyz.stignarnia.ui_settings.helpers.AppLanguage
  */
 @ViewModelScoped
 class MainWelcomeCase @Inject constructor(
-  @ApplicationContext private val context: Context,
+  @param:ApplicationContext private val context: Context,
   private val initialsCase: MainInitialsCase,
   private val apiKeyProvider: ApiKeyProvider,
   private val settingsRepository: SettingsRepository,
   private val webDavRepository: SettingsWebDavRepository,
-  @Named("miscPreferences") private val miscPreferences: SharedPreferences,
+  @param:Named("miscPreferences") private val miscPreferences: SharedPreferences,
 ) {
 
   companion object {

@@ -3,12 +3,12 @@ package xyz.stignarnia.ui_people.gallery
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
-import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.viewModels
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
+import xyz.stignarnia.ui_base.utilities.extensions.navigateBack
 import xyz.stignarnia.ui_base.utilities.extensions.nextPage
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.openWebUrl
@@ -28,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class PersonGalleryFragment : BaseFragment<PersonGalleryViewModel>(R.layout.fragment_person_gallery) {
 
   companion object {
-    fun createBundle(person: Person): Bundle = bundleOf(ARG_ID to person.ids.tmdb)
+    fun createBundle(person: Person): Bundle = Bundle().apply { putParcelable(ARG_ID, person.ids.tmdb) }
   }
 
   override val viewModel by viewModels<PersonGalleryViewModel>()
@@ -60,7 +60,7 @@ class PersonGalleryFragment : BaseFragment<PersonGalleryViewModel>(R.layout.frag
   private fun setupView() {
     with(binding) {
       personGalleryBackArrow.onClick {
-        requireActivity().onBackPressed()
+        navigateBack()
       }
       personGalleryBrowserIcon.onClick {
         val currentIndex = personGalleryPager.currentItem

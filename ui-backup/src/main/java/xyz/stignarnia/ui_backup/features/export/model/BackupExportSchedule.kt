@@ -13,9 +13,9 @@ import java.util.concurrent.TimeUnit.SECONDS
 enum class BackupExportSchedule(
   val duration: Long,
   val durationUnit: TimeUnit,
-  @StringRes val stringRes: Int,
-  @StringRes val confirmationStringRes: Int,
-  @StringRes val buttonStringRes: Int,
+  @param:StringRes val stringRes: Int,
+  @param:StringRes val confirmationStringRes: Int,
+  @param:StringRes val buttonStringRes: Int,
 ) {
 
   OFF(

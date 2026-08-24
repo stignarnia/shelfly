@@ -160,7 +160,7 @@ class SearchViewModelTest : BaseMockTest() {
   @Test
   fun `Should not update filters if they are the same`() =
     runTest {
-      val item = mockk<SearchListItem>()
+      val item = TestData.SEARCH_LIST_ITEM
       coEvery { searchQueryCase.searchByQuery(any()) } returns listOf(item)
       coEvery { searchFiltersCase.filter(any(), any()) } returns true
       coEvery { searchSortingCase.sort(any()) } returns compareBy { it.id }
@@ -178,7 +178,7 @@ class SearchViewModelTest : BaseMockTest() {
   @Test
   fun `Should update filters`() =
     runTest {
-      val item = mockk<SearchListItem>()
+      val item = TestData.SEARCH_LIST_ITEM
       coEvery { searchQueryCase.searchByQuery(any()) } returns listOf(item)
       coEvery { searchFiltersCase.filter(any(), any()) } returns true
       coEvery { searchSortingCase.sort(any()) } returns compareBy { it.id }
@@ -202,7 +202,7 @@ class SearchViewModelTest : BaseMockTest() {
   @Test
   fun `Should not update sort order if they are the same`() =
     runTest {
-      val item = mockk<SearchListItem>()
+      val item = TestData.SEARCH_LIST_ITEM
       coEvery { searchQueryCase.searchByQuery(any()) } returns listOf(item)
       coEvery { searchFiltersCase.filter(any(), any()) } returns true
       coEvery { searchSortingCase.sort(any()) } returns compareBy { it.id }
@@ -220,7 +220,7 @@ class SearchViewModelTest : BaseMockTest() {
   @Test
   fun `Should update sort order`() =
     runTest {
-      val item = mockk<SearchListItem>()
+      val item = TestData.SEARCH_LIST_ITEM
       coEvery { searchQueryCase.searchByQuery(any()) } returns listOf(item)
       coEvery { searchFiltersCase.filter(any(), any()) } returns true
       coEvery { searchSortingCase.sort(any()) } returns compareBy { it.id }
@@ -245,7 +245,7 @@ class SearchViewModelTest : BaseMockTest() {
   @Test
   fun `Should clear suggestions properly`() =
     runTest {
-      val item = mockk<SearchListItem>()
+      val item = TestData.SEARCH_LIST_ITEM
       coEvery { suggestionsCase.loadSuggestions(any()) } returns listOf(item)
 
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
@@ -262,7 +262,7 @@ class SearchViewModelTest : BaseMockTest() {
   @Test
   fun `Should not load suggestions if query length is less than 2`() =
     runTest {
-      val item = mockk<SearchListItem>()
+      val item = TestData.SEARCH_LIST_ITEM
       coEvery { suggestionsCase.loadSuggestions(any()) } returns listOf(item)
 
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
@@ -279,7 +279,7 @@ class SearchViewModelTest : BaseMockTest() {
   @Test
   fun `Should load suggestions properly`() =
     runTest {
-      val item = mockk<SearchListItem>()
+      val item = TestData.SEARCH_LIST_ITEM
 
       coEvery { suggestionsCase.loadSuggestions(any()) } returns listOf(item, item)
 
@@ -401,7 +401,7 @@ class SearchViewModelTest : BaseMockTest() {
         show = Show.EMPTY.copy(title = "test"),
       )
       coEvery { searchTranslationsCase.getLanguage() } returns "pl"
-      coEvery { searchTranslationsCase.loadTranslation(any<Show>()) } returns Translation.EMPTY
+      coEvery { searchTranslationsCase.loadTranslation(item.show!!) } returns Translation.EMPTY
       coEvery { suggestionsCase.loadSuggestions((any())) } returns listOf(item)
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
 
@@ -413,8 +413,8 @@ class SearchViewModelTest : BaseMockTest() {
         assertThat(suggestionsItems?.last()?.translation).isEqualTo(Translation.EMPTY)
       }
 
-      coVerify(exactly = 1) { searchTranslationsCase.loadTranslation(any<Show>()) }
-      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(any<Movie>()) }
+      coVerify(exactly = 1) { searchTranslationsCase.loadTranslation(item.show!!) }
+      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(ofType(Movie::class)) }
 
       job.cancel()
     }
@@ -426,7 +426,7 @@ class SearchViewModelTest : BaseMockTest() {
         movie = Movie.EMPTY.copy(title = "test"),
       )
       coEvery { searchTranslationsCase.getLanguage() } returns "pl"
-      coEvery { searchTranslationsCase.loadTranslation(any<Movie>()) } returns Translation.EMPTY
+      coEvery { searchTranslationsCase.loadTranslation(item.movie!!) } returns Translation.EMPTY
       coEvery { suggestionsCase.loadSuggestions((any())) } returns listOf(item)
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
 
@@ -438,8 +438,8 @@ class SearchViewModelTest : BaseMockTest() {
         assertThat(suggestionsItems?.last()?.translation).isEqualTo(Translation.EMPTY)
       }
 
-      coVerify(exactly = 1) { searchTranslationsCase.loadTranslation(any<Movie>()) }
-      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(any<Show>()) }
+      coVerify(exactly = 1) { searchTranslationsCase.loadTranslation(item.movie!!) }
+      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(ofType(Show::class)) }
 
       job.cancel()
     }
@@ -452,8 +452,8 @@ class SearchViewModelTest : BaseMockTest() {
 
       SUT.loadMissingSuggestionTranslation(item)
 
-      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(any<Movie>()) }
-      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(any<Show>()) }
+      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(ofType(Movie::class)) }
+      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(ofType(Show::class)) }
     }
 
   @Test
@@ -464,7 +464,7 @@ class SearchViewModelTest : BaseMockTest() {
 
       SUT.loadMissingSuggestionTranslation(item)
 
-      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(any<Movie>()) }
-      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(any<Show>()) }
+      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(ofType(Movie::class)) }
+      coVerify(exactly = 0) { searchTranslationsCase.loadTranslation(ofType(Show::class)) }
     }
 }

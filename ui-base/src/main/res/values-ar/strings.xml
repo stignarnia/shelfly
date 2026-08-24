@@ -20,7 +20,7 @@
   <string name="textSeason">الموسم %1$d</string>
   <string name="textSpecials">الحلقات الخاصة</string>
   <string name="textEpisode">الحلقة %1$d</string>
-  <string name="textSeasonEpisode">S.%02d E.%02d</string>
+  <string name="textSeasonEpisode">S.%1$02d E.%2$02d</string>
   <string name="textSortBy">ترتيب حسب:</string>
   <string name="textNetwork">(%2$s) %1$s</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">البث</string>

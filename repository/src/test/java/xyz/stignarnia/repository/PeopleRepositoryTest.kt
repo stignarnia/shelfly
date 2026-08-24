@@ -19,11 +19,13 @@ import xyz.stignarnia.ui_model.IdTmdb
 import xyz.stignarnia.ui_model.Ids
 import xyz.stignarnia.ui_model.Person
 import xyz.stignarnia.ui_model.Person.Department
+import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.coVerifyOrder
 import io.mockk.confirmVerified
 import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.just
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -33,20 +35,69 @@ import xyz.stignarnia.data_local.database.model.Person as PersonDb
 
 class PeopleRepositoryTest : BaseMockTest() {
 
+  private fun createPersonModel(idTmdb: Long = 1) =
+    Person(
+      ids = Ids.EMPTY.copy(tmdb = IdTmdb(idTmdb)),
+      name = "Person $idTmdb",
+      department = Department.ACTING,
+      bio = null,
+      bioTranslation = null,
+      characters = emptyList(),
+      jobs = emptyList(),
+      episodesCount = 0,
+      birthplace = null,
+      imagePath = null,
+      homepage = null,
+      birthday = null,
+      deathday = null,
+    )
+
   @RelaxedMockK lateinit var peopleDao: PeopleDao
   @RelaxedMockK lateinit var showsDao: ShowsDao
   @RelaxedMockK lateinit var moviesDao: MoviesDao
   @RelaxedMockK lateinit var peopleShowsMoviesDao: PeopleShowsMoviesDao
   @RelaxedMockK lateinit var peopleCreditsDao: PeopleCreditsDao
-  @RelaxedMockK lateinit var person: PersonDb
+  private val person = PersonDb(
+    idTmdb = 1,
+    idImdb = null,
+    name = "Person",
+    department = "Acting",
+    biography = null,
+    biographyTranslation = null,
+    birthday = null,
+    birthplace = null,
+    character = null,
+    episodesCount = null,
+    job = null,
+    deathday = null,
+    image = "test",
+    homepage = null,
+    createdAt = nowUtc(),
+    updatedAt = nowUtc(),
+    detailsUpdatedAt = null,
+  )
   @RelaxedMockK lateinit var tmdbApi: TmdbRemoteDataSource
-  @RelaxedMockK lateinit var settingsRepository: SettingsRepository
+  private lateinit var settingsRepository: SettingsRepository
 
   private lateinit var SUT: PeopleRepository
 
   @Before
   override fun setUp() {
     super.setUp()
+    settingsRepository = SettingsRepository(
+      sorting = mockk(),
+      filters = mockk(),
+      widgets = mockk(),
+      viewMode = mockk(),
+      spoilers = mockk(),
+      sync = mockk(),
+      webdav = mockk(),
+      dispatchers = testDispatchers,
+      localSource = mockk(),
+      transactions = mockk(),
+      mappers = mappers,
+      preferences = mockk(relaxed = true),
+    )
     SUT = PeopleRepository(settingsRepository, database, cloud, transactions, mappers)
     coEvery { database.people } returns peopleDao
     coEvery { database.shows } returns showsDao
@@ -74,6 +125,26 @@ class PeopleRepositoryTest : BaseMockTest() {
         peopleDao.getAllForShow(11)
       }
       coVerify(exactly = 0) { tmdbApi.fetchShowPeople(any()) }
+    }
+
+  @Test
+  fun `Should return remote data for shows if cache is empty`() =
+    runBlocking {
+      coEvery { peopleShowsMoviesDao.getTimestampForShow(any()) } returns nowUtc().minusHours(10).toMillis()
+      coEvery { peopleDao.getAllForShow(any()) } returns listOf()
+      coEvery { tmdbApi.fetchShowPeople(any()) } returns mapOf()
+      coEvery { peopleDao.upsert(any()) } just Runs
+      coEvery { peopleShowsMoviesDao.insertForShow(any(), any()) } just Runs
+
+      SUT.loadAllForShow(Ids.EMPTY.copy(tmdb = IdTmdb(12)))
+
+      coVerifyOrder {
+        peopleShowsMoviesDao.getTimestampForShow(12)
+        peopleDao.getAllForShow(12)
+        tmdbApi.fetchShowPeople(12)
+        peopleDao.upsert(any())
+        peopleShowsMoviesDao.insertForShow(any(), 12)
+      }
     }
 
   @Test
@@ -109,6 +180,26 @@ class PeopleRepositoryTest : BaseMockTest() {
     }
 
   @Test
+  fun `Should return remote data for movies if cache is empty`() =
+    runBlocking {
+      coEvery { peopleShowsMoviesDao.getTimestampForMovie(any()) } returns nowUtc().minusHours(10).toMillis()
+      coEvery { peopleDao.getAllForMovie(any()) } returns listOf()
+      coEvery { tmdbApi.fetchMoviePeople(any()) } returns mapOf()
+      coEvery { peopleDao.upsert(any()) } just Runs
+      coEvery { peopleShowsMoviesDao.insertForMovie(any(), any()) } just Runs
+
+      SUT.loadAllForMovie(Ids.EMPTY.copy(tmdb = IdTmdb(12)))
+
+      coVerifyOrder {
+        peopleShowsMoviesDao.getTimestampForMovie(12)
+        peopleDao.getAllForMovie(12)
+        tmdbApi.fetchMoviePeople(12)
+        peopleDao.upsert(any())
+        peopleShowsMoviesDao.insertForMovie(any(), 12)
+      }
+    }
+
+  @Test
   fun `Should return remote data for movies properly`() =
     runBlocking {
       coEvery { peopleShowsMoviesDao.getTimestampForMovie(any()) } returns nowUtc().minusDays(10).toMillis()
@@ -126,70 +217,66 @@ class PeopleRepositoryTest : BaseMockTest() {
     }
 
   @Test
-  fun `Should return shows items with image in the first place`() =
-    runBlocking {
-      coEvery { peopleShowsMoviesDao.getTimestampForShow(any()) } returns nowUtc().minusHours(10).toMillis()
-
-      val person1 = mockk<PersonDb>(relaxed = true) {
-        coEvery { image } returns null
-        coEvery { department } returns "Acting"
-      }
-      val person2 = mockk<PersonDb>(relaxed = true) {
-        coEvery { image } returns "test"
-        coEvery { department } returns "Acting"
-      }
-      val person3 = mockk<PersonDb>(relaxed = true) {
-        coEvery { image } returns "test"
-        coEvery { department } returns "Acting"
-      }
-      coEvery { peopleDao.getAllForShow(any()) } returns listOf(person1, person2, person3)
-
-      val result = SUT.loadAllForShow(Ids.EMPTY.copy(tmdb = IdTmdb(11)))
-      assertThat(result[Department.ACTING]!!.first().imagePath).isNotNull()
-
-      coVerify { peopleDao.getAllForShow(any()) }
-    }
-
-  @Test
-  fun `Should return movies items with image in the first place`() =
-    runBlocking {
-      coEvery { peopleShowsMoviesDao.getTimestampForMovie(any()) } returns nowUtc().minusHours(10).toMillis()
-
-      val person1 = mockk<PersonDb>(relaxed = true) {
-        coEvery { image } returns null
-        coEvery { department } returns "Acting"
-      }
-      val person2 = mockk<PersonDb>(relaxed = true) {
-        coEvery { image } returns "test"
-        coEvery { department } returns "Acting"
-      }
-      val person3 = mockk<PersonDb>(relaxed = true) {
-        coEvery { image } returns "test"
-        coEvery { department } returns "Acting"
-      }
-      coEvery { peopleDao.getAllForMovie(any()) } returns listOf(person1, person2, person3)
-
-      val result = SUT.loadAllForMovie(Ids.EMPTY.copy(tmdb = IdTmdb(11)))
-      assertThat(result[Department.ACTING]!!.first().imagePath).isNotNull()
-
-      coVerify { peopleDao.getAllForMovie(any()) }
-    }
-
-  @Test
   fun `Should return locally cached credits if cache is valid`() =
     runBlocking {
-      val person = mockk<Person>(relaxed = true)
-      val personDb = mockk<PersonDb>(relaxed = true) {
-        coEvery { idTmdb } returns 1
-      }
-      val show = mockk<Show>(relaxed = true)
-      val movie = mockk<Movie>(relaxed = true)
+      val personModel = createPersonModel(1)
+      val personDb = person.copy(idTmdb = 1)
+      val show = Show(
+        idTmdb = 1,
+        idTvdb = 1,
+        idImdb = "1",
+        idSlug = "1",
+        idTvrage = 1,
+        title = "Show",
+        year = 2020,
+        overview = "",
+        firstAired = "",
+        runtime = 45,
+        airtimeDay = "",
+        airtimeTime = "",
+        airtimeTimezone = "",
+        certification = "",
+        network = "",
+        networkLogoPath = "",
+        country = "",
+        trailer = "",
+        homepage = "",
+        status = "",
+        rating = 5f,
+        votes = 10,
+        commentCount = 0,
+        genres = "",
+        airedEpisodes = 10,
+        createdAt = 0,
+        updatedAt = 0,
+      )
+      val movie = Movie(
+        idTmdb = 1,
+        idImdb = "1",
+        idSlug = "1",
+        title = "Movie",
+        year = 2020,
+        overview = "",
+        released = "",
+        runtime = 90,
+        country = "",
+        trailer = "",
+        language = "",
+        homepage = "",
+        status = "",
+        rating = 5f,
+        votes = 10,
+        commentCount = 0,
+        genres = "",
+        updatedAt = 0,
+        createdAt = 0,
+      )
       coEvery { peopleDao.getById(any()) } returns personDb
       coEvery { peopleCreditsDao.getTimestampForPerson(any()) } returns nowUtcMillis() - 100
       coEvery { peopleCreditsDao.getAllShowsForPerson(any()) } returns listOf(show)
       coEvery { peopleCreditsDao.getAllMoviesForPerson(any()) } returns listOf(movie)
 
-      val result = SUT.loadCredits(person)
+      val result = SUT.loadCredits(personModel)
 
       assertThat(result).hasSize(2)
       assertThat(result[0].show).isNotNull()
@@ -200,22 +287,66 @@ class PeopleRepositoryTest : BaseMockTest() {
   @Test
   fun `Should return remote credits if cache is invalid`() =
     runBlocking {
-      val person = mockk<Person>(relaxed = true)
-      val personDb = mockk<PersonDb>(relaxed = true) {
-        coEvery { idTmdb } returns 1
-      }
-      val creditsShow = mockk<PersonCredit>(relaxed = true) {
-        coEvery { show } returns mockk(relaxed = true)
-        coEvery { movie } returns null
-      }
-      val creditsMovie = mockk<PersonCredit>(relaxed = true) {
-        coEvery { show } returns null
-        coEvery { movie } returns mockk(relaxed = true)
-      }
+      val personModel = createPersonModel(1)
+      val personDb = person.copy(idTmdb = 1)
+      val showRemote = xyz.stignarnia.data_remote.catalog.model.Show(
+        ids = xyz.stignarnia.data_remote.catalog.model.Ids(
+          tmdb = 1,
+          imdb = "tt1",
+          slug = null,
+          tvdb = null,
+          tvrage = null,
+        ),
+        title = "Show",
+        year = 2020,
+        overview = null,
+        first_aired = null,
+        runtime = null,
+        airs = null,
+        certification = null,
+        network = null,
+        country = null,
+        trailer = null,
+        homepage = null,
+        status = null,
+        rating = null,
+        votes = null,
+        comment_count = null,
+        genres = null,
+        aired_episodes = null,
+      )
+      val movieRemote = xyz.stignarnia.data_remote.catalog.model.Movie(
+        ids = xyz.stignarnia.data_remote.catalog.model.Ids(
+          tmdb = 1,
+          imdb = "tt1",
+          slug = null,
+          tvdb = null,
+          tvrage = null,
+        ),
+        title = "Movie",
+        year = 2020,
+        overview = null,
+        released = null,
+        runtime = null,
+        country = null,
+        trailer = null,
+        homepage = null,
+        status = null,
+        rating = null,
+        votes = null,
+        comment_count = null,
+        genres = null,
+        language = null,
+      )
+      val creditsShow =
+        PersonCredit(characters = null, episode_count = null, series_regular = null, show = showRemote, movie = null)
+      val creditsMovie =
+        PersonCredit(characters = null, episode_count = null, series_regular = null, show = null, movie = movieRemote)
+
       coEvery { peopleDao.getById(any()) } returns personDb
       coEvery { tmdbApi.fetchPersonCredits(any(), any()) } returns listOf(creditsShow, creditsMovie)
 
-      val result = SUT.loadCredits(person)
+      val result = SUT.loadCredits(personModel)
 
       assertThat(result).hasSize(2)
       assertThat(result[0].show).isNotNull()

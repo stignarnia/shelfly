@@ -6,6 +6,10 @@ import xyz.stignarnia.repository.TranslationsRepository
 import xyz.stignarnia.repository.images.MovieImagesProvider
 import xyz.stignarnia.ui_base.utilities.events.MessageEvent
 import xyz.stignarnia.ui_model.CalendarMode
+import xyz.stignarnia.ui_model.Image
+import xyz.stignarnia.ui_model.ImageType
+import xyz.stignarnia.ui_model.Movie
+import xyz.stignarnia.ui_model.SpoilersSettings
 import xyz.stignarnia.ui_progress_movies.BaseMockTest
 import xyz.stignarnia.ui_progress_movies.calendar.cases.items.CalendarMoviesFutureCase
 import xyz.stignarnia.ui_progress_movies.calendar.cases.items.CalendarMoviesRecentsCase
@@ -15,7 +19,6 @@ import io.mockk.Called
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.toList
@@ -40,18 +43,25 @@ class CalendarMoviesViewModelTest : BaseMockTest() {
   private val stateResult = mutableListOf<CalendarMoviesUiState>()
   private val messagesResult = mutableListOf<MessageEvent>()
 
+  private val movieItem = CalendarMovieListItem.MovieItem(
+    movie = Movie.EMPTY,
+    image = Image.createUnknown(ImageType.POSTER),
+    isLoading = false,
+    isWatched = false,
+    isWatchlist = false,
+    translation = null,
+    dateFormat = null,
+    spoilers = SpoilersSettings.INITIAL,
+  )
+
   @Before
   override fun setUp() {
     super.setUp()
 
-    coEvery { translationsRepository.getLanguage() } returns "en"
+    coEvery { futureCase.loadItems(any()) } returns listOf()
+    coEvery { recentsCase.loadItems(any()) } returns listOf()
 
-    SUT = CalendarMoviesViewModel(
-      recentsCase,
-      futureCase,
-      imagesProvider,
-      translationsRepository,
-    )
+    SUT = CalendarMoviesViewModel(recentsCase, futureCase, imagesProvider, translationsRepository)
   }
 
   @After
@@ -65,12 +75,11 @@ class CalendarMoviesViewModelTest : BaseMockTest() {
   fun `Should load items if parent timestamp changed`() =
     runTest {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
-      val item = mockk<CalendarMovieListItem.MovieItem>()
-      coEvery { futureCase.loadItems(any()) } returns listOf(item)
+      coEvery { futureCase.loadItems(any()) } returns listOf(movieItem)
 
       SUT.onParentState(parentState.copy(timestamp = 123))
 
-      assertThat(stateResult.last().items).containsExactly(item)
+      assertThat(stateResult.last().items).containsExactly(movieItem)
       coVerify(exactly = 1) { futureCase.loadItems(any()) }
       coVerify { recentsCase wasNot Called }
       job.cancel()
@@ -80,8 +89,7 @@ class CalendarMoviesViewModelTest : BaseMockTest() {
   fun `Should not reload items if parent timestamp is the same`() =
     runTest {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
-      val item = mockk<CalendarMovieListItem.MovieItem>()
-      coEvery { futureCase.loadItems(any()) } returns listOf(item)
+      coEvery { futureCase.loadItems(any()) } returns listOf(movieItem)
 
       SUT.onParentState(parentState.copy(timestamp = 0))
 
@@ -94,12 +102,11 @@ class CalendarMoviesViewModelTest : BaseMockTest() {
   fun `Should load items if calendar mode changed`() =
     runTest {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
-      val item = mockk<CalendarMovieListItem.MovieItem>()
-      coEvery { recentsCase.loadItems(any()) } returns listOf(item)
+      coEvery { recentsCase.loadItems(any()) } returns listOf(movieItem)
 
       SUT.onParentState(parentState.copy(timestamp = 0, calendarMode = CalendarMode.RECENTS))
 
-      assertThat(stateResult.last().items).containsExactly(item)
+      assertThat(stateResult.last().items).containsExactly(movieItem)
       coVerify(exactly = 1) { recentsCase.loadItems(any()) }
       coVerify { futureCase wasNot Called }
       job.cancel()
@@ -109,12 +116,11 @@ class CalendarMoviesViewModelTest : BaseMockTest() {
   fun `Should load items if search query changed`() =
     runTest {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
-      val item = mockk<CalendarMovieListItem.MovieItem>()
-      coEvery { futureCase.loadItems(any()) } returns listOf(item)
+      coEvery { futureCase.loadItems(any()) } returns listOf(movieItem)
 
       SUT.onParentState(parentState.copy(timestamp = 0, searchQuery = "test"))
 
-      assertThat(stateResult.last().items).containsExactly(item)
+      assertThat(stateResult.last().items).containsExactly(movieItem)
       coVerify(exactly = 1) { futureCase.loadItems(any()) }
       coVerify { recentsCase wasNot Called }
       job.cancel()
@@ -124,13 +130,12 @@ class CalendarMoviesViewModelTest : BaseMockTest() {
   fun `Should not reload items if parent search query is the same`() =
     runTest {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
-      val item = mockk<CalendarMovieListItem.MovieItem>()
-      coEvery { futureCase.loadItems(any()) } returns listOf(item)
+      coEvery { futureCase.loadItems(any()) } returns listOf(movieItem)
 
       SUT.onParentState(parentState.copy(timestamp = 0, searchQuery = "test"))
       SUT.onParentState(parentState.copy(timestamp = 0, searchQuery = "test"))
 
-      assertThat(stateResult.last().items).containsExactly(item)
+      assertThat(stateResult.last().items).containsExactly(movieItem)
       coVerify(exactly = 1) { futureCase.loadItems(any()) }
       coVerify { recentsCase wasNot Called }
       job.cancel()

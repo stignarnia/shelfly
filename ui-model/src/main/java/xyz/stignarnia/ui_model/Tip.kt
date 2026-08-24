@@ -3,7 +3,7 @@ package xyz.stignarnia.ui_model
 import androidx.annotation.StringRes
 
 enum class Tip(
-  @StringRes val textResId: Int,
+  @param:StringRes val textResId: Int,
 ) {
   MENU_MODES(R.string.textTipBottomModeMenu),
   MENU_DISCOVER(R.string.textTipDiscover),

@@ -3,7 +3,6 @@ package xyz.stignarnia.ui_movie.sections.collections.details
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
@@ -50,10 +49,10 @@ class MovieDetailsCollectionBottomSheet : BaseBottomSheetFragment(R.layout.view_
     fun createBundle(
       collectionId: IdTmdb,
       sourceMovieId: IdTmdb,
-    ) = bundleOf(
-      ARG_ID to collectionId,
-      ARG_MOVIE_ID to sourceMovieId,
-    )
+    ) = Bundle().apply {
+      putParcelable(ARG_ID, collectionId)
+      putParcelable(ARG_MOVIE_ID, sourceMovieId)
+    }
   }
 
   private val viewModel by viewModels<MovieDetailsCollectionViewModel>()
@@ -122,10 +121,10 @@ class MovieDetailsCollectionBottomSheet : BaseBottomSheetFragment(R.layout.view_
       return
     }
 
-    val resultBundle = bundleOf(ARG_COLLECTION_ID to collectionId)
+    val resultBundle = Bundle().apply { putParcelable(ARG_COLLECTION_ID, collectionId) }
     setFragmentResult(REQUEST_DETAILS, resultBundle)
 
-    val argsBundle = bundleOf(ARG_MOVIE_ID to item.movie.tmdbId)
+    val argsBundle = Bundle().apply { putLong(ARG_MOVIE_ID, item.movie.tmdbId) }
     requireParentFragment()
       .findNavController()
       .navigate(R.id.actionMovieCollectionDialogToMovie, argsBundle)

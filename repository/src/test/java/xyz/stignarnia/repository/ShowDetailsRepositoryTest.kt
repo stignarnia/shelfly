@@ -38,14 +38,73 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
     SUT = ShowDetailsRepository(cloud, database, transactions, mappers)
   }
 
+  private fun createShowDb(
+    idTmdb: Long = 1,
+    idImdb: String = "tt0000001",
+    updatedAt: Long = nowUtcMillis() - 100,
+  ) = Show(
+    idTmdb = idTmdb,
+    idTvdb = 1,
+    idImdb = idImdb,
+    idSlug = "show-1",
+    idTvrage = 1,
+    title = "Show",
+    year = 2020,
+    overview = "",
+    firstAired = "",
+    runtime = 45,
+    airtimeDay = "",
+    airtimeTime = "",
+    airtimeTimezone = "",
+    certification = "",
+    network = "",
+    country = "",
+    trailer = "",
+    homepage = "",
+    status = "",
+    rating = 5f,
+    votes = 10,
+    commentCount = 0,
+    genres = "",
+    airedEpisodes = 10,
+    createdAt = 0,
+    updatedAt = updatedAt,
+  )
+
+  private fun createShowRemote(
+    tmdbId: Long = 1,
+    imdbId: String = "tt0000001",
+  ) = ShowRemote(
+    ids = xyz.stignarnia.data_remote.catalog.model.Ids(
+      slug = null,
+      tvdb = null,
+      imdb = imdbId,
+      tmdb = tmdbId,
+      tvrage = null,
+    ),
+    title = "Show",
+    year = 2020,
+    overview = null,
+    first_aired = null,
+    runtime = null,
+    airs = null,
+    certification = null,
+    network = null,
+    country = null,
+    trailer = null,
+    homepage = null,
+    status = null,
+    rating = null,
+    votes = null,
+    comment_count = null,
+    genres = null,
+    aired_episodes = null,
+  )
+
   @Test
   fun `Should load cached show details on given conditions`() {
     runBlocking {
-      val showDb = mockk<Show>(relaxed = true) {
-        every { idTmdb } returns 1
-        every { idImdb } returns "tt0000001"
-        every { updatedAt } returns nowUtcMillis() - 100
-      }
+      val showDb = createShowDb()
       coEvery { showsDao.getById(any<Long>()) } returns showDb
 
       val show = SUT.load(IdTmdb(1), false)
@@ -59,16 +118,8 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
   @Test
   fun `Should load remote show details if cached show has no IMDb id`() {
     runBlocking {
-      // Only the details endpoint appends external_ids, so a row cached by a list endpoint has no IMDb id and external ratings cannot be looked up.
-      val showDb = mockk<Show>(relaxed = true) {
-        every { idTmdb } returns 1
-        every { idImdb } returns ""
-        every { updatedAt } returns nowUtcMillis() - 100
-      }
-      val showRemote = mockk<ShowRemote>(relaxed = true) {
-        every { ids?.tmdb } returns 1
-        every { ids?.imdb } returns "tt0000001"
-      }
+      val showDb = createShowDb(idImdb = "")
+      val showRemote = createShowRemote(tmdbId = 1, imdbId = "tt0000001")
       coEvery { showsDao.getById(any<Long>()) } returns showDb
       coEvery { showsDao.upsert(any()) } just Runs
       coEvery { catalogApi.fetchShow(any<Long>()) } returns showRemote
@@ -83,9 +134,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
   @Test
   fun `Should load remote show details if force flag is set`() {
     runBlocking {
-      val showRemote = mockk<ShowRemote>(relaxed = true) {
-        every { ids?.tmdb } returns 1
-      }
+      val showRemote = createShowRemote(tmdbId = 1)
       coEvery { showsDao.getById(any<Long>()) } returns null
       coEvery { showsDao.upsert(any()) } just Runs
       coEvery { catalogApi.fetchShow(any<Long>()) } returns showRemote
@@ -105,9 +154,7 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
   @Test
   fun `Should load remote show details if nothing is cached`() {
     runBlocking {
-      val showRemote = mockk<ShowRemote>(relaxed = true) {
-        every { ids?.tmdb } returns 1
-      }
+      val showRemote = createShowRemote(tmdbId = 1)
       coEvery { showsDao.getById(any<Long>()) } returns null
       coEvery { showsDao.upsert(any()) } just Runs
       coEvery { catalogApi.fetchShow(any<Long>()) } returns showRemote
@@ -127,13 +174,8 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
   @Test
   fun `Should load remote show details if cached show expired`() {
     runBlocking {
-      val showDb = mockk<Show>(relaxed = true) {
-        every { idTmdb } returns 1
-        every { updatedAt } returns nowUtcMillis() - TimeUnit.DAYS.toMillis(10)
-      }
-      val showRemote = mockk<ShowRemote>(relaxed = true) {
-        every { ids?.tmdb } returns 1
-      }
+      val showDb = createShowDb(updatedAt = nowUtcMillis() - TimeUnit.DAYS.toMillis(10))
+      val showRemote = createShowRemote(tmdbId = 1)
       coEvery { showsDao.getById(any<Long>()) } returns showDb
       coEvery { showsDao.upsert(any()) } just Runs
       coEvery { catalogApi.fetchShow(any<Long>()) } returns showRemote

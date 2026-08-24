@@ -23,6 +23,7 @@ import xyz.stignarnia.ui_base.utilities.events.MessageEvent
 import xyz.stignarnia.ui_base.utilities.extensions.capitalizeWords
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
+import xyz.stignarnia.ui_base.utilities.extensions.navigateBack
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.showErrorSnackbar
 import xyz.stignarnia.ui_base.utilities.extensions.showInfoSnackbar
@@ -96,7 +97,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
 
   private fun setupView() {
     with(binding) {
-      toolbar.onClick { activity?.onBackPressed() }
+      toolbar.onClick { navigateBack() }
       exportButton.onClick { createNewExport() }
     }
   }

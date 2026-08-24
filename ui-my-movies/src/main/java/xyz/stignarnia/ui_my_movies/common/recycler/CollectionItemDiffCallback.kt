@@ -52,7 +52,7 @@ class CollectionItemDiffCallback : DiffUtil.ItemCallback<CollectionListItem>() {
   ): Boolean =
     oldItem.upcoming == newItem.upcoming &&
       oldItem.sortOrder == newItem.sortOrder &&
-      oldItem.genres == newItem.genres &&
+      oldItem.genres.toTypedArray().contentEquals(newItem.genres.toTypedArray()) &&
       oldItem.sortType == newItem.sortType &&
       oldItem.count == newItem.count
 }

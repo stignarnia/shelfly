@@ -4,6 +4,7 @@ import BaseMockTest
 import androidx.lifecycle.viewModelScope
 import com.google.common.truth.Truth.assertThat
 import xyz.stignarnia.repository.movies.MoviesRepository
+import xyz.stignarnia.repository.movies.MyMoviesRepository
 import xyz.stignarnia.ui_base.utilities.events.MessageEvent
 import xyz.stignarnia.ui_model.Genre
 import xyz.stignarnia.ui_model.IdTmdb
@@ -16,6 +17,7 @@ import xyz.stignarnia.ui_statistics_movies.cases.StatisticsMoviesLoadRatingsCase
 import xyz.stignarnia.ui_statistics_movies.views.ratings.recycler.StatisticsMoviesRatingItem
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.toList
@@ -27,12 +29,12 @@ import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@Suppress("EXPERIMENTAL_API_USAGE")
 class StatisticsMoviesViewModelTest : BaseMockTest() {
 
   @MockK lateinit var ratingsCase: StatisticsMoviesLoadRatingsCase
-  @MockK lateinit var moviesRepository: MoviesRepository
+  @MockK lateinit var myMovies: MyMoviesRepository
 
+  private lateinit var moviesRepository: MoviesRepository
   private lateinit var SUT: StatisticsMoviesViewModel
 
   private val stateResult = mutableListOf<StatisticsMoviesUiState>()
@@ -42,6 +44,14 @@ class StatisticsMoviesViewModelTest : BaseMockTest() {
   override fun setUp() {
     super.setUp()
 
+    moviesRepository = MoviesRepository(
+      discoverMovies = mockk(),
+      relatedMovies = mockk(),
+      movieDetails = mockk(),
+      myMovies = myMovies,
+      watchlistMovies = mockk(),
+      hiddenMovies = mockk(),
+    )
     SUT = StatisticsMoviesViewModel(
       ratingsCase,
       moviesRepository,
@@ -95,7 +105,7 @@ class StatisticsMoviesViewModelTest : BaseMockTest() {
         Movie.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(3)), runtime = 3, genres = listOf("war", "animation")),
       )
 
-      coEvery { moviesRepository.myMovies.loadAll() } returns movies
+      coEvery { myMovies.loadAll() } returns movies
 
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
 

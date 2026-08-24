@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -77,7 +76,7 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
         isWatched = isWatched,
         showTabs = showTabs,
       )
-      return bundleOf(ARG_OPTIONS to options)
+      return Bundle().apply { putParcelable(ARG_OPTIONS, options) }
     }
   }
 
@@ -365,7 +364,10 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
         else -> Timber.w("Unknown result.")
       }
       viewModel.loadRatings(options.showIds.tmdb, options.episode)
-      setFragmentResult(REQUEST_EPISODE_DETAILS, bundleOf(NavigationArgs.ACTION_RATING_CHANGED to true))
+      setFragmentResult(
+        REQUEST_EPISODE_DETAILS,
+        Bundle().apply { putBoolean(NavigationArgs.ACTION_RATING_CHANGED, true) },
+      )
     }
     val bundle = RatingsBottomSheet.createBundle(
       id = options.episode.ids.tmdb,
@@ -389,7 +391,12 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
     override fun onTabSelected(tab: TabLayout.Tab?) {
       binding.episodeDetailsTabs.removeOnTabSelectedListener(this)
       closeSheet()
-      setFragmentResult(REQUEST_EPISODE_DETAILS, bundleOf(ACTION_EPISODE_TAB_SELECTED to tab?.tag))
+      setFragmentResult(
+        REQUEST_EPISODE_DETAILS,
+        Bundle().apply {
+          (tab?.tag as? Episode)?.let { putParcelable(ACTION_EPISODE_TAB_SELECTED, it) }
+        },
+      )
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab?) = Unit

@@ -18,7 +18,7 @@ import xyz.stignarnia.ui_settings.R
  */
 enum class AppTheme(
   val id: String,
-  @StringRes val displayName: Int,
+  @get:StringRes val displayName: Int,
   val nightMode: Int,
   val isDynamic: Boolean = false,
 ) {

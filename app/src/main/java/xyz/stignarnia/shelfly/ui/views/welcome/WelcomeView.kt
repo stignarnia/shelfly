@@ -212,7 +212,7 @@ class WelcomeView : FrameLayout {
    */
   private fun resourcesFor(language: AppLanguage): Resources {
     val configuration = Configuration(context.resources.configuration)
-    configuration.setLocale(Locale(language.code))
+    configuration.setLocale(Locale.forLanguageTag(language.code))
     return context.createConfigurationContext(configuration).resources
   }
 }

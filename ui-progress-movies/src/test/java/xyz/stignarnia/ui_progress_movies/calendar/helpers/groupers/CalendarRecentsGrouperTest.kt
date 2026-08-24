@@ -1,12 +1,13 @@
 package xyz.stignarnia.ui_progress_movies.calendar.helpers.groupers
 
 import com.google.common.truth.Truth.assertThat
+import xyz.stignarnia.ui_model.Image
+import xyz.stignarnia.ui_model.ImageType
 import xyz.stignarnia.ui_model.Movie
+import xyz.stignarnia.ui_model.SpoilersSettings
 import xyz.stignarnia.ui_progress_movies.BaseMockTest
 import xyz.stignarnia.ui_progress_movies.R
 import xyz.stignarnia.ui_progress_movies.calendar.recycler.CalendarMovieListItem
-import io.mockk.every
-import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Test
@@ -18,6 +19,18 @@ import java.time.ZonedDateTime
 class CalendarRecentsGrouperTest : BaseMockTest() {
 
   private lateinit var SUT: CalendarRecentsGrouper
+
+  private fun createMovieItem(movie: Movie) =
+    CalendarMovieListItem.MovieItem(
+      movie = movie,
+      image = Image.createUnknown(ImageType.POSTER),
+      isLoading = false,
+      isWatched = false,
+      isWatchlist = false,
+      translation = null,
+      dateFormat = null,
+      spoilers = SpoilersSettings.INITIAL,
+    )
 
   @Before
   override fun setUp() {
@@ -34,18 +47,10 @@ class CalendarRecentsGrouperTest : BaseMockTest() {
     val movie3 = Movie.EMPTY.copy(released = now.minusDays(30))
     val movie4 = Movie.EMPTY.copy(released = now.minusDays(90))
 
-    val item1 = mockk<CalendarMovieListItem.MovieItem> {
-      every { movie } returns movie1
-    }
-    val item2 = mockk<CalendarMovieListItem.MovieItem> {
-      every { movie } returns movie2
-    }
-    val item3 = mockk<CalendarMovieListItem.MovieItem> {
-      every { movie } returns movie3
-    }
-    val item4 = mockk<CalendarMovieListItem.MovieItem> {
-      every { movie } returns movie4
-    }
+    val item1 = createMovieItem(movie1)
+    val item2 = createMovieItem(movie2)
+    val item3 = createMovieItem(movie3)
+    val item4 = createMovieItem(movie4)
 
     val results = SUT.groupByTime(zonedNow, listOf(item1, item2, item3, item4))
 
@@ -66,9 +71,7 @@ class CalendarRecentsGrouperTest : BaseMockTest() {
     val now = LocalDate.parse("2021-12-20") // Monday
     val movie1 = Movie.EMPTY.copy(released = now.minusDays(91))
 
-    val item1 = mockk<CalendarMovieListItem.MovieItem> {
-      every { movie } returns movie1
-    }
+    val item1 = createMovieItem(movie1)
 
     val results = SUT.groupByTime(zonedNow, listOf(item1))
 

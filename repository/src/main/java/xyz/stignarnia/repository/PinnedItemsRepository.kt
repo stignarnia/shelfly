@@ -10,8 +10,8 @@ import javax.inject.Singleton
 
 @Singleton
 class PinnedItemsRepository @Inject constructor(
-  @Named("watchlistPreferences") private val sharedPreferences: SharedPreferences,
-  @Named("progressMoviesPreferences") private val sharedPreferencesMovies: SharedPreferences,
+  @param:Named("watchlistPreferences") private val sharedPreferences: SharedPreferences,
+  @param:Named("progressMoviesPreferences") private val sharedPreferencesMovies: SharedPreferences,
 ) {
 
   fun addPinnedItem(show: Show) = addShowPinnedItem(IdTmdb(show.tmdbId))

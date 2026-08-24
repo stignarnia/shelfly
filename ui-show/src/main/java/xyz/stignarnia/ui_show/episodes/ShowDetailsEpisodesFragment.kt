@@ -3,7 +3,6 @@ package xyz.stignarnia.ui_show.episodes
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.setFragmentResultListener
@@ -60,9 +59,9 @@ class ShowDetailsEpisodesFragment :
       showId: IdTmdb,
       seasonId: IdTmdb,
     ): Bundle =
-      bundleOf(
-        NavigationArgs.ARG_OPTIONS to Options(showId, seasonId),
-      )
+      Bundle().apply {
+        putParcelable(NavigationArgs.ARG_OPTIONS, Options(showId, seasonId))
+      }
   }
 
   override val navigationId = R.id.showDetailsEpisodesFragment

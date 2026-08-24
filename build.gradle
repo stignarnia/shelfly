@@ -5,7 +5,7 @@ buildscript {
   repositories {
     google()
     mavenCentral()
-    maven { url "https://plugins.gradle.org/m2/" }
+    maven { url = "https://plugins.gradle.org/m2/" }
   }
 
   dependencies {
@@ -33,17 +33,21 @@ allprojects {
 
 subprojects {
   // Centralised so the SDK and bytecode level live in one place instead of being repeated in every module's android {} block.
+  // AGP's built-in Kotlin support creates the kotlin extension itself, so this hooks com.android.base rather than org.jetbrains.kotlin.android - the latter is never applied and a block keyed on it never runs.
   plugins.withId("com.android.base") {
     android {
-      compileSdk versions.compileSdk
-      buildToolsVersion versions.buildTools
+      compileSdk rootProject.ext.versions.compileSdk
+      buildToolsVersion rootProject.ext.versions.buildTools
     }
-  }
 
-  // Gradle itself runs on whatever JDK is installed; compilation is pinned to the toolchain so the output does not change with the local JDK.
-  plugins.withId("org.jetbrains.kotlin.android") {
     kotlin {
-      jvmToolchain(versions.jvmTarget)
+      // Gradle itself runs on whatever JDK is installed; compilation is pinned to the toolchain so the output does not change with the local JDK.
+      jvmToolchain(rootProject.ext.versions.jvmTarget)
+
+      compilerOptions {
+        // The tree compiles warning-free, so warnings are errors to keep it that way.
+        allWarningsAsErrors = true
+      }
     }
   }
 }

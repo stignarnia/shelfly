@@ -2,7 +2,6 @@ package xyz.stignarnia.ui_progress.history.filters
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.fragment.app.setFragmentResult
 import xyz.stignarnia.ui_base.BaseBottomSheetFragment
@@ -23,7 +22,8 @@ class HistoryPeriodFilterBottomSheet : BaseBottomSheetFragment(R.layout.fragment
     const val REQUEST_KEY = "REQUEST_KEY_HISTORY_DATES_FILTER"
     const val ARG_SELECTED_FILTER = "ARG_SELECTED_ITEM"
 
-    fun createBundle(selectedItem: HistoryPeriod): Bundle = bundleOf(ARG_SELECTED_FILTER to selectedItem)
+    fun createBundle(selectedItem: HistoryPeriod): Bundle =
+      Bundle().apply { putSerializable(ARG_SELECTED_FILTER, selectedItem) }
   }
 
   private val binding by viewBinding(FragmentHistoryPeriodFilterBinding::bind)
@@ -69,7 +69,7 @@ class HistoryPeriodFilterBottomSheet : BaseBottomSheetFragment(R.layout.fragment
       closeSheet()
       return
     }
-    val result = bundleOf(ARG_SELECTED_FILTER to selectedPeriod)
+    val result = Bundle().apply { putSerializable(ARG_SELECTED_FILTER, selectedPeriod) }
     setFragmentResult(REQUEST_KEY, result)
     closeSheet()
   }

@@ -3,7 +3,6 @@ package xyz.stignarnia.ui_my_shows.common.filters.network
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.core.view.forEach
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
@@ -34,7 +33,7 @@ internal class CollectionFiltersNetworkBottomSheet : BaseBottomSheetFragment(R.l
     private const val ARG_ORIGIN = "ARG_ORIGIN"
     const val REQUEST_COLLECTION_FILTERS_NETWORK = "REQUEST_COLLECTION_FILTERS_NETWORK"
 
-    fun createBundle(origin: CollectionFiltersOrigin): Bundle = bundleOf(ARG_ORIGIN to origin)
+    fun createBundle(origin: CollectionFiltersOrigin): Bundle = Bundle().apply { putSerializable(ARG_ORIGIN, origin) }
   }
 
   private val viewModel by viewModels<CollectionFiltersNetworkViewModel>()

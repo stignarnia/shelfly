@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 
 enum class MovieStatus(
   val key: String,
-  @StringRes val displayName: Int,
+  @param:StringRes val displayName: Int,
 ) {
   RELEASED("released", R.string.textMovieStatusReleased),
   IN_PRODUCTION("in production", R.string.textMovieStatusInProduction),

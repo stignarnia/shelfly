@@ -16,6 +16,7 @@ import android.view.View.VISIBLE
 import android.widget.RemoteViews
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.Mode
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_model.CalendarMode
 import xyz.stignarnia.ui_progress_movies.calendar.cases.items.CalendarMoviesFutureCase
@@ -65,6 +66,8 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
     appWidgetManager: AppWidgetManager,
     widgetId: Int,
   ) {
+    if (!AndroidVersion.isAtLeastAndroid12) return
+
     val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
 
     val palette = palette(context, widgetId)

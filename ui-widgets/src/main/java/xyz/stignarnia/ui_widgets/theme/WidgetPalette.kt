@@ -24,17 +24,17 @@ import xyz.stignarnia.ui_widgets.R
  * [mediaFrame] is a drawable rather than a colour because the poster frame carries two themed colours at once, a fill and a stroke, and a background tint would take both.
  */
 data class WidgetPalette(
-  @ColorInt val background: Int,
-  @ColorInt val textPrimary: Int,
-  @ColorInt val textSecondary: Int,
-  @ColorInt val accent: Int,
-  @ColorInt val accentText: Int,
-  @ColorInt val badge: Int,
-  @ColorInt val placeholderInk: Int,
-  @ColorInt val searchBackground: Int,
-  @ColorInt val statusBackground: Int,
-  @ColorInt val statusText: Int,
-  @DrawableRes val mediaFrame: Int,
+  @get:ColorInt val background: Int,
+  @get:ColorInt val textPrimary: Int,
+  @get:ColorInt val textSecondary: Int,
+  @get:ColorInt val accent: Int,
+  @get:ColorInt val accentText: Int,
+  @get:ColorInt val badge: Int,
+  @get:ColorInt val placeholderInk: Int,
+  @get:ColorInt val searchBackground: Int,
+  @get:ColorInt val statusBackground: Int,
+  @get:ColorInt val statusText: Int,
+  @get:DrawableRes val mediaFrame: Int,
 )
 
 /**

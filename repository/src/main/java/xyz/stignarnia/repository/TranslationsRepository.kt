@@ -27,7 +27,7 @@ import xyz.stignarnia.data_remote.catalog.model.Translation as TranslationRemote
 
 @Singleton
 class TranslationsRepository @Inject constructor(
-  @Named("miscPreferences") private var miscPreferences: SharedPreferences,
+  @param:Named("miscPreferences") private var miscPreferences: SharedPreferences,
   private val remoteSource: RemoteDataSource,
   private val localSource: LocalDataSource,
   private val mappers: Mappers,

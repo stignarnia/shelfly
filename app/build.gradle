@@ -1,6 +1,5 @@
 plugins {
   id 'com.android.application'
-  id 'kotlin-android'
   id 'com.google.devtools.ksp'
   id 'dagger.hilt.android.plugin'
 }
@@ -8,35 +7,30 @@ plugins {
 apply from: '../versions.gradle'
 
 android {
-  kotlinOptions { jvmTarget = "21" }
   compileOptions {
-    coreLibraryDesugaringEnabled true
-    sourceCompatibility JavaVersion.VERSION_21
-    targetCompatibility JavaVersion.VERSION_21
+    coreLibraryDesugaringEnabled = true
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
   }
 
   buildFeatures {
     buildConfig = true
-    viewBinding true
+    viewBinding = true
   }
 
   hilt {
     enableExperimentalClasspathAggregation = true
   }
 
-  compileSdkVersion versions.compileSdk
-
   defaultConfig {
-    applicationId "xyz.stignarnia.shelfly"
-    minSdkVersion versions.minSdk
-    targetSdkVersion versions.targetSdk
-    compileSdkVersion versions.compileSdk
-    compileSdkVersion versions.compileSdk
-    versionCode versions.versionCode
-    versionName versions.versionName
+    applicationId = "xyz.stignarnia.shelfly"
+    minSdk = versions.minSdk
+    targetSdk = versions.targetSdk
+    versionCode = versions.versionCode
+    versionName = versions.versionName
 
     resourceConfigurations += ['en', 'ar', 'de', 'da', 'es', 'fi', 'fr', 'it', 'pl', 'pt', 'ro', 'ru', 'tr', 'zh', 'uk']
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
   signingConfigs {
@@ -50,19 +44,19 @@ android {
       keystorePropertiesFile.withDataInputStream { keystoreProperties.load(it) }
 
       release {
-        storeFile keystoreFile
-        storePassword keystoreProperties['storePassword']
-        keyAlias keystoreProperties['keyAlias']
-        keyPassword keystoreProperties['keyPassword']
+        storeFile = keystoreFile
+        storePassword = keystoreProperties['storePassword']
+        keyAlias = keystoreProperties['keyAlias']
+        keyPassword = keystoreProperties['keyPassword']
       }
     }
   }
 
   buildTypes {
     debug {
-      applicationIdSuffix '.debugoss'
-      versionNameSuffix '-debug'
-      minifyEnabled false
+      applicationIdSuffix = '.debugoss'
+      versionNameSuffix = '-debug'
+      minifyEnabled = false
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'r8-rules.pro'
       manifestPlaceholders = [
           appIcon     : "@mipmap/ic_launcher_gray",
@@ -70,10 +64,10 @@ android {
       ]
     }
     release {
-      minifyEnabled true
+      minifyEnabled = true
       // Absent when no keystore is configured; the APK then builds unsigned.
       if (signingConfigs.findByName("release") != null) {
-        signingConfig signingConfigs.release
+        signingConfig = signingConfigs.release
       }
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'r8-rules.pro'
       manifestPlaceholders = [
@@ -84,7 +78,7 @@ android {
   }
 
   lint {
-    checkReleaseBuilds false
+    checkReleaseBuilds = false
   }
 
   // https://github.com/trakt/showly/issues/46#issuecomment-2324619155
@@ -95,7 +89,7 @@ android {
     includeInBundle = false
   }
 
-  namespace 'xyz.stignarnia.shelfly'
+  namespace = 'xyz.stignarnia.shelfly'
 }
 
 // Stamps every debug build so consecutive ones can be told apart on the device.

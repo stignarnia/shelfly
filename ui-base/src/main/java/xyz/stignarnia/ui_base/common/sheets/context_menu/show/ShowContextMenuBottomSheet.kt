@@ -3,7 +3,6 @@ package xyz.stignarnia.ui_base.common.sheets.context_menu.show
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.viewModels
 import xyz.stignarnia.common.Config.SPOILERS_HIDE_SYMBOL
@@ -204,7 +203,7 @@ class ShowContextMenuBottomSheet : ContextMenuBottomSheet() {
   }
 
   override fun openDetails() {
-    val bundle = bundleOf(ARG_SHOW_ID to itemId.id)
+    val bundle = Bundle().apply { putLong(ARG_SHOW_ID, itemId.id) }
     navigateTo(R.id.actionShowItemContextDialogToShowDetails, bundle)
   }
 }

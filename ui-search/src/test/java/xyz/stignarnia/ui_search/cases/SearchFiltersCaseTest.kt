@@ -1,5 +1,6 @@
 package xyz.stignarnia.ui_search.cases
 
+import android.content.SharedPreferences
 import com.google.common.truth.Truth.assertThat
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.repository.settings.SettingsRepository
@@ -8,9 +9,10 @@ import xyz.stignarnia.ui_search.recycler.SearchListItem
 import xyz.stignarnia.ui_search.utilities.SearchOptions
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.confirmVerified
+import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -21,7 +23,8 @@ import org.junit.Test
 @Suppress("EXPERIMENTAL_API_USAGE")
 class SearchFiltersCaseTest : BaseMockTest() {
 
-  @RelaxedMockK lateinit var settingsRepository: SettingsRepository
+  @RelaxedMockK lateinit var preferences: SharedPreferences
+  private lateinit var settingsRepository: SettingsRepository
   @RelaxedMockK lateinit var item: SearchListItem
 
   private lateinit var SUT: SearchFiltersCase
@@ -29,13 +32,26 @@ class SearchFiltersCaseTest : BaseMockTest() {
   @Before
   override fun setUp() {
     super.setUp()
-    coEvery { settingsRepository.isMoviesEnabled } returns true
+    every { preferences.getBoolean("KEY_MOVIES_ENABLED", true) } returns true
+    settingsRepository = SettingsRepository(
+      sorting = mockk(),
+      filters = mockk(),
+      widgets = mockk(),
+      viewMode = mockk(),
+      spoilers = mockk(),
+      sync = mockk(),
+      webdav = mockk(),
+      dispatchers = testDispatchers,
+      localSource = mockk(),
+      transactions = mockk(),
+      mappers = mockk(),
+      preferences = preferences,
+    )
     SUT = SearchFiltersCase(settingsRepository)
   }
 
   @After
   fun tearDown() {
-    confirmVerified(settingsRepository)
     clearAllMocks()
   }
 
@@ -64,7 +80,7 @@ class SearchFiltersCaseTest : BaseMockTest() {
 
       val result = SUT.filter(options, item)
 
-      coVerify(exactly = 1) { settingsRepository.isMoviesEnabled }
+      verify(exactly = 1) { preferences.getBoolean("KEY_MOVIES_ENABLED", true) }
       assertThat(result).isFalse()
     }
 
@@ -77,7 +93,7 @@ class SearchFiltersCaseTest : BaseMockTest() {
 
       val result = SUT.filter(options, item)
 
-      coVerify(exactly = 0) { settingsRepository.isMoviesEnabled }
+      verify(exactly = 0) { preferences.getBoolean("KEY_MOVIES_ENABLED", true) }
       assertThat(result).isFalse()
     }
 
@@ -85,14 +101,14 @@ class SearchFiltersCaseTest : BaseMockTest() {
   fun `Should not pass movies if movies are disabled`() =
     runTest {
       val options = SearchOptions(filters = listOf(Mode.MOVIES))
-      coEvery { settingsRepository.isMoviesEnabled } returns false
+      every { preferences.getBoolean("KEY_MOVIES_ENABLED", true) } returns false
 
       coEvery { item.isShow } returns false
       coEvery { item.isMovie } returns true
 
       val result = SUT.filter(options, item)
 
-      coVerify(exactly = 1) { settingsRepository.isMoviesEnabled }
+      verify(exactly = 1) { preferences.getBoolean("KEY_MOVIES_ENABLED", true) }
       assertThat(result).isFalse()
     }
 }

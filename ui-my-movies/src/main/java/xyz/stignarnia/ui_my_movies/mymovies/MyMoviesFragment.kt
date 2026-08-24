@@ -22,6 +22,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.fadeIf
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
 import xyz.stignarnia.ui_base.utilities.extensions.navigateToSafe
+import xyz.stignarnia.ui_base.utilities.extensions.requireSerializable
 import xyz.stignarnia.ui_base.utilities.extensions.withSpanSizeLookup
 import xyz.stignarnia.ui_base.utilities.viewBinding
 import xyz.stignarnia.ui_model.Movie
@@ -182,8 +183,8 @@ class MyMoviesFragment :
     val args = SortOrderBottomSheet.createBundle(options, order, type)
 
     requireParentFragment().setFragmentResultListener(NavigationArgs.REQUEST_SORT_ORDER) { _, bundle ->
-      val sortOrder = bundle.getSerializable(NavigationArgs.ARG_SELECTED_SORT_ORDER) as SortOrder
-      val sortType = bundle.getSerializable(NavigationArgs.ARG_SELECTED_SORT_TYPE) as SortType
+      val sortOrder = bundle.requireSerializable<SortOrder>(NavigationArgs.ARG_SELECTED_SORT_ORDER)
+      val sortType = bundle.requireSerializable<SortType>(NavigationArgs.ARG_SELECTED_SORT_TYPE)
       viewModel.setSortOrder(sortOrder, sortType)
     }
 

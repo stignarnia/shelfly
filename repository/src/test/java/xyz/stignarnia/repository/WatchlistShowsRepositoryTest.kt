@@ -28,7 +28,35 @@ class WatchlistShowsRepositoryTest : BaseMockTest() {
   @MockK lateinit var myShowsDao: MyShowsDao
   @MockK lateinit var archivedShowsDao: ArchiveShowsDao
 
-  @RelaxedMockK lateinit var showDb: ShowDb
+  private val showDb = ShowDb(
+    idTmdb = 1,
+    idTvdb = 1,
+    idImdb = "1",
+    idSlug = "1",
+    idTvrage = 1,
+    title = "Show",
+    year = 2020,
+    overview = "",
+    firstAired = "",
+    runtime = 45,
+    airtimeDay = "",
+    airtimeTime = "",
+    airtimeTimezone = "",
+    certification = "",
+    network = "",
+    networkLogoPath = "",
+    country = "",
+    trailer = "",
+    homepage = "",
+    status = "",
+    rating = 5f,
+    votes = 10,
+    commentCount = 0,
+    genres = "",
+    airedEpisodes = 10,
+    createdAt = 0,
+    updatedAt = 0,
+  )
 
   private lateinit var SUT: WatchlistShowsRepository
 
@@ -51,28 +79,23 @@ class WatchlistShowsRepositoryTest : BaseMockTest() {
   fun `Should load and map all SeeLater shows`() {
     runBlocking {
       coEvery { seeLaterShowsDao.getAll() } returns listOf(showDb)
-      coEvery { mappers.show.fromDatabase(any()) } returns Show.EMPTY
 
-      SUT.loadAll()
+      val shows = SUT.loadAll()
 
+      assertThat(shows).hasSize(1)
       coVerify(exactly = 1) { seeLaterShowsDao.getAll() }
-      coVerify(exactly = 1) { mappers.show.fromDatabase(showDb) }
     }
   }
 
   @Test
   fun `Should load and map single SeeLater show by TMDB ID`() {
     runBlocking {
-      val show = Show.EMPTY.copy(title = "Test")
-
       coEvery { seeLaterShowsDao.getById(any()) } returns showDb
-      coEvery { mappers.show.fromDatabase(any()) } returns show
 
       val testShow = SUT.load(IdTmdb(1L))
 
-      assertThat(testShow?.title).isEqualTo(show.title)
+      assertThat(testShow?.title).isEqualTo("Show")
       coVerify(exactly = 1) { seeLaterShowsDao.getById(any()) }
-      coVerify(exactly = 1) { mappers.show.fromDatabase(showDb) }
     }
   }
 

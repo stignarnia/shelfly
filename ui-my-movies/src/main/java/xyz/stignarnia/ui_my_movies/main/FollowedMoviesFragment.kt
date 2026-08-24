@@ -162,7 +162,7 @@ class FollowedMoviesFragment :
         exitSearch()
       } else {
         isEnabled = false
-        activity?.onBackPressed()
+        dispatcher.onBackPressed()
       }
     }
   }

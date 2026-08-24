@@ -11,56 +11,56 @@ import com.squareup.moshi.Json
  * The JSON keys are otherwise unchanged from v2, so a v2 file still reads - see the importer, which remaps the legacy ids on the way in.
  */
 data class BackupShows(
-  @Json(name = "cH") val collectionHistory: List<BackupShow> = emptyList(),
-  @Json(name = "cW") val collectionWatchlist: List<BackupShow> = emptyList(),
-  @Json(name = "cHid") val collectionHidden: List<BackupShow> = emptyList(),
-  @Json(name = "pEp") val progressEpisodes: List<BackupEpisode> = emptyList(),
-  @Json(name = "pSe") val progressSeasons: List<BackupSeason> = emptyList(),
-  @Json(name = "pP") val progressPinned: List<Long> = emptyList(),
-  @Json(name = "pOH") val progressOnHold: List<Long> = emptyList(),
-  @Json(name = "rS") val ratingsShows: List<BackupShowRating> = emptyList(),
-  @Json(name = "rSe") val ratingsSeasons: List<BackupSeasonRating> = emptyList(),
-  @Json(name = "rEp") val ratingsEpisodes: List<BackupEpisodeRating> = emptyList(),
+  @param:Json(name = "cH") val collectionHistory: List<BackupShow> = emptyList(),
+  @param:Json(name = "cW") val collectionWatchlist: List<BackupShow> = emptyList(),
+  @param:Json(name = "cHid") val collectionHidden: List<BackupShow> = emptyList(),
+  @param:Json(name = "pEp") val progressEpisodes: List<BackupEpisode> = emptyList(),
+  @param:Json(name = "pSe") val progressSeasons: List<BackupSeason> = emptyList(),
+  @param:Json(name = "pP") val progressPinned: List<Long> = emptyList(),
+  @param:Json(name = "pOH") val progressOnHold: List<Long> = emptyList(),
+  @param:Json(name = "rS") val ratingsShows: List<BackupShowRating> = emptyList(),
+  @param:Json(name = "rSe") val ratingsSeasons: List<BackupSeasonRating> = emptyList(),
+  @param:Json(name = "rEp") val ratingsEpisodes: List<BackupEpisodeRating> = emptyList(),
 )
 
 data class BackupShow(
-  @Json(name = "tmId") val tmdbId: Long,
-  @Json(name = "t") val title: String,
-  @Json(name = "a") val addedAt: String,
-  @Json(name = "u") val updatedAt: String,
+  @param:Json(name = "tmId") val tmdbId: Long,
+  @param:Json(name = "t") val title: String,
+  @param:Json(name = "a") val addedAt: String,
+  @param:Json(name = "u") val updatedAt: String,
 )
 
 data class BackupSeason(
-  @Json(name = "stmId") val showTmdbId: Long,
-  @Json(name = "sN") val seasonNumber: Int,
+  @param:Json(name = "stmId") val showTmdbId: Long,
+  @param:Json(name = "sN") val seasonNumber: Int,
 )
 
 data class BackupEpisode(
-  @Json(name = "stmId") val showTmdbId: Long,
-  @Json(name = "eN") val episodeNumber: Int,
-  @Json(name = "sN") val seasonNumber: Int,
-  @Json(name = "a") val addedAt: String?,
+  @param:Json(name = "stmId") val showTmdbId: Long,
+  @param:Json(name = "eN") val episodeNumber: Int,
+  @param:Json(name = "sN") val seasonNumber: Int,
+  @param:Json(name = "a") val addedAt: String?,
 )
 
 // Ratings
 
 data class BackupShowRating(
-  @Json(name = "tmId") val tmdbId: Long,
-  @Json(name = "r") val rating: Int,
-  @Json(name = "rA") val ratedAt: String,
+  @param:Json(name = "tmId") val tmdbId: Long,
+  @param:Json(name = "r") val rating: Int,
+  @param:Json(name = "rA") val ratedAt: String,
 )
 
 data class BackupSeasonRating(
-  @Json(name = "stmId") val showTmdbId: Long,
-  @Json(name = "sN") val seasonNumber: Int,
-  @Json(name = "r") val rating: Int,
-  @Json(name = "rA") val ratedAt: String,
+  @param:Json(name = "stmId") val showTmdbId: Long,
+  @param:Json(name = "sN") val seasonNumber: Int,
+  @param:Json(name = "r") val rating: Int,
+  @param:Json(name = "rA") val ratedAt: String,
 )
 
 data class BackupEpisodeRating(
-  @Json(name = "stmId") val showTmdbId: Long,
-  @Json(name = "sN") val seasonNumber: Int,
-  @Json(name = "eN") val episodeNumber: Int,
-  @Json(name = "r") val rating: Int,
-  @Json(name = "rA") val ratedAt: String,
+  @param:Json(name = "stmId") val showTmdbId: Long,
+  @param:Json(name = "sN") val seasonNumber: Int,
+  @param:Json(name = "eN") val episodeNumber: Int,
+  @param:Json(name = "r") val rating: Int,
+  @param:Json(name = "rA") val ratedAt: String,
 )

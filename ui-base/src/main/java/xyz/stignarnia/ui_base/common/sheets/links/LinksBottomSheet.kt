@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.ui_base.BaseBottomSheetFragment
@@ -37,12 +36,12 @@ class LinksBottomSheet : BaseBottomSheetFragment(R.layout.view_links) {
   companion object {
     fun createBundle(movie: Movie): Bundle {
       val options = Options(movie.ids, movie.title, movie.homepage, Mode.MOVIES)
-      return bundleOf(NavigationArgs.ARG_OPTIONS to options)
+      return Bundle().apply { putParcelable(NavigationArgs.ARG_OPTIONS, options) }
     }
 
     fun createBundle(show: Show): Bundle {
       val options = Options(show.ids, show.title, show.homepage, Mode.SHOWS)
-      return bundleOf(NavigationArgs.ARG_OPTIONS to options)
+      return Bundle().apply { putParcelable(NavigationArgs.ARG_OPTIONS, options) }
     }
   }
 

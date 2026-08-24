@@ -3,7 +3,7 @@ package xyz.stignarnia.ui_model
 import androidx.annotation.StringRes
 
 enum class HistoryPeriod(
-  @StringRes val displayStringRes: Int,
+  @param:StringRes val displayStringRes: Int,
 ) {
   THIS_WEEK(R.string.textPeriodThisWeek),
   LAST_WEEK(R.string.textPeriodLastWeek),

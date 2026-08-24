@@ -31,7 +31,8 @@ class SearchSuggestionsCaseTest : BaseMockTest() {
   @RelaxedMockK lateinit var mappers: Mappers
   @RelaxedMockK lateinit var showsRepository: ShowsRepository
   @RelaxedMockK lateinit var moviesRepository: MoviesRepository
-  @RelaxedMockK lateinit var settingsRepository: SettingsRepository
+  @RelaxedMockK lateinit var preferences: android.content.SharedPreferences
+  private lateinit var settingsRepository: SettingsRepository
   @RelaxedMockK lateinit var translationsRepository: TranslationsRepository
   @RelaxedMockK lateinit var showImagesProvider: ShowImagesProvider
   @RelaxedMockK lateinit var movieImagesProvider: MovieImagesProvider
@@ -42,7 +43,24 @@ class SearchSuggestionsCaseTest : BaseMockTest() {
   override fun setUp() {
     super.setUp()
 
-    coEvery { settingsRepository.isMoviesEnabled } returns true
+    io.mockk.every { preferences.getBoolean("KEY_MOVIES_ENABLED", true) } returns true
+    settingsRepository = SettingsRepository(
+      sorting = io.mockk.mockk(),
+      filters = io.mockk.mockk(),
+      widgets = io.mockk.mockk(),
+      viewMode = io.mockk.mockk(),
+      spoilers = io.mockk.mockk {
+        io.mockk.every { getAll() } returns xyz.stignarnia.ui_model.SpoilersSettings.INITIAL
+      },
+      sync = io.mockk.mockk(),
+      webdav = io.mockk.mockk(),
+      dispatchers = testDispatchers,
+      localSource = database,
+      transactions = io.mockk.mockk(),
+      mappers = mappers,
+      preferences = preferences,
+    )
+
     coEvery { translationsRepository.getLanguage() } returns "en"
     coEvery { database.shows } returns showsDao
     coEvery { database.movies } returns moviesDao

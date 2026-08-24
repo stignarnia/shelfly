@@ -3,18 +3,6 @@
 
   <application android:theme="@style/AppTheme">
 
-    <service
-      android:name="xyz.stignarnia.ui_widgets.progress.ProgressWidgetEpisodeCheckService"
-      android:exported="true"
-      android:permission="android.permission.BIND_JOB_SERVICE"
-      />
-
-    <service
-      android:name="xyz.stignarnia.ui_widgets.progress_movies.ProgressMoviesWidgetCheckService"
-      android:exported="true"
-      android:permission="android.permission.BIND_JOB_SERVICE"
-      />
-
     <receiver
       android:name="xyz.stignarnia.ui_widgets.progress.ProgressWidgetProvider"
       android:exported="true"

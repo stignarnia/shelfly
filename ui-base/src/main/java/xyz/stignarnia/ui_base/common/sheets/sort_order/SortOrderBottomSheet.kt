@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.fragment.app.setFragmentResult
 import xyz.stignarnia.ui_base.BaseBottomSheetFragment
@@ -38,13 +37,13 @@ class SortOrderBottomSheet : BaseBottomSheetFragment(R.layout.view_sort_order) {
       selectedType: SortType,
       requestKey: String = REQUEST_SORT_ORDER,
       newAtTop: Pair<Boolean, Boolean> = Pair(false, false),
-    ) = bundleOf(
-      ARG_SORT_ORDERS to options.map { it.name },
-      ARG_SELECTED_SORT_ORDER to selectedOrder,
-      ARG_SELECTED_SORT_TYPE to selectedType,
-      ARG_SELECTED_NEW_AT_TOP to newAtTop,
-      ARG_REQUEST_KEY to requestKey,
-    )
+    ) = Bundle().apply {
+      putStringArrayList(ARG_SORT_ORDERS, ArrayList(options.map { it.name }))
+      putSerializable(ARG_SELECTED_SORT_ORDER, selectedOrder)
+      putSerializable(ARG_SELECTED_SORT_TYPE, selectedType)
+      putSerializable(ARG_SELECTED_NEW_AT_TOP, newAtTop)
+      putString(ARG_REQUEST_KEY, requestKey)
+    }
   }
 
   private val binding by viewBinding(ViewSortOrderBinding::bind)
@@ -126,11 +125,11 @@ class SortOrderBottomSheet : BaseBottomSheetFragment(R.layout.view_sort_order) {
       initialSortType != selectedSortType ||
       initialNewAtTop.second != selectedNewAtTop
     ) {
-      val result = bundleOf(
-        ARG_SELECTED_SORT_ORDER to selectedSortOrder,
-        ARG_SELECTED_SORT_TYPE to selectedSortType,
-        ARG_SELECTED_NEW_AT_TOP to selectedNewAtTop,
-      )
+      val result = Bundle().apply {
+        putSerializable(ARG_SELECTED_SORT_ORDER, selectedSortOrder)
+        putSerializable(ARG_SELECTED_SORT_TYPE, selectedSortType)
+        putBoolean(ARG_SELECTED_NEW_AT_TOP, selectedNewAtTop)
+      }
       setFragmentResult(requestKey, result)
     }
 

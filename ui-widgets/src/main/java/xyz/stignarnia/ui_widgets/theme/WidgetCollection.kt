@@ -1,9 +1,11 @@
 package xyz.stignarnia.ui_widgets.theme
 
 import android.content.Context
+import android.os.Build
 import android.os.Parcel
 import android.view.WindowManager
 import android.widget.RemoteViews
+import androidx.annotation.RequiresApi
 
 /**
  * Builds a widget's rows into the RemoteViews itself, within the budgets the framework enforces on them.
@@ -21,6 +23,7 @@ import android.widget.RemoteViews
  *
  * Neither budget is discounted again here. Both already carry the framework's own slack - 80% of a transaction, 90% of the bitmap memory - and cutting twice only makes the list shorter than the platform itself would allow.
  */
+@RequiresApi(Build.VERSION_CODES.S)
 object WidgetCollection {
 
   /**

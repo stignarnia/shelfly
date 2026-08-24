@@ -25,9 +25,9 @@
       android:orientation="horizontal"
       >
 
-      <TextView
+      <Space
         android:layout_width="@dimen/spaceMedium"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         />
 
       <TextView

@@ -24,6 +24,7 @@ import xyz.stignarnia.ui_base.utilities.events.MessageEvent
 import xyz.stignarnia.ui_base.utilities.events.MessageEvent.Error
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
+import xyz.stignarnia.ui_base.utilities.extensions.navigateBack
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.showErrorSnackbar
 import xyz.stignarnia.ui_base.utilities.extensions.showInfoSnackbar
@@ -68,7 +69,7 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
 
   private fun setupView() {
     with(binding) {
-      toolbar.onClick { activity?.onBackPressed() }
+      toolbar.onClick { navigateBack() }
       importButton.onClick { openNewImport() }
       importWebDavButton.onClick { viewModel.loadWebDavBackups() }
       // Only an option once a server is configured in Settings.

@@ -31,8 +31,10 @@ import xyz.stignarnia.ui_base.utilities.extensions.fadeOut
 import xyz.stignarnia.ui_base.utilities.extensions.gone
 import xyz.stignarnia.ui_base.utilities.extensions.hideKeyboard
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
+import xyz.stignarnia.ui_base.utilities.extensions.navigateBack
 import xyz.stignarnia.ui_base.utilities.extensions.navigateToSafe
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
+import xyz.stignarnia.ui_base.utilities.extensions.requireSerializable
 import xyz.stignarnia.ui_base.utilities.extensions.shake
 import xyz.stignarnia.ui_base.utilities.extensions.showKeyboard
 import xyz.stignarnia.ui_base.utilities.extensions.visible
@@ -168,7 +170,7 @@ class SearchFragment :
 
       searchViewLayout.binding.searchViewIcon.onClick {
         searchViewLayout.binding.searchViewInput.hideKeyboard()
-        requireActivity().onBackPressed()
+        navigateBack()
       }
 
       with(searchFiltersView) {
@@ -264,8 +266,8 @@ class SearchFragment :
     val args = SortOrderBottomSheet.createBundle(options, order, type)
 
     setFragmentResultListener(REQUEST_SORT_ORDER) { _, bundle ->
-      val sortOrder = bundle.getSerializable(ARG_SELECTED_SORT_ORDER) as SortOrder
-      val sortType = bundle.getSerializable(ARG_SELECTED_SORT_TYPE) as SortType
+      val sortOrder = bundle.requireSerializable<SortOrder>(ARG_SELECTED_SORT_ORDER)
+      val sortType = bundle.requireSerializable<SortType>(ARG_SELECTED_SORT_TYPE)
       viewModel.setSortOrder(sortOrder, sortType)
     }
 

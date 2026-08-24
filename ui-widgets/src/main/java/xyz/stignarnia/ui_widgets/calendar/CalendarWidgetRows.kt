@@ -6,7 +6,6 @@ import android.content.Intent
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
-import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -111,8 +110,8 @@ class CalendarWidgetRows(
       }
       setViewVisibility(R.id.progressWidgetHeaderIcon, VISIBLE)
       val fillIntent = Intent().apply {
-        putExtras(bundleOf(EXTRA_MODE_CLICK to true))
-        putExtras(bundleOf(EXTRA_APPWIDGET_ID to widgetId))
+        putExtra(EXTRA_MODE_CLICK, true)
+        putExtra(EXTRA_APPWIDGET_ID, widgetId)
       }
       setOnClickFillInIntent(R.id.progressWidgetHeaderIcon, fillIntent)
     } else {
@@ -178,7 +177,7 @@ class CalendarWidgetRows(
       }
 
       val fillIntent = Intent().apply {
-        putExtras(bundleOf(EXTRA_SHOW_ID to item.show.tmdbId))
+        putExtra(EXTRA_SHOW_ID, item.show.tmdbId)
       }
       setOnClickFillInIntent(R.id.calendarWidgetItem, fillIntent)
 
@@ -225,7 +224,7 @@ class CalendarWidgetRows(
       palette?.let { setTextColor(R.id.widgetMoreItemText, it.textSecondary) }
       setOnClickFillInIntent(
         R.id.widgetMoreItem,
-        Intent().putExtras(bundleOf(BaseWidgetProvider.EXTRA_MORE_CLICK to true)),
+        Intent().putExtra(BaseWidgetProvider.EXTRA_MORE_CLICK, true),
       )
     }
 

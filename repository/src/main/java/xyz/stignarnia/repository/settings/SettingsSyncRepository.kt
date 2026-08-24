@@ -19,7 +19,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class SettingsSyncRepository @Inject constructor(
-  @Named("syncPreferences") private var preferences: SharedPreferences,
+  @param:Named("syncPreferences") private var preferences: SharedPreferences,
 ) {
 
   companion object Key {

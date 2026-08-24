@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.setFragmentResultListener
@@ -23,16 +22,20 @@ import xyz.stignarnia.repository.settings.SettingsViewModeRepository
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.common.ListViewMode.LIST_NORMAL
 import xyz.stignarnia.ui_base.common.sheets.sort_order.SortOrderBottomSheet
+import xyz.stignarnia.ui_base.utilities.events.Event
 import xyz.stignarnia.ui_base.utilities.extensions.add
 import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
 import xyz.stignarnia.ui_base.utilities.extensions.disableUi
 import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.ui_base.utilities.extensions.enableUi
 import xyz.stignarnia.ui_base.utilities.extensions.fadeIf
+import xyz.stignarnia.ui_base.utilities.extensions.fadeIn
 import xyz.stignarnia.ui_base.utilities.extensions.fadeOut
 import xyz.stignarnia.ui_base.utilities.extensions.launchAndRepeatStarted
+import xyz.stignarnia.ui_base.utilities.extensions.navigateBack
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_base.utilities.extensions.requireParcelable
+import xyz.stignarnia.ui_base.utilities.extensions.requireSerializable
 import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
 import xyz.stignarnia.ui_base.utilities.extensions.withSpanSizeLookup
 import xyz.stignarnia.ui_base.utilities.viewBinding
@@ -148,7 +151,7 @@ class ListDetailsFragment :
           if (isReorderMode) {
             toggleReorderMode()
           } else {
-            activity?.onBackPressed()
+            navigateBack()
           }
         }
       }
@@ -231,8 +234,8 @@ class ListDetailsFragment :
     val args = SortOrderBottomSheet.createBundle(options, order, type)
 
     setFragmentResultListener(REQUEST_SORT_ORDER) { _, bundle ->
-      val sortOrder = bundle.getSerializable(ARG_SELECTED_SORT_ORDER) as SortOrder
-      val sortType = bundle.getSerializable(ARG_SELECTED_SORT_TYPE) as SortType
+      val sortOrder = bundle.requireSerializable<SortOrder>(ARG_SELECTED_SORT_ORDER)
+      val sortType = bundle.requireSerializable<SortType>(ARG_SELECTED_SORT_TYPE)
       viewModel.setSortOrder(list.id, sortOrder, sortType)
     }
 
@@ -254,7 +257,7 @@ class ListDetailsFragment :
     setFragmentResultListener(NavigationArgs.REQUEST_CREATE_LIST) { _, _ ->
       viewModel.loadDetails(list.id)
     }
-    val bundle = bundleOf(ARG_LIST to list)
+    val bundle = Bundle().apply { putParcelable(ARG_LIST, list) }
     navigateTo(R.id.actionListDetailsFragmentToEditListDialog, bundle)
   }
 
@@ -262,10 +265,10 @@ class ListDetailsFragment :
     disableUi()
     binding.fragmentListDetailsRoot
       .fadeOut(150) {
-        val bundle = bundleOf(
-          ARG_SHOW_ID to listItem.show?.tmdbId,
-          ARG_MOVIE_ID to listItem.movie?.tmdbId,
-        )
+        val bundle = Bundle().apply {
+          listItem.show?.tmdbId?.let { putLong(ARG_SHOW_ID, it) }
+          listItem.movie?.tmdbId?.let { putLong(ARG_MOVIE_ID, it) }
+        }
         val destination =
           when {
             listItem.isShow() -> R.id.actionListDetailsFragmentToShowDetailsFragment
@@ -388,7 +391,7 @@ class ListDetailsFragment :
           if (it) disableUi() else enableUi()
         }
         deleteEvent?.let { event ->
-          event.consume()?.let { activity?.onBackPressed() }
+          event.consume()?.let { navigateBack() }
         }
       }
     }

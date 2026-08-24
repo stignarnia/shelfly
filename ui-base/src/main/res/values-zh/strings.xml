@@ -20,7 +20,7 @@
   <string name="textSeason">第 %1$d 季</string>
   <string name="textSpecials">特别集</string>
   <string name="textEpisode">第 %1$d 集</string>
-  <string name="textSeasonEpisode">%02d 季 %02d 集</string>
+  <string name="textSeasonEpisode">%1$02d 季 %2$02d 集</string>
   <string name="textSortBy">排序：</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textDiscoverFilterProviders" comment="Streaming service like Netflix, Disney+, Sky etc.">流媒体</string>

@@ -6,20 +6,26 @@ import xyz.stignarnia.repository.RatingsRepository
 import xyz.stignarnia.repository.TranslationsRepository
 import xyz.stignarnia.repository.images.MovieImagesProvider
 import xyz.stignarnia.repository.movies.MoviesRepository
+import xyz.stignarnia.repository.movies.WatchlistMoviesRepository
+import xyz.stignarnia.repository.movies.ratings.MoviesRatingsRepository
 import xyz.stignarnia.repository.settings.SettingsRepository
+import xyz.stignarnia.repository.settings.SettingsSortRepository
 import xyz.stignarnia.ui_base.dates.DateFormatProvider
 import xyz.stignarnia.ui_model.Image
 import xyz.stignarnia.ui_model.ImageType
 import xyz.stignarnia.ui_model.Movie
 import xyz.stignarnia.ui_model.SortOrder
 import xyz.stignarnia.ui_model.SortType
+import xyz.stignarnia.ui_model.SpoilersSettings
 import xyz.stignarnia.ui_model.Translation
 import xyz.stignarnia.ui_progress_movies.BaseMockTest
 import xyz.stignarnia.ui_progress_movies.helpers.ProgressMoviesItemsSorter
 import xyz.stignarnia.ui_progress_movies.progress.recycler.ProgressMovieListItem
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -31,10 +37,12 @@ import java.time.format.DateTimeFormatter
 class ProgressMoviesItemsCaseTest : BaseMockTest() {
 
   @RelaxedMockK lateinit var sorter: ProgressMoviesItemsSorter
-  @RelaxedMockK lateinit var moviesRepository: MoviesRepository
+  @RelaxedMockK lateinit var watchlistMovies: WatchlistMoviesRepository
+  private lateinit var moviesRepository: MoviesRepository
   @RelaxedMockK lateinit var translationsRepository: TranslationsRepository
-  @RelaxedMockK lateinit var ratingsRepository: RatingsRepository
-  @RelaxedMockK lateinit var settingsRepository: SettingsRepository
+  @RelaxedMockK lateinit var moviesRatings: MoviesRatingsRepository
+  private lateinit var ratingsRepository: RatingsRepository
+  private lateinit var settingsRepository: SettingsRepository
   @RelaxedMockK lateinit var imagesProvider: MovieImagesProvider
   @RelaxedMockK lateinit var pinnedItemsRepository: PinnedItemsRepository
   @RelaxedMockK lateinit var dateFormatProvider: DateFormatProvider
@@ -45,14 +53,45 @@ class ProgressMoviesItemsCaseTest : BaseMockTest() {
   override fun setUp() {
     super.setUp()
 
+    moviesRepository = MoviesRepository(
+      discoverMovies = mockk(),
+      relatedMovies = mockk(),
+      movieDetails = mockk(),
+      myMovies = mockk(),
+      watchlistMovies = watchlistMovies,
+      hiddenMovies = mockk(),
+    )
+
+    ratingsRepository = RatingsRepository(
+      shows = mockk(),
+      movies = moviesRatings,
+    )
+
     coEvery { translationsRepository.getLanguage() } returns "en"
     coEvery { dateFormatProvider.loadFullDayFormat() } returns DateTimeFormatter.ofPattern("dd MMM yyyy")
 
-    coEvery { settingsRepository.sorting getProperty "progressMoviesSortOrder" } returns SortOrder.RANK
-    coEvery { settingsRepository.sorting getProperty "progressMoviesSortType" } returns SortType.DESCENDING
+    val sortRepo = mockk<SettingsSortRepository> {
+      every { progressMoviesSortOrder } returns SortOrder.RANK
+      every { progressMoviesSortType } returns SortType.DESCENDING
+    }
+
+    settingsRepository = SettingsRepository(
+      sorting = sortRepo,
+      filters = mockk(),
+      widgets = mockk(),
+      viewMode = mockk(),
+      spoilers = mockk { every { getAll() } returns SpoilersSettings.INITIAL },
+      sync = mockk(),
+      webdav = mockk(),
+      dispatchers = testDispatchers,
+      localSource = mockk(),
+      transactions = mockk(),
+      mappers = mockk(),
+      preferences = mockk(),
+    )
 
     coEvery { imagesProvider.findCachedImage(any(), any()) } returns Image.createUnknown(ImageType.POSTER)
-    coEvery { pinnedItemsRepository.isItemPinned(any<Movie>()) } returns false
+    coEvery { pinnedItemsRepository.isItemPinned(ofType(Movie::class)) } returns false
 
     SUT = ProgressMoviesItemsCase(
       testDispatchers,
@@ -227,7 +266,7 @@ class ProgressMoviesItemsCaseTest : BaseMockTest() {
       )
 
       coEvery { translationsRepository.getLanguage() } returns "pl"
-      coEvery { translationsRepository.loadTranslation(any<Movie>(), any(), any()) } returns Translation.EMPTY
+      coEvery { translationsRepository.loadTranslation(movie1, any(), any()) } returns Translation.EMPTY
       coEvery { moviesRepository.watchlistMovies.loadAll() } returns listOf(movie1)
 
       val result = SUT.loadItems(searchQuery = "")

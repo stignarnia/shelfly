@@ -41,7 +41,7 @@ class SearchTranslationsCaseTest : BaseMockTest() {
     runTest {
       coEvery { translationsRepository.getLanguage() } returns "en"
 
-      val item = mockk<Show>()
+      val item = Show.EMPTY
       val result = SUT.loadTranslation(item)
 
       assertThat(result).isEqualTo(Translation.EMPTY)
@@ -54,7 +54,7 @@ class SearchTranslationsCaseTest : BaseMockTest() {
     runTest {
       coEvery { translationsRepository.getLanguage() } returns "en"
 
-      val item = mockk<Movie>()
+      val item = Movie.EMPTY
       val result = SUT.loadTranslation(item)
 
       assertThat(result).isEqualTo(Translation.EMPTY)
@@ -65,30 +65,30 @@ class SearchTranslationsCaseTest : BaseMockTest() {
   @Test
   fun `Should return show translation if language is not default`() =
     runTest {
+      val item = Show.EMPTY
       coEvery { translationsRepository.getLanguage() } returns "pl"
-      coEvery { translationsRepository.loadTranslation(any<Show>(), any(), any()) } returns Translation.EMPTY
+      coEvery { translationsRepository.loadTranslation(item, any(), any()) } returns Translation.EMPTY
 
-      val item = mockk<Show>()
       val result = SUT.loadTranslation(item)
 
       assertThat(result).isNotNull()
       coVerify(exactly = 1) { translationsRepository.getLanguage() }
-      coVerify(exactly = 1) { translationsRepository.loadTranslation(any<Show>(), any(), any()) }
+      coVerify(exactly = 1) { translationsRepository.loadTranslation(item, any(), any()) }
       confirmVerified(translationsRepository)
     }
 
   @Test
   fun `Should return movie translation if language is not default`() =
     runTest {
+      val item = Movie.EMPTY
       coEvery { translationsRepository.getLanguage() } returns "pl"
-      coEvery { translationsRepository.loadTranslation(any<Movie>(), any(), any()) } returns Translation.EMPTY
+      coEvery { translationsRepository.loadTranslation(item, any(), any()) } returns Translation.EMPTY
 
-      val item = mockk<Movie>()
       val result = SUT.loadTranslation(item)
 
       assertThat(result).isNotNull()
       coVerify(exactly = 1) { translationsRepository.getLanguage() }
-      coVerify(exactly = 1) { translationsRepository.loadTranslation(any<Movie>(), any(), any()) }
+      coVerify(exactly = 1) { translationsRepository.loadTranslation(item, any(), any()) }
       confirmVerified(translationsRepository)
     }
 }

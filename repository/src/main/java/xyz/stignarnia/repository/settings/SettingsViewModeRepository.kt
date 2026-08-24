@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SettingsViewModeRepository @Inject constructor(
-  @Named("miscPreferences") private var preferences: SharedPreferences,
+  @param:Named("miscPreferences") private var preferences: SharedPreferences,
 ) {
 
   companion object Key {

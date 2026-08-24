@@ -15,7 +15,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
@@ -261,7 +260,6 @@ class MainActivity :
         val destination = when (viewModel.getMode()) {
           SHOWS -> R.id.progressMainFragment
           MOVIES -> R.id.progressMoviesMainFragment
-          else -> throw IllegalStateException()
         }
         setStartDestination(destination)
       }
@@ -345,7 +343,7 @@ class MainActivity :
           }
           else -> {
             remove()
-            super.onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
           }
         }
       }
@@ -468,7 +466,10 @@ class MainActivity :
   private fun navigateToWebDavSetup() {
     findNavControl()?.run {
       try {
-        navigate(R.id.actionNavigateSettingsFragment, bundleOf(SettingsBackupFragment.ARG_OPEN_WEB_DAV to true))
+        navigate(
+          R.id.actionNavigateSettingsFragment,
+          Bundle().apply { putBoolean(SettingsBackupFragment.ARG_OPEN_WEB_DAV, true) },
+        )
         hideNavigation(false)
       } catch (error: Throwable) {
       }
@@ -573,21 +574,18 @@ class MainActivity :
     when (viewModel.getMode()) {
       SHOWS -> R.id.actionNavigateDiscoverFragment
       MOVIES -> R.id.actionNavigateDiscoverMoviesFragment
-      else -> throw IllegalStateException()
     }
 
   private fun getMenuCollectionAction() =
     when (viewModel.getMode()) {
       SHOWS -> R.id.actionNavigateFollowedShowsFragment
       MOVIES -> R.id.actionNavigateFollowedMoviesFragment
-      else -> throw IllegalStateException()
     }
 
   private fun getMenuProgressAction() =
     when (viewModel.getMode()) {
       SHOWS -> R.id.actionNavigateProgressFragment
       MOVIES -> R.id.actionNavigateProgressMoviesFragment
-      else -> throw IllegalStateException()
     }
 
   private fun handleDeepLink(intent: Intent?) {

@@ -29,7 +29,7 @@ object AndroidVersion {
   val isAtLeastAndroid12: Boolean
     get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
 
-  /** API 33. The POST_NOTIFICATIONS permission, per-app language, the typed Bundle getters. */
+  /** API 33. The POST_NOTIFICATIONS permission and per-app language settings. */
   @get:ChecksSdkIntAtLeast(api = Build.VERSION_CODES.TIRAMISU)
   val isAtLeastAndroid13: Boolean
     get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU

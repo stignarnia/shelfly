@@ -28,7 +28,7 @@ import org.junit.Test
 class ProgressMoviesMainViewModelTest : BaseMockTest() {
 
   @MockK lateinit var mainCase: ProgressMoviesMainCase
-  @MockK lateinit var eventsManager: EventsManager
+  private val eventsManager = EventsManager()
 
   private lateinit var SUT: ProgressMoviesMainViewModel
 
@@ -38,8 +38,6 @@ class ProgressMoviesMainViewModelTest : BaseMockTest() {
   @Before
   override fun setUp() {
     super.setUp()
-
-    coEvery { eventsManager.events } returns MutableSharedFlow()
 
     SUT = ProgressMoviesMainViewModel(mainCase, eventsManager)
   }
@@ -99,14 +97,14 @@ class ProgressMoviesMainViewModelTest : BaseMockTest() {
   fun `Should set watched movie properly and update timestamp`() =
     runTest {
       val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
-      coEvery { mainCase.addToMyMovies(any<Movie>(), null) } just Runs
+      coEvery { mainCase.addToMyMovies(Movie.EMPTY, null) } just Runs
 
       SUT.setWatchedMovie(Movie.EMPTY, null)
 
       assertThat(stateResult[0].timestamp).isEqualTo(null)
       assertThat(stateResult[1].timestamp).isGreaterThan(0L)
 
-      coVerify(exactly = 1) { mainCase.addToMyMovies(any<Movie>(), null) }
+      coVerify(exactly = 1) { mainCase.addToMyMovies(Movie.EMPTY, null) }
 
       job.cancel()
     }

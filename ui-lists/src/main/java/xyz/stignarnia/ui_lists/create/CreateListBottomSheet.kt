@@ -3,7 +3,6 @@ package xyz.stignarnia.ui_lists.create
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -104,7 +103,7 @@ class CreateListBottomSheet : BaseBottomSheetFragment(R.layout.view_create_list)
       }
       onListUpdated?.let {
         it.consume()?.let {
-          setFragmentResult(REQUEST_CREATE_LIST, bundleOf())
+          setFragmentResult(REQUEST_CREATE_LIST, Bundle())
           closeSheet()
         }
       }

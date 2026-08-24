@@ -33,7 +33,7 @@ sealed class ProgressMovieListItem(
     override val movie: Movie,
     override val image: Image,
     override val isLoading: Boolean = false,
-    @StringRes val textResId: Int,
+    @get:StringRes val textResId: Int,
   ) : ProgressMovieListItem(movie, image, isLoading) {
 
     companion object {

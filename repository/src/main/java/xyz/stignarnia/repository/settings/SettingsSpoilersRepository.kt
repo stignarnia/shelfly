@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SettingsSpoilersRepository @Inject constructor(
-  @Named("spoilersPreferences") private var preferences: SharedPreferences,
+  @param:Named("spoilersPreferences") private var preferences: SharedPreferences,
 ) {
 
   companion object Key {

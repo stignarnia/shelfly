@@ -28,7 +28,7 @@ sealed class CalendarMovieListItem(
   ) : CalendarMovieListItem(movie, image, isLoading)
 
   data class Header(
-    @StringRes val textResId: Int,
+    @get:StringRes val textResId: Int,
     val calendarMode: CalendarMode,
   ) : CalendarMovieListItem(
       movie = Movie.EMPTY,

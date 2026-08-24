@@ -3,7 +3,6 @@ package xyz.stignarnia.ui_people.details
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
@@ -56,11 +55,11 @@ class PersonDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_person_de
       sourceId: IdTmdb,
       personArgs: PersonDetailsArgs?,
     ): Bundle =
-      bundleOf(
-        ARG_PERSON to person,
-        ARG_PERSON_ARGS to (personArgs ?: PersonDetailsArgs()),
-        ARG_ID to sourceId,
-      )
+      Bundle().apply {
+        putParcelable(ARG_PERSON, person)
+        putParcelable(ARG_PERSON_ARGS, personArgs ?: PersonDetailsArgs())
+        putParcelable(ARG_ID, sourceId)
+      }
   }
 
   private val viewModel by viewModels<PersonDetailsViewModel>()
@@ -141,24 +140,27 @@ class PersonDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_person_de
   }
 
   private fun openDetails(item: PersonDetailsItem) {
-    val personBundle = bundleOf(
-      ARG_PERSON to person,
-      ARG_PERSON_ARGS to PersonDetailsArgs(
-        isExpanded = isSheetExpanded(),
-        isUpButtonVisible = binding.personDetailsRecyclerFab.isVisible,
-        firstVisibleItemPosition = (layoutManager?.findLastVisibleItemPosition() ?: 0),
-      ),
-    )
+    val personBundle = Bundle().apply {
+      putParcelable(ARG_PERSON, person)
+      putParcelable(
+        ARG_PERSON_ARGS,
+        PersonDetailsArgs(
+          isExpanded = isSheetExpanded(),
+          isUpButtonVisible = binding.personDetailsRecyclerFab.isVisible,
+          firstVisibleItemPosition = (layoutManager?.findLastVisibleItemPosition() ?: 0),
+        ),
+      )
+    }
     if (item is PersonDetailsItem.CreditsShowItem && item.show.tmdbId != sourceId.id) {
       setFragmentResult(REQUEST_DETAILS, personBundle)
-      val bundle = bundleOf(NavigationArgs.ARG_SHOW_ID to item.show.tmdbId)
+      val bundle = Bundle().apply { putLong(NavigationArgs.ARG_SHOW_ID, item.show.tmdbId) }
       requireParentFragment()
         .findNavController()
         .navigate(R.id.actionPersonDetailsDialogToShow, bundle)
     }
     if (item is PersonDetailsItem.CreditsMovieItem && item.movie.tmdbId != sourceId.id) {
       setFragmentResult(REQUEST_DETAILS, personBundle)
-      val bundle = bundleOf(NavigationArgs.ARG_MOVIE_ID to item.movie.tmdbId)
+      val bundle = Bundle().apply { putLong(NavigationArgs.ARG_MOVIE_ID, item.movie.tmdbId) }
       requireParentFragment()
         .findNavController()
         .navigate(R.id.actionPersonDetailsDialogToMovie, bundle)
@@ -166,7 +168,7 @@ class PersonDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_person_de
   }
 
   private fun openGallery() {
-    val personBundle = bundleOf(ARG_PERSON to person)
+    val personBundle = Bundle().apply { putParcelable(ARG_PERSON, person) }
     setFragmentResult(REQUEST_DETAILS, personBundle)
     val options = PersonGalleryFragment.createBundle(person)
     requireParentFragment()

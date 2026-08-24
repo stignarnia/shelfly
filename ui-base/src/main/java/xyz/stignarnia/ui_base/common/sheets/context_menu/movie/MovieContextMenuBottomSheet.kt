@@ -3,7 +3,6 @@ package xyz.stignarnia.ui_base.common.sheets.context_menu.movie
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -212,7 +211,7 @@ class MovieContextMenuBottomSheet : ContextMenuBottomSheet() {
   }
 
   override fun openDetails() {
-    val bundle = bundleOf(NavigationArgs.ARG_MOVIE_ID to itemId.id)
+    val bundle = Bundle().apply { putLong(NavigationArgs.ARG_MOVIE_ID, itemId.id) }
     navigateTo(R.id.actionMovieItemContextDialogToMovieDetails, bundle)
   }
 }

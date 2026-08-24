@@ -38,7 +38,7 @@ class SettingsRepository @Inject constructor(
   private val localSource: LocalDataSource,
   private val transactions: TransactionsProvider,
   private val mappers: Mappers,
-  @Named("miscPreferences") private var preferences: SharedPreferences,
+  @param:Named("miscPreferences") private var preferences: SharedPreferences,
 ) {
 
   companion object Key {

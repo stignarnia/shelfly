@@ -3,7 +3,6 @@ package xyz.stignarnia.ui_lists.manage
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -116,7 +115,7 @@ class ManageListsBottomSheet : BaseBottomSheetFragment(R.layout.view_manage_list
   private fun handleEvent(event: Event) = Unit
 
   override fun onDestroyView() {
-    setFragmentResult(REQUEST_MANAGE_LISTS, bundleOf())
+    setFragmentResult(REQUEST_MANAGE_LISTS, Bundle())
     adapter = null
     layoutManager = null
     super.onDestroyView()

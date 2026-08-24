@@ -63,7 +63,7 @@ class BackupExportScheduleWorker @AssistedInject constructor(
   private val webDavClient: WebDavClient,
   private val syncEngine: SyncEngine,
   private val syncNotificationManager: SyncNotificationManager,
-  @Named("miscPreferences") private val miscPreferences: SharedPreferences,
+  @param:Named("miscPreferences") private val miscPreferences: SharedPreferences,
 ) : CoroutineWorker(appContext, workerParams) {
 
   companion object {

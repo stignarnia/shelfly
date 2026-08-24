@@ -2,7 +2,6 @@ package xyz.stignarnia.shelfly.utilities.deeplink
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import xyz.stignarnia.shelfly.R
 import xyz.stignarnia.shelfly.utilities.deeplink.resolvers.ImdbSourceResolver
@@ -41,7 +40,7 @@ class DeepLinkResolver @Inject constructor() {
   ) {
     navController.navigateSafe(
       R.id.actionNavigateShowDetailsFragment,
-      bundleOf(NavigationArgs.ARG_SHOW_ID to show.tmdbId),
+      Bundle().apply { putLong(NavigationArgs.ARG_SHOW_ID, show.tmdbId) },
     )
   }
 
@@ -51,7 +50,7 @@ class DeepLinkResolver @Inject constructor() {
   ) {
     navController.navigateSafe(
       R.id.actionNavigateMovieDetailsFragment,
-      bundleOf(NavigationArgs.ARG_MOVIE_ID to movie.tmdbId),
+      Bundle().apply { putLong(NavigationArgs.ARG_MOVIE_ID, movie.tmdbId) },
     )
   }
 

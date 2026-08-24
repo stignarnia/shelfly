@@ -2,7 +2,6 @@ package xyz.stignarnia.ui_people.list
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -42,12 +41,12 @@ class PeopleListBottomSheet : BaseBottomSheetFragment(R.layout.view_people_list)
       mediaTitle: String,
       mode: Mode,
       department: Person.Department,
-    ) = bundleOf(
-      ARG_ID to mediaIdTmdb.id,
-      ARG_TITLE to mediaTitle,
-      ARG_TYPE to mode.type,
-      ARG_DEPARTMENT to department,
-    )
+    ) = Bundle().apply {
+      putLong(ARG_ID, mediaIdTmdb.id)
+      putString(ARG_TITLE, mediaTitle)
+      putSerializable(ARG_TYPE, mode.type)
+      putSerializable(ARG_DEPARTMENT, department)
+    }
   }
 
   private val viewModel by viewModels<PeopleListViewModel>()
@@ -105,7 +104,7 @@ class PeopleListBottomSheet : BaseBottomSheetFragment(R.layout.view_people_list)
   }
 
   private fun openDetails(item: Person) {
-    setFragmentResult(REQUEST_DETAILS, bundleOf(ARG_PERSON to item))
+    setFragmentResult(REQUEST_DETAILS, Bundle().apply { putParcelable(ARG_PERSON, item) })
     val bundle = PersonDetailsBottomSheet.createBundle(item, mediaIdTmdb, null)
     findNavController().navigate(R.id.actionPeopleListDialogToDetails, bundle)
   }
