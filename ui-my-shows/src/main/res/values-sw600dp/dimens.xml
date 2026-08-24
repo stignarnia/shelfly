@@ -4,7 +4,4 @@
   <dimen name="myShowsFanartCorner">6dp</dimen>
   <dimen name="myShowsBottomPadding">86dp</dimen>
 
-  <dimen name="collectionImageMargin">29dp</dimen>
-  <dimen name="collectionImageTitleMargin">8dp</dimen>
-  <dimen name="collectionImageTitleSize">12sp</dimen>
 </resources>
