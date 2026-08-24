@@ -107,11 +107,24 @@ It is a whitespace check rather than a formatter: it will not reindent XML or wr
 Android Lint is the only thing that checks XML, translations, and accessibility.
 The Kotlin compiler cannot see any of it.
 
-`check-config.sh` covers the one localization mistake Lint cannot see.
-`resourceConfigurations` in `app/build.gradle` pins which locales survive into the APK, so adding `res/values-nb` without adding `nb` to that list strips the translation at build time - and `MissingTranslation` stays quiet, because it only reasons about locales that are already configured.
+**The build scripts are Kotlin DSL because Lint will not read Groovy ones.**
+AGP 9 only parses `.gradle.kts`, so while the scripts were `.gradle` no Gradle-DSL check ran anywhere in the tree - `GradleDynamicVersion` on a literal `31.+` produced nothing, and the same dependency in a `.kts` file reports it immediately.
+That is worth knowing before anyone converts a build file back for convenience: it silently removes a whole category of checking.
+One gap survives the migration - Lint scans library module build scripts but not the application module's, so nothing in `app/build.gradle.kts` is checked, and any Gradle DSL check that reasons about it cannot pass.
+
+`check-config.sh` covers two things Lint cannot see.
+
+The first is unreferenced resources.
+`UnusedResources` only reports meaningfully in an application module, because a library's resources may be used by any consumer Lint cannot see - and 28 of the 29 modules here are libraries, so almost the whole resource set falls outside what Lint will judge.
+viewBinding hides the remainder: it generates a binding class per layout, which Lint counts as a use, so an orphaned layout looks alive no matter how long nothing has inflated it.
+Resolving references across every module at once is sound here precisely because the module graph is closed - nothing outside this repository consumes these resources.
+Deleting one resource can orphan whatever it referenced, so the check is worth re-running until it passes rather than once.
+
+The second is the one localization mistake Lint cannot see.
+`resourceConfigurations` in `app/build.gradle.kts` pins which locales survive into the APK, so adding `res/values-nb` without adding `nb` to that list strips the translation at build time - and `MissingTranslation` stays quiet, because it only reasons about locales that are already configured.
 A complete, correct, silently discarded translation looks exactly like a healthy one.
 
-`lint.checkTestSources` is on in the root `build.gradle`, so `test/` and `androidTest/` sources are linted too - they are skipped by default.
+`lint.checkTestSources` is on in the root `build.gradle.kts`, so `test/` and `androidTest/` sources are linted too - they are skipped by default.
 It does not guard against test sources failing to *compile*, which is a Kotlin error rather than a Lint finding - that is what Tier 3 covers.
 
 ### Tier 3 - Room entities, DAOs, migrations
@@ -160,8 +173,7 @@ Run in two parts, because the device half is the only one that needs hardware.
     :app:assembleRelease \
     :app:assembleDebug \
     --warning-mode all \
-  && ./scripts/check-schemas.sh \
-  && ./scripts/count-sarif.sh
+  && ./scripts/check-schemas.sh
 ```
 
 Then, with a device attached:
@@ -174,10 +186,10 @@ Keeping them apart matters more than it looks.
 In a single `&&` chain the first failure hides every later signal, and `connectedDebugAndroidTest` fails immediately when nothing is plugged in - so an unplugged phone would silently cost you the release build, the debug build and the schema check, none of which need a device.
 Splitting also means the long half can run while the phone is elsewhere.
 
-`check-schemas.sh` and `count-sarif.sh` come after the build because they read outputs the build just regenerated; the other three scripts come first because they need no build at all.
+`check-schemas.sh` comes after the build because it reads outputs the build just regenerated; the other three scripts come first because they need no build at all.
 
-`clean` is what forces every task - and every Lint SARIF report - to regenerate.
-Without it, Lint tasks go `UP-TO-DATE` and the reports on disk are from a previous run.
+`clean` is what forces every task to actually run.
+Without it, Lint tasks go `UP-TO-DATE` and nothing is re-checked - a green `lintDebug` then only tells you the *previous* run was green.
 Do not add `--rerun-tasks` or `--no-build-cache` on top of `clean`; they are redundant.
 
 **Never pass `--no-configuration-cache`.**
@@ -196,9 +208,9 @@ Unit tests never run R8, so the release variant only re-executes the same source
 These rules are checked by tooling rather than by review.
 
 - **Conventional Commits**: `scripts/hooks/commit-msg` rejects any subject that is not `<type>(<scope>): <description>` with a type from the list above. Merges, reverts and rebase scratch commits are left alone, and `--no-verify` bypasses it. Enable it once per clone with `git config core.hooksPath scripts/hooks`.
-- **Release notes**: `scripts/check-release-notes.sh` fails when the first line of `release_notes.txt` is not `Shelfly <versionName>` from `versions.gradle`, or when the heading has no notes beneath it. Run it before tagging.
+- **Release notes**: `scripts/check-release-notes.sh` fails when the first line of `release_notes.txt` is not `Shelfly <versionName>` from `versions.gradle.kts`, or when the heading has no notes beneath it. Run it before tagging.
 - **Non-Kotlin whitespace**: `scripts/check-format.sh` fails on CRLF, hard tabs, or trailing whitespace across the tracked text files ktlint does not parse, excluding binaries and the generated Gradle wrapper scripts.
-- **Version and locale configuration**: `scripts/check-config.sh` fails when a tag on HEAD disagrees with `versionName`, and when the locale directories and `resourceConfigurations` disagree in either direction.
+- **Version and locale configuration, and unreferenced resources**: `scripts/check-config.sh` fails when a tag on HEAD disagrees with `versionName`, when the locale directories and `resourceConfigurations` disagree in either direction, and when any resource is declared but referenced nowhere in the project.
 - **Room schemas**: `scripts/check-schemas.sh` fails on uncommitted schema drift, and on any schema released in the last tag having been modified rather than superseded.
 - **Translation completeness**: Android Lint's `MissingTranslation` is error severity, so `lintDebug` already fails when a string is added to `values/strings.xml` without reaching every other locale. This needs no extra tooling - it is why the localization rule holds.
 
@@ -229,15 +241,22 @@ Debug builds stamp epoch seconds into `versionName` (`4.0.6-debug-<stamp>`) so t
 
 | System | Setting | State |
 | --- | --- | --- |
-| Kotlin compiler | `allWarningsAsErrors` in the root `build.gradle` | **On.** The tree compiles warning-free; any new warning fails the build. |
-| Android Lint | `lint.warningsAsErrors` | **Off.** ~420 warnings outstanding. |
+| Kotlin compiler | `allWarningsAsErrors` in the root `build.gradle.kts` | **On.** The tree compiles warning-free; any new warning fails the build. |
+| Android Lint | `lint.warningsAsErrors` | **On.** The tree lints clean; any new finding fails the build. |
 
 These are unrelated knobs.
 `allWarningsAsErrors` has no effect on Lint, and `--warning-mode all` is a third thing again - it only surfaces deprecated *Gradle API* usage, not Kotlin or Lint warnings.
 
-Lint's `abortOnError` is on, but it only fails the build on **error** severity.
-All outstanding findings are warnings, so `lintDebug` passes while reporting them.
-There is no command-line property that changes this - making Lint warnings fail requires `lint { warningsAsErrors = true }` in the build file, ideally with a `baseline` so existing findings are grandfathered.
+Both live in the root `build.gradle.kts`, in the `subprojects` block keyed on `com.android.base`, so every module inherits them and none can opt out locally.
+
+Lint's `abortOnError` only fails the build on **error** severity, so `warningsAsErrors` is what gives the rest of the checks teeth - it promotes every warning to an error first.
+Neither can be set from the command line: there is no `-Plint.warningsAsErrors` and no equivalent flag, in either direction.
+Changing this means editing the build file, which makes it a reviewable commit rather than something one person's shell alias quietly turns off.
+
+**Findings get fixed.**
+No `lint-baseline.xml`, no `tools:ignore`, no `@Suppress`, no disabling the check that caught it.
+The message Lint prints on failure recommends `updateLintBaseline`; that advice does not apply here, because a baseline grandfathers findings in and this tree is at zero.
+If a check looks wrong about the code, it is usually right about something adjacent - fix that.
 
 **Do not enable `lint.checkAllWarnings`.**
 It switches on every check that is off by default, which are overwhelmingly stylistic.
@@ -249,6 +268,7 @@ To pick up a specific off-by-default check, name it in `lint.enable` instead.
 ## Localization & Strings
 
 - **Always update all languages**: When adding, modifying, or removing string resources, always check and update all locale folders (`res/values-*/strings.xml`) across the modules, not just the default English `res/values/strings.xml`. Ensure consistent and accurate translations across all supported languages.
+- **The locale config is generated, not written**: `androidResources.generateLocaleConfig` is on, so AGP derives the per-app language list from the `values-*` directories and injects `android:localeConfig` into the merged manifest itself. There is deliberately no `res/xml/locales_config.xml` - a hand-written one duplicated the list in `resourceConfigurations` and could drift from it silently, since `check-config.sh` only ever validated the latter. `app/src/main/res/resources.properties` declares which locale the unqualified `values/` folder holds, and the build fails without it.
 
 ---
 
@@ -257,6 +277,6 @@ To pick up a specific off-by-default check, name it in `lint.enable` instead.
 `app/src/main/assets/release_notes.txt` is shown to users in the What's New screen. It is part of "done", not a release-time chore.
 
 - **Update it with any user-visible change**: new features, fixed bugs, changed behaviour. Purely internal work (refactors, tooling, tests) does not belong there.
-- **Keep the heading in sync with the version**: the first line is `Shelfly <versionName>`, matching `versions.gradle`. When the version is bumped, start a fresh list under the new heading.
+- **Keep the heading in sync with the version**: the first line is `Shelfly <versionName>`, matching `versions.gradle.kts`. When the version is bumped, start a fresh list under the new heading.
 - **Write for users, not for the diff**: one `•` bullet per change, describing what is different in the app - not which class changed.
 
