@@ -2,7 +2,6 @@
 <resources>
     <string name="menuProgress">Progres</string>
     <string name="menuDiscover">Descoperă</string>
-    <string name="menuCollection">Colecție</string>
     <string name="textDisclaimerTitle">Bine ai venit!</string>
     <string name="textDisclaimerText">Te rugăm să reții că <b>NU POȚI</b> viziona, transmite în flux sau descărca seriale și filme cu această aplicație.\n\nUtilizează aplicații precum <b>Netflix</b> pentru a transmite în flux și viziona conținut.</string>
     <string name="textDisclaimerConfirmText">Bine, înțeleg</string>

@@ -2,7 +2,6 @@
 <resources>
   <string name="menuProgress">Прогресс</string>
   <string name="menuDiscover">Открытия</string>
-  <string name="menuCollection">Коллекция</string>
   <string name="textDisclaimerTitle">Добро пожаловать!</string>
   <string name="textDisclaimerText">Обратите внимание, что приложение <b>НЕ ПРЕДНАЗНАЧЕНО</b> для просмотра или скачивания сериалов и фильмов.\n\nИспользуйте приложения по типу <b>Netflix</b>, чтобы скачивать и просматривать контент.</string>
   <string name="textDisclaimerConfirmText">Ок, я понял</string>

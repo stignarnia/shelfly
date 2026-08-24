@@ -138,7 +138,7 @@ Keep rules for Room, Hilt, Moshi, and WorkManager are only exercised here, and a
   clean \
   testDebugUnitTest \
   lintDebug \
-  connectedDebugAndroidTest \
+  :data-local:connectedDebugAndroidTest \
   :app:assembleRelease \
   :app:assembleDebug \
   --warning-mode all

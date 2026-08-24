@@ -105,6 +105,7 @@
   <string name="menuUnpin">Désépingler du haut</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Épingler vers \"En attente\"</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Désépingler de \"En attente\"</string>
+  <string name="menuCollection">Collection</string>
   <string name="errorGeneral">Oups… Quelque chose s\'est mal passé.\nVeuillez nous contacter si cela continue de se produire.</string>
   <string name="errorSeasonsNotLoaded">Veuillez attendre que les données des saisons soient chargées.</string>
   <string name="errorEpisodeNotAired">Cet épisode n\'a pas encore été diffusé.</string>

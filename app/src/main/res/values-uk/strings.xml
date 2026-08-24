@@ -2,7 +2,6 @@
 <resources>
   <string name="menuProgress">Прогрес</string>
   <string name="menuDiscover">Огляд</string>
-  <string name="menuCollection">Колекція</string>
   <string name="textDisclaimerTitle">Вітаємо!</string>
   <string name="textDisclaimerText">Будь ласка, зверніть увагу, що ви <b>НЕ МОЖЕТЕ</b> дивитися або завантажувати серіали та фільми з цим додатком.\n\nВикористовуйте додатки, такі як <b>Netflix</b> для завантаження та перегляду вмісту.</string>
   <string name="textDisclaimerConfirmText">ОК, зрозуміло</string>

@@ -2,7 +2,6 @@
 <resources>
   <string name="menuProgress">进度</string>
   <string name="menuDiscover">发现</string>
-  <string name="menuCollection">合集</string>
   <string name="textDisclaimerTitle">欢迎!</string>
   <string name="textDisclaimerText">请注意您<b>不能</b>使用此应用观看或下载剧集和电影。\n\n请使用 <b>Netflix</b> 等应用观看。</string>
   <string name="textDisclaimerConfirmText">好的，我已了解</string>

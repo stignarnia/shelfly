@@ -104,6 +104,7 @@
   <string name="menuUnpin">Pin von Oben lösen</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Pin auf \'Angehalten\'</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Pin von \'Angehalten\' lösen</string>
+  <string name="menuCollection">Sammlung</string>
   <string name="errorGeneral">Hoppla… Da ging etwas schief.\nBitte kontaktiere uns, wenn dies weiterhin geschieht.</string>
   <string name="errorSeasonsNotLoaded">Bitte warte bis die Staffelinformationen geladen sind.</string>
   <string name="errorEpisodeNotAired">Diese Folge wurde bisher noch nicht veröffentlicht.</string>

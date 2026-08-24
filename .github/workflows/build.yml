@@ -35,6 +35,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # First, because it needs no toolchain and fails in under a second.
+      # The release step in the build job publishes release_notes.txt as the GitHub Release body, so a heading left on the previous version would ship as the public description of this one.
+      - name: Check release notes
+        run: ./scripts/check-release-notes.sh
+
       - name: Setup JDK
         uses: actions/setup-java@v5
         with:
@@ -49,7 +54,9 @@ jobs:
       #
       # Debug variant only.
       # Unit tests never run R8, so ./gradlew test would just re-execute the same sources for the release variant - twice the tasks for the same signal.
-      # Runs full verification: all unit tests (testDebugUnitTest) and Android Lint (lintDebug) across all modules (no release-variant duplication).
+      #
+      # This is not the full sweep from CLAUDE.md.
+      # It covers the unit tests and Android Lint across every module; it does not compile or run the androidTest sources, which need a device, so MigrationsTest and the DAO tests are verified locally rather than here.
       - name: Run tests and lint
         run: ./gradlew testDebugUnitTest lintDebug --warning-mode all
 

@@ -2,7 +2,6 @@
 <resources>
   <string name="menuProgress">Progressi</string>
   <string name="menuDiscover">Scopri</string>
-  <string name="menuCollection">Raccolta</string>
   <string name="textDisclaimerTitle">Benvenuto/a!</string>
   <string name="textDisclaimerText">Si prega di notare che <b>NON È POSSIBILE</b> guardare, riprodurre o scaricare show e film con questa app.\n\nUsa app come <b>Netflix</b> per riprodurre e guardare i contenuti.</string>
   <string name="textDisclaimerConfirmText">OK, ho capito</string>

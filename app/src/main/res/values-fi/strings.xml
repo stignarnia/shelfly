@@ -2,7 +2,6 @@
 <resources>
   <string name="menuProgress">Katselutila</string>
   <string name="menuDiscover">Etsi</string>
-  <string name="menuCollection">Kokoelma</string>
   <string name="textDisclaimerTitle">Tervetuloa!</string>
   <string name="textDisclaimerText">Huomioi, että tällä sovelluksella <b>ET VOI</b> katsella, suoratoistaa tai ladata sarjoja ja elokuvia.\n\nKäytä suoratoistoon ja katseluun <b>Netflixin</b> kaltaisia sovelluksia.</string>
   <string name="textDisclaimerConfirmText">OK, ymmärrän</string>

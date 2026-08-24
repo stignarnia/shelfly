@@ -105,6 +105,7 @@
   <string name="menuUnpin">Irrota listan ylälaidasta</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Kiinnitä pitoon</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Irrota pidosta</string>
+  <string name="menuCollection">Kokoelma</string>
   <string name="errorGeneral">Hups… Jotain meni pieleen.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorSeasonsNotLoaded">Odota kun tuotantokausien tiedot ladataan.</string>
   <string name="errorEpisodeNotAired">Jaksoa ei ole vielä esitetty.</string>

@@ -105,6 +105,7 @@
   <string name="menuUnpin">Desanclar de la parte superior</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Anclar a \"en espera\"</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Desanclar de \"en espera\"</string>
+  <string name="menuCollection">Colección</string>
   <string name="errorGeneral">Ups… Algo salió mal.\nPor favor, contáctanos si esto sigue sucediendo.</string>
   <string name="errorSeasonsNotLoaded">Por favor, espera a que se carguen los datos de las temporadas.</string>
   <string name="errorEpisodeNotAired">Este episodio aún no se ha emitido.</string>

@@ -2,7 +2,6 @@
 <resources>
   <string name="menuProgress">Progression</string>
   <string name="menuDiscover">Découvrir</string>
-  <string name="menuCollection">Collection</string>
   <string name="textDisclaimerTitle">Bienvenue !</string>
   <string name="textDisclaimerText">Veuillez prendre note que vous <b>NE POUVEZ PAS</b> regarder ou télécharger des séries ou des films avec cette application.\n\nUtilisez des applications telles que <b>Netflix</b> pour regarder du contenu.</string>
   <string name="textDisclaimerConfirmText">Compris</string>

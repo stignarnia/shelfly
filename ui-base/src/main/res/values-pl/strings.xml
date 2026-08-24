@@ -113,6 +113,7 @@
   <string name="menuUnpin">Odepnij z góry</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Przypnij do wstrzymanych</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Odepnij ze wstrzymanych</string>
+  <string name="menuCollection">Kolekcja</string>
   <string name="errorGeneral">Oj… Coś poszło nie tak.\nSkontaktuj się z nami jeżeli błąd się powtarza.</string>
   <string name="errorSeasonsNotLoaded">Proszę poczekać na dane o sezonach.</string>
   <string name="errorEpisodeNotAired">Ten odcinek nie miał jeszcze premiery.</string>

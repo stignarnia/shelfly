@@ -2,7 +2,6 @@
 <resources>
   <string name="menuProgress">Fremskridt</string>
   <string name="menuDiscover">Opdag</string>
-  <string name="menuCollection">Samling</string>
   <string name="textDisclaimerTitle">Velkommen!</string>
   <string name="textDisclaimerText">Bemærk venligst, at du <b>IKKE</b> kan se, streame eller downloade serier og film med denne app.\n\nBrug apps som <b>Netflix</b> til at streame og se indhold.</string>
   <string name="textDisclaimerConfirmText">OK, jeg forstår</string>

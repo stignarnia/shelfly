@@ -121,6 +121,7 @@
   <string name="menuUnpin">إلغاء التثبيت من الأعلى</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">إضافة إلى \"المعلقة\"</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">إزالة من \"المعلقة\"</string>
+  <string name="menuCollection">المجموعة</string>
   <string name="errorGeneral">عفواً… حدث خطأ ما.\nإذا استمرت المشكلة بالحدوث، رجاءً تواصل معنا.</string>
   <string name="errorSeasonsNotLoaded">رجاءً إنتظر قليلاً حتى يكتمل تحميل بيانات المواسم.</string>
   <string name="errorEpisodeNotAired">لم تُعرض الحلقة حتى الآن.</string>

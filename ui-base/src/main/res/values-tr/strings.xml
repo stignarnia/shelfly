@@ -105,6 +105,7 @@
   <string name="menuUnpin">Sabitlemeyi kaldır</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">\"Beklemeye\" sabitle</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">\"Beklemeye\" sabitlemeyi kaldır</string>
+  <string name="menuCollection">Koleksiyon</string>
   <string name="errorGeneral">Hay aksi… Bir şeyler ters gitti.\nBu sorun devam ederse lütfen bizimle iletişime geçin.</string>
   <string name="errorSeasonsNotLoaded">Lütfen sezon verilerinin yüklenmesini bekleyin.</string>
   <string name="errorEpisodeNotAired">Bu bölüm henüz yayınlanmadı.</string>

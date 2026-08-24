@@ -101,6 +101,7 @@
   <string name="menuUnpin">取消置顶</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">设为「暂缓中」</string>
   <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">取消「暂缓」</string>
+  <string name="menuCollection">合集</string>
   <string name="errorGeneral">哎呀～ 出错了。\n如果这种情况持续发生，请联系我们。</string>
   <string name="errorSeasonsNotLoaded">剧集数据加载中，请等待。</string>
   <string name="errorEpisodeNotAired">该集尚未播出。</string>

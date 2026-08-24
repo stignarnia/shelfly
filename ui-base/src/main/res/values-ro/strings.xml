@@ -109,6 +109,7 @@
     <string name="menuUnpin">Anulează fixarea din partea de sus</string>
     <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Fixează la „În așteptare”</string>
     <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Anulează fixarea de la „În așteptare”</string>
+    <string name="menuCollection">Colecție</string>
     <string name="errorGeneral">Oops… S-a produs o eroare.\nTe rugăm să ne contactezi dacă problema persistă.</string>
     <string name="errorSeasonsNotLoaded">Te rugăm să aștepți încărcarea datelor privind anotimpurile.</string>
     <string name="errorEpisodeNotAired">Acest episod nu a fost încă difuzat.</string>

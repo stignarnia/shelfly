@@ -2,7 +2,6 @@
 <resources>
   <string name="menuProgress">مستوى التقدم</string>
   <string name="menuDiscover">اكتشف</string>
-  <string name="menuCollection">المجموعة</string>
   <string name="textDisclaimerTitle">أهلًا بك!</string>
   <string name="textDisclaimerText">يرجى مُلاحظة أن هذا التطبيق <b>غير مُخصص</b> لِمُشاهدة أو تحميل الأفلام والمُسلسلات.\n\nيُمكنك اِستخدام تطبيقات مثل <b>Netflix</b> لهذه الأمور.</string>
   <string name="textDisclaimerConfirmText">حسنًا، فهمت</string>
