@@ -26,7 +26,7 @@ set -uo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 GLOBS=(
-  '*.gradle' '*.xml' '*.yml' '*.yaml' '*.pro' '*.sh' '*.properties'
+  '*.gradle.kts' '*.xml' '*.yml' '*.yaml' '*.pro' '*.sh' '*.properties'
   '*.toml' '*.json' '*.md' '*.txt'
   '.editorconfig' '.gitignore' '*/.gitignore' 'LICENSE'
 )
