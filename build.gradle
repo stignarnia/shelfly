@@ -38,6 +38,12 @@ subprojects {
     android {
       compileSdk rootProject.ext.versions.compileSdk
       buildToolsVersion rootProject.ext.versions.buildTools
+
+      lint {
+        // Lint skips test sources by default, so test code is held to no standard at all.
+        // Enabling it costs nothing today - the test sources report zero findings - and keeps it that way as tests are added.
+        checkTestSources = true
+      }
     }
 
     kotlin {

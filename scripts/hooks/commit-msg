@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Reject commit messages that do not follow the Conventional Commits format CLAUDE.md requires.
+#
+# The rule was documented but unenforced, so a missing prefix was only ever caught by review.
+# This runs on every commit, including ones made by tooling and agents.
+#
+# Enabled by pointing git at this directory, which is version controlled unlike .git/hooks:
+#
+#   git config core.hooksPath scripts/hooks
+#
+# Bypass a single commit with --no-verify when a hook is genuinely in the way.
+set -euo pipefail
+
+msg_file="$1"
+
+# The subject is the first line that is neither blank nor a git comment.
+subject="$(grep -v '^#' "$msg_file" | sed '/^[[:space:]]*$/d' | head -n 1 || true)"
+
+# An empty message aborts the commit on git's own terms, so there is nothing to validate.
+if [[ -z "$subject" ]]; then
+  exit 0
+fi
+
+# Merges, reverts and rebase scratch commits have message formats git generates or consumes itself.
+case "$subject" in
+  Merge\ * | Revert\ * | fixup!\ * | squash!\ * | amend!\ *)
+    exit 0
+    ;;
+esac
+
+types="feat|fix|refactor|style|perf|test|chore|ci|docs"
+# An optional (scope), an optional ! for a breaking change, then ": " and a description.
+pattern="^($types)(\([a-z0-9._/-]+\))?!?: .+"
+
+if [[ ! "$subject" =~ $pattern ]]; then
+  echo "error: commit message does not follow Conventional Commits." >&2
+  echo "" >&2
+  echo "  found: $subject" >&2
+  echo "" >&2
+  echo "Expected <type>(<optional scope>): <description>, where type is one of:" >&2
+  echo "  $(echo "$types" | tr '|' ' ')" >&2
+  echo "" >&2
+  echo "For example:" >&2
+  echo "  refactor(ui): consolidate modal dialogs into ModalView" >&2
+  echo "" >&2
+  echo "See the Git Commit Guidelines in CLAUDE.md." >&2
+  exit 1
+fi
+
+# Long subjects are a smell rather than an error, so this warns instead of blocking.
+if [[ "${#subject}" -gt 72 ]]; then
+  echo "warning: commit subject is ${#subject} characters; keep it short and imperative." >&2
+fi

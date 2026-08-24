@@ -73,16 +73,125 @@ refactor(ui): replace MaterialAlertDialogBuilder with unified ModalView
 - **Run Unit Tests**: `./gradlew testDebugUnitTest` (or a single module: `./gradlew :app:testDebugUnitTest`)
 - **Build Release APK**: `./gradlew :app:assembleRelease`
 - **Build Debug APK**: `./gradlew :app:assembleDebug`
+- **Install on a connected device**: `./gradlew :app:installDebug`
+
+---
+
+## Verification
+
+No single command catches everything, and the full sweep takes minutes.
+**Match the command to the change** rather than running everything on every edit or trusting unit tests alone.
+
+Each tier below is additive: it assumes the tiers above it also ran.
+
+### Tier 1 - any Kotlin change
+
+```
+./ktlint && ./gradlew testDebugUnitTest
+```
+
+`ktlint` is a self-executing jar, not a Gradle plugin.
+No Gradle task runs it, so `check` will never catch a formatting violation - it has to be invoked separately.
+
+### Tier 2 - resources, layouts, manifest, strings
+
+```
+./gradlew lintDebug
+```
+
+Android Lint is the only thing that checks XML, translations, and accessibility.
+The Kotlin compiler cannot see any of it.
+
+`lint.checkTestSources` is on in the root `build.gradle`, so `test/` and `androidTest/` sources are linted too - they are skipped by default.
+It does not guard against test sources failing to *compile*, which is a Kotlin error rather than a Lint finding - that is what Tier 3 covers.
+
+### Tier 3 - Room entities, DAOs, migrations
+
+```
+./gradlew :data-local:connectedDebugAndroidTest
+```
+
+Requires a connected device or emulator.
+`data-local`'s `androidTest` source set is the only real-database coverage in the repo, and nothing in `check` or CI compiles it - it silently rots.
+When no device is attached, run `./gradlew :data-local:assembleDebugAndroidTest` so the sources cannot drift out of compiling.
+It takes about 15 seconds and is a strict superset of `compileDebugAndroidTestKotlin`: it also dexes, merges the test manifest, and runs the duplicate-class and AAR metadata checks, none of which the compile task reaches.
+
+### Tier 4 - dependencies, R8 rules, anything reflective
+
+```
+./gradlew :app:assembleRelease
+```
+
+Unit tests and debug builds never run R8.
+Keep rules for Room, Hilt, Moshi, and WorkManager are only exercised here, and a missing one fails at runtime rather than at compile time.
+
+### Everything - before tagging a release
+
+```
+./ktlint && SHELFLY_V2_BACKUP=/path/to/showly_export.json ./gradlew \
+  clean \
+  testDebugUnitTest \
+  lintDebug \
+  connectedDebugAndroidTest \
+  :app:assembleRelease \
+  :app:assembleDebug \
+  --warning-mode all
+```
+
+`clean` is what forces every task - and every Lint SARIF report - to regenerate.
+Without it, Lint tasks go `UP-TO-DATE` and the reports on disk are from a previous run.
+Do not add `--rerun-tasks` or `--no-build-cache` on top of `clean`; they are redundant.
+
+**Never pass `--no-configuration-cache`.**
+`gradle.properties` enables the configuration cache, so disabling it *removes* a check and tests a configuration that no ordinary build uses.
 
 **Never run `./gradlew test`.**
 It is the lifecycle task, so it runs the release unit test variant on top of the debug one - 1465 tasks against 732, for the same result.
 Unit tests never run R8, so the release variant only re-executes the same sources.
 `testDebugUnitTest` is what CI runs and what you should run.
 
+**Prefer `testDebugUnitTest lintDebug` over `check`.**
+`check` pulls in `testReleaseUnitTest` as well, which is the same duplication as `./gradlew test`.
+
+### Enforced conventions
+
+Two of the rules in this file are checked by tooling rather than by review.
+
+- **Conventional Commits**: `scripts/hooks/commit-msg` rejects any subject that is not `<type>(<scope>): <description>` with a type from the list above. Merges, reverts and rebase scratch commits are left alone, and `--no-verify` bypasses it. Enable it once per clone with `git config core.hooksPath scripts/hooks`.
+- **Release notes**: `scripts/check-release-notes.sh` fails when the first line of `release_notes.txt` is not `Shelfly <versionName>` from `versions.gradle`, or when the heading has no notes beneath it. Run it before tagging.
+
+The comment formatting rules are **not** enforced by anything.
+`ktlint` does not read comment prose, so sentence-per-line remains a review-time concern.
+
+### What a green run still does not prove
+
 Two suites are opt-in and skip themselves, so a green run does not mean they ran:
 
-- `data-remote`'s `TmdbLiveApiTest` calls the real TMDB API and skips when no key is compiled in. It has caught real mapping defects - run it locally.
+- `data-remote`'s `TmdbLiveApiTest` calls the real TMDB API. The key comes from `tmdbApiKey` in `local.properties` and is compiled into the **debug** BuildConfig, so it does run locally under `testDebugUnitTest` and skips only on CI. It has caught real mapping defects.
 - `ui-backup`'s `BackupMigrationV2FileTest` skips unless `SHELFLY_V2_BACKUP` points at a real v2 export.
+
+**Nothing above runs the app.**
+There are no UI or integration tests in the repo, so runtime behaviour is only ever verified by installing on a device.
+Debug builds stamp epoch seconds into `versionName` (`4.0.6-debug-<stamp>`) so the installed build can be told apart from the previous one.
+
+### Warnings: two separate systems
+
+| System | Setting | State |
+| --- | --- | --- |
+| Kotlin compiler | `allWarningsAsErrors` in the root `build.gradle` | **On.** The tree compiles warning-free; any new warning fails the build. |
+| Android Lint | `lint.warningsAsErrors` | **Off.** ~420 warnings outstanding. |
+
+These are unrelated knobs.
+`allWarningsAsErrors` has no effect on Lint, and `--warning-mode all` is a third thing again - it only surfaces deprecated *Gradle API* usage, not Kotlin or Lint warnings.
+
+Lint's `abortOnError` is on, but it only fails the build on **error** severity.
+All outstanding findings are warnings, so `lintDebug` passes while reporting them.
+There is no command-line property that changes this - making Lint warnings fail requires `lint { warningsAsErrors = true }` in the build file, ideally with a `baseline` so existing findings are grandfathered.
+
+**Do not enable `lint.checkAllWarnings`.**
+It switches on every check that is off by default, which are overwhelmingly stylistic.
+Measured on `ui-model`, it took that module from 1 finding to 95 - the extra 94 being `DuplicateStrings` and `TypographyQuotes`, which fire constantly on a localized app and bury the findings that matter.
+To pick up a specific off-by-default check, name it in `lint.enable` instead.
 
 ---
 
