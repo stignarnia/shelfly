@@ -44,6 +44,7 @@ dependencies {
   androidTestImplementation libs.truth
   androidTestImplementation libs.android.test.runner
   androidTestImplementation libs.android.test.truth
+  androidTestImplementation libs.android.room.testing
 
   coreLibraryDesugaring libs.android.desugar
 }

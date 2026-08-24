@@ -113,6 +113,12 @@ It does not guard against test sources failing to *compile*, which is a Kotlin e
 
 Requires a connected device or emulator.
 `data-local`'s `androidTest` source set is the only real-database coverage in the repo, and nothing in `check` or CI compiles it - it silently rots.
+
+`MigrationsTest` is the part to care about.
+The database is built with `fallbackToDestructiveMigration(dropAllTables = true)`, so a migration that throws does not crash - Room drops every table and the user loses their whole library without being told.
+A failing test here is the only warning that would ever be given, so never add or change a migration without running this on a device.
+It checks the migrated data as well as the schema, and the exported schemas in `data-local/schemas` are what it validates against - they are build output worth committing, not noise.
+
 When no device is attached, run `./gradlew :data-local:assembleDebugAndroidTest` so the sources cannot drift out of compiling.
 It takes about 15 seconds and is a strict superset of `compileDebugAndroidTestKotlin`: it also dexes, merges the test manifest, and runs the duplicate-class and AAR metadata checks, none of which the compile task reaches.
 
@@ -128,7 +134,7 @@ Keep rules for Room, Hilt, Moshi, and WorkManager are only exercised here, and a
 ### Everything - before tagging a release
 
 ```
-./ktlint && SHELFLY_V2_BACKUP=/path/to/showly_export.json ./gradlew \
+./ktlint && ./scripts/check-release-notes.sh && SHELFLY_V2_BACKUP=/path/to/showly_export.json ./gradlew \
   clean \
   testDebugUnitTest \
   lintDebug \
@@ -175,7 +181,13 @@ Two suites are opt-in and skip themselves, so a green run does not mean they ran
 - `ui-backup`'s `BackupMigrationV2FileTest` skips unless `SHELFLY_V2_BACKUP` points at a real v2 export.
 
 **Nothing above runs the app.**
-There are no UI or integration tests in the repo, so runtime behaviour is only ever verified by installing on a device.
+There are no UI or integration tests in the repo, so runtime behaviour is only ever verified by installing on a device:
+
+```
+./gradlew :app:installDebug && scripts/logcat.sh
+```
+
+`logcat.sh` follows the app's own process, so a crash or a swallowed exception is visible without grepping the whole buffer - the app has to be running before it starts.
 Debug builds stamp epoch seconds into `versionName` (`4.0.6-debug-<stamp>`) so the installed build can be told apart from the previous one.
 
 ### Warnings: two separate systems
