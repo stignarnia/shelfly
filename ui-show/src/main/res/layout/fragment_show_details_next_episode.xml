@@ -58,7 +58,6 @@
       android:textColor="?android:attr/textColorSecondary"
       android:textSize="12sp"
       android:visibility="gone"
-      tools:ignore="SmallSp"
       tools:text="Airs in 3 days 2 hours"
       tools:visibility="visible"
       />

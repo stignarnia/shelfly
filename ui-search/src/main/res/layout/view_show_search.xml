@@ -121,13 +121,12 @@
       android:maxLines="1"
       android:textAlignment="viewStart"
       android:textColor="?attr/colorAccentText"
-      android:textSize="10sp"
+      android:textSize="12sp"
       app:layout_constraintBottom_toTopOf="@+id/showSearchTitle"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@id/showSearchIcon"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      tools:ignore="SmallSp"
       tools:text="Netflix"
       />
 

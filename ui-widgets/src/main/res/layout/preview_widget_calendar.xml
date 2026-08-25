@@ -7,7 +7,7 @@
   android:layout_height="match_parent"
   android:background="@drawable/bg_widget"
   android:theme="@style/AppTheme.Widget.Dark"
-  tools:ignore="HardcodedText,SmallSp"
+  tools:ignore="HardcodedText"
   >
 
   <LinearLayout
@@ -274,7 +274,7 @@
       android:text="Shows Calendar"
       android:textAlignment="viewStart"
       android:textColor="@color/colorWhite"
-      android:textSize="10sp"
+      android:textSize="12sp"
       />
 
   </LinearLayout>

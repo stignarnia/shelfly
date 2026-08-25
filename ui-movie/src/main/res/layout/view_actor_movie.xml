@@ -53,7 +53,6 @@
       android:textAlignment="viewStart"
       android:textSize="@dimen/actorMovieTileTextSize"
       android:translationZ="10dp"
-      tools:ignore="SmallSp"
       tools:text="Erin Moriarty"
       />
 

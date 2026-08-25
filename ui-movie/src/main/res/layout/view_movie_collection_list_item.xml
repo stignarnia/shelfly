@@ -67,12 +67,11 @@
       android:gravity="center"
       android:includeFontPadding="false"
       android:textColor="?attr/textColorOnSurface"
-      android:textSize="10sp"
+      android:textSize="12sp"
       android:textStyle="bold"
       android:translationZ="@dimen/elevationSmall"
       app:layout_constraintBottom_toBottomOf="@id/movieImage"
       app:layout_constraintEnd_toEndOf="@id/movieImage"
-      tools:ignore="SmallSp"
       tools:text="10"
       />
 
@@ -101,7 +100,6 @@
       app:layout_constraintStart_toEndOf="@id/guideline1"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      tools:ignore="SmallSp"
       tools:text="2023"
       />
 

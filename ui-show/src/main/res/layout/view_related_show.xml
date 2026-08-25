@@ -52,7 +52,6 @@
       android:textSize="@dimen/relatedShowTextSize"
       android:translationZ="10dp"
       android:visibility="gone"
-      tools:ignore="SmallSp"
       tools:text="Erin Moriarty"
       tools:visibility="visible"
       />

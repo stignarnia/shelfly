@@ -69,13 +69,12 @@
       android:gravity="center"
       android:includeFontPadding="false"
       android:textColor="?attr/textColorOnSurface"
-      android:textSize="10sp"
+      android:textSize="12sp"
       android:textStyle="bold"
       android:translationZ="@dimen/elevationSmall"
       android:visibility="gone"
       app:layout_constraintBottom_toBottomOf="@id/listDetailsShowImage"
       app:layout_constraintEnd_toEndOf="@id/listDetailsShowImage"
-      tools:ignore="SmallSp"
       tools:text="10"
       tools:visibility="visible"
       />
@@ -134,7 +133,6 @@
       app:layout_constraintStart_toEndOf="@id/listDetailsShowHeaderIcon"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      tools:ignore="SmallSp"
       tools:text="Netflix 2020"
       />
 

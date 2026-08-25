@@ -109,13 +109,12 @@
       android:maxLines="1"
       android:textAlignment="viewStart"
       android:textColor="?attr/colorAccentText"
-      android:textSize="10sp"
+      android:textSize="12sp"
       app:layout_constraintBottom_toTopOf="@+id/suggestionTitle"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@id/suggestionImage"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      tools:ignore="SmallSp"
       tools:text="Netflix"
       />
 
@@ -129,12 +128,11 @@
       android:maxLines="2"
       android:textAlignment="viewStart"
       android:textColor="?android:attr/textColorSecondary"
-      android:textSize="10sp"
+      android:textSize="12sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@id/suggestionImage"
       app:layout_constraintTop_toBottomOf="@id/suggestionTitle"
-      tools:ignore="SmallSp"
       tools:text="Lorem Ipsum"
       />
 

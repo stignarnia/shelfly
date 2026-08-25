@@ -4,7 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:ignore="HardcodedText,SmallSp"
+  tools:ignore="HardcodedText"
   >
 
   <ListView
@@ -78,7 +78,7 @@
       android:text="Movies Progress"
       android:textAlignment="viewStart"
       android:textColor="@color/colorWhite"
-      android:textSize="10sp"
+      android:textSize="12sp"
       />
 
   </LinearLayout>

@@ -111,7 +111,6 @@
     app:layout_constraintStart_toEndOf="@id/contextMenuItemGuide1"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_chainStyle="packed"
-    tools:ignore="SmallSp"
     tools:text="Netflix"
     />
 
