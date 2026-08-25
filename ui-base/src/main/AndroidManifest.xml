@@ -1,5 +1,12 @@
 <manifest
   xmlns:android="http://schemas.android.com/apk/res/android">
 
+  <!--
+    Declared here rather than only in the app module because this is where they are used: NetworkStatusProvider registers a network callback, and the notification managers post notifications.
+    The merger unions these into the app's manifest, so the installed permission set is unchanged - but lint analyses each module on its own, and cannot see a permission a consumer happens to declare.
+  -->
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
   <application android:supportsRtl="true" />
 </manifest>
