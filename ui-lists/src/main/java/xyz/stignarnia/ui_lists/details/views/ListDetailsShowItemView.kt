@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_lists.details.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
@@ -29,7 +28,6 @@ import xyz.stignarnia.ui_model.Show
 import java.util.Locale.ENGLISH
 import kotlin.math.abs
 
-@SuppressLint("ClickableViewAccessibility")
 class ListDetailsShowItemView : ListDetailsItemView {
 
   constructor(context: Context) : super(context)
@@ -53,23 +51,29 @@ class ListDetailsShowItemView : ListDetailsItemView {
 
     with(binding) {
       listDetailsShowHandle.expandTouch(100)
-      listDetailsShowHandle.setOnTouchListener { _, event ->
+      // The handle carries no click listener; performClick is called so the drag affordance still reports itself to accessibility services.
+      listDetailsShowHandle.setOnTouchListener { view, event ->
         if (item.isManageMode && event.action == ACTION_DOWN) {
           itemDragStartListener?.invoke()
         }
+        if (event.action == ACTION_UP) view.performClick()
         false
       }
 
       var x = 0F
-      listDetailsShowRoot.setOnTouchListener { _, event ->
+      // The tap is performed here rather than left to the framework: this listener consumes the gesture once it turns into a swipe, so ownership of the click has to sit in one place to avoid firing it twice.
+      listDetailsShowRoot.setOnTouchListener { view, event ->
         if (item.isManageMode) {
           return@setOnTouchListener false
         }
         if (event.action == ACTION_DOWN) x = event.x
-        if (event.action == ACTION_UP) x = 0F
         if (event.action == ACTION_MOVE && abs(x - event.x) > 50F) {
           itemSwipeStartListener?.invoke()
           return@setOnTouchListener true
+        }
+        if (event.action == ACTION_UP) {
+          x = 0F
+          return@setOnTouchListener view.performClick()
         }
         false
       }

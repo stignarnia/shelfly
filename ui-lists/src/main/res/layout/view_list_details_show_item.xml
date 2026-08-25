@@ -8,7 +8,7 @@
   tools:parentTag="android.widget.FrameLayout"
   >
 
-  <androidx.constraintlayout.widget.ConstraintLayout
+  <xyz.stignarnia.ui_base.common.views.TouchableConstraintLayout
     android:id="@+id/listDetailsShowRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -202,7 +202,7 @@
       tools:text="Lorem Ipsum"
       />
 
-    <ImageView
+    <xyz.stignarnia.ui_base.common.views.TouchableImageView
       android:id="@+id/listDetailsShowHandle"
       android:layout_width="40dp"
       android:layout_height="100dp"
@@ -218,6 +218,6 @@
       tools:visibility="visible"
       />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  </xyz.stignarnia.ui_base.common.views.TouchableConstraintLayout>
 
 </merge>
