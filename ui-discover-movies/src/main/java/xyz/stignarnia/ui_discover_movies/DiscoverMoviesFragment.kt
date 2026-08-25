@@ -151,10 +151,15 @@ internal class DiscoverMoviesFragment :
           dimenToPx(R.dimen.discoverOverscrollGap) +
           dimenToPx(R.dimen.overscrollActionProgress) +
           dimenToPx(R.dimen.spaceMedium)
-        // The slot above the list provides the gap under the floating header, so the list itself needs no top padding of its own.
+        val listTopGap = statusBarSize + dimenToPx(R.dimen.discoverRecyclerPadding)
+        discoverMoviesOverscroll.restHeight = listTopGap
+        // The list spans the whole window and carries the gap under the floating header as its own top padding, so a poster scrolled past the gap slides under the header and off the top of the screen.
+        // Ending the list below the slot instead dropped each poster whole the moment it left the list's bounds, which is a row's height short of the screen edge.
+        // The negative margin cancels the slot's resting height, so the slot still moves the list by exactly however far it opens past rest and nothing else.
+        (discoverMoviesRecycler.layoutParams as ViewGroup.MarginLayoutParams)
+          .updateMargins(top = -listTopGap)
         discoverMoviesRecycler
-          .updatePadding(top = 0)
-        discoverMoviesOverscroll.restHeight = statusBarSize + dimenToPx(R.dimen.discoverRecyclerPadding)
+          .updatePadding(top = listTopGap)
         (discoverMoviesSearchView.layoutParams as ViewGroup.MarginLayoutParams)
           .updateMargins(top = statusBarSize + dimenToPx(R.dimen.spaceMedium))
         (discoverMoviesTabsView.layoutParams as ViewGroup.MarginLayoutParams)
@@ -189,6 +194,8 @@ internal class DiscoverMoviesFragment :
         viewModel.loadMovies(pullToRefresh = true)
       }
       attach(binding.discoverMoviesRecycler, viewLifecycleOwner)
+      // The chips are what the ring is placed under, so they are what it has to leave with when the header scrolls away.
+      follow(binding.discoverMoviesFiltersView)
     }
   }
 

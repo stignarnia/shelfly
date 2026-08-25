@@ -4,6 +4,8 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewTreeObserver
 import android.view.animation.LinearInterpolator
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
@@ -32,6 +34,7 @@ import xyz.stignarnia.ui_base.utilities.extensions.bump
  *
  * Host this stacked directly above the list, not layered over it: the view owns its own height - zero at rest, opening as the pull progresses - so the list below is pushed down to make room.
  * Occupying a slot of its own rather than floating is what makes overlap impossible in either direction, and it costs nothing while idle because the slot collapses.
+ * Where the list runs under a floating header that scrolls away, pass that header to [follow] so the ring leaves with it instead of being stranded over the content.
  */
 class OverscrollActionView
   @JvmOverloads
@@ -60,6 +63,8 @@ class OverscrollActionView
     private var heightAnimator: ValueAnimator? = null
     private var armed = true
     private var isRunning = false
+    private var header: View? = null
+    private var headerListener: ViewTreeObserver.OnPreDrawListener? = null
 
     /**
      * How far the slot opens at a full pull.
@@ -149,6 +154,48 @@ class OverscrollActionView
       recycler = null
       decor?.detach()
       decor = null
+      header = null
+      stopFollowing()
+    }
+
+    /**
+     * Keeps the indicator in step with a floating header that scrolls away with the list.
+     *
+     * The ring is placed against the header, so once the header translates out of the way the ring has to go with it or it is left painting over the content the header used to cover.
+     * The slot cannot simply take the header's own CoordinatorLayout behaviour: it lives inside the stack above the list rather than directly under the coordinator, and a behaviour only ever runs on a direct child.
+     * Nor can the header's translation be observed - the behaviour animates it through a ViewPropertyAnimator, which writes the render node without going through setTranslationY - so it is read once a frame instead, which catches the drag and the snap back to the top alike.
+     *
+     * Only the translation is copied.
+     * The slot keeps its own height, so nothing about this moves the list.
+     */
+    fun follow(view: View) {
+      header = view
+      if (isAttachedToWindow) startFollowing()
+    }
+
+    override fun onAttachedToWindow() {
+      super.onAttachedToWindow()
+      if (header != null) startFollowing()
+    }
+
+    override fun onDetachedFromWindow() {
+      stopFollowing()
+      super.onDetachedFromWindow()
+    }
+
+    private fun startFollowing() {
+      if (headerListener != null) return
+      headerListener = ViewTreeObserver
+        .OnPreDrawListener {
+          header?.let { translationY = it.translationY }
+          true
+        }.also { viewTreeObserver.addOnPreDrawListener(it) }
+    }
+
+    private fun stopFollowing() {
+      headerListener?.let { viewTreeObserver.removeOnPreDrawListener(it) }
+      headerListener = null
+      translationY = 0F
     }
 
     /**

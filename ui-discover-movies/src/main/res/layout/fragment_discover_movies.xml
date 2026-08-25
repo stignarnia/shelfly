@@ -28,6 +28,7 @@
       android:id="@+id/discoverMoviesOverscroll"
       android:layout_width="match_parent"
       android:layout_height="0dp"
+      android:translationZ="@dimen/overscrollActionElevation"
       app:actionIcon="@drawable/ic_tmdb_logo"
       app:actionIconSize="@dimen/overscrollActionIconSmall"
       />

@@ -87,4 +87,9 @@
   <!-- Gap left between the filter chips and the pull indicator below them. -->
   <dimen name="discoverOverscrollGap">24dp</dimen>
   <dimen name="overscrollActionProgress">48dp</dimen>
+  <!--
+    Lifts the indicator's slot above the list it shares a stack with, so the list's own top padding - which the slot sits inside - can never bring a scrolled item over the ring.
+    Everything else in the tree sits at zero, so the smallest step is enough; it is a draw order, not a shadow, and the slot has no background to cast one.
+  -->
+  <dimen name="overscrollActionElevation">1dp</dimen>
 </resources>

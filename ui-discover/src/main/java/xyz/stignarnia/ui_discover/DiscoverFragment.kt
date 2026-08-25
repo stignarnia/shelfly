@@ -174,6 +174,8 @@ internal class DiscoverFragment :
         viewModel.loadShows(pullToRefresh = true)
       }
       attach(binding.discoverRecycler, viewLifecycleOwner)
+      // The chips are what the ring is placed under, so they are what it has to leave with when the header scrolls away.
+      follow(binding.discoverFiltersView)
     }
   }
 
@@ -205,10 +207,15 @@ internal class DiscoverFragment :
           dimenToPx(R.dimen.discoverOverscrollGap) +
           dimenToPx(R.dimen.overscrollActionProgress) +
           dimenToPx(R.dimen.spaceMedium)
-        // The slot above the list provides the gap under the floating header, so the list itself needs no top padding of its own.
+        val listTopGap = statusBarSize + dimenToPx(recyclerPadding)
+        discoverOverscroll.restHeight = listTopGap
+        // The list spans the whole window and carries the gap under the floating header as its own top padding, so a poster scrolled past the gap slides under the header and off the top of the screen.
+        // Ending the list below the slot instead dropped each poster whole the moment it left the list's bounds, which is a row's height short of the screen edge.
+        // The negative margin cancels the slot's resting height, so the slot still moves the list by exactly however far it opens past rest and nothing else.
+        (discoverRecycler.layoutParams as MarginLayoutParams)
+          .updateMargins(top = -listTopGap)
         discoverRecycler
-          .updatePadding(top = 0)
-        discoverOverscroll.restHeight = statusBarSize + dimenToPx(recyclerPadding)
+          .updatePadding(top = listTopGap)
         (discoverSearchView.layoutParams as MarginLayoutParams)
           .updateMargins(top = statusBarSize + dimenToPx(R.dimen.spaceMedium))
         (discoverModeTabsView.layoutParams as MarginLayoutParams)

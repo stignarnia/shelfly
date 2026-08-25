@@ -4,3 +4,4 @@ Shelfly 4.0.6
 • New app icon and branding.
 • Opening Settings now fades in smoothly from Discover and across the app.
 • Full landscape, tablet, and foldable support across all screens with dynamic rotation.
+• Posters on Discover now scroll up under the header instead of vanishing at the top of the list.
