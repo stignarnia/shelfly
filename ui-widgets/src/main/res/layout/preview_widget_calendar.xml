@@ -7,7 +7,6 @@
   android:layout_height="match_parent"
   android:background="@drawable/bg_widget"
   android:theme="@style/AppTheme.Widget.Dark"
-  tools:ignore="HardcodedText"
   >
 
   <LinearLayout
@@ -25,17 +24,13 @@
       android:orientation="horizontal"
       >
 
-      <Space
-        android:layout_width="@dimen/spaceMedium"
-        android:layout_height="wrap_content"
-        />
-
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spaceMedium"
         android:layout_marginTop="@dimen/spaceTiny"
         android:layout_marginBottom="@dimen/spaceTiny"
-        android:text="Wednesday, 23 August"
+        android:text="@string/previewCalendarDate"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -86,7 +81,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginBottom="@dimen/spaceTiny"
-          android:text="House of the Dragon"
+          android:text="@string/previewCalendarShow1"
           />
 
         <TextView
@@ -104,7 +99,7 @@
           android:paddingTop="2dp"
           android:paddingEnd="6dp"
           android:paddingBottom="2dp"
-          android:text="S.02 E.08"
+          android:text="@string/previewCalendarEpisode1"
           android:textColor="?android:attr/textColorPrimary"
           android:textSize="12sp"
           />
@@ -121,7 +116,7 @@
           android:ellipsize="end"
           android:includeFontPadding="false"
           android:maxLines="1"
-          android:text="The Queen Who Ever Was"
+          android:text="@string/previewCalendarEpisodeTitle1"
           android:textColor="?android:attr/textColorPrimary"
           android:textSize="12sp"
           />
@@ -131,7 +126,7 @@
           android:layout_height="wrap_content"
           android:layout_below="@id/previewCalBadge1"
           android:gravity="start|center_vertical"
-          android:text="21:00 • HBO"
+          android:text="@string/previewCalendarAir1"
           android:textAlignment="viewStart"
           android:textColor="?android:attr/textColorSecondary"
           android:textSize="11sp"
@@ -184,7 +179,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginBottom="@dimen/spaceTiny"
-          android:text="The Boys"
+          android:text="@string/previewCalendarShow2"
           />
 
         <TextView
@@ -202,7 +197,7 @@
           android:paddingTop="2dp"
           android:paddingEnd="6dp"
           android:paddingBottom="2dp"
-          android:text="S.04 E.08"
+          android:text="@string/previewCalendarEpisode2"
           android:textColor="?android:attr/textColorPrimary"
           android:textSize="12sp"
           />
@@ -219,7 +214,7 @@
           android:ellipsize="end"
           android:includeFontPadding="false"
           android:maxLines="1"
-          android:text="Season Finale"
+          android:text="@string/previewCalendarEpisodeTitle2"
           android:textColor="?android:attr/textColorPrimary"
           android:textSize="12sp"
           />
@@ -229,7 +224,7 @@
           android:layout_height="wrap_content"
           android:layout_below="@id/previewCalBadge2"
           android:gravity="start|center_vertical"
-          android:text="Tomorrow • Prime Video"
+          android:text="@string/previewCalendarAir2"
           android:textAlignment="viewStart"
           android:textColor="?android:attr/textColorSecondary"
           android:textSize="11sp"
@@ -265,7 +260,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:gravity="start"
-      android:text="Shows Calendar"
+      android:text="@string/textWidgetShowsCalendar"
       android:textAlignment="viewStart"
       android:textColor="@color/colorWhite"
       android:textSize="12sp"

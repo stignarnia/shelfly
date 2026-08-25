@@ -7,7 +7,6 @@
   android:layout_height="match_parent"
   android:background="@drawable/bg_widget"
   android:theme="@style/AppTheme.Widget.Dark"
-  tools:ignore="HardcodedText"
   >
 
   <LinearLayout
@@ -25,17 +24,13 @@
       android:orientation="horizontal"
       >
 
-      <Space
-        android:layout_width="@dimen/spaceMedium"
-        android:layout_height="wrap_content"
-        />
-
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spaceMedium"
         android:layout_marginTop="@dimen/spaceTiny"
         android:layout_marginBottom="@dimen/spaceTiny"
-        android:text="Friday, 25 August"
+        android:text="@string/previewMoviesCalendarDate"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -87,7 +82,7 @@
           android:layout_alignParentStart="true"
           android:layout_marginEnd="@dimen/spaceTiny"
           android:layout_toStartOf="@id/previewMovieCalDate1"
-          android:text="Gladiator II"
+          android:text="@string/previewMoviesCalendarMovie1"
           />
 
         <TextView
@@ -96,7 +91,7 @@
           android:layout_height="wrap_content"
           android:layout_below="@id/previewMovieCalTitle1"
           android:layout_marginTop="@dimen/spaceTiny"
-          android:text="In Theaters"
+          android:text="@string/previewMoviesCalendarStatus"
           />
 
         <TextView
@@ -113,7 +108,7 @@
           android:paddingTop="2dp"
           android:paddingEnd="6dp"
           android:paddingBottom="2dp"
-          android:text="22 Nov 2024"
+          android:text="@string/previewMoviesCalendarRelease1"
           android:textAlignment="viewStart"
           android:textColor="?android:attr/textColorPrimary"
           android:textSize="11sp"
@@ -167,7 +162,7 @@
           android:layout_alignParentStart="true"
           android:layout_marginEnd="@dimen/spaceTiny"
           android:layout_toStartOf="@id/previewMovieCalDate2"
-          android:text="Interstellar"
+          android:text="@string/previewMoviesCalendarMovie2"
           />
 
         <TextView
@@ -176,7 +171,7 @@
           android:layout_height="wrap_content"
           android:layout_below="@id/previewMovieCalTitle2"
           android:layout_marginTop="@dimen/spaceTiny"
-          android:text="IMAX 10th Anniversary"
+          android:text="@string/previewMoviesCalendarSubtitle2"
           />
 
         <TextView
@@ -193,7 +188,7 @@
           android:paddingTop="2dp"
           android:paddingEnd="6dp"
           android:paddingBottom="2dp"
-          android:text="6 Dec 2024"
+          android:text="@string/previewMoviesCalendarRelease2"
           android:textAlignment="viewStart"
           android:textColor="?android:attr/textColorPrimary"
           android:textSize="11sp"
@@ -229,7 +224,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:gravity="start"
-      android:text="Movies Calendar"
+      android:text="@string/textWidgetMoviesCalendar"
       android:textAlignment="viewStart"
       android:textColor="@color/colorWhite"
       android:textSize="12sp"
