@@ -1,7 +1,9 @@
 package xyz.stignarnia.data_remote.tmdb.model
 
 import kotlin.math.sqrt
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class TmdbImage(
   val file_path: String,
   val vote_average: Float,

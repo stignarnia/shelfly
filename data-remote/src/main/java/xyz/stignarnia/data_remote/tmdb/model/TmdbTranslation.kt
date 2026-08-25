@@ -1,5 +1,8 @@
 package xyz.stignarnia.data_remote.tmdb.model
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class TmdbTranslation(
   // ex: zh
   val iso_639_1: String,
@@ -8,6 +11,7 @@ data class TmdbTranslation(
   val data: Data?,
 ) {
 
+  @JsonClass(generateAdapter = true)
   data class Data(
     val biography: String?,
   )

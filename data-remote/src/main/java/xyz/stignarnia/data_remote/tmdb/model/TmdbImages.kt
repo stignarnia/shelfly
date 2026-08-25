@@ -1,5 +1,8 @@
 package xyz.stignarnia.data_remote.tmdb.model
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class TmdbImages(
   val backdrops: List<TmdbImage>?,
   val posters: List<TmdbImage>?,

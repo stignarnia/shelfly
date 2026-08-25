@@ -3,7 +3,6 @@ package xyz.stignarnia.data_remote.di.module
 import xyz.stignarnia.data_remote.Config.OMDB_BASE_URL
 import xyz.stignarnia.data_remote.Config.TMDB_BASE_URL
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,6 +56,5 @@ object RetrofitModule {
   fun providesMoshi(): Moshi =
     Moshi
       .Builder()
-      .addLast(KotlinJsonAdapterFactory())
       .build()
 }

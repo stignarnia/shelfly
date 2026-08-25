@@ -18,7 +18,6 @@ import xyz.stignarnia.ui_backup.model.BackupScheme
 import xyz.stignarnia.ui_base.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import xyz.stignarnia.ui_base.utilities.extensions.rethrowCancellation
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -142,7 +141,6 @@ class BackupImportViewModel @Inject constructor(
         SCHEME_VERSION -> {
           val moshi = Moshi
             .Builder()
-            .add(KotlinJsonAdapterFactory())
             .build()
           val scheme = moshi.adapter(BackupScheme::class.java).fromJson(jsonInput)
             ?: throw IllegalArgumentException("Backup file is empty.")

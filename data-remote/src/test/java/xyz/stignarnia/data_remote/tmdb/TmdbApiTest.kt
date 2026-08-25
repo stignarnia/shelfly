@@ -4,7 +4,6 @@ import com.google.common.truth.Truth.assertThat
 import xyz.stignarnia.data_remote.tmdb.api.TmdbApi
 import xyz.stignarnia.data_remote.tmdb.api.TmdbService
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -30,7 +29,6 @@ class TmdbApiTest {
 
     val moshi = Moshi
       .Builder()
-      .addLast(KotlinJsonAdapterFactory())
       .build()
 
     val service = Retrofit

@@ -1,5 +1,8 @@
 package xyz.stignarnia.data_remote.tmdb.model
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class TmdbStreamingService(
   val display_priority: Long,
   val logo_path: String,

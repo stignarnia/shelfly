@@ -23,7 +23,6 @@ import xyz.stignarnia.ui_backup.model.BackupShow
 import xyz.stignarnia.ui_backup.model.BackupShowRating
 import xyz.stignarnia.ui_backup.model.BackupShows
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
@@ -49,7 +48,6 @@ class BackupMigrationV2 @Inject constructor(
     withContext(dispatchers.IO) {
       val moshi = Moshi
         .Builder()
-        .add(KotlinJsonAdapterFactory())
         .build()
 
       val scheme = moshi

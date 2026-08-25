@@ -1,11 +1,14 @@
 package xyz.stignarnia.ui_backup.model
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class BackupLists(
   @param:Json(name = "l") val lists: List<BackupList> = emptyList(),
 )
 
+@JsonClass(generateAdapter = true)
 data class BackupList(
   @param:Json(name = "id") val id: Long,
   @param:Json(name = "sId") val slugId: String,
@@ -18,6 +21,7 @@ data class BackupList(
   @param:Json(name = "it") val items: List<BackupListItem> = emptyList(),
 )
 
+@JsonClass(generateAdapter = true)
 data class BackupListItem(
   @param:Json(name = "id") val id: Long,
   @param:Json(name = "lId") val listId: Long,

@@ -158,7 +158,6 @@ It takes about 15 seconds and is a strict superset of `compileDebugAndroidTestKo
 ```
 
 Unit tests and debug builds never run R8.
-Keep rules for Room, Hilt, Moshi, and WorkManager are only exercised here, and a missing one fails at runtime rather than at compile time.
 
 ### Everything - before tagging a release
 

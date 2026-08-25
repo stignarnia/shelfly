@@ -1,5 +1,8 @@
 package xyz.stignarnia.data_remote.omdb.model
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class OmdbResult(
   val Ratings: List<OmdbRating>?,
   val imdbRating: String?,
@@ -8,6 +11,7 @@ data class OmdbResult(
   val tomatoURL: String?,
 )
 
+@JsonClass(generateAdapter = true)
 data class OmdbRating(
   val Source: String?,
   val Value: String?,

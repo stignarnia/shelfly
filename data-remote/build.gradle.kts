@@ -29,7 +29,6 @@ android {
       .get()
       .toInt()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    consumerProguardFiles("consumer-rules.pro")
   }
 
   buildTypes.all {
@@ -72,6 +71,7 @@ dependencies {
   api(libs.loggingInterceptor)
 
   implementation(libs.moshi)
+  ksp(libs.moshi.codegen)
   implementation(libs.coroutines)
   implementation(libs.timber)
 

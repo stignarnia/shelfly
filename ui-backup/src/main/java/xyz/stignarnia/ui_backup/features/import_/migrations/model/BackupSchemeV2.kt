@@ -1,6 +1,7 @@
 package xyz.stignarnia.ui_backup.features.import_.migrations.model
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 /**
  * Backup scheme v2, as written by Showly before this fork.
@@ -10,6 +11,7 @@ import com.squareup.moshi.Json
  *
  * These models exist only to be read by [xyz.stignarnia.ui_backup.features.import_.migrations.BackupMigrationV2]; nothing else should depend on them.
  */
+@JsonClass(generateAdapter = true)
 internal data class BackupSchemeV2(
   val version: Int,
   val platform: String,
@@ -21,6 +23,7 @@ internal data class BackupSchemeV2(
 
 // Shows
 
+@JsonClass(generateAdapter = true)
 internal data class BackupShowsV2(
   @param:Json(name = "cH") val collectionHistory: List<BackupShowV2> = emptyList(),
   @param:Json(name = "cW") val collectionWatchlist: List<BackupShowV2> = emptyList(),
@@ -34,6 +37,7 @@ internal data class BackupShowsV2(
   @param:Json(name = "rEp") val ratingsEpisodes: List<BackupEpisodeRatingV2> = emptyList(),
 )
 
+@JsonClass(generateAdapter = true)
 internal data class BackupShowV2(
   @param:Json(name = "id") val legacyId: Long,
   @param:Json(name = "tmId") val tmdbId: Long = -1,
@@ -42,6 +46,7 @@ internal data class BackupShowV2(
   @param:Json(name = "u") val updatedAt: String,
 )
 
+@JsonClass(generateAdapter = true)
 internal data class BackupSeasonV2(
   @param:Json(name = "sId") val showLegacyId: Long = -1,
   @param:Json(name = "stmId") val showTmdbId: Long = -1,
@@ -54,6 +59,7 @@ internal data class BackupSeasonV2(
  * The parent is recovered from "sId" instead.
  * Seasons and show ratings are unaffected: their exporter looked the id up properly.
  */
+@JsonClass(generateAdapter = true)
 internal data class BackupEpisodeV2(
   @param:Json(name = "sId") val showLegacyId: Long = -1,
   @param:Json(name = "eN") val episodeNumber: Int,
@@ -61,6 +67,7 @@ internal data class BackupEpisodeV2(
   @param:Json(name = "a") val addedAt: String?,
 )
 
+@JsonClass(generateAdapter = true)
 internal data class BackupShowRatingV2(
   @param:Json(name = "id") val showLegacyId: Long = -1,
   @param:Json(name = "tmId") val showTmdbId: Long = -1,
@@ -68,6 +75,7 @@ internal data class BackupShowRatingV2(
   @param:Json(name = "rA") val ratedAt: String,
 )
 
+@JsonClass(generateAdapter = true)
 internal data class BackupSeasonRatingV2(
   @param:Json(name = "sId") val showLegacyId: Long = -1,
   @param:Json(name = "stmId") val showTmdbId: Long = -1,
@@ -76,6 +84,7 @@ internal data class BackupSeasonRatingV2(
   @param:Json(name = "rA") val ratedAt: String,
 )
 
+@JsonClass(generateAdapter = true)
 internal data class BackupEpisodeRatingV2(
   @param:Json(name = "sId") val showLegacyId: Long = -1,
   @param:Json(name = "sN") val seasonNumber: Int,
@@ -86,6 +95,7 @@ internal data class BackupEpisodeRatingV2(
 
 // Movies
 
+@JsonClass(generateAdapter = true)
 internal data class BackupMoviesV2(
   @param:Json(name = "cH") val collectionHistory: List<BackupMovieV2> = emptyList(),
   @param:Json(name = "cW") val collectionWatchlist: List<BackupMovieV2> = emptyList(),
@@ -94,6 +104,7 @@ internal data class BackupMoviesV2(
   @param:Json(name = "rM") val ratingsMovies: List<BackupMovieRatingV2> = emptyList(),
 )
 
+@JsonClass(generateAdapter = true)
 internal data class BackupMovieV2(
   @param:Json(name = "id") val legacyId: Long,
   @param:Json(name = "tmId") val tmdbId: Long = -1,
@@ -101,6 +112,7 @@ internal data class BackupMovieV2(
   @param:Json(name = "a") val addedAt: String,
 )
 
+@JsonClass(generateAdapter = true)
 internal data class BackupMovieRatingV2(
   @param:Json(name = "id") val movieLegacyId: Long = -1,
   @param:Json(name = "tmId") val movieTmdbId: Long = -1,
@@ -110,10 +122,12 @@ internal data class BackupMovieRatingV2(
 
 // Lists
 
+@JsonClass(generateAdapter = true)
 internal data class BackupListsV2(
   @param:Json(name = "l") val lists: List<BackupListV2> = emptyList(),
 )
 
+@JsonClass(generateAdapter = true)
 internal data class BackupListV2(
   @param:Json(name = "id") val id: Long,
   @param:Json(name = "sId") val slugId: String,
@@ -126,6 +140,7 @@ internal data class BackupListV2(
   @param:Json(name = "it") val items: List<BackupListItemV2> = emptyList(),
 )
 
+@JsonClass(generateAdapter = true)
 internal data class BackupListItemV2(
   @param:Json(name = "id") val id: Long,
   @param:Json(name = "lId") val listId: Long,

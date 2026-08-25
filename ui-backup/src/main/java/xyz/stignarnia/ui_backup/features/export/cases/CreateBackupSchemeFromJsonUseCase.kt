@@ -2,7 +2,6 @@ package xyz.stignarnia.ui_backup.features.export.cases
 
 import xyz.stignarnia.ui_backup.model.BackupScheme
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,7 +23,6 @@ class CreateBackupSchemeFromJsonUseCase @Inject constructor() {
     try {
       val moshi = Moshi
         .Builder()
-        .add(KotlinJsonAdapterFactory())
         .build()
       val jsonAdapter = moshi.adapter(BackupScheme::class.java)
       return Result.success(jsonAdapter.fromJson(json))

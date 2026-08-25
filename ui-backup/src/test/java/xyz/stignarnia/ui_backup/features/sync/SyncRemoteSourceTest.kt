@@ -2,7 +2,6 @@ package xyz.stignarnia.ui_backup.features.sync
 
 import com.google.common.truth.Truth.assertThat
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import xyz.stignarnia.data_webdav.WebDavClient
@@ -148,7 +147,6 @@ class SyncRemoteSourceTest {
   private fun json(payload: SyncPayload): String =
     Moshi
       .Builder()
-      .add(KotlinJsonAdapterFactory())
       .build()
       .adapter(SyncPayload::class.java)
       .toJson(payload)

@@ -6,7 +6,6 @@ import xyz.stignarnia.ui_backup.features.import_.migrations.model.BackupMoviesV2
 import xyz.stignarnia.ui_backup.features.import_.migrations.model.BackupSchemeV2
 import xyz.stignarnia.ui_backup.features.import_.migrations.model.BackupShowsV2
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.test.runTest
 import org.junit.Assume.assumeTrue
 import org.junit.Test
@@ -54,7 +53,6 @@ class BackupMigrationV2FileTest {
 
       val source = Moshi
         .Builder()
-        .add(KotlinJsonAdapterFactory())
         .build()
         .adapter(BackupSchemeV2::class.java)
         .fromJson(file!!.readText())!!

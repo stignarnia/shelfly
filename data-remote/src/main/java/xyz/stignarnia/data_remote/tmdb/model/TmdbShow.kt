@@ -1,9 +1,12 @@
 package xyz.stignarnia.data_remote.tmdb.model
 
+import com.squareup.moshi.JsonClass
+
 /**
  * A TV show as returned by /tv/{id}.
  * List endpoints return the same shape with most fields absent, so everything is nullable.
  */
+@JsonClass(generateAdapter = true)
 data class TmdbShow(
   val id: Long?,
   val name: String?,
@@ -27,6 +30,7 @@ data class TmdbShow(
   val videos: TmdbVideos?,
 )
 
+@JsonClass(generateAdapter = true)
 data class TmdbSeason(
   val id: Long?,
   val season_number: Int?,
@@ -38,6 +42,7 @@ data class TmdbSeason(
   val episodes: List<TmdbEpisode>?,
 )
 
+@JsonClass(generateAdapter = true)
 data class TmdbEpisode(
   val id: Long?,
   val season_number: Int?,
@@ -50,17 +55,20 @@ data class TmdbEpisode(
   val vote_count: Int?,
 )
 
+@JsonClass(generateAdapter = true)
 data class TmdbGenre(
   val id: Int?,
   val name: String?,
 )
 
+@JsonClass(generateAdapter = true)
 data class TmdbNetwork(
   val id: Long?,
   val name: String?,
   val logo_path: String? = null,
 )
 
+@JsonClass(generateAdapter = true)
 data class TmdbExternalIds(
   val imdb_id: String?,
   val tvdb_id: Long?,
@@ -69,20 +77,24 @@ data class TmdbExternalIds(
 /**
  * Age certifications per country, from /tv/{id}?append_to_response=content_ratings.
  */
+@JsonClass(generateAdapter = true)
 data class TmdbContentRatings(
   val results: List<Result>?,
 ) {
 
+  @JsonClass(generateAdapter = true)
   data class Result(
     val iso_3166_1: String?,
     val rating: String?,
   )
 }
 
+@JsonClass(generateAdapter = true)
 data class TmdbVideos(
   val results: List<TmdbVideo>?,
 )
 
+@JsonClass(generateAdapter = true)
 data class TmdbVideo(
   val key: String?,
   val site: String?,

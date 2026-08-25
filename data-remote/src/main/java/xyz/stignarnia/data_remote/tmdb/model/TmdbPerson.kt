@@ -1,5 +1,8 @@
 package xyz.stignarnia.data_remote.tmdb.model
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class TmdbPerson(
   val id: Long,
   val name: String?,
@@ -19,10 +22,12 @@ data class TmdbPerson(
   val total_episode_count: Int?,
 ) {
 
+  @JsonClass(generateAdapter = true)
   data class Role(
     val character: String?,
   )
 
+  @JsonClass(generateAdapter = true)
   data class Job(
     val job: String?,
   )

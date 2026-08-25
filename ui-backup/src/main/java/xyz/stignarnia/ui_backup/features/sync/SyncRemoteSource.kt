@@ -1,7 +1,6 @@
 package xyz.stignarnia.ui_backup.features.sync
 
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import timber.log.Timber
 import xyz.stignarnia.data_webdav.WebDavClient
 import xyz.stignarnia.data_webdav.WebDavCredentials
@@ -20,7 +19,6 @@ internal class SyncRemoteSource @Inject constructor(
   private val adapter by lazy {
     Moshi
       .Builder()
-      .add(KotlinJsonAdapterFactory())
       .build()
       .adapter(SyncPayload::class.java)
   }

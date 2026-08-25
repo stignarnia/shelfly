@@ -8,7 +8,6 @@ import xyz.stignarnia.data_remote.tmdb.api.TmdbApi
 import xyz.stignarnia.data_remote.tmdb.model.TmdbPerson
 import xyz.stignarnia.data_remote.tmdb.api.TmdbService
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import org.junit.Assume.assumeTrue
@@ -51,7 +50,6 @@ class TmdbLiveApiTest {
 
     val moshi = Moshi
       .Builder()
-      .addLast(KotlinJsonAdapterFactory())
       .build()
 
     val service = Retrofit

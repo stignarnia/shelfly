@@ -1,9 +1,12 @@
 package xyz.stignarnia.data_remote.tmdb.model
 
+import com.squareup.moshi.JsonClass
+
 /**
  * A movie as returned by /movie/{id}.
  * List endpoints return the same shape with most fields absent, so everything is nullable.
  */
+@JsonClass(generateAdapter = true)
 data class TmdbMovie(
   val id: Long?,
   val title: String?,
@@ -24,6 +27,7 @@ data class TmdbMovie(
   val videos: TmdbVideos?,
 )
 
+@JsonClass(generateAdapter = true)
 data class TmdbCountry(
   val iso_3166_1: String?,
   val name: String?,
@@ -33,20 +37,24 @@ data class TmdbCountry(
  * Age certifications per country, from /movie/{id}?append_to_response=release_dates.
  * Shows use content_ratings instead, with a different shape.
  */
+@JsonClass(generateAdapter = true)
 data class TmdbReleaseDates(
   val results: List<Result>?,
 ) {
 
+  @JsonClass(generateAdapter = true)
   data class Result(
     val iso_3166_1: String?,
     val release_dates: List<ReleaseDate>?,
   )
 
+  @JsonClass(generateAdapter = true)
   data class ReleaseDate(
     val certification: String?,
   )
 }
 
+@JsonClass(generateAdapter = true)
 data class TmdbCollectionRef(
   val id: Long?,
   val name: String?,
@@ -56,6 +64,7 @@ data class TmdbCollectionRef(
  * A franchise from /collection/{id}.
  * TMDB places a movie in at most one.
  */
+@JsonClass(generateAdapter = true)
 data class TmdbCollection(
   val id: Long?,
   val name: String?,

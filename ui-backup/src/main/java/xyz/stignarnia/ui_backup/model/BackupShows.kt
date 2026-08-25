@@ -1,6 +1,7 @@
 package xyz.stignarnia.ui_backup.model
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 /**
  * Backup scheme v3.
@@ -10,6 +11,7 @@ import com.squareup.moshi.Json
  *
  * The JSON keys are otherwise unchanged from v2, so a v2 file still reads - see the importer, which remaps the legacy ids on the way in.
  */
+@JsonClass(generateAdapter = true)
 data class BackupShows(
   @param:Json(name = "cH") val collectionHistory: List<BackupShow> = emptyList(),
   @param:Json(name = "cW") val collectionWatchlist: List<BackupShow> = emptyList(),
@@ -23,6 +25,7 @@ data class BackupShows(
   @param:Json(name = "rEp") val ratingsEpisodes: List<BackupEpisodeRating> = emptyList(),
 )
 
+@JsonClass(generateAdapter = true)
 data class BackupShow(
   @param:Json(name = "tmId") val tmdbId: Long,
   @param:Json(name = "t") val title: String,
@@ -30,11 +33,13 @@ data class BackupShow(
   @param:Json(name = "u") val updatedAt: String,
 )
 
+@JsonClass(generateAdapter = true)
 data class BackupSeason(
   @param:Json(name = "stmId") val showTmdbId: Long,
   @param:Json(name = "sN") val seasonNumber: Int,
 )
 
+@JsonClass(generateAdapter = true)
 data class BackupEpisode(
   @param:Json(name = "stmId") val showTmdbId: Long,
   @param:Json(name = "eN") val episodeNumber: Int,
@@ -44,12 +49,14 @@ data class BackupEpisode(
 
 // Ratings
 
+@JsonClass(generateAdapter = true)
 data class BackupShowRating(
   @param:Json(name = "tmId") val tmdbId: Long,
   @param:Json(name = "r") val rating: Int,
   @param:Json(name = "rA") val ratedAt: String,
 )
 
+@JsonClass(generateAdapter = true)
 data class BackupSeasonRating(
   @param:Json(name = "stmId") val showTmdbId: Long,
   @param:Json(name = "sN") val seasonNumber: Int,
@@ -57,6 +64,7 @@ data class BackupSeasonRating(
   @param:Json(name = "rA") val ratedAt: String,
 )
 
+@JsonClass(generateAdapter = true)
 data class BackupEpisodeRating(
   @param:Json(name = "stmId") val showTmdbId: Long,
   @param:Json(name = "sN") val seasonNumber: Int,

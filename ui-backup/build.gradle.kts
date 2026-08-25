@@ -20,7 +20,6 @@ android {
       .get()
       .toInt()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    consumerProguardFiles("consumer-rules.pro")
   }
 
   buildTypes {
@@ -54,6 +53,7 @@ dependencies {
   implementation(project(":ui-model"))
 
   implementation(libs.moshi)
+  ksp(libs.moshi.codegen)
   implementation(libs.hilt.android)
   ksp(libs.hilt.compiler)
 
