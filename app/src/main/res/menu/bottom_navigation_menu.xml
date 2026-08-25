@@ -10,8 +10,6 @@
     android:enabled="true"
     android:icon="@drawable/ic_check_menu"
     android:title="@string/menuProgress"
-    app:showAsAction="always"
-    tools:ignore="AlwaysShowAction"
     />
 
   <item
@@ -19,7 +17,6 @@
     android:enabled="true"
     android:icon="@drawable/ic_search"
     android:title="@string/menuDiscover"
-    app:showAsAction="always"
     />
 
   <item
@@ -27,7 +24,6 @@
     android:enabled="true"
     android:icon="@drawable/ic_bookmark"
     android:title="@string/menuCollection"
-    app:showAsAction="always"
     />
 
 </menu>

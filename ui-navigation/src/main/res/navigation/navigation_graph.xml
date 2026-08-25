@@ -1,11 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidDomInspection -->
-<!-- Start destination is set programmatically -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The start destination declared here is the shows default.
+  MainActivity inflates this graph and calls setStartDestination before setGraph, swapping in the movies equivalent when that is the selected mode, so this value only documents the default.
+-->
 <navigation
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/navigationGraph"
-  tools:ignore="InvalidNavigation"
+  app:startDestination="@id/progressMainFragment"
   >
 
   <!--

@@ -9,7 +9,6 @@
   android:clipToPadding="false"
   android:focusableInTouchMode="true"
   tools:background="?android:windowBackground"
-  tools:ignore="UnusedAttribute"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
   >
 
