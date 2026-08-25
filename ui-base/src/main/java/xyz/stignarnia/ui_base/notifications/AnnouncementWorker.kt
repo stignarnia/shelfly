@@ -1,14 +1,16 @@
 package xyz.stignarnia.ui_base.notifications
 
-import android.annotation.SuppressLint
+import android.Manifest
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.bumptech.glide.Glide
@@ -30,7 +32,6 @@ class AnnouncementWorker(
     const val DATA_IMAGE_URL = "DATA_IMAGE_URL"
   }
 
-  @SuppressLint("MissingPermission")
   override fun doWork(): Result {
     val color = R.color.colorNotificationDark
 
@@ -66,6 +67,16 @@ class AnnouncementWorker(
     val notificationId = when {
       !title.isNullOrBlank() -> title.hashCode()
       else -> Random.nextInt()
+    }
+
+    // POST_NOTIFICATIONS became a runtime permission in Android 13; below that it does not exist and posting is always allowed.
+    // Checked here rather than through a helper, because notify() drops the notification silently when the permission was refused.
+    if (AndroidVersion.isAtLeastAndroid13 &&
+      ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.POST_NOTIFICATIONS) !=
+      PackageManager.PERMISSION_GRANTED
+    ) {
+      // Nothing to retry: a refused permission will not appear on a later attempt.
+      return Result.success()
     }
 
     NotificationManagerCompat

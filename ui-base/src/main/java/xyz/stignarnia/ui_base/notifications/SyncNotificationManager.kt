@@ -1,14 +1,16 @@
 package xyz.stignarnia.ui_base.notifications
 
-import android.annotation.SuppressLint
+import android.Manifest
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import xyz.stignarnia.ui_base.utilities.AndroidVersion
 import dagger.hilt.android.qualifiers.ApplicationContext
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.ui_base.R
@@ -36,7 +38,6 @@ class SyncNotificationManager @Inject constructor(
    * An ongoing notification cannot be swiped away, so that would leave a permanent "Syncing…" the user has no way to be rid of.
    * Dismissible plus [cancelStaleProgress] on the next launch is worth more than a notification the user cannot accidentally clear.
    */
-  @SuppressLint("MissingPermission")
   fun showProgress(
     title: String,
     message: String,
@@ -53,10 +54,18 @@ class SyncNotificationManager @Inject constructor(
       .setColor(ContextCompat.getColor(context, R.color.colorNotificationDark))
       .build()
 
+    // POST_NOTIFICATIONS became a runtime permission in Android 13; below that it does not exist and posting is always allowed.
+    // Checked at every call site rather than through a helper, because notify() drops the notification silently when the permission was refused.
+    if (AndroidVersion.isAtLeastAndroid13 &&
+      ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) !=
+      PackageManager.PERMISSION_GRANTED
+    ) {
+      return
+    }
+
     notificationManager.notify(SYNC_PROGRESS_NOTIFICATION_ID, notification)
   }
 
-  @SuppressLint("MissingPermission")
   fun showSuccess(
     title: String,
     message: String,
@@ -72,10 +81,18 @@ class SyncNotificationManager @Inject constructor(
       .setColor(ContextCompat.getColor(context, R.color.colorNotificationDark))
       .build()
 
+    // POST_NOTIFICATIONS became a runtime permission in Android 13; below that it does not exist and posting is always allowed.
+    // Checked at every call site rather than through a helper, because notify() drops the notification silently when the permission was refused.
+    if (AndroidVersion.isAtLeastAndroid13 &&
+      ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) !=
+      PackageManager.PERMISSION_GRANTED
+    ) {
+      return
+    }
+
     notificationManager.notify(SYNC_SUCCESS_NOTIFICATION_ID, notification)
   }
 
-  @SuppressLint("MissingPermission")
   fun showError(
     title: String,
     message: String,
@@ -91,6 +108,15 @@ class SyncNotificationManager @Inject constructor(
       .setPriority(NotificationCompat.PRIORITY_DEFAULT)
       .setColor(ContextCompat.getColor(context, R.color.colorNotificationDark))
       .build()
+
+    // POST_NOTIFICATIONS became a runtime permission in Android 13; below that it does not exist and posting is always allowed.
+    // Checked at every call site rather than through a helper, because notify() drops the notification silently when the permission was refused.
+    if (AndroidVersion.isAtLeastAndroid13 &&
+      ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) !=
+      PackageManager.PERMISSION_GRANTED
+    ) {
+      return
+    }
 
     notificationManager.notify(SYNC_ERROR_NOTIFICATION_ID, notification)
   }
