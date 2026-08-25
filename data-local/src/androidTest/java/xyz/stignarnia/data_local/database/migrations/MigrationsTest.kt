@@ -4,7 +4,7 @@ package xyz.stignarnia.data_local.database.migrations
 import androidx.room.testing.MigrationTestHelper
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import xyz.stignarnia.data_local.database.AppDatabase
 import org.junit.Rule

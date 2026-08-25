@@ -1,8 +1,5 @@
 # ## Moshi
 
-# JSR 305 annotations are for embedding nullability information.
--dontwarn javax.annotation.**
-
 -keepclasseswithmembers class * {
     @com.squareup.moshi.* <methods>;
 }
@@ -78,19 +75,6 @@
     @retrofit2.http.* <methods>;
 }
 
-# Ignore annotation used for build tooling.
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
-
-# Ignore JSR 305 annotations for embedding nullability information.
--dontwarn javax.annotation.**
-
-# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
--dontwarn kotlin.Unit
-
-# Top-level functions that can only be used by Kotlin.
--dontwarn retrofit2.KotlinExtensions
--dontwarn retrofit2.KotlinExtensions$*
-
 # With R8 full mode, it sees no subtypes of Retrofit interfaces since they are created with a Proxy and replaces all potential values with null.
 # Explicitly keeping the interfaces prevents this.
 -if interface * { @retrofit2.http.* <methods>; }
@@ -102,37 +86,19 @@
 
 # ## OkHttp
 
-# JSR 305 annotations are for embedding nullability information.
--dontwarn javax.annotation.**
-
-# A resource is loaded with a relative path so the package of this class must be preserved.
+# The suffix list is loaded by a path relative to this class, so its package has to survive.
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
-
-# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
--dontwarn org.codehaus.mojo.animal_sniffer.*
-
-# OkHttp platform used only on JVM and when Conscrypt dependency is available.
--dontwarn okhttp3.internal.platform.ConscryptPlatform
-
-# A resource is loaded with a relative path so the package of this class must be preserved.
 -adaptresourcefilenames okhttp3/internal/publicsuffix/PublicSuffixDatabase.gz
 
-# OkHttp platform used only on JVM and when Conscrypt and other security providers are available.
--dontwarn okhttp3.internal.platform.**
--dontwarn org.conscrypt.**
--dontwarn org.bouncycastle.**
--dontwarn org.openjsse.**
+# ## R8 full mode
 
-# With R8 full mode generic signatures are stripped for classes that are not kept.
-# Suspend functions are wrapped in continuations where the type argument is used.
+# Full mode strips generic signatures from any class it does not keep.
+# Suspend functions are wrapped in a continuation whose type argument is the response type, so losing it loses what every call returns.
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
 -keep,allowobfuscation,allowshrinking class com.squareup.moshi.JsonAdapter
-
-# With R8 full mode generic signatures are stripped for classes that are not kept.
-# Suspend functions are wrapped in continuations where the type argument is used.
 -keep,allowobfuscation,allowshrinking interface retrofit2.Call
 -keep,allowobfuscation,allowshrinking class retrofit2.Response
 
-# R8 full mode strips generic signatures from return types if not kept.
+# The same stripping applies to return types.
 -if interface * { @retrofit2.http.* public *** *(...); }
 -keep,allowoptimization,allowshrinking,allowobfuscation class <3>

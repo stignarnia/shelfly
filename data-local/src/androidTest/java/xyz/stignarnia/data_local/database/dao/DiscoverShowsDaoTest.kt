@@ -1,7 +1,7 @@
 
 package xyz.stignarnia.data_local.database.dao
 
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import xyz.stignarnia.data_local.database.dao.helpers.TestData
 import xyz.stignarnia.data_local.database.model.DiscoverShow

@@ -16,6 +16,7 @@ androidLifecycle = "2.11.0"
 androidNavigation = "2.9.8"
 androidRoom = "2.8.4"
 androidTestRunner = "1.7.0"
+androidTestExtJunit = "1.3.0"
 androidTestTruth = "1.7.0"
 viewpager2 = "1.1.0"
 appcompat = "1.8.0"
@@ -105,6 +106,7 @@ android-test-core = { group = "androidx.arch.core", name = "core-testing", versi
 
 # Android Testing
 android-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidTestRunner" }
+android-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidTestExtJunit" }
 android-test-truth = { group = "androidx.test.ext", name = "truth", version.ref = "androidTestTruth" }
 
 [bundles]

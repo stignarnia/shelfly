@@ -2,7 +2,7 @@
 package xyz.stignarnia.data_local.database.dao.converters
 
 import com.google.common.truth.Truth.assertThat
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import xyz.stignarnia.data_local.database.converters.DateConverter
 import org.junit.Before
 import org.junit.Test

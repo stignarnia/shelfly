@@ -3,7 +3,6 @@
 #
 # For more details, see https://developer.android.com/build/shrink-code
 
--dontwarn okhttp3.internal.platform.ConscryptPlatform
 
 # This is an open source app, so obfuscation buys nothing: anyone can read the source anyway.
 # Turning it off keeps crash reports and stack traces readable without shipping a mapping file, and helps reproducible builds.

@@ -21,11 +21,6 @@ android {
       isMinifyEnabled = false
     }
   }
-  packaging {
-    resources {
-      excludes += setOf("META-INF/*.md")
-    }
-  }
 
   testOptions {
     // targetSdk only affects instrumentation tests in a library, and AGP 9 removed it from defaultConfig.
