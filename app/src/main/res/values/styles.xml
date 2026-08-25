@@ -1,0 +1,11 @@
+<resources>
+
+  <!--
+    The theme MainActivity launches with.
+
+    Empty here on purpose: below API 31 there is no system splash screen to configure, so this resolves to AppTheme unchanged.
+    The values-v31 copy is where the splash is actually described - see the note there for why the icon needs its own drawable.
+  -->
+  <style name="AppTheme.Splash" parent="AppTheme" />
+
+</resources>

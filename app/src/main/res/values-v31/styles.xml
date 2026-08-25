@@ -1,0 +1,18 @@
+<resources>
+
+  <!--
+    The system splash screen, which exists from API 31.
+
+    Left alone, the platform draws the launcher icon here - and draws it on a 288dp canvas, against the 108dp that an adaptive icon foreground is authored at.
+    Upstream's foreground was a vector and scaled to any size for nothing; this fork's is a render, so that 2.67x is a real upscale and the icon arrives soft.
+    ic_splash_icon is the same artwork authored at the size the splash actually draws, which is the whole fix: 288dp canvas, artwork inside the centred 192dp circle, per the platform's own icon spec.
+
+    The background is set rather than inherited so the splash matches the first frame the app paints.
+    It follows values/values-night like every other colour here, though the system resolves it from the device's dark-mode setting rather than from the theme the user picked inside the app - a splash is drawn before there is an app to ask.
+  -->
+  <style name="AppTheme.Splash" parent="AppTheme">
+    <item name="android:windowSplashScreenBackground">@color/themeBackground</item>
+    <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash_icon</item>
+  </style>
+
+</resources>
