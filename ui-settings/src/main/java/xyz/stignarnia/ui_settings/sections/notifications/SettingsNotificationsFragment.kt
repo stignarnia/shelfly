@@ -1,11 +1,12 @@
 package xyz.stignarnia.ui_settings.sections.notifications
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.os.Build.VERSION_CODES.TIRAMISU
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import xyz.stignarnia.ui_base.BaseFragment
@@ -30,15 +31,6 @@ class SettingsNotificationsFragment :
 
   override val viewModel by viewModels<SettingsNotificationsViewModel>()
   private val binding by viewBinding(FragmentSettingsNotificationsBinding::bind)
-
-  /**
-   * The permission the switch may need, named once.
-   *
-   * POST_NOTIFICATIONS arrived in API 33 and is a String constant, so the compiler inlines its value and referencing it below 33 is safe - it never looks the field up at runtime.
-   * That is exactly what InlinedApi points out, and suppressing it here, on the one declaration whose job is to name the constant, keeps the note off the methods that merely use it.
-   */
-  @SuppressLint("InlinedApi")
-  private val postNotificationsPermission = Manifest.permission.POST_NOTIFICATIONS
 
   /**
    * Set when a request goes out without a rationale first.
@@ -107,22 +99,35 @@ class SettingsNotificationsFragment :
    * Asking regardless is what made this loop: the request returns granted immediately, the app tries to enable again, the system still says notifications are off, and round it goes.
    */
   private fun onNotificationsBlocked() {
-    val canAskForPermission = AndroidVersion.isAtLeastAndroid13 &&
-      ContextCompat.checkSelfPermission(
-        requireContext(),
-        postNotificationsPermission,
-      ) != PackageManager.PERMISSION_GRANTED
+    if (!AndroidVersion.isAtLeastAndroid13) {
+      openSystemNotificationSettings()
+      return
+    }
+    askForNotificationsPermission()
+  }
+
+  /**
+   * The half of [onNotificationsBlocked] that only exists from API 33.
+   *
+   * Split out and annotated rather than guarded inline so the requirement is part of the signature: POST_NOTIFICATIONS is an API 33 constant, and RequiresApi is what makes every caller prove it checked.
+   */
+  @RequiresApi(TIRAMISU)
+  private fun askForNotificationsPermission() {
+    val isAlreadyGranted = ContextCompat.checkSelfPermission(
+      requireContext(),
+      Manifest.permission.POST_NOTIFICATIONS,
+    ) == PackageManager.PERMISSION_GRANTED
 
     when {
-      !canAskForPermission -> {
+      isAlreadyGranted -> {
         openSystemNotificationSettings()
       }
-      shouldShowRequestPermissionRationale(postNotificationsPermission) -> {
+      shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
         showNotificationsRationaleDialog()
       }
       else -> {
         requestedWithoutRationale = true
-        requestPermissionLauncher.launch(postNotificationsPermission)
+        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
       }
     }
   }
@@ -133,13 +138,14 @@ class SettingsNotificationsFragment :
     }
   }
 
+  @RequiresApi(TIRAMISU)
   private fun showNotificationsRationaleDialog() {
     val context = requireContext()
     val view = NotificationsRationaleView(context)
     modal()
       .setView(view)
       .setPositiveButton(R.string.textYes) { modal ->
-        requestPermissionLauncher.launch(postNotificationsPermission)
+        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         modal.dismiss()
       }.setNegativeButton(R.string.textCancel)
       .show()
