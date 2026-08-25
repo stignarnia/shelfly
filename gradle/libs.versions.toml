@@ -1,11 +1,23 @@
 [versions]
 
+# The app's own version and SDK levels, read by Gradle and by scripts/check-config.sh and
+# scripts/check-release-notes.sh. jvmTarget stays at 21, Android's bytecode ceiling, whatever
+# JDK happens to run Gradle - see the toolchain block in the root build script.
+versionCode = "7"
+versionName = "4.0.6"
+minSdk = "23"
+compileSdk = "37"
+targetSdk = "37"
+buildTools = "37.0.0"
+jvmTarget = "21"
+
 agp = "9.3.2"
 androidLifecycle = "2.11.0"
 androidNavigation = "2.9.8"
 androidRoom = "2.8.4"
 androidTestRunner = "1.7.0"
 androidTestTruth = "1.7.0"
+viewpager2 = "1.1.0"
 appcompat = "1.8.0"
 circleindicator = "2.1.6"
 constraintlayout = "2.2.2"
@@ -47,6 +59,7 @@ android-material = { group = "com.google.android.material", name = "material", v
 android-dynamicanimation = { group = "androidx.dynamicanimation", name = "dynamicanimation", version.ref = "dynamicanimation" }
 android-work = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work-runtime-ktx" }
 android-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+android-viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
 android-recycler = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 android-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment-ktx" }
 

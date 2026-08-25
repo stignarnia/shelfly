@@ -2,7 +2,7 @@
 # Check the three things that go wrong silently, because nothing downstream complains when they do.
 #
 #   Tag    - a tag whose name disagrees with versionName ships a mislabelled release.
-#            CI fires on v* tags and publishes release_notes.txt as the release body, so tagging v4.0.7 while versions.gradle.kts still says 4.0.6 passes every other check and produces a release that claims to be something it is not.
+#            CI fires on v* tags and publishes release_notes.txt as the release body, so tagging v4.0.7 while gradle/libs.versions.toml still says 4.0.6 passes every other check and produces a release that claims to be something it is not.
 #            Skipped when HEAD carries no tag, which is every ordinary commit.
 #
 #   Locale - resourceConfigurations in app/build.gradle.kts pins the locales that survive into the APK.
@@ -22,9 +22,9 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 failed=0
 
 # Tag.
-version="$(sed -n 's/.*extra\["versionName"\][[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' versions.gradle.kts | head -n 1)"
+version="$(sed -n 's/^versionName[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' gradle/libs.versions.toml | head -n 1)"
 if [ -z "$version" ]; then
-  echo "error: could not read versionName from versions.gradle.kts" >&2
+  echo "error: could not read versionName from gradle/libs.versions.toml" >&2
   exit 1
 fi
 
@@ -34,7 +34,7 @@ if [ -z "$tag" ]; then
 else
   # Both v4.0.6 and 4.0.6 are accepted, matching the two tag patterns the workflow triggers on.
   if [ "$tag" != "v$version" ] && [ "$tag" != "$version" ]; then
-    echo "error: tag $tag does not match versionName $version from versions.gradle.kts." >&2
+    echo "error: tag $tag does not match versionName $version from gradle/libs.versions.toml." >&2
     echo "The release would be published under a version the app does not report." >&2
     failed=1
   else

@@ -16,10 +16,12 @@ android {
   }
 
   defaultConfig {
-    minSdk = rootProject.extra["minSdk"] as Int
+    minSdk = libs.versions.minSdk
+      .get()
+      .toInt()
 
-    buildConfigField("int", "VER_CODE", "${rootProject.extra["versionCode"]}")
-    buildConfigField("String", "VER_NAME", "\"${rootProject.extra["versionName"]}\"")
+    buildConfigField("int", "VER_CODE", "${libs.versions.versionCode.get()}")
+    buildConfigField("String", "VER_NAME", "\"${libs.versions.versionName.get()}\"")
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -32,7 +34,9 @@ android {
 
   testOptions {
     // targetSdk only affects instrumentation tests in a library, and AGP 9 removed it from defaultConfig.
-    targetSdk = rootProject.extra["targetSdk"] as Int
+    targetSdk = libs.versions.targetSdk
+      .get()
+      .toInt()
   }
 
   namespace = "xyz.stignarnia.ui_settings"

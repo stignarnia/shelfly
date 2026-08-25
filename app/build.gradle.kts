@@ -32,10 +32,16 @@ android {
 
   defaultConfig {
     applicationId = "xyz.stignarnia.shelfly"
-    minSdk = rootProject.extra["minSdk"] as Int
-    targetSdk = rootProject.extra["targetSdk"] as Int
-    versionCode = rootProject.extra["versionCode"] as Int
-    versionName = rootProject.extra["versionName"] as String
+    minSdk = libs.versions.minSdk
+      .get()
+      .toInt()
+    targetSdk = libs.versions.targetSdk
+      .get()
+      .toInt()
+    versionCode = libs.versions.versionCode
+      .get()
+      .toInt()
+    versionName = libs.versions.versionName.get()
 
     // Kept in step with the res/values-* directories by scripts/check-config.sh, which fails if either side gains a locale the other lacks.
     resourceConfigurations +=
@@ -130,7 +136,7 @@ abstract class BuildStamp : ValueSource<Long, ValueSourceParameters.None> {
 
 extensions.configure<com.android.build.api.variant.ApplicationAndroidComponentsExtension>("androidComponents") {
   onVariants(selector().withBuildType("debug")) { variant ->
-    val releaseName = rootProject.extra["versionName"] as String
+    val releaseName = libs.versions.versionName.get()
     val stamp = providers.of(BuildStamp::class.java) {}
     variant.outputs.forEach { output ->
       output.versionCode.set(stamp.map { it.toInt() })

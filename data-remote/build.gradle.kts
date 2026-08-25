@@ -25,14 +25,16 @@ android {
   }
 
   defaultConfig {
-    minSdk = rootProject.extra["minSdk"] as Int
+    minSdk = libs.versions.minSdk
+      .get()
+      .toInt()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
   }
 
   buildTypes.all {
-    buildConfigField("String", "VER_NAME", "\"${rootProject.extra["versionName"]}\"")
-    buildConfigField("int", "VER_CODE", "${rootProject.extra["versionCode"]}")
+    buildConfigField("String", "VER_NAME", "\"${libs.versions.versionName.get()}\"")
+    buildConfigField("int", "VER_CODE", "${libs.versions.versionCode.get()}")
 
     // Release ships no key material - users enter their own keys at runtime.
     // Debug builds prefill from local.properties so development does not mean retyping a key after every install.
@@ -54,7 +56,9 @@ android {
 
   testOptions {
     // targetSdk only affects instrumentation tests in a library, and AGP 9 removed it from defaultConfig.
-    targetSdk = rootProject.extra["targetSdk"] as Int
+    targetSdk = libs.versions.targetSdk
+      .get()
+      .toInt()
   }
 
   namespace = "xyz.stignarnia.data_remote"

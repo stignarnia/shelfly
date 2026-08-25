@@ -14,8 +14,6 @@ plugins {
   alias(libs.plugins.kotlin.parcelize) apply false
 }
 
-apply(from = "./versions.gradle.kts")
-
 allprojects {
   apply(plugin = "com.google.devtools.ksp")
 
@@ -25,13 +23,22 @@ allprojects {
   }
 }
 
+// Read once here: the catalog accessor is not available inside the subprojects block.
+val compileSdkVersion = libs.versions.compileSdk
+  .get()
+  .toInt()
+val buildToolsRelease = libs.versions.buildTools.get()
+val jvmTargetVersion = libs.versions.jvmTarget
+  .get()
+  .toInt()
+
 subprojects {
   // Centralised so the SDK and bytecode level live in one place instead of being repeated in every module's android {} block.
   // AGP's built-in Kotlin support creates the kotlin extension itself, so this hooks com.android.base rather than org.jetbrains.kotlin.android - the latter is never applied and a block keyed on it never runs.
   plugins.withId("com.android.base") {
     extensions.configure<CommonExtension>("android") {
-      compileSdk = rootProject.extra["compileSdk"] as Int
-      buildToolsVersion = rootProject.extra["buildTools"] as String
+      compileSdk = compileSdkVersion
+      buildToolsVersion = buildToolsRelease
 
       // Set through the property rather than a lint {} block: CommonExtension carries no type arguments here, so the Action overload does not resolve.
       // Lint skips test sources by default, so test code is held to no standard at all.
@@ -42,7 +49,7 @@ subprojects {
 
     extensions.configure<KotlinAndroidProjectExtension>("kotlin") {
       // Gradle itself runs on whatever JDK is installed; compilation is pinned to the toolchain so the output does not change with the local JDK.
-      jvmToolchain(rootProject.extra["jvmTarget"] as Int)
+      jvmToolchain(jvmTargetVersion)
 
       compilerOptions {
         // The tree compiles warning-free, so warnings are errors to keep it that way.

@@ -16,7 +16,9 @@ android {
   }
 
   defaultConfig {
-    minSdk = rootProject.extra["minSdk"] as Int
+    minSdk = libs.versions.minSdk
+      .get()
+      .toInt()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
   }
@@ -31,7 +33,9 @@ android {
 
   testOptions {
     // targetSdk only affects instrumentation tests in a library, and AGP 9 removed it from defaultConfig.
-    targetSdk = rootProject.extra["targetSdk"] as Int
+    targetSdk = libs.versions.targetSdk
+      .get()
+      .toInt()
     unitTests.all { test ->
       // BackupMigrationV2FileTest self-skips unless this points at a real v2 export.
       // Forwarded explicitly so it survives the Gradle daemon.

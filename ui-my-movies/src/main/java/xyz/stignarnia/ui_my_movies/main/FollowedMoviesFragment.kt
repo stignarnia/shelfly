@@ -8,7 +8,8 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.common.OnScrollResetListener
 import xyz.stignarnia.ui_base.common.OnSearchClickListener
@@ -54,6 +55,8 @@ class FollowedMoviesFragment :
   private var searchViewTranslation = 0F
   private var tabsViewTranslation = 0F
   private var currentPage = 0
+  private var pagesAdapter: FollowedPagesAdapter? = null
+  private var tabsMediator: TabLayoutMediator? = null
   private var isSearching = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,7 +99,11 @@ class FollowedMoviesFragment :
   }
 
   override fun onDestroyView() {
-    binding.followedMoviesPager.removeOnPageChangeListener(pageChangeListener)
+    tabsMediator?.detach()
+    tabsMediator = null
+    binding.followedMoviesPager.unregisterOnPageChangeCallback(pageChangeListener)
+    binding.followedMoviesPager.adapter = null
+    pagesAdapter = null
     super.onDestroyView()
   }
 
@@ -131,12 +138,16 @@ class FollowedMoviesFragment :
 
   private fun setupPager() {
     with(binding) {
+      pagesAdapter = FollowedPagesAdapter(childFragmentManager, viewLifecycleOwner.lifecycle, requireContext())
       followedMoviesPager.run {
-        offscreenPageLimit = FollowedPagesAdapter.PAGES_COUNT
-        adapter = FollowedPagesAdapter(childFragmentManager, requireContext())
-        addOnPageChangeListener(pageChangeListener)
+        // No offscreenPageLimit: FragmentStateAdapter saves and restores each page's state, so holding them all live is no longer what keeps a tab intact.
+        adapter = pagesAdapter
+        registerOnPageChangeCallback(pageChangeListener)
       }
-      followedMoviesTabs.setupWithViewPager(followedMoviesPager)
+      // ViewPager2 carries no page titles, so the mediator asks the adapter for each one as it binds the tab.
+      tabsMediator = TabLayoutMediator(followedMoviesTabs, followedMoviesPager) { tab, position ->
+        tab.text = pagesAdapter?.getPageTitle(position)
+      }.also { it.attach() }
     }
   }
 
@@ -271,7 +282,7 @@ class FollowedMoviesFragment :
     }
   }
 
-  private val pageChangeListener = object : ViewPager.OnPageChangeListener {
+  private val pageChangeListener = object : ViewPager2.OnPageChangeCallback() {
     override fun onPageSelected(position: Int) {
       if (currentPage == position) return
 

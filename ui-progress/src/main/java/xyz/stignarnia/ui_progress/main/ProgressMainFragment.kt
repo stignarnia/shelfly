@@ -10,7 +10,8 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import xyz.stignarnia.ui_base.BaseFragment
 import xyz.stignarnia.ui_base.common.OnScrollResetListener
 import xyz.stignarnia.ui_base.common.OnSearchClickListener
@@ -71,6 +72,7 @@ class ProgressMainFragment :
   private val binding by viewBinding(FragmentProgressMainBinding::bind)
 
   private var adapter: ProgressMainAdapter? = null
+  private var tabsMediator: TabLayoutMediator? = null
 
   private var searchViewTranslation = 0F
   private var tabsTranslation = 0F
@@ -130,7 +132,9 @@ class ProgressMainFragment :
 
   override fun onDestroyView() {
     with(binding) {
-      progressMainPager.removeOnPageChangeListener(pageChangeListener)
+      tabsMediator?.detach()
+      tabsMediator = null
+      progressMainPager.unregisterOnPageChangeCallback(pageChangeListener)
       progressMainPager.adapter = null
     }
     adapter = null
@@ -169,14 +173,17 @@ class ProgressMainFragment :
   }
 
   private fun setupPager() {
-    adapter = ProgressMainAdapter(childFragmentManager, requireContext())
+    adapter = ProgressMainAdapter(childFragmentManager, viewLifecycleOwner.lifecycle, requireContext())
     with(binding) {
       progressMainPager.run {
+        // No offscreenPageLimit: FragmentStateAdapter saves and restores each page's state, so holding them all live is no longer what keeps a tab intact.
         adapter = this@ProgressMainFragment.adapter
-        offscreenPageLimit = ProgressMainAdapter.PAGES_COUNT
-        addOnPageChangeListener(pageChangeListener)
+        registerOnPageChangeCallback(pageChangeListener)
       }
-      progressMainTabs.setupWithViewPager(progressMainPager)
+      // ViewPager2 carries no page titles, so the mediator asks the adapter for each one as it binds the tab.
+      tabsMediator = TabLayoutMediator(progressMainTabs, progressMainPager) { tab, position ->
+        tab.text = adapter?.getPageTitle(position)
+      }.also { it.attach() }
     }
   }
 
@@ -389,7 +396,7 @@ class ProgressMainFragment :
     }
   }
 
-  private val pageChangeListener = object : ViewPager.OnPageChangeListener {
+  private val pageChangeListener = object : ViewPager2.OnPageChangeCallback() {
     override fun onPageSelected(position: Int) {
       if (currentPage == position) return
 

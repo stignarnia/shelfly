@@ -17,7 +17,9 @@ android {
   }
 
   defaultConfig {
-    minSdk = rootProject.extra["minSdk"] as Int
+    minSdk = libs.versions.minSdk
+      .get()
+      .toInt()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
@@ -29,7 +31,9 @@ android {
 
   testOptions {
     // targetSdk only affects instrumentation tests in a library, and AGP 9 removed it from defaultConfig.
-    targetSdk = rootProject.extra["targetSdk"] as Int
+    targetSdk = libs.versions.targetSdk
+      .get()
+      .toInt()
   }
 
   namespace = "xyz.stignarnia.ui_base"
@@ -60,6 +64,7 @@ dependencies {
   api(libs.bundles.android.navigation)
   api(libs.android.fragment)
   api(libs.android.recycler)
+  api(libs.android.viewpager2)
   api(libs.android.constraintlayout)
   api(libs.android.work)
   api(libs.android.material)

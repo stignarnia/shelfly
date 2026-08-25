@@ -5,7 +5,7 @@
 # A stale heading ships the previous version's notes to users, which is silent - the app renders whatever the file says.
 #
 # Verifies two things:
-#   - the first line is "Shelfly <versionName>", with versionName read from versions.gradle.kts.
+#   - the first line is "Shelfly <versionName>", with versionName read from gradle/libs.versions.toml.
 #   - at least one note follows the heading, so a version bump cannot ship an empty list.
 #
 #   scripts/check-release-notes.sh
@@ -14,7 +14,7 @@
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-versions_file="$root/versions.gradle.kts"
+versions_file="$root/gradle/libs.versions.toml"
 notes_file="$root/app/src/main/assets/release_notes.txt"
 
 for f in "$versions_file" "$notes_file"; do
@@ -24,8 +24,8 @@ for f in "$versions_file" "$notes_file"; do
   fi
 done
 
-# versions.gradle.kts holds the single source of truth, as 'extra["versionName"] = "4.0.6"'.
-version="$(sed -n 's/.*extra\["versionName"\][[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' "$versions_file" | head -n 1)"
+# The catalog holds the single source of truth, as 'versionName = "4.0.6"' under [versions].
+version="$(sed -n 's/^versionName[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' "$versions_file" | head -n 1)"
 if [[ -z "$version" ]]; then
   echo "error: could not read versionName from $versions_file" >&2
   exit 1
@@ -36,7 +36,7 @@ expected="Shelfly $version"
 actual="$(head -n 1 "$notes_file" | tr -d '\r')"
 
 if [[ "$actual" != "$expected" ]]; then
-  echo "error: release notes heading is out of sync with versions.gradle.kts." >&2
+  echo "error: release notes heading is out of sync with gradle/libs.versions.toml." >&2
   echo "  expected: $expected" >&2
   echo "  found:    $actual" >&2
   echo "" >&2
