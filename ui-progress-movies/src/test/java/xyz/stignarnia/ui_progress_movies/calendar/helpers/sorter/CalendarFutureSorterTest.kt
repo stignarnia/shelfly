@@ -8,7 +8,6 @@ import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
 
-@Suppress("EXPERIMENTAL_API_USAGE")
 class CalendarFutureSorterTest : BaseMockTest() {
 
   private lateinit var SUT: CalendarFutureSorter

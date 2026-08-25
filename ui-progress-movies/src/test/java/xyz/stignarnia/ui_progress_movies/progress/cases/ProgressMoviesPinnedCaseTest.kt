@@ -11,7 +11,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-@Suppress("EXPERIMENTAL_API_USAGE")
 class ProgressMoviesPinnedCaseTest : BaseMockTest() {
 
   @RelaxedMockK lateinit var pinnedItemsRepository: PinnedItemsRepository

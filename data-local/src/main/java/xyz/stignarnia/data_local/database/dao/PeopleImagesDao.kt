@@ -1,4 +1,3 @@
-@file:Suppress("ktlint")
 
 package xyz.stignarnia.data_local.database.dao
 
@@ -9,7 +8,9 @@ import xyz.stignarnia.data_local.database.model.PersonImage
 import xyz.stignarnia.data_local.sources.PeopleImagesLocalDataSource
 
 @Dao
-interface PeopleImagesDao : BaseDao<PersonImage>, PeopleImagesLocalDataSource {
+interface PeopleImagesDao :
+  BaseDao<PersonImage>,
+  PeopleImagesLocalDataSource {
 
   @Query("SELECT updated_at FROM people_images WHERE id_tmdb = :personTmdbId LIMIT 1")
   override suspend fun getTimestampForPerson(personTmdbId: Long): Long?
@@ -23,7 +24,7 @@ interface PeopleImagesDao : BaseDao<PersonImage>, PeopleImagesLocalDataSource {
   @Transaction
   override suspend fun insertSingle(
     personTmdbId: Long,
-    images: List<PersonImage>
+    images: List<PersonImage>,
   ) {
     deleteAllForPerson(personTmdbId)
     insert(images)

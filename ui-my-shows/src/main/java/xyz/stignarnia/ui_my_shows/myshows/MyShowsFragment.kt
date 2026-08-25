@@ -180,7 +180,6 @@ class MyShowsFragment :
     (requireParentFragment() as? FollowedShowsFragment)?.openShowMenu(show)
   }
 
-  @Suppress("DEPRECATION")
   private fun openSortOrderDialog(
     section: MyShowsSection,
     order: SortOrder,

@@ -43,7 +43,6 @@ import javax.inject.Inject
 import kotlin.time.Duration.Companion.days
 import xyz.stignarnia.ui_model.Episode as EpisodeUi
 
-@Suppress("UNCHECKED_CAST")
 internal class GetHistoryItemsCase @Inject constructor(
   private val dispatchers: CoroutineDispatchers,
   private val localSource: LocalDataSource,
@@ -68,21 +67,19 @@ internal class GetHistoryItemsCase @Inject constructor(
       val periodFilter = settingsRepository.filters.historyShowsPeriod
       val periodRange = getPeriodRange(periodFilter)
 
-      val (episodes, seasons) = awaitAll(
-        async {
-          showsIds.fold(listOf<Episode>()) { acc, ids ->
-            acc.plus(localSource.episodes.getAllWatchedForShows(ids, periodRange.first, periodRange.last))
-          }
-        },
-        async {
-          showsIds.fold(listOf<Season>()) { acc, ids ->
-            acc.plus(localSource.seasons.getAllByShowsIds(ids))
-          }
-        },
-      )
-
-      val localEpisodes = episodes as List<Episode>
-      val localSeasons = seasons as List<Season>
+      // Awaited separately rather than through awaitAll, which erases two different element types to a common supertype and needs an unchecked cast to get them back.
+      val episodesAsync = async {
+        showsIds.fold(listOf<Episode>()) { acc, ids ->
+          acc.plus(localSource.episodes.getAllWatchedForShows(ids, periodRange.first, periodRange.last))
+        }
+      }
+      val seasonsAsync = async {
+        showsIds.fold(listOf<Season>()) { acc, ids ->
+          acc.plus(localSource.seasons.getAllByShowsIds(ids))
+        }
+      }
+      val localEpisodes = episodesAsync.await()
+      val localSeasons = seasonsAsync.await()
 
       val language = translationsRepository.getLanguage()
       val dateFormat = dateFormatProvider.loadFullHourFormat()
@@ -100,7 +97,7 @@ internal class GetHistoryItemsCase @Inject constructor(
               return@async null
             }
 
-            val seasonEpisodes = episodes.filter {
+            val seasonEpisodes = localEpisodes.filter {
               it.idShowTmdb == season.idShowTmdb &&
                 it.seasonNumber == season.seasonNumber
             }

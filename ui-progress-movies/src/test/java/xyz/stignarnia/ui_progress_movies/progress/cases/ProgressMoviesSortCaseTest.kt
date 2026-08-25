@@ -14,7 +14,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-@Suppress("EXPERIMENTAL_API_USAGE")
 class ProgressMoviesSortCaseTest : BaseMockTest() {
 
   @RelaxedMockK lateinit var sortRepository: SettingsSortRepository

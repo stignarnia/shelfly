@@ -92,13 +92,13 @@ class EnumPreference<T : Enum<T>>(
   private val clazz: Class<T>,
 ) : ReadWriteProperty<Any, T> {
 
-  @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
   override fun getValue(
     thisRef: Any,
     property: KProperty<*>,
   ): T {
     val enumName = sharedPreferences.getString(key, "")
-    return clazz.enumConstants.find { it.name == enumName } ?: defaultValue
+    // enumConstants is a platform type and is null for a non-enum class; T is bounded to Enum here, so the elvis only ever covers a missing or unknown stored name.
+    return clazz.enumConstants?.find { it.name == enumName } ?: defaultValue
   }
 
   override fun setValue(

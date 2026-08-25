@@ -1,4 +1,3 @@
-@file:Suppress("ktlint:standard:filename")
 
 package xyz.stignarnia.ui_discover.filters.feed
 

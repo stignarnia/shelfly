@@ -20,7 +20,6 @@ import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@Suppress("EXPERIMENTAL_API_USAGE")
 class SearchFiltersCaseTest : BaseMockTest() {
 
   @RelaxedMockK lateinit var preferences: SharedPreferences

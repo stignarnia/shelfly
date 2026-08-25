@@ -14,7 +14,6 @@ import org.junit.Test
 import java.time.LocalDate
 import java.time.ZonedDateTime
 
-@Suppress("EXPERIMENTAL_API_USAGE")
 class CalendarFutureGrouperTest : BaseMockTest() {
 
   private lateinit var SUT: CalendarFutureGrouper

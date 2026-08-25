@@ -2,6 +2,7 @@ package xyz.stignarnia.ui_movie.sections.collections.list
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.BundleCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -89,14 +90,13 @@ class MovieDetailsCollectionsFragment :
     }
   }
 
-  @Suppress("DEPRECATION")
   private fun openCollectionDetails(
     movie: Movie,
     collection: MovieCollection,
   ) {
     requireParentFragment()
       .setFragmentResultListener(NavigationArgs.REQUEST_DETAILS) { _, bundle ->
-        bundle.getParcelable<IdTmdb>(ARG_COLLECTION_ID)?.let {
+        BundleCompat.getParcelable(bundle, ARG_COLLECTION_ID, IdTmdb::class.java)?.let {
           viewModel.saveLastOpenedCollection(it)
         }
       }

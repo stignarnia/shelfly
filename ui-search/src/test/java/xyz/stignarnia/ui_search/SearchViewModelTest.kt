@@ -43,7 +43,6 @@ import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@Suppress("EXPERIMENTAL_API_USAGE")
 class SearchViewModelTest : BaseMockTest() {
 
   @MockK lateinit var searchQueryCase: SearchQueryCase

@@ -56,7 +56,6 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
 
     val view = thisRef.view
 
-    @Suppress("FoldInitializerAndIfToElvis")
     if (view == null) {
       throw IllegalStateException("Should not attempt to get bindings when the Fragment's view is null.")
     }

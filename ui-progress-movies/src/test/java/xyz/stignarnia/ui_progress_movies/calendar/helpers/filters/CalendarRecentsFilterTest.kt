@@ -9,7 +9,6 @@ import org.junit.Test
 import java.time.LocalDate
 import java.time.ZonedDateTime
 
-@Suppress("EXPERIMENTAL_API_USAGE")
 class CalendarRecentsFilterTest : BaseMockTest() {
 
   private lateinit var SUT: CalendarRecentsFilter

@@ -1,4 +1,3 @@
-@file:Suppress("DEPRECATION")
 
 package xyz.stignarnia.data_local.database.migrations
 

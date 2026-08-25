@@ -1,4 +1,3 @@
-@file:Suppress("ktlint")
 
 package xyz.stignarnia.data_local.database.dao
 
@@ -11,7 +10,9 @@ import xyz.stignarnia.data_local.database.model.Show
 import xyz.stignarnia.data_local.sources.PeopleCreditsLocalDataSource
 
 @Dao
-interface PeopleCreditsDao : BaseDao<PersonCredits>, PeopleCreditsLocalDataSource {
+interface PeopleCreditsDao :
+  BaseDao<PersonCredits>,
+  PeopleCreditsLocalDataSource {
 
   @Query(
     """
@@ -47,7 +48,7 @@ interface PeopleCreditsDao : BaseDao<PersonCredits>, PeopleCreditsLocalDataSourc
     FROM shows
     INNER JOIN people_credits ON people_credits.id_tmdb_show = shows.id_tmdb
     WHERE people_credits.id_tmdb_person = :personTmdbId
-    """
+    """,
   )
   override suspend fun getAllShowsForPerson(personTmdbId: Long): List<Show>
 
@@ -77,7 +78,7 @@ interface PeopleCreditsDao : BaseDao<PersonCredits>, PeopleCreditsLocalDataSourc
     FROM movies
     INNER JOIN people_credits ON people_credits.id_tmdb_movie = movies.id_tmdb
     WHERE people_credits.id_tmdb_person = :personTmdbId
-    """
+    """,
   )
   override suspend fun getAllMoviesForPerson(personTmdbId: Long): List<Movie>
 
@@ -90,7 +91,7 @@ interface PeopleCreditsDao : BaseDao<PersonCredits>, PeopleCreditsLocalDataSourc
   @Transaction
   override suspend fun insertSingle(
     personTmdbId: Long,
-    credits: List<PersonCredits>
+    credits: List<PersonCredits>,
   ) {
     deleteAllForPerson(personTmdbId)
     insert(credits)

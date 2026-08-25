@@ -33,7 +33,6 @@ import org.junit.Test
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-@Suppress("EXPERIMENTAL_API_USAGE")
 class ProgressMoviesItemsCaseTest : BaseMockTest() {
 
   @RelaxedMockK lateinit var sorter: ProgressMoviesItemsSorter

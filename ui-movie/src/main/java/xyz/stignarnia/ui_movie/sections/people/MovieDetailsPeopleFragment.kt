@@ -3,6 +3,7 @@ package xyz.stignarnia.ui_movie.sections.people
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.core.os.BundleCompat
 import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -160,12 +161,11 @@ class MovieDetailsPeopleFragment : BaseFragment<MovieDetailsPeopleViewModel>(R.l
     }
   }
 
-  @Suppress("DEPRECATION")
   private fun handleSheetResult() {
     requireParentFragment()
       .setFragmentResultListener(REQUEST_DETAILS) { _, bundle ->
-        val person = bundle.getParcelable<Person>(ARG_PERSON)
-        val personArgs = bundle.getParcelable<PersonDetailsArgs>(ARG_PERSON_ARGS)
+        val person = BundleCompat.getParcelable(bundle, ARG_PERSON, Person::class.java)
+        val personArgs = BundleCompat.getParcelable(bundle, ARG_PERSON_ARGS, PersonDetailsArgs::class.java)
         person?.let {
           viewModel.saveLastPerson(it, personArgs)
           bundle.clear()

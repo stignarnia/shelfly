@@ -1,4 +1,3 @@
-@file:Suppress("ktlint")
 
 package xyz.stignarnia.data_local.database.dao
 
@@ -9,7 +8,9 @@ import xyz.stignarnia.data_local.database.model.Person
 import xyz.stignarnia.data_local.sources.PeopleLocalDataSource
 
 @Dao
-interface PeopleDao : BaseDao<Person>, PeopleLocalDataSource {
+interface PeopleDao :
+  BaseDao<Person>,
+  PeopleLocalDataSource {
 
   @Transaction
   override suspend fun upsert(people: List<Person>) {
@@ -50,7 +51,7 @@ interface PeopleDao : BaseDao<Person>, PeopleLocalDataSource {
     FROM people
     INNER JOIN people_shows_movies ON people_shows_movies.id_tmdb_person = people.id_tmdb
     WHERE people_shows_movies.id_tmdb_show = :showTmdbId
-    """
+    """,
   )
   override suspend fun getAllForShow(showTmdbId: Long): List<Person>
 
@@ -78,7 +79,7 @@ interface PeopleDao : BaseDao<Person>, PeopleLocalDataSource {
     FROM people
     INNER JOIN people_shows_movies ON people_shows_movies.id_tmdb_person = people.id_tmdb
     WHERE people_shows_movies.id_tmdb_movie = :movieTmdbId
-    """
+    """,
   )
   override suspend fun getAllForMovie(movieTmdbId: Long): List<Person>
 

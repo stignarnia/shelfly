@@ -28,7 +28,6 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 
-@Suppress("UNCHECKED_CAST")
 abstract class CalendarItemsCase(
   private val dispatchers: CoroutineDispatchers,
   private val localSource: LocalDataSource,
@@ -74,23 +73,24 @@ abstract class CalendarItemsCase(
       val showsIds = shows.map { it.tmdbId }.chunked(250)
       val watchlistShowsIds = watchlistShows.map { it.tmdbId }
 
-      val (episodes, seasons) = awaitAll(
-        async {
-          showsIds.fold(mutableListOf<Episode>()) { acc, list ->
-            acc += localSource.episodes.getAllByShowsIds(list)
-            acc
-          }
-        },
-        async {
-          showsIds.fold(mutableListOf<Season>()) { acc, list ->
-            acc += localSource.seasons.getAllByShowsIds(list)
-            acc
-          }
-        },
-      )
+      // Awaited separately rather than through awaitAll, which erases two different element types to a common supertype and needs an unchecked cast to get them back.
+      val episodesAsync = async {
+        showsIds.fold(mutableListOf<Episode>()) { acc, list ->
+          acc += localSource.episodes.getAllByShowsIds(list)
+          acc
+        }
+      }
+      val seasonsAsync = async {
+        showsIds.fold(mutableListOf<Season>()) { acc, list ->
+          acc += localSource.seasons.getAllByShowsIds(list)
+          acc
+        }
+      }
+      val episodes = episodesAsync.await()
+      val seasons = seasonsAsync.await()
 
-      val filteredSeasons = (seasons as List<Season>).filter { it.seasonNumber != 0 }.toMutableList()
-      val filteredEpisodes = (episodes as List<Episode>).filter { it.seasonNumber != 0 }.toMutableList()
+      val filteredSeasons = seasons.filter { it.seasonNumber != 0 }.toMutableList()
+      val filteredEpisodes = episodes.filter { it.seasonNumber != 0 }.toMutableList()
 
       watchlistAppender.appendWatchlistShows(
         watchlistShows,

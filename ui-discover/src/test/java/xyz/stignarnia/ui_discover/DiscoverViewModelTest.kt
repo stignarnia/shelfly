@@ -27,7 +27,6 @@ import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@Suppress("EXPERIMENTAL_API_USAGE")
 class DiscoverViewModelTest : BaseMockTest() {
 
   @MockK internal lateinit var showsCase: DiscoverShowsCase

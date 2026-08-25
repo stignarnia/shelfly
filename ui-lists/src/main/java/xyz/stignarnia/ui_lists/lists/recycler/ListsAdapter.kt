@@ -1,4 +1,3 @@
-@file:Suppress("ktlint")
 
 package xyz.stignarnia.ui_lists.lists.recycler
 
@@ -40,9 +39,9 @@ class ListsAdapter :
     ListsItemView(parent.context).apply {
       itemClickListener = { this@ListsAdapter.itemClickListener?.invoke(it) }
       missingImageListener = {
-          item,
-          itemImage,
-          force,
+        item,
+        itemImage,
+        force,
         ->
         this@ListsAdapter.missingImageListener?.invoke(item, itemImage, force)
       }

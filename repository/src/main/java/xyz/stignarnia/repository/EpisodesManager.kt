@@ -179,7 +179,6 @@ class EpisodesManager @Inject constructor(
     }
   }
 
-  @Suppress("UNCHECKED_CAST")
   suspend fun invalidateSeasons(
     show: Show,
     remoteSeasons: List<Season>,
@@ -188,12 +187,11 @@ class EpisodesManager @Inject constructor(
       return
     }
     coroutineScope {
-      val (localSeasons, localEpisodes) = awaitAll(
-        async { seasonsLocalSource.getAllByShowId(show.tmdbId) },
-        async { episodesLocalSource.getAllByShowId(show.tmdbId) },
-      )
-      localSeasons as List<SeasonDb>
-      localEpisodes as List<EpisodeDb>
+      // Awaited separately rather than through awaitAll, which erases two different element types to List<Any> and needs an unchecked cast to get them back.
+      val localSeasonsAsync = async { seasonsLocalSource.getAllByShowId(show.tmdbId) }
+      val localEpisodesAsync = async { episodesLocalSource.getAllByShowId(show.tmdbId) }
+      val localSeasons = localSeasonsAsync.await()
+      val localEpisodes = localEpisodesAsync.await()
 
       val seasonsToAdd = mutableListOf<SeasonDb>()
       val episodesToAdd = mutableListOf<EpisodeDb>()
