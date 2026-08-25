@@ -65,19 +65,19 @@
   <string name="textActing">Aktorstwo</string>
   <string name="textAiredAlready">Po premierze</string>
   <string name="textAirsNow">Premiera teraz</string>
-  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textDaysToAir">
     <item quantity="one">Premiera jutro</item>
     <item quantity="few">Premiera za %d dni</item>
     <item quantity="many">Premiera za %d dni</item>
     <item quantity="other">Premiera za %d dni</item>
   </plurals>
-  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textHoursToAir">
     <item quantity="one">Premiera za godzinę</item>
     <item quantity="few">Premiera za %d godzin</item>
     <item quantity="many">Premiera za %d godzin</item>
     <item quantity="other">Premiera za %d godzin</item>
   </plurals>
-  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textMinutesToAir">
     <item quantity="one">Premiera teraz</item>
     <item quantity="few">Premiera za %d minut</item>
     <item quantity="many">Premiera za %d minut</item>

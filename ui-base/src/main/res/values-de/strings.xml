@@ -60,15 +60,15 @@
   <string name="textActing">Darsteller</string>
   <string name="textAiredAlready">Veröffentlicht</string>
   <string name="textAirsNow">Jetzt live</string>
-  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textDaysToAir">
     <item quantity="one">Morgen verfügbar</item>
     <item quantity="other">Verfügbar in %d Tagen</item>
   </plurals>
-  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textHoursToAir">
     <item quantity="one">Veröffentlichung in 1 Stunde</item>
     <item quantity="other">Verfügbar in %d Stunden</item>
   </plurals>
-  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textMinutesToAir">
     <item quantity="one">Jetzt verfügbar</item>
     <item quantity="other">Verfügbar in %d Minuten</item>
   </plurals>

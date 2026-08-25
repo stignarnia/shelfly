@@ -61,15 +61,15 @@
   <string name="textActing">Näyttely</string>
   <string name="textAiredAlready">Esitetty</string>
   <string name="textAirsNow">Esitetään nyt</string>
-  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textDaysToAir">
     <item quantity="one">Esitetään huomenna</item>
     <item quantity="other">Esitetään %d päivän kuluttua</item>
   </plurals>
-  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textHoursToAir">
     <item quantity="one">Esitetään tunnin kuluttua</item>
     <item quantity="other">Esitetään %d tunnin kuluttua</item>
   </plurals>
-  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textMinutesToAir">
     <item quantity="one">Esitetään nyt</item>
     <item quantity="other">Esitetään %d minuutin kuluttua</item>
   </plurals>

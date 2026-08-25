@@ -61,15 +61,15 @@
   <string name="textActing">Skuespil</string>
   <string name="textAiredAlready">Sendt</string>
   <string name="textAirsNow">Sendes Nu</string>
-  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textDaysToAir">
     <item quantity="one">Sendes i morgen</item>
     <item quantity="other">Sendes om %d dage</item>
   </plurals>
-  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textHoursToAir">
     <item quantity="one">Sendes om 1 time</item>
     <item quantity="other">Sendes om %d timer</item>
   </plurals>
-  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textMinutesToAir">
     <item quantity="one">Sendes nu</item>
     <item quantity="other">Sendes om %d minutter</item>
   </plurals>

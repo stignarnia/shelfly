@@ -63,17 +63,17 @@
   <string name="textActing">Recitazione</string>
   <string name="textAiredAlready">Trasmesso</string>
   <string name="textAirsNow">Trasmesso ora</string>
-  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textDaysToAir">
     <item quantity="one">Trasmesso domani</item>
     <item quantity="other">Trasmesso tra %d giorni</item>
     <item quantity="many">Trasmesso tra %d giorni</item>
   </plurals>
-  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textHoursToAir">
     <item quantity="one">Trasmesso tra 1 ora</item>
     <item quantity="other">Trasmesso tra %d ore</item>
     <item quantity="many">Trasmesso tra %d ore</item>
   </plurals>
-  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textMinutesToAir">
     <item quantity="one">Trasmesso ora</item>
     <item quantity="other">Trasmesso tra %d minuti</item>
     <item quantity="many">Trasmesso tra %d minuti</item>

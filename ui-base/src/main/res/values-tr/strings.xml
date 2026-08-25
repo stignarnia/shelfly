@@ -61,15 +61,15 @@
   <string name="textActing">Oyunculuk</string>
   <string name="textAiredAlready">Yayınlandı</string>
   <string name="textAirsNow">Şimdi Yayında</string>
-  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textDaysToAir">
     <item quantity="one">Yarın yayında</item>
     <item quantity="other">%d gün içinde yayınlanacak</item>
   </plurals>
-  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textHoursToAir">
     <item quantity="one">1 saat içinde yayınlanacak</item>
     <item quantity="other">%d saat içinde yayınlanır</item>
   </plurals>
-  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textMinutesToAir">
     <item quantity="one">Şimdi yayında</item>
     <item quantity="other">%d dakika içinde yayında</item>
   </plurals>

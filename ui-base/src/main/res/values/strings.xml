@@ -69,17 +69,17 @@
   <string name="textAiredAlready">Aired</string>
   <string name="textAirsNow">Airs Now</string>
 
-  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textDaysToAir">
     <item quantity="one">Airs tomorrow</item>
     <item quantity="other">Airs in %d days</item>
   </plurals>
 
-  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textHoursToAir">
     <item quantity="one">Airs in 1 hour</item>
     <item quantity="other">Airs in %d hours</item>
   </plurals>
 
-  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textMinutesToAir">
     <item quantity="one">Airs now</item>
     <item quantity="other">Airs in %d minutes</item>
   </plurals>

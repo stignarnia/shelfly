@@ -63,17 +63,17 @@
   <string name="textActing">Actuación</string>
   <string name="textAiredAlready">Emitido</string>
   <string name="textAirsNow">Se emite ahora</string>
-  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textDaysToAir">
     <item quantity="one">Se emite mañana</item>
     <item quantity="other">Se emite en %d días</item>
     <item quantity="many">Se emite en %d días</item>
   </plurals>
-  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textHoursToAir">
     <item quantity="one">Se emite en 1 hora</item>
     <item quantity="other">Se emite en %d horas</item>
     <item quantity="many">Se emite en %d horas</item>
   </plurals>
-  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textMinutesToAir">
     <item quantity="one">Se emite ahora</item>
     <item quantity="other">Se emite en %d minutos</item>
     <item quantity="many">Se emite en %d minutos</item>

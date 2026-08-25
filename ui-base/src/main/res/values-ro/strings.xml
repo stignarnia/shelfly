@@ -63,17 +63,17 @@
     <string name="textActing">Actorie</string>
     <string name="textAiredAlready">Difuzat</string>
     <string name="textAirsNow">Se difuzează acum</string>
-    <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
+    <plurals name="textDaysToAir">
         <item quantity="one">Se va difuza mâine</item>
         <item quantity="few">Se va difuza în %d zile</item>
         <item quantity="other">Se va difuza în %d zile</item>
     </plurals>
-    <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
+    <plurals name="textHoursToAir">
         <item quantity="one">Se difuzează într-o oră</item>
         <item quantity="few">Se difuzează în %d ore</item>
         <item quantity="other">Se difuzează în %d ore</item>
     </plurals>
-    <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
+    <plurals name="textMinutesToAir">
         <item quantity="one">Se difuzează acum</item>
         <item quantity="few">Se difuzează în %d minute</item>
         <item quantity="other">Se difuzează în %d minute</item>

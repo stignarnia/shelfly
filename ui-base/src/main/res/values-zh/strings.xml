@@ -59,13 +59,13 @@
   <string name="textActing">出演</string>
   <string name="textAiredAlready">已播出</string>
   <string name="textAirsNow">现已开播</string>
-  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textDaysToAir">
     <item quantity="other">%d 天后开播</item>
   </plurals>
-  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textHoursToAir">
     <item quantity="other">%d 小时后开播</item>
   </plurals>
-  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textMinutesToAir">
     <item quantity="other">%d 分钟后开播</item>
   </plurals>
   <string name="textToday">今日</string>

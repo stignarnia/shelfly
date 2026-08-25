@@ -65,20 +65,20 @@
   <string name="textActing">Акторство</string>
   <string name="textAiredAlready">Прем\'єра відбулася</string>
   <string name="textAirsNow">Прем\'єра зараз</string>
-  <plurals name="textDaysToAir" tools:ignore="ImpliedQuantity">
+  <plurals name="textDaysToAir">
     <item quantity="one">Прем\'єра за %d день</item>
     <item quantity="few">Прем\'єра за %d дні</item>
     <item quantity="many">Прем\'єра за %d днів</item>
     <item quantity="other">Прем\'єра за %d днів</item>
   </plurals>
-  <plurals name="textHoursToAir" tools:ignore="ImpliedQuantity">
-    <item quantity="one">Прем\'єра за годину</item>
+  <plurals name="textHoursToAir">
+    <item quantity="one">Прем\'єра за %d годину</item>
     <item quantity="few">Прем\'єра за %d години</item>
     <item quantity="many">Прем\'єра за %d годин</item>
     <item quantity="other">Прем\'єра за %d годин</item>
   </plurals>
-  <plurals name="textMinutesToAir" tools:ignore="ImpliedQuantity">
-    <item quantity="one">Прем\'єра зараз</item>
+  <plurals name="textMinutesToAir">
+    <item quantity="one">Прем\'єра за %d хвилину</item>
     <item quantity="few">Прем\'єра за %d хвилини</item>
     <item quantity="many">Прем\'єра за %d хвилин</item>
     <item quantity="other">Прем\'єра за %d хвилин</item>
