@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_people.list.recycler.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -48,7 +47,6 @@ class PeopleListItemView : FrameLayout {
     binding.viewPersonItemRoot.onClick { onItemClickListener?.invoke(item.person) }
   }
 
-  @SuppressLint("SetTextI18n")
   fun bind(item: PeopleListItem.PersonItem) {
     clear()
     this.item = item
@@ -70,7 +68,12 @@ class PeopleListItemView : FrameLayout {
         }
       }
       viewPersonItemDescription.visibleIf(item.person.episodesCount > 0)
-      viewPersonItemDescription.text = "${context.getString(R.string.textEpisodes)}: ${item.person.episodesCount}"
+      viewPersonItemDescription.text =
+        context.getString(
+          R.string.textEpisodesCount,
+          context.getString(R.string.textEpisodes),
+          item.person.episodesCount,
+        )
     }
 
     loadImage(item.person.imagePath)

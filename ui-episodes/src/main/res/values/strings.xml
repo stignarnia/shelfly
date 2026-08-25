@@ -5,4 +5,5 @@
     <item quantity="one">%1$.1f (%2$d votes)</item>
     <item quantity="other">%1$.1f (%2$d votes)</item>
   </plurals>
+  <string name="textRatingOutOfTen" translatable="false">%1$s / 10</string>
 </resources>

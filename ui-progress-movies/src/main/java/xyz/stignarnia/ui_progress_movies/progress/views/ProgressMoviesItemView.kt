@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_progress_movies.progress.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -29,7 +28,6 @@ import xyz.stignarnia.ui_progress_movies.databinding.ViewProgressMoviesMainItemB
 import xyz.stignarnia.ui_progress_movies.progress.recycler.ProgressMovieListItem
 import java.util.Locale
 
-@SuppressLint("SetTextI18n")
 class ProgressMoviesItemView : MovieView<ProgressMovieListItem.MovieItem> {
 
   constructor(context: Context) : super(context)
@@ -153,7 +151,12 @@ class ProgressMoviesItemView : MovieView<ProgressMovieListItem.MovieItem> {
 
       progressMovieItemRuntimeIcon.visible()
       progressMovieItemRuntime.visible()
-      progressMovieItemRuntime.text = "${item.movie.runtime} ${context.getString(R.string.textMinutesShort)}"
+      progressMovieItemRuntime.text =
+        context.getString(
+          R.string.textRuntimeMinutes,
+          item.movie.runtime,
+          context.getString(R.string.textMinutesShort),
+        )
     }
   }
 

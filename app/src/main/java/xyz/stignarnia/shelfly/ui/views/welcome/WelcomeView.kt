@@ -1,6 +1,5 @@
 package xyz.stignarnia.shelfly.ui.views.welcome
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
@@ -128,7 +127,6 @@ class WelcomeView : FrameLayout {
     }
   }
 
-  @SuppressLint("SetTextI18n")
   private fun bindContent(step: WelcomeStep) {
     val inflater = LayoutInflater.from(context)
     val container = binding.viewWelcomeContent
@@ -141,8 +139,7 @@ class WelcomeView : FrameLayout {
         ViewWelcomeStepLanguageBinding.inflate(inflater, container, true).apply {
           // Always English: it asks the question before the answer exists.
           viewWelcomeStepLanguageMessage.text =
-            "It seems like your device's language is ${step.suggested.displayNameRaw}.\n" +
-            "Would you like to use it in Shelfly?"
+            context.getString(R.string.textWelcomeLanguageQuestion, step.suggested.displayNameRaw)
           viewWelcomeStepLanguageHint.text = strings.getText(R.string.textLanguagesChoose2)
         }
       }

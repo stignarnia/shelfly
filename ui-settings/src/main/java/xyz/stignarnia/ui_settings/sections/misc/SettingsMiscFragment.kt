@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_settings.sections.misc
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -45,11 +44,10 @@ class SettingsMiscFragment : BaseFragment<SettingsMiscViewModel>(R.layout.fragme
     }
   }
 
-  @SuppressLint("SetTextI18n")
   private fun render(uiState: SettingsMiscUiState) {
     uiState.run {
       with(binding) {
-        settingsVersion.text = "v${BuildConfig.VER_NAME} (${BuildConfig.VER_CODE})"
+        settingsVersion.text = getString(R.string.textVersionFormat, BuildConfig.VER_NAME, BuildConfig.VER_CODE)
       }
     }
   }

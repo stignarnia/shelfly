@@ -148,4 +148,6 @@
   <string name="textRatingsImdb" translatable="false">IMDb</string>
   <string name="textRatingsMetascore" translatable="false">Metascore</string>
   <string name="textRatingsRottenTomatoes" translatable="false">R. Tomatoes</string>
+  <!-- A runtime and its unit; the unit itself is translated as textMinutesShort. -->
+  <string name="textRuntimeMinutes" translatable="false">%1$d %2$s</string>
 </resources>

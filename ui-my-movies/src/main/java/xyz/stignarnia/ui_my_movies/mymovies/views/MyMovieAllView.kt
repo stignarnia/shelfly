@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_my_movies.mymovies.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -26,7 +25,6 @@ import xyz.stignarnia.ui_my_movies.databinding.ViewCollectionMovieBinding
 import xyz.stignarnia.ui_my_movies.mymovies.recycler.MyMoviesItem
 import java.util.Locale.ENGLISH
 
-@SuppressLint("SetTextI18n")
 class MyMovieAllView : MovieView<MyMoviesItem> {
 
   constructor(context: Context) : super(context)
@@ -89,7 +87,12 @@ class MyMovieAllView : MovieView<MyMoviesItem> {
       if (item.movie.runtime > 0 && item.sortOrder == SortOrder.RUNTIME) {
         collectionMovieRuntimeIcon.visible()
         collectionMovieRuntime.visible()
-        collectionMovieRuntime.text = "${item.movie.runtime} ${context.getString(R.string.textMinutesShort)}"
+        collectionMovieRuntime.text =
+          context.getString(
+            R.string.textRuntimeMinutes,
+            item.movie.runtime,
+            context.getString(R.string.textMinutesShort),
+          )
       }
     }
     loadImage(item)

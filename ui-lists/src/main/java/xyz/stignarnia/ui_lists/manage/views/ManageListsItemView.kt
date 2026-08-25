@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_lists.manage.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -12,7 +11,6 @@ import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_lists.databinding.ViewManageListsItemBinding
 import xyz.stignarnia.ui_lists.manage.recycler.ManageListsItem
 
-@SuppressLint("SetTextI18n")
 class ManageListsItemView : FrameLayout {
 
   constructor(context: Context) : super(context)
@@ -41,7 +39,7 @@ class ManageListsItemView : FrameLayout {
     this.item = item
     isCheckEnabled = false
     with(binding) {
-      manageListsItemCheckbox.text = " ${item.list.name}"
+      manageListsItemCheckbox.text = item.list.name
       manageListsItemCheckbox.isChecked = item.isChecked
       manageListsItemCheckbox.isEnabled = item.isEnabled
     }

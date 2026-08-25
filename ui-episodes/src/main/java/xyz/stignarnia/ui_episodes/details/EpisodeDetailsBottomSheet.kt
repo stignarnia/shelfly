@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_episodes.details
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
@@ -140,7 +139,6 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
     }
   }
 
-  @SuppressLint("SetTextI18n")
   private fun render(uiState: EpisodeDetailsUiState) {
     uiState.run {
       with(binding) {
@@ -171,7 +169,7 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
           episodeDetailsRateButton.isEnabled = state.rateLoading == false
           episodeDetailsRateButton.onClick { openRateDialog() }
           if (state.hasRating()) {
-            episodeDetailsRateButton.text = "${state.userRating?.rating} / 10"
+            episodeDetailsRateButton.text = getString(R.string.textRatingOutOfTen, state.userRating?.rating.toString())
           } else {
             episodeDetailsRateButton.setText(R.string.textRate)
           }

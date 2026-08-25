@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_my_movies.common.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -27,7 +26,6 @@ import xyz.stignarnia.ui_my_movies.common.recycler.CollectionListItem
 import xyz.stignarnia.ui_my_movies.databinding.ViewCollectionMovieBinding
 import java.util.Locale.ENGLISH
 
-@SuppressLint("SetTextI18n")
 class CollectionMovieView : MovieView<CollectionListItem.MovieItem> {
 
   constructor(context: Context) : super(context)
@@ -111,7 +109,12 @@ class CollectionMovieView : MovieView<CollectionListItem.MovieItem> {
       if (item.movie.runtime > 0 && item.sortOrder == RUNTIME) {
         collectionMovieRuntimeIcon.visible()
         collectionMovieRuntime.visible()
-        collectionMovieRuntime.text = "${item.movie.runtime} ${context.getString(R.string.textMinutesShort)}"
+        collectionMovieRuntime.text =
+          context.getString(
+            R.string.textRuntimeMinutes,
+            item.movie.runtime,
+            context.getString(R.string.textMinutesShort),
+          )
       }
     }
 

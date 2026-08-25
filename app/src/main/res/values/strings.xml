@@ -50,4 +50,8 @@
   <string name="textContinue">Continue</string>
   <string name="textSkip">Skip</string>
   <string name="textNotNow">Not now</string>
+  <!--
+    Deliberately not translated: it asks whether to switch to the device language, before any language has been chosen, so it has to be readable to someone who has not answered yet.
+  -->
+  <string name="textWelcomeLanguageQuestion" translatable="false">It seems like your device\'s language is %1$s.\nWould you like to use it in Shelfly?</string>
 </resources>
