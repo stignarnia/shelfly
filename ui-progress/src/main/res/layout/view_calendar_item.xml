@@ -74,7 +74,6 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
       app:layout_goneMarginEnd="@dimen/spaceMedium"
-      tools:ignore="RtlSymmetry"
       tools:text="Breaking Bad"
       />
 
