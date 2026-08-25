@@ -38,10 +38,7 @@
       android:contentDescription="@null"
       android:padding="@dimen/spaceSmall"
       android:src="@drawable/ic_television"
-      android:tint="?attr/colorPlaceholderIcon"
       android:visibility="gone"
-      app:tint="?attr/colorPlaceholderIcon"
-      tools:ignore="UseAppTint"
       tools:visibility="visible"
       />
 

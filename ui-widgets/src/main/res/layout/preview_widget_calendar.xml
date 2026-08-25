@@ -69,9 +69,6 @@
           android:contentDescription="@null"
           android:padding="@dimen/spaceSmall"
           android:src="@drawable/ic_television"
-          android:tint="?attr/colorPlaceholderIcon"
-          app:tint="?attr/colorPlaceholderIcon"
-          tools:ignore="UseAppTint"
           />
 
       </FrameLayout>
@@ -170,9 +167,6 @@
           android:contentDescription="@null"
           android:padding="@dimen/spaceSmall"
           android:src="@drawable/ic_television"
-          android:tint="?attr/colorPlaceholderIcon"
-          app:tint="?attr/colorPlaceholderIcon"
-          tools:ignore="UseAppTint"
           />
 
       </FrameLayout>
