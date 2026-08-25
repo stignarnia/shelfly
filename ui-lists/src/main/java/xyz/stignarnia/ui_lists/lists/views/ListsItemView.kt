@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_lists.lists.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -17,7 +16,6 @@ import xyz.stignarnia.ui_model.SortOrder.DATE_UPDATED
 import xyz.stignarnia.ui_model.SortOrder.NAME
 import xyz.stignarnia.ui_model.SortOrder.NEWEST
 
-@SuppressLint("SetTextI18n")
 class ListsItemView : FrameLayout {
 
   constructor(context: Context) : super(context)

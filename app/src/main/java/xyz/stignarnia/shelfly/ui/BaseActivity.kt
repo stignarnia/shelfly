@@ -1,6 +1,5 @@
 package xyz.stignarnia.shelfly.ui
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -50,7 +49,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
   }
 
-  @SuppressLint("RestrictedApi")
   private fun handleShowMovieExtra(
     intent: Intent,
     key: String,

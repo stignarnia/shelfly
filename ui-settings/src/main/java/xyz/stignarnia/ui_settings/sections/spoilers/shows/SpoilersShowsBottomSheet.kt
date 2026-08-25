@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_settings.sections.spoilers.shows
 
-import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
@@ -67,7 +66,6 @@ class SpoilersShowsBottomSheet : BaseBottomSheetFragment(R.layout.sheet_spoilers
     }
   }
 
-  @SuppressLint("SetTextI18n")
   private fun render(uiState: SpoilersShowsUiState) {
     uiState.settings.run {
       with(binding) {

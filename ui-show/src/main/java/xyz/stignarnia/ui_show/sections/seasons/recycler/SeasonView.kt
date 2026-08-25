@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_show.sections.seasons.recycler
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
@@ -32,7 +31,6 @@ class SeasonView : FrameLayout {
     post { binding.seasonViewCheckbox.expandTouch() }
   }
 
-  @SuppressLint("SetTextI18n")
   fun bind(
     item: SeasonListItem,
     clickListener: (SeasonListItem) -> Unit,

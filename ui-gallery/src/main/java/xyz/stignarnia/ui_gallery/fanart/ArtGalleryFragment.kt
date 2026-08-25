@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_gallery.fanart
 
-import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
@@ -45,7 +44,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-@SuppressLint("SetTextI18n", "DefaultLocale")
 @AndroidEntryPoint
 class ArtGalleryFragment : BaseFragment<ArtGalleryViewModel>(R.layout.fragment_art_gallery) {
 

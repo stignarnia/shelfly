@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_base.common.sheets.context_menu.show
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import xyz.stignarnia.repository.images.ShowImagesProvider
@@ -34,7 +33,6 @@ import timber.log.Timber
 import javax.inject.Inject
 import kotlin.properties.Delegates.notNull
 
-@SuppressLint("StaticFieldLeak")
 @HiltViewModel
 class ShowContextMenuViewModel @Inject constructor(
   private val loadItemCase: ShowContextMenuLoadItemCase,

@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_base.common.sheets.context_menu.movie
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import xyz.stignarnia.repository.settings.SettingsRepository
@@ -31,7 +30,6 @@ import java.time.ZonedDateTime
 import javax.inject.Inject
 import kotlin.properties.Delegates.notNull
 
-@SuppressLint("StaticFieldLeak")
 @HiltViewModel
 class MovieContextMenuViewModel @Inject constructor(
   private val loadItemCase: MovieContextMenuLoadItemCase,

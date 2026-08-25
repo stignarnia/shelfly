@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_progress_movies.calendar.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import xyz.stignarnia.ui_progress_movies.R
 import xyz.stignarnia.ui_progress_movies.calendar.recycler.CalendarMovieListItem
 import xyz.stignarnia.ui_progress_movies.databinding.ViewCalendarMoviesHeaderBinding
 
-@SuppressLint("SetTextI18n")
 class CalendarMoviesHeaderView : LinearLayout {
 
   constructor(context: Context) : super(context)

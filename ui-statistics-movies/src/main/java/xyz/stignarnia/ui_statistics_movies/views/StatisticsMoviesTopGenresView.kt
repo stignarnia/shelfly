@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_statistics_movies.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import xyz.stignarnia.ui_model.Genre
 import xyz.stignarnia.ui_statistics_movies.R
 import xyz.stignarnia.ui_statistics_movies.databinding.ViewStatisticsMoviesCardTopGenreBinding
 
-@SuppressLint("SetTextI18n")
 class StatisticsMoviesTopGenresView : MaterialCardView {
 
   constructor(context: Context) : super(context)

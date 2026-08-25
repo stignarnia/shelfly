@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_discover.filters.genres
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -46,7 +45,6 @@ internal class DiscoverFiltersGenresBottomSheet : BaseBottomSheetFragment(R.layo
     )
   }
 
-  @SuppressLint("SetTextI18n")
   private fun setupView() {
     val behavior: BottomSheetBehavior<*> = (dialog as BottomSheetDialog).behavior
     behavior.skipCollapsed = true

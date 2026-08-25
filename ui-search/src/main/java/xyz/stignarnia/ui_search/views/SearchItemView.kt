@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_search.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -20,7 +19,6 @@ import xyz.stignarnia.ui_search.R
 import xyz.stignarnia.ui_search.databinding.ViewShowSearchBinding
 import xyz.stignarnia.ui_search.recycler.SearchListItem
 
-@SuppressLint("SetTextI18n")
 class SearchItemView : ShowView<SearchListItem> {
 
   constructor(context: Context) : super(context)

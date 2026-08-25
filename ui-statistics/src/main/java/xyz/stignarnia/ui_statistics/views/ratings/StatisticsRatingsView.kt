@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_statistics.views.ratings
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -18,7 +17,6 @@ import xyz.stignarnia.ui_statistics.databinding.ViewStatisticsCardRatingsBinding
 import xyz.stignarnia.ui_statistics.views.ratings.recycler.StatisticsRatingItem
 import xyz.stignarnia.ui_statistics.views.ratings.recycler.StatisticsRatingsAdapter
 
-@SuppressLint("SetTextI18n")
 class StatisticsRatingsView : MaterialCardView {
 
   constructor(context: Context) : super(context)

@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_people.details
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -181,7 +180,6 @@ class PersonDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_person_de
     navigateTo(R.id.actionPersonDetailsDialogToLinks, options)
   }
 
-  @SuppressLint("SetTextI18n")
   private fun render(uiState: PersonDetailsUiState) {
     uiState.run {
       personDetailsItems?.let { adapter?.setItems(it) }

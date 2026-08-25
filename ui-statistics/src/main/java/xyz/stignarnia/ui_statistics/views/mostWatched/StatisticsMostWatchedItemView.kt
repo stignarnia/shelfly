@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_statistics.views.mostWatched
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -12,7 +11,6 @@ import xyz.stignarnia.ui_base.common.views.ShowView
 import xyz.stignarnia.ui_base.utilities.extensions.onClick
 import xyz.stignarnia.ui_statistics.databinding.ViewStatisticsMostWatchedItemBinding
 
-@SuppressLint("SetTextI18n")
 class StatisticsMostWatchedItemView : ShowView<StatisticsMostWatchedItem> {
 
   constructor(context: Context) : super(context)

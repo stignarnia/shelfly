@@ -1,7 +1,6 @@
 package xyz.stignarnia.shelfly.ui.main
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color.TRANSPARENT
 import android.os.Bundle
@@ -508,7 +507,6 @@ class MainActivity :
       welcomeView = this
     }
 
-  @SuppressLint("MissingSuperCall")
   override fun onSaveInstanceState(outState: Bundle) {
     outState.putBoolean(ARG_NAVIGATION_VISIBLE, binding.bottomNavigationWrapper.translationY == 0F)
     super.onSaveInstanceState(outState)

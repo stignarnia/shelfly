@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_my_shows.myshows.filters
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.forEach
@@ -48,7 +47,6 @@ internal class MyShowsFiltersBottomSheet : BaseBottomSheetFragment(R.layout.view
     )
   }
 
-  @SuppressLint("SetTextI18n")
   private fun setupView() {
     val behavior: BottomSheetBehavior<*> = (dialog as BottomSheetDialog).behavior
     behavior.skipCollapsed = true

@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_lists.details.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
@@ -21,7 +20,6 @@ import xyz.stignarnia.ui_model.ImageStatus.AVAILABLE
 import xyz.stignarnia.ui_model.ImageStatus.UNAVAILABLE
 import xyz.stignarnia.ui_model.ImageStatus.UNKNOWN
 
-@SuppressLint("ClickableViewAccessibility")
 abstract class ListDetailsItemView : FrameLayout {
 
   constructor(context: Context) : super(context)

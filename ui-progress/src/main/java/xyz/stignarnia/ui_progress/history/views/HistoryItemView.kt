@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_progress.history.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -20,7 +19,6 @@ import xyz.stignarnia.ui_progress.databinding.ViewHistoryItemBinding
 import xyz.stignarnia.ui_progress.history.entities.HistoryListItem
 import java.util.Locale.ENGLISH
 
-@SuppressLint("SetTextI18n")
 internal class HistoryItemView : ShowView<HistoryListItem.Episode> {
 
   constructor(context: Context) : super(context)

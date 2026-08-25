@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_statistics_movies.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import java.text.NumberFormat
 import java.util.Locale.ENGLISH
 import java.util.concurrent.TimeUnit
 
-@SuppressLint("SetTextI18n")
 class StatisticsMoviesTotalTimeSpentView : MaterialCardView {
 
   constructor(context: Context) : super(context)

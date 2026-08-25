@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_discover_movies.filters.providers
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.forEach
@@ -47,7 +46,6 @@ internal class DiscoverMoviesFiltersProvidersBottomSheet :
     )
   }
 
-  @SuppressLint("SetTextI18n")
   private fun setupView() {
     val behavior: BottomSheetBehavior<*> = (dialog as BottomSheetDialog).behavior
     behavior.skipCollapsed = true

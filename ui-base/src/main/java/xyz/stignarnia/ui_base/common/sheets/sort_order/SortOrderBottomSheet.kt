@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_base.common.sheets.sort_order
 
-import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
@@ -69,7 +68,6 @@ class SortOrderBottomSheet : BaseBottomSheetFragment(R.layout.view_sort_order) {
     setupView()
   }
 
-  @SuppressLint("SetTextI18n")
   private fun setupView() {
     with(binding) {
       viewSortOrderItemsLayout.removeAllViews()

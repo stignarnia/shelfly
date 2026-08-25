@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_lists.details.recycler
 
-import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -140,7 +139,6 @@ class ListDetailsAdapter(
     itemsSwipedListener(item)
   }
 
-  @SuppressLint("ClickableViewAccessibility")
   class ListDetailsItemViewHolder(
     itemView: ListDetailsItemView,
     dragStartListener: ListItemDragListener,

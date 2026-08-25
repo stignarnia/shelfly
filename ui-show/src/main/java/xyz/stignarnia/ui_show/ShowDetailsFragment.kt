@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_show
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
@@ -81,7 +80,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.util.Locale.ENGLISH
 
-@SuppressLint("SetTextI18n", "DefaultLocale")
 @AndroidEntryPoint
 class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment_show_details) {
 

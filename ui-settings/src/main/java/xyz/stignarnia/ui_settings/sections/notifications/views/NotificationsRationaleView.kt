@@ -1,13 +1,11 @@
 package xyz.stignarnia.ui_settings.sections.notifications.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import xyz.stignarnia.ui_settings.databinding.ViewNotificationsRationaleBinding
 
-@SuppressLint("SetTextI18n")
 class NotificationsRationaleView : FrameLayout {
 
   constructor(context: Context) : super(context)

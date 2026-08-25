@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_progress.calendar.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -23,7 +22,6 @@ import xyz.stignarnia.ui_progress.calendar.recycler.CalendarListItem
 import xyz.stignarnia.ui_progress.databinding.ViewCalendarItemBinding
 import java.util.Locale.ENGLISH
 
-@SuppressLint("SetTextI18n")
 class CalendarItemView : ShowView<CalendarListItem.Episode> {
 
   constructor(context: Context) : super(context)

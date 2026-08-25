@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_movie
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
@@ -89,7 +88,6 @@ import java.time.ZoneOffset.UTC
 import java.util.Locale.ENGLISH
 import java.util.Locale.ROOT
 
-@SuppressLint("SetTextI18n", "DefaultLocale")
 @AndroidEntryPoint
 class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragment_movie_details) {
 

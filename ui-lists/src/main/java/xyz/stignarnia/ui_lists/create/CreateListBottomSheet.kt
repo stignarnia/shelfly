@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_lists.create
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.setFragmentResult
@@ -54,7 +53,6 @@ class CreateListBottomSheet : BaseBottomSheetFragment(R.layout.view_create_list)
     }
   }
 
-  @SuppressLint("SetTextI18n")
   private fun setupView() {
     with(binding) {
       viewCreateListButton.onClick { onCreateListClick() }
@@ -80,7 +78,6 @@ class CreateListBottomSheet : BaseBottomSheetFragment(R.layout.view_create_list)
     }
   }
 
-  @SuppressLint("SetTextI18n")
   private fun render(uiState: CreateListUiState) {
     uiState.run {
       listDetails?.let {

@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_progress_movies.calendar.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
@@ -23,7 +22,6 @@ import xyz.stignarnia.ui_progress_movies.R
 import xyz.stignarnia.ui_progress_movies.calendar.recycler.CalendarMovieListItem
 import xyz.stignarnia.ui_progress_movies.databinding.ViewProgressMoviesCalendarItemBinding
 
-@SuppressLint("SetTextI18n")
 class CalendarMoviesItemView : MovieView<CalendarMovieListItem.MovieItem> {
 
   constructor(context: Context) : super(context)

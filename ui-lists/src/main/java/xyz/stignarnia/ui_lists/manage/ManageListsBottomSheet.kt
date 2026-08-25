@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_lists.manage
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.setFragmentResult
@@ -102,7 +101,6 @@ class ManageListsBottomSheet : BaseBottomSheetFragment(R.layout.view_manage_list
     }
   }
 
-  @SuppressLint("SetTextI18n")
   private fun render(uiState: ManageListsUiState) {
     uiState.run {
       items?.let {

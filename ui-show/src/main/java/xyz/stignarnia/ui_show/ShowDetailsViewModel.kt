@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_show
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import xyz.stignarnia.common.errors.ErrorHelper
@@ -46,7 +45,6 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-@SuppressLint("StaticFieldLeak")
 @HiltViewModel
 class ShowDetailsViewModel @Inject constructor(
   private val mainCase: ShowDetailsMainCase,

@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_movie.sections.collections.details
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.clearFragmentResultListener
@@ -148,7 +147,6 @@ class MovieDetailsCollectionBottomSheet : BaseBottomSheetFragment(R.layout.view_
     navigateTo(R.id.actionMovieCollectionDialogToContextDialog, bundle)
   }
 
-  @SuppressLint("SetTextI18n")
   private fun render(uiState: MovieDetailsCollectionUiState) {
     uiState.run {
       items?.let { adapter?.setItems(it) }

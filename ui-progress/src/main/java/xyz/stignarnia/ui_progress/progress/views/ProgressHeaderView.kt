@@ -1,6 +1,5 @@
 package xyz.stignarnia.ui_progress.progress.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.text.TextUtils
 import android.util.AttributeSet
@@ -13,7 +12,6 @@ import xyz.stignarnia.ui_progress.databinding.ViewProgressHeaderBinding
 import xyz.stignarnia.ui_progress.progress.recycler.ProgressListItem
 import java.util.Locale
 
-@SuppressLint("SetTextI18n")
 class ProgressHeaderView : LinearLayout {
 
   constructor(context: Context) : super(context)
