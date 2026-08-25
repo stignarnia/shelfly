@@ -140,4 +140,5 @@
   <string name="errorCouldNotLoadSearchResults">لم نستطع تحميل نتائج البحث.\nرجاءً تواصل معنا إذا استمرت هذه المشكلة بالحدوث.</string>
   <string name="errorNoInternetConnection">لا يوجد إتصال بالإنترنت. رجاءً تحقق من إتصالك.</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">العودة إلى الأعلى</string>
 </resources>

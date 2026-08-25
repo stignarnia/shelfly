@@ -120,4 +120,5 @@
   <string name="errorNoInternetConnection">Kein Internet. Bitte überprüfe deine Verbindung.</string>
   <string name="textDisabled">Deaktiviert</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">Zurück nach oben</string>
 </resources>

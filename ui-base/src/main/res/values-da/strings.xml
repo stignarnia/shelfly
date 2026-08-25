@@ -120,4 +120,5 @@
   <string name="errorCouldNotLoadSearchResults">Vi kunne ikke indlæse søgeresultaterne i øjeblikket.\nKontakt os venligst hvis dette fortsætter med at ske.</string>
   <string name="errorNoInternetConnection">Ingen internetforbindelse. Tjek venligst din forbindelse.</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">Tilbage til toppen</string>
 </resources>

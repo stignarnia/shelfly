@@ -130,4 +130,5 @@
   <string name="errorCouldNotLoadSearchResults">Нам не вдалося завантажити результати пошуку.\nБудь ласка, зв\'яжіться з нами, якщо помилка не зникає.</string>
   <string name="errorNoInternetConnection">Немає доступу до інтернету. Перевірте підключення до мережі.</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">Догори</string>
 </resources>

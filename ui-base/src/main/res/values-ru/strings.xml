@@ -130,4 +130,5 @@
   <string name="errorNoInternetConnection">Нет интернет соединения. Проверьте своё подключение.</string>
   <string name="textReleaseDay">День премьеры</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">Наверх</string>
 </resources>

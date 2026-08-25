@@ -115,4 +115,5 @@
   <string name="errorCouldNotLoadSearchResults">当前暂时无法加载搜索结果。\n如果这种情况持续发生，请联系我们。</string>
   <string name="errorNoInternetConnection">无互联网连接。请检查您的网络。</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">返回顶部</string>
 </resources>

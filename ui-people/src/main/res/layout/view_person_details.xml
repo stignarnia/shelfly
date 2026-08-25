@@ -30,6 +30,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="bottom|end"
     android:layout_margin="@dimen/spaceNormal"
+    android:contentDescription="@string/textBackToTop"
     android:rotation="270"
     android:visibility="gone"
     app:backgroundTint="?attr/colorAccent"
@@ -38,7 +39,6 @@
     app:maxImageSize="30dp"
     app:srcCompat="@drawable/ic_arrow_right"
     app:tint="?attr/textColorOnSurface"
-    tools:ignore="ContentDescription"
     tools:visibility="visible"
     />
 

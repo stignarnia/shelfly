@@ -125,4 +125,5 @@
   <string name="errorCouldNotLoadSearchResults">Não foi possível carregar os resultados da pesquisa no momento.\nEntre em contato conosco se isso continuar acontecendo.</string>
   <string name="errorNoInternetConnection">Sem conexão com a internet. Por favor, verifique sua conexão.</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">Voltar ao topo</string>
 </resources>

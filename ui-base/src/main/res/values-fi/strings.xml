@@ -120,4 +120,5 @@
   <string name="errorCouldNotLoadSearchResults">Hakutuloksia ei voitu ladata.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorNoInternetConnection">Ei Internet-yhteyttä. Tarkista yhteys.</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">Takaisin ylös</string>
 </resources>

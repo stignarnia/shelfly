@@ -130,4 +130,5 @@
   <string name="errorCouldNotLoadSearchResults">W tej chwili nie można załadować wyników wyszukiwania.\nSkontaktuj się z nami jeżeli błąd się powtarza.</string>
   <string name="errorNoInternetConnection">Brak Internetu. Sprawdź swoje połączenie.</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">Powrót na górę</string>
 </resources>

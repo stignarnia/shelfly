@@ -120,4 +120,5 @@
   <string name="errorCouldNotLoadSearchResults">Şu anda arama sonuçlarını yükleyemiyoruz.\nBu durum devam ederse lütfen bizimle iletişime geçin.</string>
   <string name="errorNoInternetConnection">İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">Başa dön</string>
 </resources>

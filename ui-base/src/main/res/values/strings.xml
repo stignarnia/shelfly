@@ -141,4 +141,5 @@
   <string name="errorCouldNotFindApp" translatable="false">Sorry, we could not find app on this device that could handle this link.</string>
   <string name="errorAccountListsLimitsReached" translatable="false">Sorry, you have reached your TMDB account limit for personal lists!\n\nPlease contact us if you need more assistance.</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">Back to top</string>
 </resources>

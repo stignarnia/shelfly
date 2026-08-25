@@ -125,4 +125,5 @@
     <string name="errorCouldNotLoadSearchResults">Nu am putut încărca rezultatele căutării în acest moment.\nVă rugăm să ne contactați dacă această problemă persistă.</string>
     <string name="errorNoInternetConnection">Nu există conexiune la Internet. Vă rugăm să verificați conexiunea.</string>
   <string name="textPercentage">%1$d%%</string>
+  <string name="textBackToTop">Înapoi sus</string>
 </resources>
