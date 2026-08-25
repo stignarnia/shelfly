@@ -112,7 +112,8 @@ The Kotlin compiler cannot see any of it.
 **The build scripts are Kotlin DSL because Lint will not read Groovy ones.**
 AGP 9 only parses `.gradle.kts`, so while the scripts were `.gradle` no Gradle-DSL check ran anywhere in the tree - `GradleDynamicVersion` on a literal `31.+` produced nothing, and the same dependency in a `.kts` file reports it immediately.
 That is worth knowing before anyone converts a build file back for convenience: it silently removes a whole category of checking.
-One gap survives the migration - Lint scans library module build scripts but not the application module's, so nothing in `app/build.gradle.kts` is checked, and any Gradle DSL check that reasons about it cannot pass.
+Every module's build script is scanned, `app` included - which is how `AppBundleLocaleChanges` reads the `bundle { language { enableSplit } }` block and how `NotShrinkingResources` found the release build type.
+It looked otherwise for a while, because a module applying a Kotlin script through `apply(from = ...)` crashes the build-script visitor and Lint swallows the crash: the module is then silently never analysed, and the symptom is indistinguishable from the check simply not existing.
 
 `check-config.sh` covers two things Lint cannot see.
 
@@ -211,7 +212,7 @@ These rules are checked by tooling rather than by review.
 
 - **Layout attribute loss**: `scripts/hooks/pre-commit` rejects a commit in which a layout element that still exists lost an attribute it had at HEAD. Nothing else catches this: the file stays well-formed XML, `aapt` does not require `layout_width` at build time, the compiler never sees XML, and Lint has no check for it - a bulk edit once cut an `ImageView` from ten attributes to two, and the app built, installed, and died on launch. Bypass a deliberate removal with `--no-verify`.
 - **Conventional Commits**: `scripts/hooks/commit-msg` rejects any subject that is not `<type>(<scope>): <description>` with a type from the list above. Merges, reverts and rebase scratch commits are left alone, and `--no-verify` bypasses it. Enable it once per clone with `git config core.hooksPath scripts/hooks`.
-- **Release notes**: `scripts/check-release-notes.sh` fails when the first line of `release_notes.txt` is not `Shelfly <versionName>` from `versions.gradle.kts`, or when the heading has no notes beneath it. Run it before tagging.
+- **Release notes**: `scripts/check-release-notes.sh` fails when the first line of `release_notes.txt` is not `Shelfly <versionName>` from `gradle/libs.versions.toml`, or when the heading has no notes beneath it. Run it before tagging.
 - **Non-Kotlin whitespace**: `scripts/check-format.sh` fails on CRLF, hard tabs, or trailing whitespace across the tracked text files ktlint does not parse, excluding binaries and the generated Gradle wrapper scripts.
 - **Version and locale configuration, and unreferenced resources**: `scripts/check-config.sh` fails when a tag on HEAD disagrees with `versionName`, when the locale directories and `resourceConfigurations` disagree in either direction, and when any resource is declared but referenced nowhere in the project.
 - **Room schemas**: `scripts/check-schemas.sh` fails on uncommitted schema drift, and on any schema released in the last tag having been modified rather than superseded.
@@ -257,8 +258,10 @@ Neither can be set from the command line: there is no `-Plint.warningsAsErrors` 
 Changing this means editing the build file, which makes it a reviewable commit rather than something one person's shell alias quietly turns off.
 
 **Findings get fixed.**
-No `lint-baseline.xml`, no `tools:ignore`, no `@Suppress`, no disabling the check that caught it.
-The message Lint prints on failure recommends `updateLintBaseline`; that advice does not apply here, because a baseline grandfathers findings in and this tree is at zero.
+No `lint-baseline.xml`, no `tools:ignore`, no `@SuppressLint`, no `@Suppress`, no disabling the check that caught it.
+The tree carries **zero** suppressions of any kind, which is a state worth keeping rather than a rule worth quoting: 280 were removed, and only about 60 of them turned out to cover a real finding.
+That ratio is the argument. A suppression outlives whatever justified it, and the next reader cannot tell the two apart without deleting it and rebuilding - so the cheapest first move on any suppression is to delete it and see whether anything actually fires.
+The message Lint prints on failure recommends `updateLintBaseline`; that advice does not apply here, because a baseline grandfathers findings in.
 If a check looks wrong about the code, it is usually right about something adjacent - fix that.
 
 **Do not enable `lint.checkAllWarnings`.**
@@ -271,6 +274,8 @@ To pick up a specific off-by-default check, name it in `lint.enable` instead.
 ## Localization & Strings
 
 - **Always update all languages**: When adding, modifying, or removing string resources, always check and update all locale folders (`res/values-*/strings.xml`) across the modules, not just the default English `res/values/strings.xml`. Ensure consistent and accurate translations across all supported languages.
+- **The version and SDK levels live in the version catalog**: `versionCode`, `versionName`, `minSdk`, `compileSdk`, `targetSdk`, `buildTools` and `jvmTarget` are `[versions]` entries in `gradle/libs.versions.toml`, read as `libs.versions.minSdk.get().toInt()`. There is deliberately no `versions.gradle.kts` - a module applying a Kotlin script through `apply(from = ...)` crashes Lint's build-script visitor, and Lint swallows the crash, so that module's build file silently stops being analysed. Nothing in the tree uses `apply(from = ...)` any more, and nothing should.
+
 - **The locale config is generated, not written**: `androidResources.generateLocaleConfig` is on, so AGP derives the per-app language list from the `values-*` directories and injects `android:localeConfig` into the merged manifest itself. There is deliberately no `res/xml/locales_config.xml` - a hand-written one duplicated the list in `resourceConfigurations` and could drift from it silently, since `check-config.sh` only ever validated the latter. `app/src/main/res/resources.properties` declares which locale the unqualified `values/` folder holds, and the build fails without it.
 
 ---
@@ -280,6 +285,6 @@ To pick up a specific off-by-default check, name it in `lint.enable` instead.
 `app/src/main/assets/release_notes.txt` is shown to users in the What's New screen. It is part of "done", not a release-time chore.
 
 - **Update it with any user-visible change**: new features, fixed bugs, changed behaviour. Purely internal work (refactors, tooling, tests) does not belong there.
-- **Keep the heading in sync with the version**: the first line is `Shelfly <versionName>`, matching `versions.gradle.kts`. When the version is bumped, start a fresh list under the new heading.
+- **Keep the heading in sync with the version**: the first line is `Shelfly <versionName>`, matching `versionName` in `gradle/libs.versions.toml`. When the version is bumped, start a fresh list under the new heading.
 - **Write for users, not for the diff**: one `•` bullet per change, describing what is different in the app - not which class changed.
 
