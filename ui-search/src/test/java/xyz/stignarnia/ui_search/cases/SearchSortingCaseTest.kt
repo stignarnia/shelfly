@@ -18,7 +18,6 @@ import org.junit.Before
 import org.junit.Test
 import java.util.UUID
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class SearchSortingCaseTest : BaseMockTest() {
 
   private lateinit var SUT: SearchSortingCase

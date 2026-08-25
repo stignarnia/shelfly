@@ -18,7 +18,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class SearchTranslationsCaseTest : BaseMockTest() {
 
   @RelaxedMockK lateinit var translationsRepository: TranslationsRepository

@@ -22,7 +22,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class SearchSuggestionsCaseTest : BaseMockTest() {
 
   @RelaxedMockK lateinit var database: LocalDataSource

@@ -14,7 +14,6 @@ import org.junit.Test
 import java.time.LocalDate
 import java.time.ZonedDateTime
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class CalendarRecentsGrouperTest : BaseMockTest() {
 
   private lateinit var SUT: CalendarRecentsGrouper
