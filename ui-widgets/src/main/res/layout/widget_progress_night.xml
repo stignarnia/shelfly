@@ -7,7 +7,6 @@
   android:layout_height="match_parent"
   android:background="@drawable/bg_widget"
   android:theme="@style/AppTheme.Widget.Dark"
-  tools:ignore="HardcodedText"
   >
 
   <include

@@ -5,4 +5,8 @@
   <string name="menuCalendar">Calendar</string>
 
   <string name="textWidgetMore">Arată tot</string>
+  <string name="textWidgetShowsProgress">Progres seriale</string>
+  <string name="textWidgetMoviesProgress">Progres filme</string>
+  <string name="textWidgetShowsCalendar">Calendar seriale</string>
+  <string name="textWidgetMoviesCalendar">Calendar filme</string>
 </resources>

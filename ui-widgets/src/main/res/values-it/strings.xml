@@ -3,4 +3,8 @@
   <string name="menuProgress">Progressi</string>
   <string name="menuCalendar">Calendario</string>
   <string name="textWidgetMore">Mostra tutto</string>
+  <string name="textWidgetShowsProgress">Avanzamento serie</string>
+  <string name="textWidgetMoviesProgress">Avanzamento film</string>
+  <string name="textWidgetShowsCalendar">Calendario serie</string>
+  <string name="textWidgetMoviesCalendar">Calendario film</string>
 </resources>

@@ -7,7 +7,6 @@
   android:layout_height="match_parent"
   android:background="@drawable/bg_widget"
   android:theme="@style/AppTheme.Widget.Dark"
-  tools:ignore="HardcodedText"
   >
 
   <LinearLayout
@@ -67,14 +66,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spaceMicro"
-            android:text="Dune: Part Two"
+            android:text="@string/previewMoviesProgressMovie1"
             />
 
           <TextView
             style="@style/WidgetItem.Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Watched on 15 March 2024"
+            android:text="@string/previewMoviesProgressWatched1"
             />
 
         </LinearLayout>
@@ -142,14 +141,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spaceMicro"
-            android:text="Oppenheimer"
+            android:text="@string/previewMoviesProgressMovie2"
             />
 
           <TextView
             style="@style/WidgetItem.Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Watched on 21 July 2023"
+            android:text="@string/previewMoviesProgressWatched2"
             />
 
         </LinearLayout>
@@ -194,7 +193,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:gravity="start"
-      android:text="Movies Progress"
+      android:text="@string/textWidgetMoviesProgress"
       android:textAlignment="viewStart"
       android:textColor="@color/colorWhite"
       android:textSize="12sp"

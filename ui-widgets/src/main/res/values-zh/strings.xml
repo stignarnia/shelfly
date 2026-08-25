@@ -5,4 +5,8 @@
   <string name="menuCalendar">日历</string>
 
   <string name="textWidgetMore">查看全部</string>
+  <string name="textWidgetShowsProgress">剧集进度</string>
+  <string name="textWidgetMoviesProgress">电影进度</string>
+  <string name="textWidgetShowsCalendar">剧集日历</string>
+  <string name="textWidgetMoviesCalendar">电影日历</string>
 </resources>

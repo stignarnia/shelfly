@@ -1,0 +1,40 @@
+<resources>
+
+  <!--
+    Sample content for the widget picker previews, which are static layouts rather than real widgets.
+    None of it is translatable: the show and film names are proper nouns, and the rest is mock data standing in for whatever the user actually has.
+  -->
+
+  <string name="previewCalendarDate" translatable="false">Wednesday, 23 August</string>
+  <string name="previewCalendarShow1" translatable="false">House of the Dragon</string>
+  <string name="previewCalendarEpisode1" translatable="false">S.02 E.08</string>
+  <string name="previewCalendarEpisodeTitle1" translatable="false">The Queen Who Ever Was</string>
+  <string name="previewCalendarAir1" translatable="false">21:00 • HBO</string>
+  <string name="previewCalendarShow2" translatable="false">The Boys</string>
+  <string name="previewCalendarEpisode2" translatable="false">S.04 E.08</string>
+  <string name="previewCalendarEpisodeTitle2" translatable="false">Season Finale</string>
+  <string name="previewCalendarAir2" translatable="false">Tomorrow • Prime Video</string>
+
+  <string name="previewMoviesCalendarDate" translatable="false">Friday, 25 August</string>
+  <string name="previewMoviesCalendarStatus" translatable="false">In Theaters</string>
+  <string name="previewMoviesCalendarMovie1" translatable="false">Gladiator II</string>
+  <string name="previewMoviesCalendarRelease1" translatable="false">22 Nov 2024</string>
+  <string name="previewMoviesCalendarMovie2" translatable="false">Interstellar</string>
+  <string name="previewMoviesCalendarSubtitle2" translatable="false">IMAX 10th Anniversary</string>
+  <string name="previewMoviesCalendarRelease2" translatable="false">6 Dec 2024</string>
+
+  <string name="previewMoviesProgressMovie1" translatable="false">Dune: Part Two</string>
+  <string name="previewMoviesProgressWatched1" translatable="false">Watched on 15 March 2024</string>
+  <string name="previewMoviesProgressMovie2" translatable="false">Oppenheimer</string>
+  <string name="previewMoviesProgressWatched2" translatable="false">Watched on 21 July 2023</string>
+
+  <string name="previewProgressShow1" translatable="false">Severance</string>
+  <string name="previewProgressEpisode1" translatable="false">S.02 E.01</string>
+  <string name="previewProgressEpisodeTitle1" translatable="false">Hello, Ms. Cobel</string>
+  <string name="previewProgressRating1" translatable="false">9/10</string>
+  <string name="previewProgressShow2" translatable="false">The Bear</string>
+  <string name="previewProgressEpisode2" translatable="false">S.03 E.01</string>
+  <string name="previewProgressRating2" translatable="false">8/10</string>
+  <string name="previewProgressAir" translatable="false">Tomorrow</string>
+
+</resources>

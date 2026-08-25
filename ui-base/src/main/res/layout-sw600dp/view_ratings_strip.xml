@@ -71,10 +71,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:lineSpacingExtra="2dp"
-        android:text="TMDB"
+        android:text="@string/textRatingsTmdb"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="13sp"
-        tools:ignore="HardcodedText"
         />
 
     </LinearLayout>
@@ -129,10 +128,9 @@
         android:id="@+id/viewRatingsStripMetaLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Metascore"
+        android:text="@string/textRatingsMetascore"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="13sp"
-        tools:ignore="HardcodedText"
         />
 
     </LinearLayout>
@@ -199,10 +197,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:lineSpacingExtra="2dp"
-        android:text="IMDb"
+        android:text="@string/textRatingsImdb"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="13sp"
-        tools:ignore="HardcodedText"
         />
 
     </LinearLayout>
@@ -259,10 +256,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:lineSpacingExtra="2dp"
-        android:text="R. Tomatoes"
+        android:text="@string/textRatingsRottenTomatoes"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="13sp"
-        tools:ignore="HardcodedText"
         />
 
     </LinearLayout>

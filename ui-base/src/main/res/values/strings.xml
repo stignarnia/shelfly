@@ -142,4 +142,10 @@
   <string name="errorAccountListsLimitsReached" translatable="false">Sorry, you have reached your TMDB account limit for personal lists!\n\nPlease contact us if you need more assistance.</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">Back to top</string>
+  <!-- Not translatable: a placeholder shown until a value loads, and the rating providers' own brand names. -->
+  <string name="textPlaceholderDash" translatable="false">-</string>
+  <string name="textRatingsTmdb" translatable="false">TMDB</string>
+  <string name="textRatingsImdb" translatable="false">IMDb</string>
+  <string name="textRatingsMetascore" translatable="false">Metascore</string>
+  <string name="textRatingsRottenTomatoes" translatable="false">R. Tomatoes</string>
 </resources>

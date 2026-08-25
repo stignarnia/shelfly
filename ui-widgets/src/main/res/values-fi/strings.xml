@@ -5,4 +5,8 @@
   <string name="menuCalendar">Kalenteri</string>
 
   <string name="textWidgetMore">Näytä kaikki</string>
+  <string name="textWidgetShowsProgress">Sarjojen edistyminen</string>
+  <string name="textWidgetMoviesProgress">Elokuvien edistyminen</string>
+  <string name="textWidgetShowsCalendar">Sarjakalenteri</string>
+  <string name="textWidgetMoviesCalendar">Elokuvakalenteri</string>
 </resources>

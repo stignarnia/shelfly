@@ -3,4 +3,8 @@
   <string name="menuProgress">Progress</string>
   <string name="menuCalendar">Calendar</string>
   <string name="textWidgetMore">Show all</string>
+  <string name="textWidgetShowsProgress">Shows Progress</string>
+  <string name="textWidgetMoviesProgress">Movies Progress</string>
+  <string name="textWidgetShowsCalendar">Shows Calendar</string>
+  <string name="textWidgetMoviesCalendar">Movies Calendar</string>
 </resources>

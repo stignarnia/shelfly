@@ -5,4 +5,8 @@
   <string name="menuCalendar">Calendário</string>
 
   <string name="textWidgetMore">Ver tudo</string>
+  <string name="textWidgetShowsProgress">Progresso das séries</string>
+  <string name="textWidgetMoviesProgress">Progresso dos filmes</string>
+  <string name="textWidgetShowsCalendar">Calendário de séries</string>
+  <string name="textWidgetMoviesCalendar">Calendário de filmes</string>
 </resources>

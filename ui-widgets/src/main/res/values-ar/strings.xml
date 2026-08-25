@@ -4,4 +4,8 @@
   <string name="menuCalendar">تقويم الأفلام</string>
 
     <string name="textWidgetMore">عرض الكل</string>
+  <string name="textWidgetShowsProgress">تقدم المسلسلات</string>
+  <string name="textWidgetMoviesProgress">تقدم الأفلام</string>
+  <string name="textWidgetShowsCalendar">تقويم المسلسلات</string>
+  <string name="textWidgetMoviesCalendar">تقويم الأفلام</string>
 </resources>

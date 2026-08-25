@@ -5,4 +5,8 @@
   <string name="menuCalendar">Takvim</string>
 
   <string name="textWidgetMore">Tümünü göster</string>
+  <string name="textWidgetShowsProgress">Dizi ilerlemesi</string>
+  <string name="textWidgetMoviesProgress">Film ilerlemesi</string>
+  <string name="textWidgetShowsCalendar">Dizi takvimi</string>
+  <string name="textWidgetMoviesCalendar">Film takvimi</string>
 </resources>

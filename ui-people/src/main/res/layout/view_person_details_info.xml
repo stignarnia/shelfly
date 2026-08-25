@@ -178,7 +178,7 @@
     android:ellipsize="end"
     android:gravity="start"
     android:maxLines="2"
-    android:text="-"
+    android:text="@string/textPlaceholderDash"
     android:textAlignment="viewStart"
     android:textColor="?android:attr/textColorPrimary"
     android:textSize="14sp"
@@ -187,7 +187,6 @@
     app:layout_constraintHorizontal_bias="0"
     app:layout_constraintStart_toEndOf="@id/barrier1"
     app:layout_constraintTop_toBottomOf="@id/viewPersonDetailsBirthdayValue"
-    tools:ignore="HardcodedText"
     tools:text="@tools:sample/lorem/random"
     tools:visibility="visible"
     />
