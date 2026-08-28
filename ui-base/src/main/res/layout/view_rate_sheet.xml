@@ -11,9 +11,9 @@
   android:focusableInTouchMode="true"
   android:padding="@dimen/spaceNormal"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
-  <xyz.stignarnia.ui_base.common.views.RateValueView
+  <xyz.stignarnia.uiBase.common.views.RateValueView
     android:id="@+id/viewRateSheetRating"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0"
     app:layout_constraintVertical_chainStyle="packed"
-    />
+  />
 
   <LinearLayout
     android:id="@+id/viewRateSheetStarsLayout"
@@ -37,7 +37,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewRateSheetRating"
     tools:visibility="visible"
-    >
+  >
 
     <ImageView
       android:id="@+id/star1"
@@ -50,7 +50,7 @@
       android:src="@drawable/ic_star_empty"
       android:tag="1"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/star2"
@@ -63,7 +63,7 @@
       android:src="@drawable/ic_star_empty"
       android:tag="2"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/star3"
@@ -76,7 +76,7 @@
       android:src="@drawable/ic_star_empty"
       android:tag="3"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/star4"
@@ -89,7 +89,7 @@
       android:src="@drawable/ic_star_empty"
       android:tag="4"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/star5"
@@ -102,7 +102,7 @@
       android:src="@drawable/ic_star_empty"
       android:tag="5"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/star6"
@@ -115,7 +115,7 @@
       android:src="@drawable/ic_star_empty"
       android:tag="6"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/star7"
@@ -128,7 +128,7 @@
       android:src="@drawable/ic_star_empty"
       android:tag="7"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/star8"
@@ -141,7 +141,7 @@
       android:src="@drawable/ic_star_empty"
       android:tag="8"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/star9"
@@ -154,7 +154,7 @@
       android:src="@drawable/ic_star_empty"
       android:tag="9"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/star10"
@@ -166,7 +166,7 @@
       android:src="@drawable/ic_star_empty"
       android:tag="10"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
   </LinearLayout>
 
@@ -188,7 +188,7 @@
     app:layout_constraintTop_toBottomOf="@id/viewRateSheetStarsLayout"
     app:layout_goneMarginStart="0dp"
     app:rippleColor="?android:attr/textColorPrimary"
-    />
+  />
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/viewRateSheetRemoveButton"
@@ -207,7 +207,7 @@
     app:layout_constraintTop_toBottomOf="@id/viewRateSheetStarsLayout"
     app:rippleColor="?android:attr/textColorPrimary"
     tools:visibility="visible"
-    />
+  />
 
   <ProgressBar
     android:id="@+id/viewRateSheetProgress"
@@ -222,13 +222,13 @@
     app:layout_constraintTop_toTopOf="@id/viewRateSheetSaveButton"
     app:layout_goneMarginBottom="@dimen/spaceMedium"
     tools:visibility="visible"
-    />
+  />
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/viewRateSheetSnackHost"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintBottom_toBottomOf="parent"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

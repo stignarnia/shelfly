@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <FrameLayout
     android:id="@+id/showPosterRoot"
@@ -16,14 +16,14 @@
     android:background="@drawable/bg_media_view_elevation"
     android:elevation="@dimen/elevationSmall"
     android:foreground="@drawable/bg_media_view_ripple"
-    >
+  >
 
     <ImageView
       android:id="@+id/showPosterImage"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:contentDescription="@null"
-      />
+    />
 
     <ImageView
       android:id="@+id/showPosterPlaceholder"
@@ -35,7 +35,7 @@
       app:srcCompat="@drawable/ic_television"
       app:tint="?attr/colorPlaceholderIcon"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/showPosterTitle"
@@ -51,7 +51,7 @@
       android:visibility="gone"
       tools:text="Game Of Thrones"
       tools:visibility="visible"
-      />
+    />
 
     <ProgressBar
       android:id="@+id/showPosterProgress"
@@ -60,7 +60,7 @@
       android:layout_height="28dp"
       android:layout_gravity="center"
       android:visibility="gone"
-      />
+    />
 
   </FrameLayout>
 
@@ -70,7 +70,7 @@
     android:contentDescription="@null"
     app:srcCompat="@drawable/ic_bookmark_full"
     tools:visibility="visible"
-    />
+  />
 
   <ImageView
     android:id="@+id/showPosterLaterBadge"
@@ -79,6 +79,6 @@
     android:elevation="@dimen/elevationSmall"
     app:srcCompat="@drawable/ic_bookmark_full"
     tools:visibility="visible"
-    />
+  />
 
 </merge>

@@ -2,7 +2,7 @@ package xyz.stignarnia.shelfly.ui.main.welcome
 
 import androidx.annotation.StringRes
 import xyz.stignarnia.shelfly.R
-import xyz.stignarnia.ui_settings.helpers.AppLanguage
+import xyz.stignarnia.uiSettings.helpers.AppLanguage
 
 /**
  * A single screen of the welcome flow.
@@ -12,7 +12,6 @@ import xyz.stignarnia.ui_settings.helpers.AppLanguage
  * Adding a screen means adding a variant here and a condition in the case, not another dialog with its own callback chain.
  */
 sealed interface WelcomeStep {
-
   /** Stable key used to record that this step has been completed. */
   val id: String
 
@@ -50,7 +49,6 @@ sealed interface WelcomeStep {
    * Both services share a screen shape, and differ only in their copy and in whether the flow can move on without an answer.
    */
   sealed interface ApiKey : WelcomeStep {
-
     @get:StringRes val title: Int
 
     @get:StringRes val message: Int

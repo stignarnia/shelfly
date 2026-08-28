@@ -6,7 +6,7 @@
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/rootLayout"
@@ -18,7 +18,7 @@
     android:paddingTop="@dimen/spaceSmall"
     android:paddingEnd="@dimen/spaceMedium"
     android:paddingBottom="@dimen/spaceSmall"
-    >
+  >
 
     <TextView
       android:id="@+id/title"
@@ -39,7 +39,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
       tools:text="Google Play Movies"
-      />
+    />
 
     <TextView
       android:id="@+id/description"
@@ -60,7 +60,7 @@
       app:layout_constraintTop_toBottomOf="@id/title"
       app:layout_constraintWidth_max="271dp"
       tools:text="@tools:sample/lorem/random"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

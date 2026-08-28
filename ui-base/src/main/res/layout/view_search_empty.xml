@@ -10,7 +10,7 @@
   tools:background="?attr/colorAppBackground"
   tools:parentTag="android.widget.LinearLayout"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <ImageView
     android:layout_width="130dp"
@@ -19,13 +19,13 @@
     android:contentDescription="@null"
     android:src="@drawable/vincent_vega"
     app:tint="?android:attr/textColorPrimary"
-    />
+  />
 
   <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/textEmptyResults"
     android:textColor="?android:attr/textColorPrimary"
-    />
+  />
 
 </merge>

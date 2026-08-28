@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="textStatisticsMovies">Statistici</string>
-    <string name="textStatisticsMoviesEmpty">Cel puțin un film trebuie să fie prezent în <b>Istoric</b>\nînainte ca statisticile să poată fi afișate.</string>
-    <string name="textStatisticsMoviesTotalTimeSpent">Timpul total petrecut vizionând</string>
-    <string name="textStatisticsMoviesTotalTimeItIs">și este</string>
-    <string name="textStatisticsMoviesTotalTimeSpentHours">%s ore</string>
-    <string name="textStatisticsMoviesTotalTimeSpentMinutes">%s minute</string>
-    <string name="textStatisticsMoviesTotalTimeSpentDays">care este de aproximativ %s zile.</string>
-    <string name="textStatisticsMoviesTotalMovies">Total filme vizionate</string>
-    <string name="textStatisticsMoviesTotalMoviesCount">%s Filme</string>
-    <string name="textStatisticsMoviesTopGenre">Genuri populare</string>
-    <string name="textStatisticsMoviesTopGenreSubValue">par să fie pe gustul tău. Apasă pentru a vedea mai multe.</string>
-    <string name="textStatisticsMoviesTopGenreSubValue2">pare să fie pe gustul tău.</string>
-    <string name="textStatisticsMoviesRatings">Evaluate recent</string>
+  <string name="textStatisticsMovies">Statistici</string>
+  <string name="textStatisticsMoviesEmpty">Cel puțin un film trebuie să fie prezent în <b>Istoric</b>\nînainte ca statisticile să poată fi afișate.</string>
+  <string name="textStatisticsMoviesTotalTimeSpent">Timpul total petrecut vizionând</string>
+  <string name="textStatisticsMoviesTotalTimeItIs">și este</string>
+  <string name="textStatisticsMoviesTotalTimeSpentHours">%s ore</string>
+  <string name="textStatisticsMoviesTotalTimeSpentMinutes">%s minute</string>
+  <string name="textStatisticsMoviesTotalTimeSpentDays">care este de aproximativ %s zile.</string>
+  <string name="textStatisticsMoviesTotalMovies">Total filme vizionate</string>
+  <string name="textStatisticsMoviesTotalMoviesCount">%s Filme</string>
+  <string name="textStatisticsMoviesTopGenre">Genuri populare</string>
+  <string name="textStatisticsMoviesTopGenreSubValue">par să fie pe gustul tău. Apasă pentru a vedea mai multe.</string>
+  <string name="textStatisticsMoviesTopGenreSubValue2">pare să fie pe gustul tău.</string>
+  <string name="textStatisticsMoviesRatings">Evaluate recent</string>
 </resources>

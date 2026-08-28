@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/rootLayout"
@@ -18,7 +18,7 @@
     android:paddingTop="@dimen/spaceSmall"
     android:paddingEnd="@dimen/spaceNormal"
     android:paddingBottom="@dimen/spaceSmall"
-    >
+  >
 
     <androidx.constraintlayout.widget.Guideline
       android:id="@+id/guideline1"
@@ -26,7 +26,7 @@
       android:layout_height="wrap_content"
       android:orientation="vertical"
       app:layout_constraintGuide_begin="@dimen/movieCollectionImageGuide"
-      />
+    />
 
     <ImageView
       android:id="@+id/movieImage"
@@ -38,7 +38,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+    />
 
     <ImageView
       android:id="@+id/placeholderImage"
@@ -56,7 +56,7 @@
       app:srcCompat="@drawable/ic_film"
       app:tint="?attr/colorPlaceholderIcon"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/rankText"
@@ -73,7 +73,7 @@
       app:layout_constraintBottom_toBottomOf="@id/movieImage"
       app:layout_constraintEnd_toEndOf="@id/movieImage"
       tools:text="10"
-      />
+    />
 
     <ImageView
       android:id="@+id/badgeImage"
@@ -87,7 +87,7 @@
       app:layout_constraintTop_toTopOf="@id/movieImage"
       app:srcCompat="@drawable/ic_bookmark_full"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/headerText"
@@ -101,7 +101,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
       tools:text="2023"
-      />
+    />
 
     <TextView
       android:id="@+id/titleText"
@@ -115,7 +115,7 @@
       app:layout_constraintTop_toBottomOf="@id/headerText"
       app:layout_constraintVertical_chainStyle="packed"
       tools:text="Kill Bill"
-      />
+    />
 
     <TextView
       android:id="@+id/descriptionText"
@@ -128,7 +128,7 @@
       app:layout_constraintStart_toEndOf="@id/guideline1"
       app:layout_constraintTop_toBottomOf="@id/titleText"
       tools:text="@tools:sample/lorem/random"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

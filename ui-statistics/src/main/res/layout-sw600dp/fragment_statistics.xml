@@ -14,14 +14,14 @@
   android:scrollbars="none"
   tools:background="?attr/colorAppBackground"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/statisticsCoordinator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipChildren="false"
-    >
+  >
 
     <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/statisticsToolbar"
@@ -38,7 +38,7 @@
       app:navigationIconTint="?android:attr/textColorPrimary"
       app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
       app:title="@string/textStatistics"
-      />
+    />
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/statisticsContent"
@@ -48,9 +48,9 @@
       android:clipToPadding="false"
       android:visibility="gone"
       tools:visibility="visible"
-      >
+    >
 
-      <xyz.stignarnia.ui_statistics.views.StatisticsTotalTimeSpentView
+      <xyz.stignarnia.uiStatistics.views.StatisticsTotalTimeSpentView
         android:id="@+id/statisticsTotalTimeSpent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -60,9 +60,9 @@
         app:layout_constraintEnd_toStartOf="@id/statisticsTopGenres"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+      />
 
-      <xyz.stignarnia.ui_statistics.views.StatisticsTopGenresView
+      <xyz.stignarnia.uiStatistics.views.StatisticsTopGenresView
         android:id="@+id/statisticsTopGenres"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,9 +72,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/statisticsTotalTimeSpent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+      />
 
-      <xyz.stignarnia.ui_statistics.views.StatisticsTotalEpisodesView
+      <xyz.stignarnia.uiStatistics.views.StatisticsTotalEpisodesView
         android:id="@+id/statisticsTotalEpisodes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -85,9 +85,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/statisticsTotalTimeSpent"
         app:layout_goneMarginEnd="@dimen/screenMarginHorizontal"
-        />
+      />
 
-      <xyz.stignarnia.ui_statistics.views.ratings.StatisticsRatingsView
+      <xyz.stignarnia.uiStatistics.views.ratings.StatisticsRatingsView
         android:id="@+id/statisticsRatings"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
         app:layout_constraintStart_toEndOf="@id/statisticsTotalEpisodes"
         app:layout_constraintTop_toBottomOf="@id/statisticsTopGenres"
         tools:visibility="visible"
-        />
+      />
 
       <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier1"
@@ -107,9 +107,9 @@
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="statisticsTotalEpisodes, statisticsRatings"
-        />
+      />
 
-      <xyz.stignarnia.ui_statistics.views.mostWatched.StatisticsMostWatchedShowsView
+      <xyz.stignarnia.uiStatistics.views.mostWatched.StatisticsMostWatchedShowsView
         android:id="@+id/statisticsMostWatchedShows"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barrier1"
         app:layout_constraintVertical_bias="0"
-        />
+      />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -135,7 +135,7 @@
       android:layout_marginStart="@dimen/spaceBig"
       android:layout_marginEnd="@dimen/spaceBig"
       android:visibility="gone"
-      />
+    />
 
   </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

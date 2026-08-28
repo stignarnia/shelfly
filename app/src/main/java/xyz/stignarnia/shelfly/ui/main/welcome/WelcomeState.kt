@@ -1,6 +1,6 @@
 package xyz.stignarnia.shelfly.ui.main.welcome
 
-import xyz.stignarnia.ui_settings.helpers.AppLanguage
+import xyz.stignarnia.uiSettings.helpers.AppLanguage
 
 /**
  * Where the welcome flow currently is.
@@ -18,7 +18,6 @@ data class WelcomeState(
   val displayLanguage: AppLanguage,
   val apiKeyDraft: String = "",
 ) {
-
   val isBackEnabled: Boolean
     get() = index > 0
 

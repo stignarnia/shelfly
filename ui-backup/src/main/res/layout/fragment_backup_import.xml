@@ -9,7 +9,7 @@
   android:overScrollMode="never"
   tools:background="?attr/colorAppBackground"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/root"
@@ -17,7 +17,7 @@
     android:layout_height="wrap_content"
     android:clipChildren="false"
     android:clipToPadding="false"
-    >
+  >
 
     <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/toolbar"
@@ -31,7 +31,7 @@
       app:navigationIcon="@drawable/ic_arrow_back"
       app:navigationIconTint="?android:attr/textColorPrimary"
       app:title="@string/textBackupAndRestore"
-      />
+    />
 
     <ImageView
       android:id="@+id/phoneIcon"
@@ -46,7 +46,7 @@
       app:layout_constraintTop_toTopOf="@id/arrowIcon"
       app:srcCompat="@drawable/ic_phone"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/arrowIcon"
@@ -64,7 +64,7 @@
       app:layout_constraintVertical_chainStyle="packed"
       app:srcCompat="@drawable/ic_arrow_right"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/appIcon"
@@ -78,7 +78,7 @@
       app:layout_constraintStart_toEndOf="@id/arrowIcon"
       app:layout_constraintTop_toTopOf="@id/arrowIcon"
       app:srcCompat="@drawable/ic_app"
-      />
+    />
 
     <TextView
       android:id="@+id/titleText"
@@ -95,7 +95,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/arrowIcon"
-      />
+    />
 
     <TextView
       android:id="@+id/descriptionText"
@@ -112,7 +112,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/titleText"
-      />
+    />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/importButton"
@@ -130,7 +130,7 @@
       app:layout_constraintTop_toBottomOf="@id/descriptionText"
       app:rippleColor="?android:attr/textColorPrimary"
       app:strokeColor="?android:attr/textColorPrimary"
-      />
+    />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/importWebDavButton"
@@ -146,7 +146,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/importButton"
       tools:visibility="visible"
-      />
+    />
 
     <ProgressBar
       android:id="@+id/progressBar"
@@ -159,7 +159,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@id/importButton"
       tools:visibility="invisible"
-      />
+    />
 
     <TextView
       android:id="@+id/statusText"
@@ -175,7 +175,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/progressBar"
       tools:text="Lorem ipsum..."
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

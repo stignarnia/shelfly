@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <ProgressBar
     android:id="@+id/progressBar"
@@ -14,7 +14,6 @@
     android:layout_height="30dp"
     android:layout_gravity="center"
     android:layout_margin="@dimen/spaceNormal"
-    />
+  />
 
 </merge>
-

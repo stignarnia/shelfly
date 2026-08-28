@@ -11,25 +11,25 @@ import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import com.jakewharton.processphoenix.ProcessPhoenix
 import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.shelfly.ui.ThemeApplier
-import xyz.stignarnia.ui_base.common.AppScopeProvider
-import xyz.stignarnia.ui_base.common.WidgetsProvider
-import xyz.stignarnia.ui_base.notifications.NotificationChannel as AppNotificationChannel
-import xyz.stignarnia.ui_base.notifications.SyncNotificationManager
-import xyz.stignarnia.ui_base.utilities.AndroidVersion
-import xyz.stignarnia.ui_base.utilities.extensions.notificationManager
-import xyz.stignarnia.ui_model.Settings
-import xyz.stignarnia.ui_widgets.calendar.CalendarWidgetProvider
-import xyz.stignarnia.ui_widgets.calendar_movies.CalendarMoviesWidgetProvider
-import xyz.stignarnia.ui_widgets.progress.ProgressWidgetProvider
-import xyz.stignarnia.ui_widgets.progress_movies.ProgressMoviesWidgetProvider
-import xyz.stignarnia.ui_widgets.search.SearchWidgetProvider
+import xyz.stignarnia.uiBase.common.AppScopeProvider
+import xyz.stignarnia.uiBase.common.WidgetsProvider
+import xyz.stignarnia.uiBase.notifications.SyncNotificationManager
+import xyz.stignarnia.uiBase.utilities.AndroidVersion
+import xyz.stignarnia.uiBase.utilities.extensions.notificationManager
+import xyz.stignarnia.uiModel.Settings
+import xyz.stignarnia.uiWidgets.calendar.CalendarWidgetProvider
+import xyz.stignarnia.uiWidgets.calendarMovies.CalendarMoviesWidgetProvider
+import xyz.stignarnia.uiWidgets.progress.ProgressWidgetProvider
+import xyz.stignarnia.uiWidgets.progressMovies.ProgressMoviesWidgetProvider
+import xyz.stignarnia.uiWidgets.search.SearchWidgetProvider
+import javax.inject.Inject
+import xyz.stignarnia.uiBase.notifications.NotificationChannel as AppNotificationChannel
 
 @HiltAndroidApp
 class App :
@@ -37,21 +37,23 @@ class App :
   AppScopeProvider,
   Configuration.Provider,
   WidgetsProvider {
-
   override val appScope = MainScope()
 
   @Inject lateinit var workerFactory: HiltWorkerFactory
+
   @Inject lateinit var settingsRepository: SettingsRepository
+
   @Inject lateinit var syncNotificationManager: SyncNotificationManager
 
   /** The night mode the widgets were last drawn against - see [onConfigurationChanged]. */
   private var lastNightMode = android.content.res.Configuration.UI_MODE_NIGHT_UNDEFINED
 
   override val workManagerConfiguration: Configuration
-    get() = Configuration
-      .Builder()
-      .setWorkerFactory(workerFactory)
-      .build()
+    get() =
+      Configuration
+        .Builder()
+        .setWorkerFactory(workerFactory)
+        .build()
 
   override fun onCreate() {
     fun setupSettings() =
@@ -153,13 +155,14 @@ class App :
   private fun setupWidgets() {
     if (AndroidVersion.isAtLeastAndroid12) return
 
-    val providers = listOf(
-      ProgressWidgetProvider::class.java,
-      ProgressMoviesWidgetProvider::class.java,
-      CalendarWidgetProvider::class.java,
-      CalendarMoviesWidgetProvider::class.java,
-      SearchWidgetProvider::class.java,
-    )
+    val providers =
+      listOf(
+        ProgressWidgetProvider::class.java,
+        ProgressMoviesWidgetProvider::class.java,
+        CalendarWidgetProvider::class.java,
+        CalendarMoviesWidgetProvider::class.java,
+        SearchWidgetProvider::class.java,
+      )
     providers.forEach {
       packageManager.setComponentEnabledSetting(
         ComponentName(this, it),

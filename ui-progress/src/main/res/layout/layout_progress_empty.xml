@@ -6,7 +6,7 @@
   android:layout_height="wrap_content"
   android:layout_gravity="center"
   android:orientation="vertical"
-  >
+>
 
   <TextView
     android:layout_width="match_parent"
@@ -17,7 +17,7 @@
     android:textColor="?android:attr/textColorPrimary"
     android:textSize="20sp"
     android:textStyle="bold"
-    />
+  />
 
   <TextView
     android:layout_width="match_parent"
@@ -25,7 +25,7 @@
     android:text="@string/textProgressEmpty"
     android:textColor="?android:attr/textColorSecondary"
     android:textSize="14sp"
-    />
+  />
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/progressEmptyDiscoverButton"
@@ -39,6 +39,6 @@
     app:backgroundTint="?attr/colorAccent"
     app:rippleColor="?android:attr/textColorPrimary"
     app:strokeColor="?android:attr/textColorPrimary"
-    />
+  />
 
 </LinearLayout>

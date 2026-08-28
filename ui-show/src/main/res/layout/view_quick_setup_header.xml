@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <TextView
     android:id="@+id/viewQuickSetupHeaderTitle"
@@ -19,6 +19,6 @@
     android:textColor="?attr/colorAccentText"
     android:textSize="18sp"
     android:textStyle="bold"
-    />
+  />
 
 </merge>

@@ -14,7 +14,7 @@
   android:paddingBottom="@dimen/spaceNormal"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <TextView
     android:id="@+id/viewCreateListTitle"
@@ -30,7 +30,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <TextView
     android:id="@+id/viewCreateListSubtitle"
@@ -44,7 +44,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewCreateListTitle"
-    />
+  />
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/viewCreateListNameInput"
@@ -58,7 +58,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewCreateListSubtitle"
-    >
+  >
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/viewCreateListNameValue"
@@ -73,7 +73,7 @@
       android:textColorHint="@color/selector_create_list_input"
       android:textCursorDrawable="@null"
       android:textSize="14sp"
-      />
+    />
 
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,7 +89,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewCreateListNameInput"
-    >
+  >
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/viewCreateListDescriptionValue"
@@ -104,7 +104,7 @@
       android:textColorHint="@color/selector_create_list_input"
       android:textCursorDrawable="@null"
       android:textSize="14sp"
-      />
+    />
 
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,7 +123,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewCreateListDescriptionInput"
     app:rippleColor="?android:attr/textColorPrimary"
-    />
+  />
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/viewCreateListSnackHost"
@@ -132,6 +132,6 @@
     app:layout_constraintBottom_toTopOf="@id/viewCreateListButton"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

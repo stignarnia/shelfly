@@ -9,7 +9,7 @@
   tools:cardBackgroundColor="?attr/colorAppBackground"
   tools:parentTag="com.google.android.material.card.MaterialCardView"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <LinearLayout
     android:id="@+id/viewRatingsContent"
@@ -18,7 +18,7 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:orientation="vertical"
-    >
+  >
 
     <TextView
       android:id="@+id/viewRatingsTitle"
@@ -36,7 +36,7 @@
       android:textStyle="bold"
       app:drawableStartCompat="@drawable/ic_star"
       app:drawableTint="?android:attr/textColorPrimary"
-      />
+    />
 
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/viewRatingsRecycler"
@@ -49,7 +49,7 @@
       android:overScrollMode="never"
       android:paddingStart="@dimen/spaceMedium"
       android:paddingEnd="@dimen/spaceMedium"
-      />
+    />
 
   </LinearLayout>
 

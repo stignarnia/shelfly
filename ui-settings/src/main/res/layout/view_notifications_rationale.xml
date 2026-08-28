@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -15,7 +15,7 @@
     android:paddingTop="@dimen/spaceBig"
     android:paddingEnd="@dimen/spaceNormal"
     android:paddingBottom="@dimen/spaceSmall"
-    >
+  >
 
     <ImageView
       android:id="@+id/viewIcon"
@@ -26,7 +26,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/ic_notification_bell"
-      />
+    />
 
     <TextView
       android:id="@+id/viewTitle"
@@ -40,7 +40,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/viewIcon"
-      />
+    />
 
     <TextView
       android:id="@+id/viewMessage"
@@ -56,7 +56,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/viewTitle"
-      />
+    />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/viewYesButton"
@@ -69,7 +69,7 @@
       android:visibility="gone"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      />
+    />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/viewNoButton"
@@ -83,7 +83,7 @@
       android:visibility="gone"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toStartOf="@id/viewYesButton"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

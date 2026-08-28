@@ -11,9 +11,10 @@ android {
   }
 
   defaultConfig {
-    minSdk = libs.versions.minSdk
-      .get()
-      .toInt()
+    minSdk =
+      libs.versions.minSdk
+        .get()
+        .toInt()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
@@ -25,12 +26,13 @@ android {
 
   testOptions {
     // targetSdk only affects instrumentation tests in a library, and AGP 9 removed it from defaultConfig.
-    targetSdk = libs.versions.targetSdk
-      .get()
-      .toInt()
+    targetSdk =
+      libs.versions.targetSdk
+        .get()
+        .toInt()
   }
 
-  namespace = "xyz.stignarnia.ui_widgets"
+  namespace = "xyz.stignarnia.uiWidgets"
 }
 
 // WidgetPaletteResourcesTest reads the palette XML off the filesystem rather than through R, because what it checks is that two sets of colours agree - something R cannot express.

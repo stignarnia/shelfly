@@ -13,7 +13,7 @@
   android:layout_height="match_parent"
   android:fitsSystemWindows="true"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <TextView
     android:id="@+id/widgetConfigCategory"
@@ -21,7 +21,7 @@
     android:text="@string/textWidgetConfigTitle"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/widgetConfigTheme"
@@ -29,7 +29,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/widgetConfigCategory"
-    >
+  >
 
     <TextView
       android:id="@+id/widgetConfigThemeTitle"
@@ -39,7 +39,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/widgetConfigThemeDescription"
@@ -52,7 +52,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/widgetConfigThemeTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/widgetConfigThemeValue"
@@ -63,7 +63,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/widgetConfigTheme"
       tools:text="Same as app"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -74,7 +74,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/widgetConfigTheme"
-    >
+  >
 
     <TextView
       android:id="@+id/widgetConfigAmoledTitle"
@@ -84,7 +84,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/widgetConfigAmoledDescription"
@@ -97,7 +97,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/widgetConfigAmoledTitle"
-      />
+    />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
       android:id="@+id/widgetConfigAmoledSwitch"
@@ -108,7 +108,7 @@
       app:layout_constraintBottom_toBottomOf="@id/widgetConfigAmoled"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/widgetConfigAmoled"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -118,7 +118,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/widgetConfigAmoled"
-    >
+  >
 
     <TextView
       android:id="@+id/widgetConfigTransparencyTitle"
@@ -128,7 +128,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/widgetConfigTransparencyDescription"
@@ -141,7 +141,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/widgetConfigTransparencyTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/widgetConfigTransparencyValue"
@@ -152,7 +152,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/widgetConfigTransparencyTitle"
       tools:text="0%"
-      />
+    />
 
     <com.google.android.material.slider.Slider
       android:id="@+id/widgetConfigTransparencySlider"
@@ -166,7 +166,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/widgetConfigTransparencyDescription"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -182,6 +182,6 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

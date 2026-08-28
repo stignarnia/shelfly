@@ -8,13 +8,13 @@
   android:layout_height="wrap_content"
   android:orientation="vertical"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
-    >
+  >
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
@@ -24,7 +24,7 @@
       android:paddingTop="@dimen/spaceNormal"
       android:paddingEnd="@dimen/spaceNormal"
       tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
-      >
+    >
 
       <TextView
         android:id="@+id/networksTitle"
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+      />
 
       <com.google.android.material.chip.ChipGroup
         android:id="@+id/networksChipGroup"
@@ -52,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/networksTitle"
         app:lineSpacing="10dp"
-        />
+      />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -66,7 +66,7 @@
     android:paddingTop="@dimen/spaceMedium"
     android:paddingEnd="@dimen/spaceNormal"
     android:paddingBottom="@dimen/spaceNormal"
-    >
+  >
 
     <ImageView
       android:id="@+id/clearButton"
@@ -79,7 +79,7 @@
       app:srcCompat="@drawable/ic_delete"
       app:tint="?android:textColorSecondary"
       tools:visibility="visible"
-      />
+    />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/applyButton"
@@ -91,7 +91,7 @@
       android:text="@string/textApply"
       android:textColor="?attr/textColorOnSurface"
       app:rippleColor="?android:attr/textColorPrimary"
-      />
+    />
 
   </LinearLayout>
 

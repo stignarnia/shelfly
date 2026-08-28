@@ -10,7 +10,7 @@
   tools:paddingStart="@dimen/itemMarginHorizontal"
   tools:paddingTop="@dimen/spaceBig"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <TextView
     android:id="@+id/text"
@@ -21,6 +21,6 @@
     android:textSize="@dimen/progressHeaderTextSize"
     android:textStyle="bold"
     tools:text="@string/textPeriodLast30Days"
-    />
+  />
 
 </merge>

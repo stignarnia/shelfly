@@ -6,7 +6,7 @@
   android:id="@+id/episodesRoot"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  >
+>
 
   <TextView
     android:id="@+id/episodesTitle"
@@ -19,7 +19,7 @@
     app:layout_constraintStart_toEndOf="@id/episodesBackArrow"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="Season 2"
-    />
+  />
 
   <com.google.android.material.checkbox.MaterialCheckBox
     android:id="@+id/episodesCheckbox"
@@ -30,7 +30,7 @@
     app:layout_constraintBottom_toTopOf="@id/episodesOverview"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <ImageView
     android:id="@+id/episodesUnlockButton"
@@ -44,7 +44,7 @@
     app:layout_goneMarginEnd="@dimen/spaceNormal"
     app:srcCompat="@drawable/ic_locked"
     app:tint="?android:attr/textColorPrimary"
-    />
+  />
 
   <ImageView
     android:id="@+id/episodesStarIcon"
@@ -56,7 +56,7 @@
     app:layout_constraintTop_toTopOf="@id/episodesSeasonRating"
     app:srcCompat="@drawable/ic_star"
     app:tint="?attr/colorAccent"
-    />
+  />
 
   <TextView
     android:id="@+id/episodesSeasonRating"
@@ -71,7 +71,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_goneMarginEnd="@dimen/spaceMedium"
     tools:text="7.6"
-    />
+  />
 
   <ImageView
     android:id="@+id/episodesSeasonMyStarIcon"
@@ -85,7 +85,7 @@
     app:srcCompat="@drawable/ic_star"
     app:tint="?android:attr/textColorPrimary"
     tools:visibility="visible"
-    />
+  />
 
   <com.google.android.material.chip.Chip
     android:id="@+id/episodesSeasonRateButton"
@@ -98,7 +98,7 @@
     app:layout_constraintEnd_toStartOf="@id/episodesSeasonMyStarIcon"
     app:layout_constraintTop_toTopOf="parent"
     tools:visibility="visible"
-    />
+  />
 
   <!--  <com.google.android.material.button.MaterialButton-->
   <!--    android:id="@+id/episodesSeasonRateButton"-->
@@ -133,9 +133,9 @@
     app:layout_goneMarginEnd="@dimen/spaceMedium"
     tools:text="7.6"
     tools:visibility="visible"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.FoldableTextView
+  <xyz.stignarnia.uiBase.common.views.FoldableTextView
     android:id="@+id/episodesOverview"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
     app:layout_goneMarginBottom="0dp"
     tools:targetApi="o"
     tools:text="@tools:sample/lorem/random"
-    />
+  />
 
   <View
     android:id="@+id/episodesSeparator"
@@ -163,7 +163,7 @@
     android:background="?attr/colorSeparator"
     app:layout_constraintBottom_toTopOf="@id/episodesRecycler"
     app:layout_constraintTop_toBottomOf="@id/episodesOverview"
-    />
+  />
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/episodesRecycler"
@@ -180,7 +180,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/episodesSeparator"
-    />
+  />
 
   <ImageView
     android:id="@+id/episodesBackArrow"
@@ -194,6 +194,6 @@
     app:layout_constraintTop_toTopOf="parent"
     app:srcCompat="@drawable/ic_arrow_back"
     app:tint="?android:attr/textColorPrimary"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

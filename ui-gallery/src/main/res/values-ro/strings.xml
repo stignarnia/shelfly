@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="textGalleryEmpty">Nu sunt imagini disponibile</string>
-    <string name="textUrlDialogHint">URL-ul imaginii</string>
+  <string name="textGalleryEmpty">Nu sunt imagini disponibile</string>
+  <string name="textUrlDialogHint">URL-ul imaginii</string>
 </resources>

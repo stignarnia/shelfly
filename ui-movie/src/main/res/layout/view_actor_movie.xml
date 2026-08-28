@@ -6,14 +6,14 @@
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <FrameLayout
     android:id="@+id/actorMovieRoot"
     android:layout_width="@dimen/actorMovieTileImageWidth"
     android:layout_height="@dimen/actorMovieTileImageHeight"
     android:foreground="@drawable/bg_media_view_ripple"
-    >
+  >
 
     <ImageView
       android:id="@+id/actorMovieImage"
@@ -22,7 +22,7 @@
       android:background="@drawable/bg_media_view_elevation"
       android:contentDescription="@null"
       android:elevation="@dimen/elevationSmall"
-      />
+    />
 
     <ImageView
       android:id="@+id/actorMoviePlaceholder"
@@ -37,7 +37,7 @@
       app:srcCompat="@drawable/ic_person_outline"
       app:tint="?attr/colorPlaceholderIcon"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/actorMovieName"
@@ -54,7 +54,7 @@
       android:textSize="@dimen/actorMovieTileTextSize"
       android:translationZ="10dp"
       tools:text="Erin Moriarty"
-      />
+    />
 
   </FrameLayout>
 

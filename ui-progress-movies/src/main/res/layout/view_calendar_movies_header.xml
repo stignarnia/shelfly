@@ -10,7 +10,7 @@
   tools:paddingStart="@dimen/itemMarginHorizontal"
   tools:paddingTop="@dimen/spaceNormal"
   tools:parentTag="android.widget.LinearLayout"
-  >
+>
 
   <TextView
     android:id="@+id/calendarMoviesHeaderText"
@@ -21,6 +21,6 @@
     android:textSize="@dimen/progressMoviesHeaderTextSize"
     android:textStyle="bold"
     tools:text="@string/textLast7Days"
-    />
+  />
 
 </merge>

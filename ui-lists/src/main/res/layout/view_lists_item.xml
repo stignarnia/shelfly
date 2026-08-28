@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/listsItemRoot"
@@ -19,7 +19,7 @@
     android:paddingTop="@dimen/spaceSmall"
     android:paddingRight="@dimen/listsMarginHorizontal"
     android:paddingBottom="@dimen/spaceSmall"
-    >
+  >
 
     <androidx.constraintlayout.widget.Guideline
       android:id="@+id/listsItemGuideline"
@@ -28,9 +28,9 @@
       android:orientation="vertical"
       app:layout_constraintGuide_begin="@dimen/listsTripleImageWidth"
       app:layout_constraintStart_toStartOf="parent"
-      />
+    />
 
-    <xyz.stignarnia.ui_lists.lists.views.ListsTripleImageView
+    <xyz.stignarnia.uiLists.lists.views.ListsTripleImageView
       android:id="@+id/listsItemImages"
       android:layout_width="0dp"
       android:layout_height="@dimen/listsImageHeight"
@@ -39,7 +39,7 @@
       app:layout_constraintEnd_toStartOf="@id/listsItemGuideline"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+    />
 
     <TextView
       android:id="@+id/listsItemTitle"
@@ -53,7 +53,7 @@
       app:layout_constraintTop_toBottomOf="@id/listsItemHeader"
       app:layout_constraintVertical_chainStyle="packed"
       tools:text="Game of Thrones"
-      />
+    />
 
     <TextView
       android:id="@+id/listsItemHeader"
@@ -67,7 +67,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
       tools:text="Netflix"
-      />
+    />
 
     <TextView
       android:id="@+id/listsItemDescription"
@@ -80,7 +80,7 @@
       app:layout_constraintStart_toEndOf="@id/listsItemGuideline"
       app:layout_constraintTop_toBottomOf="@id/listsItemTitle"
       tools:text="Lorem Ipsum"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

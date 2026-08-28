@@ -8,13 +8,13 @@
   android:layout_height="wrap_content"
   android:orientation="vertical"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
-    >
+  >
 
     <LinearLayout
       android:id="@+id/rootItemsLayout"
@@ -22,7 +22,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/spaceMedium"
       android:orientation="vertical"
-      />
+    />
 
   </androidx.core.widget.NestedScrollView>
 
@@ -40,6 +40,6 @@
     android:text="@string/textApply"
     android:textColor="?attr/textColorOnSurface"
     app:rippleColor="?android:attr/textColorPrimary"
-    />
+  />
 
 </LinearLayout>

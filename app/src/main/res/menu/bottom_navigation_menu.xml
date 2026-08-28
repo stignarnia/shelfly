@@ -3,27 +3,27 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  >
+>
 
   <item
     android:id="@+id/menuProgress"
     android:enabled="true"
     android:icon="@drawable/ic_check_menu"
     android:title="@string/menuProgress"
-    />
+  />
 
   <item
     android:id="@+id/menuDiscover"
     android:enabled="true"
     android:icon="@drawable/ic_search"
     android:title="@string/menuDiscover"
-    />
+  />
 
   <item
     android:id="@+id/menuCollection"
     android:enabled="true"
     android:icon="@drawable/ic_bookmark"
     android:title="@string/menuCollection"
-    />
+  />
 
 </menu>

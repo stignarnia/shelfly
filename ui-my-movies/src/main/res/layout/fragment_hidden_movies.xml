@@ -6,7 +6,7 @@
   android:layout_height="match_parent"
   android:clipChildren="false"
   android:clipToPadding="false"
-  >
+>
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/hiddenMoviesRecycler"
@@ -20,7 +20,7 @@
     android:paddingTop="@dimen/collectionTabsViewPadding"
     android:paddingEnd="@dimen/screenMarginHorizontal"
     android:paddingBottom="@dimen/myMoviesBottomPadding"
-    />
+  />
 
   <include
     android:id="@+id/hiddenMoviesEmptyView"
@@ -31,6 +31,6 @@
     android:layout_marginStart="@dimen/spaceBig"
     android:layout_marginEnd="@dimen/spaceBig"
     android:visibility="gone"
-    />
+  />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

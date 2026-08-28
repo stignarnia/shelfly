@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="textBackupAndRestore">Copie de rezervă &amp; Restaurare</string>
-    <string name="textBackupExport">Exportă datele</string>
-    <string name="textBackupExportDescription">Exportă datele despre seriale și filme într-un fișier pentru a crea o copie de rezervă sau pentru a le transfera pe un dispozitiv nou.</string>
-    <string name="textBackupImport">Importă date</string>
-    <string name="textBackupImportDescription">Importă datele referitoare la seriale și filme dintr-un fișier de rezervă.\n\nColecția actuală nu va fi eliminată și vor fi adăugate doar elementele lipsă.</string>
-    <string name="textBackupExportSuccess">Datele au fost exportate cu succes.</string>
-    <string name="textBackupImportSuccess">Datele au fost importate cu succes.</string>
-    <string name="errorImportCancelled">Importul datelor a fost anulat.</string>
-    <string name="textBackupExportSchedule">Program</string>
-    <string name="textBackupExportOptionOff">Oprit</string>
-    <string name="textBackupExportOption6Hours">La fiecare 6 ore</string>
-    <string name="textBackupExportOptionDaily">În fiecare zi</string>
-    <string name="textBackupExportOption3Day">La fiecare 3 zile</string>
-    <string name="textBackupExportOptionWeekly">În fiecare săptămână</string>
-    <string name="textBackupExportOptionOffMessage">Copia de rezervă nu se va executa automat.</string>
-    <string name="textBackupExportOptionConfirmMessage">Copia de rezervă automată a fost programată.</string>
-    <string name="textBackupExportOption6HoursButton">Programat să ruleze la fiecare 6 ore</string>
-    <string name="textBackupExportOptionDailyButton">Programat să funcționeze în fiecare zi</string>
-    <string name="textBackupExportOption3DayButton">Programat să ruleze la fiecare 3 zile</string>
-    <string name="textBackupExportOptionWeeklyButton">Programat să ruleze în fiecare săptămână</string>
-    <string name="textBackupExportLastTimestamp">Ultima copie de rezervă: %s</string>
+  <string name="textBackupAndRestore">Copie de rezervă &amp; Restaurare</string>
+  <string name="textBackupExport">Exportă datele</string>
+  <string name="textBackupExportDescription">Exportă datele despre seriale și filme într-un fișier pentru a crea o copie de rezervă sau pentru a le transfera pe un dispozitiv nou.</string>
+  <string name="textBackupImport">Importă date</string>
+  <string name="textBackupImportDescription">Importă datele referitoare la seriale și filme dintr-un fișier de rezervă.\n\nColecția actuală nu va fi eliminată și vor fi adăugate doar elementele lipsă.</string>
+  <string name="textBackupExportSuccess">Datele au fost exportate cu succes.</string>
+  <string name="textBackupImportSuccess">Datele au fost importate cu succes.</string>
+  <string name="errorImportCancelled">Importul datelor a fost anulat.</string>
+  <string name="textBackupExportSchedule">Program</string>
+  <string name="textBackupExportOptionOff">Oprit</string>
+  <string name="textBackupExportOption6Hours">La fiecare 6 ore</string>
+  <string name="textBackupExportOptionDaily">În fiecare zi</string>
+  <string name="textBackupExportOption3Day">La fiecare 3 zile</string>
+  <string name="textBackupExportOptionWeekly">În fiecare săptămână</string>
+  <string name="textBackupExportOptionOffMessage">Copia de rezervă nu se va executa automat.</string>
+  <string name="textBackupExportOptionConfirmMessage">Copia de rezervă automată a fost programată.</string>
+  <string name="textBackupExportOption6HoursButton">Programat să ruleze la fiecare 6 ore</string>
+  <string name="textBackupExportOptionDailyButton">Programat să funcționeze în fiecare zi</string>
+  <string name="textBackupExportOption3DayButton">Programat să ruleze la fiecare 3 zile</string>
+  <string name="textBackupExportOptionWeeklyButton">Programat să ruleze în fiecare săptămână</string>
+  <string name="textBackupExportLastTimestamp">Ultima copie de rezervă: %s</string>
 
   <string name="textBackupImportSkipped">Unele intrări nu au avut potrivire în TMDB și au fost omise:</string>
   <plurals name="textBackupImportSkippedShows">

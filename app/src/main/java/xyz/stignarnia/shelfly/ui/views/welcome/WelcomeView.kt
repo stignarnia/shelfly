@@ -19,12 +19,12 @@ import xyz.stignarnia.shelfly.databinding.ViewWelcomeStepMessageBinding
 import xyz.stignarnia.shelfly.databinding.ViewWelcomeStepWhatsNewBinding
 import xyz.stignarnia.shelfly.ui.main.welcome.WelcomeState
 import xyz.stignarnia.shelfly.ui.main.welcome.WelcomeStep
-import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
-import xyz.stignarnia.ui_base.utilities.extensions.gone
-import xyz.stignarnia.ui_base.utilities.extensions.onClick
-import xyz.stignarnia.ui_base.utilities.extensions.visible
-import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
-import xyz.stignarnia.ui_settings.helpers.AppLanguage
+import xyz.stignarnia.uiBase.utilities.extensions.doOnApplyWindowInsets
+import xyz.stignarnia.uiBase.utilities.extensions.gone
+import xyz.stignarnia.uiBase.utilities.extensions.onClick
+import xyz.stignarnia.uiBase.utilities.extensions.visible
+import xyz.stignarnia.uiBase.utilities.extensions.visibleIf
+import xyz.stignarnia.uiSettings.helpers.AppLanguage
 import java.util.Locale
 
 /**
@@ -37,7 +37,6 @@ import java.util.Locale
  * See [WelcomeState.displayLanguage].
  */
 class WelcomeView : FrameLayout {
-
   constructor(context: Context) : super(context)
   constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
   constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
@@ -87,11 +86,12 @@ class WelcomeView : FrameLayout {
 
     with(binding) {
       viewWelcomeStepIndicator.visibleIf(state.total > 1)
-      viewWelcomeStepIndicator.text = strings.getString(
-        R.string.textWelcomeStepIndicator,
-        state.index + 1,
-        state.total,
-      )
+      viewWelcomeStepIndicator.text =
+        strings.getString(
+          R.string.textWelcomeStepIndicator,
+          state.index + 1,
+          state.total,
+        )
       viewWelcomeBackButton.text = strings.getText(R.string.textBack)
       viewWelcomeBackButton.visibleIf(state.isBackEnabled)
       viewWelcomePrimaryButton.text = strings.getText(state.step.primaryButton)
@@ -116,10 +116,12 @@ class WelcomeView : FrameLayout {
           text = strings.getString(R.string.textKeepLanguage, step.current.displayNameRaw)
           visible()
         }
+
         secondaryLabel != null -> {
           text = strings.getText(secondaryLabel)
           visible()
         }
+
         else -> {
           gone()
         }
@@ -152,14 +154,15 @@ class WelcomeView : FrameLayout {
       }
 
       is WelcomeStep.ApiKey -> {
-        apiKeyBinding = ViewWelcomeStepApiKeyBinding.inflate(inflater, container, true).apply {
-          viewWelcomeStepApiKeyTitle.text = strings.getText(step.title)
-          viewWelcomeStepApiKeyMessage.text = strings.getText(step.message)
-          viewWelcomeStepApiKeyInput.hint = strings.getText(step.hint)
-          viewWelcomeStepApiKeyInput.doAfterTextChanged {
-            onApiKeyChanged?.invoke(it?.toString().orEmpty())
+        apiKeyBinding =
+          ViewWelcomeStepApiKeyBinding.inflate(inflater, container, true).apply {
+            viewWelcomeStepApiKeyTitle.text = strings.getText(step.title)
+            viewWelcomeStepApiKeyMessage.text = strings.getText(step.message)
+            viewWelcomeStepApiKeyInput.hint = strings.getText(step.hint)
+            viewWelcomeStepApiKeyInput.doAfterTextChanged {
+              onApiKeyChanged?.invoke(it?.toString().orEmpty())
+            }
           }
-        }
       }
 
       is WelcomeStep.Notifications -> {

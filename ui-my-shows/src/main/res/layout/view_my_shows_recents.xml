@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <androidx.gridlayout.widget.GridLayout
     android:id="@+id/myShowsRecentsContainer"
@@ -15,6 +15,6 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     app:columnCount="2"
-    />
+  />
 
 </merge>

@@ -1,13 +1,6 @@
 package xyz.stignarnia.repository
 
 import com.google.common.truth.Truth.assertThat
-import xyz.stignarnia.common.extensions.nowUtcMillis
-import xyz.stignarnia.data_local.database.dao.DiscoverShowsDao
-import xyz.stignarnia.data_local.database.dao.ShowsDao
-import xyz.stignarnia.data_local.database.model.DiscoverShow
-import xyz.stignarnia.repository.common.BaseMockTest
-import xyz.stignarnia.repository.shows.DiscoverShowsRepository
-import xyz.stignarnia.ui_model.Show
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.confirmVerified
@@ -18,12 +11,19 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import xyz.stignarnia.common.extensions.nowUtcMillis
+import xyz.stignarnia.dataLocal.database.dao.DiscoverShowsDao
+import xyz.stignarnia.dataLocal.database.dao.ShowsDao
+import xyz.stignarnia.dataLocal.database.model.DiscoverShow
+import xyz.stignarnia.repository.common.BaseMockTest
+import xyz.stignarnia.repository.shows.DiscoverShowsRepository
+import xyz.stignarnia.uiModel.Show
 import java.util.concurrent.TimeUnit
-import xyz.stignarnia.data_local.database.model.Show as ShowDb
+import xyz.stignarnia.dataLocal.database.model.Show as ShowDb
 
 class DiscoverShowsRepositoryTest : BaseMockTest() {
-
   @MockK lateinit var showsDao: ShowsDao
+
   @MockK lateinit var discoverShowsDao: DiscoverShowsDao
 
   private lateinit var SUT: DiscoverShowsRepository
@@ -70,34 +70,35 @@ class DiscoverShowsRepositoryTest : BaseMockTest() {
   fun `Should load cached shows`() {
     runBlocking {
       val discoverShow = DiscoverShow(idTmdb = 10, createdAt = nowUtcMillis(), updatedAt = 0)
-      val showDb = ShowDb(
-        idTmdb = 10,
-        idTvdb = 10,
-        idImdb = "10",
-        idSlug = "10",
-        idTvrage = 10,
-        title = "Show",
-        year = 2020,
-        overview = "",
-        firstAired = "",
-        runtime = 45,
-        airtimeDay = "",
-        airtimeTime = "",
-        airtimeTimezone = "",
-        certification = "",
-        network = "",
-        country = "",
-        trailer = "",
-        homepage = "",
-        status = "",
-        rating = 5f,
-        votes = 10,
-        commentCount = 0,
-        genres = "",
-        airedEpisodes = 10,
-        createdAt = 0,
-        updatedAt = 0,
-      )
+      val showDb =
+        ShowDb(
+          idTmdb = 10,
+          idTvdb = 10,
+          idImdb = "10",
+          idSlug = "10",
+          idTvrage = 10,
+          title = "Show",
+          year = 2020,
+          overview = "",
+          firstAired = "",
+          runtime = 45,
+          airtimeDay = "",
+          airtimeTime = "",
+          airtimeTimezone = "",
+          certification = "",
+          network = "",
+          country = "",
+          trailer = "",
+          homepage = "",
+          status = "",
+          rating = 5f,
+          votes = 10,
+          commentCount = 0,
+          genres = "",
+          airedEpisodes = 10,
+          createdAt = 0,
+          updatedAt = 0,
+        )
 
       coEvery { discoverShowsDao.getAll() } returns listOf(discoverShow)
       coEvery { showsDao.getAll(any()) } returns listOf(showDb)

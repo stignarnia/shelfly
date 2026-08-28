@@ -1,0 +1,497 @@
+package xyz.stignarnia.dataRemote.tmdb.api
+
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import xyz.stignarnia.dataRemote.catalog.model.Episode
+import xyz.stignarnia.dataRemote.catalog.model.Ids
+import xyz.stignarnia.dataRemote.catalog.model.Movie
+import xyz.stignarnia.dataRemote.catalog.model.MovieCollection
+import xyz.stignarnia.dataRemote.catalog.model.PersonCredit
+import xyz.stignarnia.dataRemote.catalog.model.SearchResult
+import xyz.stignarnia.dataRemote.catalog.model.Season
+import xyz.stignarnia.dataRemote.catalog.model.SeasonTranslation
+import xyz.stignarnia.dataRemote.catalog.model.Show
+import xyz.stignarnia.dataRemote.catalog.model.Translation
+import xyz.stignarnia.dataRemote.tmdb.TmdbGenres
+import xyz.stignarnia.dataRemote.tmdb.TmdbRemoteDataSource
+import xyz.stignarnia.dataRemote.tmdb.model.TmdbImages
+import xyz.stignarnia.dataRemote.tmdb.model.TmdbPage
+import xyz.stignarnia.dataRemote.tmdb.model.TmdbPerson
+import xyz.stignarnia.dataRemote.tmdb.model.TmdbStreamingCountry
+import xyz.stignarnia.dataRemote.tmdb.model.TmdbTranslation
+import xyz.stignarnia.dataRemote.tmdb.model.TmdbWatchProvider
+import xyz.stignarnia.dataRemote.tmdb.toEpisode
+import xyz.stignarnia.dataRemote.tmdb.toMovie
+import xyz.stignarnia.dataRemote.tmdb.toSeason
+import xyz.stignarnia.dataRemote.tmdb.toShow
+import java.time.LocalDate
+import java.time.ZoneOffset
+
+internal class TmdbApi(
+  private val service: TmdbService,
+) : TmdbRemoteDataSource {
+  override suspend fun fetchShowImages(tmdbId: Long) =
+    try {
+      if (tmdbId <= 0) TmdbImages.EMPTY
+      service.fetchShowImages(tmdbId)
+    } catch (error: Throwable) {
+      TmdbImages.EMPTY
+    }
+
+  override suspend fun fetchEpisodeImage(
+    showTmdbId: Long?,
+    season: Int?,
+    episode: Int?,
+  ) = try {
+    if (showTmdbId == null || showTmdbId <= 0) TmdbImages.EMPTY
+    if (season == null || season <= 0) TmdbImages.EMPTY
+    if (episode == null || episode <= 0) TmdbImages.EMPTY
+    val images = service.fetchEpisodeImages(showTmdbId, season, episode)
+    images.stills?.firstOrNull()
+  } catch (error: Throwable) {
+    null
+  }
+
+  override suspend fun fetchMovieImages(tmdbId: Long) =
+    try {
+      if (tmdbId <= 0) TmdbImages.EMPTY
+      service.fetchMovieImages(tmdbId)
+    } catch (error: Throwable) {
+      TmdbImages.EMPTY
+    }
+
+  override suspend fun fetchMoviePeople(tmdbId: Long): Map<TmdbPerson.Type, List<TmdbPerson>> {
+    val result = service.fetchMoviePeople(tmdbId)
+    val cast = result.cast?.toList() ?: emptyList()
+    val crew = result.crew?.toList() ?: emptyList()
+    return mapOf(
+      TmdbPerson.Type.CAST to cast,
+      TmdbPerson.Type.CREW to crew,
+    )
+  }
+
+  override suspend fun fetchShowPeople(tmdbId: Long): Map<TmdbPerson.Type, List<TmdbPerson>> {
+    val result = service.fetchShowPeople(tmdbId)
+    val cast = result.cast?.toList() ?: emptyList()
+    val crew = result.crew?.toList() ?: emptyList()
+    return mapOf(
+      TmdbPerson.Type.CAST to cast,
+      TmdbPerson.Type.CREW to crew,
+    )
+  }
+
+  override suspend fun fetchShowWatchProviders(
+    tmdbId: Long,
+    countryCode: String,
+  ): TmdbStreamingCountry? {
+    val result = service.fetchShowWatchProviders(tmdbId)
+    return result.results[watchRegion(countryCode)]
+  }
+
+  override suspend fun fetchMovieWatchProviders(
+    tmdbId: Long,
+    countryCode: String,
+  ): TmdbStreamingCountry? {
+    val result = service.fetchMovieWatchProviders(tmdbId)
+    return result.results[watchRegion(countryCode)]
+  }
+
+  override suspend fun fetchWatchProviders(
+    isMovie: Boolean,
+    countryCode: String,
+  ): List<TmdbWatchProvider> {
+    val region = watchRegion(countryCode)
+    val response =
+      if (isMovie) {
+        service.fetchMovieProviders(region)
+      } else {
+        service.fetchShowProviders(region)
+      }
+    // The global `display_priority` puts the American services first no matter where the user is, so the region's own ranking wins when TMDB publishes one for it.
+    return response.results
+      .orEmpty()
+      .sortedWith(
+        compareBy(
+          { it.display_priorities?.get(region) ?: it.display_priority ?: Long.MAX_VALUE },
+          { it.provider_name },
+        ),
+      )
+  }
+
+  override suspend fun fetchPersonDetails(id: Long): TmdbPerson = service.fetchPersonDetails(id)
+
+  override suspend fun fetchPersonTranslations(id: Long): Map<String, TmdbTranslation.Data> {
+    val result = service.fetchPersonTranslation(id).translations ?: emptyList()
+    return result
+      .filter {
+        if (it.iso_639_1.lowercase() != "zh") true else it.iso_3166_1.lowercase() == "cn"
+      } // Chinese Simplified filter
+      .associateBy(
+        keySelector = { it.iso_639_1.lowercase() },
+        valueTransform = { it.data ?: TmdbTranslation.Data(null) },
+      )
+  }
+
+  override suspend fun fetchPersonImages(tmdbId: Long) =
+    try {
+      if (tmdbId <= 0) TmdbImages.EMPTY
+      service.fetchPersonImages(tmdbId)
+    } catch (error: Throwable) {
+      TmdbImages.EMPTY
+    }
+
+  override suspend fun fetchShow(
+    tmdbId: Long,
+    language: String?,
+  ): Show = service.fetchShow(tmdbId, language).toShow()
+
+  override suspend fun fetchMovie(
+    tmdbId: Long,
+    language: String?,
+  ): Movie = service.fetchMovie(tmdbId, language).toMovie()
+
+  /**
+   * A show's episodes are only available per season, so this fans out over the season list from the show payload.
+   * Season 0 (specials) is included.
+   */
+  override suspend fun fetchSeasons(tmdbId: Long): List<Season> =
+    coroutineScope {
+      val show = service.fetchShow(tmdbId, null)
+      val seasonNumbers = show.seasons?.mapNotNull { it.season_number } ?: emptyList()
+      seasonNumbers
+        .map { number ->
+          async { service.fetchSeason(tmdbId, number).toSeason() }
+        }.awaitAll()
+    }
+
+  // Trending and popular accept no filters, so an active genre or streaming filter routes the request through discover instead.
+
+  override suspend fun fetchTrendingShows(
+    genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
+    limit: Int,
+  ): List<Show> {
+    val genresQuery = TmdbGenres.showQuery(genres)
+    val providersQuery = providersQuery(providers)
+    return fetchPaged(limit, { it.id }) {
+      if (genresQuery != null || providersQuery != null) {
+        service.fetchDiscoverShows(genresQuery, providersQuery, region(providersQuery, countryCode), it)
+      } else {
+        service.fetchTrendingShows(it)
+      }
+    }.map { it.toShow() }
+  }
+
+  override suspend fun fetchTrendingMovies(
+    genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
+    limit: Int,
+  ): List<Movie> {
+    val genresQuery = TmdbGenres.movieQuery(genres)
+    val providersQuery = providersQuery(providers)
+    return fetchPaged(limit, { it.id }) {
+      if (genresQuery != null || providersQuery != null) {
+        service.fetchDiscoverMovies(genresQuery, providersQuery, region(providersQuery, countryCode), it)
+      } else {
+        service.fetchTrendingMovies(it)
+      }
+    }.map { it.toMovie() }
+  }
+
+  override suspend fun fetchPopularShows(
+    genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
+    limit: Int,
+  ): List<Show> {
+    val genresQuery = TmdbGenres.showQuery(genres)
+    val providersQuery = providersQuery(providers)
+    return fetchPaged(limit, { it.id }) {
+      if (genresQuery != null || providersQuery != null) {
+        service.fetchDiscoverShows(genresQuery, providersQuery, region(providersQuery, countryCode), it)
+      } else {
+        service.fetchPopularShows(it)
+      }
+    }.map { it.toShow() }
+  }
+
+  override suspend fun fetchPopularMovies(
+    genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
+    limit: Int,
+  ): List<Movie> {
+    val genresQuery = TmdbGenres.movieQuery(genres)
+    val providersQuery = providersQuery(providers)
+    return fetchPaged(limit, { it.id }) {
+      if (genresQuery != null || providersQuery != null) {
+        service.fetchDiscoverMovies(genresQuery, providersQuery, region(providersQuery, countryCode), it)
+      } else {
+        service.fetchPopularMovies(it)
+      }
+    }.map { it.toMovie() }
+  }
+
+  override suspend fun fetchAnticipatedShows(
+    genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
+    limit: Int,
+  ): List<Show> {
+    val providersQuery = providersQuery(providers)
+    return fetchPaged(limit, { it.id }) {
+      service.fetchAnticipatedShows(
+        today(),
+        TmdbGenres.showQuery(genres),
+        providersQuery,
+        region(providersQuery, countryCode),
+        it,
+      )
+    }.map { it.toShow() }
+  }
+
+  override suspend fun fetchAnticipatedMovies(
+    genres: List<String>,
+    providers: List<Long>,
+    countryCode: String,
+    limit: Int,
+  ): List<Movie> {
+    val providersQuery = providersQuery(providers)
+    return fetchPaged(limit, { it.id }) {
+      service.fetchAnticipatedMovies(
+        today(),
+        TmdbGenres.movieQuery(genres),
+        providersQuery,
+        region(providersQuery, countryCode),
+        it,
+      )
+    }.map { it.toMovie() }
+  }
+
+  /**
+   * TMDB carries the next episode on the show payload rather than on a dedicated endpoint.
+   */
+  override suspend fun fetchNextEpisode(tmdbId: Long): Episode? =
+    service
+      .fetchShow(tmdbId, null)
+      .next_episode_to_air
+      ?.toEpisode()
+
+  override suspend fun fetchPersonCredits(
+    tmdbId: Long,
+    type: TmdbPerson.Type,
+  ): List<PersonCredit> {
+    val credits = service.fetchPersonCredits(tmdbId)
+    val items =
+      when (type) {
+        TmdbPerson.Type.CAST -> credits.cast
+        TmdbPerson.Type.CREW -> credits.crew
+      }
+    return items
+      .orEmpty()
+      .filter { it.isShow() || it.isMovie() }
+      .map {
+        PersonCredit(
+          characters = null,
+          episode_count = null,
+          series_regular = null,
+          show = if (it.isShow()) it.toShow() else null,
+          movie = if (it.isMovie()) it.toMovie() else null,
+        )
+      }
+  }
+
+  /**
+   * TMDB serves localised text by asking for the resource in that language rather than through a separate translations endpoint.
+   * A title that comes back identical to the default is treated as untranslated.
+   */
+  override suspend fun fetchShowTranslation(
+    tmdbId: Long,
+    language: String,
+  ): Translation? {
+    val show = service.fetchShow(tmdbId, language)
+    return Translation(
+      title = show.name,
+      overview = show.overview,
+      language = language,
+      country = null,
+    )
+  }
+
+  override suspend fun fetchMovieTranslation(
+    tmdbId: Long,
+    language: String,
+  ): Translation? {
+    val movie = service.fetchMovie(tmdbId, language)
+    return Translation(
+      title = movie.title,
+      overview = movie.overview,
+      language = language,
+      country = null,
+    )
+  }
+
+  override suspend fun fetchSeasonTranslations(
+    tmdbId: Long,
+    seasonNumber: Int,
+    language: String,
+  ): List<SeasonTranslation> {
+    val season = service.fetchSeason(tmdbId, seasonNumber, language)
+    return season.episodes.orEmpty().map { episode ->
+      SeasonTranslation(
+        season = episode.season_number ?: seasonNumber,
+        number = episode.episode_number ?: -1,
+        ids =
+          Ids(
+            slug = null,
+            tvdb = null,
+            imdb = null,
+            tmdb = episode.id,
+            tvrage = null,
+          ),
+        translations =
+          listOf(
+            Translation(
+              title = episode.name,
+              overview = episode.overview,
+              language = language,
+              country = null,
+            ),
+          ),
+      )
+    }
+  }
+
+  /**
+   * A movie belongs to at most one TMDB collection, so this returns zero or one entry even though the caller accepts a list.
+   */
+  override suspend fun fetchMovieCollections(tmdbId: Long): List<MovieCollection> {
+    val reference = service.fetchMovie(tmdbId, null).belongs_to_collection ?: return emptyList()
+    val collection = service.fetchCollection(reference.id ?: return emptyList())
+    return listOf(
+      MovieCollection(
+        ids = Ids(slug = null, tvdb = null, imdb = null, tmdb = collection.id, tvrage = null),
+        name = collection.name ?: "",
+        description = collection.overview ?: "",
+        privacy = "public",
+        item_count = collection.parts?.size ?: 0,
+        likes = 0,
+      ),
+    )
+  }
+
+  override suspend fun fetchMovieCollectionItems(collectionId: Long): List<Movie> =
+    service
+      .fetchCollection(collectionId)
+      .parts
+      ?.map { it.toMovie() }
+      ?: emptyList()
+
+  override suspend fun fetchRelatedShows(tmdbId: Long): List<Show> =
+    service
+      .fetchRelatedShows(tmdbId, 1)
+      .results
+      ?.map { it.toShow() }
+      ?: emptyList()
+
+  override suspend fun fetchRelatedMovies(tmdbId: Long): List<Movie> =
+    service
+      .fetchRelatedMovies(tmdbId, 1)
+      .results
+      ?.map { it.toMovie() }
+      ?: emptyList()
+
+  override suspend fun fetchSearchResults(query: String): List<SearchResult> =
+    service
+      .fetchSearchResults(query, 1)
+      .results
+      .orEmpty()
+      .filter { it.isShow() || it.isMovie() }
+      .mapIndexed { index, item ->
+        SearchResult(
+          order = index,
+          score = item.vote_average,
+          show = if (item.isShow()) item.toShow() else null,
+          movie = if (item.isMovie()) item.toMovie() else null,
+          person = null,
+        )
+      }
+
+  override suspend fun fetchShowByImdbId(imdbId: String): Show? =
+    service
+      .fetchByExternalId(imdbId, EXTERNAL_SOURCE_IMDB)
+      .tv_results
+      ?.firstOrNull()
+      ?.toShow()
+
+  override suspend fun fetchMovieByImdbId(imdbId: String): Movie? =
+    service
+      .fetchByExternalId(imdbId, EXTERNAL_SOURCE_IMDB)
+      .movie_results
+      ?.firstOrNull()
+      ?.toMovie()
+
+  /**
+   * TMDB pages every list endpoint at 20 items, so a longer list means walking pages until the caller's limit is met or the results run out.
+   *
+   * Entries are deduplicated by id as they accumulate: the ranked feeds reorder between requests, so the same title can legitimately appear on two pages and would otherwise show up twice in the list.
+   */
+  private suspend fun <T> fetchPaged(
+    limit: Int,
+    key: (T) -> Any?,
+    fetch: suspend (Int) -> TmdbPage<T>,
+  ): List<T> {
+    val results = LinkedHashMap<Any?, T>()
+    var page = 1
+    while (results.size < limit) {
+      val response = fetch(page)
+      val items = response.results.orEmpty()
+      if (items.isEmpty()) {
+        break
+      }
+      items.forEach { item ->
+        val itemKey = key(item)
+        if (!results.containsKey(itemKey)) {
+          results[itemKey] = item
+        }
+      }
+      if (page >= (response.total_pages ?: page)) {
+        break
+      }
+      page++
+    }
+    return results.values.take(limit)
+  }
+
+  private fun today(): String = LocalDate.now(ZoneOffset.UTC).toString()
+
+  /**
+   * `|` is TMDB's OR separator, so several selected services widen the results rather than asking for a title carried by all of them at once.
+   */
+  private fun providersQuery(providers: List<Long>): String? =
+    providers
+      .takeIf { it.isNotEmpty() }
+      ?.joinToString("|")
+
+  /**
+   * `with_watch_providers` is only honoured together with a region, and sending a region without it would narrow the results for no reason.
+   */
+  private fun region(
+    providersQuery: String?,
+    countryCode: String,
+  ): String? = if (providersQuery == null) null else watchRegion(countryCode)
+
+  /** TMDB keys availability by ISO-3166-1, where the UK is GB. */
+  private fun watchRegion(countryCode: String): String =
+    when (countryCode.uppercase()) {
+      "UK" -> "GB"
+      else -> countryCode.uppercase()
+    }
+
+  companion object {
+    private const val EXTERNAL_SOURCE_IMDB = "imdb_id"
+  }
+}

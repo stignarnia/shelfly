@@ -7,14 +7,14 @@
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <HorizontalScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:overScrollMode="never"
     android:scrollbars="none"
-    >
+  >
 
     <com.google.android.material.chip.ChipGroup
       android:id="@+id/discoverMoviesChips"
@@ -23,7 +23,7 @@
       android:paddingTop="@dimen/spaceSmall"
       android:paddingBottom="@dimen/spaceSmall"
       app:singleLine="true"
-      >
+    >
 
       <com.google.android.material.chip.Chip
         android:id="@+id/discoverMoviesFeedChip"
@@ -35,27 +35,27 @@
         app:chipIconTint="@color/selector_chip_text"
         app:chipIconVisible="true"
         app:iconStartPadding="5dp"
-        />
+      />
 
       <com.google.android.material.chip.Chip
         android:id="@+id/discoverMoviesProvidersChip"
         style="@style/ShelflyChip.Filter"
         android:checkable="false"
         android:text="@string/textDiscoverFilterProviders"
-        />
+      />
 
       <com.google.android.material.chip.Chip
         android:id="@+id/discoverMoviesGenresChip"
         style="@style/ShelflyChip.Filter"
         android:checkable="false"
         android:text="@string/textGenres"
-        />
+      />
 
       <com.google.android.material.chip.Chip
         android:id="@+id/discoverMoviesCollectionChip"
         style="@style/ShelflyChip.Filter"
         android:text="@string/textDiscoverFilterCollectionMovies"
-        />
+      />
 
     </com.google.android.material.chip.ChipGroup>
 

@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <HorizontalScrollView
     android:id="@+id/followedShowsScroll"
@@ -16,12 +16,12 @@
     android:clipToPadding="false"
     android:overScrollMode="never"
     android:scrollbars="none"
-    >
+  >
 
     <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      >
+    >
 
       <ImageView
         android:id="@+id/followedShowsCountIcon"
@@ -30,7 +30,7 @@
         android:contentDescription="@null"
         app:srcCompat="@drawable/ic_folder"
         app:tint="?android:textColorPrimary"
-        />
+      />
 
       <TextView
         android:id="@+id/followedShowsCountText"
@@ -43,7 +43,7 @@
         android:textColor="?android:textColorPrimary"
         android:textSize="13sp"
         tools:text="212"
-        />
+      />
 
       <com.google.android.material.chip.ChipGroup
         android:id="@+id/followedShowsChips"
@@ -52,27 +52,27 @@
         android:paddingTop="@dimen/spaceSmall"
         android:paddingBottom="@dimen/spaceSmall"
         app:singleLine="true"
-        >
+      >
 
         <com.google.android.material.chip.Chip
           android:id="@+id/followedShowsSortingChip"
           style="@style/ShelflyChip.Sort"
           android:text="@string/textSortName"
-          />
+        />
 
         <com.google.android.material.chip.Chip
           android:id="@+id/followedShowsNetworksChip"
           style="@style/ShelflyChip.Filter"
           android:checkable="false"
           android:text="@string/textDiscoverFilterProviders"
-          />
+        />
 
         <com.google.android.material.chip.Chip
           android:id="@+id/followedShowsGenresChip"
           style="@style/ShelflyChip.Filter"
           android:checkable="false"
           android:text="@string/textGenres"
-          />
+        />
 
         <com.google.android.material.chip.Chip
           android:id="@+id/followedShowsUpcomingChip"
@@ -80,7 +80,7 @@
           android:text="@string/textWatchlistIncoming"
           android:visibility="gone"
           tools:visibility="visible"
-          />
+        />
 
       </com.google.android.material.chip.ChipGroup>
 

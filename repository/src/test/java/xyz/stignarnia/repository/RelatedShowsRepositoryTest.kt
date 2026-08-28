@@ -1,13 +1,5 @@
 package xyz.stignarnia.repository
 
-import xyz.stignarnia.common.Config
-import xyz.stignarnia.common.extensions.nowUtcMillis
-import xyz.stignarnia.data_local.database.dao.RelatedShowsDao
-import xyz.stignarnia.data_local.database.dao.ShowsDao
-import xyz.stignarnia.data_local.database.model.RelatedShow
-import xyz.stignarnia.data_remote.tmdb.TmdbRemoteDataSource
-import xyz.stignarnia.repository.common.BaseMockTest
-import xyz.stignarnia.repository.shows.RelatedShowsRepository
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -21,10 +13,17 @@ import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
+import xyz.stignarnia.common.Config
+import xyz.stignarnia.common.extensions.nowUtcMillis
+import xyz.stignarnia.dataLocal.database.dao.RelatedShowsDao
+import xyz.stignarnia.dataLocal.database.dao.ShowsDao
+import xyz.stignarnia.dataLocal.database.model.RelatedShow
+import xyz.stignarnia.dataRemote.tmdb.TmdbRemoteDataSource
+import xyz.stignarnia.repository.common.BaseMockTest
+import xyz.stignarnia.repository.shows.RelatedShowsRepository
 import java.util.concurrent.TimeUnit.HOURS
 
 class RelatedShowsRepositoryTest : BaseMockTest() {
-
   @MockK
   lateinit var catalogApi: TmdbRemoteDataSource
 
@@ -47,14 +46,15 @@ class RelatedShowsRepositoryTest : BaseMockTest() {
   }
 
   private fun createShowRemote(tmdbId: Long = 2) =
-    xyz.stignarnia.data_remote.catalog.model.Show(
-      ids = xyz.stignarnia.data_remote.catalog.model.Ids(
-        slug = null,
-        tvdb = null,
-        imdb = "tt1",
-        tmdb = tmdbId,
-        tvrage = null,
-      ),
+    xyz.stignarnia.dataRemote.catalog.model.Show(
+      ids =
+        xyz.stignarnia.dataRemote.catalog.model.Ids(
+          slug = null,
+          tvdb = null,
+          imdb = "tt1",
+          tmdb = tmdbId,
+          tvrage = null,
+        ),
       title = "Show",
       year = 2020,
       overview = null,
@@ -82,10 +82,12 @@ class RelatedShowsRepositoryTest : BaseMockTest() {
       coEvery { showsDao.getAll(any()) } returns emptyList()
       coEvery { relatedShowsDao.getAllById(any()) } returns listOf(showDb)
 
-      val showInput = xyz.stignarnia.ui_model.Show.EMPTY.copy(
-        ids = xyz.stignarnia.ui_model.Ids.EMPTY
-          .copy(tmdb = xyz.stignarnia.ui_model.IdTmdb(1)),
-      )
+      val showInput =
+        xyz.stignarnia.uiModel.Show.EMPTY.copy(
+          ids =
+            xyz.stignarnia.uiModel.Ids.EMPTY
+              .copy(tmdb = xyz.stignarnia.uiModel.IdTmdb(1)),
+        )
       SUT.loadAll(showInput, 0)
 
       coVerifySequence {
@@ -104,10 +106,12 @@ class RelatedShowsRepositoryTest : BaseMockTest() {
       coEvery { catalogApi.fetchRelatedShows(any()) } returns listOf(createShowRemote(2))
       coEvery { relatedShowsDao.getAllById(any()) } returns listOf()
 
-      val showInput = xyz.stignarnia.ui_model.Show.EMPTY.copy(
-        ids = xyz.stignarnia.ui_model.Ids.EMPTY
-          .copy(tmdb = xyz.stignarnia.ui_model.IdTmdb(1)),
-      )
+      val showInput =
+        xyz.stignarnia.uiModel.Show.EMPTY.copy(
+          ids =
+            xyz.stignarnia.uiModel.Ids.EMPTY
+              .copy(tmdb = xyz.stignarnia.uiModel.IdTmdb(1)),
+        )
       SUT.loadAll(showInput, 0)
 
       coVerifyOrder {
@@ -121,22 +125,25 @@ class RelatedShowsRepositoryTest : BaseMockTest() {
   @Test
   fun `Should return remote shows if cached values expired`() {
     runBlocking {
-      val showDb = RelatedShow(
-        id = 0,
-        idTmdb = 1,
-        idTmdbRelatedShow = 2,
-        updatedAt =
-          nowUtcMillis() - (Config.RELATED_CACHE_DURATION + 1000),
-      )
+      val showDb =
+        RelatedShow(
+          id = 0,
+          idTmdb = 1,
+          idTmdbRelatedShow = 2,
+          updatedAt =
+            nowUtcMillis() - (Config.RELATED_CACHE_DURATION + 1000),
+        )
       coEvery { showsDao.getAll(any()) } returns emptyList()
       coEvery { showsDao.upsert(any()) } just Runs
       coEvery { catalogApi.fetchRelatedShows(any()) } returns listOf(createShowRemote(2))
       coEvery { relatedShowsDao.getAllById(any()) } returns listOf(showDb)
 
-      val showInput = xyz.stignarnia.ui_model.Show.EMPTY.copy(
-        ids = xyz.stignarnia.ui_model.Ids.EMPTY
-          .copy(tmdb = xyz.stignarnia.ui_model.IdTmdb(1)),
-      )
+      val showInput =
+        xyz.stignarnia.uiModel.Show.EMPTY.copy(
+          ids =
+            xyz.stignarnia.uiModel.Ids.EMPTY
+              .copy(tmdb = xyz.stignarnia.uiModel.IdTmdb(1)),
+        )
       SUT.loadAll(showInput, 0)
 
       coVerifyOrder {

@@ -7,8 +7,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import xyz.stignarnia.repository.settings.SettingsRepository
-import xyz.stignarnia.ui_base.R
-import xyz.stignarnia.ui_settings.helpers.AppTheme
+import xyz.stignarnia.uiBase.R
+import xyz.stignarnia.uiSettings.helpers.AppTheme
 
 /**
  * Puts the selected theme onto an Activity.
@@ -20,7 +20,6 @@ import xyz.stignarnia.ui_settings.helpers.AppTheme
  * Order matters: Material You first, then AMOLED, so a pure black background wins over the dynamic surface and "Material You Dark" with AMOLED on is black carrying wallpaper accents rather than a dynamic dark grey.
  */
 object ThemeApplier {
-
   /**
    * Reaches the settings before Hilt has injected the Activity.
    *

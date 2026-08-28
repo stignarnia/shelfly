@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   android:overScrollMode="never"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/root"
@@ -18,7 +18,7 @@
     android:focusableInTouchMode="true"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
     tools:theme="@style/AppTheme"
-    >
+  >
 
     <LinearLayout
       android:id="@+id/settingsLayout"
@@ -29,13 +29,13 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      >
+    >
 
       <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/episodesLayout"
         style="@style/Settings.ItemLayout"
         android:layout_width="match_parent"
-        >
+      >
 
         <TextView
           android:id="@+id/episodesTitle"
@@ -46,7 +46,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_chainStyle="spread"
-          />
+        />
 
         <TextView
           android:id="@+id/episodesHideTitle"
@@ -60,7 +60,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/episodesTitle"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/episodesHideTitleSwitch"
@@ -71,7 +71,7 @@
           app:layout_constraintBottom_toBottomOf="@id/episodesHideTitle"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/episodesHideTitle"
-          />
+        />
 
         <TextView
           android:id="@+id/episodesHideDescription"
@@ -85,7 +85,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/episodesHideTitle"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/episodesHideDescriptionSwitch"
@@ -96,7 +96,7 @@
           app:layout_constraintBottom_toBottomOf="@id/episodesHideDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/episodesHideDescription"
-          />
+        />
 
         <TextView
           android:id="@+id/episodesHideRating"
@@ -110,7 +110,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/episodesHideDescription"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/episodesHideRatingSwitch"
@@ -121,7 +121,7 @@
           app:layout_constraintBottom_toBottomOf="@id/episodesHideRating"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/episodesHideRating"
-          />
+        />
 
         <TextView
           android:id="@+id/episodesHideImages"
@@ -135,7 +135,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/episodesHideRating"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/episodesHideImagesSwitch"
@@ -146,7 +146,7 @@
           app:layout_constraintBottom_toBottomOf="@id/episodesHideImages"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/episodesHideImages"
-          />
+        />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -167,7 +167,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsLayout"
       app:rippleColor="?android:attr/textColorPrimary"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

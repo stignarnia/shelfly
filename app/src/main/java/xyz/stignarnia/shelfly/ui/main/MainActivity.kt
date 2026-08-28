@@ -26,8 +26,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.work.WorkManager
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
@@ -43,27 +41,29 @@ import xyz.stignarnia.shelfly.ui.main.delegates.TipsDelegate
 import xyz.stignarnia.shelfly.ui.main.welcome.WelcomeState
 import xyz.stignarnia.shelfly.ui.views.welcome.WelcomeView
 import xyz.stignarnia.shelfly.utilities.deeplink.DeepLinkResolver
-import xyz.stignarnia.ui_base.common.OnShowsMoviesSyncedListener
-import xyz.stignarnia.ui_base.common.OnTabReselectedListener
-import xyz.stignarnia.ui_base.events.Event
-import xyz.stignarnia.ui_base.events.EventsManager
-import xyz.stignarnia.ui_base.events.ShowsMoviesSyncComplete
-import xyz.stignarnia.ui_base.network.NetworkStatusProvider
-import xyz.stignarnia.ui_base.notifications.SyncNotificationManager
-import xyz.stignarnia.ui_base.sync.ShowsMoviesSyncWorker
-import xyz.stignarnia.ui_base.utilities.AndroidVersion
-import xyz.stignarnia.ui_base.utilities.ModeHost
-import xyz.stignarnia.ui_base.utilities.MoviesStatusHost
-import xyz.stignarnia.ui_base.utilities.NavigationHost
-import xyz.stignarnia.ui_base.utilities.SnackbarHost
-import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
-import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
-import xyz.stignarnia.ui_base.utilities.extensions.fadeOut
-import xyz.stignarnia.ui_base.utilities.extensions.gone
-import xyz.stignarnia.ui_base.utilities.extensions.onClick
-import xyz.stignarnia.ui_base.utilities.extensions.visible
-import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
-import xyz.stignarnia.ui_settings.sections.backup.SettingsBackupFragment
+import xyz.stignarnia.uiBase.common.OnShowsMoviesSyncedListener
+import xyz.stignarnia.uiBase.common.OnTabReselectedListener
+import xyz.stignarnia.uiBase.events.Event
+import xyz.stignarnia.uiBase.events.EventsManager
+import xyz.stignarnia.uiBase.events.ShowsMoviesSyncComplete
+import xyz.stignarnia.uiBase.network.NetworkStatusProvider
+import xyz.stignarnia.uiBase.notifications.SyncNotificationManager
+import xyz.stignarnia.uiBase.sync.ShowsMoviesSyncWorker
+import xyz.stignarnia.uiBase.utilities.AndroidVersion
+import xyz.stignarnia.uiBase.utilities.ModeHost
+import xyz.stignarnia.uiBase.utilities.MoviesStatusHost
+import xyz.stignarnia.uiBase.utilities.NavigationHost
+import xyz.stignarnia.uiBase.utilities.SnackbarHost
+import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
+import xyz.stignarnia.uiBase.utilities.extensions.doOnApplyWindowInsets
+import xyz.stignarnia.uiBase.utilities.extensions.fadeOut
+import xyz.stignarnia.uiBase.utilities.extensions.gone
+import xyz.stignarnia.uiBase.utilities.extensions.onClick
+import xyz.stignarnia.uiBase.utilities.extensions.visible
+import xyz.stignarnia.uiBase.utilities.extensions.visibleIf
+import xyz.stignarnia.uiSettings.sections.backup.SettingsBackupFragment
+import javax.inject.Inject
+import kotlin.time.Duration.Companion.seconds
 
 @AndroidEntryPoint
 class MainActivity :
@@ -73,7 +73,6 @@ class MainActivity :
   ModeHost,
   MoviesStatusHost,
   TipsDelegate by MainTipsDelegate() {
-
   companion object {
     private const val NAVIGATION_TRANSITION_DURATION_MS = 250L
     private const val ARG_NAVIGATION_VISIBLE = "ARG_NAVIGATION_VISIBLE"
@@ -98,8 +97,11 @@ class MainActivity :
   private val decelerateInterpolator by lazy { DecelerateInterpolator(2F) }
 
   @Inject lateinit var workManager: WorkManager
+
   @Inject lateinit var eventsManager: EventsManager
+
   @Inject lateinit var deepLinkResolver: DeepLinkResolver
+
   @Inject lateinit var networkStatusProvider: NetworkStatusProvider
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -255,13 +257,15 @@ class MainActivity :
     findNavControl()?.run {
       // Added before the graph, so the start destination lights its own tab on the first pass.
       addOnDestinationChangedListener { _, destination, _ -> syncBottomMenu(destination.id) }
-      val graph = navInflater.inflate(R.navigation.navigation_graph).apply {
-        val destination = when (viewModel.getMode()) {
-          SHOWS -> R.id.progressMainFragment
-          MOVIES -> R.id.progressMoviesMainFragment
+      val graph =
+        navInflater.inflate(R.navigation.navigation_graph).apply {
+          val destination =
+            when (viewModel.getMode()) {
+              SHOWS -> R.id.progressMainFragment
+              MOVIES -> R.id.progressMoviesMainFragment
+            }
+          setStartDestination(destination)
         }
-        setStartDestination(destination)
-      }
       setGraph(graph, Bundle.EMPTY)
     }
     with(binding.bottomMenuView.binding.bottomNavigationView) {
@@ -271,12 +275,13 @@ class MainActivity :
           return@setOnItemSelectedListener true
         }
 
-        val target = when (item.itemId) {
-          R.id.menuProgress -> getMenuProgressAction()
-          R.id.menuDiscover -> getMenuDiscoverAction()
-          R.id.menuCollection -> getMenuCollectionAction()
-          else -> throw IllegalStateException("Invalid menu item.")
-        }
+        val target =
+          when (item.itemId) {
+            R.id.menuProgress -> getMenuProgressAction()
+            R.id.menuDiscover -> getMenuDiscoverAction()
+            R.id.menuCollection -> getMenuCollectionAction()
+            else -> throw IllegalStateException("Invalid menu item.")
+          }
 
         navigateToTab(target)
 
@@ -340,6 +345,7 @@ class MainActivity :
           -> {
             navigateToTab(getMenuProgressAction())
           }
+
           else -> {
             remove()
             onBackPressedDispatcher.onBackPressed()
@@ -392,12 +398,13 @@ class MainActivity :
     if (force || viewModel.getMode() != mode) {
       viewModel.setMode(mode)
       // The mode menu only exists on the bar, and the bar only stands over a tab, so anywhere else there is no tab to swap.
-      val target = when (menuItemFor(findNavControl()?.currentDestination?.id)) {
-        R.id.menuDiscover -> getMenuDiscoverAction()
-        R.id.menuCollection -> getMenuCollectionAction()
-        R.id.menuProgress -> getMenuProgressAction()
-        else -> return
-      }
+      val target =
+        when (menuItemFor(findNavControl()?.currentDestination?.id)) {
+          R.id.menuDiscover -> getMenuDiscoverAction()
+          R.id.menuCollection -> getMenuCollectionAction()
+          R.id.menuProgress -> getMenuProgressAction()
+          else -> return
+        }
       findNavControl()?.navigate(target)
     }
   }
@@ -444,9 +451,10 @@ class MainActivity :
     }
   }
 
-  private val notificationsPermissionLauncher = registerForActivityResult(RequestPermission()) {
-    viewModel.onNotificationsPermissionResult(it)
-  }
+  private val notificationsPermissionLauncher =
+    registerForActivityResult(RequestPermission()) {
+      viewModel.onNotificationsPermissionResult(it)
+    }
 
   private fun requestNotificationsPermission() {
     if (!AndroidVersion.isAtLeastAndroid13) {
@@ -534,6 +542,7 @@ class MainActivity :
         }
         viewModel.refreshAnnouncements()
       }
+
       else -> {
         Timber.d("Event ignored. Noop.")
       }

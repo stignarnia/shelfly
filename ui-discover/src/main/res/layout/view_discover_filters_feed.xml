@@ -9,13 +9,13 @@
   android:orientation="vertical"
   tools:parentTag="android.widget.FrameLayout"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
-    >
+  >
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
@@ -25,7 +25,7 @@
       android:paddingTop="@dimen/spaceNormal"
       android:paddingEnd="@dimen/spaceNormal"
       tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
-      >
+    >
 
       <TextView
         android:id="@+id/feedTitle"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+      />
 
       <com.google.android.material.chip.ChipGroup
         android:id="@+id/feedChipGroup"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@id/feedTitle"
         app:selectionRequired="true"
         app:singleSelection="true"
-        >
+      >
 
         <com.google.android.material.chip.Chip
           android:id="@+id/feedChipHot"
@@ -69,7 +69,7 @@
           app:chipCornerRadius="100dp"
           app:chipStrokeColor="@color/selector_discover_chip_text"
           app:chipStrokeWidth="1dp"
-          />
+        />
 
         <com.google.android.material.chip.Chip
           android:id="@+id/feedChipNewest"
@@ -83,7 +83,7 @@
           app:chipCornerRadius="100dp"
           app:chipStrokeColor="@color/selector_discover_chip_text"
           app:chipStrokeWidth="1dp"
-          />
+        />
 
         <com.google.android.material.chip.Chip
           android:id="@+id/feedChipTopRated"
@@ -97,7 +97,7 @@
           app:chipCornerRadius="100dp"
           app:chipStrokeColor="@color/selector_discover_chip_text"
           app:chipStrokeWidth="1dp"
-          />
+        />
 
         <com.google.android.material.chip.Chip
           android:id="@+id/feedChipRecent"
@@ -111,7 +111,7 @@
           app:chipCornerRadius="100dp"
           app:chipStrokeColor="@color/selector_discover_chip_text"
           app:chipStrokeWidth="1dp"
-          />
+        />
 
       </com.google.android.material.chip.ChipGroup>
 
@@ -133,6 +133,6 @@
     android:text="@string/textApply"
     android:textColor="?attr/textColorOnSurface"
     app:rippleColor="?android:attr/textColorPrimary"
-    />
+  />
 
 </LinearLayout>

@@ -1,0 +1,132 @@
+package xyz.stignarnia.uiShow.episodes.recycler
+
+import android.content.Context
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import androidx.constraintlayout.widget.ConstraintLayout
+import xyz.stignarnia.common.Config
+import xyz.stignarnia.common.Config.SPOILERS_HIDE_SYMBOL
+import xyz.stignarnia.common.Config.SPOILERS_REGEX
+import xyz.stignarnia.common.extensions.toLocalZone
+import xyz.stignarnia.uiBase.utilities.extensions.addRipple
+import xyz.stignarnia.uiBase.utilities.extensions.capitalizeWords
+import xyz.stignarnia.uiBase.utilities.extensions.gone
+import xyz.stignarnia.uiBase.utilities.extensions.onClick
+import xyz.stignarnia.uiBase.utilities.extensions.visible
+import xyz.stignarnia.uiBase.utilities.extensions.visibleIf
+import xyz.stignarnia.uiModel.Episode
+import xyz.stignarnia.uiShow.R
+import xyz.stignarnia.uiShow.databinding.ViewEpisodeBinding
+import java.util.Locale.ENGLISH
+
+class EpisodeView : ConstraintLayout {
+  constructor(context: Context) : super(context)
+  constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+  private val binding = ViewEpisodeBinding.inflate(LayoutInflater.from(context), this)
+
+  init {
+    layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+    addRipple()
+  }
+
+  fun bind(
+    item: EpisodeListItem,
+    itemClickListener: (Episode, Boolean) -> Unit,
+    itemCheckedListener: (Episode, Boolean) -> Unit,
+    isLocked: Boolean,
+  ) {
+    clear()
+    with(binding) {
+      bindTitle(item)
+
+      val hasAired = item.episode.hasAired(item.season) || item.season.isSpecial()
+      episodeCheckbox.isChecked = item.isWatched
+      episodeCheckbox.isEnabled = hasAired || !isLocked
+
+      val rating = String.format(ENGLISH, "%.1f", item.episode.rating)
+      episodeRating.visibleIf(item.episode.rating != 0F)
+      if (!item.isWatched && item.spoilers.isEpisodeRatingHidden) {
+        episodeRating.tag = rating
+        episodeRating.text = Config.SPOILERS_RATINGS_HIDE_SYMBOL
+        if (item.spoilers.isTapToReveal) {
+          with(episodeRating) {
+            onClick {
+              tag?.let { text = it.toString() }
+              isClickable = false
+            }
+          }
+        }
+      } else {
+        episodeRating.text = rating
+      }
+
+      item.myRating?.let {
+        episodeMyStarIcon.visible()
+        episodeMyRating.visible()
+        episodeMyRating.text = String.format(ENGLISH, "%d", item.myRating.rating)
+      }
+
+      if (!hasAired) {
+        val date = item.episode.firstAired?.toLocalZone()
+        val displayDate =
+          date?.let { item.dateFormat?.format(it)?.capitalizeWords() }
+            ?: context.getString(R.string.textTba)
+        episodeTitle.text =
+          String.format(ENGLISH, context.getString(R.string.textEpisodeDate), item.episode.number, displayDate)
+      }
+
+      episodeCheckbox.setOnClickListener {
+        val isChecked = episodeCheckbox.isChecked
+        itemCheckedListener(item.episode, isChecked)
+        if (isChecked) {
+          episodeCheckbox.isChecked = false
+        }
+      }
+      onClick { itemClickListener(item.episode, item.isWatched) }
+    }
+  }
+
+  private fun bindTitle(item: EpisodeListItem) {
+    with(binding) {
+      val titleText =
+        String
+          .format(ENGLISH, context.getString(R.string.textEpisode), item.episode.number)
+          .plus(item.episode.numberAbs?.let { if (it > 0 && item.isAnime) " ($it)" else "" } ?: "")
+
+      var overviewText =
+        when {
+          !item.translation?.title.isNullOrBlank() -> item.translation.title
+          item.episode.title.isEmpty() -> context.getString(R.string.textTba)
+          item.episode.title == "Episode ${item.episode.number}" -> titleText
+          else -> item.episode.title
+        }
+
+      if (!item.isWatched && item.spoilers.isEpisodeTitleHidden) {
+        episodeOverview.tag = overviewText
+        overviewText = SPOILERS_REGEX.replace(overviewText, SPOILERS_HIDE_SYMBOL)
+
+        if (item.spoilers.isTapToReveal) {
+          episodeOverview.onClick { view ->
+            view.tag?.let { episodeOverview.text = it.toString() }
+            view.isClickable = false
+          }
+        }
+      }
+
+      episodeTitle.text = titleText
+      episodeOverview.text = overviewText
+    }
+  }
+
+  private fun clear() {
+    with(binding) {
+      episodeCheckbox.setOnCheckedChangeListener(null)
+      episodeMyStarIcon.gone()
+      episodeMyRating.gone()
+    }
+  }
+}

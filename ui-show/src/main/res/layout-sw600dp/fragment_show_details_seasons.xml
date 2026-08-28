@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   android:clipChildren="false"
   android:clipToPadding="false"
-  >
+>
 
   <TextView
     android:id="@+id/showDetailsSeasonsLabel"
@@ -22,7 +22,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_goneMarginTop="@dimen/spaceMicro"
     tools:visibility="visible"
-    />
+  />
 
   <TextView
     android:id="@+id/showDetailsRuntimeLeft"
@@ -41,7 +41,7 @@
     app:layout_constraintWidth_default="wrap"
     tools:text="~14h 12min of watching"
     tools:visibility="visible"
-    />
+  />
 
   <ImageView
     android:id="@+id/showDetailsQuickProgress"
@@ -61,7 +61,7 @@
     app:layout_constraintTop_toTopOf="@id/showDetailsSeasonsLabel"
     app:tint="?android:attr/textColorPrimary"
     tools:visibility="visible"
-    />
+  />
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/showDetailsSeasonsRecycler"
@@ -83,7 +83,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/showDetailsSeasonsLabel"
     tools:visibility="visible"
-    />
+  />
 
   <ProgressBar
     android:id="@+id/showDetailsSeasonsProgress"
@@ -94,7 +94,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <TextView
     android:id="@+id/showDetailsSeasonsEmptyView"
@@ -113,6 +113,6 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:visibility="visible"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,4 +22,4 @@
   <string name="errorCouldNotUpdateList">Мы не смогли обновить список в вашей учетной записи TMDB.\nПожалуйста, проверьте подключение к Интернету и повторите попытку.</string>
   <string name="errorCouldNotDeleteList">Мы не смогли удалить список в вашей учетной записи TMDB.\nПожалуйста, проверьте подключение к Интернету и повторите попытку.</string>
 
-  </resources>
+</resources>

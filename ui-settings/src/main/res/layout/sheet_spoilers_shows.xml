@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   android:overScrollMode="never"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/root"
@@ -18,7 +18,7 @@
     android:focusableInTouchMode="true"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
     tools:theme="@style/AppTheme"
-    >
+  >
 
     <LinearLayout
       android:id="@+id/settingsLayout"
@@ -29,13 +29,13 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      >
+    >
 
       <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/notCollectedShowsLayout"
         style="@style/Settings.ItemLayout"
         android:layout_width="match_parent"
-        >
+      >
 
         <TextView
           android:id="@+id/notCollectedShowsTitle"
@@ -46,7 +46,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_chainStyle="spread"
-          />
+        />
 
         <TextView
           android:id="@+id/notCollectedShowsDescription"
@@ -59,7 +59,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/notCollectedShowsTitle"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/notCollectedShowsSwitch"
@@ -70,7 +70,7 @@
           app:layout_constraintBottom_toBottomOf="@id/notCollectedShowsDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/notCollectedShowsDescription"
-          />
+        />
 
         <TextView
           android:id="@+id/notCollectedShowsRatingDescription"
@@ -84,7 +84,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/notCollectedShowsDescription"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/notCollectedShowsRatingsSwitch"
@@ -95,7 +95,7 @@
           app:layout_constraintBottom_toBottomOf="@id/notCollectedShowsRatingDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/notCollectedShowsRatingDescription"
-          />
+        />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -104,7 +104,7 @@
         style="@style/Settings.ItemLayout"
         android:layout_width="match_parent"
         android:paddingTop="0dp"
-        >
+      >
 
         <TextView
           android:id="@+id/myShowsTitle"
@@ -115,7 +115,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_chainStyle="spread"
-          />
+        />
 
         <TextView
           android:id="@+id/myShowsDescription"
@@ -128,7 +128,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/myShowsTitle"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/myShowsSwitch"
@@ -139,7 +139,7 @@
           app:layout_constraintBottom_toBottomOf="@id/myShowsDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/myShowsDescription"
-          />
+        />
 
         <TextView
           android:id="@+id/myShowsRatingDescription"
@@ -153,7 +153,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/myShowsDescription"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/myShowsRatingsSwitch"
@@ -164,7 +164,7 @@
           app:layout_constraintBottom_toBottomOf="@id/myShowsRatingDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/myShowsRatingDescription"
-          />
+        />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,7 +173,7 @@
         style="@style/Settings.ItemLayout"
         android:layout_width="match_parent"
         android:paddingTop="0dp"
-        >
+      >
 
         <TextView
           android:id="@+id/watchlistShowsTitle"
@@ -184,7 +184,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_chainStyle="spread"
-          />
+        />
 
         <TextView
           android:id="@+id/watchlistShowsDescription"
@@ -197,7 +197,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/watchlistShowsTitle"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/watchlistShowsSwitch"
@@ -208,7 +208,7 @@
           app:layout_constraintBottom_toBottomOf="@id/watchlistShowsDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/watchlistShowsDescription"
-          />
+        />
 
         <TextView
           android:id="@+id/watchlistShowsRatingDescription"
@@ -222,7 +222,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/watchlistShowsDescription"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/watchlistShowsRatingsSwitch"
@@ -233,7 +233,7 @@
           app:layout_constraintBottom_toBottomOf="@id/watchlistShowsRatingDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/watchlistShowsRatingDescription"
-          />
+        />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -242,7 +242,7 @@
         style="@style/Settings.ItemLayout"
         android:layout_width="match_parent"
         android:paddingTop="0dp"
-        >
+      >
 
         <TextView
           android:id="@+id/hiddenShowsTitle"
@@ -253,7 +253,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_chainStyle="spread"
-          />
+        />
 
         <TextView
           android:id="@+id/hiddenShowsDescription"
@@ -266,7 +266,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/hiddenShowsTitle"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/hiddenShowsSwitch"
@@ -277,7 +277,7 @@
           app:layout_constraintBottom_toBottomOf="@id/hiddenShowsDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/hiddenShowsDescription"
-          />
+        />
 
         <TextView
           android:id="@+id/hiddenShowsRatingDescription"
@@ -291,7 +291,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/hiddenShowsDescription"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/hiddenShowsRatingsSwitch"
@@ -302,7 +302,7 @@
           app:layout_constraintBottom_toBottomOf="@id/hiddenShowsRatingDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/hiddenShowsRatingDescription"
-          />
+        />
       </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
@@ -322,7 +322,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsLayout"
       app:rippleColor="?android:attr/textColorPrimary"
-      />
+    />
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>

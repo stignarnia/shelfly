@@ -11,7 +11,7 @@
     android:alpha="0.5"
     android:color="@android:color/white"
     android:state_enabled="false"
-    />
+  />
 
   <item android:color="@android:color/white" />
 

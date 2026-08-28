@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <FrameLayout
     android:id="@+id/showFanartRoot"
@@ -16,14 +16,14 @@
     android:background="@drawable/bg_media_view_elevation"
     android:elevation="@dimen/elevationSmall"
     android:foreground="@drawable/bg_media_view_ripple"
-    >
+  >
 
     <ImageView
       android:id="@+id/showFanartImage"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:contentDescription="@null"
-      />
+    />
 
     <ImageView
       android:id="@+id/showFanartPlaceholder"
@@ -35,7 +35,7 @@
       app:srcCompat="@drawable/ic_television"
       app:tint="?attr/colorPlaceholderIcon"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/showFanartTitle"
@@ -49,7 +49,7 @@
       android:textAlignment="viewStart"
       android:textSize="14sp"
       tools:text="Game Of Thrones"
-      />
+    />
 
     <ProgressBar
       android:id="@+id/showFanartProgress"
@@ -58,7 +58,7 @@
       android:layout_height="28dp"
       android:layout_gravity="center"
       android:visibility="gone"
-      />
+    />
 
   </FrameLayout>
 
@@ -68,7 +68,7 @@
     android:contentDescription="@null"
     app:srcCompat="@drawable/ic_bookmark_full"
     tools:visibility="visible"
-    />
+  />
 
   <ImageView
     android:id="@+id/showFanartBadgeLater"
@@ -76,6 +76,6 @@
     android:contentDescription="@null"
     app:srcCompat="@drawable/ic_bookmark_full"
     tools:visibility="visible"
-    />
+  />
 
 </merge>

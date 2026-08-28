@@ -1,24 +1,6 @@
 package xyz.stignarnia.repository
 
 import com.google.common.truth.Truth.assertThat
-import xyz.stignarnia.common.extensions.nowUtc
-import xyz.stignarnia.common.extensions.nowUtcMillis
-import xyz.stignarnia.common.extensions.toMillis
-import xyz.stignarnia.data_local.database.dao.MoviesDao
-import xyz.stignarnia.data_local.database.dao.PeopleCreditsDao
-import xyz.stignarnia.data_local.database.dao.PeopleDao
-import xyz.stignarnia.data_local.database.dao.PeopleShowsMoviesDao
-import xyz.stignarnia.data_local.database.dao.ShowsDao
-import xyz.stignarnia.data_local.database.model.Movie
-import xyz.stignarnia.data_local.database.model.Show
-import xyz.stignarnia.data_remote.tmdb.TmdbRemoteDataSource
-import xyz.stignarnia.data_remote.catalog.model.PersonCredit
-import xyz.stignarnia.repository.common.BaseMockTest
-import xyz.stignarnia.repository.settings.SettingsRepository
-import xyz.stignarnia.ui_model.IdTmdb
-import xyz.stignarnia.ui_model.Ids
-import xyz.stignarnia.ui_model.Person
-import xyz.stignarnia.ui_model.Person.Department
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -31,10 +13,27 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import xyz.stignarnia.data_local.database.model.Person as PersonDb
+import xyz.stignarnia.common.extensions.nowUtc
+import xyz.stignarnia.common.extensions.nowUtcMillis
+import xyz.stignarnia.common.extensions.toMillis
+import xyz.stignarnia.dataLocal.database.dao.MoviesDao
+import xyz.stignarnia.dataLocal.database.dao.PeopleCreditsDao
+import xyz.stignarnia.dataLocal.database.dao.PeopleDao
+import xyz.stignarnia.dataLocal.database.dao.PeopleShowsMoviesDao
+import xyz.stignarnia.dataLocal.database.dao.ShowsDao
+import xyz.stignarnia.dataLocal.database.model.Movie
+import xyz.stignarnia.dataLocal.database.model.Show
+import xyz.stignarnia.dataRemote.catalog.model.PersonCredit
+import xyz.stignarnia.dataRemote.tmdb.TmdbRemoteDataSource
+import xyz.stignarnia.repository.common.BaseMockTest
+import xyz.stignarnia.repository.settings.SettingsRepository
+import xyz.stignarnia.uiModel.IdTmdb
+import xyz.stignarnia.uiModel.Ids
+import xyz.stignarnia.uiModel.Person
+import xyz.stignarnia.uiModel.Person.Department
+import xyz.stignarnia.dataLocal.database.model.Person as PersonDb
 
 class PeopleRepositoryTest : BaseMockTest() {
-
   private fun createPersonModel(idTmdb: Long = 1) =
     Person(
       ids = Ids.EMPTY.copy(tmdb = IdTmdb(idTmdb)),
@@ -53,29 +52,35 @@ class PeopleRepositoryTest : BaseMockTest() {
     )
 
   @RelaxedMockK lateinit var peopleDao: PeopleDao
+
   @RelaxedMockK lateinit var showsDao: ShowsDao
+
   @RelaxedMockK lateinit var moviesDao: MoviesDao
+
   @RelaxedMockK lateinit var peopleShowsMoviesDao: PeopleShowsMoviesDao
+
   @RelaxedMockK lateinit var peopleCreditsDao: PeopleCreditsDao
-  private val person = PersonDb(
-    idTmdb = 1,
-    idImdb = null,
-    name = "Person",
-    department = "Acting",
-    biography = null,
-    biographyTranslation = null,
-    birthday = null,
-    birthplace = null,
-    character = null,
-    episodesCount = null,
-    job = null,
-    deathday = null,
-    image = "test",
-    homepage = null,
-    createdAt = nowUtc(),
-    updatedAt = nowUtc(),
-    detailsUpdatedAt = null,
-  )
+  private val person =
+    PersonDb(
+      idTmdb = 1,
+      idImdb = null,
+      name = "Person",
+      department = "Acting",
+      biography = null,
+      biographyTranslation = null,
+      birthday = null,
+      birthplace = null,
+      character = null,
+      episodesCount = null,
+      job = null,
+      deathday = null,
+      image = "test",
+      homepage = null,
+      createdAt = nowUtc(),
+      updatedAt = nowUtc(),
+      detailsUpdatedAt = null,
+    )
+
   @RelaxedMockK lateinit var tmdbApi: TmdbRemoteDataSource
   private lateinit var settingsRepository: SettingsRepository
 
@@ -84,20 +89,21 @@ class PeopleRepositoryTest : BaseMockTest() {
   @Before
   override fun setUp() {
     super.setUp()
-    settingsRepository = SettingsRepository(
-      sorting = mockk(),
-      filters = mockk(),
-      widgets = mockk(),
-      viewMode = mockk(),
-      spoilers = mockk(),
-      sync = mockk(),
-      webdav = mockk(),
-      dispatchers = testDispatchers,
-      localSource = mockk(),
-      transactions = mockk(),
-      mappers = mappers,
-      preferences = mockk(relaxed = true),
-    )
+    settingsRepository =
+      SettingsRepository(
+        sorting = mockk(),
+        filters = mockk(),
+        widgets = mockk(),
+        viewMode = mockk(),
+        spoilers = mockk(),
+        sync = mockk(),
+        webdav = mockk(),
+        dispatchers = testDispatchers,
+        localSource = mockk(),
+        transactions = mockk(),
+        mappers = mappers,
+        preferences = mockk(relaxed = true),
+      )
     SUT = PeopleRepository(settingsRepository, database, cloud, transactions, mappers)
     coEvery { database.people } returns peopleDao
     coEvery { database.shows } returns showsDao
@@ -221,56 +227,58 @@ class PeopleRepositoryTest : BaseMockTest() {
     runBlocking {
       val personModel = createPersonModel(1)
       val personDb = person.copy(idTmdb = 1)
-      val show = Show(
-        idTmdb = 1,
-        idTvdb = 1,
-        idImdb = "1",
-        idSlug = "1",
-        idTvrage = 1,
-        title = "Show",
-        year = 2020,
-        overview = "",
-        firstAired = "",
-        runtime = 45,
-        airtimeDay = "",
-        airtimeTime = "",
-        airtimeTimezone = "",
-        certification = "",
-        network = "",
-        networkLogoPath = "",
-        country = "",
-        trailer = "",
-        homepage = "",
-        status = "",
-        rating = 5f,
-        votes = 10,
-        commentCount = 0,
-        genres = "",
-        airedEpisodes = 10,
-        createdAt = 0,
-        updatedAt = 0,
-      )
-      val movie = Movie(
-        idTmdb = 1,
-        idImdb = "1",
-        idSlug = "1",
-        title = "Movie",
-        year = 2020,
-        overview = "",
-        released = "",
-        runtime = 90,
-        country = "",
-        trailer = "",
-        language = "",
-        homepage = "",
-        status = "",
-        rating = 5f,
-        votes = 10,
-        commentCount = 0,
-        genres = "",
-        updatedAt = 0,
-        createdAt = 0,
-      )
+      val show =
+        Show(
+          idTmdb = 1,
+          idTvdb = 1,
+          idImdb = "1",
+          idSlug = "1",
+          idTvrage = 1,
+          title = "Show",
+          year = 2020,
+          overview = "",
+          firstAired = "",
+          runtime = 45,
+          airtimeDay = "",
+          airtimeTime = "",
+          airtimeTimezone = "",
+          certification = "",
+          network = "",
+          networkLogoPath = "",
+          country = "",
+          trailer = "",
+          homepage = "",
+          status = "",
+          rating = 5f,
+          votes = 10,
+          commentCount = 0,
+          genres = "",
+          airedEpisodes = 10,
+          createdAt = 0,
+          updatedAt = 0,
+        )
+      val movie =
+        Movie(
+          idTmdb = 1,
+          idImdb = "1",
+          idSlug = "1",
+          title = "Movie",
+          year = 2020,
+          overview = "",
+          released = "",
+          runtime = 90,
+          country = "",
+          trailer = "",
+          language = "",
+          homepage = "",
+          status = "",
+          rating = 5f,
+          votes = 10,
+          commentCount = 0,
+          genres = "",
+          updatedAt = 0,
+          createdAt = 0,
+        )
       coEvery { peopleDao.getById(any()) } returns personDb
       coEvery { peopleCreditsDao.getTimestampForPerson(any()) } returns nowUtcMillis() - 100
       coEvery { peopleCreditsDao.getAllShowsForPerson(any()) } returns listOf(show)
@@ -289,55 +297,59 @@ class PeopleRepositoryTest : BaseMockTest() {
     runBlocking {
       val personModel = createPersonModel(1)
       val personDb = person.copy(idTmdb = 1)
-      val showRemote = xyz.stignarnia.data_remote.catalog.model.Show(
-        ids = xyz.stignarnia.data_remote.catalog.model.Ids(
-          tmdb = 1,
-          imdb = "tt1",
-          slug = null,
-          tvdb = null,
-          tvrage = null,
-        ),
-        title = "Show",
-        year = 2020,
-        overview = null,
-        first_aired = null,
-        runtime = null,
-        airs = null,
-        certification = null,
-        network = null,
-        country = null,
-        trailer = null,
-        homepage = null,
-        status = null,
-        rating = null,
-        votes = null,
-        comment_count = null,
-        genres = null,
-        aired_episodes = null,
-      )
-      val movieRemote = xyz.stignarnia.data_remote.catalog.model.Movie(
-        ids = xyz.stignarnia.data_remote.catalog.model.Ids(
-          tmdb = 1,
-          imdb = "tt1",
-          slug = null,
-          tvdb = null,
-          tvrage = null,
-        ),
-        title = "Movie",
-        year = 2020,
-        overview = null,
-        released = null,
-        runtime = null,
-        country = null,
-        trailer = null,
-        homepage = null,
-        status = null,
-        rating = null,
-        votes = null,
-        comment_count = null,
-        genres = null,
-        language = null,
-      )
+      val showRemote =
+        xyz.stignarnia.dataRemote.catalog.model.Show(
+          ids =
+            xyz.stignarnia.dataRemote.catalog.model.Ids(
+              tmdb = 1,
+              imdb = "tt1",
+              slug = null,
+              tvdb = null,
+              tvrage = null,
+            ),
+          title = "Show",
+          year = 2020,
+          overview = null,
+          first_aired = null,
+          runtime = null,
+          airs = null,
+          certification = null,
+          network = null,
+          country = null,
+          trailer = null,
+          homepage = null,
+          status = null,
+          rating = null,
+          votes = null,
+          comment_count = null,
+          genres = null,
+          aired_episodes = null,
+        )
+      val movieRemote =
+        xyz.stignarnia.dataRemote.catalog.model.Movie(
+          ids =
+            xyz.stignarnia.dataRemote.catalog.model.Ids(
+              tmdb = 1,
+              imdb = "tt1",
+              slug = null,
+              tvdb = null,
+              tvrage = null,
+            ),
+          title = "Movie",
+          year = 2020,
+          overview = null,
+          released = null,
+          runtime = null,
+          country = null,
+          trailer = null,
+          homepage = null,
+          status = null,
+          rating = null,
+          votes = null,
+          comment_count = null,
+          genres = null,
+          language = null,
+        )
       val creditsShow =
         PersonCredit(characters = null, episode_count = null, series_regular = null, show = showRemote, movie = null)
       val creditsMovie =

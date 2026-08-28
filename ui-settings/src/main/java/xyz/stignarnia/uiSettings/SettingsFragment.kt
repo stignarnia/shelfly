@@ -1,0 +1,99 @@
+package xyz.stignarnia.uiSettings
+
+import android.os.Bundle
+import android.view.View
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
+import xyz.stignarnia.uiBase.BaseFragment
+import xyz.stignarnia.uiBase.utilities.extensions.doOnApplyWindowInsets
+import xyz.stignarnia.uiBase.utilities.extensions.launchAndRepeatStarted
+import xyz.stignarnia.uiBase.utilities.extensions.navigateBack
+import xyz.stignarnia.uiBase.utilities.extensions.visibleIf
+import xyz.stignarnia.uiBase.utilities.viewBinding
+import xyz.stignarnia.uiSettings.databinding.FragmentSettingsBinding
+import xyz.stignarnia.uiSettings.sections.spoilers.SettingsSpoilersFragment
+import xyz.stignarnia.uiSettings.views.SettingsFiltersView.SettingsFilter
+import xyz.stignarnia.uiSettings.views.SettingsFiltersView.SettingsFilter.API_KEYS
+import xyz.stignarnia.uiSettings.views.SettingsFiltersView.SettingsFilter.BACKUP
+import xyz.stignarnia.uiSettings.views.SettingsFiltersView.SettingsFilter.GENERAL
+import xyz.stignarnia.uiSettings.views.SettingsFiltersView.SettingsFilter.MISC
+import xyz.stignarnia.uiSettings.views.SettingsFiltersView.SettingsFilter.NOTIFICATIONS
+import xyz.stignarnia.uiSettings.views.SettingsFiltersView.SettingsFilter.SPOILERS
+import xyz.stignarnia.uiSettings.views.SettingsFiltersView.SettingsFilter.WIDGETS
+
+@AndroidEntryPoint
+class SettingsFragment : BaseFragment<SettingsViewModel>(R.layout.fragment_settings) {
+  companion object {
+    const val REQUEST_SETTINGS = "REQUEST_SETTINGS"
+  }
+
+  override val viewModel by viewModels<SettingsViewModel>()
+  private val binding by viewBinding(FragmentSettingsBinding::bind)
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setFragmentResultListener(REQUEST_SETTINGS) { _, _ ->
+      childFragmentManager.fragments.forEach { fragment ->
+        (fragment as? SettingsSpoilersFragment)?.refreshSettings()
+      }
+    }
+  }
+
+  override fun onViewCreated(
+    view: View,
+    savedInstanceState: Bundle?,
+  ) {
+    super.onViewCreated(view, savedInstanceState)
+    setupView()
+    setupInsets()
+
+    launchAndRepeatStarted(
+      { viewModel.messageFlow.collect { showSnack(it) } },
+      { viewModel.uiState.collect { render(it) } },
+    )
+  }
+
+  override fun onStop() {
+    binding.settingsFilters.clear()
+    viewModel.setFilter(null)
+    super.onStop()
+  }
+
+  private fun setupView() {
+    with(binding) {
+      settingsToolbar.setOnClickListener { navigateBack() }
+      settingsFilters.onFilterClick = { viewModel.setFilter(it) }
+    }
+  }
+
+  private fun setupInsets() {
+    binding.settingsRoot.doOnApplyWindowInsets { view, insets, padding, _ ->
+      val inset = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+      view.updatePadding(
+        top = padding.top + inset.top,
+        bottom = padding.bottom + inset.bottom,
+      )
+    }
+  }
+
+  private fun render(uiState: SettingsUiState) {
+    uiState.run {
+      renderFiltered(uiState.filter)
+    }
+  }
+
+  private fun renderFiltered(filter: SettingsFilter?) {
+    with(binding) {
+      settingsCategoryApiKeys.visibleIf(filter == API_KEYS || filter == null)
+      settingsCategoryGeneral.visibleIf(filter == GENERAL || filter == null)
+      settingsCategoryNotifications.visibleIf(filter == NOTIFICATIONS || filter == null)
+      settingsCategorySpoilers.visibleIf(filter == SPOILERS || filter == null)
+      settingsCategoryWidgets.visibleIf(filter == WIDGETS || filter == null)
+      settingsCategoryBackup.visibleIf(filter == BACKUP || filter == null)
+      settingsCategoryMisc.visibleIf(filter == MISC || filter == null)
+    }
+  }
+}

@@ -3,7 +3,6 @@ package xyz.stignarnia.shelfly.ui.main.cases
 import BaseMockTest
 import android.content.SharedPreferences
 import com.google.common.truth.Truth.assertThat
-import xyz.stignarnia.ui_model.Tip
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -11,9 +10,9 @@ import io.mockk.just
 import io.mockk.verifyAll
 import org.junit.Before
 import org.junit.Test
+import xyz.stignarnia.uiModel.Tip
 
 class MainTipsCaseTest : BaseMockTest() {
-
   @MockK
   lateinit var sharedPreferences: SharedPreferences
 

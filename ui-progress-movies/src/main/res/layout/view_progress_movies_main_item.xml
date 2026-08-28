@@ -6,13 +6,13 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipChildren="false"
-    >
+  >
 
     <androidx.constraintlayout.widget.Barrier
       android:id="@+id/barrier"
@@ -21,7 +21,7 @@
       android:orientation="horizontal"
       app:barrierDirection="start"
       app:constraint_referenced_ids="progressMovieItemRuntimeIcon,progressMovieItemRatingStar"
-      />
+    />
 
     <ImageView
       android:id="@+id/progressMovieItemImage"
@@ -36,7 +36,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+    />
 
     <ImageView
       android:id="@+id/progressMovieItemPlaceholder"
@@ -54,7 +54,7 @@
       app:srcCompat="@drawable/ic_film"
       app:tint="?attr/colorPlaceholderIcon"
       tools:visibility="visible"
-      />
+    />
 
     <ImageView
       android:id="@+id/progressMovieItemPin"
@@ -69,7 +69,7 @@
       app:srcCompat="@drawable/ic_pin"
       app:tint="?android:attr/textColorSecondary"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/progressMovieItemTitle"
@@ -85,7 +85,7 @@
       app:layout_constraintVertical_chainStyle="packed"
       app:layout_goneMarginEnd="@dimen/spaceMedium"
       tools:text="Breaking Bad"
-      />
+    />
 
     <ImageView
       android:id="@+id/progressMovieItemRatingStar"
@@ -99,7 +99,7 @@
       app:srcCompat="@drawable/ic_star"
       app:tint="?attr/colorAccent"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/progressMovieItemRating"
@@ -115,7 +115,7 @@
       app:layout_constraintTop_toTopOf="@id/progressMovieItemTitle"
       tools:text="7.6"
       tools:visibility="visible"
-      />
+    />
 
     <ImageView
       android:id="@+id/progressMovieItemRuntimeIcon"
@@ -129,7 +129,7 @@
       app:srcCompat="@drawable/ic_clock"
       app:tint="?android:attr/textColorPrimary"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/progressMovieItemRuntime"
@@ -145,7 +145,7 @@
       app:layout_constraintTop_toTopOf="@id/progressMovieItemTitle"
       tools:text="123 min"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/progressMovieItemSubtitle"
@@ -161,7 +161,7 @@
       app:layout_constraintStart_toEndOf="@id/progressMovieItemImage"
       app:layout_constraintTop_toBottomOf="@id/progressMovieItemTitle"
       tools:text="@tools:sample/lorem/random"
-      />
+    />
 
     <LinearLayout
       android:id="@+id/progressMovieItemButtons"
@@ -178,7 +178,7 @@
       app:layout_constraintHorizontal_bias="1"
       app:layout_constraintStart_toEndOf="@id/progressMovieItemImage"
       app:layout_constraintTop_toBottomOf="@id/progressMovieItemSubtitle"
-      >
+    >
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/progressMovieItemCheckButton"
@@ -196,7 +196,7 @@
         app:iconTint="?android:attr/textColorPrimary"
         app:rippleColor="?android:attr/textColorPrimary"
         app:strokeColor="?android:attr/textColorPrimary"
-        />
+      />
 
     </LinearLayout>
 

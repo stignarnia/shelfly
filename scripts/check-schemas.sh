@@ -51,7 +51,16 @@ if [ -z "$baseline" ]; then
 fi
 
 # Anything other than an addition means a schema that shipped in $baseline was changed or removed.
-offenders="$(git diff --name-status "$baseline" HEAD -- "$SCHEMA_DIR" | grep -v '^A' || true)"
+#
+# -M so a schema that only moved is reported as a rename rather than as a delete plus an add.
+# The database's own package is part of the directory name - schemas/<fully qualified AppDatabase>/45.json - so renaming that package relocates every schema without altering a byte of one.
+# A rename that is 100% identical and keeps its filename is exactly that, and is allowed.
+# Anything else is not: a modification, a deletion, or a rename that changed content or version.
+offenders="$(git diff -M --name-status "$baseline" HEAD -- "$SCHEMA_DIR" | awk '
+  $1 == "A" { next }
+  $1 == "R100" { n = split($2, from, "/"); m = split($3, to, "/"); if (from[n] == to[m]) next }
+  { print }
+' || true)"
 if [ -n "$offenders" ]; then
   echo "error: schemas released in $baseline were modified rather than superseded." >&2
   echo "$offenders" >&2

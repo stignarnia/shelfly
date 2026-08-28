@@ -9,7 +9,7 @@
   android:clipToPadding="false"
   android:focusableInTouchMode="true"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/personDetailsRecycler"
@@ -22,7 +22,7 @@
     android:overScrollMode="never"
     android:paddingTop="@dimen/spaceNormal"
     android:paddingBottom="56dp"
-    />
+  />
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/personDetailsRecyclerFab"
@@ -40,7 +40,7 @@
     app:srcCompat="@drawable/ic_arrow_right"
     app:tint="?attr/textColorOnSurface"
     tools:visibility="visible"
-    />
+  />
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/personDetailsSnackHost"
@@ -48,6 +48,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="top"
     android:layout_marginTop="@dimen/personImageTipMargin"
-    />
+  />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

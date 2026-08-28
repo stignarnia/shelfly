@@ -6,26 +6,49 @@ ktlint = disabled
 ktlint = disabled
 
 # Everything ktlint does not read.
-# ktlint only parses Kotlin, so nothing here is enforced by it; scripts/check-format.sh covers the three rules that the tree already satisfies.
-# insert_final_newline is declared but deliberately not enforced: 335 files would fail it today, so letting editors fix each file as it is genuinely edited beats one mechanical commit across the resource tree.
-[*.{gradle,xml,yml,yaml,pro,sh,properties}]
+# editorconfig-checker enforces these keys, so this file is the single source of truth for whitespace.
+[*.{xml,yml,yaml,pro,sh,properties,toml}]
 indent_size = 2
 indent_style = space
 end_of_line = lf
 trim_trailing_whitespace = true
 insert_final_newline = true
 
+# Generated and prose files get whitespace hygiene but no indentation rule.
+# Pinning the indent of generated JSON would fail the build the day its generator changes formatter.
+[*.{json,md,txt}]
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Exported Room schemas are immutable once released.
+# scripts/check-schemas.sh fails when a schema that shipped in the last tag is modified rather than superseded, and a trailing newline is a modification.
+# Room writes them without a final newline, so enforcing one here would recreate drift on every regeneration.
+[data-local/schemas/**]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+[{.gitignore,.editorconfig,LICENSE}]
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# There is no line length limit anywhere in the tree.
+# Comments are one sentence per line and sentences are never wrapped to fit a column, so any limit would fight that rule rather than enforce anything worth having.
+# max_line_length is left unset and the rule disabled explicitly, because ktlint falls back to a code-style default when the key is absent rather than reading it as no limit.
+#
+# function-signature and class-signature go with it.
+# Neither is a line length check, but both decide whether to collapse a signature onto one line by measuring it against max_line_length - with no limit to measure against, everything fits and they ask for every multi-line signature in the tree to be joined up.
 [*.{kt,kts}]
 indent_size = 2
+end_of_line = lf
+trim_trailing_whitespace = true
 insert_final_newline = true
-max_line_length = 120
 
-ktlint_standard_package-name = disabled
-ktlint_standard_import-ordering = disabled
-ktlint_standard_string-template-indent = disabled
-ktlint_standard_multiline-expression-wrapping = disabled
-ktlint_standard_no-empty-first-line-in-class-body = disabled
+ktlint_standard_max-line-length = disabled
+ktlint_standard_function-signature = disabled
+ktlint_standard_class-signature = disabled
+
+# CoroutineDispatchers exposes Main, IO, Default and Unconfined, named to mirror kotlinx's Dispatchers.Main and Dispatchers.IO so a call site reads dispatchers.IO.
+# Lowercasing them would make the wrapper read worse than the thing it wraps, and the rule cannot autocorrect them anyway.
 ktlint_standard_property-naming = disabled
-ktlint_standard_annotation = disabled
-ktlint_standard_spacing-between-declarations-with-annotations = disabled
-ktlint_standard_blank-line-between-when-conditions = disabled

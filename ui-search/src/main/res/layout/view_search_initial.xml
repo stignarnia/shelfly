@@ -10,7 +10,7 @@
   tools:background="?attr/colorAppBackground"
   tools:parentTag="android.widget.LinearLayout"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <ImageView
     android:layout_width="80dp"
@@ -19,7 +19,7 @@
     android:contentDescription="@null"
     app:srcCompat="@drawable/ic_search"
     app:tint="?android:attr/textColorPrimary"
-    />
+  />
 
   <TextView
     android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
     android:text="@string/textSearchInitial1"
     android:textColor="?android:attr/textColorPrimary"
     android:textSize="16sp"
-    />
+  />
 
   <TextView
     android:layout_width="wrap_content"
@@ -36,6 +36,6 @@
     android:text="@string/textSearchInitial2"
     android:textColor="?android:attr/textColorSecondary"
     android:textSize="12sp"
-    />
+  />
 
 </merge>

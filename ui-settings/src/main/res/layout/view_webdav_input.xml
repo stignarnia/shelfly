@@ -8,7 +8,7 @@
   android:paddingStart="@dimen/spaceNormal"
   android:paddingTop="@dimen/spaceSmall"
   android:paddingEnd="@dimen/spaceNormal"
-  >
+>
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/webdavUrlInputLayout"
@@ -18,7 +18,7 @@
     app:boxStrokeColor="@color/selector_text_input"
     app:endIconMode="clear_text"
     app:hintTextColor="@color/selector_text_input"
-    >
+  >
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/webdavUrlInput"
@@ -26,7 +26,7 @@
       android:layout_height="wrap_content"
       android:inputType="textUri|textNoSuggestions"
       android:maxLines="1"
-      />
+    />
 
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -39,7 +39,7 @@
     app:boxStrokeColor="@color/selector_text_input"
     app:endIconMode="clear_text"
     app:hintTextColor="@color/selector_text_input"
-    >
+  >
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/webdavUsernameInput"
@@ -47,7 +47,7 @@
       android:layout_height="wrap_content"
       android:inputType="textNoSuggestions"
       android:maxLines="1"
-      />
+    />
 
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,7 +60,7 @@
     app:boxStrokeColor="@color/selector_text_input"
     app:endIconMode="password_toggle"
     app:hintTextColor="@color/selector_text_input"
-    >
+  >
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/webdavPasswordInput"
@@ -68,7 +68,7 @@
       android:layout_height="wrap_content"
       android:inputType="textPassword"
       android:maxLines="1"
-      />
+    />
 
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,6 +84,6 @@
     android:lines="3"
     tools:text="Connected. The folder is reachable and writable."
     xmlns:tools="http://schemas.android.com/tools"
-    />
+  />
 
 </LinearLayout>

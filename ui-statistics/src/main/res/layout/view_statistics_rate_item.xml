@@ -8,13 +8,13 @@
   tools:background="?attr/colorAppBackground"
   tools:parentTag="android.widget.FrameLayout"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    >
+  >
 
     <FrameLayout
       android:id="@+id/viewRateItemImageLayout"
@@ -23,14 +23,14 @@
       android:background="@drawable/bg_media_view_elevation_card"
       android:elevation="@dimen/elevationSmall"
       android:foreground="?attr/selectableItemBackground"
-      >
+    >
 
       <ImageView
         android:id="@+id/viewRateItemImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@null"
-        />
+      />
 
       <ImageView
         android:id="@+id/viewRateItemPlaceholder"
@@ -42,7 +42,7 @@
         app:srcCompat="@drawable/ic_television"
         app:tint="?attr/colorPlaceholderIcon"
         tools:visibility="visible"
-        />
+      />
 
       <TextView
         android:id="@+id/viewRateItemTitle"
@@ -56,7 +56,7 @@
         android:visibility="gone"
         tools:text="Game Of Thrones"
         tools:visibility="visible"
-        />
+      />
 
     </FrameLayout>
 
@@ -75,7 +75,7 @@
       app:drawableStartCompat="@drawable/ic_star"
       app:drawableTint="?attr/colorAccent"
       tools:text="8"
-      />
+    />
 
   </LinearLayout>
 

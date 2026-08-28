@@ -8,7 +8,7 @@
   app:cardBackgroundColor="?attr/colorCardBackground"
   tools:parentTag="com.google.android.material.card.MaterialCardView"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/viewTopGenresContent"
@@ -18,7 +18,7 @@
     android:paddingTop="@dimen/spaceNormal"
     android:paddingEnd="@dimen/spaceSmall"
     android:paddingBottom="@dimen/spaceNormal"
-    >
+  >
 
     <TextView
       android:id="@+id/viewTopGenresTitle"
@@ -35,7 +35,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:drawableStart="@drawable/ic_stars_round"
-      />
+    />
 
     <TextView
       android:id="@+id/viewTopGenresValue"
@@ -49,7 +49,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/viewTopGenresTitle"
       tools:text="Drama\nComedy\nThriller"
-      />
+    />
 
     <TextView
       android:id="@+id/viewTopGenresSubValue"
@@ -61,7 +61,7 @@
       android:textSize="14sp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/viewTopGenresValue"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

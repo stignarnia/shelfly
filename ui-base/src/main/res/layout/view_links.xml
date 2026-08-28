@@ -14,7 +14,7 @@
   android:paddingBottom="@dimen/spaceNormal"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/viewLinksGuideline"
@@ -22,7 +22,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_constraintGuide_percent="0.5"
-    />
+  />
 
   <TextView
     android:id="@+id/viewLinksTitle"
@@ -40,9 +40,9 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksWebsite"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -54,9 +54,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewLinksTitle"
     custom:icon="@drawable/ic_link_color"
     custom:text="Website"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksImdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -68,9 +68,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewLinksWebsite"
     custom:icon="@drawable/ic_imdb"
     custom:text="IMDb"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksTmdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -82,9 +82,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewLinksImdb"
     custom:icon="@drawable/ic_tmdb"
     custom:text="TMDB"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksTvdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -96,9 +96,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewLinksTmdb"
     custom:icon="@drawable/ic_tvdb"
     custom:text="TVDB"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksJustWatch"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -110,9 +110,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewLinksTvdb"
     custom:icon="@drawable/ic_justwatch"
     custom:text="JustWatch"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksGoogle"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -124,9 +124,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewLinksTitle"
     custom:icon="@drawable/ic_google"
     custom:text="Google"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksDuckDuck"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -138,9 +138,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewLinksGoogle"
     custom:icon="@drawable/ic_duckduck"
     custom:text="DuckDuckGo"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksWiki"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -153,9 +153,9 @@
     custom:icon="@drawable/ic_wikipedia"
     custom:iconTint="?attr/colorIconPrimary"
     custom:text="Wikipedia"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksYouTube"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -167,9 +167,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewLinksWiki"
     custom:icon="@drawable/ic_youtube"
     custom:text="YouTube"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksTwitter"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -181,9 +181,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewLinksYouTube"
     custom:icon="@drawable/ic_twitter"
     custom:text="Twitter"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewLinksGif"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -195,7 +195,7 @@
     app:layout_constraintTop_toBottomOf="@id/viewLinksTwitter"
     custom:icon="@drawable/ic_giphy"
     custom:text="Giphy"
-    />
+  />
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/viewLinksButtonClose"
@@ -214,6 +214,6 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewLinksJustWatch"
     app:rippleColor="?android:attr/textColorPrimary"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

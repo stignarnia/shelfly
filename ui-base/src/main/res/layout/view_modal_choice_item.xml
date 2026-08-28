@@ -16,4 +16,4 @@
   android:paddingEnd="@dimen/spaceBig"
   android:textColor="?android:attr/textColorPrimary"
   android:textSize="16sp"
-  />
+/>

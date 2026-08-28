@@ -9,7 +9,7 @@
   android:clipToPadding="false"
   android:focusableInTouchMode="true"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
-  >
+>
 
   <View
     android:id="@+id/viewSortOrderItemBadge"
@@ -20,7 +20,7 @@
     app:layout_constraintBottom_toBottomOf="@id/viewSortOrderItemTitle"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="@id/viewSortOrderItemTitle"
-    />
+  />
 
   <TextView
     android:id="@+id/viewSortOrderItemTitle"
@@ -41,7 +41,7 @@
     app:layout_constraintStart_toEndOf="@id/viewSortOrderItemBadge"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_goneMarginStart="0dp"
-    />
+  />
 
   <ImageView
     android:id="@+id/viewSortOrderItemAscDesc"
@@ -55,6 +55,6 @@
     app:layout_constraintTop_toTopOf="parent"
     app:srcCompat="@drawable/ic_arrow_alt"
     app:tint="?attr/colorAccent"
-    />
+  />
 
 </merge>

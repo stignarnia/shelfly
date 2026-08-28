@@ -2,68 +2,69 @@ package xyz.stignarnia.repository.movies
 
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.extensions.nowUtcMillis
-import xyz.stignarnia.data_local.LocalDataSource
-import xyz.stignarnia.data_local.database.model.MoviesSyncLog
-import xyz.stignarnia.data_remote.RemoteDataSource
+import xyz.stignarnia.dataLocal.LocalDataSource
+import xyz.stignarnia.dataLocal.database.model.MoviesSyncLog
+import xyz.stignarnia.dataRemote.RemoteDataSource
 import xyz.stignarnia.repository.mappers.Mappers
-import xyz.stignarnia.ui_model.IdImdb
-import xyz.stignarnia.ui_model.IdSlug
-import xyz.stignarnia.ui_model.IdTmdb
-import xyz.stignarnia.ui_model.Movie
+import xyz.stignarnia.uiModel.IdImdb
+import xyz.stignarnia.uiModel.IdSlug
+import xyz.stignarnia.uiModel.IdTmdb
+import xyz.stignarnia.uiModel.Movie
 import javax.inject.Inject
 
-class MovieDetailsRepository @Inject constructor(
-  private val remoteSource: RemoteDataSource,
-  private val localSource: LocalDataSource,
-  private val mappers: Mappers,
-) {
-
-  suspend fun load(
-    idTmdb: IdTmdb,
-    force: Boolean = false,
-  ): Movie {
-    val local = localSource.movies.getById(idTmdb.id)
-    // Only the details endpoint appends external_ids, so a row first cached by a list endpoint carries no IMDb id.
-    // Treat that as stale however fresh it is, otherwise external ratings have nothing to look up for the whole cache window.
-    // Movies TMDB has no IMDb id for simply refetch on each open.
-    val isMissingImdbId = local != null && local.idImdb.isBlank()
-    if (force ||
-      local == null ||
-      isMissingImdbId ||
-      nowUtcMillis() - local.updatedAt > Config.MOVIE_DETAILS_CACHE_DURATION
-    ) {
-      val remote = remoteSource.tmdb.fetchMovie(idTmdb.id)
-      val movie = mappers.movie.fromNetwork(remote)
-      localSource.movies.upsert(listOf(mappers.movie.toDatabase(movie)))
-      localSource.moviesSyncLog.upsert(MoviesSyncLog(movie.tmdbId, nowUtcMillis()))
-      return movie
+class MovieDetailsRepository
+  @Inject
+  constructor(
+    private val remoteSource: RemoteDataSource,
+    private val localSource: LocalDataSource,
+    private val mappers: Mappers,
+  ) {
+    suspend fun load(
+      idTmdb: IdTmdb,
+      force: Boolean = false,
+    ): Movie {
+      val local = localSource.movies.getById(idTmdb.id)
+      // Only the details endpoint appends external_ids, so a row first cached by a list endpoint carries no IMDb id.
+      // Treat that as stale however fresh it is, otherwise external ratings have nothing to look up for the whole cache window.
+      // Movies TMDB has no IMDb id for simply refetch on each open.
+      val isMissingImdbId = local != null && local.idImdb.isBlank()
+      if (force ||
+        local == null ||
+        isMissingImdbId ||
+        nowUtcMillis() - local.updatedAt > Config.MOVIE_DETAILS_CACHE_DURATION
+      ) {
+        val remote = remoteSource.tmdb.fetchMovie(idTmdb.id)
+        val movie = mappers.movie.fromNetwork(remote)
+        localSource.movies.upsert(listOf(mappers.movie.toDatabase(movie)))
+        localSource.moviesSyncLog.upsert(MoviesSyncLog(movie.tmdbId, nowUtcMillis()))
+        return movie
+      }
+      return mappers.movie.fromDatabase(local)
     }
-    return mappers.movie.fromDatabase(local)
-  }
 
-  suspend fun find(idImdb: IdImdb): Movie? {
-    val localMovie = localSource.movies.getById(idImdb.id)
-    if (localMovie != null) {
-      return mappers.movie.fromDatabase(localMovie)
+    suspend fun find(idImdb: IdImdb): Movie? {
+      val localMovie = localSource.movies.getById(idImdb.id)
+      if (localMovie != null) {
+        return mappers.movie.fromDatabase(localMovie)
+      }
+      return null
     }
-    return null
-  }
 
-  suspend fun find(idTmdb: IdTmdb): Movie? {
-    val localMovie = localSource.movies.getByTmdbId(idTmdb.id)
-    if (localMovie != null) {
-      return mappers.movie.fromDatabase(localMovie)
+    suspend fun find(idTmdb: IdTmdb): Movie? {
+      val localMovie = localSource.movies.getByTmdbId(idTmdb.id)
+      if (localMovie != null) {
+        return mappers.movie.fromDatabase(localMovie)
+      }
+      return null
     }
-    return null
-  }
 
-  suspend fun find(idSlug: IdSlug): Movie? {
-    val localMovie = localSource.movies.getBySlug(idSlug.id)
-    if (localMovie != null) {
-      return mappers.movie.fromDatabase(localMovie)
+    suspend fun find(idSlug: IdSlug): Movie? {
+      val localMovie = localSource.movies.getBySlug(idSlug.id)
+      if (localMovie != null) {
+        return mappers.movie.fromDatabase(localMovie)
+      }
+      return null
     }
-    return null
-  }
 
-  suspend fun delete(idTmdb: IdTmdb) = localSource.movies.deleteById(idTmdb.id)
-}
+    suspend fun delete(idTmdb: IdTmdb) = localSource.movies.deleteById(idTmdb.id)
+  }

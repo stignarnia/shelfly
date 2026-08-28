@@ -10,7 +10,7 @@
   app:cardCornerRadius="@dimen/searchLocalViewCorner"
   app:cardElevation="@dimen/elevationSmall"
   app:strokeWidth="0dp"
-  >
+>
 
   <FrameLayout
     android:layout_width="match_parent"
@@ -19,7 +19,7 @@
     android:layout_marginEnd="8dp"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    >
+  >
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/searchViewLocalInput"
@@ -41,7 +41,7 @@
       android:textSize="13sp"
       android:visibility="gone"
       tools:visibility="visible"
-      />
+    />
 
     <ImageView
       android:id="@+id/searchViewLocalIcon"
@@ -53,7 +53,7 @@
       android:paddingEnd="0dp"
       app:srcCompat="@drawable/ic_close"
       app:tint="?attr/colorSearchLocalViewControl"
-      />
+    />
 
   </FrameLayout>
 

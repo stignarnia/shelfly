@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="textSortOrderMovies">Hrană:</string>
-    <string name="textDiscoverFilterCollectionMovies">Ascunde colecția</string>
+  <string name="textSortOrderMovies">Hrană:</string>
+  <string name="textDiscoverFilterCollectionMovies">Ascunde colecția</string>
 
-  </resources>
+</resources>

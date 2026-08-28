@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/viewWelcomeRoot"
@@ -19,7 +19,7 @@
     android:paddingTop="@dimen/spaceNormal"
     android:paddingEnd="@dimen/spaceNormal"
     android:paddingBottom="@dimen/spaceNormal"
-    >
+  >
 
     <TextView
       android:id="@+id/viewWelcomeStepIndicator"
@@ -32,7 +32,7 @@
       app:layout_constraintTop_toTopOf="parent"
       tools:text="Step 1 of 3"
       tools:visibility="visible"
-      />
+    />
 
     <androidx.core.widget.NestedScrollView
       android:id="@+id/viewWelcomeContentScroll"
@@ -47,13 +47,13 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/viewWelcomeStepIndicator"
       app:layout_constraintVertical_bias="0.5"
-      >
+    >
 
       <FrameLayout
         android:id="@+id/viewWelcomeContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+      />
 
     </androidx.core.widget.NestedScrollView>
 
@@ -68,7 +68,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       tools:visibility="visible"
-      />
+    />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/viewWelcomeSecondaryButton"
@@ -81,7 +81,7 @@
       app:layout_constraintStart_toEndOf="@id/viewWelcomeBackButton"
       tools:text="No, keep English"
       tools:visibility="visible"
-      />
+    />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/viewWelcomePrimaryButton"
@@ -92,7 +92,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       tools:text="@string/textDisclaimerConfirmText"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

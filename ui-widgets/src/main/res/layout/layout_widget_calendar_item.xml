@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   android:clipChildren="false"
   tools:parentTag="android.widget.LinearLayout"
-  >
+>
 
   <FrameLayout
     android:id="@+id/calendarWidgetItemFrame"
@@ -20,7 +20,7 @@
     android:layout_marginBottom="@dimen/spaceSmall"
     android:background="@drawable/bg_widget_media_view_elevation"
     android:elevation="@dimen/elevationSmall"
-    >
+  >
 
     <ImageView
       android:id="@+id/calendarWidgetItemImage"
@@ -29,7 +29,7 @@
       android:contentDescription="@null"
       android:visibility="gone"
       tools:visibility="visible"
-      />
+    />
 
     <ImageView
       android:id="@+id/calendarWidgetItemPlaceholder"
@@ -40,7 +40,7 @@
       android:src="@drawable/ic_television"
       android:visibility="gone"
       tools:visibility="visible"
-      />
+    />
 
     <ImageView
       android:id="@+id/calendarWidgetItemImageBadge"
@@ -52,7 +52,7 @@
       android:src="@drawable/ic_bookmark_full"
       android:translationY="-2dp"
       tools:visibility="visible"
-      />
+    />
 
   </FrameLayout>
 
@@ -61,7 +61,7 @@
     android:layout_height="match_parent"
     android:layout_marginEnd="@dimen/spaceMedium"
     android:gravity="center_vertical"
-    >
+  >
 
     <TextView
       android:id="@+id/calendarWidgetItemTitle"
@@ -70,7 +70,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/spaceTiny"
       tools:text="Breaking Bad"
-      />
+    />
 
     <TextView
       android:id="@+id/calendarWidgetItemOverview"
@@ -88,7 +88,7 @@
       android:textColor="?android:attr/textColorPrimary"
       android:textSize="12sp"
       tools:text="@tools:sample/lorem/random"
-      />
+    />
 
     <TextView
       android:id="@+id/calendarWidgetItemBadge"
@@ -108,7 +108,7 @@
       android:textColor="?android:attr/textColorPrimary"
       android:textSize="12sp"
       tools:text="S.01 E.01"
-      />
+    />
 
     <TextView
       android:id="@+id/calendarWidgetItemDate"
@@ -120,7 +120,7 @@
       android:textColor="?android:attr/textColorSecondary"
       android:textSize="11sp"
       tools:text="Wednesday, 27 June 2019"
-      />
+    />
 
   </RelativeLayout>
 

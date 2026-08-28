@@ -4,37 +4,37 @@
     <include
       domain="database"
       path="SHELFLY_DB"
-      />
+    />
 
     <include
       domain="sharedpref"
       path="PREFERENCES_SPOILERS.xml"
-      />
+    />
 
     <include
       domain="sharedpref"
       path="PREFERENCES_MISC.xml"
-      />
+    />
 
     <include
       domain="sharedpref"
       path="PREFERENCES_PROGRESS_MOVIES.xml"
-      />
+    />
 
     <include
       domain="sharedpref"
       path="PREFERENCES_PROGRESS_SHOWS_ON_HOLD.xml"
-      />
+    />
 
     <include
       domain="sharedpref"
       path="PREFERENCES_WATCHLIST.xml"
-      />
+    />
 
     <include
       domain="sharedpref"
       path="PREFERENCES_TUTORIALS.xml"
-      />
+    />
 
   </cloud-backup>
 </data-extraction-rules>

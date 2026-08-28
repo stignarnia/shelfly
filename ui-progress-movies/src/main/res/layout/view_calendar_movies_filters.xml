@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <HorizontalScrollView
     android:layout_width="match_parent"
@@ -18,7 +18,7 @@
     android:paddingTop="@dimen/spaceSmall"
     android:paddingEnd="@dimen/itemMarginHorizontal"
     android:scrollbars="none"
-    >
+  >
 
     <com.google.android.material.chip.ChipGroup
       android:id="@+id/chipsGroup"
@@ -26,7 +26,7 @@
       android:layout_height="wrap_content"
       app:singleLine="true"
       app:singleSelection="true"
-      >
+    >
 
       <com.google.android.material.chip.Chip
         android:id="@+id/modeChip"
@@ -36,7 +36,7 @@
         app:chipIcon="@drawable/ic_calendar"
         app:chipIconTint="@color/selector_chip_text"
         app:chipIconVisible="true"
-        />
+      />
 
     </com.google.android.material.chip.ChipGroup>
 

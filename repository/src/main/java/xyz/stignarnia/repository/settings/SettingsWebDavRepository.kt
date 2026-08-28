@@ -6,7 +6,7 @@ import xyz.stignarnia.common.security.SecretCipher
 import xyz.stignarnia.repository.utilities.EnumPreference
 import xyz.stignarnia.repository.utilities.IntPreference
 import xyz.stignarnia.repository.utilities.StringPreference
-import xyz.stignarnia.ui_model.BackupTarget
+import xyz.stignarnia.uiModel.BackupTarget
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -18,58 +18,59 @@ import javax.inject.Singleton
  * The URL and username are not secret and are stored as-is, which keeps them readable when diagnosing a failing backup.
  */
 @Singleton
-class SettingsWebDavRepository @Inject constructor(
-  @param:Named("webdavPreferences") private val preferences: SharedPreferences,
-  private val secretCipher: SecretCipher,
-) {
+class SettingsWebDavRepository
+  @Inject
+  constructor(
+    @param:Named("webdavPreferences") private val preferences: SharedPreferences,
+    private val secretCipher: SecretCipher,
+  ) {
+    companion object Key {
+      private const val URL = "WEBDAV_URL"
+      private const val USERNAME = "WEBDAV_USERNAME"
+      private const val PASSWORD = "WEBDAV_PASSWORD"
+      private const val TARGET = "BACKUP_TARGET"
+      private const val RETENTION = "BACKUP_RETENTION"
 
-  companion object Key {
-    private const val URL = "WEBDAV_URL"
-    private const val USERNAME = "WEBDAV_USERNAME"
-    private const val PASSWORD = "WEBDAV_PASSWORD"
-    private const val TARGET = "BACKUP_TARGET"
-    private const val RETENTION = "BACKUP_RETENTION"
-
-    const val RETENTION_KEEP_ALL = 0
-    const val RETENTION_DEFAULT = 5
-  }
-
-  var url: String by StringPreference(preferences, URL, "")
-  var username: String by StringPreference(preferences, USERNAME, "")
-
-  /**
-   * How many backups to keep at the destination.
-   * [RETENTION_KEEP_ALL] disables pruning entirely, so nothing is ever deleted on the user's behalf.
-   */
-  var backupRetention: Int by IntPreference(preferences, RETENTION, RETENTION_DEFAULT)
-
-  var backupTarget: BackupTarget by EnumPreference(
-    preferences,
-    TARGET,
-    BackupTarget.LOCAL_FOLDER,
-    BackupTarget::class.java,
-  )
-
-  /**
-   * Returns an empty string when nothing is stored, and also when the stored value cannot be decrypted - which happens if the Keystore key was lost to a device restore.
-   * The user is asked for the password again in that case, rather than the backup silently failing to authenticate.
-   */
-  var password: String
-    get() {
-      val stored = preferences.getString(PASSWORD, null) ?: return ""
-      return secretCipher.decrypt(stored) ?: ""
+      const val RETENTION_KEEP_ALL = 0
+      const val RETENTION_DEFAULT = 5
     }
-    set(value) {
-      preferences.edit {
-        if (value.isBlank()) {
-          remove(PASSWORD)
-        } else {
-          putString(PASSWORD, secretCipher.encrypt(value))
+
+    var url: String by StringPreference(preferences, URL, "")
+    var username: String by StringPreference(preferences, USERNAME, "")
+
+    /**
+     * How many backups to keep at the destination.
+     * [RETENTION_KEEP_ALL] disables pruning entirely, so nothing is ever deleted on the user's behalf.
+     */
+    var backupRetention: Int by IntPreference(preferences, RETENTION, RETENTION_DEFAULT)
+
+    var backupTarget: BackupTarget by EnumPreference(
+      preferences,
+      TARGET,
+      BackupTarget.LOCAL_FOLDER,
+      BackupTarget::class.java,
+    )
+
+    /**
+     * Returns an empty string when nothing is stored, and also when the stored value cannot be decrypted - which happens if the Keystore key was lost to a device restore.
+     * The user is asked for the password again in that case, rather than the backup silently failing to authenticate.
+     */
+    var password: String
+      get() {
+        val stored = preferences.getString(PASSWORD, null) ?: return ""
+        return secretCipher.decrypt(stored) ?: ""
+      }
+      set(value) {
+        preferences.edit {
+          if (value.isBlank()) {
+            remove(PASSWORD)
+          } else {
+            putString(PASSWORD, secretCipher.encrypt(value))
+          }
         }
       }
-    }
 
-  fun clear() {
-    preferences.edit { clear() }
+    fun clear() {
+      preferences.edit { clear() }
+    }
   }
-}

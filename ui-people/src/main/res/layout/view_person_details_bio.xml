@@ -6,9 +6,9 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
-  <xyz.stignarnia.ui_base.common.views.FoldableTextView
+  <xyz.stignarnia.uiBase.common.views.FoldableTextView
     android:id="@+id/personBioText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,14 +23,13 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewPersonDetailsSeparator"
     tools:text="@tools:sample/lorem/random"
-    />
+  />
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/snackbarLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
-    />
+  />
 
 </merge>
-

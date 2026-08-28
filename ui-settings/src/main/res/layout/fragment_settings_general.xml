@@ -7,7 +7,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <TextView
     android:id="@+id/settingsCategoryGeneral"
@@ -19,7 +19,7 @@
     app:layout_constraintVertical_bias="0"
     app:layout_constraintVertical_chainStyle="packed"
     app:layout_goneMarginTop="@dimen/spaceBig"
-    />
+  />
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/settingsLanguage"
@@ -28,7 +28,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsCategoryGeneral"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsLanguageTitle"
@@ -38,7 +38,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsLanguageDescription"
@@ -51,7 +51,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsLanguageTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsLanguageValue"
@@ -62,7 +62,7 @@
       app:layout_constraintBottom_toBottomOf="@id/settingsLanguage"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsLanguage"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -73,7 +73,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsLanguage"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsCountryTitle"
@@ -83,7 +83,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsCountryDescription"
@@ -96,7 +96,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsCountryTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsCountryValue"
@@ -107,7 +107,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsCountry"
       tools:text="@tools:sample/lorem"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -118,7 +118,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsCountry"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsThemeTitle"
@@ -128,7 +128,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsThemeDescription"
@@ -141,7 +141,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsThemeTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsThemeValue"
@@ -152,7 +152,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsTheme"
       tools:text="@tools:sample/lorem"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -167,7 +167,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsTheme"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsAmoledTitle"
@@ -177,7 +177,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsAmoledDescription"
@@ -190,7 +190,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsAmoledTitle"
-      />
+    />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
       android:id="@+id/settingsAmoledSwitch"
@@ -201,7 +201,7 @@
       app:layout_constraintBottom_toBottomOf="@id/settingsAmoled"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsAmoled"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -212,18 +212,18 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsAmoled"
-    >
+  >
 
     <TextView
       style="@style/Settings.Title"
       android:text="@string/textSettingsDateFormatTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsDateFormatValue"
       style="@style/Settings.Summary"
       tools:text="MMM dd, yyyy HH:mm (EEEE)"
-      />
+    />
 
   </LinearLayout>
 
@@ -234,7 +234,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsDateFormat"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsTabletColumnsTitle"
@@ -244,7 +244,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsTabletColumnsDescription"
@@ -257,7 +257,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsTabletColumnsTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsTabletColumnsValue"
@@ -268,7 +268,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsTabletColumns"
       tools:text="@tools:sample/lorem"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -279,7 +279,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsTabletColumns"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsMoviesEnabledTitle"
@@ -289,7 +289,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsMoviesEnabledDescription"
@@ -302,7 +302,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsMoviesEnabledTitle"
-      />
+    />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
       android:id="@+id/settingsMoviesEnabledSwitch"
@@ -314,7 +314,7 @@
       app:layout_constraintBottom_toBottomOf="@id/settingsMoviesEnabled"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsMoviesEnabled"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -325,7 +325,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/settingsMoviesEnabled"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsStreamingsEnabledTitle"
@@ -335,7 +335,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsStreamingsEnabledDescription"
@@ -348,7 +348,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsStreamingsEnabledTitle"
-      />
+    />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
       android:id="@+id/settingsStreamingsEnabledSwitch"
@@ -360,7 +360,7 @@
       app:layout_constraintBottom_toBottomOf="@id/settingsStreamingsEnabled"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsStreamingsEnabled"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -371,7 +371,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsStreamingsEnabled"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsIncludeSpecialsTitle"
@@ -381,7 +381,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsIncludeSpecialsDescription"
@@ -394,7 +394,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsIncludeSpecialsTitle"
-      />
+    />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
       android:id="@+id/settingsIncludeSpecialsSwitch"
@@ -406,7 +406,7 @@
       app:layout_constraintBottom_toBottomOf="@id/settingsIncludeSpecials"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsIncludeSpecials"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -417,7 +417,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsIncludeSpecials"
-    />
+  />
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/settingsDateSelection"
@@ -427,7 +427,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsSeparator1"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsDateSelectionTitle"
@@ -437,7 +437,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsDateSelectionDescription"
@@ -451,7 +451,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsDateSelectionTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsDateSelectionValue"
@@ -464,7 +464,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -476,7 +476,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsDateSelection"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsProgressNextTitle"
@@ -486,7 +486,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsProgressNextDescription"
@@ -501,7 +501,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsProgressNextTitle"
       tools:text="@tools:sample/lorem/random"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsProgressNextValue"
@@ -514,7 +514,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -525,7 +525,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsProgressNext"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsUpcomingSectionTitle"
@@ -535,7 +535,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsUpcomingSectionDescription"
@@ -548,7 +548,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsUpcomingSectionTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsUpcomingValue"
@@ -561,7 +561,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="@tools:sample/lorem"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -572,17 +572,17 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsUpcomingSection"
-    >
+  >
 
     <TextView
       style="@style/Settings.Title"
       android:text="@string/textSettingsRecentShowsTitle"
-      />
+    />
 
     <TextView
       style="@style/Settings.Summary"
       android:text="@string/textSettingsRecentShowsSummary"
-      />
+    />
 
   </LinearLayout>
 

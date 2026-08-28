@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   android:overScrollMode="never"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/root"
@@ -18,7 +18,7 @@
     android:focusableInTouchMode="true"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
     tools:theme="@style/AppTheme"
-    >
+  >
 
     <LinearLayout
       android:id="@+id/settingsLayout"
@@ -29,13 +29,13 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      >
+    >
 
       <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/notCollectedMoviesLayout"
         style="@style/Settings.ItemLayout"
         android:layout_width="match_parent"
-        >
+      >
 
         <TextView
           android:id="@+id/notCollectedMoviesTitle"
@@ -46,7 +46,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_chainStyle="spread"
-          />
+        />
 
         <TextView
           android:id="@+id/notCollectedMoviesDescription"
@@ -59,7 +59,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/notCollectedMoviesTitle"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/notCollectedMoviesSwitch"
@@ -70,7 +70,7 @@
           app:layout_constraintBottom_toBottomOf="@id/notCollectedMoviesDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/notCollectedMoviesDescription"
-          />
+        />
 
         <TextView
           android:id="@+id/notCollectedMoviesRatingDescription"
@@ -84,7 +84,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/notCollectedMoviesDescription"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/notCollectedMoviesRatingsSwitch"
@@ -95,7 +95,7 @@
           app:layout_constraintBottom_toBottomOf="@id/notCollectedMoviesRatingDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/notCollectedMoviesRatingDescription"
-          />
+        />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -104,7 +104,7 @@
         style="@style/Settings.ItemLayout"
         android:layout_width="match_parent"
         android:paddingTop="0dp"
-        >
+      >
 
         <TextView
           android:id="@+id/myMoviesTitle"
@@ -115,7 +115,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_chainStyle="spread"
-          />
+        />
 
         <TextView
           android:id="@+id/myMoviesDescription"
@@ -128,7 +128,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/myMoviesTitle"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/myMoviesSwitch"
@@ -139,7 +139,7 @@
           app:layout_constraintBottom_toBottomOf="@id/myMoviesDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/myMoviesDescription"
-          />
+        />
 
         <TextView
           android:id="@+id/myMoviesRatingDescription"
@@ -153,7 +153,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/myMoviesDescription"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/myMoviesRatingsSwitch"
@@ -164,7 +164,7 @@
           app:layout_constraintBottom_toBottomOf="@id/myMoviesRatingDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/myMoviesRatingDescription"
-          />
+        />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,7 +173,7 @@
         style="@style/Settings.ItemLayout"
         android:layout_width="match_parent"
         android:paddingTop="0dp"
-        >
+      >
 
         <TextView
           android:id="@+id/watchlistMoviesTitle"
@@ -184,7 +184,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_chainStyle="spread"
-          />
+        />
 
         <TextView
           android:id="@+id/watchlistMoviesDescription"
@@ -197,7 +197,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/watchlistMoviesTitle"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/watchlistMoviesSwitch"
@@ -208,7 +208,7 @@
           app:layout_constraintBottom_toBottomOf="@id/watchlistMoviesDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/watchlistMoviesDescription"
-          />
+        />
 
         <TextView
           android:id="@+id/watchlistMoviesRatingDescription"
@@ -222,7 +222,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/watchlistMoviesDescription"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/watchlistMoviesRatingsSwitch"
@@ -233,7 +233,7 @@
           app:layout_constraintBottom_toBottomOf="@id/watchlistMoviesRatingDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/watchlistMoviesRatingDescription"
-          />
+        />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -242,7 +242,7 @@
         style="@style/Settings.ItemLayout"
         android:layout_width="match_parent"
         android:paddingTop="0dp"
-        >
+      >
 
         <TextView
           android:id="@+id/hiddenMoviesTitle"
@@ -253,7 +253,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_chainStyle="spread"
-          />
+        />
 
         <TextView
           android:id="@+id/hiddenMoviesDescription"
@@ -266,7 +266,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/hiddenMoviesTitle"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/hiddenMoviesSwitch"
@@ -277,7 +277,7 @@
           app:layout_constraintBottom_toBottomOf="@id/hiddenMoviesDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/hiddenMoviesDescription"
-          />
+        />
 
         <TextView
           android:id="@+id/hiddenMoviesRatingDescription"
@@ -291,7 +291,7 @@
           app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/hiddenMoviesDescription"
-          />
+        />
 
         <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/hiddenMoviesRatingsSwitch"
@@ -302,7 +302,7 @@
           app:layout_constraintBottom_toBottomOf="@id/hiddenMoviesRatingDescription"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="@id/hiddenMoviesRatingDescription"
-          />
+        />
       </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
@@ -322,7 +322,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsLayout"
       app:rippleColor="?android:attr/textColorPrimary"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

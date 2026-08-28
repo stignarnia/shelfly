@@ -4,5 +4,5 @@
   <application
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
-    />
+  />
 </manifest>

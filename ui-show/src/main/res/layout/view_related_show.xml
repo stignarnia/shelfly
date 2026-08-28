@@ -6,14 +6,14 @@
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <FrameLayout
     android:id="@+id/relatedRoot"
     android:layout_width="@dimen/relatedShowWidth"
     android:layout_height="@dimen/relatedShowHeight"
     android:foreground="@drawable/bg_media_view_ripple"
-    >
+  >
 
     <ImageView
       android:id="@+id/relatedImage"
@@ -22,7 +22,7 @@
       android:background="@drawable/bg_media_view_elevation"
       android:contentDescription="@null"
       android:elevation="@dimen/elevationSmall"
-      />
+    />
 
     <ImageView
       android:id="@+id/relatedPlaceholder"
@@ -37,7 +37,7 @@
       app:srcCompat="@drawable/ic_television"
       app:tint="?attr/colorPlaceholderIcon"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/relatedTitle"
@@ -54,7 +54,7 @@
       android:visibility="gone"
       tools:text="Erin Moriarty"
       tools:visibility="visible"
-      />
+    />
 
     <ImageView
       android:id="@+id/relatedBadge"
@@ -67,7 +67,7 @@
       android:translationY="-3dp"
       app:srcCompat="@drawable/ic_bookmark_full"
       tools:visibility="visible"
-      />
+    />
 
   </FrameLayout>
 

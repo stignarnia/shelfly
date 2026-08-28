@@ -17,9 +17,10 @@ android {
   }
 
   defaultConfig {
-    minSdk = libs.versions.minSdk
-      .get()
-      .toInt()
+    minSdk =
+      libs.versions.minSdk
+        .get()
+        .toInt()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
@@ -31,12 +32,13 @@ android {
 
   testOptions {
     // targetSdk only affects instrumentation tests in a library, and AGP 9 removed it from defaultConfig.
-    targetSdk = libs.versions.targetSdk
-      .get()
-      .toInt()
+    targetSdk =
+      libs.versions.targetSdk
+        .get()
+        .toInt()
   }
 
-  namespace = "xyz.stignarnia.ui_base"
+  namespace = "xyz.stignarnia.uiBase"
 }
 
 // ThemeResourcesTest reads the theme XML off the filesystem rather than through R, because what it checks is which entries exist - something R cannot express.

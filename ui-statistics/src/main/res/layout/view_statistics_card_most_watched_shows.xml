@@ -8,7 +8,7 @@
   tools:background="?attr/colorAppBackground"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <TextView
     android:id="@+id/viewMostWatchedShowsTitle"
@@ -24,7 +24,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0"
     app:layout_constraintVertical_chainStyle="packed"
-    />
+  />
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/viewMostWatchedShowsRecycler"
@@ -40,7 +40,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewMostWatchedShowsTitle"
     app:layout_goneMarginBottom="@dimen/spaceMedium"
-    />
+  />
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/viewMostWatchedShowsMoreButton"
@@ -55,6 +55,6 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewMostWatchedShowsRecycler"
     app:rippleColor="?android:attr/textColorSecondary"
-    />
+  />
 
 </merge>

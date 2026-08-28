@@ -1,0 +1,13 @@
+package xyz.stignarnia.commonTest
+
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import xyz.stignarnia.common.dispatchers.CoroutineDispatchers
+
+@OptIn(ExperimentalCoroutinesApi::class)
+class UnconfinedCoroutineDispatchers : CoroutineDispatchers {
+  override val Main = UnconfinedTestDispatcher()
+  override val IO = UnconfinedTestDispatcher()
+  override val Default = UnconfinedTestDispatcher()
+  override val Unconfined = UnconfinedTestDispatcher()
+}

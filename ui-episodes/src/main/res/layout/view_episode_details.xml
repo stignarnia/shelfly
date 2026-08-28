@@ -8,7 +8,7 @@
   android:layout_height="match_parent"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <ImageView
     android:id="@+id/episodeDetailsImage"
@@ -21,7 +21,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0"
     app:layout_constraintVertical_chainStyle="packed"
-    />
+  />
 
   <ImageView
     android:id="@+id/episodeDetailsImagePlaceholder"
@@ -41,7 +41,7 @@
     app:srcCompat="@drawable/ic_television"
     app:tint="?attr/colorPlaceholderIcon"
     tools:visibility="visible"
-    />
+  />
 
   <ProgressBar
     android:id="@+id/episodeDetailsProgress"
@@ -52,7 +52,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="@id/episodeDetailsImage"
-    />
+  />
 
   <View
     android:id="@+id/episodeDetailsSeparator"
@@ -63,7 +63,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/episodeDetailsImage"
-    />
+  />
 
   <androidx.core.widget.NestedScrollView
     android:id="@+id/episodeDetailsRootScroll"
@@ -78,7 +78,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/episodeDetailsSeparator"
-    >
+  >
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -87,7 +87,7 @@
       android:clipToPadding="false"
       android:orientation="vertical"
       android:paddingBottom="@dimen/spaceBig"
-      >
+    >
 
       <com.google.android.material.tabs.TabLayout
         android:id="@+id/episodeDetailsTabs"
@@ -101,7 +101,7 @@
         android:paddingEnd="@dimen/spaceSmall"
         android:visibility="invisible"
         tools:visibility="visible"
-        />
+      />
 
       <LinearLayout
         android:layout_width="match_parent"
@@ -112,7 +112,7 @@
         android:layout_marginBottom="@dimen/spaceNormal"
         android:clipChildren="false"
         android:orientation="vertical"
-        >
+      >
 
         <TextView
           android:id="@+id/episodeDetailsTitle"
@@ -128,7 +128,7 @@
           android:textSize="20sp"
           android:textStyle="bold"
           tools:text="That is not an example."
-          />
+        />
 
         <TextView
           android:id="@+id/episodeDetailsName"
@@ -139,7 +139,7 @@
           android:textColor="?android:attr/textColorSecondary"
           android:textSize="12sp"
           tools:text="S.01 E.99 | Thursday, 23 December 2019 at 15:00 | 23 mins"
-          />
+        />
 
         <TextView
           android:id="@+id/episodeDetailsRating"
@@ -155,7 +155,7 @@
           app:drawableStartCompat="@drawable/ic_star"
           app:drawableTint="?attr/colorAccent"
           tools:text="8.2 (1000 votes)"
-          />
+        />
 
         <TextView
           android:id="@+id/episodeDetailsWatchedAt"
@@ -179,7 +179,7 @@
           app:drawableTint="?android:attr/textColorPrimary"
           tools:text="Thursday, 23 Dec 2019, 15:00"
           tools:visibility="visible"
-          />
+        />
       </LinearLayout>
 
       <TextView
@@ -196,7 +196,7 @@
         android:textSize="14sp"
         tools:targetApi="o"
         tools:text="That is not an example."
-        />
+      />
 
       <LinearLayout
         android:id="@+id/episodeDetailsButtons"
@@ -209,12 +209,12 @@
         android:gravity="center_vertical|start"
         android:orientation="horizontal"
         tools:visibility="visible"
-        >
+      >
 
         <FrameLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          >
+        >
 
           <com.google.android.material.chip.Chip
             android:id="@+id/episodeDetailsRateButton"
@@ -222,7 +222,7 @@
             android:text="@string/textRate"
             app:chipBackgroundColor="?colorSheetBackground"
             app:chipIcon="@drawable/ic_star"
-            />
+          />
 
           <ProgressBar
             android:id="@+id/episodeDetailsRateProgress"
@@ -232,7 +232,7 @@
             android:layout_gravity="center"
             android:visibility="gone"
             tools:visibility="visible"
-            />
+          />
 
         </FrameLayout>
 
@@ -243,7 +243,7 @@
           android:text="@string/textLink"
           app:chipBackgroundColor="?colorSheetBackground"
           app:chipIcon="@drawable/ic_link"
-          />
+        />
 
       </LinearLayout>
 
@@ -260,6 +260,6 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

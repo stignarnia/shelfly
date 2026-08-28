@@ -16,9 +16,10 @@ android {
   }
 
   defaultConfig {
-    minSdk = libs.versions.minSdk
-      .get()
-      .toInt()
+    minSdk =
+      libs.versions.minSdk
+        .get()
+        .toInt()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
@@ -28,13 +29,14 @@ android {
     }
   }
 
-  namespace = "xyz.stignarnia.ui_backup"
+  namespace = "xyz.stignarnia.uiBackup"
 
   testOptions {
     // targetSdk only affects instrumentation tests in a library, and AGP 9 removed it from defaultConfig.
-    targetSdk = libs.versions.targetSdk
-      .get()
-      .toInt()
+    targetSdk =
+      libs.versions.targetSdk
+        .get()
+        .toInt()
     unitTests.all { test ->
       // BackupMigrationV2FileTest self-skips unless this points at a real v2 export.
       // Forwarded explicitly so it survives the Gradle daemon.

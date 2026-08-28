@@ -8,7 +8,7 @@
   android:layout_height="match_parent"
   android:clipChildren="false"
   android:clipToPadding="false"
-  >
+>
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/progressMoviesMainRecycler"
@@ -24,7 +24,7 @@
     android:paddingBottom="@dimen/bottomNavigationHeightPadded"
     android:visibility="gone"
     tools:visibility="visible"
-    />
+  />
 
   <include
     android:id="@+id/progressMoviesEmptyView"
@@ -38,9 +38,9 @@
     android:layout_marginBottom="@dimen/bottomNavigationHeight"
     android:visibility="gone"
     tools:visibility="visible"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.EmptySearchView
+  <xyz.stignarnia.uiBase.common.views.EmptySearchView
     android:id="@+id/progressMoviesEmptyFilterView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -48,15 +48,15 @@
     android:layout_marginBottom="@dimen/bottomNavigationHeight"
     android:visibility="gone"
     tools:visibility="visible"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.OverscrollActionView
+  <xyz.stignarnia.uiBase.common.views.OverscrollActionView
     android:id="@+id/progressMoviesOverscroll"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:layout_marginTop="@dimen/progressOverscrollPadding"
     app:actionIcon="@drawable/ic_cloud_upload"
-    />
+  />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

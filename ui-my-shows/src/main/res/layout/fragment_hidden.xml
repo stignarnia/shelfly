@@ -6,7 +6,7 @@
   android:layout_height="match_parent"
   android:clipChildren="false"
   android:clipToPadding="false"
-  >
+>
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/hiddenRecycler"
@@ -20,7 +20,7 @@
     android:paddingTop="@dimen/archiveTabsViewPadding"
     android:paddingEnd="@dimen/screenMarginHorizontal"
     android:paddingBottom="@dimen/myShowsBottomPadding"
-    />
+  />
 
   <include
     android:id="@+id/hiddenEmptyView"
@@ -31,6 +31,6 @@
     android:layout_marginStart="@dimen/spaceBig"
     android:layout_marginEnd="@dimen/spaceBig"
     android:visibility="gone"
-    />
+  />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

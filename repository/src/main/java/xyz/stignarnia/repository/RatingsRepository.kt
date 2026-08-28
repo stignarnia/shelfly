@@ -6,7 +6,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RatingsRepository @Inject constructor(
-  val shows: ShowsRatingsRepository,
-  val movies: MoviesRatingsRepository,
-)
+class RatingsRepository
+  @Inject
+  constructor(
+    val shows: ShowsRatingsRepository,
+    val movies: MoviesRatingsRepository,
+  )

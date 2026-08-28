@@ -7,7 +7,7 @@
   android:layout_height="match_parent"
   android:background="@drawable/bg_widget"
   android:theme="@style/AppTheme.Widget.Dark"
-  >
+>
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -15,7 +15,7 @@
     android:orientation="vertical"
     android:paddingTop="@dimen/widgetPaddingTop"
     android:paddingBottom="@dimen/spaceTiny"
-    >
+  >
 
     <!-- Item 1 -->
     <LinearLayout
@@ -23,7 +23,7 @@
       android:layout_height="wrap_content"
       android:clipChildren="false"
       android:orientation="horizontal"
-      >
+    >
 
       <FrameLayout
         android:layout_width="@dimen/widgetImageWidth"
@@ -35,7 +35,7 @@
         android:layout_marginBottom="@dimen/spaceSmall"
         android:background="@drawable/bg_widget_media_view_elevation"
         android:elevation="@dimen/elevationTiny"
-        >
+      >
 
         <ImageView
           android:layout_width="match_parent"
@@ -43,7 +43,7 @@
           android:contentDescription="@null"
           android:padding="@dimen/spaceSmall"
           android:src="@drawable/ic_television"
-          />
+        />
 
       </FrameLayout>
 
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
-        >
+      >
 
         <TextView
           android:id="@+id/previewTitle1"
@@ -63,7 +63,7 @@
           android:layout_marginEnd="@dimen/spaceTiny"
           android:layout_marginBottom="@dimen/spaceTiny"
           android:text="@string/previewProgressShow1"
-          />
+        />
 
         <TextView
           android:id="@+id/previewBadge1"
@@ -82,7 +82,7 @@
           android:text="@string/previewProgressEpisode1"
           android:textColor="?android:attr/textColorPrimary"
           android:textSize="12sp"
-          />
+        />
 
         <TextView
           android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
           android:text="@string/previewProgressEpisodeTitle1"
           android:textColor="?android:attr/textColorPrimary"
           android:textSize="12sp"
-          />
+        />
 
         <TextView
           android:id="@+id/previewProgressText1"
@@ -110,7 +110,7 @@
           android:gravity="start|center_vertical"
           android:maxLines="1"
           android:text="@string/previewProgressRating1"
-          />
+        />
 
         <ProgressBar
           style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -129,7 +129,7 @@
           android:progressTint="?attr/colorAccent"
           android:scaleY="0.75"
           android:translationY="1dp"
-          />
+        />
 
         <ImageButton
           android:id="@+id/previewCheck1"
@@ -137,7 +137,7 @@
           android:layout_alignParentTop="true"
           android:layout_alignParentEnd="true"
           android:contentDescription="@null"
-          />
+        />
 
       </RelativeLayout>
 
@@ -149,7 +149,7 @@
       android:layout_height="wrap_content"
       android:clipChildren="false"
       android:orientation="horizontal"
-      >
+    >
 
       <FrameLayout
         android:layout_width="@dimen/widgetImageWidth"
@@ -161,7 +161,7 @@
         android:layout_marginBottom="@dimen/spaceSmall"
         android:background="@drawable/bg_widget_media_view_elevation"
         android:elevation="@dimen/elevationTiny"
-        >
+      >
 
         <ImageView
           android:layout_width="match_parent"
@@ -169,7 +169,7 @@
           android:contentDescription="@null"
           android:padding="@dimen/spaceSmall"
           android:src="@drawable/ic_television"
-          />
+        />
 
       </FrameLayout>
 
@@ -178,7 +178,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
-        >
+      >
 
         <TextView
           android:id="@+id/previewTitle2"
@@ -189,7 +189,7 @@
           android:layout_marginEnd="@dimen/spaceTiny"
           android:layout_marginBottom="@dimen/spaceTiny"
           android:text="@string/previewProgressShow2"
-          />
+        />
 
         <TextView
           android:id="@+id/previewBadge2"
@@ -208,7 +208,7 @@
           android:text="@string/previewProgressEpisode2"
           android:textColor="?android:attr/textColorPrimary"
           android:textSize="12sp"
-          />
+        />
 
         <TextView
           android:layout_width="wrap_content"
@@ -224,7 +224,7 @@
           android:text="@string/previewProgressAir"
           android:textColor="?android:attr/textColorPrimary"
           android:textSize="12sp"
-          />
+        />
 
         <TextView
           android:id="@+id/previewProgressText2"
@@ -236,7 +236,7 @@
           android:gravity="start|center_vertical"
           android:maxLines="1"
           android:text="@string/previewProgressRating2"
-          />
+        />
 
         <ProgressBar
           style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -255,7 +255,7 @@
           android:progressTint="?attr/colorAccent"
           android:scaleY="0.75"
           android:translationY="1dp"
-          />
+        />
 
         <ImageButton
           android:id="@+id/previewCheck2"
@@ -263,7 +263,7 @@
           android:layout_alignParentTop="true"
           android:layout_alignParentEnd="true"
           android:contentDescription="@null"
-          />
+        />
 
       </RelativeLayout>
 
@@ -280,7 +280,7 @@
     android:orientation="horizontal"
     android:paddingTop="@dimen/spaceTiny"
     android:paddingBottom="@dimen/spaceTiny"
-    >
+  >
 
     <ImageView
       android:layout_width="14dp"
@@ -289,7 +289,7 @@
       android:layout_marginEnd="@dimen/spaceTiny"
       android:contentDescription="@null"
       android:src="@drawable/ic_app_round"
-      />
+    />
 
     <TextView
       android:layout_width="match_parent"
@@ -299,7 +299,7 @@
       android:textAlignment="viewStart"
       android:textColor="@color/colorWhite"
       android:textSize="12sp"
-      />
+    />
 
   </LinearLayout>
 

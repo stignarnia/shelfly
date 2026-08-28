@@ -95,7 +95,7 @@
 
   <string name="textLanguageEnglish" translatable="false">English</string>
   <string name="textLanguagePolish" translatable="false">Polski</string>
-    <string name="textLanguageRomanian" translatable="false">Română</string>
+  <string name="textLanguageRomanian" translatable="false">Română</string>
   <string name="textLanguageArabic" translatable="false">العربية</string>
   <string name="textLanguageChinese" translatable="false">中文简体</string>
   <string name="textLanguageSpanish" translatable="false">Español</string>

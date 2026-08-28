@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="textInMyMovies">Adăugat la istoric</string>
-    <string name="textInMoviesWatchlist">Adăugat la lista de urmărire</string>
-    <string name="textInHidden">Ascuns</string>
-    <string name="textMovieActorsEmpty">Actorii nu sunt disponibili</string>
-    <string name="textMovieTrailer">Trailer</string>
-    <string name="textMovieRate">Evaluare</string>
-    <string name="textMovieYouMayAlsoLike">Ți-ar putea plăcea și</string>
-    <string name="textMovieCollections">Colecții</string>
-    <string name="textMovieManageLists">Gestionare liste</string>
-    <string name="textMovieManageListsCount">Gestionare liste (%d)</string>
+  <string name="textInMyMovies">Adăugat la istoric</string>
+  <string name="textInMoviesWatchlist">Adăugat la lista de urmărire</string>
+  <string name="textInHidden">Ascuns</string>
+  <string name="textMovieActorsEmpty">Actorii nu sunt disponibili</string>
+  <string name="textMovieTrailer">Trailer</string>
+  <string name="textMovieRate">Evaluare</string>
+  <string name="textMovieYouMayAlsoLike">Ți-ar putea plăcea și</string>
+  <string name="textMovieCollections">Colecții</string>
+  <string name="textMovieManageLists">Gestionare liste</string>
+  <string name="textMovieManageListsCount">Gestionare liste (%d)</string>
 </resources>

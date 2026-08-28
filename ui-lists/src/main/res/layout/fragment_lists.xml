@@ -8,7 +8,7 @@
   android:layout_height="match_parent"
   android:clipChildren="false"
   android:clipToPadding="false"
-  >
+>
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/fragmentListsRecycler"
@@ -21,7 +21,7 @@
     android:paddingTop="@dimen/listsRecyclerPaddingTop"
     android:paddingEnd="@dimen/listsRecyclerPaddingHorizontal"
     android:paddingBottom="@dimen/listsBottomPadding"
-    />
+  />
 
   <include
     android:id="@+id/fragmentListsEmptyView"
@@ -33,7 +33,7 @@
     android:layout_marginEnd="@dimen/spaceBig"
     android:visibility="gone"
     tools:visibility="visible"
-    />
+  />
 
   <FrameLayout
     android:id="@+id/fragmentListsIcons"
@@ -43,17 +43,17 @@
     android:layout_marginStart="@dimen/screenMarginHorizontal"
     android:layout_marginTop="@dimen/listsIconsPadding"
     android:layout_marginEnd="@dimen/screenMarginHorizontal"
-    app:layout_behavior="xyz.stignarnia.ui_base.common.behaviour.ScrollableViewBehaviour"
-    >
+    app:layout_behavior="xyz.stignarnia.uiBase.common.behaviour.ScrollableViewBehaviour"
+  >
 
-    <xyz.stignarnia.ui_lists.lists.views.ListsFiltersView
+    <xyz.stignarnia.uiLists.lists.views.ListsFiltersView
       android:id="@+id/fragmentListsFilters"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center_vertical"
-      />
+    />
 
-    <xyz.stignarnia.ui_base.common.views.ScrollableImageView
+    <xyz.stignarnia.uiBase.common.views.ScrollableImageView
       android:id="@+id/fragmentListsSearchButton"
       android:layout_width="36dp"
       android:layout_height="36dp"
@@ -63,21 +63,21 @@
       android:paddingEnd="0dp"
       app:srcCompat="@drawable/ic_search"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
   </FrameLayout>
 
-  <xyz.stignarnia.ui_base.common.views.ModeTabsView
+  <xyz.stignarnia.uiBase.common.views.ModeTabsView
     android:id="@+id/fragmentListsModeTabs"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/screenMarginHorizontal"
     android:layout_marginTop="@dimen/collectionTabsMargin"
     android:layout_marginEnd="@dimen/screenMarginHorizontal"
-    app:layout_behavior="xyz.stignarnia.ui_base.common.behaviour.ScrollableViewBehaviour"
-    />
+    app:layout_behavior="xyz.stignarnia.uiBase.common.behaviour.ScrollableViewBehaviour"
+  />
 
-  <xyz.stignarnia.ui_base.common.views.SearchLocalView
+  <xyz.stignarnia.uiBase.common.views.SearchLocalView
     android:id="@+id/fragmentListsSearchLocalView"
     android:layout_width="match_parent"
     android:layout_height="@dimen/searchLocalViewHeight"
@@ -86,16 +86,16 @@
     android:layout_marginRight="@dimen/screenMarginHorizontal"
     android:visibility="gone"
     tools:visibility="visible"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.SearchView
+  <xyz.stignarnia.uiBase.common.views.SearchView
     android:id="@+id/fragmentListsSearchView"
     android:layout_width="match_parent"
     android:layout_height="@dimen/searchViewHeight"
     android:layout_marginLeft="@dimen/screenMarginHorizontal"
     android:layout_marginTop="@dimen/spaceSmall"
     android:layout_marginRight="@dimen/screenMarginHorizontal"
-    />
+  />
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/fragmentListsSnackHost"
@@ -103,7 +103,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:layout_marginBottom="@dimen/listsFabBottomPadding"
-    >
+  >
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
       android:id="@+id/fragmentListsCreateListButton"
@@ -120,7 +120,7 @@
       app:srcCompat="@drawable/ic_list_create"
       app:tint="?attr/textColorOnSurface"
       tools:visibility="visible"
-      />
+    />
 
   </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

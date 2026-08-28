@@ -14,7 +14,7 @@
   android:paddingBottom="@dimen/spaceNormal"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/viewPersonLinksGuideline"
@@ -22,7 +22,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_constraintGuide_percent="0.5"
-    />
+  />
 
   <TextView
     android:id="@+id/viewPersonLinksTitle"
@@ -40,9 +40,9 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksWebsite"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -54,9 +54,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewPersonLinksTitle"
     custom:icon="@drawable/ic_link_color"
     custom:text="Website"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksImdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -68,9 +68,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewPersonLinksWebsite"
     custom:icon="@drawable/ic_imdb"
     custom:text="IMDb"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksTmdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -82,9 +82,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewPersonLinksImdb"
     custom:icon="@drawable/ic_tmdb"
     custom:text="TMDB"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksGoogle"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -96,9 +96,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewPersonLinksTitle"
     custom:icon="@drawable/ic_google"
     custom:text="Google"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksDuckDuck"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -110,9 +110,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewPersonLinksGoogle"
     custom:icon="@drawable/ic_duckduck"
     custom:text="DuckDuckGo"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksWiki"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -125,9 +125,9 @@
     custom:icon="@drawable/ic_wikipedia"
     custom:iconTint="?attr/colorIconPrimary"
     custom:text="Wikipedia"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksYouTube"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -139,9 +139,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewPersonLinksWiki"
     custom:icon="@drawable/ic_youtube"
     custom:text="YouTube"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewPersonLinksTwitter"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
     app:layout_constraintTop_toBottomOf="@id/viewPersonLinksTmdb"
     custom:icon="@drawable/ic_twitter"
     custom:text="Twitter"
-    />
+  />
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/viewPersonLinksButtonClose"
@@ -172,6 +172,6 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewPersonLinksTwitter"
     app:rippleColor="?android:attr/textColorPrimary"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

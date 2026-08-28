@@ -69,7 +69,7 @@ refactor(ui): replace MaterialAlertDialogBuilder with unified ModalView
 
 ## Development & Build Commands
 
-- **Run ktlint**: `./ktlint`
+- **Run ktlint**: `./scripts/ktlint.sh` (downloads ktlint if the clone does not have it)
 - **Run Unit Tests**: `./gradlew testDebugUnitTest` (or a single module: `./gradlew :app:testDebugUnitTest`)
 - **Build Release APK**: `./gradlew :app:assembleRelease`
 - **Build Debug APK**: `./gradlew :app:assembleDebug`
@@ -87,18 +87,46 @@ Each tier below is additive: it assumes the tiers above it also ran.
 ### Tier 1 - any Kotlin change
 
 ```
-./ktlint && ./scripts/check-format.sh && ./gradlew testDebugUnitTest
+./scripts/ktlint.sh && ./scripts/check-format.sh && ./gradlew testDebugUnitTest
 ```
 
 `ktlint` is a self-executing jar, not a Gradle plugin.
 No Gradle task runs it, so `check` will never catch a formatting violation - it has to be invoked separately.
 
-`check-format.sh` checks CRLF, hard tabs, and trailing whitespace across the tracked text files ktlint cannot read: Gradle scripts, resources, manifests, workflows, R8 rules, shell, properties, the version catalog, JSON, Markdown, the fastlane metadata, `.editorconfig`, `.gitignore` and `LICENSE`.
-Binaries are excluded because the rules are meaningless for them, and `gradlew` / `gradlew.bat` because Gradle regenerates them.
-It is a whitespace check rather than a formatter: it will not reindent XML or wrap long lines.
-It does validate that every tracked XML file is well formed, which nothing else does - `aapt` only parses the resources of the variant being built, so a malformed file in a locale or qualifier that variant skips goes unread until a device configuration selects it.
-A missing `xmllint` fails the run rather than skipping, because a check that quietly does nothing is worse than one that is absent; CI installs `libxml2-utils` for that reason.
-`insert_final_newline` is declared in `.editorconfig` but deliberately not enforced, because 335 files would fail it today.
+`check-format.sh` does two things, and only one of them is whitespace.
+
+Whitespace is delegated to `editorconfig-checker`, which reads `.editorconfig` directly, making that file the single source of truth.
+Reimplementing the rules in the script would put a second copy alongside the one the editor reads, and nothing would catch the two disagreeing.
+The tracked file list is passed to it explicitly rather than letting it walk the working tree, so its default excludes never have to agree with `.gitignore`; build output, generated sources and `local.properties` are excluded for free.
+Files `.editorconfig` declares no rules for - `gradlew`, `gradlew.bat`, the ktlint jar, every binary - match no section and are reported on by nothing, so there is no exclude list to maintain.
+
+There is no line length limit anywhere in the tree, so nothing checks one.
+`max_line_length` is unset in `.editorconfig` and ktlint's rule is disabled explicitly, since ktlint falls back to a code-style default when the key is absent rather than reading it as no limit.
+`function-signature` and `class-signature` are disabled with it: neither is a length check, but both measure a signature against `max_line_length` to decide whether to collapse it onto one line, and with no limit they ask for every multi-line signature in the tree to be joined up.
+This is the no-mid-sentence-wrapping rule from this document applied to code - imports, SQL `@Query` literals and one-sentence-per-line comments all exceed any limit worth setting.
+
+The second half is XML well-formedness, which nothing else in the build checks - `aapt` only parses the resources of the variant being built, so a malformed file in a locale or qualifier that variant skips goes unread until a device configuration selects it.
+A missing `xmllint` fails the run rather than skipping, because a check that quietly does nothing is worse than one that is absent.
+It is the one tool that cannot be fetched automatically, being a system package rather than a single release binary, so CI installs `libxml2-utils`.
+
+`ktlint` and `editorconfig-checker` are self-contained binaries in the repository root, gitignored, and downloaded by the scripts themselves when the working tree does not have them - see `scripts/lib/tools.sh`.
+A fresh clone therefore needs no setup and no package manager, and CI runs the same two scripts rather than carrying its own copy of the download.
+Neither tool is pinned: both track the latest release, so a rule the upstream tool adds is caught the next time anyone runs it rather than whenever someone remembers to bump a version, and a pin in CI cannot drift from what everyone runs locally.
+
+### Editor setup
+
+`.vscode/settings.json` turns on the save-time half of the same rules, so the editor fixes what CI would fail on.
+`files.trimTrailingWhitespace`, `files.insertFinalNewline` and `files.eol` map one-to-one onto `.editorconfig` and need no extension.
+
+`editor.formatOnSave` formats XML through `redhat.vscode-xml`, which is recommended in `.vscode/extensions.json` - VSCode ships no XML formatter of its own, so without it saving an XML file does nothing.
+The resource tree sits at that formatter's fixed point, so saving an XML file produces no diff.
+
+Three of its settings override defaults that are wrong for this tree:
+
+- `xml.format.maxLineWidth` is **0**. The extension ships `100`, which rewraps the text inside `<string>` elements across every locale. `aapt` collapses that whitespace so the app renders identically, but the translations stop being reviewable in a diff. This is the mid-sentence-wrapping rule from this document applied to XML.
+- `xml.format.splitAttributes` is `preserve` and `xml.format.preserveAttributeLineBreaks` is `true`, which keep the one-attribute-per-line style. Without them the formatter joins every attribute of an element onto one line.
+
+Kotlin has no VSCode formatter, so ktlint is run by hand: `./scripts/ktlint.sh --format`.
 
 ### Tier 2 - resources, layouts, manifest, strings
 
@@ -164,7 +192,7 @@ Unit tests and debug builds never run R8.
 Run in two parts, because the device half is the only one that needs hardware.
 
 ```
-./ktlint \
+./scripts/ktlint.sh \
   && ./scripts/check-format.sh \
   && ./scripts/check-config.sh \
   && ./scripts/check-release-notes.sh \
@@ -212,7 +240,7 @@ These rules are checked by tooling rather than by review.
 - **Layout attribute loss**: `scripts/hooks/pre-commit` rejects a commit in which a layout element that still exists lost an attribute it had at HEAD. Nothing else catches this: the file stays well-formed XML, `aapt` does not require `layout_width` at build time, the compiler never sees XML, and Lint has no check for it - a bulk edit once cut an `ImageView` from ten attributes to two, and the app built, installed, and died on launch. Bypass a deliberate removal with `--no-verify`.
 - **Conventional Commits**: `scripts/hooks/commit-msg` rejects any subject that is not `<type>(<scope>): <description>` with a type from the list above. Merges, reverts and rebase scratch commits are left alone, and `--no-verify` bypasses it. Enable it once per clone with `git config core.hooksPath scripts/hooks`.
 - **Release notes**: `scripts/check-release-notes.sh` fails when the first line of `release_notes.txt` is not `Shelfly <versionName>` from `gradle/libs.versions.toml`, or when the heading has no notes beneath it. Run it before tagging.
-- **Non-Kotlin whitespace**: `scripts/check-format.sh` fails on CRLF, hard tabs, or trailing whitespace across the tracked text files ktlint does not parse, excluding binaries and the generated Gradle wrapper scripts.
+- **Non-Kotlin whitespace**: `scripts/check-format.sh` runs `editorconfig-checker` over the tracked files, failing on any violation of `.editorconfig` - CRLF, hard tabs, trailing whitespace, missing final newline, wrong indent style. There is no line length rule to violate.
 - **Version and locale configuration, and unreferenced resources**: `scripts/check-config.sh` fails when a tag on HEAD disagrees with `versionName`, when the locale directories and `resourceConfigurations` disagree in either direction, and when any resource is declared but referenced nowhere in the project.
 - **Room schemas**: `scripts/check-schemas.sh` fails on uncommitted schema drift, and on any schema released in the last tag having been modified rather than superseded.
 - **Translation completeness**: Android Lint's `MissingTranslation` is error severity, so `lintDebug` already fails when a string is added to `values/strings.xml` without reaching every other locale. This needs no extra tooling - it is why the localization rule holds.
@@ -258,8 +286,16 @@ Changing this means editing the build file, which makes it a reviewable commit r
 
 **Findings get fixed.**
 No `lint-baseline.xml`, no `tools:ignore`, no `@SuppressLint`, no `@Suppress`, no disabling the check that caught it.
-The tree carries **zero** suppressions of any kind, which is a state worth keeping rather than a rule worth quoting: 280 were removed, and only about 60 of them turned out to cover a real finding.
+The tree carries **zero** in-source suppressions, which is a state worth keeping rather than a rule worth quoting: 280 were removed, and only about 60 of them turned out to cover a real finding.
 That ratio is the argument. A suppression outlives whatever justified it, and the next reader cannot tell the two apart without deleting it and rebuilding - so the cheapest first move on any suppression is to delete it and see whether anything actually fires.
+
+The four `ktlint_standard_* = disabled` keys in `.editorconfig` are the exception, and the one that is a judgement call carries its reason in a comment beside it.
+They were held to the same test rather than grandfathered: every one was deleted, `ktlint` was re-run, and `ktlint --format` was tried on the result.
+Eight did not survive that.
+Seven were fully autocorrectable - `import-ordering`, `string-template-indent`, `spacing-between-declarations-with-annotations`, `multiline-expression-wrapping`, `no-empty-first-line-in-class-body`, `annotation` and `blank-line-between-when-conditions` - so they were enabled and the tree formatted to match.
+`package-name` was not autocorrectable but was done by hand: every package was camel-cased, `ui_base` to `uiBase` and `data_local` to `dataLocal`, because the underscore is reserved in a package name rather than merely discouraged - JLS 6.1 uses it to escape a hyphen, a keyword or a leading digit in a domain component, and `ui_backup.features.import_` was using it for both meanings at once.
+
+What is left is `property-naming`, which the rule is simply wrong about, and the three that only exist because there is no line length to measure against.
 The message Lint prints on failure recommends `updateLintBaseline`; that advice does not apply here, because a baseline grandfathers findings in.
 If a check looks wrong about the code, it is usually right about something adjacent - fix that.
 

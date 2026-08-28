@@ -7,7 +7,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <TextView
     android:id="@+id/settingsCategoryWidgets"
@@ -16,7 +16,7 @@
     app:layout_constraintBottom_toTopOf="@id/settingsWidgetsLabels"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/settingsWidgetsLabels"
@@ -25,7 +25,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsCategoryWidgets"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsWidgetsLabelsTitle"
@@ -35,7 +35,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsWidgetsLabelsDescription"
@@ -49,7 +49,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsWidgetsLabelsTitle"
       tools:text="@tools:sample/lorem/random"
-      />
+    />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
       android:id="@+id/settingsWidgetsLabelsSwitch"
@@ -61,7 +61,7 @@
       app:layout_constraintBottom_toBottomOf="@id/settingsWidgetsLabels"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/settingsWidgetsLabels"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

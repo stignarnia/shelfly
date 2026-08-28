@@ -13,14 +13,14 @@
   tools:background="?attr/colorAppBackground"
   tools:layout_marginTop="-0dp"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/settingsContent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipChildren="false"
-    >
+  >
 
     <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/settingsToolbar"
@@ -34,10 +34,10 @@
       app:navigationIcon="@drawable/ic_arrow_back"
       app:navigationIconTint="?android:attr/textColorPrimary"
       app:title="@string/textSettings"
-      />
+    />
 
 
-    <xyz.stignarnia.ui_settings.views.SettingsFiltersView
+    <xyz.stignarnia.uiSettings.views.SettingsFiltersView
       android:id="@+id/settingsFilters"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -51,11 +51,11 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsToolbar"
       app:layout_goneMarginTop="0dp"
-      />
+    />
 
     <androidx.fragment.app.FragmentContainerView
       android:id="@+id/settingsCategoryApiKeys"
-      android:name="xyz.stignarnia.ui_settings.sections.apikeys.SettingsApiKeysFragment"
+      android:name="xyz.stignarnia.uiSettings.sections.apikeys.SettingsApiKeysFragment"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/spaceTiny"
@@ -65,11 +65,11 @@
       app:layout_constraintTop_toBottomOf="@id/settingsFilters"
       app:layout_goneMarginTop="0dp"
       tools:layout="@layout/fragment_settings_api_keys"
-      />
+    />
 
     <androidx.fragment.app.FragmentContainerView
       android:id="@+id/settingsCategoryGeneral"
-      android:name="xyz.stignarnia.ui_settings.sections.general.SettingsGeneralFragment"
+      android:name="xyz.stignarnia.uiSettings.sections.general.SettingsGeneralFragment"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       app:layout_constraintBottom_toTopOf="@+id/settingsCategoryNotifications"
@@ -77,11 +77,11 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsCategoryApiKeys"
       tools:layout="@layout/fragment_settings_general"
-      />
+    />
 
     <androidx.fragment.app.FragmentContainerView
       android:id="@+id/settingsCategorySpoilers"
-      android:name="xyz.stignarnia.ui_settings.sections.spoilers.SettingsSpoilersFragment"
+      android:name="xyz.stignarnia.uiSettings.sections.spoilers.SettingsSpoilersFragment"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       app:layout_constraintBottom_toTopOf="@id/settingsCategoryWidgets"
@@ -89,11 +89,11 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/settingsCategoryNotifications"
       tools:layout="@layout/fragment_settings_spoilers"
-      />
+    />
 
     <androidx.fragment.app.FragmentContainerView
       android:id="@+id/settingsCategoryNotifications"
-      android:name="xyz.stignarnia.ui_settings.sections.notifications.SettingsNotificationsFragment"
+      android:name="xyz.stignarnia.uiSettings.sections.notifications.SettingsNotificationsFragment"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       app:layout_constraintBottom_toTopOf="@id/settingsCategorySpoilers"
@@ -101,11 +101,11 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsCategoryGeneral"
       tools:layout="@layout/fragment_settings_notifications"
-      />
+    />
 
     <androidx.fragment.app.FragmentContainerView
       android:id="@+id/settingsCategoryWidgets"
-      android:name="xyz.stignarnia.ui_settings.sections.widgets.SettingsWidgetsFragment"
+      android:name="xyz.stignarnia.uiSettings.sections.widgets.SettingsWidgetsFragment"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       app:layout_constraintBottom_toTopOf="@id/settingsCategoryBackup"
@@ -113,11 +113,11 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsCategorySpoilers"
       tools:layout="@layout/fragment_settings_widgets"
-      />
+    />
 
     <androidx.fragment.app.FragmentContainerView
       android:id="@+id/settingsCategoryBackup"
-      android:name="xyz.stignarnia.ui_settings.sections.backup.SettingsBackupFragment"
+      android:name="xyz.stignarnia.uiSettings.sections.backup.SettingsBackupFragment"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       app:layout_constraintBottom_toTopOf="@id/settingsCategoryMisc"
@@ -125,18 +125,18 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsCategoryWidgets"
       tools:layout="@layout/fragment_settings_backup"
-      />
+    />
 
     <androidx.fragment.app.FragmentContainerView
       android:id="@+id/settingsCategoryMisc"
-      android:name="xyz.stignarnia.ui_settings.sections.misc.SettingsMiscFragment"
+      android:name="xyz.stignarnia.uiSettings.sections.misc.SettingsMiscFragment"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsCategoryBackup"
       tools:layout="@layout/fragment_settings_misc"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

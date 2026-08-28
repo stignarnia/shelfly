@@ -7,12 +7,12 @@
   android:layout_height="match_parent"
   android:background="@drawable/bg_widget"
   android:theme="@style/AppTheme.Widget.Dark"
-  >
+>
 
   <include
     layout="@layout/layout_widget_movies_calendar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    />
+  />
 
 </FrameLayout>

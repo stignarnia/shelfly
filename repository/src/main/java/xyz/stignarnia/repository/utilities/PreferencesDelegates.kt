@@ -10,7 +10,6 @@ class StringPreference(
   private val key: String,
   private val defaultValue: String,
 ) : ReadWriteProperty<Any, String> {
-
   override fun getValue(
     thisRef: Any,
     property: KProperty<*>,
@@ -30,7 +29,6 @@ class BooleanPreference(
   private val key: String,
   private val defaultValue: Boolean = false,
 ) : ReadWriteProperty<Any, Boolean> {
-
   override fun getValue(
     thisRef: Any,
     property: KProperty<*>,
@@ -50,7 +48,6 @@ class IntPreference(
   private val key: String,
   private val defaultValue: Int = 0,
 ) : ReadWriteProperty<Any, Int> {
-
   override fun getValue(
     thisRef: Any,
     property: KProperty<*>,
@@ -70,7 +67,6 @@ class LongPreference(
   private val key: String,
   private val defaultValue: Long = 0,
 ) : ReadWriteProperty<Any, Long> {
-
   override fun getValue(
     thisRef: Any,
     property: KProperty<*>,
@@ -91,7 +87,6 @@ class EnumPreference<T : Enum<T>>(
   private val defaultValue: T,
   private val clazz: Class<T>,
 ) : ReadWriteProperty<Any, T> {
-
   override fun getValue(
     thisRef: Any,
     property: KProperty<*>,

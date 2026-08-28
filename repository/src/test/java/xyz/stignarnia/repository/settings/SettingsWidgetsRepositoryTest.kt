@@ -10,8 +10,8 @@ import org.junit.Before
 import org.junit.Test
 
 class SettingsWidgetsRepositoryTest {
-
   @MockK lateinit var sharedPreferences: SharedPreferences
+
   @MockK lateinit var editor: SharedPreferences.Editor
 
   private lateinit var repository: SettingsWidgetsRepository

@@ -9,7 +9,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/navigationGraph"
   app:startDestination="@id/progressMainFragment"
-  >
+>
 
   <!--
     Reached from anywhere - a notification, a widget, a link - so they carry the same fade the tabs' own actions to these destinations do.
@@ -20,14 +20,14 @@
     app:destination="@id/showDetailsFragment"
     app:enterAnim="@anim/anim_fade_in"
     app:popExitAnim="@anim/anim_fade_out"
-    />
+  />
 
   <action
     android:id="@+id/actionNavigateMovieDetailsFragment"
     app:destination="@id/movieDetailsFragment"
     app:enterAnim="@anim/anim_fade_in"
     app:popExitAnim="@anim/anim_fade_out"
-    />
+  />
 
   <!--
     Single top, so a second notification tap while Settings is already open re-delivers openWebDav rather than stacking a second copy of the screen.
@@ -36,7 +36,7 @@
     android:id="@+id/actionNavigateSearchFragment"
     app:destination="@id/searchFragment"
     app:launchSingleTop="true"
-    />
+  />
 
   <action
     android:id="@+id/actionNavigateSettingsFragment"
@@ -44,7 +44,7 @@
     app:enterAnim="@anim/anim_fade_in"
     app:launchSingleTop="true"
     app:popExitAnim="@anim/anim_fade_out"
-    />
+  />
 
   <action
     android:id="@+id/actionNavigateProgressFragment"
@@ -52,7 +52,7 @@
     app:launchSingleTop="true"
     app:popUpTo="@id/navigationGraph"
     app:popUpToInclusive="true"
-    />
+  />
 
   <action
     android:id="@+id/actionNavigateProgressMoviesFragment"
@@ -60,7 +60,7 @@
     app:launchSingleTop="true"
     app:popUpTo="@id/navigationGraph"
     app:popUpToInclusive="true"
-    />
+  />
 
   <action
     android:id="@+id/actionNavigateDiscoverFragment"
@@ -68,7 +68,7 @@
     app:launchSingleTop="true"
     app:popUpTo="@id/navigationGraph"
     app:popUpToInclusive="true"
-    />
+  />
 
   <action
     android:id="@+id/actionNavigateDiscoverMoviesFragment"
@@ -76,7 +76,7 @@
     app:launchSingleTop="true"
     app:popUpTo="@id/navigationGraph"
     app:popUpToInclusive="true"
-    />
+  />
 
   <action
     android:id="@+id/actionNavigateFollowedShowsFragment"
@@ -84,7 +84,7 @@
     app:launchSingleTop="true"
     app:popUpTo="@id/navigationGraph"
     app:popUpToInclusive="true"
-    />
+  />
 
   <action
     android:id="@+id/actionNavigateFollowedMoviesFragment"
@@ -92,7 +92,7 @@
     app:launchSingleTop="true"
     app:popUpTo="@id/navigationGraph"
     app:popUpToInclusive="true"
-    />
+  />
 
   <action
     android:id="@+id/actionNavigateListsFragment"
@@ -100,228 +100,228 @@
     app:launchSingleTop="true"
     app:popUpTo="@id/navigationGraph"
     app:popUpToInclusive="true"
-    />
+  />
 
   <fragment
     android:id="@+id/discoverFragment"
-    android:name="xyz.stignarnia.ui_discover.DiscoverFragment"
+    android:name="xyz.stignarnia.uiDiscover.DiscoverFragment"
     android:label="fragmentDiscover"
-    >
+  >
     <action
       android:id="@+id/actionDiscoverFragmentToShowDetailsFragment"
       app:destination="@id/showDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverFragmentToSearchFragment"
       app:destination="@id/searchFragment"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverFragmentToSettingsFragment"
       app:destination="@id/settingsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverFragmentToItemMenu"
       app:destination="@id/showItemContextDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverFragmentToFiltersGenres"
       app:destination="@id/discoverFiltersGenresDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverFragmentToFiltersProviders"
       app:destination="@id/discoverFiltersProvidersDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverFragmentToFiltersFeed"
       app:destination="@id/discoverFiltersFeedDialog"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/discoverMoviesFragment"
-    android:name="xyz.stignarnia.ui_discover_movies.DiscoverMoviesFragment"
+    android:name="xyz.stignarnia.uiDiscoverMovies.DiscoverMoviesFragment"
     android:label="fragmentDiscoverMovies"
-    >
+  >
     <action
       android:id="@+id/actionDiscoverMoviesFragmentToMovieDetailsFragment"
       app:destination="@id/movieDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverMoviesFragmentToSearchFragment"
       app:destination="@id/searchFragment"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverMoviesFragmentToSettingsFragment"
       app:destination="@id/settingsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverMoviesFragmentToItemMenu"
       app:destination="@id/movieItemContextDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverMoviesFragmentToFiltersFeed"
       app:destination="@id/discoverMoviesFiltersFeedDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverMoviesFragmentToFiltersGenres"
       app:destination="@id/discoverMoviesFiltersGenresDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionDiscoverMoviesFragmentToFiltersProviders"
       app:destination="@id/discoverMoviesFiltersProvidersDialog"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/progressMainFragment"
-    android:name="xyz.stignarnia.ui_progress.main.ProgressMainFragment"
+    android:name="xyz.stignarnia.uiProgress.main.ProgressMainFragment"
     android:label="fragmentProgressMain"
-    >
+  >
     <action
       android:id="@+id/actionProgressFragmentToShowDetailsFragment"
       app:destination="@id/showDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionProgressFragmentToMovieDetailsFragment"
       app:destination="@id/movieDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionProgressFragmentToSettingsFragment"
       app:destination="@id/settingsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionProgressFragmentToEpisodeDetails"
       app:destination="@id/episodeDetailsDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionProgressFragmentToSortOrder"
       app:destination="@id/sortOrderDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionProgressFragmentToDatesFilter"
       app:destination="@id/historyDatesDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionProgressFragmentToSearch"
       app:destination="@id/searchFragment"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionProgressFragmentToItemMenu"
       app:destination="@id/showItemContextDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionProgressFragmentToRating"
       app:destination="@id/ratingDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionProgressFragmentToDateSelection"
       app:destination="@id/dateSelectionDialog"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/progressMoviesMainFragment"
-    android:name="xyz.stignarnia.ui_progress_movies.main.ProgressMoviesMainFragment"
+    android:name="xyz.stignarnia.uiProgressMovies.main.ProgressMoviesMainFragment"
     android:label="fragmentProgressMain"
-    >
+  >
     <action
       android:id="@+id/actionProgressMoviesFragmentToMovieDetailsFragment"
       app:destination="@id/movieDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionProgressMoviesFragmentToShowDetailsFragment"
       app:destination="@id/showDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionProgressMoviesFragmentToSettingsFragment"
       app:destination="@id/settingsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionProgressMoviesFragmentToSortOrder"
       app:destination="@id/sortOrderDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionProgressMoviesFragmentToSearch"
       app:destination="@id/searchFragment"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionProgressMoviesFragmentToItemMenu"
       app:destination="@id/movieItemContextDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionProgressMoviesFragmentToRating"
       app:destination="@id/ratingDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionProgressMoviesFragmentToDateSelection"
       app:destination="@id/dateSelectionDialog"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/showDetailsFragment"
-    android:name="xyz.stignarnia.ui_show.ShowDetailsFragment"
+    android:name="xyz.stignarnia.uiShow.ShowDetailsFragment"
     android:label="fragmentShowDetails"
-    >
+  >
     <action
       android:id="@+id/actionShowDetailsFragmentToSelf"
       app:destination="@id/showDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:exitAnim="@anim/anim_fade_out"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionShowDetailsFragmentToArtGallery"
       app:destination="@id/artGalleryFragment"
@@ -329,47 +329,47 @@
       app:exitAnim="@anim/anim_fade_out"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionShowDetailsFragmentToManageLists"
       app:destination="@id/manageListsDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionShowDetailsFragmentEpisodeDetails"
       app:destination="@id/episodeDetailsDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionEpisodeDetailsToLink"
-        app:destination="@+id/episodeLinksDialog"
-        app:launchSingleTop="true"
-      />
+      app:destination="@+id/episodeLinksDialog"
+      app:launchSingleTop="true"
+    />
     <action
       android:id="@+id/actionShowDetailsFragmentToDateSelection"
       app:destination="@id/dateSelectionDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionShowDetailsFragmentToLinks"
       app:destination="@id/linksDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionShowDetailsFragmentToPerson"
       app:destination="@id/personDetailsDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionShowDetailsFragmentToPeopleList"
       app:destination="@id/peopleListDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionShowDetailsFragmentToRating"
       app:destination="@id/ratingDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionShowDetailsFragmentToEpisodes"
       app:destination="@id/showDetailsEpisodesFragment"
@@ -378,48 +378,48 @@
       app:launchSingleTop="true"
       app:popEnterAnim="@anim/anim_in_from_left"
       app:popExitAnim="@anim/anim_out_from_left"
-      />
+    />
     <action
       android:id="@+id/actionShowDetailsFragmentToContext"
       app:destination="@id/showItemContextDialog"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/showDetailsEpisodesFragment"
-    android:name="xyz.stignarnia.ui_show.episodes.ShowDetailsEpisodesFragment"
+    android:name="xyz.stignarnia.uiShow.episodes.ShowDetailsEpisodesFragment"
     android:label="fragmentEpisodes"
-    >
+  >
     <action
       android:id="@+id/actionEpisodesFragmentToEpisodesDetails"
       app:destination="@id/episodeDetailsDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionEpisodesFragmentToRating"
       app:destination="@id/ratingDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionEpisodesFragmentToDateSelection"
       app:destination="@id/dateSelectionDialog"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/movieDetailsFragment"
-    android:name="xyz.stignarnia.ui_movie.MovieDetailsFragment"
+    android:name="xyz.stignarnia.uiMovie.MovieDetailsFragment"
     android:label="fragmentMovieDetails"
-    >
+  >
     <action
       android:id="@+id/actionMovieDetailsFragmentToSelf"
       app:destination="@id/movieDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:exitAnim="@anim/anim_fade_out"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionMovieDetailsFragmentToArtGallery"
       app:destination="@id/artGalleryFragment"
@@ -427,275 +427,275 @@
       app:exitAnim="@anim/anim_fade_out"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionMovieDetailsFragmentToManageLists"
       app:destination="@id/manageListsDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionMovieDetailsFragmentToLinks"
       app:destination="@id/linksDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionMovieDetailsFragmentToPerson"
       app:destination="@id/personDetailsDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionMovieDetailsFragmentToPeopleList"
       app:destination="@id/peopleListDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionMovieDetailsFragmentToRating"
       app:destination="@id/ratingDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionMovieDetailsFragmentToCollection"
       app:destination="@id/movieCollectionDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionMovieDetailsFragmentToContext"
       app:destination="@id/movieItemContextDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionMovieDetailsFragmentToDateSelection"
       app:destination="@id/dateSelectionDialog"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/artGalleryFragment"
-    android:name="xyz.stignarnia.ui_gallery.fanart.ArtGalleryFragment"
+    android:name="xyz.stignarnia.uiGallery.fanart.ArtGalleryFragment"
     android:label="fragmentArtGallery"
-    />
+  />
 
   <fragment
     android:id="@+id/personGalleryFragment"
-    android:name="xyz.stignarnia.ui_people.gallery.PersonGalleryFragment"
+    android:name="xyz.stignarnia.uiPeople.gallery.PersonGalleryFragment"
     android:label="fragmentPersonGallery"
-    />
+  />
 
   <fragment
     android:id="@+id/followedShowsFragment"
-    android:name="xyz.stignarnia.ui_my_shows.main.FollowedShowsFragment"
+    android:name="xyz.stignarnia.uiMyShows.main.FollowedShowsFragment"
     android:label="fragmentFollowedShows"
-    >
+  >
     <action
       android:id="@+id/actionFollowedShowsFragmentToShowDetailsFragment"
       app:destination="@id/showDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionFollowedShowsFragmentToSettingsFragment"
       app:destination="@id/settingsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionFollowedShowsFragmentToStatisticsFragment"
       app:destination="@id/statisticsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionFollowedShowsFragmentToSortOrder"
       app:destination="@id/sortOrderDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionFollowedShowsFragmentToNetworks"
       app:destination="@id/collectionFiltersNetworkDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionFollowedShowsFragmentToGenres"
       app:destination="@id/collectionFiltersGenreDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionFollowedShowsFragmentToSearch"
       app:destination="@id/searchFragment"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionFollowedShowsFragmentToItemMenu"
       app:destination="@id/showItemContextDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionFollowedShowsFragmentToMyShowsFilters"
       app:destination="@id/myShowsFiltersDialog"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/followedMoviesFragment"
-    android:name="xyz.stignarnia.ui_my_movies.main.FollowedMoviesFragment"
+    android:name="xyz.stignarnia.uiMyMovies.main.FollowedMoviesFragment"
     android:label="fragmentFollowedMovies"
-    >
+  >
     <action
       android:id="@+id/actionFollowedMoviesFragmentToMovieDetailsFragment"
       app:destination="@id/movieDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionFollowedMoviesFragmentToSettingsFragment"
       app:destination="@id/settingsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionFollowedMoviesFragmentToStatisticsFragment"
       app:destination="@id/statisticsMoviesFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionFollowedMoviesFragmentToSortOrder"
       app:destination="@id/sortOrderDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionFollowedMoviesFragmentToSearch"
       app:destination="@id/searchFragment"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionFollowedMoviesFragmentToItemMenu"
       app:destination="@id/movieItemContextDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionFollowedMoviesFragmentToGenres"
       app:destination="@id/collectionMoviesFiltersGenreDialog"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/listsFragment"
-    android:name="xyz.stignarnia.ui_lists.lists.ListsFragment"
+    android:name="xyz.stignarnia.uiLists.lists.ListsFragment"
     android:label="fragmentLists"
-    >
+  >
     <action
       android:id="@+id/actionListsFragmentToDetailsFragment"
       app:destination="@id/listDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionListsFragmentToSettingsFragment"
       app:destination="@id/settingsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionListsFragmentToCreateListDialog"
       app:destination="@id/createListDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionListsFragmentToSortOrder"
       app:destination="@id/sortOrderDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionListsFragmentToSearch"
       app:destination="@id/searchFragment"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/listDetailsFragment"
-    android:name="xyz.stignarnia.ui_lists.details.ListDetailsFragment"
+    android:name="xyz.stignarnia.uiLists.details.ListDetailsFragment"
     android:label="fragmentListDetails"
-    >
+  >
     <action
       android:id="@+id/actionListDetailsFragmentToEditListDialog"
       app:destination="@id/createListDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionListDetailsFragmentToShowDetailsFragment"
       app:destination="@id/showDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionListDetailsFragmentToMovieDetailsFragment"
       app:destination="@id/movieDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionListDetailsFragmentToSortOrder"
       app:destination="@id/sortOrderDialog"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/searchFragment"
-    android:name="xyz.stignarnia.ui_search.SearchFragment"
+    android:name="xyz.stignarnia.uiSearch.SearchFragment"
     android:label="fragmentSearch"
-    >
+  >
     <action
       android:id="@+id/actionSearchFragmentToShowDetailsFragment"
       app:destination="@id/showDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionSearchFragmentToMovieDetailsFragment"
       app:destination="@id/movieDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionSearchFragmentToSortOrder"
       app:destination="@id/sortOrderDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionSearchFragmentToShowItemMenu"
       app:destination="@id/showItemContextDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionSearchFragmentToMovieItemMenu"
       app:destination="@id/movieItemContextDialog"
       app:launchSingleTop="true"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/settingsFragment"
-    android:name="xyz.stignarnia.ui_settings.SettingsFragment"
+    android:name="xyz.stignarnia.uiSettings.SettingsFragment"
     android:label="fragmentSettings"
-    >
+  >
     <!--
       Set by the welcome flow, which hands the user straight to the WebDAV form rather than leaving them to find it under Backup.
     -->
@@ -703,328 +703,325 @@
       android:name="openWebDav"
       android:defaultValue="false"
       app:argType="boolean"
-      />
+    />
     <action
       android:id="@+id/actionSettingsFragmentToSpoilersShows"
       app:destination="@id/settingsSpoilersShowsDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionSettingsFragmentToSpoilersMovies"
       app:destination="@id/settingsSpoilersMoviesDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionSettingsFragmentToSpoilersEpisodes"
       app:destination="@id/settingsSpoilersEpisodesDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionSettingsFragmentToBackupExport"
       app:destination="@id/backupExportFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionSettingsFragmentToBackupImport"
       app:destination="@id/backupImportFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/statisticsFragment"
-    android:name="xyz.stignarnia.ui_statistics.StatisticsFragment"
+    android:name="xyz.stignarnia.uiStatistics.StatisticsFragment"
     android:label="fragmentStatistics"
-    >
+  >
     <action
       android:id="@+id/actionStatisticsFragmentToShowDetailsFragment"
       app:destination="@id/showDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
   </fragment>
 
   <fragment
     android:id="@+id/statisticsMoviesFragment"
-    android:name="xyz.stignarnia.ui_statistics_movies.StatisticsMoviesFragment"
+    android:name="xyz.stignarnia.uiStatisticsMovies.StatisticsMoviesFragment"
     android:label="fragmentStatisticsMovies"
-    >
+  >
     <action
       android:id="@+id/actionStatisticsMoviesFragmentToMovieDetailsFragment"
       app:destination="@id/movieDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
   </fragment>
-
 
 
   <fragment
     android:id="@+id/backupExportFragment"
-    android:name="xyz.stignarnia.ui_backup.features.export.BackupExportFragment"
+    android:name="xyz.stignarnia.uiBackup.features.export.BackupExportFragment"
     android:label="fragmentBackupExport"
-    />
+  />
 
   <fragment
     android:id="@+id/backupImportFragment"
-    android:name="xyz.stignarnia.ui_backup.features.import_.BackupImportFragment"
+    android:name="xyz.stignarnia.uiBackup.features.imports.BackupImportFragment"
     android:label="fragmentBackupImport"
-    />
+  />
 
   <dialog
     android:id="@+id/personDetailsDialog"
-    android:name="xyz.stignarnia.ui_people.details.PersonDetailsBottomSheet"
+    android:name="xyz.stignarnia.uiPeople.details.PersonDetailsBottomSheet"
     android:label="dialogPersonDetails"
-    >
+  >
     <action
       android:id="@+id/actionPersonDetailsDialogToLinks"
       app:destination="@id/personLinksDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionPersonDetailsDialogToShow"
       app:destination="@id/showDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionPersonDetailsDialogToMovie"
       app:destination="@id/movieDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionPersonDetailsDialogToGallery"
       app:destination="@id/personGalleryFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
   </dialog>
 
   <dialog
     android:id="@+id/peopleListDialog"
-    android:name="xyz.stignarnia.ui_people.list.PeopleListBottomSheet"
+    android:name="xyz.stignarnia.uiPeople.list.PeopleListBottomSheet"
     android:label="dialogPeopleList"
-    >
+  >
     <action
       android:id="@+id/actionPeopleListDialogToDetails"
       app:destination="@id/personDetailsDialog"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
   </dialog>
 
   <dialog
     android:id="@+id/episodeDetailsDialog"
-    android:name="xyz.stignarnia.ui_episodes.details.EpisodeDetailsBottomSheet"
+    android:name="xyz.stignarnia.uiEpisodes.details.EpisodeDetailsBottomSheet"
     android:label="dialogEpisodeDetails"
-    >
+  >
     <action
       android:id="@+id/actionEpisodeDetailsDialogToRate"
       app:destination="@id/ratingDialog"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionEpisodeDetailsDialogToLink"
       app:destination="@+id/episodeLinksDialog"
       app:launchSingleTop="true"
-      />
+    />
   </dialog>
 
   <dialog
     android:id="@+id/createListDialog"
-    android:name="xyz.stignarnia.ui_lists.create.CreateListBottomSheet"
+    android:name="xyz.stignarnia.uiLists.create.CreateListBottomSheet"
     android:label="dialogCreateList"
-    />
+  />
 
   <dialog
     android:id="@+id/manageListsDialog"
-    android:name="xyz.stignarnia.ui_lists.manage.ManageListsBottomSheet"
+    android:name="xyz.stignarnia.uiLists.manage.ManageListsBottomSheet"
     android:label="dialogManageLists"
-    >
+  >
     <action
       android:id="@+id/actionManageListsDialogToCreateListDialog"
       app:destination="@id/createListDialog"
       app:launchSingleTop="true"
-      />
+    />
   </dialog>
-
-
 
 
   <dialog
     android:id="@+id/sortOrderDialog"
-    android:name="xyz.stignarnia.ui_base.common.sheets.sort_order.SortOrderBottomSheet"
+    android:name="xyz.stignarnia.uiBase.common.sheets.sortOrder.SortOrderBottomSheet"
     android:label="dialogSortOrder"
-    />
+  />
 
   <dialog
     android:id="@+id/historyDatesDialog"
-    android:name="xyz.stignarnia.ui_progress.history.filters.HistoryPeriodFilterBottomSheet"
+    android:name="xyz.stignarnia.uiProgress.history.filters.HistoryPeriodFilterBottomSheet"
     android:label="dialogHistoryDates"
-    />
+  />
 
   <dialog
     android:id="@+id/linksDialog"
-    android:name="xyz.stignarnia.ui_base.common.sheets.links.LinksBottomSheet"
+    android:name="xyz.stignarnia.uiBase.common.sheets.links.LinksBottomSheet"
     android:label="dialogLinks"
-    />
+  />
 
   <dialog
     android:id="@+id/personLinksDialog"
-    android:name="xyz.stignarnia.ui_people.details.links.PersonLinksBottomSheet"
+    android:name="xyz.stignarnia.uiPeople.details.links.PersonLinksBottomSheet"
     android:label="dialogPersonLinks"
-    />
+  />
 
   <dialog
     android:id="@+id/episodeLinksDialog"
-    android:name="xyz.stignarnia.ui_episodes.details.links.EpisodeLinksBottomSheet"
+    android:name="xyz.stignarnia.uiEpisodes.details.links.EpisodeLinksBottomSheet"
     android:label="dialogEpisodeLinks"
-    />
+  />
 
   <dialog
     android:id="@+id/showItemContextDialog"
-    android:name="xyz.stignarnia.ui_base.common.sheets.context_menu.show.ShowContextMenuBottomSheet"
+    android:name="xyz.stignarnia.uiBase.common.sheets.contextMenu.show.ShowContextMenuBottomSheet"
     android:label="dialogShowItemContext"
-    >
+  >
     <action
       android:id="@+id/actionShowItemContextDialogToShowDetails"
       app:destination="@id/showDetailsFragment"
       app:launchSingleTop="true"
-      />
+    />
   </dialog>
 
   <dialog
     android:id="@+id/movieItemContextDialog"
-    android:name="xyz.stignarnia.ui_base.common.sheets.context_menu.movie.MovieContextMenuBottomSheet"
+    android:name="xyz.stignarnia.uiBase.common.sheets.contextMenu.movie.MovieContextMenuBottomSheet"
     android:label="dialogMovieItemContext"
-    >
+  >
     <action
       android:id="@+id/actionMovieItemContextDialogToMovieDetails"
       app:destination="@id/movieDetailsFragment"
       app:launchSingleTop="true"
-      />
+    />
     <action
       android:id="@+id/actionMovieItemContextDialogToDateSelection"
       app:destination="@id/dateSelectionDialog"
       app:launchSingleTop="true"
-      />
+    />
   </dialog>
 
   <dialog
     android:id="@+id/ratingDialog"
-    android:name="xyz.stignarnia.ui_base.common.sheets.ratings.RatingsBottomSheet"
+    android:name="xyz.stignarnia.uiBase.common.sheets.ratings.RatingsBottomSheet"
     android:label="dialogRating"
-    />
+  />
 
   <dialog
     android:id="@+id/discoverFiltersFeedDialog"
-    android:name="xyz.stignarnia.ui_discover.filters.feed.DiscoverFiltersFeedBottomSheet"
+    android:name="xyz.stignarnia.uiDiscover.filters.feed.DiscoverFiltersFeedBottomSheet"
     android:label="dialogMoviesFilters"
-    />
+  />
 
   <dialog
     android:id="@+id/discoverMoviesFiltersFeedDialog"
-    android:name="xyz.stignarnia.ui_discover_movies.filters.feed.DiscoverMoviesFiltersFeedBottomSheet"
+    android:name="xyz.stignarnia.uiDiscoverMovies.filters.feed.DiscoverMoviesFiltersFeedBottomSheet"
     android:label="dialogDiscoverMoviesFilters"
-    />
+  />
 
   <dialog
     android:id="@+id/discoverFiltersGenresDialog"
-    android:name="xyz.stignarnia.ui_discover.filters.genres.DiscoverFiltersGenresBottomSheet"
+    android:name="xyz.stignarnia.uiDiscover.filters.genres.DiscoverFiltersGenresBottomSheet"
     android:label="dialogDiscoverFiltersGenres"
-    />
+  />
 
   <dialog
     android:id="@+id/discoverFiltersProvidersDialog"
-    android:name="xyz.stignarnia.ui_discover.filters.providers.DiscoverFiltersProvidersBottomSheet"
+    android:name="xyz.stignarnia.uiDiscover.filters.providers.DiscoverFiltersProvidersBottomSheet"
     android:label="dialogDiscoverFiltersProviders"
-    />
+  />
 
   <dialog
     android:id="@+id/discoverMoviesFiltersGenresDialog"
-    android:name="xyz.stignarnia.ui_discover_movies.filters.genres.DiscoverMoviesFiltersGenresBottomSheet"
+    android:name="xyz.stignarnia.uiDiscoverMovies.filters.genres.DiscoverMoviesFiltersGenresBottomSheet"
     android:label="dialogDiscoverMoviesFiltersGenres"
-    />
+  />
 
   <dialog
     android:id="@+id/discoverMoviesFiltersProvidersDialog"
-    android:name="xyz.stignarnia.ui_discover_movies.filters.providers.DiscoverMoviesFiltersProvidersBottomSheet"
+    android:name="xyz.stignarnia.uiDiscoverMovies.filters.providers.DiscoverMoviesFiltersProvidersBottomSheet"
     android:label="dialogDiscoverMoviesFiltersProviders"
-    />
+  />
 
   <dialog
     android:id="@+id/myShowsFiltersDialog"
-    android:name="xyz.stignarnia.ui_my_shows.myshows.filters.MyShowsFiltersBottomSheet"
+    android:name="xyz.stignarnia.uiMyShows.myshows.filters.MyShowsFiltersBottomSheet"
     android:label="dialogMyShowsFilters"
-    />
+  />
 
   <dialog
     android:id="@+id/collectionFiltersNetworkDialog"
-    android:name="xyz.stignarnia.ui_my_shows.common.filters.network.CollectionFiltersNetworkBottomSheet"
+    android:name="xyz.stignarnia.uiMyShows.common.filters.network.CollectionFiltersNetworkBottomSheet"
     android:label="dialogCollectionFiltersNetwork"
-    />
+  />
 
   <dialog
     android:id="@+id/collectionFiltersGenreDialog"
-    android:name="xyz.stignarnia.ui_my_shows.common.filters.genre.CollectionFiltersGenreBottomSheet"
+    android:name="xyz.stignarnia.uiMyShows.common.filters.genre.CollectionFiltersGenreBottomSheet"
     android:label="dialogCollectionFiltersGenre"
-    />
+  />
 
   <dialog
     android:id="@+id/collectionMoviesFiltersGenreDialog"
-    android:name="xyz.stignarnia.ui_my_movies.filters.genre.CollectionFiltersGenreBottomSheet"
+    android:name="xyz.stignarnia.uiMyMovies.filters.genre.CollectionFiltersGenreBottomSheet"
     android:label="dialogCollectionFiltersGenre"
-    />
+  />
 
   <dialog
     android:id="@+id/settingsSpoilersShowsDialog"
-    android:name="xyz.stignarnia.ui_settings.sections.spoilers.shows.SpoilersShowsBottomSheet"
+    android:name="xyz.stignarnia.uiSettings.sections.spoilers.shows.SpoilersShowsBottomSheet"
     android:label="dialogSettingsSpoilersShows"
-    />
+  />
 
   <dialog
     android:id="@+id/settingsSpoilersMoviesDialog"
-    android:name="xyz.stignarnia.ui_settings.sections.spoilers.movies.SpoilersMoviesBottomSheet"
+    android:name="xyz.stignarnia.uiSettings.sections.spoilers.movies.SpoilersMoviesBottomSheet"
     android:label="dialogSettingsSpoilersMovies"
-    />
+  />
 
   <dialog
     android:id="@+id/settingsSpoilersEpisodesDialog"
-    android:name="xyz.stignarnia.ui_settings.sections.spoilers.episodes.SpoilersEpisodesBottomSheet"
+    android:name="xyz.stignarnia.uiSettings.sections.spoilers.episodes.SpoilersEpisodesBottomSheet"
     android:label="dialogSettingsSpoilersEpisodes"
-    />
+  />
 
   <dialog
     android:id="@+id/movieCollectionDialog"
-    android:name="xyz.stignarnia.ui_movie.sections.collections.details.MovieDetailsCollectionBottomSheet"
+    android:name="xyz.stignarnia.uiMovie.sections.collections.details.MovieDetailsCollectionBottomSheet"
     android:label="dialogMovieCollection"
-    >
+  >
     <action
       android:id="@+id/actionMovieCollectionDialogToMovie"
       app:destination="@id/movieDetailsFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:popExitAnim="@anim/anim_fade_out"
-      />
+    />
     <action
       android:id="@+id/actionMovieCollectionDialogToContextDialog"
       app:destination="@id/movieItemContextDialog"
       app:launchSingleTop="true"
-      />
+    />
   </dialog>
 
   <dialog
     android:id="@+id/dateSelectionDialog"
-    android:name="xyz.stignarnia.ui_base.common.sheets.date_selection.DateSelectionBottomSheet"
+    android:name="xyz.stignarnia.uiBase.common.sheets.dateSelection.DateSelectionBottomSheet"
     android:label="dialogDateSelection"
-    />
+  />
 
 </navigation>

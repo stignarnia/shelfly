@@ -20,18 +20,17 @@ import androidx.core.view.updateLayoutParams
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.shelfly.R
 import xyz.stignarnia.shelfly.databinding.ViewBottomMenuBinding
-import xyz.stignarnia.ui_base.utilities.extensions.add
-import xyz.stignarnia.ui_base.utilities.extensions.colorFromAttr
-import xyz.stignarnia.ui_base.utilities.extensions.dimenToPx
-import xyz.stignarnia.ui_base.utilities.extensions.doOnApplyWindowInsets
-import xyz.stignarnia.ui_base.utilities.extensions.fadeIn
-import xyz.stignarnia.ui_base.utilities.extensions.fadeOut
-import xyz.stignarnia.ui_base.utilities.extensions.screenWidth
-import xyz.stignarnia.ui_base.utilities.extensions.visible
+import xyz.stignarnia.uiBase.utilities.extensions.add
+import xyz.stignarnia.uiBase.utilities.extensions.colorFromAttr
+import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
+import xyz.stignarnia.uiBase.utilities.extensions.doOnApplyWindowInsets
+import xyz.stignarnia.uiBase.utilities.extensions.fadeIn
+import xyz.stignarnia.uiBase.utilities.extensions.fadeOut
+import xyz.stignarnia.uiBase.utilities.extensions.screenWidth
+import xyz.stignarnia.uiBase.utilities.extensions.visible
 import kotlin.math.abs
 
 class BottomMenuView : FrameLayout {
-
   companion object {
     private const val SWIPE_MIN_THRESHOLD = 150F
     private const val FADE_DELAY = 150L
@@ -79,6 +78,7 @@ class BottomMenuView : FrameLayout {
         isModeMenu = false
         disableTooltips()
       }
+
       ACTION_MOVE -> {
         val delta = ev.x - touchX
         if (!isModeMenu && abs(delta) > SWIPE_MIN_THRESHOLD) {
@@ -97,6 +97,7 @@ class BottomMenuView : FrameLayout {
           }
         }
       }
+
       ACTION_UP, ACTION_CANCEL -> {
         if (isModeMenu) {
           hideModeMenu()
@@ -125,12 +126,14 @@ class BottomMenuView : FrameLayout {
     with(binding) {
       with(animations) {
         forEach {
-          it?.setListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationCancel(animation: Animator) {
-              bottomNavigationView.visible()
-              bottomNavigationView.alpha = 1F
-            }
-          })
+          it?.setListener(
+            object : AnimatorListenerAdapter() {
+              override fun onAnimationCancel(animation: Animator) {
+                bottomNavigationView.visible()
+                bottomNavigationView.alpha = 1F
+              }
+            },
+          )
           it?.cancel()
         }
         clear()

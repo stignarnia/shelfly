@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.LinearLayout"
-  >
+>
 
   <FrameLayout
     android:id="@+id/calendarMoviesWidgetItemFrame"
@@ -19,7 +19,7 @@
     android:layout_marginBottom="@dimen/spaceSmall"
     android:background="@drawable/bg_widget_media_view_elevation"
     android:elevation="@dimen/elevationSmall"
-    >
+  >
 
     <ImageView
       android:id="@+id/calendarMoviesWidgetItemImage"
@@ -28,7 +28,7 @@
       android:contentDescription="@null"
       android:visibility="gone"
       tools:visibility="visible"
-      />
+    />
 
     <ImageView
       android:id="@+id/calendarMoviesWidgetItemPlaceholder"
@@ -39,7 +39,7 @@
       android:src="@drawable/ic_film"
       android:visibility="gone"
       tools:visibility="visible"
-      />
+    />
 
   </FrameLayout>
 
@@ -48,7 +48,7 @@
     android:layout_height="match_parent"
     android:layout_marginEnd="@dimen/spaceMedium"
     android:gravity="center_vertical"
-    >
+  >
 
     <TextView
       android:id="@+id/calendarMoviesWidgetItemTitle"
@@ -59,7 +59,7 @@
       android:layout_toStartOf="@id/calendarMoviesWidgetItemDate"
       android:layout_alignParentStart="true"
       tools:text="@tools:sample/lorem/random"
-      />
+    />
 
     <TextView
       android:id="@+id/calendarMoviesWidgetItemOverview"
@@ -69,7 +69,7 @@
       android:layout_below="@id/calendarMoviesWidgetItemTitle"
       android:layout_marginTop="@dimen/spaceTiny"
       tools:text="@tools:sample/lorem/random"
-      />
+    />
 
     <TextView
       android:id="@+id/calendarMoviesWidgetItemDate"
@@ -89,7 +89,7 @@
       android:textColor="?android:attr/textColorPrimary"
       android:textSize="11sp"
       tools:text="Wednesday, 27 June 2019"
-      />
+    />
 
   </RelativeLayout>
 

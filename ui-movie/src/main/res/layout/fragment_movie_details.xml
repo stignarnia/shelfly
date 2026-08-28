@@ -7,7 +7,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:layout_marginTop="-0dp"
-  >
+>
 
   <androidx.core.widget.NestedScrollView
     android:id="@+id/movieDetailsMainLayout"
@@ -18,7 +18,7 @@
     android:scrollbars="none"
     android:visibility="gone"
     tools:visibility="visible"
-    >
+  >
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/movieDetailsMainContent"
@@ -28,7 +28,7 @@
       android:clipToPadding="false"
       android:descendantFocusability="blocksDescendants"
       android:paddingBottom="@dimen/spaceNormal"
-      >
+    >
 
       <androidx.constraintlayout.widget.Guideline
         android:id="@+id/movieDetailsImageGuideline"
@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintGuide_begin="230dp"
-        />
+      />
 
       <ImageView
         android:id="@+id/movieDetailsImage"
@@ -49,7 +49,7 @@
         android:contentDescription="@null"
         app:layout_constraintBottom_toTopOf="@id/movieDetailsImageGuideline"
         app:layout_constraintTop_toTopOf="parent"
-        />
+      />
 
       <ImageView
         android:id="@+id/movieDetailsPlaceholder"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="?attr/colorPlaceholderIcon"
         tools:visibility="visible"
-        />
+      />
 
       <TextView
         android:id="@+id/movieDetailsTitle"
@@ -83,7 +83,7 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Lord Of The Rings"
-        />
+      />
 
       <View
         android:id="@+id/separator1"
@@ -94,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movieDetailsImageGuideline"
-        />
+      />
 
       <ProgressBar
         android:id="@+id/movieDetailsImageProgress"
@@ -105,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/movieDetailsImage"
-        />
+      />
 
       <TextView
         android:id="@+id/movieDetailsExtraInfo"
@@ -126,7 +126,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/separator1"
         tools:text="2019 (PL) | 126 min | Drama, SF, Horror"
-        />
+      />
 
       <TextView
         android:id="@+id/movieDetailsStatus"
@@ -140,9 +140,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movieDetailsExtraInfo"
         tools:text="Post Production"
-        />
+      />
 
-      <xyz.stignarnia.ui_movie.views.AddToMoviesButton
+      <xyz.stignarnia.uiMovie.views.AddToMoviesButton
         android:id="@+id/movieDetailsAddButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movieDetailsStatus"
-        />
+      />
 
       <TextView
         android:id="@+id/movieDetailsWatchedBadge"
@@ -179,7 +179,7 @@
         app:layout_constraintTop_toBottomOf="@id/movieDetailsAddButton"
         tools:text="Wednesday, 27 June 2019"
         tools:visibility="visible"
-        />
+      />
 
       <TextView
         android:id="@+id/movieDetailsManageListsLabel"
@@ -205,7 +205,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movieDetailsWatchedBadge"
         app:layout_goneMarginTop="@dimen/spaceNormal"
-        />
+      />
 
       <TextView
         android:id="@+id/movieDetailsHideLabel"
@@ -226,7 +226,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/movieDetailsManageListsLabel"
         app:layout_constraintTop_toTopOf="@id/movieDetailsManageListsLabel"
-        />
+      />
 
       <View
         android:id="@+id/separator2"
@@ -241,11 +241,11 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movieDetailsManageListsLabel"
-        />
+      />
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/movieDetailsRatingsFragment"
-        android:name="xyz.stignarnia.ui_movie.sections.ratings.MovieDetailsRatingsFragment"
+        android:name="xyz.stignarnia.uiMovie.sections.ratings.MovieDetailsRatingsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spaceTiny"
@@ -257,11 +257,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/separator2"
         tools:layout="@layout/fragment_movie_details_ratings"
-        />
+      />
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/movieDetailsStreamingsFragment"
-        android:name="xyz.stignarnia.ui_movie.sections.streamings.MovieDetailsStreamingsFragment"
+        android:name="xyz.stignarnia.uiMovie.sections.streamings.MovieDetailsStreamingsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceMicro"
@@ -272,9 +272,9 @@
         app:layout_constraintTop_toBottomOf="@+id/movieDetailsRatingsFragment"
         tools:layout="@layout/fragment_movie_details_streamings"
         tools:visibility="visible"
-        />
+      />
 
-      <xyz.stignarnia.ui_base.common.views.FoldableTextView
+      <xyz.stignarnia.uiBase.common.views.FoldableTextView
         android:id="@+id/movieDetailsDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -294,7 +294,7 @@
         tools:layout_marginTop="@dimen/spaceNormal"
         tools:targetApi="o"
         tools:text="@string/textNoDescription"
-        />
+      />
 
       <include
         android:id="@+id/movieDetailsActions"
@@ -306,11 +306,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movieDetailsDescription"
-        />
+      />
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/movieDetailsActorsFragment"
-        android:name="xyz.stignarnia.ui_movie.sections.people.MovieDetailsPeopleFragment"
+        android:name="xyz.stignarnia.uiMovie.sections.people.MovieDetailsPeopleFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceNormal"
@@ -319,11 +319,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movieDetailsActions"
         tools:layout="@layout/fragment_movie_details_people"
-        />
+      />
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/movieDetailsCollectionsFragment"
-        android:name="xyz.stignarnia.ui_movie.sections.collections.list.MovieDetailsCollectionsFragment"
+        android:name="xyz.stignarnia.uiMovie.sections.collections.list.MovieDetailsCollectionsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -336,11 +336,11 @@
         app:layout_constraintTop_toBottomOf="@id/movieDetailsActorsFragment"
         tools:layout="@layout/fragment_movie_details_collection"
         tools:visibility="visible"
-        />
+      />
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/movieDetailsRelatedFragment"
-        android:name="xyz.stignarnia.ui_movie.sections.related.MovieDetailsRelatedFragment"
+        android:name="xyz.stignarnia.uiMovie.sections.related.MovieDetailsRelatedFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceBig"
@@ -350,7 +350,7 @@
         app:layout_constraintTop_toBottomOf="@id/movieDetailsCollectionsFragment"
         app:layout_goneMarginTop="22dp"
         tools:layout="@layout/fragment_movie_details_related"
-        />
+      />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -363,14 +363,14 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:visibility="gone"
-    />
+  />
 
   <FrameLayout
     android:id="@+id/movieDetailsBackArrow"
     android:layout_width="@dimen/backArrowSize"
     android:layout_height="@dimen/backArrowSize"
     android:layout_marginStart="6dp"
-    >
+  >
 
     <ImageView
       android:layout_width="match_parent"
@@ -380,7 +380,7 @@
       android:padding="8dp"
       app:srcCompat="@drawable/ic_circle"
       app:tint="@color/colorBlackTranslucentMedium"
-      />
+    />
 
     <ImageView
       android:layout_width="match_parent"
@@ -388,7 +388,7 @@
       android:contentDescription="@null"
       android:padding="@dimen/backArrowPadding"
       app:srcCompat="@drawable/ic_arrow_back"
-      />
+    />
 
   </FrameLayout>
 

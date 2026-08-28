@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="menuProgress">Progres</string>
-    <string name="menuDiscover">Descoperă</string>
-    <string name="textDisclaimerTitle">Bine ai venit!</string>
-    <string name="textDisclaimerText">Te rugăm să reții că <b>NU POȚI</b> viziona, transmite în flux sau descărca seriale și filme cu această aplicație.\n\nUtilizează aplicații precum <b>Netflix</b> pentru a transmite în flux și viziona conținut.</string>
-    <string name="textDisclaimerConfirmText">Bine, înțeleg</string>
-    <string name="textWhatsNewTitle">Ce e nou</string>
-    <string name="textWhatsNewSubtitle">Versiunea %s</string>
-    <string name="shortcutDiscover">Descoperă</string>
-    <string name="shortcutCollection">Colecție</string>
-    <string name="shortcutSearch">Căutare</string>
-    <string name="shortcutProgress">Progres</string>
+  <string name="menuProgress">Progres</string>
+  <string name="menuDiscover">Descoperă</string>
+  <string name="textDisclaimerTitle">Bine ai venit!</string>
+  <string name="textDisclaimerText">Te rugăm să reții că <b>NU POȚI</b> viziona, transmite în flux sau descărca seriale și filme cu această aplicație.\n\nUtilizează aplicații precum <b>Netflix</b> pentru a transmite în flux și viziona conținut.</string>
+  <string name="textDisclaimerConfirmText">Bine, înțeleg</string>
+  <string name="textWhatsNewTitle">Ce e nou</string>
+  <string name="textWhatsNewSubtitle">Versiunea %s</string>
+  <string name="shortcutDiscover">Descoperă</string>
+  <string name="shortcutCollection">Colecție</string>
+  <string name="shortcutSearch">Căutare</string>
+  <string name="shortcutProgress">Progres</string>
 
   <string name="textOnboardingApiKeyTitle">Cheie API TMDB necesară</string>
   <string name="textOnboardingApiKeyMessage">Această aplicație folosește propria cheie TMDB, astfel încât nicio cheie nu este inclusă în aplicație și utilizarea nu este partajată cu nimeni altcineva.\n\nCreați un cont gratuit pe themoviedb.org/settings/api, copiați cheia API (autentificare v3) din Setări → API și inserați-o mai jos. O puteți schimba ulterior în Setări.</string>

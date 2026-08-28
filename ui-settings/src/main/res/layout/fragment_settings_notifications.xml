@@ -7,7 +7,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <TextView
     android:id="@+id/settingsCategoryNotifications"
@@ -16,7 +16,7 @@
     app:layout_constraintBottom_toTopOf="@id/settingsShowsNotifications"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <LinearLayout
     android:id="@+id/settingsShowsNotifications"
@@ -25,18 +25,18 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsCategoryNotifications"
-    >
+  >
 
     <TextView
       style="@style/Settings.Title"
       android:text="@string/textSettingsPushNotificationsTitle"
-      />
+    />
 
     <TextView
       style="@style/Settings.Summary"
       android:layout_marginEnd="@dimen/spaceHuge"
       android:text="@string/textSettingsShowsNotificationsSummary"
-      />
+    />
 
   </LinearLayout>
 
@@ -50,7 +50,7 @@
     app:layout_constraintBottom_toBottomOf="@id/settingsShowsNotifications"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="@id/settingsShowsNotifications"
-    />
+  />
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/settingsWhenToNotify"
@@ -59,7 +59,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/settingsShowsNotifications"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsWhenToNotifyTitle"
@@ -69,7 +69,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsWhenToNotifyDescription"
@@ -83,7 +83,7 @@
       app:layout_constraintHorizontal_chainStyle="spread_inside"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsWhenToNotifyTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsWhenToNotifyValue"
@@ -95,7 +95,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@id/settingsWhenToNotifyDescription"
       app:layout_constraintTop_toTopOf="parent"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

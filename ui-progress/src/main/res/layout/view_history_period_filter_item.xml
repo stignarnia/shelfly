@@ -9,7 +9,7 @@
   android:clipToPadding="false"
   android:focusableInTouchMode="true"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
-  >
+>
 
   <View
     android:id="@+id/badge"
@@ -20,7 +20,7 @@
     app:layout_constraintBottom_toBottomOf="@id/nameText"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="@id/nameText"
-    />
+  />
 
   <TextView
     android:id="@+id/nameText"
@@ -41,6 +41,6 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_goneMarginStart="0dp"
     tools:text="@string/textPeriodLast30Days"
-    />
+  />
 
 </merge>

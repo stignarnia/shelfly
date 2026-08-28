@@ -4,5 +4,5 @@
   <size
     android:width="@dimen/dividerHorizontalList"
     android:height="1dp"
-    />
+  />
 </shape>

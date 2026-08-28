@@ -9,7 +9,7 @@
   android:paddingStart="@dimen/screenMarginHorizontal"
   android:paddingEnd="@dimen/screenMarginHorizontal"
   android:scrollbars="none"
-  >
+>
 
   <com.google.android.material.chip.ChipGroup
     android:id="@+id/chipsLayout"
@@ -18,35 +18,35 @@
     app:selectionRequired="false"
     app:singleLine="true"
     app:singleSelection="true"
-    >
+  >
 
     <com.google.android.material.chip.Chip
       android:id="@+id/rateChip"
       style="@style/ShelflyChip.Button"
       android:text="@string/textMovieRate"
       app:chipIcon="@drawable/ic_star"
-      />
+    />
 
     <com.google.android.material.chip.Chip
       android:id="@+id/trailerChip"
       style="@style/ShelflyChip.Button"
       android:text="@string/textMovieTrailer"
       app:chipIcon="@drawable/ic_play"
-      />
+    />
 
     <com.google.android.material.chip.Chip
       android:id="@+id/linksChip"
       style="@style/ShelflyChip.Button"
       android:text="@string/textLink"
       app:chipIcon="@drawable/ic_link"
-      />
+    />
 
     <com.google.android.material.chip.Chip
       android:id="@+id/shareChip"
       style="@style/ShelflyChip.Button"
       android:text="@string/textShare"
       app:chipIcon="@drawable/ic_share"
-      />
+    />
 
   </com.google.android.material.chip.ChipGroup>
 

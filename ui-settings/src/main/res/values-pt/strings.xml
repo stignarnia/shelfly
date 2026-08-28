@@ -40,7 +40,7 @@
   <string name="textSettingsTabletColumnsSummary">Selecione o número desejado de colunas para as listas.</string>
   <string name="textSettingsBackup">Backup &amp; restauração</string>
   <string name="textSettingsBackupExportTitle">Exportar</string>
-    <string name="textSettingsBackupExportDescription">Exporte seus dados para criar um backup ou transferi-los para um novo dispositivo.</string>
+  <string name="textSettingsBackupExportDescription">Exporte seus dados para criar um backup ou transferi-los para um novo dispositivo.</string>
   <string name="textSettingsBackupImportTitle">Importar</string>
   <string name="textSettingsBackupImportDescription">Importe seu arquivo de backup para restaurar dados neste dispositivo.</string>
   <string name="textSettingsSpoilers">Spoilers</string>

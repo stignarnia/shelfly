@@ -3,7 +3,6 @@ package xyz.stignarnia.common.errors
 sealed class ShelflyError(
   errorMessage: String?,
 ) : Throwable(errorMessage) {
-
   object ValidationError : ShelflyError("ValidationError")
 
   object ResourceConflictError : ShelflyError("ResourceConflictError")

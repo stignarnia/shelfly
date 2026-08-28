@@ -8,26 +8,26 @@
   android:layout_height="match_parent"
   android:clipChildren="false"
   android:clipToPadding="false"
-  >
+>
 
   <androidx.viewpager2.widget.ViewPager2
     android:id="@+id/followedShowsPager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:overScrollMode="never"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.ModeTabsView
+  <xyz.stignarnia.uiBase.common.views.ModeTabsView
     android:id="@+id/followedShowsModeTabs"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/screenMarginHorizontal"
     android:layout_marginTop="@dimen/collectionTabsMargin"
     android:layout_marginEnd="@dimen/screenMarginHorizontal"
-    app:layout_behavior="xyz.stignarnia.ui_base.common.behaviour.ScrollableViewBehaviour"
-    />
+    app:layout_behavior="xyz.stignarnia.uiBase.common.behaviour.ScrollableViewBehaviour"
+  />
 
-  <xyz.stignarnia.ui_base.common.views.ScrollableTabLayout
+  <xyz.stignarnia.uiBase.common.views.ScrollableTabLayout
     android:id="@+id/followedShowsTabs"
     style="@style/ScrollableTabsStyle"
     android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
     android:layout_marginTop="@dimen/myShowsSearchViewPadding"
     android:translationX="@dimen/myShowsTabsTranslation"
     app:tabTextAppearance="@style/ScrollableTabTextStyle"
-    />
+  />
 
   <FrameLayout
     android:id="@+id/followedShowsIcons"
@@ -45,11 +45,11 @@
     android:layout_gravity="end"
     android:layout_marginTop="@dimen/myShowsSearchViewPadding"
     android:layout_marginEnd="@dimen/screenMarginHorizontal"
-    app:layout_behavior="xyz.stignarnia.ui_base.common.behaviour.ScrollableViewBehaviour"
+    app:layout_behavior="xyz.stignarnia.uiBase.common.behaviour.ScrollableViewBehaviour"
     tools:visibility="visible"
-    >
+  >
 
-    <xyz.stignarnia.ui_base.common.views.ScrollableImageView
+    <xyz.stignarnia.uiBase.common.views.ScrollableImageView
       android:id="@+id/followedShowsSearchIcon"
       android:layout_width="36dp"
       android:layout_height="36dp"
@@ -59,11 +59,11 @@
       android:paddingEnd="0dp"
       app:srcCompat="@drawable/ic_search"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
   </FrameLayout>
 
-  <xyz.stignarnia.ui_base.common.views.SearchLocalView
+  <xyz.stignarnia.uiBase.common.views.SearchLocalView
     android:id="@+id/followedShowsSearchLocalView"
     android:layout_width="match_parent"
     android:layout_height="@dimen/searchLocalViewHeight"
@@ -72,15 +72,15 @@
     android:layout_marginEnd="@dimen/screenMarginHorizontal"
     android:visibility="gone"
     tools:visibility="visible"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.SearchView
+  <xyz.stignarnia.uiBase.common.views.SearchView
     android:id="@+id/followedShowsSearchView"
     android:layout_width="match_parent"
     android:layout_height="@dimen/searchViewHeight"
     android:layout_marginLeft="@dimen/screenMarginHorizontal"
     android:layout_marginTop="@dimen/spaceSmall"
     android:layout_marginRight="@dimen/screenMarginHorizontal"
-    />
+  />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <com.google.android.material.chip.ChipGroup
     android:id="@+id/progressFiltersChips"
@@ -18,13 +18,13 @@
     android:paddingTop="@dimen/spaceSmall"
     android:paddingBottom="10dp"
     app:singleLine="true"
-    >
+  >
 
     <com.google.android.material.chip.Chip
       android:id="@+id/progressFiltersSortingChip"
       style="@style/ShelflyChip.Sort"
       android:text="@string/textSortName"
-      />
+    />
 
   </com.google.android.material.chip.ChipGroup>
 

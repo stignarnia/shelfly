@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/viewPersonCreditsItemRoot"
@@ -18,7 +18,7 @@
     android:paddingTop="@dimen/spaceSmall"
     android:paddingEnd="@dimen/spaceNormal"
     android:paddingBottom="@dimen/spaceSmall"
-    >
+  >
 
     <androidx.constraintlayout.widget.Guideline
       android:id="@+id/viewPersonCreditsItemGuide"
@@ -26,7 +26,7 @@
       android:layout_height="wrap_content"
       android:orientation="vertical"
       app:layout_constraintGuide_begin="@dimen/personCreditsImageGuide"
-      />
+    />
 
     <ImageView
       android:id="@+id/viewPersonCreditsItemImage"
@@ -38,7 +38,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+    />
 
     <ImageView
       android:id="@+id/viewPersonCreditsItemPlaceholder"
@@ -56,7 +56,7 @@
       app:srcCompat="@drawable/ic_television"
       app:tint="?attr/colorPlaceholderIcon"
       tools:visibility="visible"
-      />
+    />
 
     <ImageView
       android:id="@+id/viewPersonCreditsItemBadge"
@@ -71,7 +71,7 @@
       app:layout_constraintTop_toTopOf="@id/viewPersonCreditsItemRoot"
       app:srcCompat="@drawable/ic_bookmark_full"
       tools:visibility="visible"
-      />
+    />
 
     <ImageView
       android:id="@+id/viewPersonCreditsItemWatchlistBadge"
@@ -86,7 +86,7 @@
       app:layout_constraintTop_toTopOf="@id/viewPersonCreditsItemRoot"
       app:srcCompat="@drawable/ic_bookmark_full"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/viewPersonCreditsItemTitle"
@@ -100,7 +100,7 @@
       app:layout_constraintTop_toBottomOf="@+id/viewPersonCreditsItemNetwork"
       app:layout_constraintVertical_chainStyle="packed"
       tools:text="Game of Thrones"
-      />
+    />
 
     <ImageView
       android:id="@+id/viewPersonCreditsItemIcon"
@@ -113,7 +113,7 @@
       app:layout_constraintTop_toTopOf="@id/viewPersonCreditsItemNetwork"
       app:srcCompat="@drawable/ic_television"
       app:tint="?attr/colorAccent"
-      />
+    />
 
     <TextView
       android:id="@+id/viewPersonCreditsItemNetwork"
@@ -129,7 +129,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
       tools:text="2006 (Netflix)"
-      />
+    />
 
     <TextView
       android:id="@+id/viewPersonCreditsItemDescription"
@@ -142,7 +142,7 @@
       app:layout_constraintStart_toEndOf="@id/viewPersonCreditsItemGuide"
       app:layout_constraintTop_toBottomOf="@id/viewPersonCreditsItemTitle"
       tools:text="Lorem Ipsum"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

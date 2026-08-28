@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="textStatistics">Statistici</string>
-    <string name="textStatisticsEmpty">Cel puțin un film trebuie să fie prezent în <b>Istoric</b>\nînainte ca statisticile să poată fi afișate.</string>
-    <string name="textStatisticsMostWatchedShows">Cele mai vizionate seriale</string>
-    <string name="textStatisticsTotalTimeSpent">Timpul total petrecut vizionând</string>
-    <string name="textStatisticsTotalTimeItIs">și este</string>
-    <string name="textStatisticsTotalTimeSpentHours">%s ore</string>
-    <string name="textStatisticsTotalTimeSpentMinutes">%s minute</string>
-    <string name="textStatisticsTotalTimeSpentDays">care este de aproximativ %s zile.</string>
-    <string name="textStatisticsTotalEpisodes">Total episoade vizionate</string>
-    <string name="textStatisticsTotalEpisodesCount">%s episoade</string>
-    <string name="textStatisticsTotalEpisodesShowsCount">împărțite între %s seriale.</string>
-    <string name="textStatisticsTopGenre">Genuri populare</string>
-    <string name="textStatisticsTopGenreSubValue">par să fie pe gustul tău. Apasă pentru a vedea mai multe.</string>
-    <string name="textStatisticsTopGenreSubValue2">pare să fie pe gustul tău.</string>
-    <string name="textStatisticsShowMore">Afișare mai multe</string>
-    <string name="textStatisticsRatings">Evaluate recent</string>
-    <string name="textStatisticsHours">Ore</string>
-    <string name="textStatisticsEpisodes">Episoade</string>
-    <string name="textStatisticsSeasons">Anotimpuri</string>
+  <string name="textStatistics">Statistici</string>
+  <string name="textStatisticsEmpty">Cel puțin un film trebuie să fie prezent în <b>Istoric</b>\nînainte ca statisticile să poată fi afișate.</string>
+  <string name="textStatisticsMostWatchedShows">Cele mai vizionate seriale</string>
+  <string name="textStatisticsTotalTimeSpent">Timpul total petrecut vizionând</string>
+  <string name="textStatisticsTotalTimeItIs">și este</string>
+  <string name="textStatisticsTotalTimeSpentHours">%s ore</string>
+  <string name="textStatisticsTotalTimeSpentMinutes">%s minute</string>
+  <string name="textStatisticsTotalTimeSpentDays">care este de aproximativ %s zile.</string>
+  <string name="textStatisticsTotalEpisodes">Total episoade vizionate</string>
+  <string name="textStatisticsTotalEpisodesCount">%s episoade</string>
+  <string name="textStatisticsTotalEpisodesShowsCount">împărțite între %s seriale.</string>
+  <string name="textStatisticsTopGenre">Genuri populare</string>
+  <string name="textStatisticsTopGenreSubValue">par să fie pe gustul tău. Apasă pentru a vedea mai multe.</string>
+  <string name="textStatisticsTopGenreSubValue2">pare să fie pe gustul tău.</string>
+  <string name="textStatisticsShowMore">Afișare mai multe</string>
+  <string name="textStatisticsRatings">Evaluate recent</string>
+  <string name="textStatisticsHours">Ore</string>
+  <string name="textStatisticsEpisodes">Episoade</string>
+  <string name="textStatisticsSeasons">Anotimpuri</string>
 </resources>

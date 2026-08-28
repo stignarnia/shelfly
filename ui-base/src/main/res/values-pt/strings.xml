@@ -5,11 +5,11 @@
   <string name="textNo">Não</string>
   <string name="textApply">Aplicar</string>
   <string name="textCancel">Cancelar</string>
-    <string name="textClose">Fechar</string>
-    <string name="textShare">Compartilhar</string>
-    <string name="textNow">Agora</string>
+  <string name="textClose">Fechar</string>
+  <string name="textShare">Compartilhar</string>
+  <string name="textNow">Agora</string>
   <string name="textNotNow">Agora não</string>
-    <string name="textReleaseDay">Data de Lançamento</string>
+  <string name="textReleaseDay">Data de Lançamento</string>
   <string name="textNew">Novo</string>
   <string name="textSelect">Selecionar</string>
   <string name="textHide">Esconder</string>
@@ -43,18 +43,18 @@
     <item quantity="other">%1$d dias</item>
     <item quantity="many">%1$d dias</item>
   </plurals>
-    <string name="textSelectDate">Escolha a Data</string>
-    <string name="textDateSelectionTitle">Seleção de Data</string>
-    <string name="textDateSelectionDescription">Quando você assistiu?</string>
-    <string name="textFeedTrending">Tendências</string>
-    <string name="textFeedPopular">Popular</string>
-    <string name="textFeedAnticipated">Aguardados</string>
+  <string name="textSelectDate">Escolha a Data</string>
+  <string name="textDateSelectionTitle">Seleção de Data</string>
+  <string name="textDateSelectionDescription">Quando você assistiu?</string>
+  <string name="textFeedTrending">Tendências</string>
+  <string name="textFeedPopular">Popular</string>
+  <string name="textFeedAnticipated">Aguardados</string>
   <plurals name="textEpisodesLeft" comment="Number of episodes left to see">
     <item quantity="one">%d restante</item>
     <item quantity="other">%d restantes</item>
     <item quantity="many">%d restantes</item>
   </plurals>
-    <string name="textPeople">Elenco &amp; Time</string>
+  <string name="textPeople">Elenco &amp; Time</string>
   <string name="textDirecting">Direcionando</string>
   <string name="textDirector">Diretor</string>
   <string name="textWriting">Escrita</string>
@@ -96,24 +96,24 @@
   <string name="textNewSeasonAvailableSoon">Nova temporada estará disponível em breve!</string>
   <string name="textNewMovieAvailable">O filme foi lançado!</string>
   <string name="textAddToMyShows">Adicionar às minhas séries</string>
-    <string name="textAddToMyMovies">Adicionar ao Histórico</string>
-    <string name="textAddToWatchlist">Adicionar a Favoritos</string>
+  <string name="textAddToMyMovies">Adicionar ao Histórico</string>
+  <string name="textAddToWatchlist">Adicionar a Favoritos</string>
   <string name="textMoveToMyShows">Mover para Minhas Séries</string>
-    <string name="textMoveToMyMovies">Mover para o Histórico</string>
-    <string name="textMoveToWatchlist">Mover para Favoritos</string>
+  <string name="textMoveToMyMovies">Mover para o Histórico</string>
+  <string name="textMoveToWatchlist">Mover para Favoritos</string>
   <string name="textMoveToHidden">Mover para Oculto</string>
   <string name="textRemoveFromMyShows">Remover das Minhas Séries</string>
-    <string name="textRemoveFromMyMovies">Remover do Histórico</string>
-    <string name="textRemoveFromWatchlist">Remover do Favoritos</string>
+  <string name="textRemoveFromMyMovies">Remover do Histórico</string>
+  <string name="textRemoveFromWatchlist">Remover do Favoritos</string>
   <string name="textRemoveFromHidden">Remover do Oculto</string>
-    <string name="textWatchlist">Favoritos</string>
+  <string name="textWatchlist">Favoritos</string>
   <string name="textWatchlistIncoming">Em breve</string>
   <string name="textNewAlwaysAtTop">Novos episódios sempre primeiro</string>
   <string name="menuPin">Fixar no topo</string>
   <string name="menuUnpin">Desafixar do topo</string>
-    <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Fixar em \'Em espera\'</string>
-    <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Desafixar de \'Em Espera\'</string>
-    <string name="menuCollection">Coleção</string>
+  <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Fixar em \'Em espera\'</string>
+  <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Desafixar de \'Em Espera\'</string>
+  <string name="menuCollection">Coleção</string>
   <string name="errorGeneral">Ops… Algo deu errado.\nEntre em contato conosco se isto continuar acontecendo.</string>
   <string name="errorSeasonsNotLoaded">Por favor, aguarde até que os dados da temporada sejam carregados.</string>
   <string name="errorEpisodeNotAired">Este episódio ainda não foi exibido.</string>

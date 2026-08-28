@@ -8,7 +8,7 @@
   android:layout_height="match_parent"
   android:clipChildren="false"
   android:clipToPadding="false"
-  >
+>
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/fragmentListDetailsRecycler"
@@ -22,9 +22,9 @@
     android:paddingTop="@dimen/listDetailsRecyclerTopPadding"
     android:paddingEnd="@dimen/screenMarginHorizontal"
     android:paddingBottom="@dimen/spaceNormal"
-    />
+  />
 
-  <xyz.stignarnia.ui_lists.details.views.ListDetailsFilterView
+  <xyz.stignarnia.uiLists.details.views.ListDetailsFilterView
     android:id="@+id/fragmentListDetailsFiltersView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -32,9 +32,9 @@
     android:layout_marginTop="@dimen/listDetailsChipsTopPadding"
     android:layout_marginEnd="@dimen/screenMarginHorizontal"
     android:visibility="gone"
-    app:layout_behavior="xyz.stignarnia.ui_base.common.behaviour.ScrollableViewBehaviour"
+    app:layout_behavior="xyz.stignarnia.uiBase.common.behaviour.ScrollableViewBehaviour"
     tools:visibility="visible"
-    />
+  />
 
   <com.google.android.material.appbar.MaterialToolbar
     android:id="@+id/fragmentListDetailsToolbar"
@@ -44,10 +44,10 @@
     android:elevation="@dimen/elevationNormal"
     app:contentInsetStartWithNavigation="0dp"
     app:navigationIcon="@drawable/ic_arrow_back"
-      app:navigationIconTint="?android:attr/textColorPrimary"
+    app:navigationIconTint="?android:attr/textColorPrimary"
     app:subtitleTextAppearance="@style/ListDetailsToolbarSubtitleAppearance"
     app:titleTextAppearance="@style/ListDetailsToolbarTitleAppearance"
-    >
+  >
 
     <ImageView
       android:id="@+id/fragmentListDetailsMoreButton"
@@ -59,7 +59,7 @@
       android:padding="8dp"
       app:srcCompat="@drawable/ic_more"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/fragmentListDetailsManageButton"
@@ -73,7 +73,7 @@
       app:srcCompat="@drawable/ic_reorder"
       app:tint="?android:attr/textColorPrimary"
       tools:visibility="visible"
-      />
+    />
 
   </com.google.android.material.appbar.MaterialToolbar>
 
@@ -87,7 +87,7 @@
     android:layout_marginEnd="@dimen/spaceBig"
     android:visibility="gone"
     tools:visibility="visible"
-    />
+  />
 
   <FrameLayout
     android:id="@+id/fragmentListDetailsLoadingView"
@@ -96,20 +96,20 @@
     android:clickable="true"
     android:focusable="true"
     android:visibility="gone"
-    >
+  >
 
     <View
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:background="@color/colorBlackTranslucent"
-      />
+    />
 
     <ProgressBar
       style="@style/ProgressBar.Accent"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
-      />
+    />
 
   </FrameLayout>
 

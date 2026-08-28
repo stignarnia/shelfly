@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="menuLists">Liste</string>
-    <string name="menuList">Listă</string>
-    <string name="textListsEmpty">Colecția ta de liste este momentan goală.</string>
-    <string name="textListEmpty">Lista ta este goală în acest moment.</string>
-    <string name="textCreateList">Creează listă</string>
-    <string name="textCreateListDescription">Creează o nouă listă personalizată.</string>
-    <string name="textName">Nume</string>
-    <string name="textDescription">Descriere (opțional)</string>
-    <string name="textDeleteList">Șterge lista</string>
-    <string name="textEditList">Editează lista</string>
-    <string name="textEditListDescription">Actualizează lista personalizată.</string>
-    <string name="textConfirmDeleteListTitle">Șterge lista</string>
-    <string name="textConfirmDeleteListSubtitle">Ești sigur că dorești să ștergi această listă?</string>
-    <string name="textChangeRanks">Schimbă rangurile</string>
-    <string name="textChangeRanksSubtitle">Trage și plasează elementul din listă pentru a-i modifica rangul</string>
-    <string name="textManageLists">Gestionează-ți listele</string>
-    <string name="textManageListsShows">Gestionează-ți listele pentru acest serial.</string>
-    <string name="textManageListsMovies">Gestionează-ți listele pentru acest film.</string>
-    <string name="errorCouldNotCreateList">Nu am putut crea o listă nouă în contul TMDB în acest moment.\nTe rugăm să verifici conexiunea la internet și să încerci din nou.</string>
-    <string name="errorCouldNotUpdateList">Nu am putut actualiza această listă în contul TMDB în acest moment.\nTe rugăm să verifici conexiunea la internet și să încerci din nou.</string>
-    <string name="errorCouldNotDeleteList">Nu am putut șterge această listă din contul TMDB în acest moment.\nTe rugăm să verifici conexiunea la internet și să încerci din nou.</string>
+  <string name="menuLists">Liste</string>
+  <string name="menuList">Listă</string>
+  <string name="textListsEmpty">Colecția ta de liste este momentan goală.</string>
+  <string name="textListEmpty">Lista ta este goală în acest moment.</string>
+  <string name="textCreateList">Creează listă</string>
+  <string name="textCreateListDescription">Creează o nouă listă personalizată.</string>
+  <string name="textName">Nume</string>
+  <string name="textDescription">Descriere (opțional)</string>
+  <string name="textDeleteList">Șterge lista</string>
+  <string name="textEditList">Editează lista</string>
+  <string name="textEditListDescription">Actualizează lista personalizată.</string>
+  <string name="textConfirmDeleteListTitle">Șterge lista</string>
+  <string name="textConfirmDeleteListSubtitle">Ești sigur că dorești să ștergi această listă?</string>
+  <string name="textChangeRanks">Schimbă rangurile</string>
+  <string name="textChangeRanksSubtitle">Trage și plasează elementul din listă pentru a-i modifica rangul</string>
+  <string name="textManageLists">Gestionează-ți listele</string>
+  <string name="textManageListsShows">Gestionează-ți listele pentru acest serial.</string>
+  <string name="textManageListsMovies">Gestionează-ți listele pentru acest film.</string>
+  <string name="errorCouldNotCreateList">Nu am putut crea o listă nouă în contul TMDB în acest moment.\nTe rugăm să verifici conexiunea la internet și să încerci din nou.</string>
+  <string name="errorCouldNotUpdateList">Nu am putut actualiza această listă în contul TMDB în acest moment.\nTe rugăm să verifici conexiunea la internet și să încerci din nou.</string>
+  <string name="errorCouldNotDeleteList">Nu am putut șterge această listă din contul TMDB în acest moment.\nTe rugăm să verifici conexiunea la internet și să încerci din nou.</string>
 </resources>

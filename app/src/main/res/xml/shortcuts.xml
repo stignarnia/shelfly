@@ -3,23 +3,23 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   tools:targetApi="n_mr1"
-  >
+>
   <shortcut
     android:enabled="true"
     android:icon="@drawable/ic_shortcut_search"
     android:shortcutId="shortcutSearch"
     android:shortcutLongLabel="@string/shortcutSearch"
     android:shortcutShortLabel="@string/shortcutSearch"
-    >
+  >
     <intent
       android:action="android.intent.action.VIEW"
       android:targetClass="xyz.stignarnia.shelfly.ui.main.MainActivity"
       android:targetPackage="xyz.stignarnia.shelfly"
-      >
+    >
       <extra
         android:name="extraShortcutSearch"
         android:value="extraShortcutSearch"
-        />
+      />
     </intent>
   </shortcut>
 
@@ -29,16 +29,16 @@
     android:shortcutId="shortcutCollection"
     android:shortcutLongLabel="@string/shortcutCollection"
     android:shortcutShortLabel="@string/shortcutCollection"
-    >
+  >
     <intent
       android:action="android.intent.action.VIEW"
       android:targetClass="xyz.stignarnia.shelfly.ui.main.MainActivity"
       android:targetPackage="xyz.stignarnia.shelfly"
-      >
+    >
       <extra
         android:name="extraShortcutCollection"
         android:value="extraShortcutCollection"
-        />
+      />
     </intent>
   </shortcut>
 
@@ -48,16 +48,16 @@
     android:shortcutId="shortcutDiscover"
     android:shortcutLongLabel="@string/shortcutDiscover"
     android:shortcutShortLabel="@string/shortcutDiscover"
-    >
+  >
     <intent
       android:action="android.intent.action.VIEW"
       android:targetClass="xyz.stignarnia.shelfly.ui.main.MainActivity"
       android:targetPackage="xyz.stignarnia.shelfly"
-      >
+    >
       <extra
         android:name="extraShortcutDiscover"
         android:value="extraShortcutDiscover"
-        />
+      />
     </intent>
   </shortcut>
 
@@ -67,16 +67,16 @@
     android:shortcutId="shortcutWatchlist"
     android:shortcutLongLabel="@string/shortcutProgress"
     android:shortcutShortLabel="@string/shortcutProgress"
-    >
+  >
     <intent
       android:action="android.intent.action.VIEW"
       android:targetClass="xyz.stignarnia.shelfly.ui.main.MainActivity"
       android:targetPackage="xyz.stignarnia.shelfly"
-      >
+    >
       <extra
         android:name="extraShortcutProgress"
         android:value="extraShortcutProgress"
-        />
+      />
     </intent>
   </shortcut>
 </shortcuts>

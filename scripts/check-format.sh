@@ -1,73 +1,51 @@
 #!/usr/bin/env bash
-# Check whitespace hygiene in the tracked text files ktlint does not read.
+# Check the tracked text files ktlint does not read.
 #
-# ktlint covers .kt and .kts and nothing else, so everything below had no automated check at all.
+# Two things happen here, and they are separate because only one of them is whitespace.
 #
-# The glob list is the scope, and it is deliberately explicit rather than "everything else":
-# binaries (.png, .webp, .jar, fonts) are excluded because the rules are meaningless for them, and gradlew / gradlew.bat are excluded because Gradle regenerates them - a wrapper upgrade that emitted a tab would otherwise fail a build over a vendor file nobody should hand-edit.
+#   Whitespace - delegated to editorconfig-checker, which reads .editorconfig directly.
+#                Checking it here rather than reimplementing the rules keeps one definition: a second copy in this script could disagree with the file the editor reads, and nothing would catch it.
 #
-# This is a whitespace check, not a formatter.
-# It will not reindent XML, reorder attributes, or wrap long lines; real formatting would need xmllint --format or an editorconfig-checker binary, which are heavier and pull in a download.
-#
-# It does validate that every tracked XML file is well formed, which nothing else in the build does.
-# aapt only parses the resources of the variant being built, so a malformed file in a locale or qualifier that variant skips is not read at all until some device configuration selects it.
-#
-# Three rules, all of which the tree already satisfies, so this holds a clean state rather than starting a cleanup:
-#   - no CRLF line endings.
-#   - no hard tabs.
-#   - no trailing whitespace.
-#
-# insert_final_newline is deliberately NOT enforced.
-# 335 of the 934 tracked files would fail it today, and normalising them means a mechanical commit across most of the resource tree.
-# .editorconfig declares it instead, so editors fix each file as it is genuinely edited and the count falls without a blame-wrecking sweep.
+#   XML        - well-formedness, which nothing else in the build checks.
+#                aapt only parses the resources of the variant being built, so a malformed file in a locale or qualifier that variant skips is not read at all until some device configuration selects it.
 #
 #   scripts/check-format.sh
 #
-# Only tracked files are scanned, so build output and generated sources are excluded for free.
+# Only tracked files are scanned, so build output, generated sources and local.properties are excluded for free.
+# The file list is passed to ec explicitly rather than letting it walk the working tree, so its default excludes never have to agree with .gitignore.
+# Files that .editorconfig declares no rules for - gradlew, gradlew.bat, the ktlint jar, every binary - match no section and are reported on by nothing, so no exclude list is needed.
+#
+# There is no line length limit in .editorconfig, so nothing here checks one.
+# Comments are one sentence per line and sentences are never wrapped to fit a column.
 set -uo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-GLOBS=(
-  '*.gradle.kts' '*.xml' '*.yml' '*.yaml' '*.pro' '*.sh' '*.properties'
-  '*.toml' '*.json' '*.md' '*.txt'
-  '.editorconfig' '.gitignore' '*/.gitignore' 'LICENSE'
-)
+# editorconfig-checker is downloaded on demand rather than being a prerequisite, so a fresh clone runs this with no setup.
+# shellcheck source=lib/tools.sh
+source "$(dirname "${BASH_SOURCE[0]}")/lib/tools.sh"
 
-crlf=()
-tabs=()
-trailing=()
+ensure_editorconfig_checker || exit 1
 
-while IFS= read -r file; do
-  [ -f "$file" ] || continue
-  if grep -qU $'\r' "$file" 2>/dev/null; then crlf+=("$file"); fi
-  if grep -qP '\t' "$file" 2>/dev/null; then tabs+=("$file"); fi
-  if grep -qP '[ \t]+$' "$file" 2>/dev/null; then trailing+=("$file"); fi
-done < <(git ls-files -- "${GLOBS[@]}")
-
-scanned=$(git ls-files -- "${GLOBS[@]}" | wc -l)
-failed=0
-
-report() {
-  local label="$1"
-  shift
-  local files=("$@")
-  if [ "${#files[@]}" -gt 0 ]; then
-    failed=1
-    echo "error: $label (${#files[@]} file(s)):" >&2
-    printf '  %s\n' "${files[@]}" >&2
-  fi
-}
-
-report "CRLF line endings" ${crlf+"${crlf[@]}"}
-report "hard tabs" ${tabs+"${tabs[@]}"}
-report "trailing whitespace" ${trailing+"${trailing[@]}"}
-
-# XML well-formedness.
-# Missing xmllint is an error rather than a skip: a check that quietly does nothing is worse than one that is absent, because the run still reports success.
+# xmllint is the one thing that cannot be fetched this way - it is a system package rather than a single release binary.
+# A missing one is an error rather than a skip, because a check that quietly does nothing is worse than one that is absent.
 if ! command -v xmllint >/dev/null 2>&1; then
   echo "error: xmllint not found. Install libxml2-utils (Debian/Ubuntu) or libxml2 (Arch)." >&2
   exit 1
+fi
+
+failed=0
+
+# editorconfig-checker reports but does not rewrite - it has no --fix, only --dry-run.
+# Saving the file in an editor that reads .editorconfig is the intended fix; .vscode/settings.json applies these rules on save.
+if ! git ls-files -z | xargs -0 ./editorconfig-checker; then
+  echo "" >&2
+  echo "Open the file and save it - .vscode/settings.json applies these rules on save. In bulk:" >&2
+  echo "  sed -i 's/[[:space:]]*\$//' <file>              (trailing whitespace)" >&2
+  echo "  sed -i 's/\\t/  /g' <file>                      (tabs)" >&2
+  echo "  sed -i 's/\\r\$//' <file>                        (CRLF)" >&2
+  echo "  tail -c1 <file> | read -r _ || printf '\\n' >> <file>   (missing final newline)" >&2
+  failed=1
 fi
 
 malformed=()
@@ -76,14 +54,14 @@ while IFS= read -r file; do
   xmllint --noout "$file" >/dev/null 2>&1 || malformed+=("$file")
 done < <(git ls-files -- '*.xml')
 
-xml_count=$(git ls-files -- '*.xml' | wc -l)
-report "malformed XML" ${malformed+"${malformed[@]}"}
+if [ "${#malformed[@]}" -gt 0 ]; then
+  echo "error: malformed XML (${#malformed[@]} file(s)):" >&2
+  printf '  %s\n' "${malformed[@]}" >&2
+  failed=1
+fi
 
 if [ "$failed" -ne 0 ]; then
-  echo "" >&2
-  echo "Fix with: sed -i 's/[[:space:]]*\$//' <file>   (trailing whitespace)" >&2
-  echo "          sed -i 's/\\t/  /g' <file>            (tabs)" >&2
   exit 1
 fi
 
-echo "format OK: $scanned file(s), no CRLF, tabs, or trailing whitespace; $xml_count XML file(s) well formed"
+echo "format OK: $(git ls-files | wc -l) tracked file(s) match .editorconfig; $(git ls-files -- '*.xml' | wc -l) XML file(s) well formed"

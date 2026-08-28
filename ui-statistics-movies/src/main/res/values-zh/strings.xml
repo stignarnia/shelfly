@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="textStatisticsMovies">统计信息</string>
-  <string name="textStatisticsMoviesEmpty">必须在观看历史中至少有一部电影，
-才能显示统计信息。</string>
+  <string name="textStatisticsMoviesEmpty">必须在观看历史中至少有一部电影， 才能显示统计信息。</string>
   <string name="textStatisticsMoviesTotalTimeSpent">总观看时间</string>
   <string name="textStatisticsMoviesTotalTimeItIs">相当于</string>
   <string name="textStatisticsMoviesTotalTimeSpentHours">%s 小时</string>

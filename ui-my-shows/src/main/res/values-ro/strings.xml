@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="menuMyShows">Serialele mele</string>
-    <string name="menuWatchlist">Lista de urmărire</string>
-    <string name="menuHidden">Ascuns</string>
-    <string name="textMyShowsEmpty">Colecția ta de seriale este momentan goală.\n\nVizitează <b>Descoperă</b> tab pentru a adăuga primul tău serial.</string>
-    <string name="textWatchlistEmpty">Lista ta de urmărire &lt;/b&gt; este momentan goală.\n\nVizitează &lt;b&gt;Descoperă&lt;/b&gt; tab-ul pentru a adăuga seriale pe care ai vrea să le urmărești în viitor.</string>
-    <string name="textHiddenEmpty">Lista ta <b>Ascuns</b> este momentan goală.\n\n<b>Ascuns</b> este o listă de articole care nu te interesează.\n\nArticolele ascunse nu vor mai apărea în <b>Progres</b>, <b>Descoperă</b> și alte secțiuni.</string>
+  <string name="menuMyShows">Serialele mele</string>
+  <string name="menuWatchlist">Lista de urmărire</string>
+  <string name="menuHidden">Ascuns</string>
+  <string name="textMyShowsEmpty">Colecția ta de seriale este momentan goală.\n\nVizitează <b>Descoperă</b> tab pentru a adăuga primul tău serial.</string>
+  <string name="textWatchlistEmpty">Lista ta de urmărire &lt;/b&gt; este momentan goală.\n\nVizitează &lt;b&gt;Descoperă&lt;/b&gt; tab-ul pentru a adăuga seriale pe care ai vrea să le urmărești în viitor.</string>
+  <string name="textHiddenEmpty">Lista ta <b>Ascuns</b> este momentan goală.\n\n<b>Ascuns</b> este o listă de articole care nu te interesează.\n\nArticolele ascunse nu vor mai apărea în <b>Progres</b>, <b>Descoperă</b> și alte secțiuni.</string>
 </resources>

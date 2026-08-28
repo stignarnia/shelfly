@@ -7,17 +7,17 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.slider.Slider
+import dagger.hilt.android.AndroidEntryPoint
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.shelfly.R
 import xyz.stignarnia.shelfly.databinding.ActivityWidgetConfigBinding
 import xyz.stignarnia.shelfly.ui.ThemeApplier
-import xyz.stignarnia.ui_base.common.WidgetsProvider
-import xyz.stignarnia.ui_base.common.views.modal.ModalBuilder
-import xyz.stignarnia.ui_base.utilities.extensions.onClick
-import xyz.stignarnia.ui_model.WidgetAmoled
-import xyz.stignarnia.ui_model.WidgetTheme
-import xyz.stignarnia.ui_settings.helpers.AppTheme
-import dagger.hilt.android.AndroidEntryPoint
+import xyz.stignarnia.uiBase.common.WidgetsProvider
+import xyz.stignarnia.uiBase.common.views.modal.ModalBuilder
+import xyz.stignarnia.uiBase.utilities.extensions.onClick
+import xyz.stignarnia.uiModel.WidgetAmoled
+import xyz.stignarnia.uiModel.WidgetTheme
+import xyz.stignarnia.uiSettings.helpers.AppTheme
 import javax.inject.Inject
 
 /**
@@ -33,7 +33,6 @@ import javax.inject.Inject
  */
 @AndroidEntryPoint
 class WidgetConfigActivity : AppCompatActivity() {
-
   @Inject lateinit var settingsRepository: SettingsRepository
 
   private lateinit var binding: ActivityWidgetConfigBinding

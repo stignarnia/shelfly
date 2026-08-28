@@ -1,0 +1,9 @@
+{
+  // redhat.vscode-xml provides the XML formatter that editor.formatOnSave uses.
+  // Without it, saving an XML file does nothing, because VSCode ships no XML formatter of its own.
+  // EditorConfig.EditorConfig applies indent_style and indent_size from .editorconfig as you type.
+  "recommendations": [
+    "redhat.vscode-xml",
+    "editorconfig.editorconfig"
+  ]
+}

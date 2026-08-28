@@ -1,0 +1,27 @@
+{
+  // Save-time hygiene, matching .editorconfig exactly.
+  // These three are what scripts/check-format.sh enforces through editorconfig-checker, so saving a file fixes what CI would fail on.
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.eol": "\n",
+
+  "editor.formatOnSave": true,
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+  // These three override redhat.vscode-xml defaults that are wrong for this tree.
+  //
+  // maxLineWidth must be 0.
+  // The extension ships 100, which rewraps the text inside <string> elements across every locale.
+  // aapt collapses that whitespace so the app renders the same, but the translations stop being reviewable in a diff.
+  //
+  // splitAttributes and preserveAttributeLineBreaks keep the one-attribute-per-line layout style.
+  // Without them the formatter joins every attribute of an element onto a single line.
+  "xml.format.maxLineWidth": 0,
+  "xml.format.splitAttributes": "preserve",
+  "xml.format.preserveAttributeLineBreaks": true,
+
+  // ktlint owns Kotlin formatting and has no VSCode formatter, so run it by hand: ./ktlint --format
+  "java.configuration.updateBuildConfiguration": "automatic"
+}

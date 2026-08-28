@@ -15,7 +15,7 @@
   android:paddingTop="@dimen/spaceSmall"
   android:paddingBottom="@dimen/spaceMedium"
   android:theme="@style/AppTheme.Widget.Dark"
-  >
+>
 
   <TextView
     android:id="@+id/widgetMoreItemText"
@@ -24,6 +24,6 @@
     android:text="@string/textWidgetMore"
     android:textColor="?android:attr/textColorSecondary"
     android:textSize="16sp"
-    />
+  />
 
 </LinearLayout>

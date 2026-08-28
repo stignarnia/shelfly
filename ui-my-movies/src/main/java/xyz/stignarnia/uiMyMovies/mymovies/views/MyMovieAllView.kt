@@ -1,0 +1,170 @@
+package xyz.stignarnia.uiMyMovies.mymovies.views
+
+import android.content.Context
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import xyz.stignarnia.common.Config.SPOILERS_HIDE_SYMBOL
+import xyz.stignarnia.common.Config.SPOILERS_RATINGS_HIDE_SYMBOL
+import xyz.stignarnia.common.Config.SPOILERS_REGEX
+import xyz.stignarnia.uiBase.common.views.MovieView
+import xyz.stignarnia.uiBase.utilities.extensions.capitalizeWords
+import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
+import xyz.stignarnia.uiBase.utilities.extensions.gone
+import xyz.stignarnia.uiBase.utilities.extensions.onClick
+import xyz.stignarnia.uiBase.utilities.extensions.onLongClick
+import xyz.stignarnia.uiBase.utilities.extensions.setOutboundRipple
+import xyz.stignarnia.uiBase.utilities.extensions.visible
+import xyz.stignarnia.uiBase.utilities.extensions.visibleIf
+import xyz.stignarnia.uiModel.SortOrder
+import xyz.stignarnia.uiMyMovies.R
+import xyz.stignarnia.uiMyMovies.databinding.ViewCollectionMovieBinding
+import xyz.stignarnia.uiMyMovies.mymovies.recycler.MyMoviesItem
+import java.util.Locale.ENGLISH
+
+class MyMovieAllView : MovieView<MyMoviesItem> {
+  constructor(context: Context) : super(context)
+  constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+  private val binding = ViewCollectionMovieBinding.inflate(LayoutInflater.from(context), this)
+
+  init {
+    layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+
+    clipChildren = false
+    clipToPadding = false
+
+    with(binding) {
+      collectionMovieRoot.onClick { itemClickListener?.invoke(item) }
+      collectionMovieRoot.onLongClick { itemLongClickListener?.invoke(item) }
+      collectionMovieRoot.setOutboundRipple(
+        size = (context.dimenToPx(R.dimen.collectionItemRippleSpace)).toFloat(),
+        corner = context.dimenToPx(R.dimen.mediaTileCorner).toFloat(),
+      )
+    }
+
+    imageLoadCompleteListener = { loadTranslation() }
+  }
+
+  override val imageView: ImageView = binding.collectionMovieImage
+  override val placeholderView: ImageView = binding.collectionMoviePlaceholder
+
+  private lateinit var item: MyMoviesItem
+
+  override fun bind(item: MyMoviesItem) {
+    clear()
+    this.item = item
+
+    with(binding) {
+      collectionMovieProgress.visibleIf(item.isLoading)
+      collectionMovieTitle.text =
+        if (item.translation?.title.isNullOrBlank()) {
+          item.movie.title
+        } else {
+          item.translation.title
+        }
+
+      bindDescription(item)
+      bindRating(item)
+
+      collectionMovieYear.visibleIf(item.movie.released != null || item.movie.year > 0)
+      collectionMovieYear.text =
+        when {
+          item.movie.released != null -> item.dateFormat?.format(item.movie.released)?.capitalizeWords()
+          else -> String.format(ENGLISH, "%d", item.movie.year)
+        }
+
+      item.userRating?.let {
+        collectionMovieUserStarIcon.visible()
+        collectionMovieUserRating.visible()
+        collectionMovieUserRating.text = String.format(ENGLISH, "%d", it)
+      }
+
+      if (item.movie.runtime > 0 && item.sortOrder == SortOrder.RUNTIME) {
+        collectionMovieRuntimeIcon.visible()
+        collectionMovieRuntime.visible()
+        collectionMovieRuntime.text =
+          context.getString(
+            R.string.textRuntimeMinutes,
+            item.movie.runtime,
+            context.getString(R.string.textMinutesShort),
+          )
+      }
+    }
+    loadImage(item)
+  }
+
+  private fun bindDescription(item: MyMoviesItem) {
+    var description =
+      if (item.translation?.overview.isNullOrBlank()) {
+        item.movie.overview
+      } else {
+        item.translation.overview
+      }
+
+    with(binding) {
+      if (item.spoilers.isSpoilerHidden) {
+        collectionMovieDescription.tag = description
+        description = SPOILERS_REGEX.replace(description, SPOILERS_HIDE_SYMBOL)
+
+        if (item.spoilers.isSpoilerTapToReveal) {
+          collectionMovieDescription.onClick { view ->
+            view.tag?.let {
+              collectionMovieDescription.text = it.toString()
+            }
+            view.isClickable = false
+          }
+        }
+      }
+
+      collectionMovieDescription.text = description
+      collectionMovieDescription.visibleIf(item.movie.overview.isNotBlank())
+    }
+  }
+
+  private fun bindRating(item: MyMoviesItem) {
+    var rating = String.format(ENGLISH, "%.1f", item.movie.rating)
+
+    with(binding) {
+      if (item.spoilers.isSpoilerRatingsHidden) {
+        collectionMovieRating.tag = rating
+        rating = SPOILERS_RATINGS_HIDE_SYMBOL
+
+        if (item.spoilers.isSpoilerTapToReveal) {
+          collectionMovieRating.onClick { view ->
+            view.tag?.let {
+              collectionMovieRating.text = it.toString()
+            }
+            view.isClickable = false
+          }
+        }
+      }
+      collectionMovieRating.text = rating
+    }
+  }
+
+  private fun loadTranslation() {
+    if (item.translation == null) {
+      missingTranslationListener?.invoke(item)
+    }
+  }
+
+  private fun clear() {
+    with(binding) {
+      collectionMovieTitle.text = ""
+      collectionMovieDescription.text = ""
+      collectionMovieYear.text = ""
+      collectionMovieRating.text = ""
+      collectionMovieUserRating.gone()
+      collectionMovieUserStarIcon.gone()
+      collectionMovieRuntime.gone()
+      collectionMovieRuntimeIcon.gone()
+      collectionMoviePlaceholder.gone()
+      Glide.with(this@MyMovieAllView).clear(collectionMovieImage)
+    }
+  }
+}

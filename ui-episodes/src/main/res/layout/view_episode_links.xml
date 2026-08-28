@@ -14,7 +14,7 @@
   android:paddingBottom="@dimen/spaceNormal"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/viewEpisodeLinksGuideline"
@@ -22,7 +22,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_constraintGuide_percent="0.5"
-    />
+  />
 
   <TextView
     android:id="@+id/viewEpisodeLinksTitle"
@@ -40,9 +40,9 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewEpisodeLinksImdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -54,9 +54,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewEpisodeLinksTitle"
     custom:icon="@drawable/ic_imdb"
     custom:text="IMDb"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewEpisodeLinksTmdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -68,9 +68,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewEpisodeLinksTitle"
     custom:icon="@drawable/ic_tmdb"
     custom:text="TMDB"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewEpisodeLinksGoogle"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -82,9 +82,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewEpisodeLinksImdb"
     custom:icon="@drawable/ic_google"
     custom:text="Google"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewEpisodeLinksTvdb"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -96,9 +96,9 @@
     app:layout_constraintTop_toBottomOf="@id/viewEpisodeLinksTmdb"
     custom:icon="@drawable/ic_tvdb"
     custom:text="TVDB"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.sheets.links.views.LinkItemView
+  <xyz.stignarnia.uiBase.common.sheets.links.views.LinkItemView
     android:id="@+id/viewEpisodeLinksDuckDuck"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
     app:layout_constraintTop_toBottomOf="@id/viewEpisodeLinksTvdb"
     custom:icon="@drawable/ic_duckduck"
     custom:text="DuckDuckGo"
-    />
+  />
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/viewEpisodeLinksButtonClose"
@@ -129,5 +129,5 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewEpisodeLinksGoogle"
     app:rippleColor="?android:attr/textColorPrimary"
-    />
+  />
 </androidx.constraintlayout.widget.ConstraintLayout>

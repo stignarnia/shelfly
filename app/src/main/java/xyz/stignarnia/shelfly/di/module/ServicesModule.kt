@@ -12,7 +12,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class ServicesModule {
-
   @Provides
   @Singleton
   fun providesConnectivityManager(

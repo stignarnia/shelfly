@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   android:clipChildren="false"
   android:clipToPadding="false"
-  >
+>
 
   <TextView
     android:id="@+id/showDetailsActorsLabel"
@@ -22,7 +22,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="People"
-    />
+  />
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/showDetailsActorsRecycler"
@@ -39,7 +39,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/showDetailsActorsLabel"
-    />
+  />
 
   <ProgressBar
     android:id="@+id/showDetailsActorsProgress"
@@ -52,7 +52,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <TextView
     android:id="@+id/showDetailsActorsEmptyView"
@@ -69,7 +69,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:visibility="visible"
-    />
+  />
 
   <TextView
     android:id="@+id/showDetailsDirectingLabel"
@@ -87,7 +87,7 @@
     app:layout_constraintTop_toBottomOf="@id/showDetailsActorsRecycler"
     app:layout_goneMarginTop="@dimen/spaceHuge"
     tools:visibility="visible"
-    />
+  />
 
   <TextView
     android:id="@+id/showDetailsDirectingValue"
@@ -102,7 +102,7 @@
     app:layout_constraintTop_toBottomOf="@id/showDetailsDirectingLabel"
     tools:text="Steven"
     tools:visibility="visible"
-    />
+  />
 
   <TextView
     android:id="@+id/showDetailsWritingLabel"
@@ -117,7 +117,7 @@
     app:layout_constraintStart_toEndOf="@id/showDetailsDirectingValue"
     app:layout_constraintTop_toTopOf="@id/showDetailsDirectingLabel"
     tools:visibility="visible"
-    />
+  />
 
   <TextView
     android:id="@+id/showDetailsWritingValue"
@@ -132,7 +132,7 @@
     app:layout_constraintTop_toBottomOf="@id/showDetailsWritingLabel"
     tools:text="Steven Spilberg\nTest"
     tools:visibility="visible"
-    />
+  />
 
   <TextView
     android:id="@+id/showDetailsMusicLabel"
@@ -148,7 +148,7 @@
     app:layout_constraintStart_toEndOf="@id/showDetailsWritingValue"
     app:layout_constraintTop_toTopOf="@id/showDetailsDirectingLabel"
     tools:visibility="visible"
-    />
+  />
 
   <TextView
     android:id="@+id/showDetailsMusicValue"
@@ -164,6 +164,6 @@
     app:layout_constraintTop_toBottomOf="@id/showDetailsMusicLabel"
     tools:text="Steven Spilberg"
     tools:visibility="visible"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

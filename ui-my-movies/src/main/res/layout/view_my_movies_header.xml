@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/myMoviesHeaderRoot"
@@ -15,7 +15,7 @@
     android:layout_height="wrap_content"
     android:clipChildren="false"
     android:clipToPadding="false"
-    >
+  >
 
     <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/myMoviesHeaderLabel"
@@ -27,7 +27,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_goneMarginBottom="@dimen/spaceSmall"
       tools:text="Section Label"
-      />
+    />
 
     <HorizontalScrollView
       android:id="@+id/myMoviesFilterChipsScroll"
@@ -41,14 +41,14 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/myMoviesHeaderLabel"
-      >
+    >
 
       <com.google.android.material.chip.ChipGroup
         android:id="@+id/myMoviesFilterChips"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:singleLine="true"
-        >
+      >
 
         <com.google.android.material.chip.Chip
           android:id="@+id/myMoviesSortChip"
@@ -56,14 +56,14 @@
           android:text="@string/textSortName"
           android:visibility="gone"
           tools:visibility="visible"
-          />
+        />
 
         <com.google.android.material.chip.Chip
           android:id="@+id/myMoviesGenresChip"
           style="@style/ShelflyChip.Filter"
           android:checkable="false"
           android:text="@string/textGenres"
-          />
+        />
 
       </com.google.android.material.chip.ChipGroup>
 

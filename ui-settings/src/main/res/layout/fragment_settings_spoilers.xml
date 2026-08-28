@@ -8,19 +8,19 @@
   android:layout_height="wrap_content"
   android:orientation="vertical"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <TextView
     android:id="@+id/settingsCategorySpoilers"
     style="@style/Settings.Category"
     android:text="@string/textSettingsSpoilers"
-    />
+  />
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/settingsSpoilersShows"
     style="@style/Settings.ItemLayout"
     android:layout_width="match_parent"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsSpoilersShowsTitle"
@@ -30,7 +30,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsSpoilersShowsSummary"
@@ -39,7 +39,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsSpoilersShowsTitle"
-      />
+    />
 
     <ImageView
       android:id="@+id/settingsSpoilersShowsCheck"
@@ -53,7 +53,7 @@
       app:srcCompat="@drawable/ic_check"
       app:tint="?attr/colorAccent"
       tools:visibility="visible"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -61,7 +61,7 @@
     android:id="@+id/settingsSpoilersMovies"
     style="@style/Settings.ItemLayout"
     android:layout_width="match_parent"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsSpoilersMoviesTitle"
@@ -71,7 +71,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsSpoilersMoviesSummary"
@@ -80,7 +80,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsSpoilersMoviesTitle"
-      />
+    />
 
     <ImageView
       android:id="@+id/settingsSpoilersMoviesCheck"
@@ -94,7 +94,7 @@
       app:srcCompat="@drawable/ic_check"
       app:tint="?attr/colorAccent"
       tools:visibility="visible"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -102,7 +102,7 @@
     android:id="@+id/settingsSpoilersEpisodes"
     style="@style/Settings.ItemLayout"
     android:layout_width="match_parent"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsSpoilersEpisodesTitle"
@@ -112,7 +112,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsSpoilersEpisodesSummary"
@@ -121,7 +121,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsSpoilersEpisodesTitle"
-      />
+    />
 
     <ImageView
       android:id="@+id/settingsSpoilersEpisodesCheck"
@@ -135,7 +135,7 @@
       app:srcCompat="@drawable/ic_check"
       app:tint="?attr/colorAccent"
       tools:visibility="visible"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -143,7 +143,7 @@
     android:id="@+id/settingsSpoilersTapToReveal"
     style="@style/Settings.ItemLayout"
     android:layout_width="match_parent"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsSpoilersTapToRevealTitle"
@@ -153,7 +153,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsSpoilersTapToDescription"
@@ -166,7 +166,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsSpoilersTapToRevealTitle"
-      />
+    />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
       android:id="@+id/settingsSpoilersTapToRevealSwitch"
@@ -178,7 +178,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

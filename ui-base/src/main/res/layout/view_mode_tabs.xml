@@ -6,7 +6,7 @@
   android:layout_height="wrap_content"
   android:orientation="horizontal"
   tools:parentTag="android.widget.LinearLayout"
-  >
+>
 
   <TextView
     android:id="@+id/viewShows"
@@ -18,7 +18,7 @@
     android:textColor="?android:attr/textColorPrimary"
     android:textSize="25sp"
     android:textStyle="bold"
-    />
+  />
 
   <TextView
     android:id="@+id/viewMovies"
@@ -30,14 +30,14 @@
     android:textColor="?android:attr/textColorSecondary"
     android:textSize="25sp"
     android:textStyle="bold"
-    />
+  />
 
   <Space
     android:id="@+id/viewSpacer"
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    />
+  />
 
   <TextView
     android:id="@+id/viewLists"
@@ -52,6 +52,6 @@
     android:textStyle="bold"
     android:visibility="gone"
     tools:visibility="visible"
-    />
+  />
 
 </merge>

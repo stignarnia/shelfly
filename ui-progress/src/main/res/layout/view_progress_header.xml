@@ -7,7 +7,7 @@
   android:layout_height="wrap_content"
   android:orientation="horizontal"
   tools:parentTag="android.widget.LinearLayout"
-  >
+>
 
   <TextView
     android:id="@+id/progressHeaderText"
@@ -20,7 +20,7 @@
     android:textSize="@dimen/progressHeaderTextSize"
     android:textStyle="bold"
     tools:text="Coming Soon"
-    />
+  />
 
   <ImageView
     android:id="@+id/progressHeaderArrow"
@@ -34,6 +34,6 @@
     android:rotation="90"
     app:srcCompat="@drawable/ic_arrow_right"
     app:tint="?android:attr/textColorPrimary"
-    />
+  />
 
 </merge>

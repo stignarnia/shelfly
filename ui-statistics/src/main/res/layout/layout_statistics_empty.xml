@@ -9,7 +9,7 @@
   android:orientation="vertical"
   tools:background="?attr/colorAppBackground"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <TextView
     android:layout_width="match_parent"
@@ -20,7 +20,7 @@
     android:textColor="?android:attr/textColorPrimary"
     android:textSize="20sp"
     android:textStyle="bold"
-    />
+  />
 
   <TextView
     android:layout_width="match_parent"
@@ -28,6 +28,6 @@
     android:text="@string/textStatisticsEmpty"
     android:textColor="?android:attr/textColorSecondary"
     android:textSize="14sp"
-    />
+  />
 
 </LinearLayout>

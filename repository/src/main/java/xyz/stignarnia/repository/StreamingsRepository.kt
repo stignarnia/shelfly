@@ -1,16 +1,15 @@
 package xyz.stignarnia.repository
 
-import xyz.stignarnia.data_remote.tmdb.model.TmdbStreamingCountry
-import xyz.stignarnia.data_remote.tmdb.model.TmdbStreamingService
-import xyz.stignarnia.ui_model.StreamingService
-import xyz.stignarnia.ui_model.StreamingService.Option.ADS
-import xyz.stignarnia.ui_model.StreamingService.Option.BUY
-import xyz.stignarnia.ui_model.StreamingService.Option.FLATRATE
-import xyz.stignarnia.ui_model.StreamingService.Option.FREE
-import xyz.stignarnia.ui_model.StreamingService.Option.RENT
+import xyz.stignarnia.dataRemote.tmdb.model.TmdbStreamingCountry
+import xyz.stignarnia.dataRemote.tmdb.model.TmdbStreamingService
+import xyz.stignarnia.uiModel.StreamingService
+import xyz.stignarnia.uiModel.StreamingService.Option.ADS
+import xyz.stignarnia.uiModel.StreamingService.Option.BUY
+import xyz.stignarnia.uiModel.StreamingService.Option.FLATRATE
+import xyz.stignarnia.uiModel.StreamingService.Option.FREE
+import xyz.stignarnia.uiModel.StreamingService.Option.RENT
 
 abstract class StreamingsRepository {
-
   protected fun processItems(
     remoteItems: List<StreamingService>,
     countryCode: String,

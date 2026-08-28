@@ -7,7 +7,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <TextView
     android:id="@+id/settingsCategoryApiKeysLabel"
@@ -16,7 +16,7 @@
     app:layout_constraintBottom_toTopOf="@id/settingsTmdbApiKey"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/settingsTmdbApiKey"
@@ -24,7 +24,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/settingsCategoryApiKeysLabel"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsTmdbApiKeyTitle"
@@ -34,7 +34,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsTmdbApiKeyDescription"
@@ -46,7 +46,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsTmdbApiKeyTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsTmdbApiKeyValue"
@@ -55,7 +55,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="****ce4c"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -65,7 +65,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/settingsTmdbApiKey"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsOmdbApiKeyTitle"
@@ -75,7 +75,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsOmdbApiKeyDescription"
@@ -87,7 +87,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsOmdbApiKeyTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsOmdbApiKeyValue"
@@ -96,7 +96,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="****bf7f"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

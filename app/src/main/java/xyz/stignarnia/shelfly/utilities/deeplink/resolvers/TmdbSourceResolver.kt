@@ -3,10 +3,9 @@ package xyz.stignarnia.shelfly.utilities.deeplink.resolvers
 import androidx.core.text.isDigitsOnly
 import xyz.stignarnia.shelfly.utilities.deeplink.DeepLinkResolver
 import xyz.stignarnia.shelfly.utilities.deeplink.DeepLinkSource
-import xyz.stignarnia.ui_model.IdTmdb
+import xyz.stignarnia.uiModel.IdTmdb
 
 class TmdbSourceResolver : SourceResolver {
-
   override fun resolve(linkPath: List<String>): DeepLinkSource? {
     if (linkPath.size < 2 ||
       !(linkPath[0] == DeepLinkResolver.TMDB_TYPE_TV || linkPath[0] == DeepLinkResolver.TMDB_TYPE_MOVIE) ||

@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/seasonViewRoot"
@@ -18,7 +18,7 @@
     android:paddingTop="6dp"
     android:paddingEnd="10dp"
     android:paddingBottom="6dp"
-    >
+  >
 
     <com.google.android.material.checkbox.MaterialCheckBox
       android:id="@+id/seasonViewCheckbox"
@@ -29,7 +29,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+    />
 
     <TextView
       android:id="@+id/seasonViewTitle"
@@ -45,7 +45,7 @@
       app:layout_constraintStart_toEndOf="@id/seasonViewCheckbox"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="Season 00"
-      />
+    />
 
     <ImageView
       android:id="@+id/seasonViewArrow"
@@ -57,7 +57,7 @@
       app:layout_constraintStart_toEndOf="@id/seasonViewProgressText"
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/ic_arrow_right"
-      />
+    />
 
     <TextView
       android:id="@+id/seasonViewProgressText"
@@ -75,7 +75,7 @@
       app:layout_constraintStart_toEndOf="@id/seasonViewProgress"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="20/20 (100%)"
-      />
+    />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
       android:id="@+id/seasonViewProgress"
@@ -92,7 +92,7 @@
       app:trackCornerRadius="4dp"
       app:trackStopIndicatorSize="0dp"
       app:trackThickness="4dp"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>

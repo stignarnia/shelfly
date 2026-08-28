@@ -12,7 +12,7 @@
   android:paddingBottom="@dimen/spaceNormal"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
   tools:theme="@style/CustomBottomSheetDialog"
-  >
+>
 
   <TextView
     android:id="@+id/viewSortOrderTitle"
@@ -30,7 +30,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <LinearLayout
     android:id="@+id/viewSortOrderItemsLayout"
@@ -42,7 +42,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewSortOrderTitle"
-    />
+  />
 
   <com.google.android.material.checkbox.MaterialCheckBox
     android:id="@+id/viewSortOrderNewCheckbox"
@@ -60,7 +60,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewSortOrderItemsLayout"
-    />
+  />
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/viewSortOrderButtonApply"
@@ -80,6 +80,6 @@
     app:layout_constraintTop_toBottomOf="@id/viewSortOrderNewCheckbox"
     app:layout_goneMarginTop="@dimen/spaceNormal"
     app:rippleColor="?android:attr/textColorPrimary"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

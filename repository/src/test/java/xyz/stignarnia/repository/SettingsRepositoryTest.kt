@@ -2,18 +2,6 @@ package xyz.stignarnia.repository
 
 import android.content.SharedPreferences
 import com.google.common.truth.Truth.assertThat
-import xyz.stignarnia.data_local.database.dao.SettingsDao
-import xyz.stignarnia.repository.common.BaseMockTest
-import xyz.stignarnia.repository.mappers.SettingsMapper
-import xyz.stignarnia.repository.settings.SettingsFiltersRepository
-import xyz.stignarnia.repository.settings.SettingsRepository
-import xyz.stignarnia.repository.settings.SettingsSortRepository
-import xyz.stignarnia.repository.settings.SettingsSpoilersRepository
-import xyz.stignarnia.repository.settings.SettingsSyncRepository
-import xyz.stignarnia.repository.settings.SettingsWebDavRepository
-import xyz.stignarnia.repository.settings.SettingsViewModeRepository
-import xyz.stignarnia.repository.settings.SettingsWidgetsRepository
-import xyz.stignarnia.ui_model.Settings
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -24,17 +12,36 @@ import io.mockk.just
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
+import xyz.stignarnia.dataLocal.database.dao.SettingsDao
+import xyz.stignarnia.repository.common.BaseMockTest
+import xyz.stignarnia.repository.mappers.SettingsMapper
+import xyz.stignarnia.repository.settings.SettingsFiltersRepository
+import xyz.stignarnia.repository.settings.SettingsRepository
+import xyz.stignarnia.repository.settings.SettingsSortRepository
+import xyz.stignarnia.repository.settings.SettingsSpoilersRepository
+import xyz.stignarnia.repository.settings.SettingsSyncRepository
+import xyz.stignarnia.repository.settings.SettingsViewModeRepository
+import xyz.stignarnia.repository.settings.SettingsWebDavRepository
+import xyz.stignarnia.repository.settings.SettingsWidgetsRepository
+import xyz.stignarnia.uiModel.Settings
 
 class SettingsRepositoryTest : BaseMockTest() {
-
   @MockK lateinit var settingsDao: SettingsDao
+
   @MockK lateinit var sharedPreferences: SharedPreferences
+
   @MockK lateinit var settingsSortRepository: SettingsSortRepository
+
   @MockK lateinit var settingsFilterRepository: SettingsFiltersRepository
+
   @MockK lateinit var settingsWidgetsRepository: SettingsWidgetsRepository
+
   @MockK lateinit var settingsViewModeRepository: SettingsViewModeRepository
+
   @MockK lateinit var settingsSpoilerRepositoryTest: SettingsSpoilersRepository
+
   @MockK lateinit var settingsSyncRepository: SettingsSyncRepository
+
   @MockK lateinit var settingsWebDavRepository: SettingsWebDavRepository
 
   private lateinit var SUT: SettingsRepository
@@ -43,20 +50,21 @@ class SettingsRepositoryTest : BaseMockTest() {
   override fun setUp() {
     super.setUp()
     every { database.settings } returns settingsDao
-    SUT = SettingsRepository(
-      sorting = settingsSortRepository,
-      filters = settingsFilterRepository,
-      widgets = settingsWidgetsRepository,
-      viewMode = settingsViewModeRepository,
-      spoilers = settingsSpoilerRepositoryTest,
-      sync = settingsSyncRepository,
-      webdav = settingsWebDavRepository,
-      dispatchers = testDispatchers,
-      localSource = database,
-      transactions = transactions,
-      mappers = mappers,
-      preferences = sharedPreferences,
-    )
+    SUT =
+      SettingsRepository(
+        sorting = settingsSortRepository,
+        filters = settingsFilterRepository,
+        widgets = settingsWidgetsRepository,
+        viewMode = settingsViewModeRepository,
+        spoilers = settingsSpoilerRepositoryTest,
+        sync = settingsSyncRepository,
+        webdav = settingsWebDavRepository,
+        dispatchers = testDispatchers,
+        localSource = database,
+        transactions = transactions,
+        mappers = mappers,
+        preferences = sharedPreferences,
+      )
   }
 
   @Test

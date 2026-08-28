@@ -8,7 +8,7 @@
   android:layout_height="match_parent"
   android:clipChildren="false"
   tools:context=".ui.main.MainActivity"
-  >
+>
 
   <!--
     Deliberately empty: the navigation host is added in code once the welcome flow is done, so its start destination cannot load and draw behind screens the user has not answered yet.
@@ -17,7 +17,7 @@
     android:id="@+id/navigationHost"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    />
+  />
 
   <LinearLayout
     android:id="@+id/bottomNavigationWrapper"
@@ -35,7 +35,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="1"
-    >
+  >
 
     <TextView
       android:id="@+id/statusView"
@@ -51,7 +51,7 @@
       android:textSize="12sp"
       android:visibility="gone"
       tools:visibility="visible"
-      />
+    />
 
     <xyz.stignarnia.shelfly.ui.views.BottomMenuView
       android:id="@+id/bottomMenuView"
@@ -60,7 +60,7 @@
       android:background="@drawable/bg_bottom_menu"
       android:elevation="2dp"
       app:elevation="2dp"
-      />
+    />
 
   </LinearLayout>
 
@@ -74,9 +74,9 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0.0"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.tips.TipView
+  <xyz.stignarnia.uiBase.common.views.tips.TipView
     android:id="@+id/tutorialTipModeMenu"
     android:layout_width="@dimen/tutorialTipSize"
     android:layout_height="@dimen/tutorialTipSize"
@@ -86,9 +86,9 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="@dimen/tipModeMenuRatio"
     app:layout_constraintStart_toStartOf="parent"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.tips.TipView
+  <xyz.stignarnia.uiBase.common.views.tips.TipView
     android:id="@+id/tutorialTipDiscover"
     android:layout_width="@dimen/tutorialTipSize"
     android:layout_height="@dimen/tutorialTipSize"
@@ -98,9 +98,9 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="@dimen/tipDiscoverRatio"
     app:layout_constraintStart_toStartOf="parent"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.tips.TipView
+  <xyz.stignarnia.uiBase.common.views.tips.TipView
     android:id="@+id/tutorialTipMyShows"
     android:layout_width="@dimen/tutorialTipSize"
     android:layout_height="@dimen/tutorialTipSize"
@@ -110,7 +110,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="@dimen/tipMyShows"
     app:layout_constraintStart_toStartOf="parent"
-    />
+  />
 
   <View
     android:id="@+id/viewMask"
@@ -124,7 +124,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:visibility="visible"
-    />
+  />
 
   <ViewStub
     android:id="@+id/welcomeViewStub"
@@ -136,7 +136,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <ProgressBar
     android:id="@+id/mainProgress"
@@ -149,6 +149,6 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

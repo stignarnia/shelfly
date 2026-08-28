@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <ImageView
     android:id="@+id/viewGalleryPosterImage"
@@ -16,7 +16,7 @@
     android:contentDescription="@null"
     android:elevation="@dimen/elevationTiny"
     android:scaleType="fitCenter"
-    />
+  />
 
   <ProgressBar
     android:id="@+id/viewGalleryPosterImageProgress"
@@ -25,6 +25,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:translationZ="@dimen/elevationTiny"
-    />
+  />
 
 </merge>

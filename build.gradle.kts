@@ -24,13 +24,15 @@ allprojects {
 }
 
 // Read once here: the catalog accessor is not available inside the subprojects block.
-val compileSdkVersion = libs.versions.compileSdk
-  .get()
-  .toInt()
+val compileSdkVersion =
+  libs.versions.compileSdk
+    .get()
+    .toInt()
 val buildToolsRelease = libs.versions.buildTools.get()
-val jvmTargetVersion = libs.versions.jvmTarget
-  .get()
-  .toInt()
+val jvmTargetVersion =
+  libs.versions.jvmTarget
+    .get()
+    .toInt()
 
 subprojects {
   // Centralised so the SDK and bytecode level live in one place instead of being repeated in every module's android {} block.

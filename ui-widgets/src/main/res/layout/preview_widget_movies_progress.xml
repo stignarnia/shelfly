@@ -7,7 +7,7 @@
   android:layout_height="match_parent"
   android:background="@drawable/bg_widget"
   android:theme="@style/AppTheme.Widget.Dark"
-  >
+>
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -15,14 +15,14 @@
     android:orientation="vertical"
     android:paddingTop="@dimen/widgetPaddingTop"
     android:paddingBottom="@dimen/spaceTiny"
-    >
+  >
 
     <!-- Movie Item 1 -->
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      >
+    >
 
       <FrameLayout
         android:layout_width="@dimen/widgetImageWidth"
@@ -34,7 +34,7 @@
         android:layout_marginBottom="@dimen/spaceSmall"
         android:background="@drawable/bg_widget_media_view_elevation"
         android:elevation="@dimen/elevationSmall"
-        >
+      >
 
         <ImageView
           android:layout_width="match_parent"
@@ -42,7 +42,7 @@
           android:contentDescription="@null"
           android:padding="@dimen/spaceSmall"
           android:src="@drawable/ic_film"
-          />
+        />
 
       </FrameLayout>
 
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        >
+      >
 
         <LinearLayout
           android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
           android:layout_centerVertical="true"
           android:layout_toStartOf="@id/previewMovieCheck1"
           android:orientation="vertical"
-          >
+        >
 
           <TextView
             style="@style/WidgetItem.Title"
@@ -67,14 +67,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spaceMicro"
             android:text="@string/previewMoviesProgressMovie1"
-            />
+          />
 
           <TextView
             style="@style/WidgetItem.Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/previewMoviesProgressWatched1"
-            />
+          />
 
         </LinearLayout>
 
@@ -86,7 +86,7 @@
           android:layout_alignParentEnd="true"
           android:layout_centerVertical="true"
           android:contentDescription="@null"
-          />
+        />
 
       </RelativeLayout>
 
@@ -97,7 +97,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      >
+    >
 
       <FrameLayout
         android:layout_width="@dimen/widgetImageWidth"
@@ -109,7 +109,7 @@
         android:layout_marginBottom="@dimen/spaceSmall"
         android:background="@drawable/bg_widget_media_view_elevation"
         android:elevation="@dimen/elevationSmall"
-        >
+      >
 
         <ImageView
           android:layout_width="match_parent"
@@ -117,7 +117,7 @@
           android:contentDescription="@null"
           android:padding="@dimen/spaceSmall"
           android:src="@drawable/ic_film"
-          />
+        />
 
       </FrameLayout>
 
@@ -125,7 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        >
+      >
 
         <LinearLayout
           android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
           android:layout_centerVertical="true"
           android:layout_toStartOf="@id/previewMovieCheck2"
           android:orientation="vertical"
-          >
+        >
 
           <TextView
             style="@style/WidgetItem.Title"
@@ -142,14 +142,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spaceMicro"
             android:text="@string/previewMoviesProgressMovie2"
-            />
+          />
 
           <TextView
             style="@style/WidgetItem.Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/previewMoviesProgressWatched2"
-            />
+          />
 
         </LinearLayout>
 
@@ -161,7 +161,7 @@
           android:layout_alignParentEnd="true"
           android:layout_centerVertical="true"
           android:contentDescription="@null"
-          />
+        />
 
       </RelativeLayout>
 
@@ -178,7 +178,7 @@
     android:orientation="horizontal"
     android:paddingTop="@dimen/spaceTiny"
     android:paddingBottom="@dimen/spaceTiny"
-    >
+  >
 
     <ImageView
       android:layout_width="14dp"
@@ -187,7 +187,7 @@
       android:layout_marginEnd="@dimen/spaceTiny"
       android:contentDescription="@null"
       android:src="@drawable/ic_app_round"
-      />
+    />
 
     <TextView
       android:layout_width="match_parent"
@@ -197,7 +197,7 @@
       android:textAlignment="viewStart"
       android:textColor="@color/colorWhite"
       android:textSize="12sp"
-      />
+    />
 
   </LinearLayout>
 

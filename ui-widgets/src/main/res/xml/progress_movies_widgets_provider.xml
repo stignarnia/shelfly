@@ -14,4 +14,4 @@
   android:widgetCategory="home_screen"
   android:widgetFeatures="reconfigurable|configuration_optional"
   tools:targetApi="31"
-  />
+/>

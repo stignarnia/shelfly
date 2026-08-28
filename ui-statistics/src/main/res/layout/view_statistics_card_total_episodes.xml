@@ -9,7 +9,7 @@
   tools:background="?attr/colorAppBackground"
   tools:parentTag="com.google.android.material.card.MaterialCardView"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <LinearLayout
     android:id="@+id/viewTotalEpisodesContent"
@@ -20,7 +20,7 @@
     android:paddingTop="@dimen/spaceNormal"
     android:paddingEnd="@dimen/spaceMedium"
     android:paddingBottom="@dimen/spaceNormal"
-    >
+  >
 
     <TextView
       android:id="@+id/viewTotalEpisodesTitle"
@@ -36,7 +36,7 @@
       app:drawableStartCompat="@drawable/ic_eye"
       app:drawableTint="?android:attr/textColorPrimary"
       tools:drawableStart="@drawable/ic_eye"
-      />
+    />
 
     <TextView
       android:id="@+id/viewTotalEpisodesValue"
@@ -47,7 +47,7 @@
       android:textSize="24sp"
       android:textStyle="bold"
       tools:text="298 episodes"
-      />
+    />
 
     <TextView
       android:id="@+id/viewTotalEpisodesSubValue"
@@ -56,7 +56,7 @@
       android:textColor="?android:attr/textColorSecondary"
       android:textSize="14sp"
       tools:text="among 23 shows."
-      />
+    />
 
   </LinearLayout>
 

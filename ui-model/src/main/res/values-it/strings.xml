@@ -60,7 +60,7 @@
   <string name="textGenreRomance">Romantico</string>
   <string name="textGenreWar">Guerra</string>
   <string name="textGenreWestern">Western</string>
-    <string name="textShowStatusReturning">Serie rinnovata</string>
+  <string name="textShowStatusReturning">Serie rinnovata</string>
   <string name="textShowStatusUpcoming">In arrivo</string>
   <string name="textShowStatusInProduction">In produzione</string>
   <string name="textShowStatusPlanned">Pianificata</string>

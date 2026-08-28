@@ -8,7 +8,7 @@
   android:layout_height="match_parent"
   android:clipChildren="false"
   android:clipToPadding="false"
-  >
+>
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/progressRecycler"
@@ -24,16 +24,16 @@
     android:paddingBottom="@dimen/bottomNavigationHeightPadded"
     android:visibility="gone"
     tools:visibility="visible"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.tips.TipView
+  <xyz.stignarnia.uiBase.common.views.tips.TipView
     android:id="@+id/progressTipItem"
     android:layout_width="@dimen/tutorialTipSize"
     android:layout_height="@dimen/tutorialTipSize"
     android:layout_marginStart="110dp"
     android:layout_marginTop="254dp"
     android:visibility="gone"
-    />
+  />
 
   <include
     android:id="@+id/progressEmptyView"
@@ -47,9 +47,9 @@
     android:layout_marginBottom="@dimen/bottomNavigationHeight"
     android:visibility="gone"
     tools:visibility="visible"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.EmptySearchView
+  <xyz.stignarnia.uiBase.common.views.EmptySearchView
     android:id="@+id/progressEmptyFilterView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -57,15 +57,15 @@
     android:layout_marginBottom="@dimen/bottomNavigationHeight"
     android:visibility="gone"
     tools:visibility="visible"
-    />
+  />
 
-  <xyz.stignarnia.ui_base.common.views.OverscrollActionView
+  <xyz.stignarnia.uiBase.common.views.OverscrollActionView
     android:id="@+id/progressOverscroll"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:layout_marginTop="@dimen/progressOverscrollPadding"
     app:actionIcon="@drawable/ic_cloud_upload"
-    />
+  />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

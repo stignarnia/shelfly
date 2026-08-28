@@ -7,7 +7,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <androidx.core.widget.NestedScrollView
     android:id="@+id/showDetailsMainLayout"
@@ -18,7 +18,7 @@
     android:scrollbars="none"
     android:visibility="gone"
     tools:visibility="visible"
-    >
+  >
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/showDetailsMainContent"
@@ -28,7 +28,7 @@
       android:clipToPadding="false"
       android:descendantFocusability="blocksDescendants"
       android:paddingBottom="@dimen/spaceBig"
-      >
+    >
 
       <androidx.constraintlayout.widget.Guideline
         android:id="@+id/showDetailsImageGuideline"
@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintGuide_begin="230dp"
-        />
+      />
 
       <androidx.constraintlayout.widget.Guideline
         android:id="@+id/showDetailsGuidelineVertical"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintGuide_percent="0.7"
         app:layout_constraintStart_toStartOf="parent"
-        />
+      />
 
       <ImageView
         android:id="@+id/showDetailsImage"
@@ -59,7 +59,7 @@
         android:contentDescription="@null"
         app:layout_constraintBottom_toTopOf="@id/showDetailsImageGuideline"
         app:layout_constraintTop_toTopOf="parent"
-        />
+      />
 
       <ImageView
         android:id="@+id/showDetailsPlaceholder"
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="?attr/colorPlaceholderIcon"
         tools:visibility="visible"
-        />
+      />
 
       <TextView
         android:id="@+id/showDetailsTitle"
@@ -93,7 +93,7 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Game Of Thrones"
-        />
+      />
 
       <View
         android:id="@+id/separator1"
@@ -104,7 +104,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/showDetailsImageGuideline"
-        />
+      />
 
       <ProgressBar
         android:id="@+id/showDetailsImageProgress"
@@ -115,9 +115,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/showDetailsImage"
-        />
+      />
 
-      <xyz.stignarnia.ui_base.common.views.tips.TipView
+      <xyz.stignarnia.uiBase.common.views.tips.TipView
         android:id="@+id/showDetailsTipGallery"
         android:layout_width="@dimen/tutorialTipSize"
         android:layout_height="@dimen/tutorialTipSize"
@@ -127,7 +127,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/showDetailsImage"
         tools:visibility="visible"
-        />
+      />
 
       <TextView
         android:id="@+id/showDetailsExtraInfo"
@@ -148,7 +148,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/separator1"
         tools:text="Netflix 2019 (PL) | 60 min | Drama, SF"
-        />
+      />
 
       <TextView
         android:id="@+id/showDetailsStatus"
@@ -162,9 +162,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showDetailsExtraInfo"
         tools:text="Returning Series"
-        />
+      />
 
-      <xyz.stignarnia.ui_show.views.AddToShowsButton
+      <xyz.stignarnia.uiShow.views.AddToShowsButton
         android:id="@+id/showDetailsAddButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
         app:layout_constraintEnd_toStartOf="@id/showDetailsGuidelineVertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/showDetailsStatus"
-        />
+      />
 
       <TextView
         android:id="@+id/showDetailsManageListsLabel"
@@ -199,7 +199,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/showDetailsAddButton"
-        />
+      />
 
       <TextView
         android:id="@+id/showDetailsHideLabel"
@@ -220,7 +220,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/showDetailsManageListsLabel"
         app:layout_constraintTop_toTopOf="@id/showDetailsManageListsLabel"
-        />
+      />
 
       <View
         android:id="@+id/separator2"
@@ -234,11 +234,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/showDetailsManageListsLabel"
-        />
+      />
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsRatingsFragment"
-        android:name="xyz.stignarnia.ui_show.sections.ratings.ShowDetailsRatingsFragment"
+        android:name="xyz.stignarnia.uiShow.sections.ratings.ShowDetailsRatingsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spaceNormal"
@@ -247,11 +247,11 @@
         app:layout_constraintStart_toEndOf="@id/showDetailsGuidelineVertical"
         app:layout_constraintTop_toBottomOf="@id/separator1"
         tools:layout="@layout/fragment_show_details_ratings"
-        />
+      />
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsStreamingsFragment"
-        android:name="xyz.stignarnia.ui_show.sections.streamings.ShowDetailsStreamingsFragment"
+        android:name="xyz.stignarnia.uiShow.sections.streamings.ShowDetailsStreamingsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -262,9 +262,9 @@
         app:layout_constraintTop_toBottomOf="@id/separator2"
         tools:layout_height="40dp"
         tools:visibility="visible"
-        />
+      />
 
-      <xyz.stignarnia.ui_base.common.views.FoldableTextView
+      <xyz.stignarnia.uiBase.common.views.FoldableTextView
         android:id="@+id/showDetailsDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -284,7 +284,7 @@
         app:layout_goneMarginTop="@dimen/spaceBig"
         tools:targetApi="o"
         tools:text="Description"
-        />
+      />
 
       <include
         android:id="@+id/showDetailsActions"
@@ -296,11 +296,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/showDetailsDescription"
-        />
+      />
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsActorsFragment"
-        android:name="xyz.stignarnia.ui_show.sections.people.ShowDetailsPeopleFragment"
+        android:name="xyz.stignarnia.uiShow.sections.people.ShowDetailsPeopleFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceBig"
@@ -309,11 +309,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/showDetailsActions"
         tools:layout="@layout/fragment_show_details_people"
-        />
+      />
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsEpisodeFragment"
-        android:name="xyz.stignarnia.ui_show.sections.nextepisode.ShowDetailsNextEpisodeFragment"
+        android:name="xyz.stignarnia.uiShow.sections.nextepisode.ShowDetailsNextEpisodeFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spaceBig"
@@ -328,11 +328,11 @@
         app:layout_constraintTop_toBottomOf="@id/showDetailsActorsFragment"
         tools:layout="@layout/fragment_show_details_next_episode"
         tools:visibility="visible"
-        />
+      />
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsSeasonsFragment"
-        android:name="xyz.stignarnia.ui_show.sections.seasons.ShowDetailsSeasonsFragment"
+        android:name="xyz.stignarnia.uiShow.sections.seasons.ShowDetailsSeasonsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceBig"
@@ -343,11 +343,11 @@
         app:layout_constraintTop_toBottomOf="@id/showDetailsEpisodeFragment"
         app:layout_goneMarginTop="22dp"
         tools:layout="@layout/fragment_show_details_seasons"
-        />
+      />
 
       <androidx.fragment.app.FragmentContainerView
         android:id="@+id/showDetailsRelatedFragment"
-        android:name="xyz.stignarnia.ui_show.sections.related.ShowDetailsRelatedFragment"
+        android:name="xyz.stignarnia.uiShow.sections.related.ShowDetailsRelatedFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spaceBig"
@@ -355,7 +355,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/showDetailsSeasonsFragment"
         tools:layout="@layout/fragment_show_details_related"
-        />
+      />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -368,14 +368,14 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:visibility="gone"
-    />
+  />
 
   <FrameLayout
     android:id="@+id/showDetailsBackArrow"
     android:layout_width="@dimen/backArrowSize"
     android:layout_height="@dimen/backArrowSize"
     android:layout_marginStart="8dp"
-    >
+  >
 
     <ImageView
       android:layout_width="match_parent"
@@ -385,7 +385,7 @@
       android:padding="8dp"
       app:srcCompat="@drawable/ic_circle"
       app:tint="@color/colorBlackTranslucentMedium"
-      />
+    />
 
     <ImageView
       android:layout_width="match_parent"
@@ -393,7 +393,7 @@
       android:contentDescription="@null"
       android:padding="@dimen/backArrowPadding"
       app:srcCompat="@drawable/ic_arrow_back"
-      />
+    />
 
   </FrameLayout>
 

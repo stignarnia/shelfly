@@ -3,7 +3,6 @@ package xyz.stignarnia.common
 import java.util.concurrent.TimeUnit.MINUTES
 
 object ConfigVariant {
-
   val SHOW_SYNC_COOLDOWN by lazy { MINUTES.toMillis(60) }
   val MOVIE_SYNC_COOLDOWN by lazy { MINUTES.toMillis(60) }
   val TRANSLATION_SYNC_SHOW_MOVIE_COOLDOWN by lazy { MINUTES.toMillis(15) }

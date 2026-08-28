@@ -11,7 +11,7 @@
   app:cardCornerRadius="@dimen/searchViewCorner"
   app:cardElevation="@dimen/elevationSmall"
   app:strokeWidth="1dp"
-  >
+>
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -20,7 +20,7 @@
     android:layout_marginEnd="@dimen/spaceMicro"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    >
+  >
 
     <ImageView
       android:id="@+id/searchViewIcon"
@@ -30,14 +30,14 @@
       android:contentDescription="@null"
       app:srcCompat="@drawable/ic_anim_search_to_close"
       app:tint="?attr/colorSearchViewControl"
-      />
+    />
 
     <FrameLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:paddingStart="0dp"
       android:paddingEnd="@dimen/spaceTiny"
-      >
+    >
 
       <TextView
         android:id="@+id/searchViewText"
@@ -48,7 +48,7 @@
         android:textAlignment="viewStart"
         android:textColor="?attr/colorSearchViewControl"
         android:textSize="16sp"
-        />
+      />
 
       <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/searchViewInput"
@@ -70,7 +70,7 @@
         android:textSize="16sp"
         android:visibility="gone"
         tools:visibility="visible"
-        />
+      />
 
       <ImageView
         android:id="@+id/searchStatsIcon"
@@ -84,7 +84,7 @@
         app:srcCompat="@drawable/ic_insight"
         app:tint="?attr/colorSearchViewControl"
         tools:visibility="visible"
-        />
+      />
 
       <ImageView
         android:id="@+id/searchSettingsIcon"
@@ -95,7 +95,7 @@
         android:padding="9dp"
         app:srcCompat="@drawable/ic_settings"
         app:tint="?attr/colorSearchViewControl"
-        />
+      />
 
     </FrameLayout>
 

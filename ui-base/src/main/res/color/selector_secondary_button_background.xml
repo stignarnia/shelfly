@@ -13,7 +13,7 @@
     android:alpha="0.3"
     android:color="@color/colorGray"
     android:state_enabled="false"
-    />
+  />
 
   <item android:color="@color/colorGray" />
 

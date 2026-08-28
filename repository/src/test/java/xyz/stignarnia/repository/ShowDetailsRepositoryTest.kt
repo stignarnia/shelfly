@@ -1,13 +1,6 @@
 package xyz.stignarnia.repository
 
 import com.google.common.truth.Truth.assertThat
-import xyz.stignarnia.common.extensions.nowUtcMillis
-import xyz.stignarnia.data_local.database.dao.ShowsDao
-import xyz.stignarnia.data_local.database.model.Show
-import xyz.stignarnia.data_remote.tmdb.TmdbRemoteDataSource
-import xyz.stignarnia.repository.common.BaseMockTest
-import xyz.stignarnia.repository.shows.ShowDetailsRepository
-import xyz.stignarnia.ui_model.IdTmdb
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -19,12 +12,19 @@ import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
+import xyz.stignarnia.common.extensions.nowUtcMillis
+import xyz.stignarnia.dataLocal.database.dao.ShowsDao
+import xyz.stignarnia.dataLocal.database.model.Show
+import xyz.stignarnia.dataRemote.tmdb.TmdbRemoteDataSource
+import xyz.stignarnia.repository.common.BaseMockTest
+import xyz.stignarnia.repository.shows.ShowDetailsRepository
+import xyz.stignarnia.uiModel.IdTmdb
 import java.util.concurrent.TimeUnit
-import xyz.stignarnia.data_remote.catalog.model.Show as ShowRemote
+import xyz.stignarnia.dataRemote.catalog.model.Show as ShowRemote
 
 class ShowDetailsRepositoryTest : BaseMockTest() {
-
   @MockK lateinit var catalogApi: TmdbRemoteDataSource
+
   @MockK lateinit var showsDao: ShowsDao
 
   private lateinit var SUT: ShowDetailsRepository
@@ -75,13 +75,14 @@ class ShowDetailsRepositoryTest : BaseMockTest() {
     tmdbId: Long = 1,
     imdbId: String = "tt0000001",
   ) = ShowRemote(
-    ids = xyz.stignarnia.data_remote.catalog.model.Ids(
-      slug = null,
-      tvdb = null,
-      imdb = imdbId,
-      tmdb = tmdbId,
-      tvrage = null,
-    ),
+    ids =
+      xyz.stignarnia.dataRemote.catalog.model.Ids(
+        slug = null,
+        tvdb = null,
+        imdb = imdbId,
+        tmdb = tmdbId,
+        tvrage = null,
+      ),
     title = "Show",
     year = 2020,
     overview = null,

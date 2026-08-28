@@ -7,7 +7,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <TextView
     android:id="@+id/settingsCategoryBackup"
@@ -16,7 +16,7 @@
     app:layout_constraintBottom_toTopOf="@id/settingsBackupImport"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/settingsBackupImport"
@@ -24,7 +24,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/settingsCategoryBackup"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsBackupCrashImport"
@@ -34,7 +34,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsBackupCrashesDescImport"
@@ -46,7 +46,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsBackupCrashImport"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -56,7 +56,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/settingsBackupImport"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsBackupExportTitle"
@@ -66,7 +66,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsBackupExportDescription"
@@ -78,7 +78,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsBackupExportTitle"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -88,7 +88,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/settingsBackupExport"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsBackupWebDavTitle"
@@ -98,7 +98,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsBackupWebDavDescription"
@@ -110,7 +110,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsBackupWebDavTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsBackupWebDavValue"
@@ -125,7 +125,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsBackupWebDavDescription"
       tools:text="https://cloud.example.com/remote.php/dav/files/me/backups/"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -135,7 +135,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/settingsBackupWebDav"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsBackupTargetTitle"
@@ -145,7 +145,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsBackupTargetDescription"
@@ -157,7 +157,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsBackupTargetTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsBackupTargetValue"
@@ -168,7 +168,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsBackupTargetDescription"
       tools:text="WebDAV server"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -178,7 +178,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/settingsBackupTarget"
-    >
+  >
 
     <TextView
       android:id="@+id/settingsBackupRetentionTitle"
@@ -188,7 +188,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsBackupRetentionDescription"
@@ -200,7 +200,7 @@
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsBackupRetentionTitle"
-      />
+    />
 
     <TextView
       android:id="@+id/settingsBackupRetentionValue"
@@ -211,7 +211,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/settingsBackupRetentionDescription"
       tools:text="5 most recent"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="textNextEpisode">Următorul episod:</string>
-    <string name="textInMyShows">Adăugat la serialele mele</string>
-    <string name="textInWatchlist">Adăugat la lista de urmărire</string>
-    <string name="textInHidden">Ascuns</string>
-    <string name="textShowQuickProgressTitle">Progres rapid</string>
-    <string name="textShowQuickProgressSubTitle">Selectează ultimul episod vizionat pentru a îți actualiza rapid progresul.</string>
-    <string name="textShowQuickProgressDone">Progresul tău a fost actualizat.</string>
-    <string name="textEpisodeDate">Episodul %1$d | %2$s</string>
-    <string name="textEpisodeTitle">S.%1$02d E.%2$02d - \'%3$s\'</string>
-    <string name="textActorsEmpty">Actorii nu sunt disponibili</string>
-    <string name="textSeasons">Sezoane:</string>
-    <string name="textSeasonsEmpty">Sezoane indisponibile.</string>
-    <string name="textTrailer">Trailer</string>
-    <string name="textYouMayAlsoLike">Ți-ar putea plăcea și</string>
-    <string name="textRuntimeLeftHours">~%1$sh %2$sm rămase</string>
-    <string name="textRuntimeLeftMinutes">~%sm rămase</string>
-    <string name="textShowManageLists">Gestionare liste</string>
-    <string name="textShowManageListsCount">Gestionare liste (%d)</string>
+  <string name="textNextEpisode">Următorul episod:</string>
+  <string name="textInMyShows">Adăugat la serialele mele</string>
+  <string name="textInWatchlist">Adăugat la lista de urmărire</string>
+  <string name="textInHidden">Ascuns</string>
+  <string name="textShowQuickProgressTitle">Progres rapid</string>
+  <string name="textShowQuickProgressSubTitle">Selectează ultimul episod vizionat pentru a îți actualiza rapid progresul.</string>
+  <string name="textShowQuickProgressDone">Progresul tău a fost actualizat.</string>
+  <string name="textEpisodeDate">Episodul %1$d | %2$s</string>
+  <string name="textEpisodeTitle">S.%1$02d E.%2$02d - \'%3$s\'</string>
+  <string name="textActorsEmpty">Actorii nu sunt disponibili</string>
+  <string name="textSeasons">Sezoane:</string>
+  <string name="textSeasonsEmpty">Sezoane indisponibile.</string>
+  <string name="textTrailer">Trailer</string>
+  <string name="textYouMayAlsoLike">Ți-ar putea plăcea și</string>
+  <string name="textRuntimeLeftHours">~%1$sh %2$sm rămase</string>
+  <string name="textRuntimeLeftMinutes">~%sm rămase</string>
+  <string name="textShowManageLists">Gestionare liste</string>
+  <string name="textShowManageListsCount">Gestionare liste (%d)</string>
 </resources>

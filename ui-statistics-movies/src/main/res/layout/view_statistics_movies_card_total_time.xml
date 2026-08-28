@@ -7,7 +7,7 @@
   android:layout_height="match_parent"
   tools:parentTag="com.google.android.material.card.MaterialCardView"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <LinearLayout
     android:id="@+id/viewMoviesTotalTimeSpentContent"
@@ -18,7 +18,7 @@
     android:paddingTop="@dimen/spaceNormal"
     android:paddingEnd="@dimen/spaceMedium"
     android:paddingBottom="@dimen/spaceNormal"
-    >
+  >
 
     <TextView
       android:id="@+id/viewMoviesTotalTimeSpentTitle"
@@ -34,7 +34,7 @@
       app:drawableStartCompat="@drawable/ic_clock"
       app:drawableTint="?android:attr/textColorPrimary"
       tools:drawableStart="@drawable/ic_clock"
-      />
+    />
 
     <TextView
       android:id="@+id/viewMoviesTotalTimeSpentMinutesValue"
@@ -45,7 +45,7 @@
       android:textSize="24sp"
       android:textStyle="bold"
       tools:text="1000000 minutes"
-      />
+    />
 
     <TextView
       android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
       android:text="@string/textStatisticsMoviesTotalTimeItIs"
       android:textColor="?android:attr/textColorSecondary"
       android:textSize="14sp"
-      />
+    />
 
     <TextView
       android:id="@+id/viewMoviesTotalTimeSpentHoursValue"
@@ -65,7 +65,7 @@
       android:textSize="24sp"
       android:textStyle="bold"
       tools:text="1 000 000 hours"
-      />
+    />
 
     <TextView
       android:id="@+id/viewMoviesTotalTimeSpentSubValue"
@@ -74,7 +74,7 @@
       android:textColor="?android:attr/textColorSecondary"
       android:textSize="14sp"
       tools:text="which is about 342 days and 23 hours."
-      />
+    />
 
   </LinearLayout>
 

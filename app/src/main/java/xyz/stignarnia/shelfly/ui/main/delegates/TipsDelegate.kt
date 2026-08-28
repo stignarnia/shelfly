@@ -3,13 +3,13 @@ package xyz.stignarnia.shelfly.ui.main.delegates
 import androidx.lifecycle.DefaultLifecycleObserver
 import xyz.stignarnia.shelfly.databinding.ActivityMainBinding
 import xyz.stignarnia.shelfly.ui.main.MainViewModel
-import xyz.stignarnia.ui_base.R
-import xyz.stignarnia.ui_base.common.views.modal.ModalBuilder
-import xyz.stignarnia.ui_base.utilities.TipsHost
-import xyz.stignarnia.ui_base.utilities.extensions.gone
-import xyz.stignarnia.ui_base.utilities.extensions.onClick
-import xyz.stignarnia.ui_base.utilities.extensions.visibleIf
-import xyz.stignarnia.ui_model.Tip
+import xyz.stignarnia.uiBase.R
+import xyz.stignarnia.uiBase.common.views.modal.ModalBuilder
+import xyz.stignarnia.uiBase.utilities.TipsHost
+import xyz.stignarnia.uiBase.utilities.extensions.gone
+import xyz.stignarnia.uiBase.utilities.extensions.onClick
+import xyz.stignarnia.uiBase.utilities.extensions.visibleIf
+import xyz.stignarnia.uiModel.Tip
 
 interface TipsDelegate : TipsHost {
   fun registerTipsDelegate(
@@ -25,7 +25,6 @@ interface TipsDelegate : TipsHost {
 class MainTipsDelegate :
   TipsDelegate,
   DefaultLifecycleObserver {
-
   private lateinit var viewModel: MainViewModel
   private lateinit var binding: ActivityMainBinding
 

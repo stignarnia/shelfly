@@ -1,14 +1,6 @@
 package xyz.stignarnia.repository
 
 import com.google.common.truth.Truth.assertThat
-import xyz.stignarnia.data_local.database.model.MyShow
-import xyz.stignarnia.data_local.sources.ArchiveShowsLocalDataSource
-import xyz.stignarnia.data_local.sources.MyShowsLocalDataSource
-import xyz.stignarnia.data_local.sources.WatchlistShowsLocalDataSource
-import xyz.stignarnia.repository.common.BaseMockTest
-import xyz.stignarnia.repository.shows.MyShowsRepository
-import xyz.stignarnia.ui_model.IdTmdb
-import xyz.stignarnia.ui_model.Show
 import io.mockk.coEvery
 import io.mockk.coJustRun
 import io.mockk.coVerify
@@ -19,55 +11,66 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import xyz.stignarnia.data_local.database.model.Show as ShowDb
+import xyz.stignarnia.dataLocal.database.model.MyShow
+import xyz.stignarnia.dataLocal.sources.ArchiveShowsLocalDataSource
+import xyz.stignarnia.dataLocal.sources.MyShowsLocalDataSource
+import xyz.stignarnia.dataLocal.sources.WatchlistShowsLocalDataSource
+import xyz.stignarnia.repository.common.BaseMockTest
+import xyz.stignarnia.repository.shows.MyShowsRepository
+import xyz.stignarnia.uiModel.IdTmdb
+import xyz.stignarnia.uiModel.Show
+import xyz.stignarnia.dataLocal.database.model.Show as ShowDb
 
 class MyShowsRepositoryTest : BaseMockTest() {
-
   @RelaxedMockK lateinit var myShowsLocalSource: MyShowsLocalDataSource
+
   @RelaxedMockK lateinit var watchlistShowsLocalSource: WatchlistShowsLocalDataSource
+
   @RelaxedMockK lateinit var hiddenShowsLocalDataSource: ArchiveShowsLocalDataSource
-  private val showDb = ShowDb(
-    idTmdb = 1,
-    idTvdb = 1,
-    idImdb = "1",
-    idSlug = "1",
-    idTvrage = 1,
-    title = "Show",
-    year = 2020,
-    overview = "",
-    firstAired = "",
-    runtime = 45,
-    airtimeDay = "",
-    airtimeTime = "",
-    airtimeTimezone = "",
-    certification = "",
-    network = "",
-    networkLogoPath = "",
-    country = "",
-    trailer = "",
-    homepage = "",
-    status = "",
-    rating = 5f,
-    votes = 10,
-    commentCount = 0,
-    genres = "",
-    airedEpisodes = 10,
-    createdAt = 0,
-    updatedAt = 0,
-  )
+  private val showDb =
+    ShowDb(
+      idTmdb = 1,
+      idTvdb = 1,
+      idImdb = "1",
+      idSlug = "1",
+      idTvrage = 1,
+      title = "Show",
+      year = 2020,
+      overview = "",
+      firstAired = "",
+      runtime = 45,
+      airtimeDay = "",
+      airtimeTime = "",
+      airtimeTimezone = "",
+      certification = "",
+      network = "",
+      networkLogoPath = "",
+      country = "",
+      trailer = "",
+      homepage = "",
+      status = "",
+      rating = 5f,
+      votes = 10,
+      commentCount = 0,
+      genres = "",
+      airedEpisodes = 10,
+      createdAt = 0,
+      updatedAt = 0,
+    )
 
   private lateinit var SUT: MyShowsRepository
 
   @Before
   override fun setUp() {
     super.setUp()
-    SUT = MyShowsRepository(
-      myShowsLocalSource,
-      watchlistShowsLocalSource,
-      hiddenShowsLocalDataSource,
-      transactions,
-      mappers,
-    )
+    SUT =
+      MyShowsRepository(
+        myShowsLocalSource,
+        watchlistShowsLocalSource,
+        hiddenShowsLocalDataSource,
+        transactions,
+        mappers,
+      )
     coEvery { database.myShows } returns myShowsLocalSource
     coEvery { database.watchlistShows } returns watchlistShowsLocalSource
     coEvery { database.archiveShows } returns hiddenShowsLocalDataSource

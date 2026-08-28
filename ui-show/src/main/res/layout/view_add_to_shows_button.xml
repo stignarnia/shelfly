@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -14,7 +14,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="horizontal"
-    >
+  >
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/addToMyShowsButton"
@@ -30,7 +30,7 @@
       android:textSize="@dimen/addToButtonTextSize"
       app:rippleColor="?android:attr/textColorPrimary"
       app:strokeColor="?android:attr/textColorPrimary"
-      />
+    />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/watchlistButton"
@@ -47,7 +47,7 @@
       android:textSize="@dimen/addToButtonTextSize"
       app:rippleColor="?android:attr/textColorSecondary"
       app:strokeWidth="0dp"
-      />
+    />
 
   </LinearLayout>
 
@@ -55,7 +55,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    >
+  >
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/addedToButton"
@@ -76,7 +76,7 @@
       app:rippleColor="?attr/colorAccent"
       app:strokeColor="?attr/colorAccent"
       tools:visibility="visible"
-      />
+    />
 
   </LinearLayout>
 

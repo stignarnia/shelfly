@@ -16,9 +16,10 @@ android {
   }
 
   defaultConfig {
-    minSdk = libs.versions.minSdk
-      .get()
-      .toInt()
+    minSdk =
+      libs.versions.minSdk
+        .get()
+        .toInt()
 
     buildConfigField("int", "VER_CODE", "${libs.versions.versionCode.get()}")
     buildConfigField("String", "VER_NAME", "\"${libs.versions.versionName.get()}\"")
@@ -34,12 +35,13 @@ android {
 
   testOptions {
     // targetSdk only affects instrumentation tests in a library, and AGP 9 removed it from defaultConfig.
-    targetSdk = libs.versions.targetSdk
-      .get()
-      .toInt()
+    targetSdk =
+      libs.versions.targetSdk
+        .get()
+        .toInt()
   }
 
-  namespace = "xyz.stignarnia.ui_settings"
+  namespace = "xyz.stignarnia.uiSettings"
 }
 
 dependencies {

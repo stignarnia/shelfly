@@ -8,13 +8,13 @@
   tools:background="?attr/colorAppBackground"
   tools:parentTag="android.widget.FrameLayout"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/searchRecentRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+  >
 
     <ImageView
       android:id="@+id/searchRecentIcon"
@@ -26,7 +26,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/ic_history"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <TextView
       android:id="@+id/searchRecentText"
@@ -40,7 +40,7 @@
       app:layout_constraintStart_toEndOf="@id/searchRecentIcon"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="Game of Thrones"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

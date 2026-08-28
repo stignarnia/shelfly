@@ -1,157 +1,170 @@
 package xyz.stignarnia.repository.images
 
+import kotlinx.coroutines.withContext
 import xyz.stignarnia.common.dispatchers.CoroutineDispatchers
-import xyz.stignarnia.data_local.LocalDataSource
-import xyz.stignarnia.data_remote.RemoteDataSource
-import xyz.stignarnia.data_remote.tmdb.model.TmdbImage
-import xyz.stignarnia.data_remote.tmdb.model.TmdbImages
+import xyz.stignarnia.dataLocal.LocalDataSource
+import xyz.stignarnia.dataRemote.RemoteDataSource
+import xyz.stignarnia.dataRemote.tmdb.model.TmdbImage
+import xyz.stignarnia.dataRemote.tmdb.model.TmdbImages
 import xyz.stignarnia.repository.TranslationsRepository
 import xyz.stignarnia.repository.mappers.Mappers
-import xyz.stignarnia.ui_model.IdTmdb
-import xyz.stignarnia.ui_model.IdTvdb
-import xyz.stignarnia.ui_model.Image
-import xyz.stignarnia.ui_model.ImageFamily.MOVIE
-import xyz.stignarnia.ui_model.ImageSource.CUSTOM
-import xyz.stignarnia.ui_model.ImageSource.TMDB
-import xyz.stignarnia.ui_model.ImageStatus.AVAILABLE
-import xyz.stignarnia.ui_model.ImageStatus.UNAVAILABLE
-import xyz.stignarnia.ui_model.ImageType
-import xyz.stignarnia.ui_model.ImageType.FANART
-import xyz.stignarnia.ui_model.ImageType.FANART_WIDE
-import xyz.stignarnia.ui_model.ImageType.POSTER
-import xyz.stignarnia.ui_model.Movie
-import kotlinx.coroutines.withContext
+import xyz.stignarnia.uiModel.IdTmdb
+import xyz.stignarnia.uiModel.IdTvdb
+import xyz.stignarnia.uiModel.Image
+import xyz.stignarnia.uiModel.ImageFamily.MOVIE
+import xyz.stignarnia.uiModel.ImageSource.CUSTOM
+import xyz.stignarnia.uiModel.ImageSource.TMDB
+import xyz.stignarnia.uiModel.ImageStatus.AVAILABLE
+import xyz.stignarnia.uiModel.ImageStatus.UNAVAILABLE
+import xyz.stignarnia.uiModel.ImageType
+import xyz.stignarnia.uiModel.ImageType.FANART
+import xyz.stignarnia.uiModel.ImageType.FANART_WIDE
+import xyz.stignarnia.uiModel.ImageType.POSTER
+import xyz.stignarnia.uiModel.Movie
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MovieImagesProvider @Inject constructor(
-  private val dispatchers: CoroutineDispatchers,
-  private val remoteSource: RemoteDataSource,
-  private val localSource: LocalDataSource,
-  private val mappers: Mappers,
-  private var translationsRepository: TranslationsRepository,
-) {
+class MovieImagesProvider
+  @Inject
+  constructor(
+    private val dispatchers: CoroutineDispatchers,
+    private val remoteSource: RemoteDataSource,
+    private val localSource: LocalDataSource,
+    private val mappers: Mappers,
+    private var translationsRepository: TranslationsRepository,
+  ) {
+    private val unavailableCache = mutableSetOf<IdTmdb>()
 
-  private val unavailableCache = mutableSetOf<IdTmdb>()
+    suspend fun findCachedImage(
+      movie: Movie,
+      type: ImageType,
+    ): Image =
+      withContext(dispatchers.IO) {
+        val image = localSource.movieImages.getByMovieId(movie.ids.tmdb.id, type.key)
+        when (image) {
+          null -> {
+            if (unavailableCache.contains(movie.ids.tmdb)) {
+              Image.createUnavailable(type, MOVIE, TMDB)
+            } else {
+              Image.createUnknown(type, MOVIE, TMDB)
+            }
+          }
 
-  suspend fun findCachedImage(
-    movie: Movie,
-    type: ImageType,
-  ): Image =
-    withContext(dispatchers.IO) {
-      val image = localSource.movieImages.getByMovieId(movie.ids.tmdb.id, type.key)
-      when (image) {
-        null -> {
-          if (unavailableCache.contains(movie.ids.tmdb)) {
-            Image.createUnavailable(type, MOVIE, TMDB)
-          } else {
-            Image.createUnknown(type, MOVIE, TMDB)
+          else -> {
+            mappers.image.fromDatabase(image).copy(type = type)
           }
         }
-        else -> {
-          mappers.image.fromDatabase(image).copy(type = type)
+      }
+
+    suspend fun loadRemoteImage(
+      movie: Movie,
+      type: ImageType,
+      force: Boolean = false,
+    ): Image =
+      withContext(dispatchers.IO) {
+        val tmdbId = movie.ids.tmdb
+        val tvdbId = movie.ids.tvdb
+
+        val cachedImage = findCachedImage(movie, type)
+        if (cachedImage.status in arrayOf(AVAILABLE, UNAVAILABLE)) {
+          if (!force) return@withContext cachedImage
+          if (force && cachedImage.source == CUSTOM) return@withContext cachedImage
+        }
+
+        val images = remoteSource.tmdb.fetchMovieImages(tmdbId.id)
+        val typeImages =
+          when (type) {
+            POSTER -> images.posters ?: emptyList()
+            FANART, FANART_WIDE -> images.backdrops ?: emptyList()
+            else -> throw Error("Invalid type")
+          }
+
+        val remoteImage = findBestImage(typeImages, type)
+        val image =
+          when (remoteImage) {
+            null -> Image.createUnavailable(type, MOVIE, TMDB)
+            else -> Image.createAvailable(movie.ids, type, MOVIE, remoteImage.file_path, TMDB)
+          }
+
+        when (image.status) {
+          UNAVAILABLE -> {
+            unavailableCache.add(movie.ids.tmdb)
+            localSource.movieImages.deleteByMovieId(tmdbId.id, image.type.key)
+          }
+
+          else -> {
+            localSource.movieImages.insertMovieImage(mappers.image.toDatabaseMovie(image))
+            storeExtraImage(tmdbId, tvdbId, images, type)
+          }
+        }
+
+        image
+      }
+
+    private suspend fun storeExtraImage(
+      tmdbId: IdTmdb,
+      tvdbId: IdTvdb,
+      images: TmdbImages,
+      targetType: ImageType,
+    ) {
+      val extraType = if (targetType == POSTER) FANART else POSTER
+      val typeImages =
+        when (extraType) {
+          POSTER -> images.posters ?: emptyList()
+          FANART, FANART_WIDE -> images.backdrops ?: emptyList()
+          else -> throw Error("Invalid type")
+        }
+      findBestImage(typeImages, extraType)?.let {
+        val extraImage = Image(-1, tvdbId, tmdbId, extraType, MOVIE, it.file_path, "", AVAILABLE, TMDB)
+        localSource.movieImages.insertMovieImage(mappers.image.toDatabaseMovie(extraImage))
+      }
+    }
+
+    suspend fun loadRemoteImages(
+      movie: Movie,
+      type: ImageType,
+    ): List<Image> =
+      withContext(dispatchers.IO) {
+        val tmdbId = movie.ids.tmdb
+        val remoteImages = remoteSource.tmdb.fetchMovieImages(tmdbId.id)
+        val typeImages =
+          when (type) {
+            POSTER -> remoteImages.posters ?: emptyList()
+            FANART, FANART_WIDE -> remoteImages.backdrops ?: emptyList()
+            else -> throw Error("Invalid type")
+          }
+        typeImages.map {
+          Image.createAvailable(movie.ids, type, MOVIE, it.file_path, TMDB)
         }
       }
-    }
 
-  suspend fun loadRemoteImage(
-    movie: Movie,
-    type: ImageType,
-    force: Boolean = false,
-  ): Image =
-    withContext(dispatchers.IO) {
-      val tmdbId = movie.ids.tmdb
-      val tvdbId = movie.ids.tvdb
+    private fun findBestImage(
+      images: List<TmdbImage>,
+      type: ImageType,
+    ): TmdbImage? {
+      val language = translationsRepository.getLanguage()
+      val comparator =
+        when (type) {
+          POSTER -> {
+            compareBy<TmdbImage> { it.isLanguage(language) }
+              .thenBy { it.isEnglish() }
+              .thenBy { it.isPlain() }
+          }
 
-      val cachedImage = findCachedImage(movie, type)
-      if (cachedImage.status in arrayOf(AVAILABLE, UNAVAILABLE)) {
-        if (!force) return@withContext cachedImage
-        if (force && cachedImage.source == CUSTOM) return@withContext cachedImage
-      }
-
-      val images = remoteSource.tmdb.fetchMovieImages(tmdbId.id)
-      val typeImages = when (type) {
-        POSTER -> images.posters ?: emptyList()
-        FANART, FANART_WIDE -> images.backdrops ?: emptyList()
-        else -> throw Error("Invalid type")
-      }
-
-      val remoteImage = findBestImage(typeImages, type)
-      val image = when (remoteImage) {
-        null -> Image.createUnavailable(type, MOVIE, TMDB)
-        else -> Image.createAvailable(movie.ids, type, MOVIE, remoteImage.file_path, TMDB)
-      }
-
-      when (image.status) {
-        UNAVAILABLE -> {
-          unavailableCache.add(movie.ids.tmdb)
-          localSource.movieImages.deleteByMovieId(tmdbId.id, image.type.key)
+          else -> {
+            compareBy<TmdbImage> { it.isPlain() }
+              .thenBy { it.isLanguage(language) }
+              .thenBy { it.isEnglish() }
+          }
         }
-        else -> {
-          localSource.movieImages.insertMovieImage(mappers.image.toDatabaseMovie(image))
-          storeExtraImage(tmdbId, tvdbId, images, type)
-        }
+      return images.maxWithOrNull(comparator.thenBy { it.getVoteScore() })
+    }
+
+    suspend fun deleteLocalCache() =
+      withContext(dispatchers.IO) {
+        localSource.movieImages.deleteAll()
       }
 
-      image
-    }
-
-  private suspend fun storeExtraImage(
-    tmdbId: IdTmdb,
-    tvdbId: IdTvdb,
-    images: TmdbImages,
-    targetType: ImageType,
-  ) {
-    val extraType = if (targetType == POSTER) FANART else POSTER
-    val typeImages = when (extraType) {
-      POSTER -> images.posters ?: emptyList()
-      FANART, FANART_WIDE -> images.backdrops ?: emptyList()
-      else -> throw Error("Invalid type")
-    }
-    findBestImage(typeImages, extraType)?.let {
-      val extraImage = Image(-1, tvdbId, tmdbId, extraType, MOVIE, it.file_path, "", AVAILABLE, TMDB)
-      localSource.movieImages.insertMovieImage(mappers.image.toDatabaseMovie(extraImage))
-    }
+    fun clear() = unavailableCache.clear()
   }
-
-  suspend fun loadRemoteImages(
-    movie: Movie,
-    type: ImageType,
-  ): List<Image> =
-    withContext(dispatchers.IO) {
-      val tmdbId = movie.ids.tmdb
-      val remoteImages = remoteSource.tmdb.fetchMovieImages(tmdbId.id)
-      val typeImages = when (type) {
-        POSTER -> remoteImages.posters ?: emptyList()
-        FANART, FANART_WIDE -> remoteImages.backdrops ?: emptyList()
-        else -> throw Error("Invalid type")
-      }
-      typeImages.map {
-        Image.createAvailable(movie.ids, type, MOVIE, it.file_path, TMDB)
-      }
-    }
-
-  private fun findBestImage(
-    images: List<TmdbImage>,
-    type: ImageType,
-  ): TmdbImage? {
-    val language = translationsRepository.getLanguage()
-    val comparator = when (type) {
-      POSTER -> compareBy<TmdbImage> { it.isLanguage(language) }
-        .thenBy { it.isEnglish() }
-        .thenBy { it.isPlain() }
-      else -> compareBy<TmdbImage> { it.isPlain() }
-        .thenBy { it.isLanguage(language) }
-        .thenBy { it.isEnglish() }
-    }
-    return images.maxWithOrNull(comparator.thenBy { it.getVoteScore() })
-  }
-
-  suspend fun deleteLocalCache() =
-    withContext(dispatchers.IO) {
-      localSource.movieImages.deleteAll()
-    }
-
-  fun clear() = unavailableCache.clear()
-}

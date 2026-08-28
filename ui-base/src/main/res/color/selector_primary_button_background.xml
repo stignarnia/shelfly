@@ -10,7 +10,7 @@
     android:alpha="0.3"
     android:color="?attr/colorAccent"
     android:state_enabled="false"
-    />
+  />
 
   <item android:color="?attr/colorAccent" />
 

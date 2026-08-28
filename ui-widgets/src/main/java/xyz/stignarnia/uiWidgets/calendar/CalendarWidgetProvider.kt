@@ -1,0 +1,229 @@
+package xyz.stignarnia.uiWidgets.calendar
+
+import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.app.PendingIntent.FLAG_MUTABLE
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
+import android.appwidget.AppWidgetManager
+import android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE
+import android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.RemoteViews
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import xyz.stignarnia.common.Config
+import xyz.stignarnia.common.Mode
+import xyz.stignarnia.uiBase.utilities.AndroidVersion
+import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
+import xyz.stignarnia.uiModel.CalendarMode
+import xyz.stignarnia.uiProgress.calendar.cases.items.CalendarFutureCase
+import xyz.stignarnia.uiProgress.calendar.cases.items.CalendarRecentsCase
+import xyz.stignarnia.uiWidgets.BaseWidgetProvider
+import xyz.stignarnia.uiWidgets.R
+import xyz.stignarnia.uiWidgets.theme.WidgetCollection
+import xyz.stignarnia.uiWidgets.theme.setIconTint
+import javax.inject.Inject
+
+@AndroidEntryPoint
+class CalendarWidgetProvider : BaseWidgetProvider() {
+  @Inject lateinit var calendarFutureCase: CalendarFutureCase
+
+  @Inject lateinit var calendarRecentsCase: CalendarRecentsCase
+
+  companion object {
+    fun requestUpdate(context: Context) {
+      val applicationContext = context.applicationContext
+      val appWidgetManager = AppWidgetManager.getInstance(applicationContext)
+      val intent =
+        Intent(applicationContext, CalendarWidgetProvider::class.java).apply {
+          val ids =
+            appWidgetManager.getAppWidgetIds(
+              ComponentName(applicationContext, CalendarWidgetProvider::class.java),
+            )
+          action = ACTION_APPWIDGET_UPDATE
+          putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+        }
+      applicationContext.sendBroadcast(intent)
+      Timber.d("Widget update requested.")
+    }
+  }
+
+  override fun getLayoutResId(): Int = R.layout.widget_calendar_night
+
+  override fun onUpdate(
+    context: Context,
+    appWidgetManager: AppWidgetManager,
+    appWidgetIds: IntArray?,
+  ) {
+    super.onUpdate(context, appWidgetManager, appWidgetIds)
+    appWidgetIds?.forEach { updateWidget(context, appWidgetManager, it) }
+  }
+
+  private fun updateWidget(
+    context: Context,
+    appWidgetManager: AppWidgetManager,
+    widgetId: Int,
+  ) {
+    if (!AndroidVersion.isAtLeastAndroid12) return
+
+    val palette = palette(context, widgetId)
+
+    val mainIntent =
+      PendingIntent.getActivity(
+        context,
+        0,
+        Intent().apply { setClassName(context, Config.HOST_ACTIVITY_NAME) },
+        FLAG_IMMUTABLE or FLAG_UPDATE_CURRENT,
+      )
+
+    val modeClickIntent =
+      PendingIntent.getBroadcast(
+        context,
+        1,
+        Intent(ACTION_CLICK).apply {
+          setClass(context, this@CalendarWidgetProvider.javaClass)
+          putExtra(EXTRA_MODE_CLICK, true)
+          putExtra(EXTRA_APPWIDGET_ID, widgetId)
+        },
+        FLAG_MUTABLE or FLAG_UPDATE_CURRENT,
+      )
+
+    val listClickIntent =
+      Intent(context, CalendarWidgetProvider::class.java).apply {
+        action = ACTION_CLICK
+      }
+    val listIntent = PendingIntent.getBroadcast(context, 0, listClickIntent, FLAG_MUTABLE or FLAG_UPDATE_CURRENT)
+
+    context.updateAsync {
+      val rows = CalendarWidgetRows(widgetId, context, calendarFutureCase, calendarRecentsCase, settingsRepository)
+      rows.load()
+      // First pass: no posters yet, so it costs nothing to wait for. This is what decides how many rows fit.
+      val (placeholders, taken) =
+        WidgetCollection.fill(
+          context,
+          rows.count,
+          rows.viewTypeCount,
+          rows::posterCost,
+          rows::moreView,
+        ) { position -> rows.itemId(position) to rows.viewAt(position) }
+      Timber.d("Widget $widgetId building $taken of ${rows.count} rows.")
+
+      fun remoteViews(items: RemoteViews.RemoteCollectionItems) =
+        RemoteViews(context.packageName, getLayoutResId()).apply {
+          setRemoteAdapter(R.id.calendarWidgetList, items)
+          setEmptyView(R.id.calendarWidgetList, R.id.calendarWidgetEmptyView)
+
+          val spaceTiny = context.dimenToPx(R.dimen.spaceTiny)
+          val paddingTop = if (settings.widgetsShowLabel) context.dimenToPx(R.dimen.widgetPaddingTop) else spaceTiny
+          val labelVisibility = if (settings.widgetsShowLabel) VISIBLE else GONE
+          setViewPadding(R.id.calendarWidgetList, 0, paddingTop, 0, spaceTiny)
+          setViewPadding(R.id.calendarWidgetEmptyView, 0, paddingTop, 0, 0)
+          setViewVisibility(R.id.calendarWidgetLabel, labelVisibility)
+
+          applyWidgetChrome(
+            palette,
+            R.id.calendarWidgetNightRoot,
+            R.id.calendarWidgetLabel,
+            R.id.calendarWidgetLabelText,
+          )
+          palette.let {
+            setTextColor(R.id.calendarWidgetEmptyViewTitle, it.textPrimary)
+            setTextColor(R.id.calendarWidgetEmptyViewSubtitle, it.textSecondary)
+            setIconTint(R.id.calendarWidgetEmptyViewIcon, it.textPrimary)
+          }
+
+          when (settingsRepository.widgets.getWidgetCalendarMode(Mode.SHOWS, widgetId)) {
+            CalendarMode.PRESENT_FUTURE -> {
+              setImageViewResource(R.id.calendarWidgetEmptyViewIcon, R.drawable.ic_history)
+              setTextViewText(R.id.calendarWidgetEmptyViewSubtitle, context.getString(R.string.textCalendarEmpty))
+            }
+
+            CalendarMode.RECENTS -> {
+              setImageViewResource(R.id.calendarWidgetEmptyViewIcon, R.drawable.ic_calendar)
+              setTextViewText(R.id.calendarWidgetEmptyViewSubtitle, context.getString(R.string.textRecentsEmpty))
+            }
+          }
+
+          setOnClickPendingIntent(R.id.calendarWidgetLabelImage, mainIntent)
+          setOnClickPendingIntent(R.id.calendarWidgetLabelText, mainIntent)
+          setOnClickPendingIntent(R.id.calendarWidgetEmptyViewIcon, modeClickIntent)
+          setPendingIntentTemplate(R.id.calendarWidgetList, listIntent)
+        }
+
+      appWidgetManager.updateAppWidget(widgetId, remoteViews(placeholders))
+
+      // Second pass: the posters, fetched together, and the same rows sent again with them in place.
+      rows.loadPosters(taken)
+      val withPosters =
+        WidgetCollection.build(
+          (0 until taken).map { position -> rows.itemId(position) to rows.viewAt(position) },
+          rows.count,
+          rows.viewTypeCount,
+          rows::moreView,
+        )
+      appWidgetManager.updateAppWidget(widgetId, remoteViews(withPosters))
+    }
+  }
+
+  private fun toggleCalendarMode(widgetId: Int) {
+    when (settingsRepository.widgets.getWidgetCalendarMode(Mode.SHOWS, widgetId)) {
+      CalendarMode.PRESENT_FUTURE -> {
+        settingsRepository.widgets.setWidgetCalendarMode(Mode.SHOWS, widgetId, CalendarMode.RECENTS)
+      }
+
+      CalendarMode.RECENTS -> {
+        settingsRepository.widgets.setWidgetCalendarMode(Mode.SHOWS, widgetId, CalendarMode.PRESENT_FUTURE)
+      }
+    }
+  }
+
+  override fun onReceive(
+    context: Context,
+    intent: Intent,
+  ) {
+    fun onListItemClick() {
+      val showId = intent.getLongExtra(EXTRA_SHOW_ID, -1L)
+      context.startActivity(
+        Intent().apply {
+          setClassName(context, Config.HOST_ACTIVITY_NAME)
+          putExtra(EXTRA_SHOW_ID, showId.toString())
+          flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        },
+      )
+    }
+
+    fun onHeaderIconClick(widgetId: Int) {
+      toggleCalendarMode(widgetId)
+      requestUpdate(context.applicationContext)
+    }
+
+    super.onReceive(context, intent)
+    if (intent.action == ACTION_CLICK) {
+      when {
+        intent.extras?.containsKey(EXTRA_MORE_CLICK) == true -> {
+          // The row standing in for what did not fit: open the app where the header does.
+          context.startActivity(
+            Intent().apply {
+              setClassName(context, Config.HOST_ACTIVITY_NAME)
+              flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            },
+          )
+        }
+
+        intent.extras?.containsKey(EXTRA_SHOW_ID) == true -> {
+          onListItemClick()
+        }
+
+        intent.extras?.containsKey(EXTRA_MODE_CLICK) == true -> {
+          val widgetId = intent.extras?.getInt(EXTRA_APPWIDGET_ID) ?: 0
+          onHeaderIconClick(widgetId)
+        }
+      }
+    }
+  }
+}

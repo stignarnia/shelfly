@@ -9,9 +9,13 @@
 .cxx
 .kotlin
 /ktlint
+/editorconfig-checker
+/*.tmp
 /app/keystore.properties
 /app/keystore
-.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 *export*.json
 showly_export*.json
 *.backup

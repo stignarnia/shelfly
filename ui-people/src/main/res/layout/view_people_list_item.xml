@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/viewPersonItemRoot"
@@ -18,7 +18,7 @@
     android:paddingTop="@dimen/spaceSmall"
     android:paddingEnd="@dimen/spaceNormal"
     android:paddingBottom="@dimen/spaceSmall"
-    >
+  >
 
     <androidx.constraintlayout.widget.Guideline
       android:id="@+id/viewPersonItemGuide"
@@ -26,7 +26,7 @@
       android:layout_height="wrap_content"
       android:orientation="vertical"
       app:layout_constraintGuide_begin="@dimen/personCreditsImageGuide"
-      />
+    />
 
     <ImageView
       android:id="@+id/viewPersonItemImage"
@@ -38,7 +38,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+    />
 
     <ImageView
       android:id="@+id/viewPersonItemPlaceholder"
@@ -56,7 +56,7 @@
       app:srcCompat="@drawable/ic_person_outline"
       app:tint="?attr/colorPlaceholderIcon"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/viewPersonItemHeader"
@@ -70,7 +70,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
       tools:text="Director"
-      />
+    />
 
     <TextView
       android:id="@+id/viewPersonItemTitle"
@@ -84,7 +84,7 @@
       app:layout_constraintTop_toBottomOf="@id/viewPersonItemHeader"
       app:layout_constraintVertical_chainStyle="packed"
       tools:text="Hans Zimmer"
-      />
+    />
 
     <TextView
       android:id="@+id/viewPersonItemDescription"
@@ -97,7 +97,7 @@
       app:layout_constraintStart_toEndOf="@id/viewPersonItemGuide"
       app:layout_constraintTop_toBottomOf="@id/viewPersonItemTitle"
       tools:text="Music"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

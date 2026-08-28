@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="textStatisticsMovies">Статистика</string>
-  <string name="textStatisticsMoviesEmpty">В истории просмотров должен быть хотя бы один фильм,
-чтобы отобразить статистику.</string>
+  <string name="textStatisticsMoviesEmpty">В истории просмотров должен быть хотя бы один фильм, чтобы отобразить статистику.</string>
   <string name="textStatisticsMoviesTotalTimeSpent">Общее время, потраченное на просмотр</string>
   <string name="textStatisticsMoviesTotalTimeItIs">это</string>
   <string name="textStatisticsMoviesTotalTimeSpentHours">%s часов</string>

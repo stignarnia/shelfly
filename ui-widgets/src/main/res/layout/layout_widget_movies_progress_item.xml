@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.LinearLayout"
-  >
+>
 
   <FrameLayout
     android:id="@+id/progressMoviesWidgetItemFrame"
@@ -19,7 +19,7 @@
     android:layout_marginBottom="@dimen/spaceSmall"
     android:background="@drawable/bg_widget_media_view_elevation"
     android:elevation="@dimen/elevationSmall"
-    >
+  >
 
     <ImageView
       android:id="@+id/progressMoviesWidgetItemImage"
@@ -28,7 +28,7 @@
       android:contentDescription="@null"
       android:visibility="gone"
       tools:visibility="visible"
-      />
+    />
 
     <ImageView
       android:id="@+id/progressMoviesWidgetItemPlaceholder"
@@ -39,7 +39,7 @@
       android:src="@drawable/ic_film"
       android:visibility="gone"
       tools:visibility="visible"
-      />
+    />
 
   </FrameLayout>
 
@@ -47,7 +47,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    >
+  >
 
     <LinearLayout
       android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
       android:layout_centerVertical="true"
       android:layout_toStartOf="@id/progressMoviesWidgetItemCheckButton"
       android:orientation="vertical"
-      >
+    >
 
       <TextView
         android:id="@+id/progressMoviesWidgetItemTitle"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spaceMicro"
         tools:text="Breaking Bad"
-        />
+      />
 
       <TextView
         android:id="@+id/progressMoviesWidgetItemSubtitle2"
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Lorem Ipsum"
-        />
+      />
 
     </LinearLayout>
 
@@ -85,7 +85,7 @@
       android:layout_alignParentEnd="true"
       android:layout_centerVertical="true"
       android:contentDescription="@null"
-      />
+    />
 
   </RelativeLayout>
 

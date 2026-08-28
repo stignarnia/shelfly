@@ -14,14 +14,14 @@
   android:scrollbars="none"
   tools:background="?attr/colorAppBackground"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/statisticsMoviesCoordinator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipChildren="false"
-    >
+  >
 
     <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/statisticsMoviesToolbar"
@@ -37,7 +37,7 @@
       app:navigationIcon="@drawable/ic_arrow_back"
       app:navigationIconTint="?android:attr/textColorPrimary"
       app:title="@string/textStatisticsMovies"
-      />
+    />
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/statisticsMoviesContent"
@@ -47,9 +47,9 @@
       android:clipToPadding="false"
       android:visibility="gone"
       tools:visibility="visible"
-      >
+    >
 
-      <xyz.stignarnia.ui_statistics_movies.views.StatisticsMoviesTotalTimeSpentView
+      <xyz.stignarnia.uiStatisticsMovies.views.StatisticsMoviesTotalTimeSpentView
         android:id="@+id/statisticsMoviesTotalTimeSpent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -62,9 +62,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintVertical_chainStyle="packed"
-        />
+      />
 
-      <xyz.stignarnia.ui_statistics_movies.views.StatisticsMoviesTotalMoviesView
+      <xyz.stignarnia.uiStatisticsMovies.views.StatisticsMoviesTotalMoviesView
         android:id="@+id/statisticsMoviesTotalMovies"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -75,9 +75,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/statisticsMoviesTotalTimeSpent"
-        />
+      />
 
-      <xyz.stignarnia.ui_statistics_movies.views.StatisticsMoviesTopGenresView
+      <xyz.stignarnia.uiStatisticsMovies.views.StatisticsMoviesTopGenresView
         android:id="@+id/statisticsMoviesTopGenres"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -88,9 +88,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/statisticsMoviesTotalMovies"
-        />
+      />
 
-      <xyz.stignarnia.ui_statistics_movies.views.ratings.StatisticsMoviesRatingsView
+      <xyz.stignarnia.uiStatisticsMovies.views.ratings.StatisticsMoviesRatingsView
         android:id="@+id/statisticsMoviesRatings"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/statisticsMoviesTopGenres"
         tools:visibility="visible"
-        />
+      />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -117,7 +117,7 @@
       android:layout_marginStart="@dimen/spaceBig"
       android:layout_marginEnd="@dimen/spaceBig"
       android:visibility="gone"
-      />
+    />
 
   </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

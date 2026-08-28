@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -14,7 +14,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="horizontal"
-    >
+  >
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/addToMyMoviesButton"
@@ -31,7 +31,7 @@
       app:rippleColor="?android:attr/textColorPrimary"
       app:strokeColor="?android:attr/textColorPrimary"
       tools:visibility="gone"
-      />
+    />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/watchlistButton"
@@ -49,7 +49,7 @@
       app:rippleColor="?android:attr/textColorSecondary"
       app:strokeWidth="0dp"
       tools:visibility="gone"
-      />
+    />
 
   </LinearLayout>
 
@@ -58,7 +58,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:orientation="horizontal"
-    >
+  >
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/addedToButton"
@@ -78,7 +78,7 @@
       app:rippleColor="?attr/colorAccent"
       app:strokeColor="?attr/colorAccent"
       tools:visibility="visible"
-      />
+    />
 
     <ImageButton
       android:id="@+id/checkButton"
@@ -91,7 +91,7 @@
       app:srcCompat="@drawable/ic_check_big"
       app:tint="?android:textColorPrimary"
       tools:visibility="visible"
-      />
+    />
 
   </LinearLayout>
 

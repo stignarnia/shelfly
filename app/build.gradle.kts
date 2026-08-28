@@ -1,6 +1,6 @@
-import java.util.Properties
 import org.gradle.api.provider.ValueSource
 import org.gradle.api.provider.ValueSourceParameters
+import java.util.Properties
 
 plugins {
   id("com.android.application")
@@ -32,15 +32,18 @@ android {
 
   defaultConfig {
     applicationId = "xyz.stignarnia.shelfly"
-    minSdk = libs.versions.minSdk
-      .get()
-      .toInt()
-    targetSdk = libs.versions.targetSdk
-      .get()
-      .toInt()
-    versionCode = libs.versions.versionCode
-      .get()
-      .toInt()
+    minSdk =
+      libs.versions.minSdk
+        .get()
+        .toInt()
+    targetSdk =
+      libs.versions.targetSdk
+        .get()
+        .toInt()
+    versionCode =
+      libs.versions.versionCode
+        .get()
+        .toInt()
     versionName = libs.versions.versionName.get()
 
     // Kept in step with the res/values-* directories by scripts/check-config.sh, which fails if either side gains a locale the other lacks.

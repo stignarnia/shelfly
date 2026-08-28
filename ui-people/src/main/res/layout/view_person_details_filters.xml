@@ -6,7 +6,7 @@
   android:id="@+id/viewPersonDetailsFiltersRoot"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  >
+>
 
   <com.google.android.material.chip.ChipGroup
     android:id="@+id/viewPersonDetailsFiltersChipGroup"
@@ -17,23 +17,23 @@
     android:paddingStart="@dimen/spaceNormal"
     android:paddingEnd="@dimen/spaceNormal"
     app:chipSpacingHorizontal="@dimen/spaceSmall"
-    app:layout_behavior="xyz.stignarnia.ui_base.common.behaviour.ScrollableViewBehaviour"
+    app:layout_behavior="xyz.stignarnia.uiBase.common.behaviour.ScrollableViewBehaviour"
     app:singleLine="true"
-    >
+  >
 
     <com.google.android.material.chip.Chip
       android:id="@+id/viewPersonDetailsFiltersShowsChip"
       style="@style/ShelflyChip.Filter"
       android:text="@string/textShows"
       app:chipBackgroundColor="?colorSheetBackground"
-      />
+    />
 
     <com.google.android.material.chip.Chip
       android:id="@+id/viewPersonDetailsFiltersMoviesChip"
       style="@style/ShelflyChip.Filter"
       android:text="@string/textMovies"
       app:chipBackgroundColor="?colorSheetBackground"
-      />
+    />
 
     <com.google.android.material.chip.Chip
       android:id="@+id/viewPersonDetailsFiltersCollectionChip"
@@ -41,7 +41,7 @@
       android:text="@string/menuCollection"
       app:chipBackgroundColor="?colorSheetBackground"
       tools:text="Collection"
-      />
+    />
 
   </com.google.android.material.chip.ChipGroup>
 

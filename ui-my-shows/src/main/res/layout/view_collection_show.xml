@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   tools:parentTag="android.widget.FrameLayout"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/collectionShowRoot"
@@ -14,7 +14,7 @@
     android:layout_height="wrap_content"
     android:clipChildren="false"
     android:clipToPadding="false"
-    >
+  >
 
     <ImageView
       android:id="@+id/collectionShowImage"
@@ -26,7 +26,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+    />
 
     <ImageView
       android:id="@+id/collectionShowPlaceholder"
@@ -44,7 +44,7 @@
       app:srcCompat="@drawable/ic_television"
       app:tint="?attr/colorPlaceholderIcon"
       tools:visibility="visible"
-      />
+    />
 
     <ProgressBar
       android:id="@+id/collectionShowProgress"
@@ -58,7 +58,7 @@
       app:layout_constraintStart_toStartOf="@id/collectionShowImage"
       app:layout_constraintTop_toTopOf="parent"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/collectionShowTitle"
@@ -72,7 +72,7 @@
       app:layout_constraintTop_toBottomOf="@+id/collectionShowNetwork"
       app:layout_constraintVertical_chainStyle="packed"
       tools:text="Game of Thrones"
-      />
+    />
 
     <TextView
       android:id="@+id/collectionShowNetwork"
@@ -86,7 +86,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
       tools:text="Netflix"
-      />
+    />
 
     <ImageView
       android:id="@+id/collectionShowStarIcon"
@@ -98,7 +98,7 @@
       app:layout_constraintTop_toTopOf="@id/collectionShowNetwork"
       app:srcCompat="@drawable/ic_star"
       app:tint="?attr/colorAccent"
-      />
+    />
 
     <TextView
       android:id="@+id/collectionShowRating"
@@ -111,7 +111,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/collectionShowNetwork"
       tools:text="7.6"
-      />
+    />
 
     <ImageView
       android:id="@+id/collectionShowUserStarIcon"
@@ -125,7 +125,7 @@
       app:srcCompat="@drawable/ic_star"
       app:tint="?android:attr/textColorPrimary"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/collectionShowUserRating"
@@ -141,7 +141,7 @@
       app:layout_constraintTop_toTopOf="@id/collectionShowNetwork"
       tools:text="10"
       tools:visibility="visible"
-      />
+    />
 
     <TextView
       android:id="@+id/collectionShowDescription"
@@ -154,7 +154,7 @@
       app:layout_constraintStart_toEndOf="@id/collectionShowImage"
       app:layout_constraintTop_toBottomOf="@id/collectionShowTitle"
       tools:text="Lorem Ipsum"
-      />
+    />
 
     <TextView
       android:id="@+id/collectionShowReleaseDate"
@@ -183,7 +183,7 @@
       app:layout_constraintTop_toBottomOf="@id/collectionShowDescription"
       tools:text="Wednesday, 27 June 2019"
       tools:visibility="visible"
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

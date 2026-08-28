@@ -9,7 +9,7 @@
   android:overScrollMode="never"
   tools:background="?attr/colorAppBackground"
   tools:theme="@style/AppTheme"
-  >
+>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/root"
@@ -17,7 +17,7 @@
     android:layout_height="wrap_content"
     android:clipChildren="false"
     android:clipToPadding="false"
-    >
+  >
 
     <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/toolbar"
@@ -31,7 +31,7 @@
       app:navigationIcon="@drawable/ic_arrow_back"
       app:navigationIconTint="?android:attr/textColorPrimary"
       app:title="@string/textBackupAndRestore"
-      />
+    />
 
     <ImageView
       android:id="@+id/appIcon"
@@ -46,7 +46,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@id/arrowIcon"
       app:srcCompat="@drawable/ic_app"
-      />
+    />
 
     <ImageView
       android:id="@+id/arrowIcon"
@@ -64,7 +64,7 @@
       app:layout_constraintVertical_chainStyle="packed"
       app:srcCompat="@drawable/ic_arrow_right"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <ImageView
       android:id="@+id/phoneIcon"
@@ -78,7 +78,7 @@
       app:layout_constraintTop_toTopOf="@id/arrowIcon"
       app:srcCompat="@drawable/ic_phone"
       app:tint="?android:attr/textColorPrimary"
-      />
+    />
 
     <TextView
       android:id="@+id/titleText"
@@ -95,7 +95,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/arrowIcon"
-      />
+    />
 
     <TextView
       android:id="@+id/descriptionText"
@@ -112,7 +112,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/titleText"
-      />
+    />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/exportButton"
@@ -130,57 +130,57 @@
       app:layout_constraintTop_toBottomOf="@id/descriptionText"
       app:rippleColor="?android:attr/textColorPrimary"
       app:strokeColor="?android:attr/textColorPrimary"
-      />
+    />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/exportScheduleButton"
-        style="@style/RoundTextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="200dp"
-        android:text="@string/textBackupExportSchedule"
-        android:textColor="?android:attr/textColorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/exportButton"
-        app:layout_constraintBottom_toBottomOf="@id/lastExportTimestamp"
-        app:rippleColor="?android:attr/textColorPrimary"
-        app:strokeColor="?android:attr/textColorPrimary"
-        />
+      android:id="@+id/exportScheduleButton"
+      style="@style/RoundTextButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:minWidth="200dp"
+      android:text="@string/textBackupExportSchedule"
+      android:textColor="?android:attr/textColorPrimary"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/exportButton"
+      app:layout_constraintBottom_toBottomOf="@id/lastExportTimestamp"
+      app:rippleColor="?android:attr/textColorPrimary"
+      app:strokeColor="?android:attr/textColorPrimary"
+    />
 
     <TextView
-        android:id="@+id/lastExportTimestamp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spaceBig"
-        android:layout_marginTop="@dimen/spaceNormal"
-        android:layout_marginEnd="@dimen/spaceBig"
-        android:gravity="center"
-        android:textColor="?android:attr/textColorSecondary"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/exportScheduleButton"
-        tools:text="Last Backup: 23 Feb 2020 17:23"
-        />
+      android:id="@+id/lastExportTimestamp"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/spaceBig"
+      android:layout_marginTop="@dimen/spaceNormal"
+      android:layout_marginEnd="@dimen/spaceBig"
+      android:gravity="center"
+      android:textColor="?android:attr/textColorSecondary"
+      android:textSize="12sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/exportScheduleButton"
+      tools:text="Last Backup: 23 Feb 2020 17:23"
+    />
 
     <TextView
-        android:id="@+id/syncStatus"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spaceBig"
-        android:layout_marginTop="@dimen/spaceSmall"
-        android:layout_marginEnd="@dimen/spaceBig"
-        android:layout_marginBottom="@dimen/spaceNormal"
-        android:gravity="center"
-        android:textColor="?android:attr/textColorSecondary"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lastExportTimestamp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="Last sync: 23 Feb 2020 17:23 · 2 other devices"
-        />
+      android:id="@+id/syncStatus"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/spaceBig"
+      android:layout_marginTop="@dimen/spaceSmall"
+      android:layout_marginEnd="@dimen/spaceBig"
+      android:layout_marginBottom="@dimen/spaceNormal"
+      android:gravity="center"
+      android:textColor="?android:attr/textColorSecondary"
+      android:textSize="12sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/lastExportTimestamp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      tools:text="Last sync: 23 Feb 2020 17:23 · 2 other devices"
+    />
 
     <ProgressBar
       android:id="@+id/progressBar"
@@ -193,7 +193,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@id/exportButton"
       tools:visibility="invisible"
-      />
+    />
 
     <TextView
       android:id="@+id/statusText"
@@ -209,7 +209,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/progressBar"
       tools:text="Lorem ipsum..."
-      />
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

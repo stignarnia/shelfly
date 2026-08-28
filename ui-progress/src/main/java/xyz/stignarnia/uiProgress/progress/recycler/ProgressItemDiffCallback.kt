@@ -1,0 +1,92 @@
+package xyz.stignarnia.uiProgress.progress.recycler
+
+import androidx.recyclerview.widget.DiffUtil
+
+class ProgressItemDiffCallback : DiffUtil.ItemCallback<ProgressListItem>() {
+  override fun areItemsTheSame(
+    oldItem: ProgressListItem,
+    newItem: ProgressListItem,
+  ): Boolean {
+    val areEpisodes = oldItem is ProgressListItem.Episode && newItem is ProgressListItem.Episode
+    val areHeaders = oldItem is ProgressListItem.Header && newItem is ProgressListItem.Header
+    val areFilters = oldItem is ProgressListItem.Filters && newItem is ProgressListItem.Filters
+    return when {
+      areEpisodes -> {
+        areItemsTheSame(
+          (oldItem),
+          (newItem),
+        )
+      }
+
+      areHeaders -> {
+        areItemsTheSame(
+          (oldItem),
+          (newItem),
+        )
+      }
+
+      areFilters -> {
+        true
+      }
+
+      else -> {
+        false
+      }
+    }
+  }
+
+  override fun areContentsTheSame(
+    oldItem: ProgressListItem,
+    newItem: ProgressListItem,
+  ) = when (oldItem) {
+    is ProgressListItem.Episode -> areContentsTheSame(oldItem, (newItem as ProgressListItem.Episode))
+    is ProgressListItem.Header -> areContentsTheSame(oldItem, (newItem as ProgressListItem.Header))
+    is ProgressListItem.Filters -> areContentsTheSame(oldItem, (newItem as ProgressListItem.Filters))
+  }
+
+  private fun areItemsTheSame(
+    oldItem: ProgressListItem.Episode,
+    newItem: ProgressListItem.Episode,
+  ) = oldItem.show.tmdbId == newItem.show.tmdbId
+
+  private fun areItemsTheSame(
+    oldItem: ProgressListItem.Header,
+    newItem: ProgressListItem.Header,
+  ) = oldItem.textResId == newItem.textResId &&
+    oldItem.type == newItem.type
+
+  private fun areContentsTheSame(
+    oldItem: ProgressListItem.Episode,
+    newItem: ProgressListItem.Episode,
+  ) = oldItem.show.tmdbId == newItem.show.tmdbId &&
+    oldItem.image == newItem.image &&
+    oldItem.isLoading == newItem.isLoading &&
+    oldItem.watchedCount == newItem.watchedCount &&
+    oldItem.totalCount == newItem.totalCount &&
+    oldItem.episode == newItem.episode &&
+    oldItem.translations == newItem.translations &&
+    oldItem.isWatched == newItem.isWatched &&
+    oldItem.isUpcoming == newItem.isUpcoming &&
+    oldItem.sortOrder == newItem.sortOrder &&
+    oldItem.spoilers == newItem.spoilers &&
+    oldItem.isOnHold == newItem.isOnHold &&
+    oldItem.userRating == newItem.userRating &&
+    oldItem.isPinned == newItem.isPinned
+
+  private fun areContentsTheSame(
+    oldItem: ProgressListItem.Header,
+    newItem: ProgressListItem.Header,
+  ) = oldItem.textResId == newItem.textResId &&
+    oldItem.isCollapsed == newItem.isCollapsed
+
+  private fun areContentsTheSame(
+    oldItem: ProgressListItem.Filters,
+    newItem: ProgressListItem.Filters,
+  ): Boolean =
+    oldItem.sortOrder == newItem.sortOrder &&
+      oldItem.sortType == newItem.sortType &&
+      oldItem.newAtTop == newItem.newAtTop &&
+      oldItem.isUpcoming == newItem.isUpcoming &&
+      oldItem.isUpcomingEnabled == newItem.isUpcomingEnabled &&
+      oldItem.isOnHold == newItem.isOnHold
+}

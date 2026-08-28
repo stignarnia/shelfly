@@ -6,7 +6,7 @@
   android:layout_height="wrap_content"
   android:clipChildren="false"
   android:clipToPadding="false"
-  >
+>
 
   <TextView
     android:id="@+id/movieDetailsCollectionLabel"
@@ -21,7 +21,7 @@
     app:layout_constraintHorizontal_bias="0"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+  />
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/movieDetailsCollectionRecycler"
@@ -39,7 +39,7 @@
     app:layout_constraintHeight_min="@dimen/movieCollectionHeight"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/movieDetailsCollectionLabel"
-    />
+  />
 
   <ProgressBar
     android:id="@+id/movieDetailsCollectionProgress"
@@ -50,6 +50,6 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="@id/movieDetailsCollectionRecycler"
-    />
+  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
