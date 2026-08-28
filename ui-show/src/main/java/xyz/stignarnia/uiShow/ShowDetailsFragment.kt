@@ -284,7 +284,7 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
 
   private fun renderExtraInfo(show: Show) {
     val year = if (show.year > 0) String.format(ENGLISH, "%d", show.year) else ""
-    val country = if (show.country.isNotBlank()) String.format(ENGLISH, "(%s)", show.country) else ""
+    val country = if (show.country.isNotBlank()) "(${show.country})" else ""
     val genres =
       show.genres
         .take(5)

@@ -99,7 +99,7 @@ class ShowContextMenuBottomSheet : ContextMenuBottomSheet() {
         if (item.show.year > 0) {
           getString(R.string.textNetwork, item.show.network, item.show.year.toString())
         } else {
-          String.format("%s", item.show.network)
+          item.show.network
         }
 
       contextMenuUserRating.text = String.format(Locale.ENGLISH, "%d", item.userRating)

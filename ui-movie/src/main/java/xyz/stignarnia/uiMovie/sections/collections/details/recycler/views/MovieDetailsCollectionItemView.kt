@@ -68,7 +68,7 @@ class MovieDetailsCollectionItemView : FrameLayout {
     bindTitleDescription(item)
     bindBadge(item.isMyMovie, item.isWatchlist)
 
-    binding.headerText.text = String.format(Locale.getDefault(), "%s", item.movie.released?.year ?: "TBA")
+    binding.headerText.text = (item.movie.released?.year ?: "TBA").toString()
     binding.rankText.text = String.format(Locale.getDefault(), "%d", item.rank)
 
     if (!item.isLoading) loadImage(item)

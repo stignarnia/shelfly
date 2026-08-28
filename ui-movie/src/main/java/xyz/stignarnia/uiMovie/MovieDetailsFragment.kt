@@ -287,15 +287,15 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
     movie: Movie,
     meta: MovieDetailsMeta?,
   ) {
-    val country = if (movie.country.isNotBlank()) String.format(ENGLISH, "(%s)", movie.country) else ""
+    val country = if (movie.country.isNotBlank()) "(${movie.country})" else ""
     val releaseDate =
       when {
         movie.released != null -> {
-          String.format(
-            ENGLISH,
-            "%s",
-            meta?.dateFormat?.format(movie.released)?.capitalizeWords(),
-          )
+          meta
+            ?.dateFormat
+            ?.format(movie.released)
+            ?.capitalizeWords()
+            .toString()
         }
 
         movie.year > 0 -> {

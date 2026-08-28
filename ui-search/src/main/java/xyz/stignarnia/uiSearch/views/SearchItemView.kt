@@ -59,7 +59,7 @@ class SearchItemView : ShowView<SearchListItem> {
         if (item.network.isNotBlank()) {
           context.getString(R.string.textNetwork, year, item.network)
         } else {
-          String.format("%s", year)
+          year
         }
 
       showSearchBadge.visibleIf(item.isFollowed)

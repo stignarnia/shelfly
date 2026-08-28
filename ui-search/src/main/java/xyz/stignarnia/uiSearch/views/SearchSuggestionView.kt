@@ -56,10 +56,10 @@ class SearchSuggestionView : ShowView<SearchListItem> {
           if (item.year > 0) {
             context.getString(R.string.textNetwork, item.network, item.year.toString())
           } else {
-            String.format("%s", item.network)
+            item.network
           }
         } else {
-          String.format("%s", item.year)
+          item.year.toString()
         }
 
       suggestionBadge.visibleIf(item.isFollowed)

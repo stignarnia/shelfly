@@ -73,7 +73,7 @@ class MyShowAllView : ShowView<MyShowsItem> {
         if (item.show.year > 0) {
           context.getString(R.string.textNetwork, item.show.network, item.show.year.toString())
         } else {
-          String.format("%s", item.show.network)
+          item.show.network
         }
 
       collectionShowNetwork.visibleIf(item.show.network.isNotBlank())

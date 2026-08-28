@@ -114,7 +114,7 @@ class ListDetailsShowItemView : ListDetailsItemView {
         if (show.year > 0) {
           context.getString(R.string.textNetwork, show.year.toString(), show.network)
         } else {
-          String.format("%s", show.network)
+          show.network
         }
 
       listDetailsShowUserRating.text = String.format(ENGLISH, "%d", item.userRating)

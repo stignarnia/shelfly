@@ -60,7 +60,7 @@ class PersonDetailsCreditsItemView : FrameLayout {
         if (item.show.network.isNotBlank()) {
           context.getString(R.string.textNetwork, year, item.show.network)
         } else {
-          String.format("%s", year)
+          year
         }
 
       viewPersonCreditsItemPlaceholder.setImageResource(R.drawable.ic_television)
@@ -79,7 +79,7 @@ class PersonDetailsCreditsItemView : FrameLayout {
     bindTitleDescription(item)
 
     with(binding) {
-      viewPersonCreditsItemNetwork.text = String.format("%s", item.movie.released?.year ?: "TBA")
+      viewPersonCreditsItemNetwork.text = (item.movie.released?.year ?: "TBA").toString()
       viewPersonCreditsItemPlaceholder.setImageResource(R.drawable.ic_film)
       viewPersonCreditsItemIcon.setImageResource(R.drawable.ic_film)
       viewPersonCreditsItemNetwork.translationY = 0F
