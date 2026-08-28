@@ -17,6 +17,27 @@ android {
 
   androidResources {
     generateLocaleConfig = true
+
+    // Which locales survive into the APK.
+    // Kept in step with the res/values-* directories by scripts/check-config.sh, which fails if either side gains a locale the other lacks.
+    localeFilters +=
+      listOf(
+        "en",
+        "ar",
+        "de",
+        "da",
+        "es",
+        "fi",
+        "fr",
+        "it",
+        "pl",
+        "pt",
+        "ro",
+        "ru",
+        "tr",
+        "zh",
+        "uk",
+      )
   }
 
   buildFeatures {
@@ -46,25 +67,6 @@ android {
         .toInt()
     versionName = libs.versions.versionName.get()
 
-    // Kept in step with the res/values-* directories by scripts/check-config.sh, which fails if either side gains a locale the other lacks.
-    resourceConfigurations +=
-      listOf(
-        "en",
-        "ar",
-        "de",
-        "da",
-        "es",
-        "fi",
-        "fr",
-        "it",
-        "pl",
-        "pt",
-        "ro",
-        "ru",
-        "tr",
-        "zh",
-        "uk",
-      )
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 

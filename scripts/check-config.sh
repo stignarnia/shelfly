@@ -5,7 +5,7 @@
 #            CI fires on v* tags and publishes release_notes.txt as the release body, so tagging v4.0.7 while gradle/libs.versions.toml still says 4.0.6 passes every other check and produces a release that claims to be something it is not.
 #            Skipped when HEAD carries no tag, which is every ordinary commit.
 #
-#   Locale - resourceConfigurations in app/build.gradle.kts pins the locales that survive into the APK.
+#   Locale - androidResources.localeFilters in app/build.gradle.kts pins the locales that survive into the APK.
 #            Adding res/values-nb without adding 'nb' to that list strips the translation at build time, and Lint stays quiet: MissingTranslation only reasons about locales that are already configured, so a complete, correct, silently discarded translation looks exactly like a healthy one.
 #            The reverse - a configured locale with no resources anywhere - is listed too, since it is dead configuration.
 #
@@ -44,9 +44,9 @@ fi
 
 # Locale.
 # Read across lines: the list is one locale per line, so a line-based match would see only the first.
-configured="$(awk '/resourceConfigurations/,/^[[:space:]]*\)/' app/build.gradle.kts | grep -oE '"[a-z]{2}"' | tr -d '"' | sort -u)"
+configured="$(awk '/localeFilters/,/^[[:space:]]*\)/' app/build.gradle.kts | grep -oE '"[a-z]{2}"' | tr -d '"' | sort -u)"
 if [ -z "$configured" ]; then
-  echo "error: could not read resourceConfigurations from app/build.gradle" >&2
+  echo "error: could not read androidResources.localeFilters from app/build.gradle.kts" >&2
   exit 1
 fi
 
@@ -63,14 +63,14 @@ missing_from_config="$(comm -13 <(echo "$configured") <(echo "$present"))"
 missing_from_tree="$(comm -23 <(echo "$configured") <(echo "$present"))"
 
 if [ -n "$missing_from_config" ]; then
-  echo "error: these locales have resources but are not in resourceConfigurations, so they are stripped from the APK:" >&2
+  echo "error: these locales have resources but are not in localeFilters, so they are stripped from the APK:" >&2
   echo "$missing_from_config" | awk '{print "  " $0}' >&2
-  echo "Add them to resourceConfigurations in app/build.gradle.kts, or delete the resources." >&2
+  echo "Add them to androidResources.localeFilters in app/build.gradle.kts, or delete the resources." >&2
   failed=1
 fi
 
 if [ -n "$missing_from_tree" ]; then
-  echo "error: these locales are in resourceConfigurations but have no resources anywhere:" >&2
+  echo "error: these locales are in localeFilters but have no resources anywhere:" >&2
   echo "$missing_from_tree" | awk '{print "  " $0}' >&2
   failed=1
 fi
