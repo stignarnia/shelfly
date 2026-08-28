@@ -47,6 +47,13 @@ subprojects {
       // Enabling it costs nothing today - the test sources report zero findings - and keeps it that way as tests are added.
       lint.checkTestSources = true
       lint.warningsAsErrors = true
+
+      // Two checks that are off by default and are named individually rather than through checkAllWarnings.
+      //
+      // StringFormatTrivial catches String.format("%s", x), which only calls toString() while allocating a Formatter and parsing the format string at runtime.
+      //
+      // ConvertToWebp catches a PNG that would be smaller as lossless WebP.
+      lint.enable += setOf("StringFormatTrivial", "ConvertToWebp")
     }
 
     extensions.configure<KotlinAndroidProjectExtension>("kotlin") {
