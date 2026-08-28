@@ -28,12 +28,13 @@ jobs:
       - name: Install xmllint
         run: command -v xmllint >/dev/null || { sudo apt-get update && sudo apt-get install -y --no-install-recommends libxml2-utils; }
 
-      # Both scripts download the linter they need into the repository root if it is missing, so there is nothing to install here and CI runs exactly what a developer runs.
-      # Neither tool is pinned - see scripts/lib/tools.sh.
+      # The scripts download the linters they need into the repository root if they are missing, so there is nothing to install here and CI runs exactly what a developer runs.
+      # Adding a tool to scripts/lib/tools.sh therefore needs no change to this file.
+      # None of them is pinned - see that file for why.
 
-      # Covers the file types ktlint cannot read.
+      # editorconfig-checker over every tracked file, shellcheck over the scripts, and xmllint over the resources.
       # Needs no toolchain, so it runs first.
-      - name: Check non-Kotlin formatting
+      - name: Check formatting, shell scripts and XML
         run: ./scripts/check-format.sh
 
       - name: Run ktlint

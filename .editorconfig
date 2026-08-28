@@ -28,6 +28,16 @@ insert_final_newline = true
 insert_final_newline = false
 trim_trailing_whitespace = false
 
+# The git hooks cannot be named pre-commit.sh.
+# Git looks for scripts/hooks/pre-commit by exact name and silently ignores anything else, so renaming them to pick up the *.sh globs above would disable both hooks without a word.
+# They match no extension glob, so they get their own section.
+[scripts/hooks/*]
+indent_size = 2
+indent_style = space
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+
 [{.gitignore,.editorconfig,LICENSE}]
 end_of_line = lf
 trim_trailing_whitespace = true

@@ -64,14 +64,14 @@ missing_from_tree="$(comm -23 <(echo "$configured") <(echo "$present"))"
 
 if [ -n "$missing_from_config" ]; then
   echo "error: these locales have resources but are not in resourceConfigurations, so they are stripped from the APK:" >&2
-  echo "$missing_from_config" | sed 's/^/  /' >&2
+  echo "$missing_from_config" | awk '{print "  " $0}' >&2
   echo "Add them to resourceConfigurations in app/build.gradle.kts, or delete the resources." >&2
   failed=1
 fi
 
 if [ -n "$missing_from_tree" ]; then
   echo "error: these locales are in resourceConfigurations but have no resources anywhere:" >&2
-  echo "$missing_from_tree" | sed 's/^/  /' >&2
+  echo "$missing_from_tree" | awk '{print "  " $0}' >&2
   failed=1
 fi
 
@@ -129,7 +129,7 @@ unused="$(comm -23 <(echo "$declared") <(echo "$referenced"))"
 
 if [ -n "$unused" ]; then
   echo "error: $(echo "$unused" | wc -l) resource(s) are declared but referenced nowhere in the project:" >&2
-  echo "$unused" | sed 's/^/  /' >&2
+  echo "$unused" | awk '{print "  " $0}' >&2
   echo "Delete them, or reference them. Deleting one can orphan what it referenced, so re-run until this passes." >&2
   failed=1
 else

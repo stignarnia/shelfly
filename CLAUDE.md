@@ -93,7 +93,7 @@ Each tier below is additive: it assumes the tiers above it also ran.
 `ktlint` is a self-executing jar, not a Gradle plugin.
 No Gradle task runs it, so `check` will never catch a formatting violation - it has to be invoked separately.
 
-`check-format.sh` does two things, and only one of them is whitespace.
+`check-format.sh` does three things, and only the first is whitespace.
 
 Whitespace is delegated to `editorconfig-checker`, which reads `.editorconfig` directly, making that file the single source of truth.
 Reimplementing the rules in the script would put a second copy alongside the one the editor reads, and nothing would catch the two disagreeing.
@@ -105,13 +105,17 @@ There is no line length limit anywhere in the tree, so nothing checks one.
 `function-signature` and `class-signature` are disabled with it: neither is a length check, but both measure a signature against `max_line_length` to decide whether to collapse it onto one line, and with no limit they ask for every multi-line signature in the tree to be joined up.
 This is the no-mid-sentence-wrapping rule from this document applied to code - imports, SQL `@Query` literals and one-sentence-per-line comments all exceed any limit worth setting.
 
-The second half is XML well-formedness, which nothing else in the build checks - `aapt` only parses the resources of the variant being built, so a malformed file in a locale or qualifier that variant skips goes unread until a device configuration selects it.
+It also runs `shellcheck` over every tracked script and both git hooks.
+These scripts are what check everything else, and until now nothing checked them - `.editorconfig` covers their whitespace and stops there, so a syntax error or an unquoted expansion only surfaced when someone ran one.
+It found a real one on the first pass: `check-format.sh` deliberately omits `set -e` so that every check runs and the output lists all the failures, which made its unguarded `cd` a live bug rather than a style note.
+
+The third part is XML well-formedness, which nothing else in the build checks - `aapt` only parses the resources of the variant being built, so a malformed file in a locale or qualifier that variant skips goes unread until a device configuration selects it.
 A missing `xmllint` fails the run rather than skipping, because a check that quietly does nothing is worse than one that is absent.
 It is the one tool that cannot be fetched automatically, being a system package rather than a single release binary, so CI installs `libxml2-utils`.
 
-`ktlint` and `editorconfig-checker` are self-contained binaries in the repository root, gitignored, and downloaded by the scripts themselves when the working tree does not have them - see `scripts/lib/tools.sh`.
-A fresh clone therefore needs no setup and no package manager, and CI runs the same two scripts rather than carrying its own copy of the download.
-Neither tool is pinned: both track the latest release, so a rule the upstream tool adds is caught the next time anyone runs it rather than whenever someone remembers to bump a version, and a pin in CI cannot drift from what everyone runs locally.
+`ktlint`, `editorconfig-checker` and `shellcheck` are self-contained binaries in the repository root, gitignored, and downloaded by the scripts themselves when the working tree does not have them - see `scripts/lib/tools.sh`.
+A fresh clone therefore needs no setup and no package manager, and CI runs the same scripts rather than carrying its own copy of the download.
+None of them is pinned: all three track the latest release, so a rule the upstream tool adds is caught the next time anyone runs it rather than whenever someone remembers to bump a version, and a pin in CI cannot drift from what everyone runs locally.
 
 ### Editor setup
 

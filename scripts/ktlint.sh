@@ -12,6 +12,7 @@ set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
+# shellcheck source-path=SCRIPTDIR
 # shellcheck source=lib/tools.sh
 source "$(dirname "${BASH_SOURCE[0]}")/lib/tools.sh"
 

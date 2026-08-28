@@ -54,6 +54,32 @@ ensure_editorconfig_checker() {
   echo "editorconfig-checker $(./editorconfig-checker --version) ready" >&2
 }
 
+ensure_shellcheck() {
+  [ -x ./shellcheck ] && return 0
+
+  local arch
+  case "$(uname -m)" in
+    x86_64 | amd64) arch=x86_64 ;;
+    aarch64 | arm64) arch=aarch64 ;;
+    *)
+      echo "error: unsupported architecture $(uname -m) for shellcheck" >&2
+      return 1
+      ;;
+  esac
+
+  echo "shellcheck not present, fetching the latest release..." >&2
+  # The tarball holds shellcheck-<version>/shellcheck, and the version is in the path, so extract by suffix rather than by full name.
+  if ! curl -sSLf "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.${arch}.tar.xz" \
+    | tar xJ --wildcards -O '*/shellcheck' > shellcheck.tmp; then
+    rm -f shellcheck.tmp
+    echo "error: could not download shellcheck." >&2
+    return 1
+  fi
+  chmod a+x shellcheck.tmp
+  mv shellcheck.tmp shellcheck
+  echo "shellcheck ready" >&2
+}
+
 ensure_ktlint() {
   [ -x ./ktlint ] && return 0
 

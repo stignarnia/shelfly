@@ -10,6 +10,7 @@
 .kotlin
 /ktlint
 /editorconfig-checker
+/shellcheck
 /*.tmp
 /app/keystore.properties
 /app/keystore
