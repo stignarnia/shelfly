@@ -11,6 +11,7 @@ import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 import androidx.core.content.res.use
 import androidx.core.view.updateLayoutParams
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import me.everything.android.ui.overscroll.IOverScrollDecor
@@ -32,8 +33,8 @@ import xyz.stignarnia.uiBase.utilities.extensions.bump
  * Set [actionIcon] to say what the pull will do.
  * While the action runs, call [setRunning] to keep the view up with an indeterminate spinner, which is what replaces a SwipeRefreshLayout's spinner for callers that had one.
  *
- * Host this stacked directly above the list, not layered over it: the view owns its own height - zero at rest, opening as the pull progresses - so the list below is pushed down to make room.
- * Occupying a slot of its own rather than floating is what makes overlap impossible in either direction, and it costs nothing while idle because the slot collapses.
+ * Host this inside an [OverscrollRecyclerLayout] above the list: the view owns its own height - matching the header gap at rest, opening as the pull progresses - so the container offsets the list below to make room.
+ * Occupying a slot of its own rather than floating is what makes overlap impossible in either direction, and it costs nothing while idle because the slot matches the resting top gap.
  * Where the list runs under a floating header that scrolls away, pass that header to [follow] so the ring leaves with it instead of being stranded over the content.
  */
 class OverscrollActionView
@@ -65,6 +66,8 @@ class OverscrollActionView
     private var isRunning = false
     private var header: View? = null
     private var headerListener: ViewTreeObserver.OnPreDrawListener? = null
+    private var attachedLifecycleOwner: LifecycleOwner? = null
+    private var lifecycleObserver: DefaultLifecycleObserver? = null
 
     /**
      * How far the slot opens at a full pull.
@@ -152,12 +155,25 @@ class OverscrollActionView
             onDragUpdate(state, offset)
           }
         }
+
+      lifecycleOwner?.let { owner ->
+        attachedLifecycleOwner = owner
+        val observer =
+          object : DefaultLifecycleObserver {
+            override fun onDestroy(owner: LifecycleOwner) {
+              detach()
+            }
+          }
+        lifecycleObserver = observer
+        owner.lifecycle.addObserver(observer)
+      }
     }
 
     fun detach() {
       // Reset, or a view re-attached mid-run would refuse to show the indicator again: both running setters treat the flag as already handled.
       isRunning = false
       cancelFill()
+      animate().cancel()
       heightAnimator?.cancel()
       heightAnimator = null
       setRowHeight(restHeight)
@@ -166,6 +182,11 @@ class OverscrollActionView
       decor = null
       header = null
       stopFollowing()
+      lifecycleObserver?.let { observer ->
+        attachedLifecycleOwner?.lifecycle?.removeObserver(observer)
+      }
+      lifecycleObserver = null
+      attachedLifecycleOwner = null
     }
 
     /**
@@ -189,6 +210,9 @@ class OverscrollActionView
     }
 
     override fun onDetachedFromWindow() {
+      cancelFill()
+      animate().cancel()
+      heightAnimator?.cancel()
       stopFollowing()
       super.onDetachedFromWindow()
     }
@@ -198,15 +222,20 @@ class OverscrollActionView
       headerListener =
         ViewTreeObserver
           .OnPreDrawListener {
-            header?.let { translationY = it.translationY }
+            header?.let {
+              if (translationY != it.translationY) {
+                translationY = it.translationY
+              }
+            }
             true
           }.also { viewTreeObserver.addOnPreDrawListener(it) }
     }
 
     private fun stopFollowing() {
-      headerListener?.let {
-        if (viewTreeObserver.isAlive) {
-          viewTreeObserver.removeOnPreDrawListener(it)
+      headerListener?.let { listener ->
+        val vto = if (viewTreeObserver.isAlive) viewTreeObserver else getViewTreeObserver()
+        if (vto.isAlive) {
+          vto.removeOnPreDrawListener(listener)
         }
       }
       headerListener = null
@@ -221,7 +250,7 @@ class OverscrollActionView
       isRunning = running
 
       binding.overscrollActionProgress.isIndeterminate = running
-      if (!running) binding.overscrollActionProgress.progress = 0
+      if (!running) binding.overscrollActionProgress.setProgressCompat(0, false)
       animateIndicator(visible = running)
     }
 
@@ -247,6 +276,7 @@ class OverscrollActionView
         // The pull's own fill is sitting full, from the hold that armed the trigger.
         // Drop it to zero unanimated before taking over, or the first real reading is seen as the ring draining backwards from full.
         cancelFill()
+        binding.overscrollActionProgress.isIndeterminate = false
         binding.overscrollActionProgress.setProgressCompat(0, false)
         animateIndicator(visible = true)
       }
@@ -273,8 +303,11 @@ class OverscrollActionView
     private fun setRowHeight(px: Int) {
       // Never below the resting gap, and nothing outside this view is touched: the slot's height is the only thing that ever moves the list, so when it comes back to rest the list is exactly where it started.
       val height = px.coerceAtLeast(restHeight)
-      if (layoutParams?.height == height) return
-      updateLayoutParams { this.height = height }
+      val lp = layoutParams ?: return
+      if (lp.height != height) {
+        lp.height = height
+        layoutParams = lp
+      }
     }
 
     private fun animateRowHeight(to: Int) {

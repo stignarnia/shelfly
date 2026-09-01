@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateMargins
 import androidx.core.view.updatePadding
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -35,6 +34,7 @@ import xyz.stignarnia.uiBase.utilities.extensions.gone
 import xyz.stignarnia.uiBase.utilities.extensions.navigateToSafe
 import xyz.stignarnia.uiBase.utilities.extensions.onClick
 import xyz.stignarnia.uiBase.utilities.extensions.requireSerializable
+import xyz.stignarnia.uiBase.utilities.extensions.updatePaddingAndAnchorTop
 import xyz.stignarnia.uiBase.utilities.extensions.visibleIf
 import xyz.stignarnia.uiBase.utilities.extensions.withSpanSizeLookup
 import xyz.stignarnia.uiBase.utilities.viewBinding
@@ -200,14 +200,10 @@ class ProgressFragment :
         progressOverscroll.restHeight = listTopGap
         // The list spans the whole window and carries the gap under the floating header as its own top padding, so an item scrolled past the gap slides under the header and off the top of the screen.
         // OverscrollRecyclerLayout moves it by the slot's extra height, leaving its resting position at the top of the window.
-        val wasAtTop = !progressRecycler.canScrollVertically(-1)
-        progressRecycler.updatePadding(
+        progressRecycler.updatePaddingAndAnchorTop(
           top = listTopGap,
           bottom = systemInsets.bottom + dimenToPx(R.dimen.bottomNavigationHeightPadded),
         )
-        if (wasAtTop) {
-          (progressRecycler.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(0, 0)
-        }
 
         (progressEmptyView.root.layoutParams as ViewGroup.MarginLayoutParams)
           .updateMargins(top = statusBarHeight + dimenToPx(R.dimen.spaceBig))

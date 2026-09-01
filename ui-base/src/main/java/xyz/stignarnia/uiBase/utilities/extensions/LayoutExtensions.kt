@@ -3,12 +3,28 @@ package xyz.stignarnia.uiBase.utilities.extensions
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
+import androidx.annotation.Px
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import androidx.recyclerview.widget.RecyclerView
+
+fun RecyclerView.updatePaddingAndAnchorTop(
+  @Px left: Int = paddingLeft,
+  @Px top: Int = paddingTop,
+  @Px right: Int = paddingRight,
+  @Px bottom: Int = paddingBottom,
+) {
+  val wasAtTop = !canScrollVertically(-1)
+  updatePadding(left = left, top = top, right = right, bottom = bottom)
+  if (wasAtTop) {
+    (layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(0, 0)
+  }
+}
 
 fun RecyclerView.addDivider(
   @DrawableRes dividerRes: Int,

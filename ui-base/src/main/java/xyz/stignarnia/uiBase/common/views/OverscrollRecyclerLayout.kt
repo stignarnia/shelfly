@@ -3,6 +3,7 @@ package xyz.stignarnia.uiBase.common.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 
@@ -27,8 +28,25 @@ class OverscrollRecyclerLayout
     ) {
       super.onLayout(changed, left, top, right, bottom)
 
-      val action = getChildAt(0) as? OverscrollActionView ?: return
-      val recycler = getChildAt(1) as? RecyclerView ?: return
-      recycler.offsetTopAndBottom(action.height - action.restHeight - recycler.top)
+      var action: OverscrollActionView? = null
+      var recycler: RecyclerView? = null
+
+      for (i in 0 until childCount) {
+        when (val child = getChildAt(i)) {
+          is OverscrollActionView -> action = child
+          is RecyclerView -> recycler = child
+        }
+        if (action != null && recycler != null) break
+      }
+
+      if (action != null && recycler != null) {
+        val baseTop = paddingTop + ((recycler.layoutParams as? MarginLayoutParams)?.topMargin ?: 0)
+        val extraOffset = (action.height - action.restHeight).coerceAtLeast(0)
+        val targetTop = baseTop + extraOffset
+        val offset = targetTop - recycler.top
+        if (offset != 0) {
+          recycler.offsetTopAndBottom(offset)
+        }
+      }
     }
   }

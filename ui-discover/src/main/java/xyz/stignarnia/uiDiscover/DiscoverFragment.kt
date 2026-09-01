@@ -7,7 +7,6 @@ import androidx.activity.addCallback
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateMargins
 import androidx.core.view.updatePadding
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -28,6 +27,7 @@ import xyz.stignarnia.uiBase.utilities.extensions.fadeOut
 import xyz.stignarnia.uiBase.utilities.extensions.launchAndRepeatStarted
 import xyz.stignarnia.uiBase.utilities.extensions.navigateToSafe
 import xyz.stignarnia.uiBase.utilities.extensions.onClick
+import xyz.stignarnia.uiBase.utilities.extensions.updatePaddingAndAnchorTop
 import xyz.stignarnia.uiBase.utilities.extensions.visible
 import xyz.stignarnia.uiBase.utilities.extensions.visibleIf
 import xyz.stignarnia.uiBase.utilities.extensions.withSpanSizeLookup
@@ -222,12 +222,7 @@ internal class DiscoverFragment :
         discoverOverscroll.restHeight = listTopGap
         // The list spans the whole window and carries the gap under the floating header as its own top padding, so a poster scrolled past the gap slides under the header and off the top of the screen.
         // OverscrollRecyclerLayout moves it by the slot's extra height, leaving its resting position at the top of the window.
-        val wasAtTop = !discoverRecycler.canScrollVertically(-1)
-        discoverRecycler
-          .updatePadding(top = listTopGap)
-        if (wasAtTop) {
-          (discoverRecycler.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(0, 0)
-        }
+        discoverRecycler.updatePaddingAndAnchorTop(top = listTopGap)
         (discoverSearchView.layoutParams as MarginLayoutParams)
           .updateMargins(top = statusBarSize + dimenToPx(R.dimen.spaceMedium))
         (discoverModeTabsView.layoutParams as MarginLayoutParams)
