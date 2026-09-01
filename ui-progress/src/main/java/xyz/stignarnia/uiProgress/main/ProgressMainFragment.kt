@@ -69,6 +69,7 @@ class ProgressMainFragment :
 
   override val viewModel by viewModels<ProgressMainViewModel>()
   private val binding by viewBinding(FragmentProgressMainBinding::bind)
+  val tabs: View get() = binding.progressMainTabs
 
   private var adapter: ProgressMainAdapter? = null
   private var tabsMediator: TabLayoutMediator? = null

@@ -15,7 +15,6 @@
   <dimen name="progressMoviesSearchLocalViewPadding">152dp</dimen>
   <dimen name="progressMoviesSearchLocalOffset">40dp</dimen>
 
-  <dimen name="progressMoviesOverscrollPadding">132dp</dimen>
 
   <dimen name="progressMoviesItemCheckButtonWidth">72dp</dimen>
   <dimen name="progressMoviesItemButtonHeight">40dp</dimen>

@@ -1,3 +1,5 @@
 Shelfly 4.0.7
 
 • Fixed an issue where artwork on Discover could flicker and disappear while scrolling on tablets.
+• Added the unified pull-to-refresh action to the Progress screen.
+• Fixed pull-to-refresh indicator layering and list alignment issues during screen orientation changes.

@@ -61,6 +61,7 @@ class ProgressMoviesMainFragment :
 
   override val viewModel by viewModels<ProgressMoviesMainViewModel>()
   private val binding by viewBinding(FragmentProgressMainMoviesBinding::bind)
+  val tabs: View get() = binding.progressMoviesTabs
 
   private var searchViewTranslation = 0F
   private var tabsTranslation = 0F

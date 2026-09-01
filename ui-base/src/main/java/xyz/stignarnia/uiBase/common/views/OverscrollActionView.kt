@@ -73,6 +73,12 @@ class OverscrollActionView
     var openHeight: Int =
       resources.getDimensionPixelSize(R.dimen.overscrollActionProgress) +
         resources.getDimensionPixelSize(R.dimen.spaceMedium) * 2
+      set(value) {
+        field = value
+        if (isRunning) {
+          setRowHeight(value)
+        }
+      }
 
     /**
      * The slot's height at rest.
@@ -81,7 +87,9 @@ class OverscrollActionView
     var restHeight: Int = 0
       set(value) {
         field = value
-        setRowHeight(value)
+        if (!isRunning) {
+          setRowHeight(value)
+        }
       }
 
     /** Invoked once per completed pull. */
@@ -91,6 +99,7 @@ class OverscrollActionView
       alpha = 0F
       scaleX = 0F
       scaleY = 0F
+      translationZ = resources.getDimension(R.dimen.overscrollActionElevation)
       context.theme
         .obtainStyledAttributes(attrs, R.styleable.OverscrollActionView, 0, 0)
         .use { typed ->
@@ -195,7 +204,11 @@ class OverscrollActionView
     }
 
     private fun stopFollowing() {
-      headerListener?.let { viewTreeObserver.removeOnPreDrawListener(it) }
+      headerListener?.let {
+        if (viewTreeObserver.isAlive) {
+          viewTreeObserver.removeOnPreDrawListener(it)
+        }
+      }
       headerListener = null
       translationY = 0F
     }

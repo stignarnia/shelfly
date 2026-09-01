@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateMargins
 import androidx.core.view.updatePadding
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -153,6 +154,7 @@ class ProgressMoviesFragment :
     with(binding.progressMoviesOverscroll) {
       onTriggered = { onOverscrollTriggered() }
       attach(binding.progressMoviesMainRecycler, viewLifecycleOwner)
+      follow(requireMainFragment().tabs)
     }
   }
 
@@ -168,19 +170,36 @@ class ProgressMoviesFragment :
 
   private fun setupInsets() {
     with(binding) {
-      root.doOnApplyWindowInsets { _, insets, padding, _ ->
+      root.doOnApplyWindowInsets { _, insets, _, _ ->
         val tabletOffset = if (isTablet) dimenToPx(R.dimen.spaceMedium) else 0
         val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
 
         statusBarHeight = systemInsets.top + tabletOffset
+
+        // The slot opens past the tabs, taking the space out of the list's top padding so the content barely shifts.
+        progressMoviesOverscroll.openHeight =
+          statusBarHeight +
+            dimenToPx(R.dimen.progressMoviesSearchViewPadding) +
+            dimenToPx(R.dimen.spaceBig) +
+            dimenToPx(R.dimen.spaceMedium) +
+            dimenToPx(R.dimen.discoverOverscrollGap) +
+            dimenToPx(R.dimen.overscrollActionProgress) +
+            dimenToPx(R.dimen.spaceMedium)
+
+        val listTopGap = statusBarHeight + dimenToPx(R.dimen.progressMoviesTabsViewPadding)
+        progressMoviesOverscroll.restHeight = listTopGap
+        // The list spans the whole window and carries the gap under the floating header as its own top padding, so an item scrolled past the gap slides under the header and off the top of the screen.
+        // OverscrollRecyclerLayout moves it by the slot's extra height, leaving its resting position at the top of the window.
+        val wasAtTop = !progressMoviesMainRecycler.canScrollVertically(-1)
         progressMoviesMainRecycler.updatePadding(
-          top = statusBarHeight + dimenToPx(R.dimen.progressMoviesTabsViewPadding),
+          top = listTopGap,
           bottom = systemInsets.bottom + dimenToPx(R.dimen.bottomNavigationHeightPadded),
         )
+        if (wasAtTop) {
+          (progressMoviesMainRecycler.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(0, 0)
+        }
         (progressMoviesEmptyView.rootLayout.layoutParams as ViewGroup.MarginLayoutParams)
           .updateMargins(top = statusBarHeight + dimenToPx(R.dimen.spaceBig))
-        (progressMoviesOverscroll.layoutParams as ViewGroup.MarginLayoutParams)
-          .updateMargins(top = statusBarHeight + dimenToPx(R.dimen.progressMoviesOverscrollPadding))
       }
     }
   }

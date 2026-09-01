@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateMargins
 import androidx.core.view.updatePadding
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -168,31 +169,48 @@ class ProgressFragment :
   private fun setupInsets() {
     with(binding) {
       val recyclerPadding =
-        if (moviesEnabled) R.dimen.progressTabsViewPadding else R.dimen.progressTabsViewPaddingNoModes
+        if (moviesEnabled) {
+          R.dimen.progressTabsViewPadding
+        } else {
+          R.dimen.progressTabsViewPaddingNoModes
+        }
 
-      val overscrollPadding =
-        if (moviesEnabled) R.dimen.progressOverscrollPadding else R.dimen.progressOverscrollPaddingNoModes
+      val tabsMargin =
+        if (moviesEnabled) {
+          R.dimen.progressSearchViewPadding
+        } else {
+          R.dimen.progressSearchViewPaddingNoModes
+        }
 
-      if (statusBarHeight != 0) {
-        (progressOverscroll.layoutParams as ViewGroup.MarginLayoutParams)
-          .updateMargins(top = statusBarHeight + dimenToPx(overscrollPadding))
-      }
-
-      root.doOnApplyWindowInsets { _, insets, padding, _ ->
+      root.doOnApplyWindowInsets { _, insets, _, _ ->
         val tabletOffset = if (isTablet) dimenToPx(R.dimen.spaceMedium) else 0
         val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
         statusBarHeight = systemInsets.top + tabletOffset
 
+        // The slot opens past the tabs, taking the space out of the list's top padding so the content barely shifts.
+        progressOverscroll.openHeight =
+          statusBarHeight +
+            dimenToPx(tabsMargin) +
+            dimenToPx(R.dimen.spaceBig) +
+            dimenToPx(R.dimen.spaceMedium) +
+            dimenToPx(R.dimen.discoverOverscrollGap) +
+            dimenToPx(R.dimen.overscrollActionProgress) +
+            dimenToPx(R.dimen.spaceMedium)
+        val listTopGap = statusBarHeight + dimenToPx(recyclerPadding)
+        progressOverscroll.restHeight = listTopGap
+        // The list spans the whole window and carries the gap under the floating header as its own top padding, so an item scrolled past the gap slides under the header and off the top of the screen.
+        // OverscrollRecyclerLayout moves it by the slot's extra height, leaving its resting position at the top of the window.
+        val wasAtTop = !progressRecycler.canScrollVertically(-1)
         progressRecycler.updatePadding(
-          top = statusBarHeight + dimenToPx(recyclerPadding),
+          top = listTopGap,
           bottom = systemInsets.bottom + dimenToPx(R.dimen.bottomNavigationHeightPadded),
         )
+        if (wasAtTop) {
+          (progressRecycler.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(0, 0)
+        }
 
         (progressEmptyView.root.layoutParams as ViewGroup.MarginLayoutParams)
           .updateMargins(top = statusBarHeight + dimenToPx(R.dimen.spaceBig))
-
-        (progressOverscroll.layoutParams as ViewGroup.MarginLayoutParams)
-          .updateMargins(top = statusBarHeight + dimenToPx(overscrollPadding))
       }
     }
   }
@@ -202,6 +220,7 @@ class ProgressFragment :
     with(binding.progressOverscroll) {
       onTriggered = { onOverscrollTriggered() }
       attach(binding.progressRecycler, viewLifecycleOwner)
+      follow(requireMainFragment().tabs)
     }
   }
 

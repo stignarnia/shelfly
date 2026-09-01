@@ -10,21 +10,43 @@
   android:clipToPadding="false"
 >
 
-  <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/progressMoviesMainRecycler"
+  <!--
+    The list fills the window while the indicator opens over it.
+    The container moves the list by only the indicator's height above its resting header gap, so posters can scroll under the header without a negative margin cancelling a stacked row.
+  -->
+  <xyz.stignarnia.uiBase.common.views.OverscrollRecyclerLayout
+    android:id="@+id/progressMoviesRecyclerStack"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:overScrollMode="never"
-    android:paddingStart="@dimen/progressMoviesRecyclerHorizontalSpace"
-    android:paddingTop="@dimen/progressMoviesTabsViewPadding"
-    android:paddingEnd="@dimen/progressMoviesRecyclerHorizontalSpace"
-    android:paddingBottom="@dimen/bottomNavigationHeightPadded"
-    android:visibility="gone"
-    tools:visibility="visible"
-  />
+  >
+
+    <xyz.stignarnia.uiBase.common.views.OverscrollActionView
+      android:id="@+id/progressMoviesOverscroll"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:translationZ="@dimen/overscrollActionElevation"
+      app:actionIcon="@drawable/ic_cloud_upload"
+    />
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/progressMoviesMainRecycler"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@android:color/transparent"
+      android:clipChildren="false"
+      android:clipToPadding="false"
+      android:overScrollMode="never"
+      android:paddingStart="@dimen/progressMoviesRecyclerHorizontalSpace"
+      android:paddingTop="@dimen/progressMoviesTabsViewPadding"
+      android:paddingEnd="@dimen/progressMoviesRecyclerHorizontalSpace"
+      android:paddingBottom="@dimen/bottomNavigationHeightPadded"
+      android:visibility="gone"
+      tools:visibility="visible"
+    />
+
+  </xyz.stignarnia.uiBase.common.views.OverscrollRecyclerLayout>
 
   <include
     android:id="@+id/progressMoviesEmptyView"
@@ -48,15 +70,6 @@
     android:layout_marginBottom="@dimen/bottomNavigationHeight"
     android:visibility="gone"
     tools:visibility="visible"
-  />
-
-  <xyz.stignarnia.uiBase.common.views.OverscrollActionView
-    android:id="@+id/progressMoviesOverscroll"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginTop="@dimen/progressOverscrollPadding"
-    app:actionIcon="@drawable/ic_cloud_upload"
   />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
