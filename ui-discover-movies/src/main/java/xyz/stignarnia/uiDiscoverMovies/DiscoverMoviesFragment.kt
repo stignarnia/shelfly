@@ -153,10 +153,7 @@ internal class DiscoverMoviesFragment :
         val listTopGap = statusBarSize + dimenToPx(R.dimen.discoverRecyclerPadding)
         discoverMoviesOverscroll.restHeight = listTopGap
         // The list spans the whole window and carries the gap under the floating header as its own top padding, so a poster scrolled past the gap slides under the header and off the top of the screen.
-        // Ending the list below the slot instead dropped each poster whole the moment it left the list's bounds, which is a row's height short of the screen edge.
-        // The negative margin cancels the slot's resting height, so the slot still moves the list by exactly however far it opens past rest and nothing else.
-        (discoverMoviesRecycler.layoutParams as ViewGroup.MarginLayoutParams)
-          .updateMargins(top = -listTopGap)
+        // OverscrollRecyclerLayout moves it by the slot's extra height, leaving its resting position at the top of the window.
         discoverMoviesRecycler
           .updatePadding(top = listTopGap)
         (discoverMoviesSearchView.layoutParams as ViewGroup.MarginLayoutParams)

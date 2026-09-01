@@ -11,17 +11,15 @@
 >
 
   <!--
-    The indicator and the list are stacked, never layered, so neither can paint over the other.
-    The list keeps a fixed height rather than a weight: a weight would re-measure it on every frame the slot resizes, which tore up the overscroll mid-drag.
-    Fixed height means the slot only ever moves it.
+    The list fills the window while the indicator opens over it.
+    The container moves the list by only the indicator's height above its resting header gap, so posters can scroll under the header without a negative margin cancelling a stacked row.
   -->
-  <LinearLayout
+  <xyz.stignarnia.uiBase.common.views.OverscrollRecyclerLayout
     android:id="@+id/discoverMoviesRecyclerStack"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:orientation="vertical"
   >
 
     <xyz.stignarnia.uiBase.common.views.OverscrollActionView
@@ -51,7 +49,7 @@
       tools:visibility="visible"
     />
 
-  </LinearLayout>
+  </xyz.stignarnia.uiBase.common.views.OverscrollRecyclerLayout>
 
 
   <xyz.stignarnia.uiBase.common.views.ModeTabsView
