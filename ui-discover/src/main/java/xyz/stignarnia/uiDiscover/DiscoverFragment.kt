@@ -148,7 +148,17 @@ internal class DiscoverFragment :
   }
 
   private fun setupRecycler() {
-    layoutManager = DiscoverLayoutManagerProvider.provideLayoutManager(requireContext())
+    layoutManager =
+      DiscoverLayoutManagerProvider.provideLayoutManager(requireContext()).apply {
+        withSpanSizeLookup { pos ->
+          adapter
+            ?.getItems()
+            ?.getOrNull(pos)
+            ?.image
+            ?.type
+            ?.getSpan(isTablet) ?: 1
+        }
+      }
     adapter =
       DiscoverAdapter(
         itemClickListener = { openDetails(it) },
@@ -302,14 +312,6 @@ internal class DiscoverFragment :
         items?.let {
           val resetScroll = resetScroll?.consume() == true
           adapter?.setItems(it, resetScroll)
-          layoutManager?.withSpanSizeLookup { pos ->
-            adapter
-              ?.getItems()
-              ?.get(pos)
-              ?.image
-              ?.type
-              ?.getSpan(isTablet)!!
-          }
           discoverRecycler.fadeIn(200, withHardware = true)
         }
         isLoading?.let {

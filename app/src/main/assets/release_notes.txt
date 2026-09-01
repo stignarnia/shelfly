@@ -1,12 +1,3 @@
-Shelfly 4.0.6
+Shelfly 4.0.7
 
-• New brand accent color across the app, widgets, and launcher icon.
-• New app icon and branding.
-• Opening Settings now fades in smoothly from Discover and across the app.
-• Full landscape, tablet, and foldable support across all screens with dynamic rotation.
-• Posters on Discover now scroll up under the header instead of vanishing at the top of the list.
-• The Shows Calendar and Movies Calendar widgets now show a preview when you pick a widget, instead of failing to load.
-• Widget headers are now translated instead of always appearing in English.
-• Countdowns to an episode or release now read correctly in French, Portuguese, Russian, and Ukrainian.
-• Small labels in lists, search, and widgets are now large enough to follow your system font size.
-• Screen readers now announce the create-list and back-to-top buttons.
+• Fixed an issue where artwork on Discover could flicker and disappear while scrolling on tablets.

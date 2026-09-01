@@ -167,7 +167,17 @@ internal class DiscoverMoviesFragment :
   }
 
   private fun setupRecycler() {
-    layoutManager = DiscoverMoviesLayoutManagerProvider.provideLayoutManager(requireContext())
+    layoutManager =
+      DiscoverMoviesLayoutManagerProvider.provideLayoutManager(requireContext()).apply {
+        withSpanSizeLookup { pos ->
+          adapter
+            ?.getItems()
+            ?.getOrNull(pos)
+            ?.image
+            ?.type
+            ?.getSpan(isTablet) ?: 1
+        }
+      }
     adapter =
       DiscoverMoviesAdapter(
         itemClickListener = { openDetails(it) },
@@ -275,14 +285,6 @@ internal class DiscoverMoviesFragment :
         items?.let {
           val resetScroll = resetScroll?.consume() == true
           adapter?.setItems(it, resetScroll)
-          layoutManager?.withSpanSizeLookup { pos ->
-            adapter
-              ?.getItems()
-              ?.get(pos)
-              ?.image
-              ?.type
-              ?.getSpan(isTablet)!!
-          }
           discoverMoviesRecycler.fadeIn(200, withHardware = true)
         }
         isLoading?.let {

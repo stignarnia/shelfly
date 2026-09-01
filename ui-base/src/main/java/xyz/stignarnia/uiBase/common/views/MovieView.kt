@@ -15,7 +15,6 @@ import xyz.stignarnia.uiBase.R
 import xyz.stignarnia.uiBase.common.MovieListItem
 import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
 import xyz.stignarnia.uiBase.utilities.extensions.isTablet
-import xyz.stignarnia.uiBase.utilities.extensions.screenWidth
 import xyz.stignarnia.uiBase.utilities.extensions.visible
 import xyz.stignarnia.uiBase.utilities.extensions.withFailListener
 import xyz.stignarnia.uiBase.utilities.extensions.withSuccessListener
@@ -38,9 +37,8 @@ abstract class MovieView<Item : MovieListItem> : FrameLayout {
   private val cornersTransformation by lazy { RoundedCorners(cornerRadius) }
 
   private val isTablet by lazy { context.isTablet() }
-  private val span by lazy { if (isTablet) MAIN_GRID_SPAN_TABLET else MAIN_GRID_SPAN }
-  private val width by lazy { (screenWidth().toFloat() - (2.0 * gridPadding)) / span }
-  private val height by lazy { width * ASPECT_RATIO }
+  private var currentSpan = 1
+  private var hasFixedAspectRatio = false
 
   protected abstract val imageView: ImageView
   protected abstract val placeholderView: ImageView
@@ -52,16 +50,27 @@ abstract class MovieView<Item : MovieListItem> : FrameLayout {
   var missingTranslationListener: ((Item) -> Unit)? = null
 
   open fun bind(item: Item) {
-    layoutParams =
-      LayoutParams(
-        (
-          width *
-            item.image.type
-              .getSpan(isTablet)
-              .toFloat()
-        ).toInt(),
-        height.toInt(),
-      )
+    hasFixedAspectRatio = true
+    currentSpan =
+      item.image.type
+        .getSpan(isTablet)
+        .coerceAtLeast(1)
+  }
+
+  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    if (hasFixedAspectRatio && currentSpan > 0) {
+      val width = MeasureSpec.getSize(widthMeasureSpec)
+      if (width > 0) {
+        val singleSpanWidth = width.toFloat() / currentSpan
+        val height = (singleSpanWidth * ASPECT_RATIO).toInt()
+        super.onMeasure(
+          widthMeasureSpec,
+          MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY),
+        )
+        return
+      }
+    }
+    super.onMeasure(widthMeasureSpec, heightMeasureSpec)
   }
 
   protected open fun loadImage(item: Item) {
