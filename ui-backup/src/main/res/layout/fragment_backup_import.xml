@@ -148,17 +148,16 @@
       tools:visibility="visible"
     />
 
-    <ProgressBar
-      android:id="@+id/progressBar"
+    <xyz.stignarnia.uiBase.common.views.OverscrollActionView
+      android:id="@+id/importOverscroll"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:foregroundTint="?attr/colorAccent"
-      android:visibility="gone"
+      app:actionIcon="@drawable/ic_cloud_upload"
+      app:actionIconSize="@dimen/overscrollActionIconSmall"
       app:layout_constraintBottom_toBottomOf="@id/importButton"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@id/importButton"
-      tools:visibility="invisible"
     />
 
     <TextView
@@ -173,7 +172,7 @@
       android:textSize="12sp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/progressBar"
+      app:layout_constraintTop_toBottomOf="@id/importOverscroll"
       tools:text="Lorem ipsum..."
     />
 

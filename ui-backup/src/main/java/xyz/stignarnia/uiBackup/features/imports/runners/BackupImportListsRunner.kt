@@ -29,32 +29,47 @@ internal class BackupImportListsRunner
     private val moviesRepository: MoviesRepository,
     private val mappers: Mappers,
   ) : BackupImportRunner<BackupLists>() {
-    override suspend fun run(backup: BackupLists) {
+    override suspend fun run(backup: BackupLists, startCount: Int, total: Int): Int {
       Timber.d("Initialized.")
-      runImport(backup)
+      return runImport(backup, startCount, total)
         .also {
           Timber.d("Success.")
         }
     }
 
-    private suspend fun runImport(backup: BackupLists) {
+    private suspend fun runImport(
+      backup: BackupLists,
+      startCount: Int,
+      total: Int,
+    ): Int =
       withContext(dispatchers.IO) {
         val localLists = localSource.customLists.getAll()
+        val totalItems = backup.lists.sumOf { it.items.size }
+        var currentItem = startCount
+
         for (backupList in backup.lists) {
-          statusListener?.invoke(Importing(backupList.name))
+          if (totalItems == 0) {
+            currentItem++
+            updateProgress(backupList.name, currentItem, total)
+          }
 
           if (localLists.any { it.id == backupList.id }) {
             // Custom lists already exists locally
-            importExistingCustomList(backupList)
+            currentItem = importExistingCustomList(backupList, currentItem, total)
           } else {
             // Custom list does not exist locally
-            importNewCustomList(backupList)
+            currentItem = importNewCustomList(backupList, currentItem, total)
           }
         }
+        currentItem
       }
-    }
 
-    private suspend fun importNewCustomList(backupList: BackupList) {
+    private suspend fun importNewCustomList(
+      backupList: BackupList,
+      startItemCount: Int,
+      total: Int,
+    ): Int {
+      var currentItem = startItemCount
       val list =
         CustomList.create().copy(
           idTmdb = null,
@@ -63,10 +78,12 @@ internal class BackupImportListsRunner
           description = backupList.description,
         )
       val listDb = mappers.customList.toDatabase(list)
-      val listId = localSource.customLists.insert(listOf(listDb)).firstOrNull() ?: return
+      val listId = localSource.customLists.insert(listOf(listDb)).firstOrNull() ?: return currentItem
 
       // Add items to the list
-      backupList.items.forEach { item ->
+      for (item in backupList.items) {
+        currentItem++
+        updateProgress(backupList.name, currentItem, total)
         importDetails(item)
         listsRepository.addToList(
           listId = listId,
@@ -77,29 +94,43 @@ internal class BackupImportListsRunner
           updatedAt = item.updatedAt.toUtcDateTime()?.toMillis() ?: nowUtcMillis(),
         )
       }
+      return currentItem
     }
 
-    private suspend fun importExistingCustomList(backupList: BackupList) {
-      val localList = localSource.customLists.getById(backupList.id) ?: return
+    private suspend fun importExistingCustomList(
+      backupList: BackupList,
+      startItemCount: Int,
+      total: Int,
+    ): Int {
+      var currentItem = startItemCount
+      val localList = localSource.customLists.getById(backupList.id) ?: return currentItem
       val localListItems = listsRepository.loadListItemsForId(localList.id)
 
-      for (backupItem in backupList.items) {
-        val itemExists = localListItems.any { it.idTmdb == backupItem.tmdbId && it.type == backupItem.type }
+      for (item in backupList.items) {
+        currentItem++
+        updateProgress(backupList.name, currentItem, total)
+
+        val itemExists = localListItems.any { it.idTmdb == item.tmdbId && it.type == item.type }
         if (itemExists) {
           continue
         }
 
-        importDetails(backupItem)
+        importDetails(item)
 
         listsRepository.addToList(
           listId = localList.id,
-          itemTmdbId = IdTmdb(backupItem.tmdbId),
-          itemType = backupItem.type,
-          listedAt = backupItem.listedAt.toUtcDateTime()?.toMillis() ?: nowUtcMillis(),
-          createdAt = backupItem.createdAt.toUtcDateTime()?.toMillis() ?: nowUtcMillis(),
-          updatedAt = backupItem.updatedAt.toUtcDateTime()?.toMillis() ?: nowUtcMillis(),
+          itemTmdbId = IdTmdb(item.tmdbId),
+          itemType = item.type,
+          listedAt = item.listedAt.toUtcDateTime()?.toMillis() ?: nowUtcMillis(),
+          createdAt = item.createdAt.toUtcDateTime()?.toMillis() ?: nowUtcMillis(),
+          updatedAt = item.updatedAt.toUtcDateTime()?.toMillis() ?: nowUtcMillis(),
         )
       }
+      return currentItem
+    }
+
+    private suspend fun updateProgress(title: String, current: Int, total: Int) {
+      statusListener?.invoke(Importing(title, current = current, total = total))
     }
 
     private suspend fun importDetails(backupItem: BackupListItem) {

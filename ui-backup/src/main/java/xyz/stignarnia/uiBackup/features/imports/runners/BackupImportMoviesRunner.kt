@@ -32,21 +32,29 @@ internal class BackupImportMoviesRunner
     private val ratingsRepository: MoviesRatingsRepository,
     private val pinnedItemsRepository: PinnedItemsRepository,
   ) : BackupImportRunner<BackupMovies>() {
-    override suspend fun run(backup: BackupMovies) {
+    override suspend fun run(
+      backup: BackupMovies,
+      startCount: Int,
+      total: Int,
+    ): Int {
       Timber.d("Initialized.")
-      runImport(backup)
+      return runImport(backup, startCount, total)
         .also {
           Timber.d("Success.")
         }
     }
 
-    private suspend fun runImport(backup: BackupMovies) {
+    private suspend fun runImport(
+      backup: BackupMovies,
+      startCount: Int,
+      total: Int,
+    ): Int =
       withContext(dispatchers.IO) {
-        importMoviesCollection(backup)
+        val countAfterCollection = importMoviesCollection(backup, startCount, total)
         importMoviesPinned(backup)
         importMoviesRatings(backup)
+        countAfterCollection
       }
-    }
 
     private suspend fun importMoviesPinned(backup: BackupMovies) {
       withContext(dispatchers.IO) {
@@ -83,26 +91,36 @@ internal class BackupImportMoviesRunner
       }
     }
 
-    private suspend fun importMoviesCollection(backup: BackupMovies) {
+    private suspend fun importMoviesCollection(
+      backup: BackupMovies,
+      startCount: Int,
+      total: Int,
+    ): Int =
       withContext(dispatchers.IO) {
         val localCollection =
           moviesRepository
             .loadCollection()
             .map { it.tmdbId }
 
-        importMyMovies(backup, localCollection)
-        importWatchlistMovies(backup, localCollection)
-        importHiddenMovies(backup, localCollection)
+        var current = startCount
+
+        current = importMyMovies(backup, localCollection, current, total)
+        current = importWatchlistMovies(backup, localCollection, current, total)
+        importHiddenMovies(backup, localCollection, current, total)
       }
-    }
 
     private suspend fun importMyMovies(
       backupMovies: BackupMovies,
       localCollection: List<Long>,
-    ) {
+      startCount: Int,
+      total: Int,
+    ): Int {
+      var current = startCount
+
       for (movie in backupMovies.collectionHistory) {
+        current++
+        updateProgress(movie.title, current, total)
         Timber.d("Importing movie ${movie.tmdbId} ...")
-        statusListener?.invoke(Importing(movie.title))
 
         if (localCollection.contains(movie.tmdbId)) {
           Timber.d("Movie already in collection. Skipping.")
@@ -122,15 +140,21 @@ internal class BackupImportMoviesRunner
 
         Timber.d("Added to history ${movie.tmdbId} ...")
       }
+      return current
     }
 
     private suspend fun importWatchlistMovies(
       backupMovies: BackupMovies,
       localCollection: List<Long>,
-    ) {
+      startCount: Int,
+      total: Int,
+    ): Int {
+      var current = startCount
+
       for (movie in backupMovies.collectionWatchlist) {
+        current++
+        updateProgress(movie.title, current, total)
         Timber.d("Importing movie ${movie.tmdbId} ...")
-        statusListener?.invoke(Importing(movie.title))
 
         if (localCollection.contains(movie.tmdbId)) {
           Timber.d("Movie already in collection. Skipping.")
@@ -150,15 +174,21 @@ internal class BackupImportMoviesRunner
 
         Timber.d("Added to Watchlist ${movie.tmdbId} ...")
       }
+      return current
     }
 
     private suspend fun importHiddenMovies(
       backupMovies: BackupMovies,
       localCollection: List<Long>,
-    ) {
+      startCount: Int,
+      total: Int,
+    ): Int {
+      var current = startCount
+
       for (movie in backupMovies.collectionHidden) {
+        current++
+        updateProgress(movie.title, current, total)
         Timber.d("Importing movie ${movie.tmdbId} ...")
-        statusListener?.invoke(Importing(movie.title))
 
         if (localCollection.contains(movie.tmdbId)) {
           Timber.d("Movie already in collection. Skipping.")
@@ -178,6 +208,11 @@ internal class BackupImportMoviesRunner
 
         Timber.d("Added to Hidden ${movie.tmdbId} ...")
       }
+      return current
+    }
+
+    private suspend fun updateProgress(title: String, current: Int, total: Int) {
+      statusListener?.invoke(Importing(title, current = current, total = total))
     }
 
     private suspend fun fetchMovieDetails(movie: BackupMovie): Boolean {

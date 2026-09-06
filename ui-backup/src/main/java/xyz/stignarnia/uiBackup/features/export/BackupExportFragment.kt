@@ -190,7 +190,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
   private fun render(uiState: BackupExportUiState) {
     uiState.run {
       with(binding) {
-        progressBar.visibleIf(isLoading)
+        exportOverscroll.setRunning(isLoading)
         statusText.visibleIf(isLoading)
         exportButton.visibleIf(!isLoading, gone = false)
         exportButton.isEnabled = !isLoading

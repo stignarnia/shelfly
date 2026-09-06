@@ -46,17 +46,25 @@ internal class BackupImportShowsRunner
     private val mappers: Mappers,
     private val transactions: TransactionsProvider,
   ) : BackupImportRunner<BackupShows>() {
-    override suspend fun run(backup: BackupShows) {
+    override suspend fun run(
+      backup: BackupShows,
+      startCount: Int,
+      total: Int,
+    ): Int {
       Timber.d("Initialized.")
-      runImport(backup)
+      return runImport(backup, startCount, total)
         .also {
           Timber.d("Success.")
         }
     }
 
-    private suspend fun runImport(backup: BackupShows) {
+    private suspend fun runImport(
+      backup: BackupShows,
+      startCount: Int,
+      total: Int,
+    ): Int =
       withContext(dispatchers.IO) {
-        importShowsCollection(backup)
+        val countAfterCollection = importShowsCollection(backup, startCount, total)
 
         importShowsPinned(backup)
         importShowsOnHold(backup)
@@ -64,29 +72,40 @@ internal class BackupImportShowsRunner
         importShowsRatings(backup)
         importSeasonsRatings(backup)
         importEpisodesRatings(backup)
-      }
-    }
 
-    private suspend fun importShowsCollection(backup: BackupShows) {
+        countAfterCollection
+      }
+
+    private suspend fun importShowsCollection(
+      backup: BackupShows,
+      startCount: Int,
+      total: Int,
+    ): Int =
       withContext(dispatchers.IO) {
         val localCollection =
           showsRepository
             .loadCollection()
             .map { it.tmdbId }
 
-        importMyShows(backup, localCollection)
-        importWatchlistShows(backup, localCollection)
-        importHiddenShows(backup, localCollection)
+        var current = startCount
+
+        current = importMyShows(backup, localCollection, current, total)
+        current = importWatchlistShows(backup, localCollection, current, total)
+        importHiddenShows(backup, localCollection, current, total)
       }
-    }
 
     private suspend fun importMyShows(
       backupShows: BackupShows,
       localCollection: List<Long>,
-    ) {
+      startCount: Int,
+      total: Int,
+    ): Int {
+      var current = startCount
+
       for (show in backupShows.collectionHistory) {
+        current++
+        updateProgress(show.title, current, total)
         Timber.d("Importing show ${show.tmdbId} ...")
-        statusListener?.invoke(Importing(show.title))
 
         if (localCollection.contains(show.tmdbId)) {
           if (showsRepository.myShows.exists(IdTmdb(show.tmdbId))) {
@@ -125,15 +144,21 @@ internal class BackupImportShowsRunner
 
         Timber.d("Added to My Shows ${show.tmdbId} ...")
       }
+      return current
     }
 
     private suspend fun importWatchlistShows(
       backupShows: BackupShows,
       localCollection: List<Long>,
-    ) {
+      startCount: Int,
+      total: Int,
+    ): Int {
+      var current = startCount
+
       for (show in backupShows.collectionWatchlist) {
+        current++
+        updateProgress(show.title, current, total)
         Timber.d("Importing show ${show.tmdbId} ...")
-        statusListener?.invoke(Importing(show.title))
 
         if (localCollection.contains(show.tmdbId)) {
           Timber.d("Show already in collection. Skipping.")
@@ -153,15 +178,21 @@ internal class BackupImportShowsRunner
 
         Timber.d("Added to Watchlist ${show.tmdbId} ...")
       }
+      return current
     }
 
     private suspend fun importHiddenShows(
       backupShows: BackupShows,
       localCollection: List<Long>,
-    ) {
+      startCount: Int,
+      total: Int,
+    ): Int {
+      var current = startCount
+
       for (show in backupShows.collectionHidden) {
+        current++
+        updateProgress(show.title, current, total)
         Timber.d("Importing show ${show.tmdbId} ...")
-        statusListener?.invoke(Importing(show.title))
 
         if (localCollection.contains(show.tmdbId)) {
           Timber.d("Show already in collection. Skipping.")
@@ -181,6 +212,11 @@ internal class BackupImportShowsRunner
 
         Timber.d("Added to Hidden ${show.tmdbId} ...")
       }
+      return current
+    }
+
+    private suspend fun updateProgress(title: String, current: Int, total: Int) {
+      statusListener?.invoke(Importing(title, current = current, total = total))
     }
 
     private suspend fun importShowsPinned(backup: BackupShows) {

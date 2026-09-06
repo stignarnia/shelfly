@@ -190,12 +190,12 @@ class ProgressFragment :
         // The slot opens past the tabs, taking the space out of the list's top padding so the content barely shifts.
         progressOverscroll.openHeight =
           statusBarHeight +
-            dimenToPx(tabsMargin) +
-            dimenToPx(R.dimen.spaceBig) +
-            dimenToPx(R.dimen.spaceMedium) +
-            dimenToPx(R.dimen.discoverOverscrollGap) +
-            dimenToPx(R.dimen.overscrollActionProgress) +
-            dimenToPx(R.dimen.spaceMedium)
+          dimenToPx(tabsMargin) +
+          dimenToPx(R.dimen.spaceBig) +
+          dimenToPx(R.dimen.spaceMedium) +
+          dimenToPx(R.dimen.discoverOverscrollGap) +
+          dimenToPx(R.dimen.overscrollActionProgress) +
+          dimenToPx(R.dimen.spaceMedium)
         val listTopGap = statusBarHeight + dimenToPx(recyclerPadding)
         progressOverscroll.restHeight = listTopGap
         // The list spans the whole window and carries the gap under the floating header as its own top padding, so an item scrolled past the gap slides under the header and off the top of the screen.

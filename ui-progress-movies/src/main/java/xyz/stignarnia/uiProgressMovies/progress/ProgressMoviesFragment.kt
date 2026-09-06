@@ -179,12 +179,12 @@ class ProgressMoviesFragment :
         // The slot opens past the tabs, taking the space out of the list's top padding so the content barely shifts.
         progressMoviesOverscroll.openHeight =
           statusBarHeight +
-            dimenToPx(R.dimen.progressMoviesSearchViewPadding) +
-            dimenToPx(R.dimen.spaceBig) +
-            dimenToPx(R.dimen.spaceMedium) +
-            dimenToPx(R.dimen.discoverOverscrollGap) +
-            dimenToPx(R.dimen.overscrollActionProgress) +
-            dimenToPx(R.dimen.spaceMedium)
+          dimenToPx(R.dimen.progressMoviesSearchViewPadding) +
+          dimenToPx(R.dimen.spaceBig) +
+          dimenToPx(R.dimen.spaceMedium) +
+          dimenToPx(R.dimen.discoverOverscrollGap) +
+          dimenToPx(R.dimen.overscrollActionProgress) +
+          dimenToPx(R.dimen.spaceMedium)
 
         val listTopGap = statusBarHeight + dimenToPx(R.dimen.progressMoviesTabsViewPadding)
         progressMoviesOverscroll.restHeight = listTopGap

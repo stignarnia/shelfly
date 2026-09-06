@@ -6,7 +6,6 @@ import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
 import androidx.annotation.PluralsRes
-import androidx.annotation.StringRes
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
@@ -194,7 +193,22 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
   private fun render(uiState: BackupImportUiState) {
     uiState.run {
       with(binding) {
-        progressBar.visibleIf(isImporting != Idle)
+        when (val status = isImporting) {
+          is Idle -> {
+            importOverscroll.setRunningProgress(null)
+          }
+          is Initializing -> {
+            importOverscroll.setRunning(true)
+          }
+          is Importing -> {
+            val progressPercent = if (status.total > 0) (status.current * 100 / status.total) else null
+            if (progressPercent != null) {
+              importOverscroll.setRunningProgress(progressPercent)
+            } else {
+              importOverscroll.setRunning(true)
+            }
+          }
+        }
         importButton.visibleIf(isImporting == Idle, gone = false)
         importButton.isEnabled = isImporting == Idle
       }
@@ -238,10 +252,21 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
     with(binding) {
       statusText.visibleIf(uiState.isImporting != Idle)
       statusText.text =
-        when (uiState.isImporting) {
+        when (val status = uiState.isImporting) {
           is Idle -> ""
           is Initializing -> "Importing..."
-          is Importing -> "Importing...\n\n\"${uiState.isImporting.title}\""
+          is Importing -> {
+            buildString {
+              if (status.total > 0) {
+                append("Importing ${status.current}/${status.total}")
+              } else {
+                append("Importing...")
+              }
+              if (status.title.isNotBlank()) {
+                append("\n\n\"${status.title}\"")
+              }
+            }
+          }
         }
     }
   }

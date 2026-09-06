@@ -27,9 +27,24 @@ internal class DefaultBackupImportWorker
 
     override suspend fun run(backup: BackupScheme) {
       coroutineScope {
-        importShowsRunner.run(backup.shows)
-        importMoviesRunner.run(backup.movies)
-        importListsRunner.run(backup.lists)
+        val showsTotal =
+          backup.shows.collectionHistory.size +
+            backup.shows.collectionWatchlist.size +
+            backup.shows.collectionHidden.size
+
+        val moviesTotal =
+          backup.movies.collectionHistory.size +
+            backup.movies.collectionWatchlist.size +
+            backup.movies.collectionHidden.size
+
+        val listItemsTotal = backup.lists.lists.sumOf { it.items.size }
+        val listsTotal = if (listItemsTotal > 0) listItemsTotal else backup.lists.lists.size
+
+        val grandTotal = showsTotal + moviesTotal + listsTotal
+
+        val showsEnd = importShowsRunner.run(backup.shows, startCount = 0, total = grandTotal)
+        val moviesEnd = importMoviesRunner.run(backup.movies, startCount = showsEnd, total = grandTotal)
+        importListsRunner.run(backup.lists, startCount = moviesEnd, total = grandTotal)
       }
     }
   }

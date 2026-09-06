@@ -5,5 +5,5 @@ import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus
 internal abstract class BackupImportRunner<T> {
   var statusListener: ((BackupImportStatus) -> Unit)? = null
 
-  abstract suspend fun run(backup: T)
+  abstract suspend fun run(backup: T, startCount: Int = 0, total: Int = 0): Int
 }
