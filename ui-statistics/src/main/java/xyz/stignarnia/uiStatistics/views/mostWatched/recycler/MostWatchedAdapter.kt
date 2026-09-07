@@ -9,6 +9,7 @@ import xyz.stignarnia.uiStatistics.views.mostWatched.StatisticsMostWatchedItemVi
 
 class MostWatchedAdapter(
   private val itemClickListener: (StatisticsMostWatchedItem) -> Unit,
+  private val missingImageListener: ((StatisticsMostWatchedItem, Boolean) -> Unit)? = null,
 ) : BaseAdapter<StatisticsMostWatchedItem>() {
   override val asyncDiffer = AsyncListDiffer(this, MostWatchedItemDiffCallback())
 
@@ -18,6 +19,7 @@ class MostWatchedAdapter(
   ) = BaseViewHolder(
     StatisticsMostWatchedItemView(parent.context).apply {
       itemClickListener = this@MostWatchedAdapter.itemClickListener
+      missingImageListener = this@MostWatchedAdapter.missingImageListener
     },
   )
 

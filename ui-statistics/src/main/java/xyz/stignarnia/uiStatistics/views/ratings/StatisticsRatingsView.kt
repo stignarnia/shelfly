@@ -28,6 +28,7 @@ class StatisticsRatingsView : MaterialCardView {
   private val layoutManager by lazy { LinearLayoutManager(context, HORIZONTAL, false) }
 
   var onShowClickListener: ((ListItem) -> Unit)? = null
+  var onMissingImageListener: ((StatisticsRatingItem, Boolean) -> Unit)? = null
 
   init {
     layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT)
@@ -43,6 +44,7 @@ class StatisticsRatingsView : MaterialCardView {
     adapter =
       StatisticsRatingsAdapter(
         itemClickListener = { onShowClickListener?.invoke(it) },
+        missingImageListener = { item, force -> onMissingImageListener?.invoke(item, force) },
       )
     binding.viewRatingsRecycler.apply {
       setHasFixedSize(true)

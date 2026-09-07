@@ -36,11 +36,9 @@ class StatisticsMoviesFragment : BaseFragment<StatisticsMoviesViewModel>(R.layou
       repeatOnLifecycle(Lifecycle.State.STARTED) {
         with(viewModel) {
           launch { uiState.collect { render(it) } }
-          if (!isInitialized) {
-            loadData()
-            isInitialized = true
-          }
+          loadData(initialDelay = if (!isInitialized) 150L else 0L)
           loadRatings()
+          isInitialized = true
         }
       }
     }
@@ -49,8 +47,13 @@ class StatisticsMoviesFragment : BaseFragment<StatisticsMoviesViewModel>(R.layou
   private fun setupView() {
     with(binding) {
       statisticsMoviesToolbar.setOnClickListener { navigateBack() }
-      statisticsMoviesRatings.onMovieClickListener = {
-        openMovieDetails(it.movie.tmdbId)
+      statisticsMoviesRatings.run {
+        onMovieClickListener = {
+          openMovieDetails(it.movie.tmdbId)
+        }
+        onMissingImageListener = { item, force ->
+          viewModel.loadMissingRatingImage(item, force)
+        }
       }
     }
   }

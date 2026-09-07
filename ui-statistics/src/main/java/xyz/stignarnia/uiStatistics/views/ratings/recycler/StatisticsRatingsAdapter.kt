@@ -9,6 +9,7 @@ import xyz.stignarnia.uiStatistics.views.ratings.StatisticsRateItemView
 
 class StatisticsRatingsAdapter(
   private val itemClickListener: (StatisticsRatingItem) -> Unit,
+  private val missingImageListener: ((StatisticsRatingItem, Boolean) -> Unit)? = null,
 ) : BaseAdapter<StatisticsRatingItem>() {
   override val asyncDiffer = AsyncListDiffer(this, StatisticsRatingsDiffCallback())
 
@@ -18,6 +19,7 @@ class StatisticsRatingsAdapter(
   ) = ViewHolderShow(
     StatisticsRateItemView(parent.context).apply {
       itemClickListener = this@StatisticsRatingsAdapter.itemClickListener
+      missingImageListener = this@StatisticsRatingsAdapter.missingImageListener
     },
   )
 

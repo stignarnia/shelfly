@@ -24,14 +24,11 @@ class StatisticsMoviesRatingsView : MaterialCardView {
 
   private val binding = ViewStatisticsMoviesCardRatingsBinding.inflate(LayoutInflater.from(context), this)
 
-  private val adapter by lazy {
-    StatisticsMoviesRatingsAdapter(
-      itemClickListener = { onMovieClickListener?.invoke(it) },
-    )
-  }
+  private lateinit var adapter: StatisticsMoviesRatingsAdapter
   private val layoutManager by lazy { LinearLayoutManager(context, HORIZONTAL, false) }
 
   var onMovieClickListener: ((MovieListItem) -> Unit)? = null
+  var onMissingImageListener: ((StatisticsMoviesRatingItem, Boolean) -> Unit)? = null
 
   init {
     layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT)
@@ -44,6 +41,11 @@ class StatisticsMoviesRatingsView : MaterialCardView {
   }
 
   private fun setupRecycler() {
+    adapter =
+      StatisticsMoviesRatingsAdapter(
+        itemClickListener = { onMovieClickListener?.invoke(it) },
+        missingImageListener = { item, force -> onMissingImageListener?.invoke(item, force) },
+      )
     binding.viewMoviesRatingsRecycler.apply {
       setHasFixedSize(true)
       adapter = this@StatisticsMoviesRatingsView.adapter

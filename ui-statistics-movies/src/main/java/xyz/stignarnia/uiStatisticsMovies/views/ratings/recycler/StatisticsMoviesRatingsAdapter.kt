@@ -9,6 +9,7 @@ import xyz.stignarnia.uiStatisticsMovies.views.ratings.StatisticsMoviesRateItemV
 
 class StatisticsMoviesRatingsAdapter(
   private val itemClickListener: (StatisticsMoviesRatingItem) -> Unit,
+  private val missingImageListener: ((StatisticsMoviesRatingItem, Boolean) -> Unit)? = null,
 ) : BaseMovieAdapter<StatisticsMoviesRatingItem>() {
   override val asyncDiffer = AsyncListDiffer(this, StatisticsMoviesRatingsDiffCallback())
 
@@ -18,6 +19,7 @@ class StatisticsMoviesRatingsAdapter(
   ) = ViewHolderShow(
     StatisticsMoviesRateItemView(parent.context).apply {
       itemClickListener = this@StatisticsMoviesRatingsAdapter.itemClickListener
+      missingImageListener = this@StatisticsMoviesRatingsAdapter.missingImageListener
     },
   )
 

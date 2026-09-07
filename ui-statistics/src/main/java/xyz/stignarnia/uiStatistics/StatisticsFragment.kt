@@ -37,11 +37,9 @@ class StatisticsFragment : BaseFragment<StatisticsViewModel>(R.layout.fragment_s
       repeatOnLifecycle(Lifecycle.State.STARTED) {
         with(viewModel) {
           launch { uiState.collect { render(it) } }
-          if (!isInitialized) {
-            loadData()
-            isInitialized = true
-          }
+          loadData(initialDelay = if (!isInitialized) 150L else 0L)
           loadRatings()
+          isInitialized = true
         }
       }
     }
@@ -55,9 +53,17 @@ class StatisticsFragment : BaseFragment<StatisticsViewModel>(R.layout.fragment_s
         onShowClickListener = {
           openShowDetails(it.tmdbId)
         }
+        onMissingImageListener = { item, force ->
+          viewModel.loadMissingImage(item, force)
+        }
       }
-      statisticsRatings.onShowClickListener = {
-        openShowDetails(it.show.tmdbId)
+      statisticsRatings.run {
+        onShowClickListener = {
+          openShowDetails(it.show.tmdbId)
+        }
+        onMissingImageListener = { item, force ->
+          viewModel.loadMissingRatingImage(item, force)
+        }
       }
     }
   }

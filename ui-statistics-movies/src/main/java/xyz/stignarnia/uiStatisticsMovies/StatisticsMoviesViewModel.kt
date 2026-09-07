@@ -9,9 +9,12 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import xyz.stignarnia.repository.images.MovieImagesProvider
 import xyz.stignarnia.repository.movies.MoviesRepository
 import xyz.stignarnia.uiBase.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
+import xyz.stignarnia.uiBase.utilities.extensions.findReplace
 import xyz.stignarnia.uiModel.Genre
+import xyz.stignarnia.uiModel.Image
 import xyz.stignarnia.uiModel.Movie
 import xyz.stignarnia.uiStatisticsMovies.cases.StatisticsMoviesLoadRatingsCase
 import xyz.stignarnia.uiStatisticsMovies.views.ratings.recycler.StatisticsMoviesRatingItem
@@ -23,8 +26,9 @@ class StatisticsMoviesViewModel
   constructor(
     private val ratingsCase: StatisticsMoviesLoadRatingsCase,
     private val moviesRepository: MoviesRepository,
+    private val imagesProvider: MovieImagesProvider,
   ) : ViewModel() {
-    private val totalTimeSpentState = MutableStateFlow<Int?>(null)
+    private val totalTimeSpentMinutesState = MutableStateFlow<Int?>(null)
     private val totalWatchedMoviesState = MutableStateFlow<Int?>(null)
     private val topGenresState = MutableStateFlow<List<Genre>?>(null)
     private val ratingsState = MutableStateFlow<List<StatisticsMoviesRatingItem>?>(null)
@@ -37,7 +41,7 @@ class StatisticsMoviesViewModel
         delay(initialDelay) // Let transition finish peacefully.
 
         totalWatchedMoviesState.value = myMovies.count()
-        totalTimeSpentState.value = myMovies.sumOf { it.runtime }
+        totalTimeSpentMinutesState.value = myMovies.sumOf { it.runtime }
         topGenresState.value = genres
       }
     }
@@ -50,6 +54,27 @@ class StatisticsMoviesViewModel
           ratingsState.value = emptyList()
         }
       }
+    }
+
+    fun loadMissingRatingImage(
+      item: StatisticsMoviesRatingItem,
+      force: Boolean,
+    ) {
+      viewModelScope.launch {
+        updateRatingItem(item.copy(isLoading = true))
+        try {
+          val image = imagesProvider.loadRemoteImage(item.movie, item.image.type, force)
+          updateRatingItem(item.copy(isLoading = false, image = image))
+        } catch (t: Throwable) {
+          updateRatingItem(item.copy(isLoading = false, image = Image.createUnavailable(item.image.type)))
+        }
+      }
+    }
+
+    private fun updateRatingItem(newItem: StatisticsMoviesRatingItem) {
+      val items = ratingsState.value?.toMutableList() ?: return
+      items.findReplace(newItem) { it.movie.ids.tmdb == newItem.movie.ids.tmdb }
+      ratingsState.value = items
     }
 
     private fun extractTopGenres(movies: List<Movie>) =
@@ -67,7 +92,7 @@ class StatisticsMoviesViewModel
     val uiState =
       combine(
         totalWatchedMoviesState,
-        totalTimeSpentState,
+        totalTimeSpentMinutesState,
         topGenresState,
         ratingsState,
       ) { s1, s2, s3, s4 ->

@@ -36,6 +36,7 @@ import xyz.stignarnia.uiModel.ImageType
 import xyz.stignarnia.uiModel.Show
 import xyz.stignarnia.uiModel.UserRating
 import xyz.stignarnia.uiStatistics.cases.StatisticsLoadRatingsCase
+import xyz.stignarnia.uiStatistics.views.mostWatched.StatisticsMostWatchedItem
 import xyz.stignarnia.uiStatistics.views.ratings.recycler.StatisticsRatingItem
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -182,6 +183,70 @@ class StatisticsViewModelTest : BaseMockTest() {
       assertThat(result.totalWatchedEpisodesShows).isEqualTo(3)
       assertThat(result.topGenres?.size).isEqualTo(3)
       assertThat(result.topGenres).containsExactly(Genre.WAR, Genre.ANIMATION, Genre.DRAMA)
+
+      job.cancel()
+    }
+
+  @Test
+  internal fun `Should load missing image for most watched item`() =
+    runTest {
+      val show = Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(1)))
+      val item =
+        StatisticsMostWatchedItem(
+          show = show,
+          seasonsCount = 1,
+          episodes = emptyList(),
+          image = Image.createUnknown(ImageType.POSTER),
+          translation = null,
+        )
+      val loadedImage =
+        Image.createAvailable(
+          Ids.EMPTY,
+          ImageType.POSTER,
+          ImageFamily.SHOW,
+          "test_path",
+          ImageSource.TMDB,
+        )
+      coEvery { imagesProvider.loadRemoteImage(show, ImageType.POSTER, false) } returns loadedImage
+      coEvery { myShows.loadAll() } returns listOf(show)
+      coEvery { watchlistShows.loadAll() } returns emptyList()
+      coEvery { hiddenShows.loadAll() } returns emptyList()
+      coEvery { database.episodes.getAllWatchedForShows(any()) } returns emptyList()
+
+      val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
+      SUT.loadData(limit = 0, initialDelay = 0)
+
+      SUT.loadMissingImage(item, false)
+
+      val updatedItem = stateResult.last().mostWatchedShows?.first { it.show.ids.tmdb == show.ids.tmdb }
+      assertThat(updatedItem?.image).isEqualTo(loadedImage)
+
+      job.cancel()
+    }
+
+  @Test
+  internal fun `Should load missing image for rating item`() =
+    runTest {
+      val show = Show.EMPTY.copy(ids = Ids.EMPTY.copy(tmdb = IdTmdb(1)))
+      val ratingItem = StatisticsRatingItem(show, Image.createUnknown(ImageType.POSTER), false, UserRating.EMPTY)
+      val loadedImage =
+        Image.createAvailable(
+          Ids.EMPTY,
+          ImageType.POSTER,
+          ImageFamily.SHOW,
+          "test_path",
+          ImageSource.TMDB,
+        )
+      coEvery { ratingsCase.loadRatings() } returns listOf(ratingItem)
+      coEvery { imagesProvider.loadRemoteImage(show, ImageType.POSTER, false) } returns loadedImage
+
+      val job = launch(UnconfinedTestDispatcher()) { SUT.uiState.toList(stateResult) }
+      SUT.loadRatings()
+
+      SUT.loadMissingRatingImage(ratingItem, false)
+
+      val updatedItem = stateResult.last().ratings?.first { it.show.ids.tmdb == show.ids.tmdb }
+      assertThat(updatedItem?.image).isEqualTo(loadedImage)
 
       job.cancel()
     }

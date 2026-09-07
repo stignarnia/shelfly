@@ -28,6 +28,7 @@ class StatisticsMostWatchedShowsView : ConstraintLayout {
 
   var onLoadMoreClickListener: ((Int) -> Unit)? = null
   var onShowClickListener: ((Show) -> Unit)? = null
+  var onMissingImageListener: ((StatisticsMostWatchedItem, Boolean) -> Unit)? = null
 
   init {
     layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
@@ -39,6 +40,7 @@ class StatisticsMostWatchedShowsView : ConstraintLayout {
     adapter =
       MostWatchedAdapter(
         itemClickListener = { onShowClickListener?.invoke(it.show) },
+        missingImageListener = { item, force -> onMissingImageListener?.invoke(item, force) },
       )
     binding.viewMostWatchedShowsRecycler.apply {
       adapter = this@StatisticsMostWatchedShowsView.adapter

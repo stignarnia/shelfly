@@ -19,6 +19,7 @@ import xyz.stignarnia.repository.mappers.Mappers
 import xyz.stignarnia.repository.shows.ShowsRepository
 import xyz.stignarnia.uiBase.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
 import xyz.stignarnia.uiBase.utilities.extensions.combine
+import xyz.stignarnia.uiBase.utilities.extensions.findReplace
 import xyz.stignarnia.uiModel.Genre
 import xyz.stignarnia.uiModel.Image
 import xyz.stignarnia.uiModel.ImageType.POSTER
@@ -107,6 +108,48 @@ class StatisticsViewModel
           ratingsState.value = emptyList()
         }
       }
+    }
+
+    fun loadMissingImage(
+      item: StatisticsMostWatchedItem,
+      force: Boolean,
+    ) {
+      viewModelScope.launch {
+        updateMostWatchedItem(item.copy(isLoading = true))
+        try {
+          val image = imagesProvider.loadRemoteImage(item.show, item.image.type, force)
+          updateMostWatchedItem(item.copy(isLoading = false, image = image))
+        } catch (t: Throwable) {
+          updateMostWatchedItem(item.copy(isLoading = false, image = Image.createUnavailable(item.image.type)))
+        }
+      }
+    }
+
+    fun loadMissingRatingImage(
+      item: StatisticsRatingItem,
+      force: Boolean,
+    ) {
+      viewModelScope.launch {
+        updateRatingItem(item.copy(isLoading = true))
+        try {
+          val image = imagesProvider.loadRemoteImage(item.show, item.image.type, force)
+          updateRatingItem(item.copy(isLoading = false, image = image))
+        } catch (t: Throwable) {
+          updateRatingItem(item.copy(isLoading = false, image = Image.createUnavailable(item.image.type)))
+        }
+      }
+    }
+
+    private fun updateMostWatchedItem(newItem: StatisticsMostWatchedItem) {
+      val items = mostWatchedShowsState.value?.toMutableList() ?: return
+      items.findReplace(newItem) { it.show.ids.tmdb == newItem.show.ids.tmdb }
+      mostWatchedShowsState.value = items
+    }
+
+    private fun updateRatingItem(newItem: StatisticsRatingItem) {
+      val items = ratingsState.value?.toMutableList() ?: return
+      items.findReplace(newItem) { it.show.ids.tmdb == newItem.show.ids.tmdb }
+      ratingsState.value = items
     }
 
     private suspend fun batchEpisodes(
