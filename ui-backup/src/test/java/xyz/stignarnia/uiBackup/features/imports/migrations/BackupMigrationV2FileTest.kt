@@ -27,9 +27,11 @@ class BackupMigrationV2FileTest {
       dispatchers = UnconfinedCoroutineDispatchers(),
       resolver =
         object : CatalogIdResolver {
-          override suspend fun findShowByTitle(title: String): Long? = null
+          override suspend fun findShowByTitle(title: String): CatalogMatchResult =
+            CatalogMatchResult.Unmatched("Offline test")
 
-          override suspend fun findMovieByTitle(title: String): Long? = null
+          override suspend fun findMovieByTitle(title: String): CatalogMatchResult =
+            CatalogMatchResult.Unmatched("Offline test")
         },
     )
 

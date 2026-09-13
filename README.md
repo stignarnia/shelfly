@@ -43,6 +43,7 @@ I think there is little chance this gets merged upstream given the repository's 
 - **Widgets need Android 12**, and are not offered below it. Their rows are carried inside the widget's own views rather than served by a `RemoteViewsService`: recent Android versions never deliver an update for views that name such a service, only announce it, which leaves a widget that cannot repaint - no theme change, no labels toggle, no calendar mode. The collection API that replaces it, and the `RemoteViews` tinting the themes are painted with, both arrive in Android 12. Carrying the rows along means they all travel at once, so a long list is measured against the framework's own budgets as it is built and cut where they run out.
 - **Original branding and iconography.** Custom 3D isometric shelf logo, adaptive launcher icons, and themed widget assets replace upstream artwork.
 - **Tablet, foldable, and landscape support.** Full screen rotation and responsive layouts across all screens, with no fixed portrait locks on large form factors.
+- **Full restore of archived shows.** Upstream Showly omitted season and episode progress when restoring hidden/archived shows from a backup, silently discarding their watch history. Shelfly restores all seasons and watched episodes for archived shows, keeping watch statistics consistent.
 
 ## Building it yourself
 
@@ -86,7 +87,7 @@ To restore, use Import data → Import from WebDAV and pick which backup you wan
 
 Shelfly reads Showly's backup files. Export from Showly, then use Settings → Backup & Restore → Import data.
 
-Older backups are keyed by ids from a catalog source this fork no longer uses, so they are re-keyed onto TMDB ids on the way in. Anything that cannot be matched is dropped and counted, and the totals are shown when the import finishes — the numbers are never silently wrong.
+Older backups are keyed by ids from a catalog source this fork no longer uses, so they are re-keyed onto TMDB ids on the way in. Anything that cannot be matched is dropped and counted, and the totals are shown when the import finishes — the numbers are never silently wrong. Unlike upstream Showly (which silently discarded watched episodes belonging to archived/hidden shows on restore), Shelfly restores full episode history and statistics for all archived shows.
 
 ## Attribution
 

@@ -5,17 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
-import androidx.annotation.PluralsRes
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import xyz.stignarnia.uiBackup.R
 import xyz.stignarnia.uiBackup.databinding.FragmentBackupImportBinding
 import xyz.stignarnia.uiBackup.features.export.cases.ReadBackupJsonFromFileUseCase
-import xyz.stignarnia.uiBackup.features.imports.migrations.BackupMigrationReport
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Idle
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Importing
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Initializing
@@ -29,7 +28,6 @@ import xyz.stignarnia.uiBase.utilities.extensions.launchAndRepeatStarted
 import xyz.stignarnia.uiBase.utilities.extensions.navigateBack
 import xyz.stignarnia.uiBase.utilities.extensions.onClick
 import xyz.stignarnia.uiBase.utilities.extensions.showErrorSnackbar
-import xyz.stignarnia.uiBase.utilities.extensions.showInfoSnackbar
 import xyz.stignarnia.uiBase.utilities.extensions.visibleIf
 import xyz.stignarnia.uiBase.utilities.viewBinding
 import javax.inject.Inject
@@ -74,6 +72,11 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
       importWebDavButton.onClick { viewModel.loadWebDavBackups() }
       // Only an option once a server is configured in Settings.
       importWebDavButton.visibleIf(viewModel.isWebDavConfigured())
+      showLastReportButton.onClick {
+        if (findNavController().currentDestination?.id == R.id.backupImportFragment) {
+          findNavController().navigate(R.id.actionBackupImportToShowLastReport)
+        }
+      }
     }
   }
 
@@ -102,71 +105,6 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
       },
     )
   }
-
-  private fun showSuccessSnack(report: BackupMigrationReport?) {
-    val host = (requireActivity() as SnackbarHost).provideSnackbarLayout()
-    val skipped = report?.takeUnless { it.isEmpty }?.let { formatSkipped(it) }
-
-    snackbar =
-      if (skipped == null) {
-        host.showInfoSnackbar(
-          message = getString(R.string.textBackupImportSuccess),
-        )
-      } else {
-        // Losses stay on screen until acknowledged, so the numbers are never silently wrong.
-        host.showInfoSnackbar(
-          message =
-            getString(R.string.textBackupImportSuccess) +
-              "\n\n" + getString(R.string.textBackupImportSkipped) + "\n" + skipped,
-          length = Snackbar.LENGTH_INDEFINITE,
-          action = {},
-        )
-      }
-  }
-
-  private fun formatSkipped(report: BackupMigrationReport): String =
-    buildList {
-      with(report) {
-        if (unmatchedShows.isNotEmpty()) {
-          add(
-            resources.getQuantityString(
-              R.plurals.textBackupImportSkippedShows,
-              unmatchedShows.size,
-              unmatchedShows.size,
-              unmatchedShows.preview(),
-            ),
-          )
-        }
-        if (unmatchedMovies.isNotEmpty()) {
-          add(
-            resources.getQuantityString(
-              R.plurals.textBackupImportSkippedMovies,
-              unmatchedMovies.size,
-              unmatchedMovies.size,
-              unmatchedMovies.preview(),
-            ),
-          )
-        }
-        addCount(skippedSeasons, R.plurals.textBackupImportSkippedSeasons)
-        addCount(skippedEpisodes, R.plurals.textBackupImportSkippedEpisodes)
-        addCount(skippedShowRatings, R.plurals.textBackupImportSkippedShowRatings)
-        addCount(skippedSeasonRatings, R.plurals.textBackupImportSkippedSeasonRatings)
-        addCount(skippedEpisodeRatings, R.plurals.textBackupImportSkippedEpisodeRatings)
-        addCount(skippedMovieRatings, R.plurals.textBackupImportSkippedMovieRatings)
-        addCount(skippedListItems, R.plurals.textBackupImportSkippedListItems)
-      }
-    }.joinToString(separator = "\n") { "• $it" }
-
-  private fun MutableList<String>.addCount(
-    count: Int,
-    @PluralsRes label: Int,
-  ) {
-    if (count > 0) {
-      add(resources.getQuantityString(label, count, count))
-    }
-  }
-
-  private fun List<String>.preview(limit: Int = 3) = take(limit).joinToString() + if (size > limit) ", …" else ""
 
   private fun showErrorSnack(error: Throwable) {
     if (error is CancellationException) {
@@ -197,9 +135,11 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
           is Idle -> {
             importOverscroll.setRunningProgress(null)
           }
+
           is Initializing -> {
             importOverscroll.setRunning(true)
           }
+
           is Importing -> {
             val progressPercent = if (status.total > 0) (status.current * 100 / status.total) else null
             if (progressPercent != null) {
@@ -211,12 +151,15 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
         }
         importButton.visibleIf(isImporting == Idle, gone = false)
         importButton.isEnabled = isImporting == Idle
+        showLastReportButton.visibleIf(hasLastReport && isImporting == Idle, gone = true)
       }
       renderImportStatus(uiState)
 
       if (isSuccess) {
-        showSuccessSnack(report)
         viewModel.clearState()
+        if (findNavController().currentDestination?.id == R.id.backupImportFragment) {
+          findNavController().navigate(R.id.actionBackupImportToResult)
+        }
       }
 
       if (isError != null) {
@@ -253,18 +196,21 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
       statusText.visibleIf(uiState.isImporting != Idle)
       statusText.text =
         when (val status = uiState.isImporting) {
-          is Idle -> ""
-          is Initializing -> "Importing..."
+          is Idle -> {
+            ""
+          }
+
+          is Initializing -> {
+            "Importing..."
+          }
+
           is Importing -> {
             buildString {
-              if (status.total > 0) {
-                append("Importing ${status.current}/${status.total}")
-              } else {
-                append("Importing...")
-              }
-              if (status.title.isNotBlank()) {
-                append("\n\n\"${status.title}\"")
-              }
+              append(status.title)
+              append("\n")
+              append(status.current)
+              append("/")
+              append(status.total)
             }
           }
         }

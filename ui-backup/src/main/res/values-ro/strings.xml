@@ -6,7 +6,6 @@
   <string name="textBackupImport">Importă date</string>
   <string name="textBackupImportDescription">Importă datele referitoare la seriale și filme dintr-un fișier de rezervă.\n\nColecția actuală nu va fi eliminată și vor fi adăugate doar elementele lipsă.</string>
   <string name="textBackupExportSuccess">Datele au fost exportate cu succes.</string>
-  <string name="textBackupImportSuccess">Datele au fost importate cu succes.</string>
   <string name="errorImportCancelled">Importul datelor a fost anulat.</string>
   <string name="textBackupExportSchedule">Program</string>
   <string name="textBackupExportOptionOff">Oprit</string>
@@ -22,52 +21,6 @@
   <string name="textBackupExportOptionWeeklyButton">Programat să ruleze în fiecare săptămână</string>
   <string name="textBackupExportLastTimestamp">Ultima copie de rezervă: %s</string>
 
-  <string name="textBackupImportSkipped">Unele intrări nu au avut potrivire în TMDB și au fost omise:</string>
-  <plurals name="textBackupImportSkippedShows">
-    <item quantity="one">%1$d seriale (%2$s)</item>
-    <item quantity="few">%1$d seriale (%2$s)</item>
-    <item quantity="other">%1$d seriale (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovies">
-    <item quantity="one">%1$d filme (%2$s)</item>
-    <item quantity="few">%1$d filme (%2$s)</item>
-    <item quantity="other">%1$d filme (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasons">
-    <item quantity="one">%1$d sezoane</item>
-    <item quantity="few">%1$d sezoane</item>
-    <item quantity="other">%1$d sezoane</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodes">
-    <item quantity="one">%1$d episoade vizionate</item>
-    <item quantity="few">%1$d episoade vizionate</item>
-    <item quantity="other">%1$d episoade vizionate</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedShowRatings">
-    <item quantity="one">%1$d evaluări de seriale</item>
-    <item quantity="few">%1$d evaluări de seriale</item>
-    <item quantity="other">%1$d evaluări de seriale</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasonRatings">
-    <item quantity="one">%1$d evaluări de sezoane</item>
-    <item quantity="few">%1$d evaluări de sezoane</item>
-    <item quantity="other">%1$d evaluări de sezoane</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodeRatings">
-    <item quantity="one">%1$d evaluări de episoade</item>
-    <item quantity="few">%1$d evaluări de episoade</item>
-    <item quantity="other">%1$d evaluări de episoade</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovieRatings">
-    <item quantity="one">%1$d evaluări de filme</item>
-    <item quantity="few">%1$d evaluări de filme</item>
-    <item quantity="other">%1$d evaluări de filme</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedListItems">
-    <item quantity="one">%1$d elemente de listă</item>
-    <item quantity="few">%1$d elemente de listă</item>
-    <item quantity="other">%1$d elemente de listă</item>
-  </plurals>
   <string name="textSyncLastTimestamp">Ultima sincronizare: %s</string>
   <string name="textSyncNever">Nu s-a sincronizat încă cu niciun alt dispozitiv</string>
   <string name="textSyncFailed">Sincronizarea a eșuat: %s</string>
@@ -87,4 +40,32 @@
   <string name="textSyncNotificationErrorTitle">Sincronizare WebDAV eșuată</string>
   <string name="textSyncNotificationErrorContent">Sincronizare eșuată: %s</string>
   <string name="textBackupNotificationErrorTitle">Copie de rezervă eșuată</string>
+
+  <string name="textBackupImportResultTitle">Rezumat import</string>
+  <string name="textBackupImportResultSuccessTitle">Import finalizat</string>
+  <string name="textBackupImportResultMoviesImported">Filme importate</string>
+  <string name="textBackupImportResultShowsImported">Seriale importate</string>
+  <string name="textBackupImportResultMoviesUnmatched">Filme neimportate</string>
+  <string name="textBackupImportResultShowsUnmatched">Seriale neimportate</string>
+  <string name="textBackupImportResultTapToView">Apasă pentru a vedea elementele nepotrivite</string>
+  <string name="textBackupImportResultAllMatched">Toate elementele au fost potrivite cu succes</string>
+  <string name="textBackupImportResultDone">Gata</string>
+  <string name="textBackupImportShowLastReport">Afișează ultimul raport de import</string>
+  <string name="textBackupUnmatchedMoviesTitle">Filme nepotrivite</string>
+  <string name="textBackupUnmatchedShowsTitle">Seriale nepotrivite</string>
+  <string name="textBackupImportUnmatchedEmpty">Niciun element nepotrivit în această categorie.</string>
+  <string name="textBackupImportRatingsDisclaimer">Notă: evaluările nu sunt importate.</string>
+  <string name="textBackupUnmatchedSeasonSingle">Sezonul %d</string>
+  <string name="textBackupUnmatchedEpisodeSingle">Episodul %d</string>
+  <string name="textBackupUnmatchedSeasonMissing">Sezonul nu a fost găsit pe TMDB.</string>
+  <plurals name="textBackupUnmatchedSeasonsSubtitle">
+    <item quantity="one">%d sezon cu elemente nepotrivite</item>
+    <item quantity="few">%d sezoane cu elemente nepotrivite</item>
+    <item quantity="other">%d de sezoane cu elemente nepotrivite</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedEpisodesSubtitle">
+    <item quantity="one">%d episod nepotrivit</item>
+    <item quantity="few">%d episoade nepotrivite</item>
+    <item quantity="other">%d de episoade nepotrivite</item>
+  </plurals>
 </resources>

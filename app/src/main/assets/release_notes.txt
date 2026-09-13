@@ -3,3 +3,5 @@ Shelfly 4.0.7
 • Fixed an issue where artwork on Discover could flicker and disappear while scrolling on tablets.
 • Added the unified pull-to-refresh action to the Progress screen.
 • Fixed pull-to-refresh indicator layering and list alignment issues during screen orientation changes.
+• Added a detailed import summary page showing imported counts and full lists of unmatched items with resolution reasons.
+• Fixed an issue where watched episodes for archived (hidden) shows were not restored during backup import.

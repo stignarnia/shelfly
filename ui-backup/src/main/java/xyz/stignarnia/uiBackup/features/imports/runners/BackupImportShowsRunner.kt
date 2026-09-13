@@ -26,10 +26,16 @@ import xyz.stignarnia.repository.mappers.Mappers
 import xyz.stignarnia.repository.shows.ShowsRepository
 import xyz.stignarnia.repository.shows.ratings.ShowsRatingsRepository
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Importing
+import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedEpisode
+import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedSeason
+import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedShow
+import xyz.stignarnia.uiBackup.model.BackupEpisode
+import xyz.stignarnia.uiBackup.model.BackupSeason
 import xyz.stignarnia.uiBackup.model.BackupShow
 import xyz.stignarnia.uiBackup.model.BackupShows
 import xyz.stignarnia.uiBase.utilities.extensions.rethrowCancellation
 import xyz.stignarnia.uiModel.IdTmdb
+import java.io.IOException
 import javax.inject.Inject
 
 internal class BackupImportShowsRunner
@@ -46,11 +52,14 @@ internal class BackupImportShowsRunner
     private val mappers: Mappers,
     private val transactions: TransactionsProvider,
   ) : BackupImportRunner<BackupShows>() {
+    val failedShows = mutableListOf<BackupUnmatchedShow>()
+
     override suspend fun run(
       backup: BackupShows,
       startCount: Int,
       total: Int,
     ): Int {
+      failedShows.clear()
       Timber.d("Initialized.")
       return runImport(backup, startCount, total)
         .also {
@@ -86,6 +95,7 @@ internal class BackupImportShowsRunner
           showsRepository
             .loadCollection()
             .map { it.tmdbId }
+            .toMutableSet()
 
         var current = startCount
 
@@ -96,7 +106,7 @@ internal class BackupImportShowsRunner
 
     private suspend fun importMyShows(
       backupShows: BackupShows,
-      localCollection: List<Long>,
+      localCollection: MutableSet<Long>,
       startCount: Int,
       total: Int,
     ): Int {
@@ -109,7 +119,7 @@ internal class BackupImportShowsRunner
 
         if (localCollection.contains(show.tmdbId)) {
           if (showsRepository.myShows.exists(IdTmdb(show.tmdbId))) {
-            importExistingMyShowEpisodes(IdTmdb(show.tmdbId), backupShows)
+            importExistingShowEpisodes(show, backupShows)
             continue
           }
           Timber.d("Show already in collection. Skipping.")
@@ -134,7 +144,7 @@ internal class BackupImportShowsRunner
           )
 
         Timber.d("New show in My Shows. Importing season, episodes ...")
-        val (seasons, episodes) = loadSeasonsEpisodes(show.tmdbId, backupShows)
+        val (seasons, episodes) = loadSeasonsEpisodes(show, backupShows)
 
         transactions.withTransaction {
           localSource.seasons.upsert(seasons)
@@ -142,6 +152,7 @@ internal class BackupImportShowsRunner
           localSource.myShows.insert(listOf(myShows))
         }
 
+        localCollection.add(show.tmdbId)
         Timber.d("Added to My Shows ${show.tmdbId} ...")
       }
       return current
@@ -149,7 +160,7 @@ internal class BackupImportShowsRunner
 
     private suspend fun importWatchlistShows(
       backupShows: BackupShows,
-      localCollection: List<Long>,
+      localCollection: MutableSet<Long>,
       startCount: Int,
       total: Int,
     ): Int {
@@ -176,6 +187,7 @@ internal class BackupImportShowsRunner
         val watchlistShow = WatchlistShow.fromTmdbId(show.tmdbId, timestamp)
         localSource.watchlistShows.insert(watchlistShow)
 
+        localCollection.add(show.tmdbId)
         Timber.d("Added to Watchlist ${show.tmdbId} ...")
       }
       return current
@@ -183,7 +195,7 @@ internal class BackupImportShowsRunner
 
     private suspend fun importHiddenShows(
       backupShows: BackupShows,
-      localCollection: List<Long>,
+      localCollection: MutableSet<Long>,
       startCount: Int,
       total: Int,
     ): Int {
@@ -195,6 +207,10 @@ internal class BackupImportShowsRunner
         Timber.d("Importing show ${show.tmdbId} ...")
 
         if (localCollection.contains(show.tmdbId)) {
+          if (showsRepository.hiddenShows.exists(IdTmdb(show.tmdbId))) {
+            importExistingShowEpisodes(show, backupShows)
+            continue
+          }
           Timber.d("Show already in collection. Skipping.")
           continue
         }
@@ -208,8 +224,17 @@ internal class BackupImportShowsRunner
 
         val timestamp = show.addedAt.toUtcDateTime()?.toMillis() ?: nowUtcMillis()
         val hiddenShow = ArchiveShow.fromTmdbId(show.tmdbId, timestamp)
-        localSource.archiveShows.insert(hiddenShow)
 
+        Timber.d("New show in Hidden. Importing season, episodes ...")
+        val (seasons, episodes) = loadSeasonsEpisodes(show, backupShows)
+
+        transactions.withTransaction {
+          localSource.seasons.upsert(seasons)
+          localSource.episodes.upsert(episodes)
+          localSource.archiveShows.insert(hiddenShow)
+        }
+
+        localCollection.add(show.tmdbId)
         Timber.d("Added to Hidden ${show.tmdbId} ...")
       }
       return current
@@ -326,23 +351,30 @@ internal class BackupImportShowsRunner
       }
     }
 
-    private suspend fun importExistingMyShowEpisodes(
-      showId: IdTmdb,
+    private suspend fun importExistingShowEpisodes(
+      show: BackupShow,
       backup: BackupShows,
     ) {
-      Timber.d("Show already in My Shows. Importing episodes ...")
+      Timber.d("Show already in collection. Importing episodes ...")
       withContext(dispatchers.IO) {
-        val show = localSource.shows.getById(showId.id) ?: return@withContext
+        val showEntity = localSource.shows.getById(show.tmdbId) ?: return@withContext
         val importEpisodes =
           backup.progressEpisodes
-            .filter { it.showTmdbId == showId.id }
+            .filter { it.showTmdbId == show.tmdbId }
 
-        val localEpisodesAsync = async { localSource.episodes.getAllByShowId(show.idTmdb) }
+        val localEpisodesAsync = async { localSource.episodes.getAllByShowId(showEntity.idTmdb) }
         val localEpisodes = localEpisodesAsync.await()
 
         if (localEpisodes.isEmpty()) {
+          val (seasons, episodes) = loadSeasonsEpisodes(show, backupShows = backup)
+          transactions.withTransaction {
+            localSource.seasons.upsert(seasons)
+            localSource.episodes.upsert(episodes)
+          }
           return@withContext
         }
+
+        val unmatchedEpsBySeason = mutableMapOf<Int, MutableList<BackupUnmatchedEpisode>>()
 
         for (importEpisode in importEpisodes) {
           val localEpisode =
@@ -351,32 +383,161 @@ internal class BackupImportShowsRunner
                 it.seasonNumber == importEpisode.seasonNumber && it.episodeNumber == importEpisode.episodeNumber
               }
 
-          if (localEpisode != null && !localEpisode.isWatched) {
-            episodesManager.setEpisodeWatched(
-              showId = showId,
-              seasonId = localEpisode.idSeason,
-              episodeId = localEpisode.idTmdb,
-              customDate = importEpisode.addedAt?.toUtcDateTime(),
-            )
+          if (localEpisode != null) {
+            if (!localEpisode.isWatched) {
+              episodesManager.setEpisodeWatched(
+                showId = IdTmdb(show.tmdbId),
+                seasonId = localEpisode.idSeason,
+                episodeId = localEpisode.idTmdb,
+                customDate = importEpisode.addedAt?.toUtcDateTime(),
+              )
+            }
+          } else {
+            unmatchedEpsBySeason
+              .getOrPut(importEpisode.seasonNumber) { mutableListOf() }
+              .add(
+                BackupUnmatchedEpisode(
+                  episodeNumber = importEpisode.episodeNumber,
+                  seasonNumber = importEpisode.seasonNumber,
+                  reason = "Episodio non trovato localmente o su TMDB.",
+                ),
+              )
           }
+        }
+
+        val localSeasonsAsync = async { localSource.seasons.getAllByShowId(showEntity.idTmdb) }
+        val localSeasons = localSeasonsAsync.await()
+        val localSeasonNumbers = localSeasons.map { it.seasonNumber }.toSet()
+
+        val backupSeasons = backup.progressSeasons.filter { it.showTmdbId == show.tmdbId }
+        val allFailedSeasons = mutableListOf<BackupUnmatchedSeason>()
+
+        for (bs in backupSeasons) {
+          if (!localSeasonNumbers.contains(bs.seasonNumber)) {
+            val eps = unmatchedEpsBySeason[bs.seasonNumber] ?: emptyList()
+            allFailedSeasons +=
+              BackupUnmatchedSeason(
+                seasonNumber = bs.seasonNumber,
+                reason = if (eps.isEmpty()) "Stagione non trovata localmente o su TMDB." else null,
+                unmatchedEpisodes = eps.sortedBy { it.episodeNumber },
+              )
+          }
+        }
+
+        for ((sNum, eps) in unmatchedEpsBySeason) {
+          if (allFailedSeasons.none { it.seasonNumber == sNum }) {
+            allFailedSeasons +=
+              BackupUnmatchedSeason(
+                seasonNumber = sNum,
+                unmatchedEpisodes = eps.sortedBy { it.episodeNumber },
+              )
+          }
+        }
+
+        if (allFailedSeasons.isNotEmpty()) {
+          failedShows +=
+            BackupUnmatchedShow(
+              title = show.title,
+              tmdbId = show.tmdbId,
+              unmatchedSeasons = allFailedSeasons.sortedBy { it.seasonNumber },
+            )
         }
       }
     }
 
     private suspend fun loadSeasonsEpisodes(
-      showId: Long,
+      show: BackupShow,
       backupShows: BackupShows,
     ): Pair<List<Season>, List<Episode>> =
       coroutineScope {
-        val remoteSeasons = remoteSource.tmdb.fetchSeasons(showId)
+        val remoteSeasons =
+          try {
+            remoteSource.tmdb.fetchSeasons(show.tmdbId)
+          } catch (error: Throwable) {
+            Timber.w("Failed to fetch seasons for show ${show.tmdbId}: ${error.message}")
+            val reason =
+              when {
+                error is HttpException && error.code() == 404 -> "Stagioni non trovate su TMDB (HTTP 404)."
+                error is HttpException -> "Errore API TMDB (${error.code()})."
+                error is IOException -> "Errore di rete su TMDB."
+                else -> "Errore caricamento stagioni: ${error.message ?: error.javaClass.simpleName}."
+              }
+            failedShows +=
+              BackupUnmatchedShow(
+                title = show.title,
+                reason = reason,
+                tmdbId = show.tmdbId,
+              )
+            return@coroutineScope Pair(emptyList(), emptyList())
+          }
 
-        val localEpisodesAsync = async { localSource.episodes.getAllWatchedIdsForShows(listOf(showId)) }
-        val localSeasonsAsync = async { localSource.seasons.getAllWatchedIdsForShows(listOf(showId)) }
+        val localEpisodesAsync = async { localSource.episodes.getAllWatchedIdsForShows(listOf(show.tmdbId)) }
+        val localSeasonsAsync = async { localSource.seasons.getAllWatchedIdsForShows(listOf(show.tmdbId)) }
         val localEpisodesIds = localEpisodesAsync.await()
         val localSeasonsIds = localSeasonsAsync.await()
 
-        val backupSeason = backupShows.progressSeasons.filter { it.showTmdbId == showId }
-        val backupEpisodes = backupShows.progressEpisodes.filter { it.showTmdbId == showId }
+        val backupSeason = backupShows.progressSeasons.filter { it.showTmdbId == show.tmdbId }
+        val backupEpisodes = backupShows.progressEpisodes.filter { it.showTmdbId == show.tmdbId }
+
+        val unmatchedSeasonsList = mutableListOf<BackupUnmatchedSeason>()
+        val remoteSeasonNumbers = remoteSeasons.mapNotNull { it.number }.toSet()
+
+        for (bs in backupSeason) {
+          if (!remoteSeasonNumbers.contains(bs.seasonNumber)) {
+            unmatchedSeasonsList +=
+              BackupUnmatchedSeason(
+                seasonNumber = bs.seasonNumber,
+                reason = "Stagione non trovata su TMDB.",
+              )
+          }
+        }
+
+        val episodesBySeason = backupEpisodes.groupBy { it.seasonNumber }
+        for ((seasonNum, episodesInSeason) in episodesBySeason) {
+          val remoteSeason = remoteSeasons.find { it.number == seasonNum }
+          if (remoteSeason == null) {
+            if (unmatchedSeasonsList.none { it.seasonNumber == seasonNum }) {
+              unmatchedSeasonsList +=
+                BackupUnmatchedSeason(
+                  seasonNumber = seasonNum,
+                  reason = "Stagione non trovata su TMDB.",
+                )
+            }
+          } else {
+            val remoteEpisodeNumbers =
+              remoteSeason.episodes
+                ?.mapNotNull { it.number }
+                ?.toSet()
+                .orEmpty()
+            val unmatchedEps = mutableListOf<BackupUnmatchedEpisode>()
+            for (be in episodesInSeason) {
+              if (!remoteEpisodeNumbers.contains(be.episodeNumber)) {
+                unmatchedEps +=
+                  BackupUnmatchedEpisode(
+                    episodeNumber = be.episodeNumber,
+                    seasonNumber = seasonNum,
+                    reason = "Episodio non trovato su TMDB.",
+                  )
+              }
+            }
+            if (unmatchedEps.isNotEmpty()) {
+              unmatchedSeasonsList +=
+                BackupUnmatchedSeason(
+                  seasonNumber = seasonNum,
+                  unmatchedEpisodes = unmatchedEps.sortedBy { it.episodeNumber },
+                )
+            }
+          }
+        }
+
+        if (unmatchedSeasonsList.isNotEmpty()) {
+          failedShows +=
+            BackupUnmatchedShow(
+              title = show.title,
+              tmdbId = show.tmdbId,
+              unmatchedSeasons = unmatchedSeasonsList.sortedBy { it.seasonNumber },
+            )
+        }
 
         val seasons =
           remoteSeasons
@@ -393,7 +554,7 @@ internal class BackupImportShowsRunner
 
               mappers.season.toDatabase(
                 season = remoteSeason,
-                showId = IdTmdb(showId),
+                showId = IdTmdb(show.tmdbId),
                 isWatched = isWatchedNumber && isWatchedSize,
               )
             }
@@ -417,7 +578,7 @@ internal class BackupImportShowsRunner
                   }
 
                 mappers.episode.toDatabase(
-                  showId = IdTmdb(showId),
+                  showId = IdTmdb(show.tmdbId),
                   season = mappers.season.fromNetwork(season),
                   episode = mappers.episode.fromNetwork(episode),
                   isWatched = importEpisode != null,
@@ -437,9 +598,20 @@ internal class BackupImportShowsRunner
         true
       } catch (error: Throwable) {
         rethrowCancellation(error) {
-          if (error is HttpException && error.code() == 404) {
-            Timber.w("Failed to fetch show: ${show.tmdbId} ${show.title}")
-          }
+          val reason =
+            when {
+              error is HttpException && error.code() == 404 -> "Details not found on TMDB (HTTP 404)."
+              error is HttpException -> "TMDB API error (${error.code()} ${error.message()})."
+              error is IOException -> "Network error fetching TMDB details (${error.message ?: "timeout"})."
+              else -> "Failed to fetch details: ${error.message ?: error.javaClass.simpleName}."
+            }
+          Timber.w("Failed to fetch show: ${show.tmdbId} ${show.title} - $reason")
+          failedShows +=
+            BackupUnmatchedShow(
+              title = show.title,
+              reason = reason,
+              tmdbId = show.tmdbId,
+            )
         }
         false
       }

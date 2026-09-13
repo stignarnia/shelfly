@@ -17,6 +17,7 @@ import xyz.stignarnia.repository.PinnedItemsRepository
 import xyz.stignarnia.repository.movies.MoviesRepository
 import xyz.stignarnia.repository.movies.ratings.MoviesRatingsRepository
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Importing
+import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedItem
 import xyz.stignarnia.uiBackup.model.BackupMovie
 import xyz.stignarnia.uiBackup.model.BackupMovies
 import xyz.stignarnia.uiBase.utilities.extensions.rethrowCancellation
@@ -32,11 +33,14 @@ internal class BackupImportMoviesRunner
     private val ratingsRepository: MoviesRatingsRepository,
     private val pinnedItemsRepository: PinnedItemsRepository,
   ) : BackupImportRunner<BackupMovies>() {
+    val failedMovies = mutableListOf<BackupUnmatchedItem>()
+
     override suspend fun run(
       backup: BackupMovies,
       startCount: Int,
       total: Int,
     ): Int {
+      failedMovies.clear()
       Timber.d("Initialized.")
       return runImport(backup, startCount, total)
         .also {
@@ -222,9 +226,15 @@ internal class BackupImportMoviesRunner
         true
       } catch (error: Throwable) {
         rethrowCancellation(error) {
-          if (error is HttpException && error.code() == 404) {
-            Timber.w("Failed to fetch movie: ${movie.tmdbId} ${movie.title}")
-          }
+          val reason =
+            when {
+              error is HttpException && error.code() == 404 -> "Details not found on TMDB (HTTP 404)."
+              error is HttpException -> "TMDB API error (${error.code()} ${error.message()})."
+              error is java.io.IOException -> "Network error fetching TMDB details (${error.message ?: "timeout"})."
+              else -> "Failed to fetch details: ${error.message ?: error.javaClass.simpleName}."
+            }
+          Timber.w("Failed to fetch movie: ${movie.tmdbId} ${movie.title} - $reason")
+          failedMovies += BackupUnmatchedItem(title = movie.title, reason = reason, tmdbId = movie.tmdbId)
         }
         false
       }

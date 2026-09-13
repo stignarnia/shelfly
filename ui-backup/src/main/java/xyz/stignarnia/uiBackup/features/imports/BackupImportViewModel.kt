@@ -20,9 +20,11 @@ import xyz.stignarnia.uiBackup.BackupConfig.SCHEME_VERSION
 import xyz.stignarnia.uiBackup.features.export.BackupFileName
 import xyz.stignarnia.uiBackup.features.imports.migrations.BackupMigrationResult
 import xyz.stignarnia.uiBackup.features.imports.migrations.BackupMigrationV2
+import xyz.stignarnia.uiBackup.features.imports.model.BackupImportResult
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Idle
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Initializing
 import xyz.stignarnia.uiBackup.features.imports.model.WebDavBackups
+import xyz.stignarnia.uiBackup.features.imports.result.BackupImportResultHolder
 import xyz.stignarnia.uiBackup.features.imports.workers.BackupImportWorker
 import xyz.stignarnia.uiBackup.model.BackupScheme
 import xyz.stignarnia.uiBase.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
@@ -38,14 +40,16 @@ class BackupImportViewModel
     private val backupMigrationV2: BackupMigrationV2,
     private val webDavRepository: SettingsWebDavRepository,
     private val webDavClient: WebDavClient,
+    private val backupImportResultHolder: BackupImportResultHolder,
   ) : ViewModel() {
-    private val initialState = BackupImportUiState()
+    private val initialState =
+      BackupImportUiState(hasLastReport = backupImportResultHolder.hasReport())
 
     private val importingState = MutableStateFlow(initialState.isImporting)
     private val successState = MutableStateFlow(initialState.isSuccess)
     private val errorState = MutableStateFlow(initialState.isError)
-    private val reportState = MutableStateFlow(initialState.report)
     private val webDavBackupsState = MutableStateFlow<WebDavBackups>(WebDavBackups.Idle)
+    private val hasLastReportState = MutableStateFlow(initialState.hasLastReport)
 
     init {
       backupImportWorker.statusListener = { status ->
@@ -117,8 +121,19 @@ class BackupImportViewModel
           delay(1.seconds)
           val importData = createImportData(jsonInput)
           if (importData != null) {
-            backupImportWorker.run(importData.scheme)
-            reportState.update { importData.report }
+            val workerResult = backupImportWorker.run(importData.scheme)
+            val allUnmatchedShows =
+              importData.report.unmatchedShows + workerResult.failedShows
+            val allUnmatchedMovies = importData.report.unmatchedMovies + workerResult.failedMovies
+            val importResult =
+              BackupImportResult(
+                importedMoviesCount = workerResult.importedMoviesCount,
+                importedShowsCount = workerResult.importedShowsCount,
+                unmatchedMovies = allUnmatchedMovies,
+                unmatchedShows = allUnmatchedShows,
+              )
+            backupImportResultHolder.result = importResult
+            hasLastReportState.update { true }
             successState.update { true }
           }
         } catch (error: Throwable) {
@@ -175,7 +190,6 @@ class BackupImportViewModel
       importingState.update { Idle }
       successState.update { false }
       errorState.update { null }
-      reportState.update { null }
       webDavBackupsState.update { WebDavBackups.Idle }
     }
 
@@ -184,19 +198,19 @@ class BackupImportViewModel
         importingState,
         successState,
         errorState,
-        reportState,
         webDavBackupsState,
-      ) { s1, s2, s3, s4, s5 ->
+        hasLastReportState,
+      ) { isImporting, isSuccess, isError, webDavBackups, hasLastReport ->
         BackupImportUiState(
-          isImporting = s1,
-          isSuccess = s2,
-          isError = s3,
-          report = s4,
-          webDavBackups = s5,
+          isImporting = isImporting,
+          isSuccess = isSuccess,
+          isError = isError,
+          webDavBackups = webDavBackups,
+          hasLastReport = hasLastReport,
         )
       }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(SUBSCRIBE_STOP_TIMEOUT),
-        initialValue = BackupImportUiState(),
+        initialValue = initialState,
       )
   }

@@ -70,7 +70,7 @@ refactor(ui): replace MaterialAlertDialogBuilder with unified ModalView
 ## Development & Build Commands
 
 - **Run ktlint**: `./scripts/ktlint.sh` (downloads ktlint if the clone does not have it)
-- **Run Unit Tests**: `./gradlew testDebugUnitTest` (or a single module: `./gradlew :app:testDebugUnitTest`)
+- **Run Unit Tests**: `./gradlew testDebugUnitTest` (or a single module: `./gradlew :app:testDebugUnitTest`)\
 - **Build Release APK**: `./gradlew :app:assembleRelease`
 - **Build Debug APK**: `./gradlew :app:assembleDebug`
 - **Install on a connected device**: `./gradlew :app:installDebug`
@@ -150,7 +150,7 @@ It looked otherwise for a while, because a module applying a Kotlin script throu
 `check-config.sh` covers two things Lint cannot see.
 
 The first is unreferenced resources.
-`UnusedResources` only reports meaningfully in an application module, because a library's resources may be used by any consumer Lint cannot see - and 28 of the 29 modules here are libraries, so almost the whole resource set falls outside what Lint will judge.
+`UnusedResources` only reports meaningfully in an application module, because a library's resources may be used by any consumer Lint cannot see - and 28 of the 29 modules here are libraries, so almost the whole resource set falls outside what Lint will judge.\
 viewBinding hides the remainder: it generates a binding class per layout, which Lint counts as a use, so an orphaned layout looks alive no matter how long nothing has inflated it.
 Resolving references across every module at once is sound here precisely because the module graph is closed - nothing outside this repository consumes these resources.
 Deleting one resource can orphan whatever it referenced, so the check is worth re-running until it passes rather than once.
@@ -269,7 +269,7 @@ There are no UI or integration tests in the repo, so runtime behaviour is only e
 ./gradlew :app:installDebug && scripts/logcat.sh
 ```
 
-`logcat.sh` follows the app's own process, so a crash or a swallowed exception is visible without grepping the whole buffer - the app has to be running before it starts.
+`logcat.sh` follows the app's own process, so a crash or a swallowed exception is visible without grepping the whole buffer - the app has to be running before it starts.\
 Debug builds stamp epoch seconds into `versionName` (`4.0.6-debug-<stamp>`) so the installed build can be told apart from the previous one.
 
 ### Warnings: two separate systems
@@ -292,6 +292,11 @@ Changing this means editing the build file, which makes it a reviewable commit r
 No `lint-baseline.xml`, no `tools:ignore`, no `@SuppressLint`, no `@Suppress`, no disabling the check that caught it.
 The tree carries **zero** in-source suppressions, which is a state worth keeping rather than a rule worth quoting: 280 were removed, and only about 60 of them turned out to cover a real finding.
 That ratio is the argument. A suppression outlives whatever justified it, and the next reader cannot tell the two apart without deleting it and rebuilding - so the cheapest first move on any suppression is to delete it and see whether anything actually fires.
+
+**Dependency and tooling updates (`AndroidGradlePluginVersion`, `GradleDependency`, `NewerVersionAvailable`).**
+Never suppress or disable dependency version checks in Lint.
+When Lint flags that a newer version of AGP, Kotlin, AndroidX, or another dependency is available, the correct response is to bump the version in `gradle/libs.versions.toml`.
+Compile, run the test suites, see if anything breaks, and adapt the code to what the new version requires.
 
 The four `ktlint_standard_* = disabled` keys in `.editorconfig` are the exception, and the one that is a judgement call carries its reason in a comment beside it.
 They were held to the same test rather than grandfathered: every one was deleted, `ktlint` was re-run, and `ktlint --format` was tried on the result.
@@ -326,4 +331,3 @@ To pick up a specific off-by-default check, name it in `lint.enable` instead.
 - **Update it with any user-visible change**: new features, fixed bugs, changed behaviour. Purely internal work (refactors, tooling, tests) does not belong there.
 - **Keep the heading in sync with the version**: the first line is `Shelfly <versionName>`, matching `versionName` in `gradle/libs.versions.toml`. When the version is bumped, start a fresh list under the new heading.
 - **Write for users, not for the diff**: one `•` bullet per change, describing what is different in the app - not which class changed.
-

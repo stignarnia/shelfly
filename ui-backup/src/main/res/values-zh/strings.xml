@@ -6,7 +6,6 @@
   <string name="textBackupImport">导入数据</string>
   <string name="textBackupImportDescription">从备份文件导入节目和电影数据。\n\n您当前的收藏将保留，系统会添加缺失的项目。</string>
   <string name="textBackupExportSuccess">数据成功导出。</string>
-  <string name="textBackupImportSuccess">数据成功导入。</string>
   <string name="errorImportCancelled">数据导入已取消。</string>
   <string name="textBackupExportSchedule">定时同步时间</string>
   <string name="textBackupExportOptionOff">关闭</string>
@@ -22,34 +21,6 @@
   <string name="textBackupExportOptionWeeklyButton">已设置每隔 1 周运行</string>
   <string name="textBackupExportLastTimestamp">上次备份: %s</string>
 
-  <string name="textBackupImportSkipped">部分条目未匹配到 TMDB 数据，已跳过：</string>
-  <plurals name="textBackupImportSkippedShows">
-    <item quantity="other">%1$d 部剧集 (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovies">
-    <item quantity="other">%1$d 部电影 (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasons">
-    <item quantity="other">%1$d 个季</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodes">
-    <item quantity="other">%1$d 个已观看剧集</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedShowRatings">
-    <item quantity="other">%1$d 条剧集评分</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasonRatings">
-    <item quantity="other">%1$d 条单季评分</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodeRatings">
-    <item quantity="other">%1$d 条单集评分</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovieRatings">
-    <item quantity="other">%1$d 条电影评分</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedListItems">
-    <item quantity="other">%1$d 个列表项</item>
-  </plurals>
   <string name="textSyncLastTimestamp">上次同步：%s</string>
   <string name="textSyncNever">尚未与其他任何设备同步</string>
   <string name="textSyncFailed">同步失败：%s</string>
@@ -67,4 +38,28 @@
   <string name="textSyncNotificationErrorTitle">WebDAV 同步失败</string>
   <string name="textSyncNotificationErrorContent">同步失败：%s</string>
   <string name="textBackupNotificationErrorTitle">备份失败</string>
+
+  <string name="textBackupImportResultTitle">导入摘要</string>
+  <string name="textBackupImportResultSuccessTitle">导入完成</string>
+  <string name="textBackupImportResultMoviesImported">已导入电影</string>
+  <string name="textBackupImportResultShowsImported">已导入剧集</string>
+  <string name="textBackupImportResultMoviesUnmatched">未导入电影</string>
+  <string name="textBackupImportResultShowsUnmatched">未导入剧集</string>
+  <string name="textBackupImportResultTapToView">点击查看未匹配项</string>
+  <string name="textBackupImportResultAllMatched">所有项目均成功匹配</string>
+  <string name="textBackupImportResultDone">完成</string>
+  <string name="textBackupImportShowLastReport">显示上次导入报告</string>
+  <string name="textBackupUnmatchedMoviesTitle">未匹配电影</string>
+  <string name="textBackupUnmatchedShowsTitle">未匹配剧集</string>
+  <string name="textBackupImportUnmatchedEmpty">此类别中没有未匹配的项目。</string>
+  <string name="textBackupImportRatingsDisclaimer">注意：评分不会被导入。</string>
+  <string name="textBackupUnmatchedSeasonSingle">第 %d 季</string>
+  <string name="textBackupUnmatchedEpisodeSingle">第 %d 集</string>
+  <string name="textBackupUnmatchedSeasonMissing">TMDB 上未找到该剧季。</string>
+  <plurals name="textBackupUnmatchedSeasonsSubtitle">
+    <item quantity="other">%d 个剧季包含未匹配项目</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedEpisodesSubtitle">
+    <item quantity="other">%d 个未匹配剧集</item>
+  </plurals>
 </resources>

@@ -53,6 +53,7 @@ dependencies {
   implementation(project(":repository"))
   implementation(project(":ui-base"))
   implementation(project(":ui-model"))
+  implementation(project(":ui-navigation"))
 
   implementation(libs.moshi)
   ksp(libs.moshi.codegen)

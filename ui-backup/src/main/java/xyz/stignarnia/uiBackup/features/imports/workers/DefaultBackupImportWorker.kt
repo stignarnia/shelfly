@@ -1,18 +1,18 @@
 package xyz.stignarnia.uiBackup.features.imports.workers
 
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
+import xyz.stignarnia.common.dispatchers.CoroutineDispatchers
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus
 import xyz.stignarnia.uiBackup.features.imports.runners.BackupImportListsRunner
 import xyz.stignarnia.uiBackup.features.imports.runners.BackupImportMoviesRunner
 import xyz.stignarnia.uiBackup.features.imports.runners.BackupImportShowsRunner
 import xyz.stignarnia.uiBackup.model.BackupScheme
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 internal class DefaultBackupImportWorker
   @Inject
   constructor(
+    private val dispatchers: CoroutineDispatchers,
     private val importShowsRunner: BackupImportShowsRunner,
     private val importMoviesRunner: BackupImportMoviesRunner,
     private val importListsRunner: BackupImportListsRunner,
@@ -20,13 +20,13 @@ internal class DefaultBackupImportWorker
     override var statusListener: ((BackupImportStatus) -> Unit)? = null
       set(value) {
         field = value
-        importShowsRunner.statusListener = field
-        importMoviesRunner.statusListener = field
-        importListsRunner.statusListener = field
+        importShowsRunner.statusListener = value
+        importMoviesRunner.statusListener = value
+        importListsRunner.statusListener = value
       }
 
-    override suspend fun run(backup: BackupScheme) {
-      coroutineScope {
+    override suspend fun run(backup: BackupScheme): BackupImportWorkerResult =
+      withContext(dispatchers.IO) {
         val showsTotal =
           backup.shows.collectionHistory.size +
             backup.shows.collectionWatchlist.size +
@@ -45,6 +45,26 @@ internal class DefaultBackupImportWorker
         val showsEnd = importShowsRunner.run(backup.shows, startCount = 0, total = grandTotal)
         val moviesEnd = importMoviesRunner.run(backup.movies, startCount = showsEnd, total = grandTotal)
         importListsRunner.run(backup.lists, startCount = moviesEnd, total = grandTotal)
+
+        val uniqueShows =
+          (backup.shows.collectionHistory + backup.shows.collectionWatchlist + backup.shows.collectionHidden)
+            .distinctBy { it.tmdbId }
+        val uniqueMovies =
+          (backup.movies.collectionHistory + backup.movies.collectionWatchlist + backup.movies.collectionHidden)
+            .distinctBy { it.tmdbId }
+
+        val failedShows = importShowsRunner.failedShows.toList()
+        val failedMovies = importMoviesRunner.failedMovies.toList()
+
+        val failedEntireShowsCount = failedShows.count { it.isEntireShowUnmatched }
+        val importedShowsCount = (uniqueShows.size - failedEntireShowsCount).coerceAtLeast(0)
+        val importedMoviesCount = (uniqueMovies.size - failedMovies.size).coerceAtLeast(0)
+
+        BackupImportWorkerResult(
+          importedShowsCount = importedShowsCount,
+          importedMoviesCount = importedMoviesCount,
+          failedShows = failedShows,
+          failedMovies = failedMovies,
+        )
       }
-    }
   }

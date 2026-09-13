@@ -6,46 +6,8 @@
   <string name="textBackupImport">Importer data</string>
   <string name="textBackupImportDescription">Importer dine serie- og filmdata fra en sikkerhedskopifil.\n\nDin nuværende samling vil ikke blive fjernet, og kun manglende elementer vil blive tilføjet.</string>
   <string name="textBackupExportSuccess">Data blev eksporteret med succes.</string>
-  <string name="textBackupImportSuccess">Data blev importeret med succes.</string>
   <string name="errorImportCancelled">Dataimporten er blevet annulleret.</string>
 
-  <string name="textBackupImportSkipped">Nogle elementer havde intet TMDB-match og blev sprunget over:</string>
-  <plurals name="textBackupImportSkippedShows">
-    <item quantity="one">%1$d serier (%2$s)</item>
-    <item quantity="other">%1$d serier (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovies">
-    <item quantity="one">%1$d film (%2$s)</item>
-    <item quantity="other">%1$d film (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasons">
-    <item quantity="one">%1$d sæsoner</item>
-    <item quantity="other">%1$d sæsoner</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodes">
-    <item quantity="one">%1$d sete episoder</item>
-    <item quantity="other">%1$d sete episoder</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedShowRatings">
-    <item quantity="one">%1$d seriebedømmelser</item>
-    <item quantity="other">%1$d seriebedømmelser</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasonRatings">
-    <item quantity="one">%1$d sæsonbedømmelser</item>
-    <item quantity="other">%1$d sæsonbedømmelser</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodeRatings">
-    <item quantity="one">%1$d episodebedømmelser</item>
-    <item quantity="other">%1$d episodebedømmelser</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovieRatings">
-    <item quantity="one">%1$d filmbedømmelser</item>
-    <item quantity="other">%1$d filmbedømmelser</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedListItems">
-    <item quantity="one">%1$d listeelementer</item>
-    <item quantity="other">%1$d listeelementer</item>
-  </plurals>
   <string name="textSyncLastTimestamp">Sidste synkronisering: %s</string>
   <string name="textSyncNever">Ikke synkroniseret med andre enheder endnu</string>
   <string name="textSyncFailed">Synkronisering mislykkedes: %s</string>
@@ -77,4 +39,30 @@
   <string name="textBackupExportOption3DayButton">Planlagt til at køre hver 3. dag</string>
   <string name="textBackupExportOptionWeeklyButton">Planlagt til at køre hver uge</string>
   <string name="textBackupExportLastTimestamp">Sidste sikkerhedskopi: %s</string>
+
+  <string name="textBackupImportResultTitle">Importoversigt</string>
+  <string name="textBackupImportResultSuccessTitle">Import fuldført</string>
+  <string name="textBackupImportResultMoviesImported">Film importeret</string>
+  <string name="textBackupImportResultShowsImported">Serier importeret</string>
+  <string name="textBackupImportResultMoviesUnmatched">Film ikke importeret</string>
+  <string name="textBackupImportResultShowsUnmatched">Serier ikke importeret</string>
+  <string name="textBackupImportResultTapToView">Tryk for at se uoverensstemmende elementer</string>
+  <string name="textBackupImportResultAllMatched">Alle elementer matchet</string>
+  <string name="textBackupImportResultDone">Færdig</string>
+  <string name="textBackupImportShowLastReport">Vis seneste importrapport</string>
+  <string name="textBackupUnmatchedMoviesTitle">Uoverensstemmende film</string>
+  <string name="textBackupUnmatchedShowsTitle">Uoverensstemmende serier</string>
+  <string name="textBackupImportUnmatchedEmpty">Ingen uoverensstemmende elementer i denne kategori.</string>
+  <string name="textBackupImportRatingsDisclaimer">Bemærk: vurderinger importeres ikke.</string>
+  <string name="textBackupUnmatchedSeasonSingle">Sæson %d</string>
+  <string name="textBackupUnmatchedEpisodeSingle">Episode %d</string>
+  <string name="textBackupUnmatchedSeasonMissing">Sæson ikke fundet på TMDB.</string>
+  <plurals name="textBackupUnmatchedSeasonsSubtitle">
+    <item quantity="one">%d sæson med ikke-matchede elementer</item>
+    <item quantity="other">%d sæsoner med ikke-matchede elementer</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedEpisodesSubtitle">
+    <item quantity="one">%d ikke-matchet episode</item>
+    <item quantity="other">%d ikke-matchede episoder</item>
+  </plurals>
 </resources>

@@ -52,7 +52,7 @@ class BackupMigrationV2Test {
       val report = SUT.migrate(fixture()).report
 
       assertThat(report.isEmpty).isFalse()
-      assertThat(report.unmatchedShows).containsExactly("Gone Show")
+      assertThat(report.unmatchedShows.map { it.title }).containsExactly("Gone Show")
       assertThat(report.unmatchedMovies).isEmpty()
     }
 
@@ -180,7 +180,9 @@ private class FakeCatalogIdResolver(
   private val shows: Map<String, Long> = emptyMap(),
   private val movies: Map<String, Long> = emptyMap(),
 ) : CatalogIdResolver {
-  override suspend fun findShowByTitle(title: String) = shows[title]
+  override suspend fun findShowByTitle(title: String): CatalogMatchResult =
+    shows[title]?.let { CatalogMatchResult.Matched(it) } ?: CatalogMatchResult.Unmatched("No TMDB match")
 
-  override suspend fun findMovieByTitle(title: String) = movies[title]
+  override suspend fun findMovieByTitle(title: String): CatalogMatchResult =
+    movies[title]?.let { CatalogMatchResult.Matched(it) } ?: CatalogMatchResult.Unmatched("No TMDB match")
 }

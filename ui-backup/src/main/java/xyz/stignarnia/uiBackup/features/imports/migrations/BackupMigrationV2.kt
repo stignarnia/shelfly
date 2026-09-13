@@ -11,6 +11,10 @@ import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupMoviesV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupSchemeV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupShowV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupShowsV2
+import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedEpisode
+import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedItem
+import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedSeason
+import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedShow
 import xyz.stignarnia.uiBackup.model.BackupEpisode
 import xyz.stignarnia.uiBackup.model.BackupEpisodeRating
 import xyz.stignarnia.uiBackup.model.BackupList
@@ -65,10 +69,69 @@ class BackupMigrationV2
       val showIds = resolveShowIds(scheme.shows)
       val movieIds = resolveMovieIds(scheme.movies)
 
+      val knownShowLegacyIds =
+        (scheme.shows.collectionHistory + scheme.shows.collectionWatchlist + scheme.shows.collectionHidden)
+          .map { it.legacyId }
+          .toSet()
+
+      val orphanShowLegacyIds =
+        (scheme.shows.progressEpisodes.map { it.showLegacyId } + scheme.shows.progressSeasons.map { it.showLegacyId })
+          .filterNot { knownShowLegacyIds.contains(it) || it <= 0 }
+          .distinct()
+
+      val orphanEntries =
+        orphanShowLegacyIds.map { orphanId ->
+          UnmatchedLegacyEntry(
+            legacyId = orphanId,
+            title = "Serie TV non archiviata (ID: $orphanId)",
+            reason = "Serie TV presente nella cronologia ma non nel catalogo TMDB.",
+          )
+        }
+
+      val allUnmatchedShowEntries = showIds.unmatched + orphanEntries
+
+      val unmatchedShowsList =
+        allUnmatchedShowEntries.map { entry ->
+          val episodesForShow = scheme.shows.progressEpisodes.filter { it.showLegacyId == entry.legacyId }
+          val seasonsForShow = scheme.shows.progressSeasons.filter { it.showLegacyId == entry.legacyId }
+
+          val epsBySeason = episodesForShow.groupBy { it.seasonNumber }
+          val allSeasonNums = (seasonsForShow.map { it.seasonNumber } + epsBySeason.keys).distinct().sorted()
+
+          val seasonsList =
+            allSeasonNums.map { sNum ->
+              val episodes =
+                (epsBySeason[sNum] ?: emptyList()).map { ep ->
+                  BackupUnmatchedEpisode(
+                    episodeNumber = ep.episodeNumber,
+                    seasonNumber = sNum,
+                    reason = "Serie TV non disponibile su TMDB.",
+                  )
+                }
+              BackupUnmatchedSeason(
+                seasonNumber = sNum,
+                reason = if (episodes.isEmpty()) "Stagione non disponibile su TMDB." else null,
+                unmatchedEpisodes = episodes.sortedBy { it.episodeNumber },
+              )
+            }
+
+          BackupUnmatchedShow(
+            title = entry.title,
+            reason = entry.reason,
+            tmdbId = null,
+            unmatchedSeasons = seasonsList,
+          )
+        }
+
+      val unmatchedMoviesList =
+        movieIds.unmatched.map {
+          BackupUnmatchedItem(title = it.title, reason = it.reason)
+        }
+
       val report =
         ReportBuilder(
-          unmatchedShows = showIds.unmatched,
-          unmatchedMovies = movieIds.unmatched,
+          unmatchedShows = unmatchedShowsList,
+          unmatchedMovies = unmatchedMoviesList,
         )
 
       val migrated =
@@ -115,22 +178,31 @@ class BackupMigrationV2
       entries: List<Pair<Long, T>>,
       tmdbIdOf: (T) -> Long,
       titleOf: (T) -> String,
-      findByTitle: suspend (String) -> Long?,
+      findByTitle: suspend (String) -> CatalogMatchResult,
     ): ResolvedIds {
       val byLegacyId = mutableMapOf<Long, Long>()
-      val unmatched = mutableListOf<String>()
+      val unmatched = mutableListOf<UnmatchedLegacyEntry>()
+      val seenLegacyIds = mutableSetOf<Long>()
 
       for ((legacyId, entry) in entries) {
-        if (byLegacyId.containsKey(legacyId)) {
+        if (!seenLegacyIds.add(legacyId)) {
           continue
         }
         val title = titleOf(entry)
-        val tmdbId = tmdbIdOf(entry).takeIf { it > 0 } ?: findByTitle(title)
-        if (tmdbId != null && tmdbId > 0) {
+        val tmdbId = tmdbIdOf(entry).takeIf { it > 0 }
+        if (tmdbId != null) {
           byLegacyId[legacyId] = tmdbId
         } else {
-          Timber.w("No TMDB id for \"$title\". Dropping it and everything under it.")
-          unmatched += title
+          when (val result = findByTitle(title)) {
+            is CatalogMatchResult.Matched -> {
+              byLegacyId[legacyId] = result.tmdbId
+            }
+
+            is CatalogMatchResult.Unmatched -> {
+              Timber.w("No TMDB id for \"$title\". Dropping it: ${result.reason}")
+              unmatched += UnmatchedLegacyEntry(legacyId = legacyId, title = title, reason = result.reason)
+            }
+          }
         }
       }
 
@@ -314,14 +386,20 @@ class BackupMigrationV2
           },
       )
 
+    private data class UnmatchedLegacyEntry(
+      val legacyId: Long,
+      val title: String,
+      val reason: String,
+    )
+
     private data class ResolvedIds(
       val byLegacyId: Map<Long, Long>,
-      val unmatched: List<String>,
+      val unmatched: List<UnmatchedLegacyEntry>,
     )
 
     private class ReportBuilder(
-      val unmatchedShows: List<String>,
-      val unmatchedMovies: List<String>,
+      val unmatchedShows: List<BackupUnmatchedShow>,
+      val unmatchedMovies: List<BackupUnmatchedItem>,
     ) {
       var skippedSeasons = 0
       var skippedEpisodes = 0

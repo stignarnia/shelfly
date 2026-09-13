@@ -6,46 +6,8 @@
   <string name="textBackupImport">Verileri içe aktar</string>
   <string name="textBackupImportDescription">Yedekleme dosyasından dizi ve film verilerinizi içe aktarın.\n\nMevcut koleksiyonunuz silinmeyecek, yalnızca eksik öğeler eklenecek.</string>
   <string name="textBackupExportSuccess">Veriler başarıyla dışa aktarıldı.</string>
-  <string name="textBackupImportSuccess">Veriler başarıyla içe aktarıldı.</string>
   <string name="errorImportCancelled">Veri içe aktarma iptal edildi.</string>
 
-  <string name="textBackupImportSkipped">Bazı öğelerin TMDB eşleşmesi bulunamadı ve atlandı:</string>
-  <plurals name="textBackupImportSkippedShows">
-    <item quantity="one">%1$d dizi (%2$s)</item>
-    <item quantity="other">%1$d dizi (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovies">
-    <item quantity="one">%1$d film (%2$s)</item>
-    <item quantity="other">%1$d film (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasons">
-    <item quantity="one">%1$d sezon</item>
-    <item quantity="other">%1$d sezon</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodes">
-    <item quantity="one">%1$d izlenen bölüm</item>
-    <item quantity="other">%1$d izlenen bölüm</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedShowRatings">
-    <item quantity="one">%1$d dizi puanı</item>
-    <item quantity="other">%1$d dizi puanı</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasonRatings">
-    <item quantity="one">%1$d sezon puanı</item>
-    <item quantity="other">%1$d sezon puanı</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodeRatings">
-    <item quantity="one">%1$d bölüm puanı</item>
-    <item quantity="other">%1$d bölüm puanı</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovieRatings">
-    <item quantity="one">%1$d film puanı</item>
-    <item quantity="other">%1$d film puanı</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedListItems">
-    <item quantity="one">%1$d liste öğesi</item>
-    <item quantity="other">%1$d liste öğesi</item>
-  </plurals>
   <string name="textSyncLastTimestamp">Son senkronizasyon: %s</string>
   <string name="textSyncNever">Henüz başka bir cihazla senkronize edilmedi</string>
   <string name="textSyncFailed">Senkronizasyon başarısız: %s</string>
@@ -78,4 +40,30 @@
   <string name="textBackupExportOption3DayButton">Her 3 günde bir çalışacak şekilde zamanlandı</string>
   <string name="textBackupExportOptionWeeklyButton">Her hafta çalışacak şekilde zamanlandı</string>
   <string name="textBackupExportLastTimestamp">Son Yedekleme: %s</string>
+
+  <string name="textBackupImportResultTitle">İçe Aktarma Özeti</string>
+  <string name="textBackupImportResultSuccessTitle">İçe aktarma tamamlandı</string>
+  <string name="textBackupImportResultMoviesImported">İçe aktarılan filmler</string>
+  <string name="textBackupImportResultShowsImported">İçe aktarılan diziler</string>
+  <string name="textBackupImportResultMoviesUnmatched">İçe aktarılamayan filmler</string>
+  <string name="textBackupImportResultShowsUnmatched">İçe aktarılamayan diziler</string>
+  <string name="textBackupImportResultTapToView">Eşleşmeyen öğeleri görmek için dokunun</string>
+  <string name="textBackupImportResultAllMatched">Tüm öğeler başarıyla eşleşti</string>
+  <string name="textBackupImportResultDone">Bitti</string>
+  <string name="textBackupImportShowLastReport">Son içe aktarma raporunu göster</string>
+  <string name="textBackupUnmatchedMoviesTitle">Eşleşmeyen Filmler</string>
+  <string name="textBackupUnmatchedShowsTitle">Eşleşmeyen Diziler</string>
+  <string name="textBackupImportUnmatchedEmpty">Bu kategoride eşleşmeyen öğe yok.</string>
+  <string name="textBackupImportRatingsDisclaimer">Not: Derecelendirmeler içe aktarılmaz.</string>
+  <string name="textBackupUnmatchedSeasonSingle">Sezon %d</string>
+  <string name="textBackupUnmatchedEpisodeSingle">Bölüm %d</string>
+  <string name="textBackupUnmatchedSeasonMissing">Sezon TMDB\x27de bulunamadı.</string>
+  <plurals name="textBackupUnmatchedSeasonsSubtitle">
+    <item quantity="one">%d sezon eşleşmeyen öğe içeriyor</item>
+    <item quantity="other">%d sezon eşleşmeyen öğe içeriyor</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedEpisodesSubtitle">
+    <item quantity="one">%d eşleşmeyen bölüm</item>
+    <item quantity="other">%d eşleşmeyen bölüm</item>
+  </plurals>
 </resources>

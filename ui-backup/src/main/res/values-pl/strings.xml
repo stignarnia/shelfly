@@ -6,7 +6,6 @@
   <string name="textBackupImport">Importuj dane</string>
   <string name="textBackupImportDescription">Importuj dane seriali i filmów z pliku kopii zapasowej.\n\nTwoja obecna kolekcja nie zostanie usunięta i tylko brakujące elementy zostaną dodane.</string>
   <string name="textBackupExportSuccess">Dane zostały wyeksportowane.</string>
-  <string name="textBackupImportSuccess">Dane zostały zaimportowane.</string>
   <string name="errorImportCancelled">Import danych został anulowany.</string>
   <string name="textBackupExportSchedule">Zaplanuj</string>
   <string name="textBackupExportOptionOff">Wyłączone</string>
@@ -22,61 +21,6 @@
   <string name="textBackupExportOptionWeeklyButton">Zaplanowano raz każdego tygodnia</string>
   <string name="textBackupExportLastTimestamp">Ostatni zapis: %s</string>
 
-  <string name="textBackupImportSkipped">Niektóre pozycje nie pasowały do TMDB i zostały pominięte:</string>
-  <plurals name="textBackupImportSkippedShows">
-    <item quantity="one">%1$d seriali (%2$s)</item>
-    <item quantity="few">%1$d seriali (%2$s)</item>
-    <item quantity="many">%1$d seriali (%2$s)</item>
-    <item quantity="other">%1$d seriali (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovies">
-    <item quantity="one">%1$d filmów (%2$s)</item>
-    <item quantity="few">%1$d filmów (%2$s)</item>
-    <item quantity="many">%1$d filmów (%2$s)</item>
-    <item quantity="other">%1$d filmów (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasons">
-    <item quantity="one">%1$d sezonów</item>
-    <item quantity="few">%1$d sezonów</item>
-    <item quantity="many">%1$d sezonów</item>
-    <item quantity="other">%1$d sezonów</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodes">
-    <item quantity="one">%1$d obejrzanych odcinków</item>
-    <item quantity="few">%1$d obejrzanych odcinków</item>
-    <item quantity="many">%1$d obejrzanych odcinków</item>
-    <item quantity="other">%1$d obejrzanych odcinków</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedShowRatings">
-    <item quantity="one">%1$d ocen seriali</item>
-    <item quantity="few">%1$d ocen seriali</item>
-    <item quantity="many">%1$d ocen seriali</item>
-    <item quantity="other">%1$d ocen seriali</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasonRatings">
-    <item quantity="one">%1$d ocen sezonów</item>
-    <item quantity="few">%1$d ocen sezonów</item>
-    <item quantity="many">%1$d ocen sezonów</item>
-    <item quantity="other">%1$d ocen sezonów</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodeRatings">
-    <item quantity="one">%1$d ocen odcinków</item>
-    <item quantity="few">%1$d ocen odcinków</item>
-    <item quantity="many">%1$d ocen odcinków</item>
-    <item quantity="other">%1$d ocen odcinków</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovieRatings">
-    <item quantity="one">%1$d ocen filmów</item>
-    <item quantity="few">%1$d ocen filmów</item>
-    <item quantity="many">%1$d ocen filmów</item>
-    <item quantity="other">%1$d ocen filmów</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedListItems">
-    <item quantity="one">%1$d elementów listy</item>
-    <item quantity="few">%1$d elementów listy</item>
-    <item quantity="many">%1$d elementów listy</item>
-    <item quantity="other">%1$d elementów listy</item>
-  </plurals>
   <string name="textSyncLastTimestamp">Ostatnia synchronizacja: %s</string>
   <string name="textSyncNever">Jeszcze nie zsynchronizowano z żadnym innym urządzeniem</string>
   <string name="textSyncFailed">Synchronizacja nie powiodła się: %s</string>
@@ -97,4 +41,34 @@
   <string name="textSyncNotificationErrorTitle">Błąd synchronizacji WebDAV</string>
   <string name="textSyncNotificationErrorContent">Synchronizacja nie powiodła się: %s</string>
   <string name="textBackupNotificationErrorTitle">Błąd kopii zapasowej</string>
+
+  <string name="textBackupImportResultTitle">Podsumowanie importu</string>
+  <string name="textBackupImportResultSuccessTitle">Import zakończony</string>
+  <string name="textBackupImportResultMoviesImported">Zaimportowane filmy</string>
+  <string name="textBackupImportResultShowsImported">Zaimportowane seriale</string>
+  <string name="textBackupImportResultMoviesUnmatched">Niezaimportowane filmy</string>
+  <string name="textBackupImportResultShowsUnmatched">Niezaimportowane seriale</string>
+  <string name="textBackupImportResultTapToView">Dotknij, aby wyświetlić niedopasowane elementy</string>
+  <string name="textBackupImportResultAllMatched">Wszystkie elementy zostały pomyślnie dopasowane</string>
+  <string name="textBackupImportResultDone">Gotowe</string>
+  <string name="textBackupImportShowLastReport">Pokaż raport z ostatniego importu</string>
+  <string name="textBackupUnmatchedMoviesTitle">Niedopasowane filmy</string>
+  <string name="textBackupUnmatchedShowsTitle">Niedopasowane seriale</string>
+  <string name="textBackupImportUnmatchedEmpty">Brak niedopasowanych elementów w tej kategorii.</string>
+  <string name="textBackupImportRatingsDisclaimer">Uwaga: oceny nie są importowane.</string>
+  <string name="textBackupUnmatchedSeasonSingle">Sezon %d</string>
+  <string name="textBackupUnmatchedEpisodeSingle">Odcinek %d</string>
+  <string name="textBackupUnmatchedSeasonMissing">Sezon nieznaleziony w TMDB.</string>
+  <plurals name="textBackupUnmatchedSeasonsSubtitle">
+    <item quantity="one">%d sezon z niedopasowanymi elementami</item>
+    <item quantity="few">%d sezony z niedopasowanymi elementami</item>
+    <item quantity="many">%d sezonów z niedopasowanymi elementami</item>
+    <item quantity="other">%d sezonów z niedopasowanymi elementami</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedEpisodesSubtitle">
+    <item quantity="one">%d niedopasowany odcinek</item>
+    <item quantity="few">%d niedopasowane odcinki</item>
+    <item quantity="many">%d niedopasowanych odcinków</item>
+    <item quantity="other">%d niedopasowanych odcinków</item>
+  </plurals>
 </resources>

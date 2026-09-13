@@ -774,6 +774,66 @@
     android:id="@+id/backupImportFragment"
     android:name="xyz.stignarnia.uiBackup.features.imports.BackupImportFragment"
     android:label="fragmentBackupImport"
+  >
+    <action
+      android:id="@+id/actionBackupImportToResult"
+      app:destination="@id/backupImportResultFragment"
+      app:popUpTo="@id/backupImportFragment"
+      app:popUpToInclusive="true"
+      app:enterAnim="@anim/anim_fade_in"
+      app:popExitAnim="@anim/anim_fade_out"
+    />
+    <action
+      android:id="@+id/actionBackupImportToShowLastReport"
+      app:destination="@id/backupImportResultFragment"
+      app:enterAnim="@anim/anim_fade_in"
+      app:popExitAnim="@anim/anim_fade_out"
+    />
+  </fragment>
+
+  <fragment
+    android:id="@+id/backupImportResultFragment"
+    android:name="xyz.stignarnia.uiBackup.features.imports.result.BackupImportResultFragment"
+    android:label="fragmentBackupImportResult"
+  >
+    <action
+      android:id="@+id/actionBackupImportResultToUnmatched"
+      app:destination="@id/backupUnmatchedItemsFragment"
+      app:enterAnim="@anim/anim_fade_in"
+      app:popExitAnim="@anim/anim_fade_out"
+    />
+  </fragment>
+
+  <fragment
+    android:id="@+id/backupUnmatchedItemsFragment"
+    android:name="xyz.stignarnia.uiBackup.features.imports.result.BackupUnmatchedItemsFragment"
+    android:label="fragmentBackupUnmatchedItems"
+  >
+    <action
+      android:id="@+id/actionBackupUnmatchedItemsToSeasons"
+      app:destination="@id/backupUnmatchedSeasonsFragment"
+      app:enterAnim="@anim/anim_fade_in"
+      app:popExitAnim="@anim/anim_fade_out"
+    />
+  </fragment>
+
+  <fragment
+    android:id="@+id/backupUnmatchedSeasonsFragment"
+    android:name="xyz.stignarnia.uiBackup.features.imports.result.BackupUnmatchedSeasonsFragment"
+    android:label="fragmentBackupUnmatchedSeasons"
+  >
+    <action
+      android:id="@+id/actionBackupUnmatchedSeasonsToEpisodes"
+      app:destination="@id/backupUnmatchedEpisodesFragment"
+      app:enterAnim="@anim/anim_fade_in"
+      app:popExitAnim="@anim/anim_fade_out"
+    />
+  </fragment>
+
+  <fragment
+    android:id="@+id/backupUnmatchedEpisodesFragment"
+    android:name="xyz.stignarnia.uiBackup.features.imports.result.BackupUnmatchedEpisodesFragment"
+    android:label="fragmentBackupUnmatchedEpisodes"
   />
 
   <dialog
@@ -833,7 +893,7 @@
     />
     <action
       android:id="@+id/actionEpisodeDetailsDialogToLink"
-      app:destination="@+id/episodeLinksDialog"
+      app:destination="@id/episodeLinksDialog"
       app:launchSingleTop="true"
     />
   </dialog>
@@ -842,7 +902,8 @@
     android:id="@+id/createListDialog"
     android:name="xyz.stignarnia.uiLists.create.CreateListBottomSheet"
     android:label="dialogCreateList"
-  />
+  >
+  </dialog>
 
   <dialog
     android:id="@+id/manageListsDialog"

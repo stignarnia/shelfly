@@ -6,7 +6,6 @@
   <string name="textBackupImport">Tuo tietoja</string>
   <string name="textBackupImportDescription">Palauta sarjojesi ja elokuviesi tiedot tuomalla aiemmin luotu varmuuskopio.\n\nNykyistä kokoelmaa ei tyhjennetä, vaan vain puuttuvat kohteet lisätään.</string>
   <string name="textBackupExportSuccess">Tietojen vienti onnistui.</string>
-  <string name="textBackupImportSuccess">Tietojen tuonti onnistui.</string>
   <string name="errorImportCancelled">Tietojen tuonti peruttiin.</string>
   <string name="textBackupExportSchedule">Ajoitus</string>
   <string name="textBackupExportOptionOff">Ei käytössä</string>
@@ -22,43 +21,6 @@
   <string name="textBackupExportOptionWeeklyButton">Ajoitettu suoritettavaksi kerran viikossa</string>
   <string name="textBackupExportLastTimestamp">Viimeksi varmuuskopioitu: %s</string>
 
-  <string name="textBackupImportSkipped">Joillekin kohteille ei löytynyt TMDB-vastaavuutta ja ne ohitettiin:</string>
-  <plurals name="textBackupImportSkippedShows">
-    <item quantity="one">%1$d sarjaa (%2$s)</item>
-    <item quantity="other">%1$d sarjaa (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovies">
-    <item quantity="one">%1$d elokuvaa (%2$s)</item>
-    <item quantity="other">%1$d elokuvaa (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasons">
-    <item quantity="one">%1$d kautta</item>
-    <item quantity="other">%1$d kautta</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodes">
-    <item quantity="one">%1$d katsottua jaksoa</item>
-    <item quantity="other">%1$d katsottua jaksoa</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedShowRatings">
-    <item quantity="one">%1$d sarja-arviota</item>
-    <item quantity="other">%1$d sarja-arviota</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasonRatings">
-    <item quantity="one">%1$d kausiarviota</item>
-    <item quantity="other">%1$d kausiarviota</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodeRatings">
-    <item quantity="one">%1$d jaksoarviota</item>
-    <item quantity="other">%1$d jaksoarviota</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovieRatings">
-    <item quantity="one">%1$d elokuva-arviota</item>
-    <item quantity="other">%1$d elokuva-arviota</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedListItems">
-    <item quantity="one">%1$d listamerkintää</item>
-    <item quantity="other">%1$d listamerkintää</item>
-  </plurals>
   <string name="textSyncLastTimestamp">Viimeisin synkronointi: %s</string>
   <string name="textSyncNever">Ei vielä synkronoitu toisen laitteen kanssa</string>
   <string name="textSyncFailed">Synkronointi epäonnistui: %s</string>
@@ -77,4 +39,30 @@
   <string name="textSyncNotificationErrorTitle">WebDAV-synkronointi epäonnistui</string>
   <string name="textSyncNotificationErrorContent">Synkronointi epäonnistui: %s</string>
   <string name="textBackupNotificationErrorTitle">Varmuuskopiointi epäonnistui</string>
+
+  <string name="textBackupImportResultTitle">Tuonnin yhteenveto</string>
+  <string name="textBackupImportResultSuccessTitle">Tuonti valmis</string>
+  <string name="textBackupImportResultMoviesImported">Elokuvia tuotu</string>
+  <string name="textBackupImportResultShowsImported">Sarjoja tuotu</string>
+  <string name="textBackupImportResultMoviesUnmatched">Elokuvia ei tuotu</string>
+  <string name="textBackupImportResultShowsUnmatched">Sarjoja ei tuotu</string>
+  <string name="textBackupImportResultTapToView">Napauta nähdäksesi vastaamattomat kohteet</string>
+  <string name="textBackupImportResultAllMatched">Kaikki kohteet yhdistetty onnistuneesti</string>
+  <string name="textBackupImportResultDone">Valmis</string>
+  <string name="textBackupImportShowLastReport">Näytä viimeisin tuontiraportti</string>
+  <string name="textBackupUnmatchedMoviesTitle">Vastaamattomat elokuvat</string>
+  <string name="textBackupUnmatchedShowsTitle">Vastaamattomat sarjat</string>
+  <string name="textBackupImportUnmatchedEmpty">Tässä kategoriassa ei ole vastaamattomia kohteita.</string>
+  <string name="textBackupImportRatingsDisclaimer">Huomautus: arvioita ei tuoda.</string>
+  <string name="textBackupUnmatchedSeasonSingle">Kausi %d</string>
+  <string name="textBackupUnmatchedEpisodeSingle">Jakso %d</string>
+  <string name="textBackupUnmatchedSeasonMissing">Kautta ei löytynyt TMDB:stä.</string>
+  <plurals name="textBackupUnmatchedSeasonsSubtitle">
+    <item quantity="one">%d kausi, jossa vastaamattomia kohteita</item>
+    <item quantity="other">%d kautta, joissa vastaamattomia kohteita</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedEpisodesSubtitle">
+    <item quantity="one">%d vastaamaton jakso</item>
+    <item quantity="other">%d vastaamatonta jaksoa</item>
+  </plurals>
 </resources>

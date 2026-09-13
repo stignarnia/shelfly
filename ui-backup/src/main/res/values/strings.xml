@@ -9,47 +9,8 @@
   <string name="textBackupImportDescription">Import your shows and movies data from a backup file.\n\nYour current collection will not be removed and only missing items will be added.</string>
 
   <string name="textBackupExportSuccess">Data exported successfully.</string>
-  <string name="textBackupImportSuccess">Data imported successfully.</string>
 
   <string name="errorImportCancelled">Data import has been cancelled.</string>
-
-  <string name="textBackupImportSkipped">Some entries had no TMDB match and were skipped:</string>
-  <plurals name="textBackupImportSkippedShows">
-    <item quantity="one">%1$d shows (%2$s)</item>
-    <item quantity="other">%1$d shows (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovies">
-    <item quantity="one">%1$d movies (%2$s)</item>
-    <item quantity="other">%1$d movies (%2$s)</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasons">
-    <item quantity="one">%1$d seasons</item>
-    <item quantity="other">%1$d seasons</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodes">
-    <item quantity="one">%1$d watched episodes</item>
-    <item quantity="other">%1$d watched episodes</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedShowRatings">
-    <item quantity="one">%1$d show ratings</item>
-    <item quantity="other">%1$d show ratings</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedSeasonRatings">
-    <item quantity="one">%1$d season ratings</item>
-    <item quantity="other">%1$d season ratings</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedEpisodeRatings">
-    <item quantity="one">%1$d episode ratings</item>
-    <item quantity="other">%1$d episode ratings</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedMovieRatings">
-    <item quantity="one">%1$d movie ratings</item>
-    <item quantity="other">%1$d movie ratings</item>
-  </plurals>
-  <plurals name="textBackupImportSkippedListItems">
-    <item quantity="one">%1$d list items</item>
-    <item quantity="other">%1$d list items</item>
-  </plurals>
 
   <string name="textBackupExportSchedule">Schedule</string>
   <string name="textBackupExportOptionOff">Off</string>
@@ -84,4 +45,30 @@
   <string name="textSyncNotificationErrorTitle">WebDAV Sync Failed</string>
   <string name="textSyncNotificationErrorContent">Sync failed: %s</string>
   <string name="textBackupNotificationErrorTitle">Backup Failed</string>
+
+  <string name="textBackupImportResultTitle">Import Summary</string>
+  <string name="textBackupImportResultSuccessTitle">Import completed</string>
+  <string name="textBackupImportResultMoviesImported">Movies imported</string>
+  <string name="textBackupImportResultShowsImported">TV shows imported</string>
+  <string name="textBackupImportResultMoviesUnmatched">Movies not imported</string>
+  <string name="textBackupImportResultShowsUnmatched">TV shows not imported</string>
+  <string name="textBackupImportResultTapToView">Tap to view unmatched items</string>
+  <string name="textBackupImportResultAllMatched">All items matched successfully</string>
+  <string name="textBackupImportRatingsDisclaimer">Note: ratings are not imported.</string>
+  <string name="textBackupImportResultDone">Done</string>
+  <string name="textBackupImportShowLastReport">Show last import report</string>
+  <string name="textBackupUnmatchedMoviesTitle">Unmatched Movies</string>
+  <string name="textBackupUnmatchedShowsTitle">Unmatched TV Shows</string>
+  <string name="textBackupUnmatchedSeasonSingle">Season %d</string>
+  <string name="textBackupUnmatchedEpisodeSingle">Episode %d</string>
+  <string name="textBackupUnmatchedSeasonMissing">Season not found on TMDB.</string>
+  <plurals name="textBackupUnmatchedSeasonsSubtitle">
+    <item quantity="one">%d season with unmatched items</item>
+    <item quantity="other">%d seasons with unmatched items</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedEpisodesSubtitle">
+    <item quantity="one">%d unmatched episode</item>
+    <item quantity="other">%d unmatched episodes</item>
+  </plurals>
+  <string name="textBackupImportUnmatchedEmpty">No unmatched items in this category.</string>
 </resources>
