@@ -1,3 +1,4 @@
 Shelfly 4.0.8
 
 • Fixed an issue where the text cursor and selection handles were invisible in dark mode.
+• Enabled pull-to-sync on the Progress screens only when WebDAV is configured.

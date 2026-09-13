@@ -75,7 +75,7 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
         viewMode = mockk(),
         spoilers = mockk(),
         sync = mockk(),
-        webdav = mockk(),
+        webdav = mockk(relaxed = true),
         dispatchers = testDispatchers,
         localSource = mockk(),
         transactions = mockk(),

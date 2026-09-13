@@ -75,6 +75,9 @@ class ProgressViewModel
       observeBackupRun()
     }
 
+    private fun isWebDavConfigured(): Boolean =
+      settingsRepository.webdav.backupTarget == BackupTarget.WEBDAV && settingsRepository.webdav.url.isNotBlank()
+
     /**
      * Follows the run started by the pull gesture so the indicator can report it.
      *
@@ -115,6 +118,12 @@ class ProgressViewModel
           this.searchQuery = state.searchQuery
           loadItems(resetScroll = state.searchQuery.isNullOrBlank())
         }
+
+        else -> {
+          itemsState.value?.let { items ->
+            overscrollState.value = isWebDavConfigured() && items.isNotEmpty()
+          }
+        }
       }
     }
 
@@ -128,7 +137,7 @@ class ProgressViewModel
           itemsState.value = items
           loadingState.value = false
           scrollState.value = Event(resetScroll)
-          overscrollState.value = false && items.isNotEmpty()
+          overscrollState.value = isWebDavConfigured() && items.isNotEmpty()
 
           eventChannel.send(RequestWidgetsUpdate)
         }
@@ -217,8 +226,7 @@ class ProgressViewModel
      * WorkManager keeps a run already in flight, so repeated pulls do not stack up.
      */
     fun startBackupNow(): Boolean {
-      if (settingsRepository.webdav.backupTarget != BackupTarget.WEBDAV) return false
-      if (settingsRepository.webdav.url.isBlank()) return false
+      if (!isWebDavConfigured()) return false
       // Set here, synchronously, so the indicator takes over from the pull in the frame the gesture completes.
       // Waiting for WorkManager to register the request and report it back would blink the indicator out and in again.
       backupProgressState.value = 0
