@@ -18,7 +18,10 @@ ec_asset() {
   local os arch
   case "$(uname -s)" in
     Linux) os=linux ;;
-    Darwin) os=darwin ;;
+    Darwin)
+      printf 'editorconfig-checker-darwin-all'
+      return 0
+      ;;
     *)
       echo "error: unsupported OS $(uname -s) for editorconfig-checker" >&2
       return 1
@@ -32,7 +35,7 @@ ec_asset() {
       return 1
       ;;
   esac
-  printf 'ec-%s-%s' "$os" "$arch"
+  printf 'editorconfig-checker-%s-%s' "$os" "$arch"
 }
 
 ensure_editorconfig_checker() {
@@ -43,8 +46,9 @@ ensure_editorconfig_checker() {
 
   echo "editorconfig-checker not present, fetching the latest release..." >&2
   # -O so a partial download cannot be left behind as an executable that fails in a confusing way later.
+  # Starting with v4.0.0, the archive contains 'editorconfig-checker' at top level rather than 'bin/${asset}'.
   if ! curl -sSLf "https://github.com/editorconfig-checker/editorconfig-checker/releases/latest/download/${asset}.tar.gz" \
-    | tar xz -O "bin/${asset}" > editorconfig-checker.tmp; then
+    | tar xz -O "editorconfig-checker" > editorconfig-checker.tmp; then
     rm -f editorconfig-checker.tmp
     echo "error: could not download editorconfig-checker." >&2
     return 1
