@@ -12,11 +12,14 @@
     <item name="android:windowBackground">@color/themeBackground</item>
     <item name="switchStyle">@style/ShelflySwitch</item>
     <item name="enableEdgeToEdge">true</item>
+    <item name="android:textCursorDrawable">@null</item>
 
     <item name="colorPrimary">@color/themeSurface</item>
     <item name="colorPrimaryDark">@color/themeBackground</item>
     <item name="colorAccent">@color/themeAccent</item>
     <item name="colorAppBackground">@color/themeBackground</item>
+    <item name="colorControlActivated">?attr/colorAccent</item>
+    <item name="android:colorControlActivated">?attr/colorAccent</item>
 
     <item name="android:textColorPrimary">@color/themeTextPrimary</item>
     <item name="android:textColorSecondary">@color/themeTextSecondary</item>

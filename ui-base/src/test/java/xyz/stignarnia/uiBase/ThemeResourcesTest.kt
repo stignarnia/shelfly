@@ -29,7 +29,7 @@ class ThemeResourcesTest {
       "colorWidgetStatusBackground",
     )
 
-  private val notAColour = setOf("switchStyle", "enableEdgeToEdge")
+  private val notAColour = setOf("switchStyle", "enableEdgeToEdge", "android:textCursorDrawable")
 
   private fun read(path: String) =
     res

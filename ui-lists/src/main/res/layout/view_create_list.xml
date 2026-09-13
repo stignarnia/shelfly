@@ -71,7 +71,6 @@
       android:lines="1"
       android:textAlignment="viewStart"
       android:textColorHint="@color/selector_create_list_input"
-      android:textCursorDrawable="@null"
       android:textSize="14sp"
     />
 
@@ -102,7 +101,6 @@
       android:minLines="4"
       android:textAlignment="viewStart"
       android:textColorHint="@color/selector_create_list_input"
-      android:textCursorDrawable="@null"
       android:textSize="14sp"
     />
 

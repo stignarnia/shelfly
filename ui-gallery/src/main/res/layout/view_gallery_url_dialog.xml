@@ -32,7 +32,6 @@
       android:inputType="text"
       android:textColor="?android:attr/textColorPrimary"
       android:textColorHint="?android:attr/textColorPrimary"
-      android:textCursorDrawable="@null"
     />
 
   </com.google.android.material.textfield.TextInputLayout>
