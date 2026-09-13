@@ -79,11 +79,7 @@
   <dimen name="collectionItemRippleSpace">6dp</dimen>
 
   <dimen name="overscrollActionPaddingTop">132dp</dimen>
-  <dimen name="overscrollActionIcon">35dp</dimen>
-  <!--
-    The TMDB mark is a three-line wordmark, so it needs to sit smaller than a single glyph to stay clear of the ring around it.
-  -->
-  <dimen name="overscrollActionIconSmall">22dp</dimen>
+  <dimen name="overscrollActionIcon">22dp</dimen>
   <!-- Gap left between the filter chips and the pull indicator below them. -->
   <dimen name="discoverOverscrollGap">24dp</dimen>
   <dimen name="overscrollActionProgress">48dp</dimen>

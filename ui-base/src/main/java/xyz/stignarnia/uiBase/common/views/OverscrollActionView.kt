@@ -10,7 +10,6 @@ import android.view.animation.LinearInterpolator
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 import androidx.core.content.res.use
-import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
@@ -108,14 +107,6 @@ class OverscrollActionView
         .use { typed ->
           val icon = typed.getResourceId(R.styleable.OverscrollActionView_actionIcon, 0)
           if (icon != 0) setActionIcon(icon)
-
-          val size = typed.getDimensionPixelSize(R.styleable.OverscrollActionView_actionIconSize, 0)
-          if (size > 0) {
-            binding.overscrollActionIcon.updateLayoutParams {
-              width = size
-              height = size
-            }
-          }
         }
     }
 
@@ -123,14 +114,6 @@ class OverscrollActionView
       @DrawableRes iconRes: Int,
     ) {
       binding.overscrollActionIcon.setImageResource(iconRes)
-    }
-
-    /** Sizes the icon inside the ring, for marks that need to sit smaller. */
-    fun setActionIconSize(sizePx: Int) {
-      binding.overscrollActionIcon.updateLayoutParams {
-        width = sizePx
-        height = sizePx
-      }
     }
 
     /**

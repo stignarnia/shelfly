@@ -134,7 +134,7 @@
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/importWebDavButton"
-      style="@style/Widget.Material3.Button.TextButton"
+      style="@style/SecondaryMaterialButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/spaceSmall"
@@ -153,7 +153,6 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:actionIcon="@drawable/ic_archive"
-      app:actionIconSize="@dimen/overscrollActionIconSmall"
       app:layout_constraintBottom_toBottomOf="@id/importButton"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
