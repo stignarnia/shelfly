@@ -4,3 +4,4 @@ Shelfly 4.0.8
 • Enabled pull-to-sync on the Progress screens only when WebDAV is configured.
 • Fixed vertical alignment on the backup export screen.
 • Improved styling of the WebDAV import button on the backup import screen.
+• Fixed deleting a list leaving you on the deleted list's screen.

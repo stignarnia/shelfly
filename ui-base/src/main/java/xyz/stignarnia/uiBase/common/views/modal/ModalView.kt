@@ -86,10 +86,15 @@ class ModalView : FrameLayout {
   /**
    * Removes the modal once the fade finishes.
    * Guarded because a button and the back press can both reach it, and the second call would fire [onDismissed] again after the view has already gone.
+   *
+   * Back is released at once rather than on detach.
+   * A confirm that navigates back as soon as its work lands - deleting a list does - would otherwise have that back press swallowed by a modal that is only still fading out.
    */
   fun dismiss() {
     if (isDismissing) return
     isDismissing = true
+    backCallback?.remove()
+    backCallback = null
     fadeOut {
       (parent as? ViewGroup)?.removeView(this)
       onDismissed?.invoke()
