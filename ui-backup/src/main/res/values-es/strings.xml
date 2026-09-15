@@ -47,12 +47,14 @@
   <string name="textBackupImportResultShowsImported">Series importadas</string>
   <string name="textBackupImportResultMoviesUnmatched">Películas no importadas</string>
   <string name="textBackupImportResultShowsUnmatched">Series no importadas</string>
+  <string name="textBackupImportResultListsUnmatched">Listas no importadas</string>
   <string name="textBackupImportResultTapToView">Toca para ver los elementos no asociados</string>
   <string name="textBackupImportResultAllMatched">Todos los elementos asociados con éxito</string>
   <string name="textBackupImportResultDone">Listo</string>
   <string name="textBackupImportShowLastReport">Mostrar informe de la última importación</string>
   <string name="textBackupUnmatchedMoviesTitle">Películas no asociadas</string>
   <string name="textBackupUnmatchedShowsTitle">Series no asociadas</string>
+  <string name="textBackupUnmatchedListsTitle">Listas no asociadas</string>
   <string name="textBackupImportUnmatchedEmpty">No hay elementos no asociados en esta categoría.</string>
   <string name="textBackupImportRatingsDisclaimer">Nota: las valoraciones no se importan.</string>
   <string name="textBackupUnmatchedSeasonSingle">Temporada %d</string>
@@ -67,5 +69,10 @@
     <item quantity="one">%d episodio no asociado</item>
     <item quantity="many">%d episodios no asociados</item>
     <item quantity="other">%d episodios no asociados</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d elemento no asociado</item>
+    <item quantity="many">%d elementos no asociados</item>
+    <item quantity="other">%d elementos no asociados</item>
   </plurals>
 </resources>

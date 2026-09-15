@@ -2,6 +2,7 @@ package xyz.stignarnia.uiBackup.features.imports.workers
 
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedItem
+import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedList
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedShow
 import xyz.stignarnia.uiBackup.model.BackupScheme
 
@@ -10,6 +11,7 @@ data class BackupImportWorkerResult(
   val importedMoviesCount: Int,
   val failedShows: List<BackupUnmatchedShow> = emptyList(),
   val failedMovies: List<BackupUnmatchedItem> = emptyList(),
+  val failedLists: List<BackupUnmatchedList> = emptyList(),
 )
 
 interface BackupImportWorker {

@@ -340,6 +340,85 @@
         </LinearLayout>
       </com.google.android.material.card.MaterialCardView>
 
+      <!-- Card: Lists Not Imported (Clickable) -->
+      <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardListsUnmatched"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="?attr/colorCardBackground"
+        app:cardCornerRadius="16dp"
+        app:strokeWidth="0dp"
+      >
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="@dimen/spaceNormal"
+        >
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+          >
+
+            <ImageView
+              android:layout_width="24dp"
+              android:layout_height="24dp"
+              android:contentDescription="@null"
+              app:srcCompat="@drawable/ic_lists"
+              app:tint="?android:attr/textColorSecondary"
+            />
+
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="12dp"
+              android:layout_weight="1"
+              android:text="@string/textBackupImportResultListsUnmatched"
+              android:textColor="?android:attr/textColorSecondary"
+              android:textSize="14sp"
+            />
+
+            <ImageView
+              android:id="@+id/arrowListsUnmatched"
+              android:layout_width="24dp"
+              android:layout_height="24dp"
+              android:contentDescription="@null"
+              app:srcCompat="@drawable/ic_arrow_right"
+              app:tint="?android:attr/textColorSecondary"
+            />
+          </LinearLayout>
+
+          <TextView
+            android:id="@+id/listsUnmatchedCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            tools:text="1"
+          />
+
+          <TextView
+            android:id="@+id/textListsUnmatchedHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/textBackupImportResultTapToView"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp"
+          />
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+
       <!-- Ratings disclaimer -->
       <LinearLayout
         android:id="@+id/ratingsDisclaimerView"

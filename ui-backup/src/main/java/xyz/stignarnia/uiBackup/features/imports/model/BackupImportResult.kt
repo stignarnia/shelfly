@@ -9,4 +9,5 @@ data class BackupImportResult(
   val importedShowsCount: Int,
   val unmatchedMovies: List<BackupUnmatchedItem> = emptyList(),
   val unmatchedShows: List<BackupUnmatchedShow> = emptyList(),
+  val unmatchedLists: List<BackupUnmatchedList> = emptyList(),
 ) : Serializable

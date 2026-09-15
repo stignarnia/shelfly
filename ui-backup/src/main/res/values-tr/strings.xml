@@ -47,12 +47,14 @@
   <string name="textBackupImportResultShowsImported">İçe aktarılan diziler</string>
   <string name="textBackupImportResultMoviesUnmatched">İçe aktarılamayan filmler</string>
   <string name="textBackupImportResultShowsUnmatched">İçe aktarılamayan diziler</string>
+  <string name="textBackupImportResultListsUnmatched">İçe aktarılamayan listeler</string>
   <string name="textBackupImportResultTapToView">Eşleşmeyen öğeleri görmek için dokunun</string>
   <string name="textBackupImportResultAllMatched">Tüm öğeler başarıyla eşleşti</string>
   <string name="textBackupImportResultDone">Bitti</string>
   <string name="textBackupImportShowLastReport">Son içe aktarma raporunu göster</string>
   <string name="textBackupUnmatchedMoviesTitle">Eşleşmeyen Filmler</string>
   <string name="textBackupUnmatchedShowsTitle">Eşleşmeyen Diziler</string>
+  <string name="textBackupUnmatchedListsTitle">Eşleşmeyen Listeler</string>
   <string name="textBackupImportUnmatchedEmpty">Bu kategoride eşleşmeyen öğe yok.</string>
   <string name="textBackupImportRatingsDisclaimer">Not: Derecelendirmeler içe aktarılmaz.</string>
   <string name="textBackupUnmatchedSeasonSingle">Sezon %d</string>
@@ -65,5 +67,9 @@
   <plurals name="textBackupUnmatchedEpisodesSubtitle">
     <item quantity="one">%d eşleşmeyen bölüm</item>
     <item quantity="other">%d eşleşmeyen bölüm</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d eşleşmeyen öğe</item>
+    <item quantity="other">%d eşleşmeyen öğe</item>
   </plurals>
 </resources>

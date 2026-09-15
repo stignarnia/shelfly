@@ -47,6 +47,7 @@
   <string name="textBackupImportResultShowsImported">Serie TV importate</string>
   <string name="textBackupImportResultMoviesUnmatched">Film non importati</string>
   <string name="textBackupImportResultShowsUnmatched">Serie TV non importate</string>
+  <string name="textBackupImportResultListsUnmatched">Liste non importate</string>
   <string name="textBackupImportResultTapToView">Tocca per vedere gli elementi non associati</string>
   <string name="textBackupImportResultAllMatched">Tutti gli elementi associati con successo</string>
   <string name="textBackupImportRatingsDisclaimer">Nota: le valutazioni non vengono importate.</string>
@@ -54,6 +55,7 @@
   <string name="textBackupImportShowLastReport">Mostra ultimo report di importazione</string>
   <string name="textBackupUnmatchedMoviesTitle">Film non associati</string>
   <string name="textBackupUnmatchedShowsTitle">Serie TV non associate</string>
+  <string name="textBackupUnmatchedListsTitle">Liste non associate</string>
   <string name="textBackupUnmatchedSeasonSingle">Stagione %d</string>
   <string name="textBackupUnmatchedEpisodeSingle">Episodio %d</string>
   <string name="textBackupUnmatchedSeasonMissing">Stagione non trovata su TMDB.</string>
@@ -66,6 +68,11 @@
     <item quantity="one">%d episodio non associato</item>
     <item quantity="many">%d episodi non associati</item>
     <item quantity="other">%d episodi non associati</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d elemento non associato</item>
+    <item quantity="many">%d elementi non associati</item>
+    <item quantity="other">%d elementi non associati</item>
   </plurals>
   <string name="textBackupImportUnmatchedEmpty">Nessun elemento non associato in questa categoria.</string>
 </resources>

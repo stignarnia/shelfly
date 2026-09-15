@@ -46,12 +46,14 @@
   <string name="textBackupImportResultShowsImported">Sarjoja tuotu</string>
   <string name="textBackupImportResultMoviesUnmatched">Elokuvia ei tuotu</string>
   <string name="textBackupImportResultShowsUnmatched">Sarjoja ei tuotu</string>
+  <string name="textBackupImportResultListsUnmatched">Listoja ei tuotu</string>
   <string name="textBackupImportResultTapToView">Napauta nähdäksesi vastaamattomat kohteet</string>
   <string name="textBackupImportResultAllMatched">Kaikki kohteet yhdistetty onnistuneesti</string>
   <string name="textBackupImportResultDone">Valmis</string>
   <string name="textBackupImportShowLastReport">Näytä viimeisin tuontiraportti</string>
   <string name="textBackupUnmatchedMoviesTitle">Vastaamattomat elokuvat</string>
   <string name="textBackupUnmatchedShowsTitle">Vastaamattomat sarjat</string>
+  <string name="textBackupUnmatchedListsTitle">Vastaamattomat listat</string>
   <string name="textBackupImportUnmatchedEmpty">Tässä kategoriassa ei ole vastaamattomia kohteita.</string>
   <string name="textBackupImportRatingsDisclaimer">Huomautus: arvioita ei tuoda.</string>
   <string name="textBackupUnmatchedSeasonSingle">Kausi %d</string>
@@ -64,5 +66,9 @@
   <plurals name="textBackupUnmatchedEpisodesSubtitle">
     <item quantity="one">%d vastaamaton jakso</item>
     <item quantity="other">%d vastaamatonta jaksoa</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d vastaamaton kohde</item>
+    <item quantity="other">%d vastaamatonta kohdetta</item>
   </plurals>
 </resources>

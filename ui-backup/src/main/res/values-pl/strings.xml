@@ -48,12 +48,14 @@
   <string name="textBackupImportResultShowsImported">Zaimportowane seriale</string>
   <string name="textBackupImportResultMoviesUnmatched">Niezaimportowane filmy</string>
   <string name="textBackupImportResultShowsUnmatched">Niezaimportowane seriale</string>
+  <string name="textBackupImportResultListsUnmatched">Niezaimportowane listy</string>
   <string name="textBackupImportResultTapToView">Dotknij, aby wyświetlić niedopasowane elementy</string>
   <string name="textBackupImportResultAllMatched">Wszystkie elementy zostały pomyślnie dopasowane</string>
   <string name="textBackupImportResultDone">Gotowe</string>
   <string name="textBackupImportShowLastReport">Pokaż raport z ostatniego importu</string>
   <string name="textBackupUnmatchedMoviesTitle">Niedopasowane filmy</string>
   <string name="textBackupUnmatchedShowsTitle">Niedopasowane seriale</string>
+  <string name="textBackupUnmatchedListsTitle">Niedopasowane listy</string>
   <string name="textBackupImportUnmatchedEmpty">Brak niedopasowanych elementów w tej kategorii.</string>
   <string name="textBackupImportRatingsDisclaimer">Uwaga: oceny nie są importowane.</string>
   <string name="textBackupUnmatchedSeasonSingle">Sezon %d</string>
@@ -70,5 +72,11 @@
     <item quantity="few">%d niedopasowane odcinki</item>
     <item quantity="many">%d niedopasowanych odcinków</item>
     <item quantity="other">%d niedopasowanych odcinków</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d niedopasowany element</item>
+    <item quantity="few">%d niedopasowane elementy</item>
+    <item quantity="many">%d niedopasowanych elementów</item>
+    <item quantity="other">%d niedopasowanych elementów</item>
   </plurals>
 </resources>

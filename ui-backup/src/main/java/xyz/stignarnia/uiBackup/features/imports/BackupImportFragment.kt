@@ -151,6 +151,9 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
         }
         importButton.visibleIf(isImporting == Idle, gone = false)
         importButton.isEnabled = isImporting == Idle
+        if (viewModel.isWebDavConfigured()) {
+          importWebDavButton.visibleIf(isImporting == Idle, gone = false)
+        }
         showLastReportButton.visibleIf(hasLastReport && isImporting == Idle, gone = true)
       }
       renderImportStatus(uiState)

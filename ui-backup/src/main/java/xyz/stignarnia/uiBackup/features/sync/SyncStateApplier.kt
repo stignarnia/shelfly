@@ -53,7 +53,7 @@ internal class SyncStateApplier
         // Items before their lists, so a list that is going away entirely does not have its items deleted out from under it twice.
         removeListItems(byEntity[SyncEntity.CUSTOM_LIST_ITEM].orEmpty())
         byEntity[SyncEntity.CUSTOM_LIST].orEmpty().forEach { key ->
-          key.toLongOrNull()?.let { localSource.customLists.deleteById(it) }
+          localSource.customLists.deleteByIdSlug(key)
         }
 
         removeCollections(byEntity)
@@ -177,9 +177,8 @@ internal class SyncStateApplier
           Timber.w("Unreadable list item key: $key")
           return@forEach
         }
-        val listId = parts[0].toLongOrNull() ?: return@forEach
         val tmdbId = parts[2].toLongOrNull() ?: return@forEach
-        localSource.customListsItems.deleteItem(idList = listId, idTmdb = tmdbId, type = parts[1])
+        localSource.customListsItems.deleteItemByListIdSlug(listIdSlug = parts[0], idTmdb = tmdbId, type = parts[1])
       }
     }
 

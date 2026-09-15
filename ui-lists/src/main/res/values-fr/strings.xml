@@ -9,10 +9,14 @@
   <string name="textName">Nom</string>
   <string name="textDescription">Description (optionnel)</string>
   <string name="textDeleteList">Supprimer la liste</string>
+  <string name="textMergeList">Fusionner avec une autre liste</string>
   <string name="textEditList">Modifier la liste</string>
   <string name="textEditListDescription">Mettre à jour votre liste personnalisée.</string>
   <string name="textConfirmDeleteListTitle">Supprimer la liste</string>
   <string name="textConfirmDeleteListSubtitle">Êtes-vous sûr de vouloir supprimer cette liste ?</string>
+  <string name="textMergeListPickTitle">Fusionner avec</string>
+  <string name="textConfirmMergeListTitle">Fusionner les listes</string>
+  <string name="textConfirmMergeListSubtitle">Tous les éléments de « %1$s » seront ajoutés à « %2$s », et « %1$s » sera supprimée.</string>
   <string name="textChangeRanks">Modifier le classement</string>
   <string name="textChangeRanksSubtitle">Glisser-déposer l\'élément de la liste pour changer son rang</string>
   <string name="textManageLists">Gérer les listes</string>
@@ -21,4 +25,5 @@
   <string name="errorCouldNotCreateList">Nous n\'avons pas pu créer une nouvelle liste dans votre compte TMDB pour le moment.\nVeuillez vérifier la connexion Internet et réessayer.</string>
   <string name="errorCouldNotUpdateList">Nous n\'avons pas pu mettre à jour cette liste dans votre compte TMDB pour le moment.\nVeuillez vérifier la connexion internet et réessayer.</string>
   <string name="errorCouldNotDeleteList">Nous n\'avons pas pu supprimer cette liste de votre compte TMDB pour le moment.\nVeuillez vérifier la connexion internet et réessayer.</string>
+  <string name="errorCouldNotMergeList">Impossible de fusionner les listes.</string>
 </resources>

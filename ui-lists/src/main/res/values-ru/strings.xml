@@ -9,10 +9,14 @@
   <string name="textName">Название</string>
   <string name="textDescription">Описание (необязательно)</string>
   <string name="textDeleteList">Удалить список</string>
+  <string name="textMergeList">Объединить с другим списком</string>
   <string name="textEditList">Изменить список</string>
   <string name="textEditListDescription">Обновить пользовательский список.</string>
   <string name="textConfirmDeleteListTitle">Удалить список</string>
   <string name="textConfirmDeleteListSubtitle">Вы уверены, что вы хотите удалить этот список?</string>
+  <string name="textMergeListPickTitle">Объединить с</string>
+  <string name="textConfirmMergeListTitle">Объединить списки</string>
+  <string name="textConfirmMergeListSubtitle">Все элементы из «%1$s» будут добавлены в «%2$s», а «%1$s» будет удалён.</string>
   <string name="textChangeRanks">Изменить ранг</string>
   <string name="textChangeRanksSubtitle">Перетащите элемент списка, чтобы изменить его ранг</string>
   <string name="textManageLists">Управление списками</string>
@@ -21,5 +25,6 @@
   <string name="errorCouldNotCreateList">Мы не смогли создать новый список в вашей учетной записи TMDB.\nПожалуйста, проверьте подключение к Интернету и повторите попытку.</string>
   <string name="errorCouldNotUpdateList">Мы не смогли обновить список в вашей учетной записи TMDB.\nПожалуйста, проверьте подключение к Интернету и повторите попытку.</string>
   <string name="errorCouldNotDeleteList">Мы не смогли удалить список в вашей учетной записи TMDB.\nПожалуйста, проверьте подключение к Интернету и повторите попытку.</string>
+  <string name="errorCouldNotMergeList">Не удалось объединить списки.</string>
 
 </resources>

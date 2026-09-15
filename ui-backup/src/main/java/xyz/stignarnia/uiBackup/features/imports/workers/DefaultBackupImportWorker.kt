@@ -55,6 +55,7 @@ internal class DefaultBackupImportWorker
 
         val failedShows = importShowsRunner.failedShows.toList()
         val failedMovies = importMoviesRunner.failedMovies.toList()
+        val failedLists = importListsRunner.failedLists.toList()
 
         val failedEntireShowsCount = failedShows.count { it.isEntireShowUnmatched }
         val importedShowsCount = (uniqueShows.size - failedEntireShowsCount).coerceAtLeast(0)
@@ -65,6 +66,7 @@ internal class DefaultBackupImportWorker
           importedMoviesCount = importedMoviesCount,
           failedShows = failedShows,
           failedMovies = failedMovies,
+          failedLists = failedLists,
         )
       }
   }

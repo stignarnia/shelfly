@@ -1,5 +1,6 @@
 package xyz.stignarnia.uiBackup.features.sync
 
+import xyz.stignarnia.repository.ListIdentity
 import xyz.stignarnia.uiBackup.features.sync.model.SyncEntity
 import xyz.stignarnia.uiBackup.features.sync.model.SyncPayload
 import xyz.stignarnia.uiBackup.features.sync.model.SyncTombstoneEntry
@@ -40,7 +41,11 @@ internal object SyncMerge {
     peers: List<SyncPayload>,
   ): Result {
     val states = listOf(local) + peers.map { it.state }
-    val tombstones = newestPerKey(localTombstones + peers.flatMap { it.tombstones })
+    // List deletions recorded before lists had an identity are keyed by local row ids, which name unrelated lists on different devices, so they are dropped rather than re-published.
+    val tombstones =
+      newestPerKey(
+        (localTombstones + peers.flatMap { it.tombstones }).filterNot { it.isListDeletionWithoutIdentity() },
+      )
 
     // The newest time any device saw each entity, used to decide whether a deletion happened before or after the thing it claims to delete.
     val sightings = mutableMapOf<Pair<SyncEntity, String>, Long>()
@@ -152,7 +157,8 @@ internal object SyncMerge {
     val lists =
       states
         .flatMap { it.lists.lists }
-        .mergeBy(SyncEntity.CUSTOM_LIST, { it.id.toString() }, { it.updatedAt.toEpochMillis() }, ::survives)
+        .filter { ListIdentity.isValid(it.slugId) }
+        .mergeBy(SyncEntity.CUSTOM_LIST, { it.slugId }, { it.updatedAt.toEpochMillis() }, ::survives)
         .map { list -> list.withMergedItems(states, ::survives) }
 
     return Result(
@@ -174,11 +180,11 @@ internal object SyncMerge {
   ): BackupList {
     val items =
       states
-        .flatMap { state -> state.lists.lists.filter { it.id == id } }
+        .flatMap { state -> state.lists.lists.filter { it.slugId == slugId } }
         .flatMap { it.items }
         .mergeBy(
           SyncEntity.CUSTOM_LIST_ITEM,
-          { SyncEntity.CUSTOM_LIST_ITEM.key(id, it.type, it.tmdbId) },
+          { SyncEntity.CUSTOM_LIST_ITEM.key(slugId, it.type, it.tmdbId) },
           { it.updatedAt.toEpochMillis() },
           survives,
         )
@@ -207,6 +213,13 @@ internal object SyncMerge {
       .values
       .toList()
   }
+
+  private fun SyncTombstoneEntry.isListDeletionWithoutIdentity() =
+    when (entity) {
+      SyncEntity.CUSTOM_LIST -> !ListIdentity.isValid(key)
+      SyncEntity.CUSTOM_LIST_ITEM -> !ListIdentity.isValid(key.substringBefore(":"))
+      else -> false
+    }
 
   private fun newestPerKey(entries: List<SyncTombstoneEntry>): Map<Pair<SyncEntity, String>, Long> {
     val newest = mutableMapOf<Pair<SyncEntity, String>, Long>()

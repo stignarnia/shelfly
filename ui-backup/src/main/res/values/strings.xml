@@ -52,6 +52,7 @@
   <string name="textBackupImportResultShowsImported">TV shows imported</string>
   <string name="textBackupImportResultMoviesUnmatched">Movies not imported</string>
   <string name="textBackupImportResultShowsUnmatched">TV shows not imported</string>
+  <string name="textBackupImportResultListsUnmatched">Lists not imported</string>
   <string name="textBackupImportResultTapToView">Tap to view unmatched items</string>
   <string name="textBackupImportResultAllMatched">All items matched successfully</string>
   <string name="textBackupImportRatingsDisclaimer">Note: ratings are not imported.</string>
@@ -59,6 +60,7 @@
   <string name="textBackupImportShowLastReport">Show last import report</string>
   <string name="textBackupUnmatchedMoviesTitle">Unmatched Movies</string>
   <string name="textBackupUnmatchedShowsTitle">Unmatched TV Shows</string>
+  <string name="textBackupUnmatchedListsTitle">Unmatched Lists</string>
   <string name="textBackupUnmatchedSeasonSingle">Season %d</string>
   <string name="textBackupUnmatchedEpisodeSingle">Episode %d</string>
   <string name="textBackupUnmatchedSeasonMissing">Season not found on TMDB.</string>
@@ -69,6 +71,10 @@
   <plurals name="textBackupUnmatchedEpisodesSubtitle">
     <item quantity="one">%d unmatched episode</item>
     <item quantity="other">%d unmatched episodes</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d unmatched item</item>
+    <item quantity="other">%d unmatched items</item>
   </plurals>
   <string name="textBackupImportUnmatchedEmpty">No unmatched items in this category.</string>
 </resources>

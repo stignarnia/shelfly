@@ -66,10 +66,19 @@ class SyncTombstoneDeriverTest {
     val tombstones = SyncTombstoneDeriver.derive(published, local, T1)
 
     assertThat(tombstones.map { it.entity to it.key }).containsExactly(
-      SyncEntity.CUSTOM_LIST to "1",
-      SyncEntity.CUSTOM_LIST_ITEM to "1:show:10",
-      SyncEntity.CUSTOM_LIST_ITEM to "1:movie:20",
+      SyncEntity.CUSTOM_LIST to slug(1),
+      SyncEntity.CUSTOM_LIST_ITEM to "${slug(1)}:show:10",
+      SyncEntity.CUSTOM_LIST_ITEM to "${slug(1)}:movie:20",
     )
+  }
+
+  @Test
+  fun `Should derive nothing for a list published before lists had an identity`() {
+    // Its only key would be the local row id, which names unrelated lists on different devices.
+    val published = scheme(lists = listOf(list(id = 1, items = listOf(listItem(1, "show", 10))).copy(slugId = "")))
+    val local = scheme()
+
+    assertThat(SyncTombstoneDeriver.derive(published, local, T1)).isEmpty()
   }
 
   @Test
@@ -118,12 +127,14 @@ class SyncTombstoneDeriverTest {
 
     fun movie(id: Long) = BackupMovie(tmdbId = id, title = "Movie $id", addedAt = "2026-01-01T00:00:00Z")
 
+    fun slug(id: Long) = "00000000-0000-0000-0000-" + id.toString().padStart(12, '0')
+
     fun list(
       id: Long,
       items: List<BackupListItem>,
     ) = BackupList(
       id = id,
-      slugId = "list-$id",
+      slugId = slug(id),
       name = "List $id",
       description = null,
       privacy = "private",

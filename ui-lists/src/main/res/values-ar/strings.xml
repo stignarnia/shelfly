@@ -9,10 +9,14 @@
   <string name="textName">اسم القائمة</string>
   <string name="textDescription">وصف القائمة (اختياري)</string>
   <string name="textDeleteList">حذف القائمة</string>
+  <string name="textMergeList">دمج مع قائمة أخرى</string>
   <string name="textEditList">تعديل القائمة</string>
   <string name="textEditListDescription">تحديث قائمتك الخاصة.</string>
   <string name="textConfirmDeleteListTitle">حذف القائمة</string>
   <string name="textConfirmDeleteListSubtitle">أتريد فعلًا حذف القائمة؟</string>
+  <string name="textMergeListPickTitle">دمج مع</string>
+  <string name="textConfirmMergeListTitle">دمج القوائم</string>
+  <string name="textConfirmMergeListSubtitle">ستتم إضافة جميع العناصر من «%1$s» إلى «%2$s»، وسيتم حذف «%1$s».</string>
   <string name="textChangeRanks">تغيير ترتيب العناصر</string>
   <string name="textChangeRanksSubtitle">اِسحب وأسقط أحد العناصر لتغيير ترتيبه</string>
   <string name="textManageLists">إدارة القوائم</string>
@@ -21,4 +25,5 @@
   <string name="errorCouldNotCreateList">تعذر إنشاء قائمة جديدة في حسابك على موقع TMDB.\nالرجاء التأكد من اتصالك بالإنترنت وحاول مرة أخرى.</string>
   <string name="errorCouldNotUpdateList">تعذر تحديث القائمة في حسابك على موقع TMDB.\nالرجاء التأكد من اتصالك بالإنترنت وحاول مرة أخرى.</string>
   <string name="errorCouldNotDeleteList">تعذر حذف القائمة من حسابك على موقع TMDB.\nالرجاء التأكد من اتصالك بالإنترنت وحاول مرة أخرى.</string>
+  <string name="errorCouldNotMergeList">تعذر دمج القوائم.</string>
 </resources>

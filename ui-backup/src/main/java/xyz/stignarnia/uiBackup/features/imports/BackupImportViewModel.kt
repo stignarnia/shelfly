@@ -125,12 +125,14 @@ class BackupImportViewModel
             val allUnmatchedShows =
               importData.report.unmatchedShows + workerResult.failedShows
             val allUnmatchedMovies = importData.report.unmatchedMovies + workerResult.failedMovies
+            val allUnmatchedLists = importData.report.unmatchedLists + workerResult.failedLists
             val importResult =
               BackupImportResult(
                 importedMoviesCount = workerResult.importedMoviesCount,
                 importedShowsCount = workerResult.importedShowsCount,
                 unmatchedMovies = allUnmatchedMovies,
                 unmatchedShows = allUnmatchedShows,
+                unmatchedLists = allUnmatchedLists,
               )
             backupImportResultHolder.result = importResult
             hasLastReportState.update { true }

@@ -51,6 +51,7 @@ class BackupImportResultFragment : Fragment(R.layout.fragment_backup_import_resu
       val importedShows = result?.importedShowsCount ?: 0
       val unmatchedMovies = result?.unmatchedMovies.orEmpty()
       val unmatchedShows = result?.unmatchedShows.orEmpty()
+      val unmatchedLists = result?.unmatchedLists.orEmpty()
 
       moviesImportedCount.text = String.format(Locale.getDefault(), "%d", importedMovies)
       showsImportedCount.text = String.format(Locale.getDefault(), "%d", importedShows)
@@ -98,6 +99,30 @@ class BackupImportResultFragment : Fragment(R.layout.fragment_backup_import_resu
         textShowsUnmatchedHint.text = getString(R.string.textBackupImportResultAllMatched)
         arrowShowsUnmatched.visibility = View.GONE
         cardShowsUnmatched.isClickable = false
+      }
+
+      val totalUnmatchedListsCount =
+        unmatchedLists.sumOf { list ->
+          if (list.unmatchedItems.isEmpty()) 1 else list.unmatchedItems.size
+        }
+      listsUnmatchedCount.text = String.format(Locale.getDefault(), "%d", totalUnmatchedListsCount)
+      if (totalUnmatchedListsCount > 0) {
+        textListsUnmatchedHint.text = getString(R.string.textBackupImportResultTapToView)
+        arrowListsUnmatched.visibility = View.VISIBLE
+        cardListsUnmatched.isClickable = true
+        cardListsUnmatched.onClick {
+          if (findNavController().currentDestination?.id == R.id.backupImportResultFragment) {
+            val args =
+              Bundle().apply {
+                putString(BackupUnmatchedItemsFragment.ARG_CATEGORY, BackupUnmatchedItemsFragment.CATEGORY_LISTS)
+              }
+            findNavController().navigate(R.id.actionBackupImportResultToUnmatched, args)
+          }
+        }
+      } else {
+        textListsUnmatchedHint.text = getString(R.string.textBackupImportResultAllMatched)
+        arrowListsUnmatched.visibility = View.GONE
+        cardListsUnmatched.isClickable = false
       }
     }
   }

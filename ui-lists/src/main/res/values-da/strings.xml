@@ -9,10 +9,14 @@
   <string name="textName">Navn</string>
   <string name="textDescription">Beskrivelse (valgfri)</string>
   <string name="textDeleteList">Slet liste</string>
+  <string name="textMergeList">Flet ind i en anden liste</string>
   <string name="textEditList">Rediger liste</string>
   <string name="textEditListDescription">Opdater din brugerdefinerede liste.</string>
   <string name="textConfirmDeleteListTitle">Slet Liste</string>
   <string name="textConfirmDeleteListSubtitle">Er du sikker på, at du vil slette denne liste?</string>
+  <string name="textMergeListPickTitle">Flet ind i</string>
+  <string name="textConfirmMergeListTitle">Flet Lister</string>
+  <string name="textConfirmMergeListSubtitle">Alle elementer fra “%1$s” tilføjes til “%2$s”, og “%1$s” slettes.</string>
   <string name="textChangeRanks">Ændre Rangering</string>
   <string name="textChangeRanksSubtitle">Træk og slip liste element for at ændre dens rangering</string>
   <string name="textManageLists">Administrer lister</string>
@@ -21,4 +25,5 @@
   <string name="errorCouldNotCreateList">Vi kunne ikke oprette en ny liste på din TMDB konto i øjeblikket.\nTjek venligst internetforbindelsen og prøv igen.</string>
   <string name="errorCouldNotUpdateList">Vi kunne ikke opdatere denne liste på din TMDB konto i øjeblikket.\nTjek venligst internetforbindelsen og prøv igen.</string>
   <string name="errorCouldNotDeleteList">Vi kunne ikke slette denne liste på din TMDB konto i øjeblikket.\nTjek venligst internetforbindelsen og prøv igen.</string>
+  <string name="errorCouldNotMergeList">Listerne kunne ikke flettes.</string>
 </resources>

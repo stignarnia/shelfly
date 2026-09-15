@@ -5,6 +5,7 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import xyz.stignarnia.common.dispatchers.CoroutineDispatchers
 import xyz.stignarnia.uiBackup.BackupConfig.SCHEME_VERSION
+import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupListItemV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupListsV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupMovieV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupMoviesV2
@@ -13,6 +14,7 @@ import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupShowV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupShowsV2
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedEpisode
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedItem
+import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedList
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedSeason
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedShow
 import xyz.stignarnia.uiBackup.model.BackupEpisode
@@ -349,6 +351,38 @@ class BackupMigrationV2
       BackupLists(
         lists =
           lists.lists.map { list ->
+            val unmatchedItems = mutableListOf<BackupUnmatchedItem>()
+            val items =
+              list.items.mapNotNull { item ->
+                val tmdbId =
+                  item.tmdbId.takeIf { it > 0 }
+                    ?: when (item.type) {
+                      "show" -> showIds[item.legacyId]
+                      "movie" -> movieIds[item.legacyId]
+                      else -> null
+                    }
+                if (tmdbId == null) {
+                  unmatchedItems +=
+                    BackupUnmatchedItem(
+                      title = unmatchedListItemTitle(item),
+                      reason = "Elemento senza ID TMDB e non presente nella collezione.",
+                    )
+                  return@mapNotNull null
+                }
+                BackupListItem(
+                  id = item.id,
+                  listId = item.listId,
+                  tmdbId = tmdbId,
+                  type = item.type,
+                  rank = item.rank,
+                  listedAt = item.listedAt,
+                  createdAt = item.createdAt,
+                  updatedAt = item.updatedAt,
+                )
+              }
+            if (unmatchedItems.isNotEmpty()) {
+              report.unmatchedLists += BackupUnmatchedList(title = list.name, unmatchedItems = unmatchedItems)
+            }
             BackupList(
               id = list.id,
               slugId = list.slugId,
@@ -358,33 +392,18 @@ class BackupMigrationV2
               itemCount = list.itemCount,
               createdAt = list.createdAt,
               updatedAt = list.updatedAt,
-              items =
-                list.items.mapNotNull { item ->
-                  val tmdbId =
-                    item.tmdbId.takeIf { it > 0 }
-                      ?: when (item.type) {
-                        "show" -> showIds[item.legacyId]
-                        "movie" -> movieIds[item.legacyId]
-                        else -> null
-                      }
-                  if (tmdbId == null) {
-                    report.skippedListItems++
-                    return@mapNotNull null
-                  }
-                  BackupListItem(
-                    id = item.id,
-                    listId = item.listId,
-                    tmdbId = tmdbId,
-                    type = item.type,
-                    rank = item.rank,
-                    listedAt = item.listedAt,
-                    createdAt = item.createdAt,
-                    updatedAt = item.updatedAt,
-                  )
-                },
+              items = items,
             )
           },
       )
+
+    // A v2 list item carries no title, and the collection entry that would have named it is the thing that is missing.
+    private fun unmatchedListItemTitle(item: BackupListItemV2) =
+      when (item.type) {
+        "show" -> "Serie TV non archiviata (ID: ${item.legacyId})"
+        "movie" -> "Film non archiviato (ID: ${item.legacyId})"
+        else -> "Elemento non archiviato (ID: ${item.legacyId})"
+      }
 
     private data class UnmatchedLegacyEntry(
       val legacyId: Long,
@@ -407,19 +426,19 @@ class BackupMigrationV2
       var skippedSeasonRatings = 0
       var skippedEpisodeRatings = 0
       var skippedMovieRatings = 0
-      var skippedListItems = 0
+      val unmatchedLists = mutableListOf<BackupUnmatchedList>()
 
       fun build() =
         BackupMigrationReport(
           unmatchedShows = unmatchedShows,
           unmatchedMovies = unmatchedMovies,
+          unmatchedLists = unmatchedLists.toList(),
           skippedSeasons = skippedSeasons,
           skippedEpisodes = skippedEpisodes,
           skippedShowRatings = skippedShowRatings,
           skippedSeasonRatings = skippedSeasonRatings,
           skippedEpisodeRatings = skippedEpisodeRatings,
           skippedMovieRatings = skippedMovieRatings,
-          skippedListItems = skippedListItems,
         )
     }
   }

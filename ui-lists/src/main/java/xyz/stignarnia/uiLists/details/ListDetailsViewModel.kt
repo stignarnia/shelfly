@@ -51,6 +51,7 @@ class ListDetailsViewModel
   ) : ViewModel(),
     ChannelsDelegate by DefaultChannelsDelegate() {
     private val listDetailsState = MutableStateFlow<CustomList?>(null)
+    private val mergeTargetsState = MutableStateFlow<List<CustomList>>(emptyList())
     private val listItemsState = MutableStateFlow<List<ListDetailsItem>?>(null)
     private val listDeleteState = MutableStateFlow<Event<Boolean>?>(null)
     private val manageModeState = MutableStateFlow(false)
@@ -66,6 +67,7 @@ class ListDetailsViewModel
         val (listItems, totalCount) = itemsCase.loadItems(list)
 
         listDetailsState.value = list
+        mergeTargetsState.value = mainCase.loadMergeTargets(id)
         listItemsState.value = listItems
         manageModeState.value = false
         filtersVisibleState.value = totalCount > 0
@@ -200,6 +202,22 @@ class ListDetailsViewModel
       }
     }
 
+    fun mergeList(
+      listId: Long,
+      targetListId: Long,
+    ) {
+      viewModelScope.launch {
+        try {
+          mainCase.mergeList(listId, targetListId)
+          // This list no longer exists, so the screen leaves exactly as it does after a delete.
+          listDeleteState.value = Event(true)
+        } catch (error: Throwable) {
+          Timber.e(error)
+          messageChannel.send(MessageEvent.Error(R.string.errorCouldNotMergeList))
+        }
+      }
+    }
+
     fun deleteListItem(
       listId: Long,
       item: ListDetailsItem,
@@ -235,9 +253,11 @@ class ListDetailsViewModel
         scrollState,
         filtersVisibleState,
         viewModeState,
-      ) { s1, s2, s3, s4, s5, s6, s7, s8, s9 ->
+        mergeTargetsState,
+      ) { s1, s2, s3, s4, s5, s6, s7, s8, s9, s10 ->
         ListDetailsUiState(
           listDetails = s1,
+          mergeTargets = s10,
           listItems = s2,
           isManageMode = s3,
           isQuickRemoveEnabled = s4,

@@ -10,6 +10,12 @@
     app:showAsAction="never"
   />
   <item
+    android:id="@+id/menuListDetailsMerge"
+    android:icon="@drawable/ic_lists"
+    android:title="@string/textMergeList"
+    app:showAsAction="never"
+  />
+  <item
     android:id="@+id/menuListDetailsDelete"
     android:icon="@drawable/ic_delete"
     android:title="@string/textDeleteList"

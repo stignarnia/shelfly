@@ -7,6 +7,7 @@ import xyz.stignarnia.uiModel.CustomList
 
 data class ListDetailsUiState(
   val listDetails: CustomList? = null,
+  val mergeTargets: List<CustomList> = emptyList(),
   val listItems: List<ListDetailsItem>? = null,
   val resetScroll: Event<Boolean>? = null,
   val deleteEvent: Event<Boolean>? = null,

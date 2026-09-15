@@ -9,10 +9,14 @@
   <string name="textName">Nazwa</string>
   <string name="textDescription">Opis (opcjonalny)</string>
   <string name="textDeleteList">Usuń listę</string>
+  <string name="textMergeList">Scal z inną listą</string>
   <string name="textEditList">Edytuj listę</string>
   <string name="textEditListDescription">Aktualizuj swoją listę.</string>
   <string name="textConfirmDeleteListTitle">Usuń listę</string>
   <string name="textConfirmDeleteListSubtitle">Czy na pewno chcesz usunąć tę listę?</string>
+  <string name="textMergeListPickTitle">Scal z</string>
+  <string name="textConfirmMergeListTitle">Scal listy</string>
+  <string name="textConfirmMergeListSubtitle">Wszystkie elementy z „%1$s” zostaną dodane do „%2$s”, a „%1$s” zostanie usunięta.</string>
   <string name="textChangeRanks">Zmień rangi</string>
   <string name="textChangeRanksSubtitle">Przeciągnij element listy aby zmienić jego rangę</string>
   <string name="textManageLists">Zarządzaj listami</string>
@@ -21,4 +25,5 @@
   <string name="errorCouldNotCreateList">W tej chwili nie mogliśmy utworzyć nowej listy na Twoim koncie TMDB.\nSprawdź połączenie internetowe i spróbuj ponownie.</string>
   <string name="errorCouldNotUpdateList">W tej chwili nie udało się zaktualizować tej listy na Twoim koncie TMDB.\nSprawdź połączenie internetowe i spróbuj ponownie.</string>
   <string name="errorCouldNotDeleteList">W tej chwili nie można usunąć tej listy z Twojego konta TMDB.\nSprawdź połączenie internetowe i spróbuj ponownie.</string>
+  <string name="errorCouldNotMergeList">Nie udało się scalić list.</string>
 </resources>

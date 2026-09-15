@@ -1,6 +1,7 @@
 package xyz.stignarnia.uiBackup.features.imports.migrations
 
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedItem
+import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedList
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedShow
 import xyz.stignarnia.uiBackup.model.BackupScheme
 import java.io.Serializable
@@ -20,23 +21,23 @@ data class BackupMigrationResult(
 data class BackupMigrationReport(
   val unmatchedShows: List<BackupUnmatchedShow> = emptyList(),
   val unmatchedMovies: List<BackupUnmatchedItem> = emptyList(),
+  val unmatchedLists: List<BackupUnmatchedList> = emptyList(),
   val skippedSeasons: Int = 0,
   val skippedEpisodes: Int = 0,
   val skippedShowRatings: Int = 0,
   val skippedSeasonRatings: Int = 0,
   val skippedEpisodeRatings: Int = 0,
   val skippedMovieRatings: Int = 0,
-  val skippedListItems: Int = 0,
 ) : Serializable {
   val isEmpty: Boolean
     get() =
       unmatchedShows.isEmpty() &&
         unmatchedMovies.isEmpty() &&
+        unmatchedLists.isEmpty() &&
         skippedSeasons == 0 &&
         skippedEpisodes == 0 &&
         skippedShowRatings == 0 &&
         skippedSeasonRatings == 0 &&
         skippedEpisodeRatings == 0 &&
-        skippedMovieRatings == 0 &&
-        skippedListItems == 0
+        skippedMovieRatings == 0
 }

@@ -181,7 +181,7 @@ class SyncMergeTest {
   @Test
   fun `Should remove a single list item without touching the rest of the list`() {
     val local = scheme(lists = listOf(list(1, JAN, listOf(item(1, "show", 10), item(1, "movie", 20)))))
-    val tombstones = listOf(tombstone(SyncEntity.CUSTOM_LIST_ITEM, "1:movie:20", FEB))
+    val tombstones = listOf(tombstone(SyncEntity.CUSTOM_LIST_ITEM, "${slug(1)}:movie:20", FEB))
 
     val merged = SyncMerge.merge(local, tombstones, emptyList())
 
@@ -190,6 +190,44 @@ class SyncMergeTest {
         .single()
         .items
     assertThat(items.map { it.tmdbId }).containsExactly(10L)
+  }
+
+  @Test
+  fun `Should keep lists apart that only share a local row id`() {
+    // Each device created its own first list, so both lists got row id 1.
+    val local = scheme(lists = listOf(list(1, JAN, listOf(item(1, "show", 10)))))
+    val tabletList = list(1, JAN, listOf(item(1, "movie", 20))).copy(slugId = slug(2), name = "Other")
+    val tablet = payload("tablet", scheme(lists = listOf(tabletList)))
+
+    val merged = SyncMerge.merge(local, emptyList(), listOf(tablet))
+
+    assertThat(
+      merged.state.lists.lists
+        .map { list -> list.slugId to list.items.map { it.tmdbId } },
+    ).containsExactly(slug(1) to listOf(10L), slug(2) to listOf(20L))
+  }
+
+  @Test
+  fun `Should ignore lists and list deletions from before lists had an identity`() {
+    val local = scheme(lists = listOf(list(1, JAN, listOf(item(1, "show", 10)))))
+    val legacyTablet =
+      payload(
+        "tablet",
+        scheme(lists = listOf(list(1, JAN, emptyList()).copy(slugId = ""))),
+        tombstones =
+          listOf(
+            tombstone(SyncEntity.CUSTOM_LIST, "1", FEB),
+            tombstone(SyncEntity.CUSTOM_LIST_ITEM, "1:show:10", FEB),
+          ),
+      )
+
+    val merged = SyncMerge.merge(local, emptyList(), listOf(legacyTablet))
+
+    assertThat(
+      merged.state.lists.lists
+        .map { list -> list.slugId to list.items.map { it.tmdbId } },
+    ).containsExactly(slug(1) to listOf(10L))
+    assertThat(merged.tombstones).isEmpty()
   }
 
   @Test
@@ -255,13 +293,15 @@ class SyncMergeTest {
       addedAt: Long,
     ) = BackupShow(tmdbId = id, title = "Show $id", addedAt = iso(addedAt), updatedAt = iso(addedAt))
 
+    fun slug(id: Long) = "00000000-0000-0000-0000-" + id.toString().padStart(12, '0')
+
     fun list(
       id: Long,
       updatedAt: Long,
       items: List<BackupListItem>,
     ) = BackupList(
       id = id,
-      slugId = "list-$id",
+      slugId = slug(id),
       name = "List $id",
       description = null,
       privacy = "private",

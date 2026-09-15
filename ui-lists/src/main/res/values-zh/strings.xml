@@ -9,10 +9,14 @@
   <string name="textName">名称</string>
   <string name="textDescription">描述（选填）</string>
   <string name="textDeleteList">删除列表</string>
+  <string name="textMergeList">合并到其他列表</string>
   <string name="textEditList">编辑列表</string>
   <string name="textEditListDescription">更新自定义列表</string>
   <string name="textConfirmDeleteListTitle">删除列表</string>
   <string name="textConfirmDeleteListSubtitle">您确定要删除此列表吗？</string>
+  <string name="textMergeListPickTitle">合并到</string>
+  <string name="textConfirmMergeListTitle">合并列表</string>
+  <string name="textConfirmMergeListSubtitle">“%1$s”中的所有项目将添加到“%2$s”，并删除“%1$s”。</string>
   <string name="textChangeRanks">修改排行</string>
   <string name="textChangeRanksSubtitle">拖放列表项以更改排行</string>
   <string name="textManageLists">管理列表</string>
@@ -21,4 +25,5 @@
   <string name="errorCouldNotCreateList">目前无法在您 TMDB 账号中创建新的列表。\n请检查网络连接并重试。</string>
   <string name="errorCouldNotUpdateList">目前无法更新您 TMDB 账号中的此列表。\n请检查网络连接并重试。</string>
   <string name="errorCouldNotDeleteList">目前无法删除您 TMDB 账号中的此列表。\n请检查网络连接并重试。</string>
+  <string name="errorCouldNotMergeList">无法合并列表。</string>
 </resources>

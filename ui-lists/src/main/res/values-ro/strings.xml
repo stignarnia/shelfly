@@ -9,10 +9,14 @@
   <string name="textName">Nume</string>
   <string name="textDescription">Descriere (opțional)</string>
   <string name="textDeleteList">Șterge lista</string>
+  <string name="textMergeList">Îmbină cu altă listă</string>
   <string name="textEditList">Editează lista</string>
   <string name="textEditListDescription">Actualizează lista personalizată.</string>
   <string name="textConfirmDeleteListTitle">Șterge lista</string>
   <string name="textConfirmDeleteListSubtitle">Ești sigur că dorești să ștergi această listă?</string>
+  <string name="textMergeListPickTitle">Îmbină cu</string>
+  <string name="textConfirmMergeListTitle">Îmbină listele</string>
+  <string name="textConfirmMergeListSubtitle">Toate elementele din „%1$s” vor fi adăugate în „%2$s”, iar „%1$s” va fi ștearsă.</string>
   <string name="textChangeRanks">Schimbă rangurile</string>
   <string name="textChangeRanksSubtitle">Trage și plasează elementul din listă pentru a-i modifica rangul</string>
   <string name="textManageLists">Gestionează-ți listele</string>
@@ -21,4 +25,5 @@
   <string name="errorCouldNotCreateList">Nu am putut crea o listă nouă în contul TMDB în acest moment.\nTe rugăm să verifici conexiunea la internet și să încerci din nou.</string>
   <string name="errorCouldNotUpdateList">Nu am putut actualiza această listă în contul TMDB în acest moment.\nTe rugăm să verifici conexiunea la internet și să încerci din nou.</string>
   <string name="errorCouldNotDeleteList">Nu am putut șterge această listă din contul TMDB în acest moment.\nTe rugăm să verifici conexiunea la internet și să încerci din nou.</string>
+  <string name="errorCouldNotMergeList">Listele nu au putut fi îmbinate.</string>
 </resources>

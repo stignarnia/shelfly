@@ -312,18 +312,19 @@ class SyncStateApplierTest {
 
       SUT.apply(local, merged)
 
-      coVerify(exactly = 1) { customListsItems.deleteItem(idList = 7, idTmdb = 100, type = "show") }
-      coVerify(exactly = 0) { customLists.deleteById(any()) }
+      coVerify(exactly = 1) { customListsItems.deleteItemByListIdSlug(listIdSlug = slug(7), idTmdb = 100, type = "show") }
+      coVerify(exactly = 0) { customLists.deleteByIdSlug(any()) }
     }
 
   @Test
-  fun `Should remove a deleted list`() =
+  fun `Should remove a deleted list by its identity, not by its local row id`() =
     runTest {
       val local = scheme(lists = BackupLists(listOf(list(7, items = listOf(listItem(7, 100))))))
 
       SUT.apply(local, scheme())
 
-      coVerify(exactly = 1) { customLists.deleteById(7) }
+      coVerify(exactly = 1) { customLists.deleteByIdSlug(slug(7)) }
+      coVerify(exactly = 0) { customLists.deleteById(any()) }
     }
 
   @Test
@@ -377,12 +378,14 @@ class SyncStateApplierTest {
     addedAt = DATE,
   )
 
+  private fun slug(id: Long) = "00000000-0000-0000-0000-" + id.toString().padStart(12, '0')
+
   private fun list(
     id: Long,
     items: List<BackupListItem>,
   ) = BackupList(
     id = id,
-    slugId = "list-$id",
+    slugId = slug(id),
     name = "List $id",
     description = null,
     privacy = "private",

@@ -1,5 +1,6 @@
 package xyz.stignarnia.uiBackup.features.sync
 
+import xyz.stignarnia.repository.ListIdentity
 import xyz.stignarnia.uiBackup.features.sync.model.SyncEntity
 import xyz.stignarnia.uiBackup.model.BackupScheme
 
@@ -70,13 +71,17 @@ internal object SyncStateFlattener {
       ratingsMovies.forEach { put(SyncEntity.MOVIE_RATING, it.tmdbId.toString(), it.ratedAt.toEpochMillis()) }
     }
 
-    scheme.lists.lists.forEach { list ->
-      put(SyncEntity.CUSTOM_LIST, list.id.toString(), list.updatedAt.toEpochMillis())
-      list.items.forEach { item ->
-        val key = SyncEntity.CUSTOM_LIST_ITEM.key(list.id, item.type, item.tmdbId)
-        put(SyncEntity.CUSTOM_LIST_ITEM, key, item.updatedAt.toEpochMillis())
+    // A list is keyed by its identity, never by its local row id, which names unrelated lists on different devices.
+    // One without an identity - published before lists had one - cannot be told apart from those, so it takes no part.
+    scheme.lists.lists
+      .filter { ListIdentity.isValid(it.slugId) }
+      .forEach { list ->
+        put(SyncEntity.CUSTOM_LIST, list.slugId, list.updatedAt.toEpochMillis())
+        list.items.forEach { item ->
+          val key = SyncEntity.CUSTOM_LIST_ITEM.key(list.slugId, item.type, item.tmdbId)
+          put(SyncEntity.CUSTOM_LIST_ITEM, key, item.updatedAt.toEpochMillis())
+        }
       }
-    }
 
     return entities
   }

@@ -47,12 +47,14 @@
   <string name="textBackupImportResultShowsImported">Seriale importate</string>
   <string name="textBackupImportResultMoviesUnmatched">Filme neimportate</string>
   <string name="textBackupImportResultShowsUnmatched">Seriale neimportate</string>
+  <string name="textBackupImportResultListsUnmatched">Liste neimportate</string>
   <string name="textBackupImportResultTapToView">Apasă pentru a vedea elementele nepotrivite</string>
   <string name="textBackupImportResultAllMatched">Toate elementele au fost potrivite cu succes</string>
   <string name="textBackupImportResultDone">Gata</string>
   <string name="textBackupImportShowLastReport">Afișează ultimul raport de import</string>
   <string name="textBackupUnmatchedMoviesTitle">Filme nepotrivite</string>
   <string name="textBackupUnmatchedShowsTitle">Seriale nepotrivite</string>
+  <string name="textBackupUnmatchedListsTitle">Liste nepotrivite</string>
   <string name="textBackupImportUnmatchedEmpty">Niciun element nepotrivit în această categorie.</string>
   <string name="textBackupImportRatingsDisclaimer">Notă: evaluările nu sunt importate.</string>
   <string name="textBackupUnmatchedSeasonSingle">Sezonul %d</string>
@@ -67,5 +69,10 @@
     <item quantity="one">%d episod nepotrivit</item>
     <item quantity="few">%d episoade nepotrivite</item>
     <item quantity="other">%d de episoade nepotrivite</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d element nepotrivit</item>
+    <item quantity="few">%d elemente nepotrivite</item>
+    <item quantity="other">%d de elemente nepotrivite</item>
   </plurals>
 </resources>

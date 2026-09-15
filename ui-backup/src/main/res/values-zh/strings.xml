@@ -45,12 +45,14 @@
   <string name="textBackupImportResultShowsImported">已导入剧集</string>
   <string name="textBackupImportResultMoviesUnmatched">未导入电影</string>
   <string name="textBackupImportResultShowsUnmatched">未导入剧集</string>
+  <string name="textBackupImportResultListsUnmatched">未导入列表</string>
   <string name="textBackupImportResultTapToView">点击查看未匹配项</string>
   <string name="textBackupImportResultAllMatched">所有项目均成功匹配</string>
   <string name="textBackupImportResultDone">完成</string>
   <string name="textBackupImportShowLastReport">显示上次导入报告</string>
   <string name="textBackupUnmatchedMoviesTitle">未匹配电影</string>
   <string name="textBackupUnmatchedShowsTitle">未匹配剧集</string>
+  <string name="textBackupUnmatchedListsTitle">未匹配列表</string>
   <string name="textBackupImportUnmatchedEmpty">此类别中没有未匹配的项目。</string>
   <string name="textBackupImportRatingsDisclaimer">注意：评分不会被导入。</string>
   <string name="textBackupUnmatchedSeasonSingle">第 %d 季</string>
@@ -61,5 +63,8 @@
   </plurals>
   <plurals name="textBackupUnmatchedEpisodesSubtitle">
     <item quantity="other">%d 个未匹配剧集</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="other">%d 个未匹配项目</item>
   </plurals>
 </resources>

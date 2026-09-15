@@ -815,6 +815,12 @@
       app:enterAnim="@anim/anim_fade_in"
       app:popExitAnim="@anim/anim_fade_out"
     />
+    <action
+      android:id="@+id/actionBackupUnmatchedItemsToListItems"
+      app:destination="@id/backupUnmatchedListItemsFragment"
+      app:enterAnim="@anim/anim_fade_in"
+      app:popExitAnim="@anim/anim_fade_out"
+    />
   </fragment>
 
   <fragment
@@ -834,6 +840,12 @@
     android:id="@+id/backupUnmatchedEpisodesFragment"
     android:name="xyz.stignarnia.uiBackup.features.imports.result.BackupUnmatchedEpisodesFragment"
     android:label="fragmentBackupUnmatchedEpisodes"
+  />
+
+  <fragment
+    android:id="@+id/backupUnmatchedListItemsFragment"
+    android:name="xyz.stignarnia.uiBackup.features.imports.result.BackupUnmatchedListItemsFragment"
+    android:label="fragmentBackupUnmatchedListItems"
   />
 
   <dialog

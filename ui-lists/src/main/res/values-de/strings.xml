@@ -9,10 +9,14 @@
   <string name="textName">Name</string>
   <string name="textDescription">Beschreibung (optional)</string>
   <string name="textDeleteList">Liste löschen</string>
+  <string name="textMergeList">In eine andere Liste zusammenführen</string>
   <string name="textEditList">Liste bearbeiten</string>
   <string name="textEditListDescription">Aktualisiere deine Liste.</string>
   <string name="textConfirmDeleteListTitle">Liste löschen</string>
   <string name="textConfirmDeleteListSubtitle">Bist du sicher, dass du diese Liste löschen möchtest?</string>
+  <string name="textMergeListPickTitle">Zusammenführen mit</string>
+  <string name="textConfirmMergeListTitle">Listen zusammenführen</string>
+  <string name="textConfirmMergeListSubtitle">Alle Elemente aus „%1$s“ werden zu „%2$s“ hinzugefügt, und „%1$s“ wird gelöscht.</string>
   <string name="textChangeRanks">Ränge ändern</string>
   <string name="textChangeRanksSubtitle">Ziehe ein Listenelement um seinen Rang zu ändern</string>
   <string name="textManageLists">Listen verwalten</string>
@@ -21,4 +25,5 @@
   <string name="errorCouldNotCreateList">Wir konnten derzeit keine neue Liste in deinem TMDB Konto erstellen.\nBitte überprüfe deine Internetverbindung und versuche es erneut.</string>
   <string name="errorCouldNotUpdateList">Wir konnten diese Liste derzeit nicht in deinem TMDB Konto aktualisieren.\nBitte überprüfe deine Internetverbindung und versuche es erneut.</string>
   <string name="errorCouldNotDeleteList">Wir konnten diese Liste momentan nicht von deinem TMDB Konto löschen.\nBitte überprüfe deine Internetverbindung und versuche es erneut.</string>
+  <string name="errorCouldNotMergeList">Die Listen konnten nicht zusammengeführt werden.</string>
 </resources>

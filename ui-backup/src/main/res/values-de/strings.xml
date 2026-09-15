@@ -46,12 +46,14 @@
   <string name="textBackupImportResultShowsImported">Serien importiert</string>
   <string name="textBackupImportResultMoviesUnmatched">Filme nicht importiert</string>
   <string name="textBackupImportResultShowsUnmatched">Serien nicht importiert</string>
+  <string name="textBackupImportResultListsUnmatched">Listen nicht importiert</string>
   <string name="textBackupImportResultTapToView">Tippen, um nicht zugeordnete Elemente anzuzeigen</string>
   <string name="textBackupImportResultAllMatched">Alle Elemente erfolgreich zugeordnet</string>
   <string name="textBackupImportResultDone">Fertig</string>
   <string name="textBackupImportShowLastReport">Letzten Importbericht anzeigen</string>
   <string name="textBackupUnmatchedMoviesTitle">Nicht zugeordnete Filme</string>
   <string name="textBackupUnmatchedShowsTitle">Nicht zugeordnete Serien</string>
+  <string name="textBackupUnmatchedListsTitle">Nicht zugeordnete Listen</string>
   <string name="textBackupImportUnmatchedEmpty">Keine nicht zugeordneten Elemente in dieser Kategorie.</string>
   <string name="textBackupImportRatingsDisclaimer">Hinweis: Bewertungen werden nicht importiert.</string>
   <string name="textBackupUnmatchedSeasonSingle">Staffel %d</string>
@@ -64,5 +66,9 @@
   <plurals name="textBackupUnmatchedEpisodesSubtitle">
     <item quantity="one">%d nicht zugeordnete Episode</item>
     <item quantity="other">%d nicht zugeordnete Episoden</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d nicht zugeordnetes Element</item>
+    <item quantity="other">%d nicht zugeordnete Elemente</item>
   </plurals>
 </resources>

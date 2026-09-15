@@ -49,12 +49,14 @@
   <string name="textBackupImportResultShowsImported">Сериалов импортировано</string>
   <string name="textBackupImportResultMoviesUnmatched">Фильмов не импортировано</string>
   <string name="textBackupImportResultShowsUnmatched">Сериалов не импортировано</string>
+  <string name="textBackupImportResultListsUnmatched">Списков не импортировано</string>
   <string name="textBackupImportResultTapToView">Нажмите, чтобы просмотреть ненайденные элементы</string>
   <string name="textBackupImportResultAllMatched">Все элементы успешно сопоставлены</string>
   <string name="textBackupImportResultDone">Готово</string>
   <string name="textBackupImportShowLastReport">Показать отчет о последнем импорте</string>
   <string name="textBackupUnmatchedMoviesTitle">Несопоставленные фильмы</string>
   <string name="textBackupUnmatchedShowsTitle">Несопоставленные сериалы</string>
+  <string name="textBackupUnmatchedListsTitle">Несопоставленные списки</string>
   <string name="textBackupImportUnmatchedEmpty">В этой категории нет несопоставленных элементов.</string>
   <string name="textBackupImportRatingsDisclaimer">Примечание: оценки не импортируются.</string>
   <string name="textBackupUnmatchedSeasonSingle">Сезон %d</string>
@@ -71,5 +73,11 @@
     <item quantity="few">%d несопоставленные серии</item>
     <item quantity="many">%d несопоставленных серий</item>
     <item quantity="other">%d несопоставленных серий</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d несопоставленный элемент</item>
+    <item quantity="few">%d несопоставленных элемента</item>
+    <item quantity="many">%d несопоставленных элементов</item>
+    <item quantity="other">%d несопоставленных элементов</item>
   </plurals>
 </resources>

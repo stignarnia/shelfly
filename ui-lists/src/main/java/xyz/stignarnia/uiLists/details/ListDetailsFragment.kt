@@ -254,6 +254,28 @@ class ListDetailsFragment :
       .show()
   }
 
+  private fun openMergeDialog(targets: List<CustomList>) {
+    modal()
+      .setTitle(R.string.textMergeListPickTitle)
+      .setItems(targets.map { it.name }) { index ->
+        openMergeConfirmDialog(targets[index])
+      }.show()
+  }
+
+  private fun openMergeConfirmDialog(target: CustomList) {
+    val name =
+      viewModel.uiState.value.listDetails
+        ?.name ?: list.name
+    modal()
+      .setTitle(R.string.textConfirmMergeListTitle)
+      .setMessage(getString(R.string.textConfirmMergeListSubtitle, name, target.name))
+      .setPositiveButton(R.string.textYes) { modal ->
+        viewModel.mergeList(list.id, target.id)
+        modal.dismiss()
+      }.setNegativeButton(R.string.textNo)
+      .show()
+  }
+
   private fun openEditDialog() {
     setFragmentResultListener(NavigationArgs.REQUEST_CREATE_LIST) { _, _ ->
       viewModel.loadDetails(list.id)
@@ -284,9 +306,13 @@ class ListDetailsFragment :
   private fun openPopupMenu(quickRemoveEnabled: Boolean) {
     PopupMenu(requireContext(), binding.fragmentListDetailsMoreButton, Gravity.CENTER).apply {
       inflate(R.menu.menu_list_details)
+      // Merging needs somewhere to merge into.
+      val mergeTargets = viewModel.uiState.value.mergeTargets
+      menu.findItem(R.id.menuListDetailsMerge).isVisible = mergeTargets.isNotEmpty()
       setOnMenuItemClickListener { menuItem ->
         when (menuItem.itemId) {
           R.id.menuListDetailsEdit -> openEditDialog()
+          R.id.menuListDetailsMerge -> openMergeDialog(mergeTargets)
           R.id.menuListDetailsDelete -> openDeleteDialog()
         }
         true

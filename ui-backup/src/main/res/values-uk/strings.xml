@@ -48,12 +48,14 @@
   <string name="textBackupImportResultShowsImported">Серіалів імпортовано</string>
   <string name="textBackupImportResultMoviesUnmatched">Фільмів не імпортовано</string>
   <string name="textBackupImportResultShowsUnmatched">Серіалів не імпортовано</string>
+  <string name="textBackupImportResultListsUnmatched">Списків не імпортовано</string>
   <string name="textBackupImportResultTapToView">Натисніть, щоб переглянути незіставлені елементи</string>
   <string name="textBackupImportResultAllMatched">Усі елементи успішно зіставлено</string>
   <string name="textBackupImportResultDone">Готово</string>
   <string name="textBackupImportShowLastReport">Показати звіт про останній імпорт</string>
   <string name="textBackupUnmatchedMoviesTitle">Незіставлені фільми</string>
   <string name="textBackupUnmatchedShowsTitle">Незіставлені серіали</string>
+  <string name="textBackupUnmatchedListsTitle">Незіставлені списки</string>
   <string name="textBackupImportUnmatchedEmpty">У цій категорії немає незіставлених елементів.</string>
   <string name="textBackupImportRatingsDisclaimer">Примітка: оцінки не імпортуються.</string>
   <string name="textBackupUnmatchedSeasonSingle">Сезон %d</string>
@@ -70,5 +72,11 @@
     <item quantity="few">%d невідповідні серії</item>
     <item quantity="many">%d невідповідних серій</item>
     <item quantity="other">%d невідповідних серій</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d невідповідний елемент</item>
+    <item quantity="few">%d невідповідні елементи</item>
+    <item quantity="many">%d невідповідних елементів</item>
+    <item quantity="other">%d невідповідних елементів</item>
   </plurals>
 </resources>

@@ -9,10 +9,14 @@
   <string name="textName">İsim</string>
   <string name="textDescription">Açıklama (isteğe bağlı)</string>
   <string name="textDeleteList">Listeyi sil</string>
+  <string name="textMergeList">Başka bir listeyle birleştir</string>
   <string name="textEditList">Listeyi düzenle</string>
   <string name="textEditListDescription">Özel listenizi güncelleyin.</string>
   <string name="textConfirmDeleteListTitle">Listeyi Sil</string>
   <string name="textConfirmDeleteListSubtitle">Bu listeyi silmek istediğinizden emin misiniz?</string>
+  <string name="textMergeListPickTitle">Birleştirilecek liste</string>
+  <string name="textConfirmMergeListTitle">Listeleri Birleştir</string>
+  <string name="textConfirmMergeListSubtitle">“%1$s” listesindeki tüm öğeler “%2$s” listesine eklenecek ve “%1$s” silinecek.</string>
   <string name="textChangeRanks">Dereceleri Değiştir</string>
   <string name="textChangeRanksSubtitle">Derecesini değiştirmek için liste öğesini sürükleyip bırakın</string>
   <string name="textManageLists">Listeleri yönet</string>
@@ -21,4 +25,5 @@
   <string name="errorCouldNotCreateList">Şu anda TMDB hesabınızda yeni liste oluşturamıyoruz.\nLütfen internet bağlantısını kontrol edin ve tekrar deneyin.</string>
   <string name="errorCouldNotUpdateList">Şu anda TMDB hesabınızdaki bu listeyi güncelleyemiyoruz.\nLütfen internet bağlantısını kontrol edin ve tekrar deneyin.</string>
   <string name="errorCouldNotDeleteList">Şu anda TMDB hesabınızdaki bu listeyi silemiyoruz.\nLütfen internet bağlantısını kontrol edin ve tekrar deneyin.</string>
+  <string name="errorCouldNotMergeList">Listeler birleştirilemedi.</string>
 </resources>

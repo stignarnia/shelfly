@@ -57,4 +57,14 @@ interface CustomListsItemsDao : CustomListsItemsLocalDataSource {
     idTmdb: Long,
     type: String,
   )
+
+  @Query(
+    "DELETE FROM custom_list_item WHERE id_list IN (SELECT id FROM custom_lists WHERE id_slug = :listIdSlug) " +
+      "AND id_tmdb == :idTmdb AND type = :type",
+  )
+  override suspend fun deleteItemByListIdSlug(
+    listIdSlug: String,
+    idTmdb: Long,
+    type: String,
+  )
 }

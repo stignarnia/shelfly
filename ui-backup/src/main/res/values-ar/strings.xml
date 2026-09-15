@@ -50,12 +50,14 @@
   <string name="textBackupImportResultShowsImported">المسلسلات المستوردة</string>
   <string name="textBackupImportResultMoviesUnmatched">أفلام لم يتم استيرادها</string>
   <string name="textBackupImportResultShowsUnmatched">مسلسلات لم يتم استيرادها</string>
+  <string name="textBackupImportResultListsUnmatched">قوائم لم يتم استيرادها</string>
   <string name="textBackupImportResultTapToView">اضغط لعرض العناصر غير المتطابقة</string>
   <string name="textBackupImportResultAllMatched">تمت مطابقة جميع العناصر بنجاح</string>
   <string name="textBackupImportResultDone">تم</string>
   <string name="textBackupImportShowLastReport">عرض تقرير الاستيراد الأخير</string>
   <string name="textBackupUnmatchedMoviesTitle">أفلام غير متطابقة</string>
   <string name="textBackupUnmatchedShowsTitle">مسلسلات غير متطابقة</string>
+  <string name="textBackupUnmatchedListsTitle">قوائم غير متطابقة</string>
   <string name="textBackupImportUnmatchedEmpty">لا توجد عناصر غير متطابقة في هذه الفئة.</string>
   <string name="textBackupImportRatingsDisclaimer">ملاحظة: لا يتم استيراد التقييمات.</string>
   <string name="textBackupUnmatchedSeasonSingle">الموسم %d</string>
@@ -76,5 +78,13 @@
     <item quantity="few">%d حلقات غير متطابقة</item>
     <item quantity="many">%d حلقة غير متطابقة</item>
     <item quantity="other">%d حلقة غير متطابقة</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="zero">%d عنصر غير متطابق</item>
+    <item quantity="one">عنصر واحد غير متطابق</item>
+    <item quantity="two">عنصران غير متطابقين</item>
+    <item quantity="few">%d عناصر غير متطابقة</item>
+    <item quantity="many">%d عنصراً غير متطابق</item>
+    <item quantity="other">%d عنصر غير متطابق</item>
   </plurals>
 </resources>

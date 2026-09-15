@@ -32,4 +32,10 @@ interface CustomListsItemsLocalDataSource {
     idTmdb: Long,
     type: String,
   )
+
+  suspend fun deleteItemByListIdSlug(
+    listIdSlug: String,
+    idTmdb: Long,
+    type: String,
+  )
 }

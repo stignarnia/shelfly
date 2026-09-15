@@ -38,5 +38,7 @@ interface CustomListsLocalDataSource {
 
   suspend fun deleteById(id: Long)
 
+  suspend fun deleteByIdSlug(idSlug: String)
+
   suspend fun deleteAll()
 }

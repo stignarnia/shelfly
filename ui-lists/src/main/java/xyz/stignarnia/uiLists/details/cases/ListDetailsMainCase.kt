@@ -58,6 +58,18 @@ class ListDetailsMainCase
         listsRepository.deleteList(listId)
       }
 
+    suspend fun loadMergeTargets(listId: Long) =
+      withContext(dispatchers.IO) {
+        listsRepository.loadAll().filter { it.id != listId }
+      }
+
+    suspend fun mergeList(
+      listId: Long,
+      targetListId: Long,
+    ) = withContext(dispatchers.IO) {
+      listsRepository.mergeLists(sourceListId = listId, targetListId = targetListId)
+    }
+
     suspend fun isQuickRemoveEnabled(list: CustomList) =
       withContext(dispatchers.IO) {
         false

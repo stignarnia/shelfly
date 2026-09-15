@@ -9,10 +9,14 @@
   <string name="textName">Nimi</string>
   <string name="textDescription">Kuvaus (valinnainen)</string>
   <string name="textDeleteList">Poista lista</string>
+  <string name="textMergeList">Yhdistä toiseen listaan</string>
   <string name="textEditList">Muokkaa listaa</string>
   <string name="textEditListDescription">Päivitä mukautettu listasi.</string>
   <string name="textConfirmDeleteListTitle">Poista lista</string>
   <string name="textConfirmDeleteListSubtitle">Haluatko varmasti poistaa listan?</string>
+  <string name="textMergeListPickTitle">Yhdistä listaan</string>
+  <string name="textConfirmMergeListTitle">Yhdistä listat</string>
+  <string name="textConfirmMergeListSubtitle">Kaikki listan ”%1$s” kohteet lisätään listaan ”%2$s”, ja lista ”%1$s” poistetaan.</string>
   <string name="textChangeRanks">Muuta sijoituksia</string>
   <string name="textChangeRanksSubtitle">Muuta listan kohteen sijoitusta vetämällä ja pudottamalla</string>
   <string name="textManageLists">Hallitse listoja</string>
@@ -21,4 +25,5 @@
   <string name="errorCouldNotCreateList">Listan luonti TMDB-kokoelmaasi ei juuri nyt onnistunut.\nTarkista Internet-yhteytesi ja yritä uudelleen.</string>
   <string name="errorCouldNotUpdateList">Listan päivitys TMDB-kokoelmaasi ei juuri nyt onnistunut.\nTarkista Internet-yhteytesi ja yritä uudelleen.</string>
   <string name="errorCouldNotDeleteList">Listan poisto TMDB-kokoelmastasi ei juuri nyt onnistunut.\nTarkista Internet-yhteytesi ja yritä uudelleen.</string>
+  <string name="errorCouldNotMergeList">Listojen yhdistäminen ei onnistunut.</string>
 </resources>

@@ -27,7 +27,7 @@ class ListsRepository
       val list =
         CustomList.create().copy(
           idTmdb = idTmdb,
-          idSlug = idSlug ?: "",
+          idSlug = idSlug ?: ListIdentity.create(),
           name = name.trim(),
           description = description?.trim(),
         )
@@ -56,7 +56,41 @@ class ListsRepository
       return mappers.customList.fromDatabase(updated)
     }
 
+    /**
+     * Gives every list that predates [ListIdentity] an identity of its own.
+     * Backup, import and sync call this before reading list identities, rather than relying on a one-off database migration.
+     *
+     * The update timestamp is left alone: being assigned an identity is not an edit, and sync orders a list's edits against its deletions by that timestamp.
+     */
+    suspend fun ensureIdentities() {
+      val missing = localSource.customLists.getAll().filterNot { ListIdentity.isValid(it.idSlug) }
+      if (missing.isEmpty()) return
+      localSource.customLists.update(missing.map { it.copy(idSlug = ListIdentity.create()) })
+    }
+
     suspend fun deleteList(listId: Long) = localSource.customLists.deleteById(listId)
+
+    /**
+     * Moves every item of [sourceListId] into [targetListId], then deletes the source list.
+     * Items the target already has are skipped, and the rest are appended after the target's own in the source's order, keeping when they were listed.
+     *
+     * Each moved item is stamped with the time of the merge, so a removal of the same item from the target that sync already carries cannot outrank this deliberate addition.
+     */
+    suspend fun mergeLists(
+      sourceListId: Long,
+      targetListId: Long,
+    ) {
+      val now = nowUtcMillis()
+      transactions.withTransaction {
+        localSource.customListsItems
+          .getItemsById(sourceListId)
+          .forEach { item ->
+            localSource.customListsItems.insertItem(item.copy(id = 0, idList = targetListId, updatedAt = now))
+          }
+        localSource.customLists.deleteById(sourceListId)
+        localSource.customLists.updateTimestamp(targetListId, now)
+      }
+    }
 
     suspend fun addToList(
       listId: Long,

@@ -47,12 +47,14 @@
   <string name="textBackupImportResultShowsImported">Séries importadas</string>
   <string name="textBackupImportResultMoviesUnmatched">Filmes não importados</string>
   <string name="textBackupImportResultShowsUnmatched">Séries não importadas</string>
+  <string name="textBackupImportResultListsUnmatched">Listas não importadas</string>
   <string name="textBackupImportResultTapToView">Toque para ver os itens não correspondidos</string>
   <string name="textBackupImportResultAllMatched">Todos os itens foram correspondidos com sucesso</string>
   <string name="textBackupImportResultDone">Concluído</string>
   <string name="textBackupImportShowLastReport">Mostrar relatório da última importação</string>
   <string name="textBackupUnmatchedMoviesTitle">Filmes não correspondidos</string>
   <string name="textBackupUnmatchedShowsTitle">Séries não correspondidas</string>
+  <string name="textBackupUnmatchedListsTitle">Listas não correspondidas</string>
   <string name="textBackupImportUnmatchedEmpty">Nenhum item não correspondido nesta categoria.</string>
   <string name="textBackupImportRatingsDisclaimer">Nota: as avaliações não são importadas.</string>
   <string name="textBackupUnmatchedSeasonSingle">Temporada %d</string>
@@ -67,5 +69,10 @@
     <item quantity="one">%d episódio não associado</item>
     <item quantity="many">%d episódios não associados</item>
     <item quantity="other">%d episódios non associados</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d item não associado</item>
+    <item quantity="many">%d itens não associados</item>
+    <item quantity="other">%d itens não associados</item>
   </plurals>
 </resources>

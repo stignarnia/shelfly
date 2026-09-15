@@ -125,7 +125,7 @@ class BackupMigrationV2Test {
     }
 
   @Test
-  fun `Should keep list items that resolve and count the ones that do not`() =
+  fun `Should keep list items that resolve and report the ones that do not under their list`() =
     runTest {
       val result = SUT.migrate(fixture())
       val list =
@@ -135,7 +135,11 @@ class BackupMigrationV2Test {
       assertThat(list.slugId).isEqualTo("my-list")
       assertThat(list.name).isEqualTo("My List")
       assertThat(list.items.map { it.tmdbId }).containsExactly(1000L)
-      assertThat(result.report.skippedListItems).isEqualTo(1)
+
+      val unmatched = result.report.unmatchedLists.single()
+      assertThat(unmatched.title).isEqualTo("My List")
+      assertThat(unmatched.isEntireListUnmatched).isFalse()
+      assertThat(unmatched.unmatchedItems.map { it.title }).containsExactly("Serie TV non archiviata (ID: 300)")
     }
 
   @Test

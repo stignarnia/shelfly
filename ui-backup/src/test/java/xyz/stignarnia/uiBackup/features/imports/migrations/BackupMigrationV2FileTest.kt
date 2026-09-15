@@ -105,7 +105,7 @@ class BackupMigrationV2FileTest {
         |  episodes   ${scheme.shows.progressEpisodes.size} / ${source.shows.progressEpisodes.size}
         |  seasons    ${scheme.shows.progressSeasons.size} / ${source.shows.progressSeasons.size}
         |  s.ratings  ${scheme.shows.ratingsSeasons.size} / ${source.shows.ratingsSeasons.size}
-        |  lists      ${scheme.lists.lists.size}, items skipped: ${report.skippedListItems}
+        |  lists      ${scheme.lists.lists.size}, items skipped: ${report.unmatchedLists.sumOf { it.unmatchedItems.size }}
         """.trimMargin(),
       )
     }

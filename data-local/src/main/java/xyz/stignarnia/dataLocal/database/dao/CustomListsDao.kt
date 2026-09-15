@@ -57,6 +57,9 @@ interface CustomListsDao : CustomListsLocalDataSource {
   @Query("DELETE FROM custom_lists WHERE id == :id")
   override suspend fun deleteById(id: Long)
 
+  @Query("DELETE FROM custom_lists WHERE id_slug == :idSlug")
+  override suspend fun deleteByIdSlug(idSlug: String)
+
   @Query("DELETE FROM custom_lists")
   override suspend fun deleteAll()
 }

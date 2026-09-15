@@ -7,6 +7,7 @@ import timber.log.Timber
 import xyz.stignarnia.common.dispatchers.CoroutineDispatchers
 import xyz.stignarnia.common.extensions.dateIsoStringFromMillis
 import xyz.stignarnia.dataLocal.LocalDataSource
+import xyz.stignarnia.repository.ListsRepository
 import xyz.stignarnia.uiBackup.model.BackupList
 import xyz.stignarnia.uiBackup.model.BackupListItem
 import xyz.stignarnia.uiBackup.model.BackupLists
@@ -17,6 +18,7 @@ internal class BackupExportListsRunner
   constructor(
     private val dispatchers: CoroutineDispatchers,
     private val localSource: LocalDataSource,
+    private val listsRepository: ListsRepository,
   ) : BackupExportRunner<BackupLists>() {
     override suspend fun run(): BackupLists {
       Timber.d("Initialized.")
@@ -30,6 +32,8 @@ internal class BackupExportListsRunner
       withContext(dispatchers.IO) {
         val exportLists = mutableListOf<BackupList>()
 
+        // The exported slug is what every other device and every later import recognises the list by.
+        listsRepository.ensureIdentities()
         val localLists = localSource.customLists.getAll()
 
         localLists.forEach { list ->

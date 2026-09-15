@@ -46,12 +46,14 @@
   <string name="textBackupImportResultShowsImported">Serier importeret</string>
   <string name="textBackupImportResultMoviesUnmatched">Film ikke importeret</string>
   <string name="textBackupImportResultShowsUnmatched">Serier ikke importeret</string>
+  <string name="textBackupImportResultListsUnmatched">Lister ikke importeret</string>
   <string name="textBackupImportResultTapToView">Tryk for at se uoverensstemmende elementer</string>
   <string name="textBackupImportResultAllMatched">Alle elementer matchet</string>
   <string name="textBackupImportResultDone">Færdig</string>
   <string name="textBackupImportShowLastReport">Vis seneste importrapport</string>
   <string name="textBackupUnmatchedMoviesTitle">Uoverensstemmende film</string>
   <string name="textBackupUnmatchedShowsTitle">Uoverensstemmende serier</string>
+  <string name="textBackupUnmatchedListsTitle">Uoverensstemmende lister</string>
   <string name="textBackupImportUnmatchedEmpty">Ingen uoverensstemmende elementer i denne kategori.</string>
   <string name="textBackupImportRatingsDisclaimer">Bemærk: vurderinger importeres ikke.</string>
   <string name="textBackupUnmatchedSeasonSingle">Sæson %d</string>
@@ -64,5 +66,9 @@
   <plurals name="textBackupUnmatchedEpisodesSubtitle">
     <item quantity="one">%d ikke-matchet episode</item>
     <item quantity="other">%d ikke-matchede episoder</item>
+  </plurals>
+  <plurals name="textBackupUnmatchedListItemsSubtitle">
+    <item quantity="one">%d ikke-matchet element</item>
+    <item quantity="other">%d ikke-matchede elementer</item>
   </plurals>
 </resources>
