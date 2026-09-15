@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  The android:targetPackage values below are only right for release.
+  GenerateShortcutsTask in app/build.gradle.kts rewrites them to each variant's own package, so the debug build's shortcuts open the debug app.
+  They have to stay literals: the launcher stores a @string reference unresolved and the shortcut then fails to start.
+-->
 <shortcuts
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"

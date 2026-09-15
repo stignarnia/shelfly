@@ -5,3 +5,4 @@ Shelfly 4.0.8
 • Fixed vertical alignment on the backup export screen.
 • Improved styling of the WebDAV import button on the backup import screen.
 • Fixed deleting a list leaving you on the deleted list's screen.
+• Updated the long-press shortcut icons on the app launcher to the Shelfly blue.

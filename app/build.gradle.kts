@@ -1,5 +1,15 @@
+import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.provider.ValueSource
 import org.gradle.api.provider.ValueSourceParameters
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
+import org.gradle.api.tasks.TaskAction
 import java.util.Properties
 
 plugins {
@@ -139,6 +149,35 @@ abstract class BuildStamp : ValueSource<Long, ValueSourceParameters.None> {
   override fun obtain(): Long = System.currentTimeMillis() / 1000L
 }
 
+// Rewrites src/main/res/xml/shortcuts.xml for one variant, with every android:targetPackage set to that variant's package.
+// The launcher takes that attribute only as a literal - a @string reference is stored unresolved and the shortcut fails to start - and the debug package carries a suffix, so the checked-in file can only be right for release.
+// The checked-in file stays a real resource so that lint and check-config.sh still see the icons and labels it references.
+// The rewritten copy wins at merge time because generated resource directories are merged after src/main/res, the same way src/debug/res is.
+abstract class GenerateShortcutsTask : DefaultTask() {
+  @get:InputFile
+  @get:PathSensitive(PathSensitivity.RELATIVE)
+  abstract val shortcutsFile: RegularFileProperty
+
+  @get:Input
+  abstract val applicationId: Property<String>
+
+  @get:OutputDirectory
+  abstract val outputDirectory: DirectoryProperty
+
+  @TaskAction
+  fun generate() {
+    val original = shortcutsFile.get().asFile.readText()
+    val targetPackage = Regex("android:targetPackage=\"[^\"]*\"")
+    // Without this a reformatted file would pass through unchanged and ship debug shortcuts that open the release app again.
+    check(targetPackage.containsMatchIn(original)) { "No android:targetPackage found in ${shortcutsFile.get().asFile}" }
+    val shortcuts = original.replace(targetPackage) { "android:targetPackage=\"${applicationId.get()}\"" }
+    outputDirectory.file("xml/shortcuts.xml").get().asFile.apply {
+      parentFile.mkdirs()
+      writeText(shortcuts)
+    }
+  }
+}
+
 extensions.configure<com.android.build.api.variant.ApplicationAndroidComponentsExtension>("androidComponents") {
   onVariants(selector().withBuildType("debug")) { variant ->
     val releaseName = libs.versions.versionName.get()
@@ -147,6 +186,15 @@ extensions.configure<com.android.build.api.variant.ApplicationAndroidComponentsE
       output.versionCode.set(stamp.map { it.toInt() })
       output.versionName.set(stamp.map { "$releaseName-debug-$it" })
     }
+  }
+
+  onVariants { variant ->
+    val generateShortcuts =
+      tasks.register<GenerateShortcutsTask>("generate${variant.name.replaceFirstChar { it.uppercase() }}Shortcuts") {
+        shortcutsFile.set(layout.projectDirectory.file("src/main/res/xml/shortcuts.xml"))
+        applicationId.set(variant.applicationId)
+      }
+    variant.sources.res?.addGeneratedSourceDirectory(generateShortcuts, GenerateShortcutsTask::outputDirectory)
   }
 }
 
