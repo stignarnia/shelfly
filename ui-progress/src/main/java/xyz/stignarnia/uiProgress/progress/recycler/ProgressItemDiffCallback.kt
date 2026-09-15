@@ -9,7 +9,6 @@ class ProgressItemDiffCallback : DiffUtil.ItemCallback<ProgressListItem>() {
   ): Boolean {
     val areEpisodes = oldItem is ProgressListItem.Episode && newItem is ProgressListItem.Episode
     val areHeaders = oldItem is ProgressListItem.Header && newItem is ProgressListItem.Header
-    val areFilters = oldItem is ProgressListItem.Filters && newItem is ProgressListItem.Filters
     return when {
       areEpisodes -> {
         areItemsTheSame(
@@ -25,10 +24,6 @@ class ProgressItemDiffCallback : DiffUtil.ItemCallback<ProgressListItem>() {
         )
       }
 
-      areFilters -> {
-        true
-      }
-
       else -> {
         false
       }
@@ -41,7 +36,6 @@ class ProgressItemDiffCallback : DiffUtil.ItemCallback<ProgressListItem>() {
   ) = when (oldItem) {
     is ProgressListItem.Episode -> areContentsTheSame(oldItem, (newItem as ProgressListItem.Episode))
     is ProgressListItem.Header -> areContentsTheSame(oldItem, (newItem as ProgressListItem.Header))
-    is ProgressListItem.Filters -> areContentsTheSame(oldItem, (newItem as ProgressListItem.Filters))
   }
 
   private fun areItemsTheSame(
@@ -78,15 +72,4 @@ class ProgressItemDiffCallback : DiffUtil.ItemCallback<ProgressListItem>() {
     newItem: ProgressListItem.Header,
   ) = oldItem.textResId == newItem.textResId &&
     oldItem.isCollapsed == newItem.isCollapsed
-
-  private fun areContentsTheSame(
-    oldItem: ProgressListItem.Filters,
-    newItem: ProgressListItem.Filters,
-  ): Boolean =
-    oldItem.sortOrder == newItem.sortOrder &&
-      oldItem.sortType == newItem.sortType &&
-      oldItem.newAtTop == newItem.newAtTop &&
-      oldItem.isUpcoming == newItem.isUpcoming &&
-      oldItem.isUpcomingEnabled == newItem.isUpcomingEnabled &&
-      oldItem.isOnHold == newItem.isOnHold
 }

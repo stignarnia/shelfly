@@ -24,12 +24,12 @@ import xyz.stignarnia.uiBase.common.WidgetsProvider
 import xyz.stignarnia.uiBase.common.sheets.sortOrder.SortOrderBottomSheet
 import xyz.stignarnia.uiBase.utilities.NavigationHost
 import xyz.stignarnia.uiBase.utilities.events.Event
-import xyz.stignarnia.uiBase.utilities.events.MessageEvent
 import xyz.stignarnia.uiBase.utilities.extensions.add
 import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
 import xyz.stignarnia.uiBase.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.uiBase.utilities.extensions.fadeIf
 import xyz.stignarnia.uiBase.utilities.extensions.fadeIn
+import xyz.stignarnia.uiBase.utilities.extensions.followTranslationY
 import xyz.stignarnia.uiBase.utilities.extensions.gone
 import xyz.stignarnia.uiBase.utilities.extensions.navigateToSafe
 import xyz.stignarnia.uiBase.utilities.extensions.onClick
@@ -119,6 +119,16 @@ class ProgressFragment :
         it.gone()
         showTip(Tip.WATCHLIST_ITEM_PIN)
       }
+      progressFiltersView.run {
+        onSortChipClicked = viewModel::loadSortOrder
+        upcomingChipClicked = viewModel::setUpcomingFilter
+        onHoldChipClicked = viewModel::setOnHoldFilter
+        // The header tabs scroll away under a behaviour in the parent screen's layout, and the chips have to go with them.
+        // While searching the chips also move down with the list, clear of the search field.
+        followTranslationY(requireMainFragment().tabs) {
+          if (isSearching) dimenToPx(R.dimen.progressSearchLocalOffset).toFloat() else 0F
+        }
+      }
     }
   }
 
@@ -129,7 +139,6 @@ class ProgressFragment :
       withSpanSizeLookup { position ->
         when (adapter?.getItems()?.get(position)) {
           is ProgressListItem.Header -> gridSpanSize
-          is ProgressListItem.Filters -> gridSpanSize
           is ProgressListItem.Episode -> 1
           else -> throw IllegalStateException()
         }
@@ -148,9 +157,6 @@ class ProgressFragment :
           )
         },
         checkClickListener = viewModel::onEpisodeChecked,
-        sortChipClickListener = viewModel::loadSortOrder,
-        upcomingChipClickListener = viewModel::setUpcomingFilter,
-        onHoldChipClickListener = viewModel::setOnHoldFilter,
         missingTranslationListener = viewModel::findMissingTranslation,
         missingImageListener = { item: ProgressListItem, force -> viewModel.findMissingImage(item, force) },
         listChangeListener = {
@@ -175,28 +181,30 @@ class ProgressFragment :
           R.dimen.progressTabsViewPaddingNoModes
         }
 
-      val tabsMargin =
-        if (moviesEnabled) {
-          R.dimen.progressSearchViewPadding
-        } else {
-          R.dimen.progressSearchViewPaddingNoModes
-        }
-
       root.doOnApplyWindowInsets { _, insets, _, _ ->
         val tabletOffset = if (isTablet) dimenToPx(R.dimen.spaceMedium) else 0
         val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
         statusBarHeight = systemInsets.top + tabletOffset
 
-        // The slot opens past the tabs, taking the space out of the list's top padding so the content barely shifts.
+        // The chips sit where the list used to start, and the list now starts below them.
+        val filtersTop = statusBarHeight + dimenToPx(recyclerPadding)
+        (progressFiltersView.layoutParams as ViewGroup.MarginLayoutParams)
+          .updateMargins(top = filtersTop)
+
+        // The slot opens past the filter chips, taking the space out of the list's top padding so the content barely shifts.
+        // The same sum Discover uses from its own chips, so the ring sits in the same place under them on both screens.
         progressOverscroll.openHeight =
-          statusBarHeight +
-          dimenToPx(tabsMargin) +
-          dimenToPx(R.dimen.spaceBig) +
-          dimenToPx(R.dimen.spaceMedium) +
+          filtersTop +
+          dimenToPx(R.dimen.chipHeight) +
           dimenToPx(R.dimen.discoverOverscrollGap) +
           dimenToPx(R.dimen.overscrollActionProgress) +
           dimenToPx(R.dimen.spaceMedium)
-        val listTopGap = statusBarHeight + dimenToPx(recyclerPadding)
+        // The gap under the header also has to clear the chips: their top padding, the chips themselves and their bottom padding.
+        val listTopGap =
+          filtersTop +
+            dimenToPx(R.dimen.spaceSmall) +
+            dimenToPx(R.dimen.chipHeight) +
+            dimenToPx(R.dimen.progressFiltersPaddingBottom)
         progressOverscroll.restHeight = listTopGap
         // The list spans the whole window and carries the gap under the floating header as its own top padding, so an item scrolled past the gap slides under the header and off the top of the screen.
         // OverscrollRecyclerLayout moves it by the slot's extra height, leaving its resting position at the top of the window.
@@ -214,20 +222,11 @@ class ProgressFragment :
   private fun setupOverscroll() {
     if (view == null) return
     with(binding.progressOverscroll) {
-      onTriggered = { onOverscrollTriggered() }
+      onTriggered = { viewModel.startBackupNow() }
       attach(binding.progressRecycler, viewLifecycleOwner)
-      follow(requireMainFragment().tabs)
+      // The chips are what the ring is placed under, so they are what it has to leave with when the header scrolls away.
+      follow(binding.progressFiltersView)
     }
-  }
-
-  /**
-   * The pull completed.
-   * Runs a backup, and a sync with the user's other devices, when one can actually run - and says so either way, because a gesture that animates and then does nothing is worse than no gesture.
-   */
-  private fun onOverscrollTriggered() {
-    val started = viewModel.startBackupNow()
-    val message = if (started) R.string.textBackupStarted else R.string.textBackupNotConfigured
-    showSnack(MessageEvent.Info(message))
   }
 
   private fun openSortOrderDialog(
@@ -292,14 +291,16 @@ class ProgressFragment :
           val resetScroll = scrollReset?.consume() == true
           adapter?.setItems(it, resetScroll)
           renderFiltersEmpty(uiState)
-          progressEmptyView.root.visibleIf(it.isEmpty() && !isLoading && !isSearching)
-          progressTipItem.visibleIf(it.count() >= 3 && !isTipShown(Tip.WATCHLIST_ITEM_PIN))
+          progressEmptyView.root.visibleIf(it.isEmpty() && filters == null && !isLoading && !isSearching)
+          progressTipItem.visibleIf(it.count() >= 2 && !isTipShown(Tip.WATCHLIST_ITEM_PIN))
           progressRecycler
             .fadeIn(
               duration = 200,
               withHardware = true,
             ).add(animations)
         }
+        progressFiltersView.visibleIf(filters != null)
+        filters?.let { progressFiltersView.bind(it) }
       }
       isOverScrollEnabled.let {
         if (it) {
@@ -326,7 +327,7 @@ class ProgressFragment :
       binding.progressEmptyFilterView.fadeIf(items.isEmpty(), duration = 200)
       return
     }
-    val hasActiveFilter = items.filterIsInstance<ProgressListItem.Filters>().firstOrNull()?.hasActiveFilters() == true
+    val hasActiveFilter = uiState.filters?.hasActiveFilters() == true
     val isFilterEmpty = hasActiveFilter && items.filterIsInstance<ProgressListItem.Episode>().isEmpty()
     binding.progressEmptyFilterView.fadeIf(isFilterEmpty, duration = 200)
   }

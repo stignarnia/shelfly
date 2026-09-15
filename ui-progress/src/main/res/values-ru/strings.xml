@@ -13,7 +13,5 @@
 
   <string name="tabHistory">История</string>
 
-  <string name="textBackupStarted">Создание резервной копии и синхронизация с другими устройствами…</string>
-  <string name="textBackupNotConfigured">Настройте сервер WebDAV в Настройках, чтобы создать резервную копию отсюда.</string>
   <string name="textHistoryEmpty">В вашей истории ничего нет.</string>
 </resources>

@@ -7,6 +7,7 @@ import xyz.stignarnia.uiProgress.progress.recycler.ProgressListItem
 
 data class ProgressUiState(
   val items: List<ProgressListItem>? = null,
+  val filters: ProgressFilters? = null,
   val isLoading: Boolean = false,
   val isOverScrollEnabled: Boolean = false,
   val scrollReset: Event<Boolean>? = null,

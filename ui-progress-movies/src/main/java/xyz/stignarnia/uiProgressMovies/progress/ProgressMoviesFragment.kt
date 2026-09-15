@@ -24,16 +24,17 @@ import xyz.stignarnia.uiBase.common.WidgetsProvider
 import xyz.stignarnia.uiBase.common.sheets.sortOrder.SortOrderBottomSheet
 import xyz.stignarnia.uiBase.utilities.NavigationHost
 import xyz.stignarnia.uiBase.utilities.events.Event
-import xyz.stignarnia.uiBase.utilities.events.MessageEvent
 import xyz.stignarnia.uiBase.utilities.extensions.add
 import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
 import xyz.stignarnia.uiBase.utilities.extensions.doOnApplyWindowInsets
 import xyz.stignarnia.uiBase.utilities.extensions.fadeIf
 import xyz.stignarnia.uiBase.utilities.extensions.fadeIn
+import xyz.stignarnia.uiBase.utilities.extensions.followTranslationY
 import xyz.stignarnia.uiBase.utilities.extensions.gone
 import xyz.stignarnia.uiBase.utilities.extensions.onClick
 import xyz.stignarnia.uiBase.utilities.extensions.requireSerializable
 import xyz.stignarnia.uiBase.utilities.extensions.updatePaddingAndAnchorTop
+import xyz.stignarnia.uiBase.utilities.extensions.visibleIf
 import xyz.stignarnia.uiBase.utilities.extensions.withSpanSizeLookup
 import xyz.stignarnia.uiBase.utilities.viewBinding
 import xyz.stignarnia.uiModel.ProgressDateSelectionType.ALWAYS_ASK
@@ -57,7 +58,6 @@ import xyz.stignarnia.uiProgressMovies.main.MovieCheckActionUiEvent
 import xyz.stignarnia.uiProgressMovies.main.ProgressMoviesMainFragment
 import xyz.stignarnia.uiProgressMovies.main.ProgressMoviesMainViewModel
 import xyz.stignarnia.uiProgressMovies.main.RequestWidgetsUpdate
-import xyz.stignarnia.uiProgressMovies.progress.recycler.ProgressMovieListItem.FiltersItem
 import xyz.stignarnia.uiProgressMovies.progress.recycler.ProgressMovieListItem.HeaderItem
 import xyz.stignarnia.uiProgressMovies.progress.recycler.ProgressMovieListItem.MovieItem
 import xyz.stignarnia.uiProgressMovies.progress.recycler.ProgressMoviesAdapter
@@ -112,6 +112,14 @@ class ProgressMoviesFragment :
       progressMoviesEmptyView.progressMoviesEmptyDiscoverButton.onClick {
         (requireActivity() as NavigationHost).navigateToDiscover()
       }
+      progressMoviesFiltersView.run {
+        onSortChipClicked = ::openSortOrderDialog
+        // The header tabs scroll away under a behaviour in the parent screen's layout, and the chips have to go with them.
+        // While searching the chips also move down with the list, clear of the search field.
+        followTranslationY(requireMainFragment().tabs) {
+          if (isSearching) dimenToPx(R.dimen.progressMoviesSearchLocalOffset).toFloat() else 0F
+        }
+      }
     }
   }
 
@@ -122,7 +130,6 @@ class ProgressMoviesFragment :
       withSpanSizeLookup { position ->
         when (adapter?.getItems()?.get(position)) {
           is HeaderItem -> gridSpanSize
-          is FiltersItem -> gridSpanSize
           is MovieItem -> 1
           else -> throw IllegalStateException()
         }
@@ -132,7 +139,6 @@ class ProgressMoviesFragment :
       ProgressMoviesAdapter(
         itemClickListener = { requireMainFragment().openMovieDetails(it.movie) },
         itemLongClickListener = { requireMainFragment().openMovieMenu(it.movie) },
-        sortChipClickListener = ::openSortOrderDialog,
         missingImageListener = viewModel::findMissingImage,
         missingTranslationListener = viewModel::findMissingTranslation,
         checkClickListener = { viewModel.onMovieChecked(it.movie) },
@@ -152,20 +158,11 @@ class ProgressMoviesFragment :
   private fun setupOverscroll() {
     if (view == null) return
     with(binding.progressMoviesOverscroll) {
-      onTriggered = { onOverscrollTriggered() }
+      onTriggered = { viewModel.startBackupNow() }
       attach(binding.progressMoviesMainRecycler, viewLifecycleOwner)
-      follow(requireMainFragment().tabs)
+      // The chips are what the ring is placed under, so they are what it has to leave with when the header scrolls away.
+      follow(binding.progressMoviesFiltersView)
     }
-  }
-
-  /**
-   * The pull completed.
-   * Runs a backup, and a sync with the user's other devices, when one can actually run - and says so either way, because a gesture that animates and then does nothing is worse than no gesture.
-   */
-  private fun onOverscrollTriggered() {
-    val started = viewModel.startBackupNow()
-    val message = if (started) R.string.textBackupStarted else R.string.textBackupNotConfigured
-    showSnack(MessageEvent.Info(message))
   }
 
   private fun setupInsets() {
@@ -176,17 +173,26 @@ class ProgressMoviesFragment :
 
         statusBarHeight = systemInsets.top + tabletOffset
 
-        // The slot opens past the tabs, taking the space out of the list's top padding so the content barely shifts.
+        // The chips sit where the list used to start, and the list now starts below them.
+        val filtersTop = statusBarHeight + dimenToPx(R.dimen.progressMoviesTabsViewPadding)
+        (progressMoviesFiltersView.layoutParams as ViewGroup.MarginLayoutParams)
+          .updateMargins(top = filtersTop)
+
+        // The slot opens past the filter chips, taking the space out of the list's top padding so the content barely shifts.
+        // The same sum Discover uses from its own chips, so the ring sits in the same place under them on both screens.
         progressMoviesOverscroll.openHeight =
-          statusBarHeight +
-          dimenToPx(R.dimen.progressMoviesSearchViewPadding) +
-          dimenToPx(R.dimen.spaceBig) +
-          dimenToPx(R.dimen.spaceMedium) +
+          filtersTop +
+          dimenToPx(R.dimen.chipHeight) +
           dimenToPx(R.dimen.discoverOverscrollGap) +
           dimenToPx(R.dimen.overscrollActionProgress) +
           dimenToPx(R.dimen.spaceMedium)
 
-        val listTopGap = statusBarHeight + dimenToPx(R.dimen.progressMoviesTabsViewPadding)
+        // The gap under the header also has to clear the chips: their top padding, the chips themselves and their bottom padding.
+        val listTopGap =
+          filtersTop +
+            dimenToPx(R.dimen.spaceSmall) +
+            dimenToPx(R.dimen.chipHeight) +
+            dimenToPx(R.dimen.progressMoviesFiltersPaddingBottom)
         progressMoviesOverscroll.restHeight = listTopGap
         // The list spans the whole window and carries the gap under the floating header as its own top padding, so an item scrolled past the gap slides under the header and off the top of the screen.
         // OverscrollRecyclerLayout moves it by the slot's extra height, leaving its resting position at the top of the window.
@@ -264,6 +270,8 @@ class ProgressMoviesFragment :
             withHardware = true,
           ).add(animations)
       }
+      binding.progressMoviesFiltersView.visibleIf(filters != null)
+      filters?.let { binding.progressMoviesFiltersView.bind(it) }
       isOverScrollEnabled.let {
         if (it) {
           setupOverscroll()

@@ -11,6 +11,7 @@ import android.graphics.drawable.RippleDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewPropertyAnimator
+import android.view.ViewTreeObserver
 import android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
 import android.widget.TextView
 import androidx.annotation.Px
@@ -143,6 +144,37 @@ fun View.updateTopMargin(margin: Int) {
 
 fun View.updateBottomMargin(margin: Int) {
   (layoutParams as ViewGroup.MarginLayoutParams).updateMargins(bottom = margin)
+}
+
+/**
+ * Keeps this view's vertical translation equal to [source]'s plus [offset], read once a frame.
+ *
+ * For a view that has to move with a header it cannot share a scroll behaviour with, such as a header that lives in a parent screen's CoordinatorLayout.
+ * A behaviour animates the header through a ViewPropertyAnimator, which writes the render node without going through setTranslationY, so the change cannot be observed and is read before every draw instead.
+ * The listener follows this view's attachment to the window, so nothing has to be removed by hand when the view goes away.
+ */
+fun View.followTranslationY(
+  source: View,
+  offset: () -> Float = { 0F },
+) {
+  val listener =
+    ViewTreeObserver.OnPreDrawListener {
+      val target = source.translationY + offset()
+      if (translationY != target) translationY = target
+      true
+    }
+  if (isAttachedToWindow) viewTreeObserver.addOnPreDrawListener(listener)
+  addOnAttachStateChangeListener(
+    object : View.OnAttachStateChangeListener {
+      override fun onViewAttachedToWindow(view: View) {
+        view.viewTreeObserver.addOnPreDrawListener(listener)
+      }
+
+      override fun onViewDetachedFromWindow(view: View) {
+        view.viewTreeObserver.removeOnPreDrawListener(listener)
+      }
+    },
+  )
 }
 
 fun TextView.setTextFade(

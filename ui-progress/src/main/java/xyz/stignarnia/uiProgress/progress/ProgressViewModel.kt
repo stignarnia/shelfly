@@ -8,7 +8,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -20,6 +19,7 @@ import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.uiBackup.features.export.workers.BackupExportScheduleWorker
 import xyz.stignarnia.uiBase.utilities.events.Event
 import xyz.stignarnia.uiBase.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
+import xyz.stignarnia.uiBase.utilities.extensions.combine
 import xyz.stignarnia.uiBase.utilities.extensions.findReplace
 import xyz.stignarnia.uiBase.viewmodel.ChannelsDelegate
 import xyz.stignarnia.uiBase.viewmodel.DefaultChannelsDelegate
@@ -55,6 +55,7 @@ class ProgressViewModel
     private var loadItemsJob: Job? = null
 
     private val itemsState = MutableStateFlow<List<ProgressListItem>?>(null)
+    private val filtersState = MutableStateFlow<ProgressFilters?>(null)
     private val loadingState = MutableStateFlow(false)
     private val overscrollState = MutableStateFlow(false)
     private val scrollState = MutableStateFlow(Event(false))
@@ -135,6 +136,8 @@ class ProgressViewModel
 
           val items = itemsCase.loadItems(searchQuery ?: "")
           itemsState.value = items
+          // The chips stay up over an empty list while a filter is on, so that filter can be turned off again.
+          filtersState.value = itemsCase.loadFilters().takeIf { items.isNotEmpty() || it.hasActiveFilters() }
           loadingState.value = false
           scrollState.value = Event(resetScroll)
           overscrollState.value = isWebDavConfigured() && items.isNotEmpty()
@@ -222,16 +225,15 @@ class ProgressViewModel
     /**
      * Runs a backup now, in response to the pull gesture on this screen.
      *
-     * Returns false when there is nothing to back up to, so the gesture can say so rather than appearing to work.
+     * Does nothing when there is nothing to back up to, which only happens if the WebDAV settings changed after the gesture was attached.
      * WorkManager keeps a run already in flight, so repeated pulls do not stack up.
      */
-    fun startBackupNow(): Boolean {
-      if (!isWebDavConfigured()) return false
+    fun startBackupNow() {
+      if (!isWebDavConfigured()) return
       // Set here, synchronously, so the indicator takes over from the pull in the frame the gesture completes.
       // Waiting for WorkManager to register the request and report it back would blink the indicator out and in again.
       backupProgressState.value = 0
       BackupExportScheduleWorker.scheduleOneOff(workManager)
-      return true
     }
 
     private fun updateItem(newItem: ProgressListItem) {
@@ -246,17 +248,19 @@ class ProgressViewModel
     val uiState =
       combine(
         itemsState,
+        filtersState,
         scrollState,
         sortOrderState,
         loadingState,
         overscrollState,
-      ) { s1, s2, s3, s4, s5 ->
+      ) { s1, s2, s3, s4, s5, s6 ->
         ProgressUiState(
           items = s1,
-          scrollReset = s2,
-          sortOrder = s3,
-          isLoading = s4,
-          isOverScrollEnabled = s5,
+          filters = s2,
+          scrollReset = s3,
+          sortOrder = s4,
+          isLoading = s5,
+          isOverScrollEnabled = s6,
         )
       }.stateIn(
         scope = viewModelScope,

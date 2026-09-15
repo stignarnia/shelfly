@@ -134,7 +134,7 @@ class ProgressMoviesItemsCaseTest : BaseMockTest() {
       val result = SUT.loadItems(searchQuery = "")
 
       assertThat(result).isNotEmpty()
-      assertThat(result).hasSize(2)
+      assertThat(result).hasSize(1)
     }
 
   @Test
@@ -156,8 +156,8 @@ class ProgressMoviesItemsCaseTest : BaseMockTest() {
 
       val result = SUT.loadItems(searchQuery = "test")
 
-      assertThat(result).hasSize(2)
-      assertThat(result[1].movie).isEqualTo(movie1)
+      assertThat(result).hasSize(1)
+      assertThat(result[0].movie).isEqualTo(movie1)
     }
   }
 
@@ -188,10 +188,10 @@ class ProgressMoviesItemsCaseTest : BaseMockTest() {
       val result = SUT.loadItems(searchQuery = "")
 
       assertThat(result).isNotEmpty()
-      assertThat((result[1] as ProgressMovieListItem.MovieItem).isPinned).isTrue()
-      assertThat(result[1].movie).isEqualTo(movie2)
+      assertThat((result[0] as ProgressMovieListItem.MovieItem).isPinned).isTrue()
+      assertThat(result[0].movie).isEqualTo(movie2)
+      assertThat((result[1] as ProgressMovieListItem.MovieItem).isPinned).isFalse()
       assertThat((result[2] as ProgressMovieListItem.MovieItem).isPinned).isFalse()
-      assertThat((result[3] as ProgressMovieListItem.MovieItem).isPinned).isFalse()
     }
   }
 
@@ -223,16 +223,16 @@ class ProgressMoviesItemsCaseTest : BaseMockTest() {
       coEvery { sorter.sort(any(), any()) } returns compareByDescending { it.movie.rating }
 
       val result1 = SUT.loadItems(searchQuery = "")
-      assertThat(result1[1].movie).isEqualTo(movie3)
-      assertThat(result1[2].movie).isEqualTo(movie1)
-      assertThat(result1[3].movie).isEqualTo(movie2)
+      assertThat(result1[0].movie).isEqualTo(movie3)
+      assertThat(result1[1].movie).isEqualTo(movie1)
+      assertThat(result1[2].movie).isEqualTo(movie2)
 
       coEvery { sorter.sort(any(), any()) } returns compareBy { it.movie.title }
 
       val result2 = SUT.loadItems(searchQuery = "")
-      assertThat(result2[1].movie).isEqualTo(movie1)
-      assertThat(result2[2].movie).isEqualTo(movie2)
-      assertThat(result2[3].movie).isEqualTo(movie3)
+      assertThat(result2[0].movie).isEqualTo(movie1)
+      assertThat(result2[1].movie).isEqualTo(movie2)
+      assertThat(result2[2].movie).isEqualTo(movie3)
     }
   }
 
@@ -272,9 +272,9 @@ class ProgressMoviesItemsCaseTest : BaseMockTest() {
 
       val result = SUT.loadItems(searchQuery = "")
 
-      assertThat(result).hasSize(2)
-      assertThat(result[1].movie).isEqualTo(movie1)
-      assertThat((result[1] as ProgressMovieListItem.MovieItem).translation).isNull()
+      assertThat(result).hasSize(1)
+      assertThat(result[0].movie).isEqualTo(movie1)
+      assertThat((result[0] as ProgressMovieListItem.MovieItem).translation).isNull()
     }
   }
 
@@ -293,9 +293,9 @@ class ProgressMoviesItemsCaseTest : BaseMockTest() {
 
       val result = SUT.loadItems(searchQuery = "")
 
-      assertThat(result).hasSize(2)
-      assertThat(result[1].movie).isEqualTo(movie1)
-      assertThat((result[1] as ProgressMovieListItem.MovieItem).translation).isEqualTo(Translation.EMPTY)
+      assertThat(result).hasSize(1)
+      assertThat(result[0].movie).isEqualTo(movie1)
+      assertThat((result[0] as ProgressMovieListItem.MovieItem).translation).isEqualTo(Translation.EMPTY)
     }
   }
 }

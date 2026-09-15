@@ -14,6 +14,7 @@ import xyz.stignarnia.uiModel.SortType.ASCENDING
 import xyz.stignarnia.uiModel.SortType.DESCENDING
 import xyz.stignarnia.uiProgressMovies.R
 import xyz.stignarnia.uiProgressMovies.databinding.ViewProgressMoviesFiltersBinding
+import xyz.stignarnia.uiProgressMovies.progress.ProgressMoviesFilters
 
 class ProgressMoviesFiltersView : FrameLayout {
   constructor(context: Context) : super(context)
@@ -28,20 +29,17 @@ class ProgressMoviesFiltersView : FrameLayout {
     layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
   }
 
-  fun bind(
-    sortOrder: SortOrder,
-    sortType: SortType,
-  ) {
+  fun bind(filters: ProgressMoviesFilters) {
     with(binding) {
       val sortIcon =
-        when (sortType) {
+        when (filters.sortType) {
           ASCENDING -> R.drawable.ic_arrow_alt_up
           DESCENDING -> R.drawable.ic_arrow_alt_down
         }
       progressFiltersSortingChip.closeIcon = ContextCompat.getDrawable(context, sortIcon)
-      progressFiltersSortingChip.text = context.getText(sortOrder.displayString)
+      progressFiltersSortingChip.text = context.getText(filters.sortOrder.displayString)
       progressFiltersSortingChip.onClick {
-        onSortChipClicked?.invoke(sortOrder, sortType)
+        onSortChipClicked?.invoke(filters.sortOrder, filters.sortType)
       }
     }
   }

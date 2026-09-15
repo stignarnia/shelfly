@@ -6,7 +6,6 @@ import xyz.stignarnia.uiModel.Image
 import xyz.stignarnia.uiModel.ImageType
 import xyz.stignarnia.uiModel.Movie
 import xyz.stignarnia.uiModel.SortOrder
-import xyz.stignarnia.uiModel.SortType
 import xyz.stignarnia.uiModel.SpoilersSettings
 import xyz.stignarnia.uiModel.Translation
 import java.time.format.DateTimeFormatter
@@ -46,13 +45,4 @@ sealed class ProgressMovieListItem(
 
     override fun isSameAs(other: MovieListItem) = textResId == (other as? HeaderItem)?.textResId
   }
-
-  data class FiltersItem(
-    val sortOrder: SortOrder,
-    val sortType: SortType,
-  ) : ProgressMovieListItem(
-      movie = Movie.EMPTY,
-      image = Image.createUnknown(ImageType.POSTER),
-      isLoading = false,
-    )
 }

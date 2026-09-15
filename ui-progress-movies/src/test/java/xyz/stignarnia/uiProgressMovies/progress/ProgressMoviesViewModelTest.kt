@@ -28,6 +28,8 @@ import xyz.stignarnia.uiBase.utilities.events.MessageEvent
 import xyz.stignarnia.uiModel.Image
 import xyz.stignarnia.uiModel.ImageType
 import xyz.stignarnia.uiModel.Movie
+import xyz.stignarnia.uiModel.SortOrder
+import xyz.stignarnia.uiModel.SortType
 import xyz.stignarnia.uiModel.SpoilersSettings
 import xyz.stignarnia.uiProgressMovies.BaseMockTest
 import xyz.stignarnia.uiProgressMovies.main.ProgressMoviesMainUiState
@@ -66,6 +68,7 @@ class ProgressMoviesViewModelTest : BaseMockTest() {
     // The constructor starts watching the manual backup run.
     // Nothing here is about that indicator, so the work stream stays empty - without a stub the mock throws on the collect and takes down every test in the class.
     every { workManager.getWorkInfosForUniqueWorkFlow(any()) } returns emptyFlow()
+    every { itemsCase.loadFilters() } returns ProgressMoviesFilters(SortOrder.NAME, SortType.ASCENDING)
 
     settingsRepository =
       SettingsRepository(

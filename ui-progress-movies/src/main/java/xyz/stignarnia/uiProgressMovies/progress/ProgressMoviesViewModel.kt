@@ -56,6 +56,7 @@ class ProgressMoviesViewModel
     private val scrollState = MutableStateFlow(Event(false))
     private val sortOrderState = MutableStateFlow<Event<Pair<SortOrder, SortType>>?>(null)
     private val overscrollState = MutableStateFlow(false)
+    private val filtersState = MutableStateFlow<ProgressMoviesFilters?>(null)
     private val backupProgressState = MutableStateFlow<Int?>(null)
 
     private var searchQuery: String? = null
@@ -141,6 +142,7 @@ class ProgressMoviesViewModel
         viewModelScope.launch {
           val items = itemsCase.loadItems(searchQuery ?: "")
           itemsState.value = items
+          filtersState.value = if (items.isNotEmpty()) itemsCase.loadFilters() else null
           scrollState.value = Event(resetScroll)
           overscrollState.value = isWebDavConfigured() && items.isNotEmpty()
           eventChannel.send(RequestWidgetsUpdate)
@@ -198,16 +200,15 @@ class ProgressMoviesViewModel
     /**
      * Runs a backup now, in response to the pull gesture on this screen.
      *
-     * Returns false when there is nothing to back up to, so the gesture can say so rather than appearing to work.
+     * Does nothing when there is nothing to back up to, which only happens if the WebDAV settings changed after the gesture was attached.
      * WorkManager keeps a run already in flight, so repeated pulls do not stack up.
      */
-    fun startBackupNow(): Boolean {
-      if (!isWebDavConfigured()) return false
+    fun startBackupNow() {
+      if (!isWebDavConfigured()) return
       // Set here, synchronously, so the indicator takes over from the pull in the frame the gesture completes.
       // Waiting for WorkManager to register the request and report it back would blink the indicator out and in again.
       backupProgressState.value = 0
       BackupExportScheduleWorker.scheduleOneOff(workManager)
-      return true
     }
 
     private fun updateItem(newItem: ProgressMovieListItem.MovieItem) {
@@ -222,15 +223,17 @@ class ProgressMoviesViewModel
     val uiState =
       combine(
         itemsState,
+        filtersState,
         scrollState,
         sortOrderState,
         overscrollState,
-      ) { s1, s2, s3, s4 ->
+      ) { s1, s2, s3, s4, s5 ->
         ProgressMoviesUiState(
           items = s1,
-          scrollReset = s2,
-          sortOrder = s3,
-          isOverScrollEnabled = s4,
+          filters = s2,
+          scrollReset = s3,
+          sortOrder = s4,
+          isOverScrollEnabled = s5,
         )
       }.stateIn(
         scope = viewModelScope,

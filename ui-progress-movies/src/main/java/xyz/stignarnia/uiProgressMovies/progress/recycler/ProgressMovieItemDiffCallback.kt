@@ -8,7 +8,6 @@ class ProgressMovieItemDiffCallback : DiffUtil.ItemCallback<ProgressMovieListIte
     newItem: ProgressMovieListItem,
   ): Boolean {
     val areMovies = oldItem is ProgressMovieListItem.MovieItem && newItem is ProgressMovieListItem.MovieItem
-    val areFilters = oldItem is ProgressMovieListItem.FiltersItem && newItem is ProgressMovieListItem.FiltersItem
 
     return when {
       areMovies -> {
@@ -16,10 +15,6 @@ class ProgressMovieItemDiffCallback : DiffUtil.ItemCallback<ProgressMovieListIte
           (oldItem),
           (newItem),
         )
-      }
-
-      areFilters -> {
-        true
       }
 
       else -> {
@@ -35,13 +30,6 @@ class ProgressMovieItemDiffCallback : DiffUtil.ItemCallback<ProgressMovieListIte
     when (oldItem) {
       is ProgressMovieListItem.MovieItem -> {
         areContentsTheSame(oldItem, (newItem as ProgressMovieListItem.MovieItem))
-      }
-
-      is ProgressMovieListItem.FiltersItem -> {
-        areContentsTheSame(
-          oldItem,
-          (newItem as ProgressMovieListItem.FiltersItem),
-        )
       }
 
       is ProgressMovieListItem.HeaderItem -> {
@@ -65,11 +53,4 @@ class ProgressMovieItemDiffCallback : DiffUtil.ItemCallback<ProgressMovieListIte
       oldItem.userRating == newItem.userRating &&
       oldItem.spoilers == newItem.spoilers &&
       oldItem.translation == newItem.translation
-
-  private fun areContentsTheSame(
-    oldItem: ProgressMovieListItem.FiltersItem,
-    newItem: ProgressMovieListItem.FiltersItem,
-  ): Boolean =
-    oldItem.sortOrder == newItem.sortOrder &&
-      oldItem.sortType == newItem.sortType
 }

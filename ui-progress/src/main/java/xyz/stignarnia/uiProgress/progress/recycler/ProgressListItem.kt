@@ -11,7 +11,6 @@ import xyz.stignarnia.uiModel.ImageType
 import xyz.stignarnia.uiModel.Season
 import xyz.stignarnia.uiModel.Show
 import xyz.stignarnia.uiModel.SortOrder
-import xyz.stignarnia.uiModel.SortType
 import xyz.stignarnia.uiModel.SpoilersSettings
 import xyz.stignarnia.uiProgress.helpers.TranslationsBundle
 import java.time.format.DateTimeFormatter
@@ -77,20 +76,5 @@ sealed class ProgressListItem(
       UPCOMING,
       ON_HOLD,
     }
-  }
-
-  data class Filters(
-    val sortOrder: SortOrder,
-    val sortType: SortType,
-    val isUpcoming: Boolean,
-    val isUpcomingEnabled: Boolean,
-    val isOnHold: Boolean,
-    val newAtTop: Boolean,
-  ) : ProgressListItem(
-      show = Show.EMPTY,
-      image = Image.createUnknown(ImageType.POSTER),
-      isLoading = false,
-    ) {
-    fun hasActiveFilters() = isUpcoming || isOnHold
   }
 }

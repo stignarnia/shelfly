@@ -6,3 +6,5 @@ Shelfly 4.0.8
 • Improved styling of the WebDAV import button on the backup import screen.
 • Fixed deleting a list leaving you on the deleted list's screen.
 • Updated the long-press shortcut icons on the app launcher to the Shelfly blue.
+• Moved the filter chips on the Progress screens into the header, so they hide and come back with it while scrolling, like in Discover.
+• Placed the pull-to-sync indicator on the Progress screens under the filter chips, and removed the message shown when a sync starts.

@@ -13,7 +13,7 @@ import xyz.stignarnia.uiModel.SortType.ASCENDING
 import xyz.stignarnia.uiModel.SortType.DESCENDING
 import xyz.stignarnia.uiProgress.R
 import xyz.stignarnia.uiProgress.databinding.ViewProgressFiltersBinding
-import xyz.stignarnia.uiProgress.progress.recycler.ProgressListItem
+import xyz.stignarnia.uiProgress.progress.ProgressFilters
 
 class ProgressFiltersView : FrameLayout {
   constructor(context: Context) : super(context)
@@ -43,9 +43,9 @@ class ProgressFiltersView : FrameLayout {
     }
   }
 
-  private lateinit var filters: ProgressListItem.Filters
+  private lateinit var filters: ProgressFilters
 
-  fun bind(filters: ProgressListItem.Filters) {
+  fun bind(filters: ProgressFilters) {
     this.filters = filters
     with(binding) {
       val sortIcon =

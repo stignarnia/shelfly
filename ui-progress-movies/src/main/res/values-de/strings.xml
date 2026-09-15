@@ -6,8 +6,4 @@
   <string name="textMoviesCalendarRecentsEmpty">Es gibt keine kürzlich ausgestrahlten Filme.</string>
   <string name="textDiscoverMovies">Filme entdecken</string>
   <string name="textMoviesProgressEmpty">Dein <b>Fortschritt</b>ist aktuell leer.\n\nTippe auf den <b>Entdecken</b> Tab, um Filme hinzuzufügen.</string>
-
-  <string name="textBackupStarted">Sicherung und Synchronisierung mit Ihren anderen Geräten läuft…</string>
-
-  <string name="textBackupNotConfigured">Richten Sie in den Einstellungen einen WebDAV-Server ein, um von hier aus zu sichern.</string>
 </resources>

@@ -29,6 +29,7 @@ import xyz.stignarnia.uiModel.ProgressType
 import xyz.stignarnia.uiProgress.R
 import xyz.stignarnia.uiProgress.helpers.ProgressItemsSorter
 import xyz.stignarnia.uiProgress.helpers.TranslationsBundle
+import xyz.stignarnia.uiProgress.progress.ProgressFilters
 import xyz.stignarnia.uiProgress.progress.recycler.ProgressListItem
 import xyz.stignarnia.uiProgress.progress.recycler.ProgressListItem.Header.Type
 import javax.inject.Inject
@@ -65,7 +66,7 @@ class ProgressItemsCase
         val progressUpcomingDays = settingsRepository.progressUpcomingDays
         val isUpcomingEnabled = progressUpcomingDays > 0
         val upcomingLimit = nowUtc.plusDays(progressUpcomingDays).toMillis()
-        val filtersItem = loadFiltersItem(isUpcomingEnabled)
+        val filters = loadFilters()
         val spoilers = settingsRepository.spoilers.getAll()
 
         val items =
@@ -97,7 +98,7 @@ class ProgressItemsCase
                   isOnHold = false,
                   spoilers = spoilers,
                   dateFormat = dateFormat,
-                  sortOrder = filtersItem.sortOrder,
+                  sortOrder = filters.sortOrder,
                 )
               }
             }.awaitAll()
@@ -161,18 +162,11 @@ class ProgressItemsCase
             }.awaitAll()
 
         val filteredItems = filterByQuery(searchQuery, filledItems)
-        val groupedItems =
-          groupItems(
-            items = filteredItems,
-            filters = filtersItem,
-            isWidget = isWidget,
-          )
-
-        if (groupedItems.isNotEmpty() || filtersItem.hasActiveFilters()) {
-          listOf(filtersItem) + groupedItems
-        } else {
-          groupedItems
-        }
+        groupItems(
+          items = filteredItems,
+          filters = filters,
+          isWidget = isWidget,
+        )
       }
 
     suspend fun loadWidgetItems(searchQuery: String = "") = loadItems(searchQuery, isWidget = true)
@@ -230,7 +224,7 @@ class ProgressItemsCase
 
     private suspend fun groupItems(
       items: List<ProgressListItem.Episode>,
-      filters: ProgressListItem.Filters,
+      filters: ProgressFilters,
       isWidget: Boolean,
     ): List<ProgressListItem> =
       coroutineScope {
@@ -310,13 +304,16 @@ class ProgressItemsCase
         }
       }
 
-    private fun loadFiltersItem(isUpcomingEnabled: Boolean): ProgressListItem.Filters =
-      ProgressListItem.Filters(
+    /**
+     * The filters as the user last set them, for the chips floating in the header above the list.
+     */
+    fun loadFilters() =
+      ProgressFilters(
         newAtTop = settingsRepository.sorting.progressShowsNewAtTop,
         sortOrder = settingsRepository.sorting.progressShowsSortOrder,
         sortType = settingsRepository.sorting.progressShowsSortType,
         isUpcoming = settingsRepository.filters.progressShowsUpcoming,
-        isUpcomingEnabled = isUpcomingEnabled,
+        isUpcomingEnabled = settingsRepository.progressUpcomingDays > 0,
         isOnHold = settingsRepository.filters.progressShowsOnHold,
       )
   }

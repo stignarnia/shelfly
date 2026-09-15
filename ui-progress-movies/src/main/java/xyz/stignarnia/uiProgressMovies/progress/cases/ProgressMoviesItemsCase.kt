@@ -14,10 +14,9 @@ import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.uiBase.dates.DateFormatProvider
 import xyz.stignarnia.uiBase.utilities.extensions.removeDiacritics
 import xyz.stignarnia.uiModel.ImageType
-import xyz.stignarnia.uiModel.SortOrder
-import xyz.stignarnia.uiModel.SortType
 import xyz.stignarnia.uiModel.Translation
 import xyz.stignarnia.uiProgressMovies.helpers.ProgressMoviesItemsSorter
+import xyz.stignarnia.uiProgressMovies.progress.ProgressMoviesFilters
 import xyz.stignarnia.uiProgressMovies.progress.recycler.ProgressMovieListItem
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -36,7 +35,7 @@ class ProgressMoviesItemsCase
     private val dateFormatProvider: DateFormatProvider,
     private val sorter: ProgressMoviesItemsSorter,
   ) {
-    suspend fun loadItems(searchQuery: String) =
+    suspend fun loadItems(searchQuery: String): List<ProgressMovieListItem> =
       withContext(dispatchers.IO) {
         val language = translationsRepository.getLanguage()
         val dateFormat = dateFormatProvider.loadFullDayFormat()
@@ -72,23 +71,16 @@ class ProgressMoviesItemsCase
 
         val filtered = filterItems(searchQuery, items)
         val sorted = filtered.sortedWith(sorter.sort(sortOrder, sortType))
-        val preparedItems = prepareItems(sorted)
-
-        if (preparedItems.isNotEmpty()) {
-          val filtersItem = loadFiltersItem(sortOrder, sortType)
-          listOf(filtersItem) + preparedItems
-        } else {
-          preparedItems
-        }
+        prepareItems(sorted)
       }
 
-    private fun loadFiltersItem(
-      sortOrder: SortOrder,
-      sortType: SortType,
-    ): ProgressMovieListItem.FiltersItem =
-      ProgressMovieListItem.FiltersItem(
-        sortOrder = sortOrder,
-        sortType = sortType,
+    /**
+     * The sorting as the user last set it, for the chips floating in the header above the list.
+     */
+    fun loadFilters() =
+      ProgressMoviesFilters(
+        sortOrder = settingsRepository.sorting.progressMoviesSortOrder,
+        sortType = settingsRepository.sorting.progressMoviesSortType,
       )
 
     private fun filterItems(

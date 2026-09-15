@@ -84,18 +84,13 @@ class ProgressWidgetRows(
 
   suspend fun load() {
     palette = WidgetPalettes.resolve(context, widgetId, settingsRepository)
-    val items =
-      itemsCase
-        .loadWidgetItems()
-        .filterNot { it is ProgressListItem.Filters }
-    adapterItems.replace(items)
+    adapterItems.replace(itemsCase.loadWidgetItems())
   }
 
   fun viewAt(position: Int) =
     when (val item = adapterItems[position]) {
       is ProgressListItem.Episode -> createItemRemoteView(item)
       is ProgressListItem.Header -> createHeaderRemoteView(item)
-      else -> throw IllegalStateException()
     }
 
   private fun createItemRemoteView(item: ProgressListItem.Episode): RemoteViews {

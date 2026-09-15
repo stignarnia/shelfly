@@ -16,7 +16,7 @@
     android:layout_marginStart="@dimen/itemMarginHorizontal"
     android:layout_marginEnd="@dimen/itemMarginHorizontal"
     android:paddingTop="@dimen/spaceSmall"
-    android:paddingBottom="10dp"
+    android:paddingBottom="@dimen/progressMoviesFiltersPaddingBottom"
     app:singleLine="true"
   >
 

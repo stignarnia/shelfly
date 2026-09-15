@@ -12,8 +12,6 @@
 
   <string name="tabHistory">Histórico</string>
 
-  <string name="textBackupStarted">A criar cópia de segurança e a sincronizar com os seus outros dispositivos…</string>
-  <string name="textBackupNotConfigured">Configure um servidor WebDAV nas Definições para efetuar cópias de segurança a partir daqui.</string>
   <string name="textHistoryEmpty">Não há nada no seu histórico.</string>
 
   <string name="textPremieres">Estreias</string>

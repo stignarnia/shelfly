@@ -48,6 +48,19 @@
 
   </xyz.stignarnia.uiBase.common.views.OverscrollRecyclerLayout>
 
+  <!--
+    The chips float over the list like Discover's, so the indicator opens under them instead of pushing them down.
+    The header tabs they hide with live in the parent screen, so the fragment keeps the two in step rather than giving the chips a scroll behaviour of their own.
+  -->
+  <xyz.stignarnia.uiProgressMovies.progress.views.ProgressMoviesFiltersView
+    android:id="@+id/progressMoviesFiltersView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/progressMoviesTabsViewPadding"
+    android:visibility="gone"
+    tools:visibility="visible"
+  />
+
   <include
     android:id="@+id/progressMoviesEmptyView"
     layout="@layout/layout_progress_movies_empty"
