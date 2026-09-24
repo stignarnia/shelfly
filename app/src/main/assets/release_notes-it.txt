@@ -6,3 +6,4 @@ Shelfly 4.0.9
 • I testi che comparivano in inglese o in italiano qualunque fosse la tua lingua ora sono tradotti: errori di backup, sincronizzazione e ripristino, il riepilogo dell'importazione, le categorie di notifica nelle impostazioni di Android, i nomi dei paesi, il menu di condivisione e questa schermata delle novità.
 • Per rimuovere un elemento da una lista con uno scorrimento ora serve un gesto più lungo e deliberato: dietro l'elemento compare uno sfondo rosso con l'icona di un cestino, il telefono vibra quando sei andato abbastanza lontano e, al rilascio, l'elemento viene rimosso solo se non sei tornato indietro. Uno scorrimento rapido non rimuove più nulla.
 • Quando la libreria è vuota e hai configurato un server WebDAV, la schermata Progressi mostra un pulsante Sincronizza che ripristina il backup più recente con un tocco.
+• Durante il ripristino di un backup, da file o da WebDAV, la schermata ora ti ricorda di non uscire dall'app finché non è terminato.

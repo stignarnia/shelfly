@@ -102,6 +102,7 @@
   <string name="textBackupImportUnsupportedVersion">تستخدم هذه النسخة الاحتياطية تنسيقًا غير مدعوم (الإصدار %1$d).</string>
   <string name="textBackupImportInvalidFile">هذا الملف ليس نسخة احتياطية صالحة.</string>
   <string name="textBackupImportInitializing">جارٍ الاستيراد…</string>
+  <string name="textBackupImportStayInApp">لا تغادر التطبيق حتى ينتهي الاستيراد.</string>
   <string name="textBackupReasonTitleBlank">العنوان في النسخة الاحتياطية فارغ.</string>
   <string name="textBackupReasonNoResults">لم يتم العثور على نتائج في TMDB.</string>
   <string name="textBackupReasonOnlyMoviesFound">تم العثور على أفلام فقط في TMDB، دون مسلسلات.</string>

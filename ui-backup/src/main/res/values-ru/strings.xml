@@ -95,6 +95,7 @@
   <string name="textBackupImportUnsupportedVersion">Эта резервная копия использует неподдерживаемый формат (версия %1$d).</string>
   <string name="textBackupImportInvalidFile">Этот файл не является резервной копией.</string>
   <string name="textBackupImportInitializing">Импорт…</string>
+  <string name="textBackupImportStayInApp">Не выходите из приложения, пока импорт не завершится.</string>
   <string name="textBackupReasonTitleBlank">Название в резервной копии пустое.</string>
   <string name="textBackupReasonNoResults">На TMDB ничего не найдено.</string>
   <string name="textBackupReasonOnlyMoviesFound">На TMDB найдены только фильмы, сериалов нет.</string>

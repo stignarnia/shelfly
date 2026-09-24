@@ -94,6 +94,7 @@
   <string name="textBackupImportUnsupportedVersion">Ta kopia zapasowa używa nieobsługiwanego formatu (wersja %1$d).</string>
   <string name="textBackupImportInvalidFile">Ten plik nie jest prawidłową kopią zapasową.</string>
   <string name="textBackupImportInitializing">Importowanie…</string>
+  <string name="textBackupImportStayInApp">Nie opuszczaj aplikacji, dopóki import się nie zakończy.</string>
   <string name="textBackupReasonTitleBlank">Tytuł w kopii zapasowej jest pusty.</string>
   <string name="textBackupReasonNoResults">Nie znaleziono wyników w TMDB.</string>
   <string name="textBackupReasonOnlyMoviesFound">W TMDB znaleziono tylko filmy, żadnych seriali.</string>

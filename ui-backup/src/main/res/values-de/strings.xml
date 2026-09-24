@@ -86,6 +86,7 @@
   <string name="textBackupImportUnsupportedVersion">Dieses Backup verwendet ein nicht unterstütztes Format (Version %1$d).</string>
   <string name="textBackupImportInvalidFile">Diese Datei ist kein gültiges Backup.</string>
   <string name="textBackupImportInitializing">Wird importiert…</string>
+  <string name="textBackupImportStayInApp">Verlasse die App nicht, bevor der Import abgeschlossen ist.</string>
   <string name="textBackupReasonTitleBlank">Der Titel im Backup ist leer.</string>
   <string name="textBackupReasonNoResults">Keine Ergebnisse auf TMDB gefunden.</string>
   <string name="textBackupReasonOnlyMoviesFound">Auf TMDB nur Filme gefunden, keine Serien.</string>

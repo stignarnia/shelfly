@@ -90,6 +90,7 @@
   <string name="textBackupImportUnsupportedVersion">Cette sauvegarde utilise un format non pris en charge (version %1$d).</string>
   <string name="textBackupImportInvalidFile">Ce fichier n\'est pas une sauvegarde valide.</string>
   <string name="textBackupImportInitializing">Importation…</string>
+  <string name="textBackupImportStayInApp">Ne quittez pas l\'application avant la fin de l\'importation.</string>
   <string name="textBackupReasonTitleBlank">Le titre dans la sauvegarde est vide.</string>
   <string name="textBackupReasonNoResults">Aucun résultat trouvé sur TMDB.</string>
   <string name="textBackupReasonOnlyMoviesFound">Seuls des films ont été trouvés sur TMDB, aucune série.</string>

@@ -6,3 +6,4 @@ Shelfly 4.0.9
 • Dilinizden bağımsız olarak İngilizce veya İtalyanca görünen metinler artık çevrildi: yedekleme, senkronizasyon ve geri yükleme hataları, içe aktarma özeti, Android ayarlarındaki bildirim kategorileri, ülke adları, paylaşım menüsü ve bu yenilikler ekranı.
 • Bir öğeyi listeden kaydırarak kaldırmak artık daha uzun ve bilinçli bir hareket gerektiriyor: öğenin arkasında çöp kutusu simgeli kırmızı bir arka plan belirir, yeterince kaydırdığınızda telefon titrer ve bıraktığınızda öğe yalnızca geri çekmediyseniz kaldırılır. Hızlı bir kaydırma artık hiçbir şeyi kaldırmaz.
 • Kitaplığınız boşken ve bir WebDAV sunucusu ayarlanmışsa, İlerleme ekranı artık en son yedeğinizi tek dokunuşla geri yükleyen bir Senkronize et düğmesi gösteriyor.
+• Bir yedek geri yüklenirken, dosyadan veya WebDAV üzerinden, ekran artık işlem bitene kadar uygulamadan çıkmamanızı hatırlatıyor.

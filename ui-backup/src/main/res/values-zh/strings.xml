@@ -82,6 +82,7 @@
   <string name="textBackupImportUnsupportedVersion">此备份使用了不受支持的格式（版本 %1$d）。</string>
   <string name="textBackupImportInvalidFile">此文件不是有效的备份。</string>
   <string name="textBackupImportInitializing">正在导入…</string>
+  <string name="textBackupImportStayInApp">导入完成前请勿离开应用。</string>
   <string name="textBackupReasonTitleBlank">备份中的标题为空。</string>
   <string name="textBackupReasonNoResults">在 TMDB 上未找到结果。</string>
   <string name="textBackupReasonOnlyMoviesFound">在 TMDB 上只找到电影，没有剧集。</string>

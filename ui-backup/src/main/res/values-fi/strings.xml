@@ -86,6 +86,7 @@
   <string name="textBackupImportUnsupportedVersion">Tämä varmuuskopio käyttää muotoa, jota ei tueta (versio %1$d).</string>
   <string name="textBackupImportInvalidFile">Tämä tiedosto ei ole kelvollinen varmuuskopio.</string>
   <string name="textBackupImportInitializing">Tuodaan…</string>
+  <string name="textBackupImportStayInApp">Älä poistu sovelluksesta ennen kuin tuonti on valmis.</string>
   <string name="textBackupReasonTitleBlank">Varmuuskopion nimi on tyhjä.</string>
   <string name="textBackupReasonNoResults">TMDB:stä ei löytynyt tuloksia.</string>
   <string name="textBackupReasonOnlyMoviesFound">TMDB:stä löytyi vain elokuvia, ei sarjoja.</string>

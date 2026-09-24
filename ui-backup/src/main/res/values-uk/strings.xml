@@ -94,6 +94,7 @@
   <string name="textBackupImportUnsupportedVersion">Ця резервна копія має непідтримуваний формат (версія %1$d).</string>
   <string name="textBackupImportInvalidFile">Цей файл не є резервною копією.</string>
   <string name="textBackupImportInitializing">Імпорт…</string>
+  <string name="textBackupImportStayInApp">Не виходьте із застосунку, доки імпорт не завершиться.</string>
   <string name="textBackupReasonTitleBlank">Назва в резервній копії порожня.</string>
   <string name="textBackupReasonNoResults">На TMDB нічого не знайдено.</string>
   <string name="textBackupReasonOnlyMoviesFound">На TMDB знайдено лише фільми, серіалів немає.</string>

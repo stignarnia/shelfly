@@ -6,3 +6,4 @@ Shelfly 4.0.9
 • Textos que apareciam em inglês ou italiano independentemente do seu idioma agora estão traduzidos: erros de backup, sincronização e restauração, o resumo da importação, as categorias de notificação nas configurações do Android, os nomes dos países, o menu de compartilhamento e esta tela de novidades.
 • Remover um item de uma lista deslizando agora exige um gesto mais longo e deliberado: um fundo vermelho com um ícone de lixeira aparece atrás do item, o celular vibra quando você desliza o suficiente e, ao soltar, o item só é removido se você não tiver voltado. Um deslize rápido não remove mais nada.
 • Quando a sua biblioteca está vazia e há um servidor WebDAV configurado, o ecrã de Progresso mostra agora um botão Sincronizar que restaura a sua cópia de segurança mais recente com um toque.
+• Durante o restauro de uma cópia de segurança, a partir de um ficheiro ou do WebDAV, o ecrã lembra-o agora de não sair da aplicação até terminar.

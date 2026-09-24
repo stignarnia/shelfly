@@ -175,6 +175,25 @@
       tools:text="Lorem ipsum..."
     />
 
+    <TextView
+      android:id="@+id/stayInAppText"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/spaceBig"
+      android:layout_marginTop="@dimen/spaceNormal"
+      android:layout_marginEnd="@dimen/spaceBig"
+      android:gravity="center"
+      android:text="@string/textBackupImportStayInApp"
+      android:textColor="?android:attr/textColorPrimary"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      android:visibility="gone"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/statusText"
+      tools:visibility="visible"
+    />
+
     <com.google.android.material.button.MaterialButton
       android:id="@+id/showLastReportButton"
       style="@style/SecondaryMaterialButton"

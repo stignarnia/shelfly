@@ -90,6 +90,7 @@
   <string name="textBackupImportUnsupportedVersion">Esta copia de seguridad usa un formato no compatible (versión %1$d).</string>
   <string name="textBackupImportInvalidFile">Este archivo no es una copia de seguridad válida.</string>
   <string name="textBackupImportInitializing">Importando…</string>
+  <string name="textBackupImportStayInApp">No salgas de la aplicación hasta que termine la importación.</string>
   <string name="textBackupReasonTitleBlank">El título en la copia de seguridad está vacío.</string>
   <string name="textBackupReasonNoResults">No se encontraron resultados en TMDB.</string>
   <string name="textBackupReasonOnlyMoviesFound">Solo se encontraron películas en TMDB, ninguna serie.</string>

@@ -86,6 +86,7 @@
   <string name="textBackupImportUnsupportedVersion">Denne sikkerhedskopi bruger et format, der ikke understøttes (version %1$d).</string>
   <string name="textBackupImportInvalidFile">Denne fil er ikke en gyldig sikkerhedskopi.</string>
   <string name="textBackupImportInitializing">Importerer…</string>
+  <string name="textBackupImportStayInApp">Forlad ikke appen, før importen er færdig.</string>
   <string name="textBackupReasonTitleBlank">Titlen i sikkerhedskopien er tom.</string>
   <string name="textBackupReasonNoResults">Ingen resultater fundet på TMDB.</string>
   <string name="textBackupReasonOnlyMoviesFound">Kun film fundet på TMDB, ingen serier.</string>

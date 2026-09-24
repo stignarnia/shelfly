@@ -90,6 +90,7 @@
   <string name="textBackupImportUnsupportedVersion">Această copie de rezervă folosește un format neacceptat (versiunea %1$d).</string>
   <string name="textBackupImportInvalidFile">Acest fișier nu este o copie de rezervă validă.</string>
   <string name="textBackupImportInitializing">Se importă…</string>
+  <string name="textBackupImportStayInApp">Nu părăsi aplicația până nu se termină importul.</string>
   <string name="textBackupReasonTitleBlank">Titlul din copia de rezervă este gol.</string>
   <string name="textBackupReasonNoResults">Niciun rezultat găsit pe TMDB.</string>
   <string name="textBackupReasonOnlyMoviesFound">Pe TMDB s-au găsit doar filme, niciun serial.</string>

@@ -216,6 +216,8 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
   private fun renderImportStatus(uiState: BackupImportUiState) {
     with(binding) {
       statusText.visibleIf(uiState.isImporting != Idle)
+      // The import runs in this screen's scope, so leaving the app lets the system reclaim it and cancel the import midway.
+      stayInAppText.visibleIf(uiState.isImporting != Idle)
       statusText.text =
         when (val status = uiState.isImporting) {
           is Idle -> {

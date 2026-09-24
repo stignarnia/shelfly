@@ -87,6 +87,7 @@
   <string name="textBackupImportUnsupportedVersion">Bu yedek desteklenmeyen bir biçim kullanıyor (sürüm %1$d).</string>
   <string name="textBackupImportInvalidFile">Bu dosya geçerli bir yedek değil.</string>
   <string name="textBackupImportInitializing">İçe aktarılıyor…</string>
+  <string name="textBackupImportStayInApp">İçe aktarma bitene kadar uygulamadan çıkmayın.</string>
   <string name="textBackupReasonTitleBlank">Yedekteki başlık boş.</string>
   <string name="textBackupReasonNoResults">TMDB\'de sonuç bulunamadı.</string>
   <string name="textBackupReasonOnlyMoviesFound">TMDB\'de yalnızca film bulundu, dizi yok.</string>
