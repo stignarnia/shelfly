@@ -210,7 +210,7 @@ class ListDetailsFragment :
       addItemDecoration(ListDetailsListItemDecoration(requireContext(), R.dimen.spaceSmall))
     }
 
-    val touchCallback = ReorderListCallback(adapter as ReorderListCallbackAdapter)
+    val touchCallback = ReorderListCallback(requireContext(), adapter as ReorderListCallbackAdapter)
     touchHelper = ItemTouchHelper(touchCallback)
     touchHelper?.attachToRecyclerView(binding.fragmentListDetailsRecycler)
   }
