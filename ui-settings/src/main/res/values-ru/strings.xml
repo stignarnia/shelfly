@@ -130,10 +130,5 @@
   <string name="textSettingsWebDavTest">Проверить подключение</string>
   <string name="textSettingsWebDavTesting">Проверка…</string>
   <string name="textSettingsWebDavConnected">Подключено. Папка доступна для записи.</string>
-  <string name="textSettingsWebDavErrorAuth">Ошибка аутентификации. Проверьте имя пользователя и пароль.</string>
-  <string name="textSettingsWebDavErrorNotFound">Папка не найдена и не может быть создана. Проверьте URL.</string>
-  <string name="textSettingsWebDavErrorTls">Не удалось установить защищенное соединение. Сертификат сервера не является доверенным.</string>
-  <string name="textSettingsWebDavErrorUnreachable">Не удалось подключиться к серверу. Проверьте адрес и соединение.</string>
-  <string name="textSettingsWebDavErrorUnexpected">Сервер вернул неожиданный ответ.</string>
   <string name="errorNotificationSettingsUnavailable">Не удалось открыть настройки уведомлений.</string>
 </resources>

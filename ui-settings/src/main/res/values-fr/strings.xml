@@ -129,10 +129,5 @@
   <string name="textSettingsWebDavTest">Tester la connexion</string>
   <string name="textSettingsWebDavTesting">Test en cours…</string>
   <string name="textSettingsWebDavConnected">Connecté. Le dossier est accessible et modifiable.</string>
-  <string name="textSettingsWebDavErrorAuth">Échec de l\'authentification. Vérifiez le nom d\'utilisateur et le mot de passe.</string>
-  <string name="textSettingsWebDavErrorNotFound">Dossier introuvable et création impossible. Vérifiez l\'URL.</string>
-  <string name="textSettingsWebDavErrorTls">Impossible d\'établir une connexion sécurisée. Le certificat du serveur n\'est pas approuvé.</string>
-  <string name="textSettingsWebDavErrorUnreachable">Impossible de joindre le serveur. Vérifiez l\'adresse et votre connexion.</string>
-  <string name="textSettingsWebDavErrorUnexpected">Le serveur a répondu de manière inattendue.</string>
   <string name="errorNotificationSettingsUnavailable">Impossible d\'ouvrir les paramètres de notification.</string>
 </resources>

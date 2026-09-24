@@ -126,4 +126,16 @@
   <string name="errorNoInternetConnection">Nu există conexiune la Internet. Vă rugăm să verificați conexiunea.</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">Înapoi sus</string>
+
+  <string name="textNotificationChannelGeneral">Informații generale</string>
+  <string name="textNotificationChannelGeneralDescription">Informații generale și anunțuri</string>
+  <string name="textNotificationChannelShows">Informații despre seriale</string>
+  <string name="textNotificationChannelShowsDescription">Informații legate de serialele tale</string>
+  <string name="textNotificationChannelEpisodes">Anunțuri despre episoade</string>
+  <string name="textNotificationChannelEpisodesDescription">Anunțuri despre episoade și sezoane</string>
+  <string name="textNotificationChannelMovies">Anunțuri despre filme</string>
+  <string name="textNotificationChannelMoviesDescription">Anunțuri legate de filme</string>
+  <string name="textNotificationChannelSync">Sincronizare și copie de rezervă</string>
+  <string name="textNotificationChannelSyncDescription">Notificări de sincronizare și copie de rezervă</string>
+  <string name="textShareTitle">Distribuie %1$s</string>
 </resources>

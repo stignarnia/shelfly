@@ -1,35 +1,41 @@
 package xyz.stignarnia.uiBase.notifications
 
+import androidx.annotation.StringRes
 import androidx.core.app.NotificationManagerCompat
+import xyz.stignarnia.uiBase.R
 
+/**
+ * The name and description are what Android shows in the app's notification settings.
+ * The id is the enum's name, which Android keeps across launches, so renaming an entry orphans the channel the user has already configured.
+ */
 enum class NotificationChannel(
-  val displayName: String,
-  val description: String,
+  @field:StringRes val displayName: Int,
+  @field:StringRes val description: Int,
   val importance: Int,
 ) {
   GENERAL_INFO(
-    "General Info",
-    "General information and announcements",
+    R.string.textNotificationChannelGeneral,
+    R.string.textNotificationChannelGeneralDescription,
     NotificationManagerCompat.IMPORTANCE_HIGH,
   ),
   SHOWS_INFO(
-    "Shows Info",
-    "Shows related information",
+    R.string.textNotificationChannelShows,
+    R.string.textNotificationChannelShowsDescription,
     NotificationManagerCompat.IMPORTANCE_DEFAULT,
   ),
   EPISODES_ANNOUNCEMENTS(
-    "Episodes Announcements",
-    "Episodes and seasons announcements",
+    R.string.textNotificationChannelEpisodes,
+    R.string.textNotificationChannelEpisodesDescription,
     NotificationManagerCompat.IMPORTANCE_DEFAULT,
   ),
   MOVIES_ANNOUNCEMENTS(
-    "Movies Announcements",
-    "Movies announcements",
+    R.string.textNotificationChannelMovies,
+    R.string.textNotificationChannelMoviesDescription,
     NotificationManagerCompat.IMPORTANCE_DEFAULT,
   ),
   SYNC(
-    "Sync & Backup",
-    "Sync and backup notifications",
+    R.string.textNotificationChannelSync,
+    R.string.textNotificationChannelSyncDescription,
     NotificationManagerCompat.IMPORTANCE_LOW,
   ),
 }

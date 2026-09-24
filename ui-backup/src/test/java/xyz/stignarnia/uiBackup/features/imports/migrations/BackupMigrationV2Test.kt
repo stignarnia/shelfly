@@ -5,6 +5,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import xyz.stignarnia.commonTest.UnconfinedCoroutineDispatchers
 import xyz.stignarnia.uiBackup.BackupConfig.SCHEME_VERSION
+import xyz.stignarnia.uiBackup.features.imports.model.BackupImportText
 
 class BackupMigrationV2Test {
   private val resolver =
@@ -52,7 +53,7 @@ class BackupMigrationV2Test {
       val report = SUT.migrate(fixture()).report
 
       assertThat(report.isEmpty).isFalse()
-      assertThat(report.unmatchedShows.map { it.title }).containsExactly("Gone Show")
+      assertThat(report.unmatchedShows.map { it.title }).containsExactly(BackupImportText.verbatim("Gone Show"))
       assertThat(report.unmatchedMovies).isEmpty()
     }
 
@@ -139,7 +140,7 @@ class BackupMigrationV2Test {
       val unmatched = result.report.unmatchedLists.single()
       assertThat(unmatched.title).isEqualTo("My List")
       assertThat(unmatched.isEntireListUnmatched).isFalse()
-      assertThat(unmatched.unmatchedItems.map { it.title }).containsExactly("Serie TV non archiviata (ID: 300)")
+      assertThat(unmatched.unmatchedItems.map { it.title }).containsExactly(BackupImportText.of(BackupImportText.Message.SHOW_LEGACY_ID, 300L))
     }
 
   @Test
@@ -185,8 +186,8 @@ private class FakeCatalogIdResolver(
   private val movies: Map<String, Long> = emptyMap(),
 ) : CatalogIdResolver {
   override suspend fun findShowByTitle(title: String): CatalogMatchResult =
-    shows[title]?.let { CatalogMatchResult.Matched(it) } ?: CatalogMatchResult.Unmatched("No TMDB match")
+    shows[title]?.let { CatalogMatchResult.Matched(it) } ?: CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.NO_RESULTS))
 
   override suspend fun findMovieByTitle(title: String): CatalogMatchResult =
-    movies[title]?.let { CatalogMatchResult.Matched(it) } ?: CatalogMatchResult.Unmatched("No TMDB match")
+    movies[title]?.let { CatalogMatchResult.Matched(it) } ?: CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.NO_RESULTS))
 }

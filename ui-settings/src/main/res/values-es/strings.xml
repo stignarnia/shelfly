@@ -129,10 +129,5 @@
   <string name="textSettingsWebDavTest">Probar conexión</string>
   <string name="textSettingsWebDavTesting">Probando…</string>
   <string name="textSettingsWebDavConnected">Conectado. La carpeta es accesible y tiene permisos de escritura.</string>
-  <string name="textSettingsWebDavErrorAuth">Error de autenticación. Comprueba el usuario y la contraseña.</string>
-  <string name="textSettingsWebDavErrorNotFound">Carpeta no encontrada y no se pudo crear. Comprueba la URL.</string>
-  <string name="textSettingsWebDavErrorTls">No se pudo establecer una conexión segura. El certificado del servidor no es de confianza.</string>
-  <string name="textSettingsWebDavErrorUnreachable">No se pudo conectar con el servidor. Comprueba la dirección y tu conexión.</string>
-  <string name="textSettingsWebDavErrorUnexpected">El servidor respondió de manera inesperada.</string>
   <string name="errorNotificationSettingsUnavailable">No se pudieron abrir los ajustes de notificaciones.</string>
 </resources>

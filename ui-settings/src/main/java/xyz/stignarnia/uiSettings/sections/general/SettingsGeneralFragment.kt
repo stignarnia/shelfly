@@ -2,6 +2,7 @@ package xyz.stignarnia.uiSettings.sections.general
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.ConfigurationCompat
 import androidx.fragment.app.viewModels
 import com.jakewharton.processphoenix.ProcessPhoenix
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +28,7 @@ import xyz.stignarnia.uiSettings.R
 import xyz.stignarnia.uiSettings.databinding.FragmentSettingsGeneralBinding
 import xyz.stignarnia.uiSettings.helpers.AppLanguage
 import xyz.stignarnia.uiSettings.helpers.AppTheme
+import java.text.Collator
 import java.util.Locale
 
 @AndroidEntryPoint
@@ -140,7 +142,7 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
   private fun renderCountry(country: AppCountry?) {
     if (country == null) return
     with(binding) {
-      settingsCountryValue.text = country.displayName
+      settingsCountryValue.text = country.displayName(requireContext())
       settingsCountry.onClick { showCountryDialog(country) }
     }
   }
@@ -224,10 +226,16 @@ class SettingsGeneralFragment : BaseFragment<SettingsGeneralViewModel>(R.layout.
       if (it != columns) viewModel.setTabletColumns(it)
     }
 
-  private fun showCountryDialog(country: AppCountry) =
-    showSingleChoiceModal(AppCountry.entries, country, { it.displayName }) {
+  /**
+   * Sorted by the names as displayed, since the declaration order is alphabetical only in English.
+   */
+  private fun showCountryDialog(country: AppCountry) {
+    val collator = Collator.getInstance(ConfigurationCompat.getLocales(resources.configuration)[0] ?: Locale.getDefault())
+    val countries = AppCountry.entries.sortedWith(compareBy(collator) { it.displayName(requireContext()) })
+    showSingleChoiceModal(countries, country, { it.displayName(requireContext()) }) {
       if (it != country) viewModel.setCountry(it)
     }
+  }
 
   private fun showProgressTypeDialog(type: ProgressNextEpisodeType) =
     showSingleChoiceModal(ProgressNextEpisodeType.entries, type, {

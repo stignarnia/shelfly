@@ -128,10 +128,5 @@
   <string name="textSettingsWebDavTest">Testaa yhteys</string>
   <string name="textSettingsWebDavTesting">Testataan…</string>
   <string name="textSettingsWebDavConnected">Yhdistetty. Kansio on tavoitettavissa ja kirjoitettavissa.</string>
-  <string name="textSettingsWebDavErrorAuth">Todennus epäonnistui. Tarkista käyttäjätunnus ja salasana.</string>
-  <string name="textSettingsWebDavErrorNotFound">Kansiota ei löytynyt eikä sitä voitu luoda. Tarkista URL.</string>
-  <string name="textSettingsWebDavErrorTls">Suojattua yhteyttä ei voitu muodostaa. Palvelimen varmenteeseen ei luoteta.</string>
-  <string name="textSettingsWebDavErrorUnreachable">Palvelimeen ei saatu yhteyttä. Tarkista osoite ja verkkoyhteys.</string>
-  <string name="textSettingsWebDavErrorUnexpected">Palvelin vastasi odottamattomasti.</string>
   <string name="errorNotificationSettingsUnavailable">Ilmoitusasetuksia ei voitu avata.</string>
 </resources>

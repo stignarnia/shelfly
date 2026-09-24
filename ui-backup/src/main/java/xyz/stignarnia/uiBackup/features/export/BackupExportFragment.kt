@@ -14,8 +14,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import xyz.stignarnia.common.extensions.dateFromMillis
 import xyz.stignarnia.common.extensions.toLocalZone
+import xyz.stignarnia.uiBackup.BackupException
 import xyz.stignarnia.uiBackup.R
 import xyz.stignarnia.uiBackup.databinding.FragmentBackupExportBinding
+import xyz.stignarnia.uiBackup.describe
 import xyz.stignarnia.uiBackup.features.export.cases.ReadBackupJsonFromFileUseCase
 import xyz.stignarnia.uiBackup.features.export.cases.WriteBackupJsonToFileUseCase
 import xyz.stignarnia.uiBackup.features.export.model.BackupExportSchedule
@@ -125,7 +127,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
     writeBackupJsonToFileUseCase(requireContext(), uri, content).fold(
       onSuccess = { /* NO-OP */ },
       onFailure = {
-        showErrorSnack(it)
+        showErrorSnack(BackupException(R.string.textBackupErrorWrite, cause = it))
         Timber.e(it)
       },
     )
@@ -145,7 +147,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
           }
       },
       onFailure = {
-        showErrorSnack(it)
+        showErrorSnack(BackupException(R.string.textBackupErrorRead, cause = it))
         Timber.e(it)
       },
     )
@@ -160,7 +162,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
       }
 
-    context?.startActivity(Intent.createChooser(intent, "Share"))
+    context?.startActivity(Intent.createChooser(intent, getString(R.string.textShare)))
   }
 
   private fun showShareSnack(uri: Uri) {
@@ -178,7 +180,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
     val host = (requireActivity() as SnackbarHost).provideSnackbarLayout()
     snackbar =
       host.showErrorSnackbar(
-        message = error.localizedMessage ?: getString(R.string.errorGeneral),
+        message = error.describe(requireContext()),
       )
   }
 
@@ -241,7 +243,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
       }
     return when (val error = status.error) {
       null -> lastSync
-      else -> "$lastSync\n${getString(R.string.textSyncFailed, error)}"
+      else -> "$lastSync\n${getString(R.string.textSyncFailed, getString(error.messageRes))}"
     }
   }
 

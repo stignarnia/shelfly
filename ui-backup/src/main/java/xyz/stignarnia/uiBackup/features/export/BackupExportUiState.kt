@@ -1,6 +1,7 @@
 package xyz.stignarnia.uiBackup.features.export
 
 import android.net.Uri
+import xyz.stignarnia.uiBackup.BackupFailure
 import xyz.stignarnia.uiBackup.features.export.model.BackupExportSchedule
 import java.time.format.DateTimeFormatter
 
@@ -23,7 +24,7 @@ data class SyncStatus(
   val deviceId: String,
   val lastSyncedAt: Long,
   val peers: Set<String>,
-  val error: String?,
+  val error: BackupFailure?,
 )
 
 data class ExportContentState(

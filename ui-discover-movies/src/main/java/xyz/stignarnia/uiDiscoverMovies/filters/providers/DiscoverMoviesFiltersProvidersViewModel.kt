@@ -39,7 +39,7 @@ internal class DiscoverMoviesFiltersProvidersViewModel
 
     private val availableState = MutableStateFlow<List<StreamingProvider>?>(null)
     private val selectedState = MutableStateFlow(emptyList<StreamingProvider>())
-    private val regionState = MutableStateFlow("")
+    private val regionState = MutableStateFlow<AppCountry?>(null)
     private val loadingState = MutableStateFlow(false)
     private val errorState = MutableStateFlow(false)
 
@@ -52,7 +52,7 @@ internal class DiscoverMoviesFiltersProvidersViewModel
         val selected = settingsRepository.filters.discoverMoviesProviders
         val country = settingsRepository.country
         selectedState.value = selected
-        regionState.value = AppCountry.fromCode(country).displayName
+        regionState.value = AppCountry.fromCode(country)
         loadingState.value = true
         try {
           val providers =
@@ -103,7 +103,7 @@ internal class DiscoverMoviesFiltersProvidersViewModel
         DiscoverMoviesFiltersProvidersUiState(
           available = s1,
           selected = s2,
-          regionName = s3,
+          region = s3,
           isLoading = s4,
           isError = s5,
         )

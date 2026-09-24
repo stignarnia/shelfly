@@ -9,10 +9,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import xyz.stignarnia.dataWebdav.WebDavClient
 import xyz.stignarnia.dataWebdav.WebDavCredentials
-import xyz.stignarnia.dataWebdav.WebDavError
 import xyz.stignarnia.repository.settings.SettingsWebDavRepository
+import xyz.stignarnia.uiBackup.BackupFailure
 import xyz.stignarnia.uiModel.BackupTarget
-import xyz.stignarnia.uiSettings.R
 import javax.inject.Inject
 
 @HiltViewModel
@@ -90,7 +89,7 @@ class SettingsBackupViewModel
             connectionTest =
               result.fold(
                 onSuccess = { ConnectionTest.Succeeded },
-                onFailure = { error -> ConnectionTest.Failed(error.toReasonRes()) },
+                onFailure = { error -> ConnectionTest.Failed(BackupFailure.of(error).messageRes) },
               ),
           )
         }
@@ -100,13 +99,4 @@ class SettingsBackupViewModel
     fun clearConnectionTest() {
       state.update { it.copy(connectionTest = ConnectionTest.Idle) }
     }
-
-    private fun Throwable.toReasonRes(): Int =
-      when (this) {
-        is WebDavError.Unauthorized -> R.string.textSettingsWebDavErrorAuth
-        is WebDavError.NotFound -> R.string.textSettingsWebDavErrorNotFound
-        is WebDavError.TlsFailure -> R.string.textSettingsWebDavErrorTls
-        is WebDavError.Unreachable -> R.string.textSettingsWebDavErrorUnreachable
-        else -> R.string.textSettingsWebDavErrorUnexpected
-      }
   }

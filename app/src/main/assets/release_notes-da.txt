@@ -1,0 +1,7 @@
+Shelfly 4.0.9
+
+• Sprogikonet på velkomstskærmen, der blev vist som en sort form, er rettet.
+• Gendannelse fra WebDAV viser nu sikkerhedskopier efter den dato, de blev lavet, i dit valgte datoformat, i stedet for efter filnavn.
+• Når en WebDAV-sikkerhedskopi eller -synkronisering afbrydes, for eksempel fordi forbindelsen falder ud, siger notifikationen det nu tydeligt i stedet for at vise "Job was cancelled".
+• Tekst, der blev vist på engelsk eller italiensk uanset dit sprog, er nu oversat: fejl ved sikkerhedskopiering, synkronisering og gendannelse, importoversigten, notifikationskategorierne i Android-indstillingerne, landenavne, delingsmenuen og denne skærm med nyheder.
+• Det kræver nu et længere, bevidst stryg at fjerne et element fra en liste: en rød baggrund med et skraldespandsikon vises bag elementet, telefonen vibrerer, når du har strøget langt nok, og når du slipper, fjernes elementet kun, hvis du ikke har trukket tilbage. Et hurtigt svirp fjerner ikke længere noget.

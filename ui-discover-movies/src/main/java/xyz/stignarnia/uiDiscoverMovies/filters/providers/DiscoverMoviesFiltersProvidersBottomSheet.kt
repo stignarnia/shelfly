@@ -72,7 +72,7 @@ internal class DiscoverMoviesFiltersProvidersBottomSheet :
     with(uiState) {
       binding.providersRegion.visibleIf(available != null)
       binding.providersError.visibleIf(isError)
-      binding.providersRegion.text = getString(R.string.textDiscoverFilterProvidersRegion, regionName)
+      binding.providersRegion.text = getString(R.string.textDiscoverFilterProvidersRegion, region?.displayName(requireContext()).orEmpty())
       available?.let { renderProviders(it, selected) }
     }
   }

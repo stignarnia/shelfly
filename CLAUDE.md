@@ -331,3 +331,4 @@ To pick up a specific off-by-default check, name it in `lint.enable` instead.
 - **Update it with any user-visible change**: new features, fixed bugs, changed behaviour. Purely internal work (refactors, tooling, tests) does not belong there.
 - **Keep the heading in sync with the version**: the first line is `Shelfly <versionName>`, matching `versionName` in `gradle/libs.versions.toml`. When the version is bumped, start a fresh list under the new heading.
 - **Write for users, not for the diff**: one `•` bullet per change, describing what is different in the app - not which class changed.
+- **Translate every note**: each locale in `androidResources.localeFilters` has its own `release_notes-<locale>.txt` beside the English file, and the What's New screen shows the one for the app's language. `scripts/check-release-notes.sh` fails when one is missing, carries a different heading, or has a different number of notes than the English file.

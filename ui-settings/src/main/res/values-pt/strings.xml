@@ -129,10 +129,5 @@
   <string name="textSettingsWebDavTest">Testar ligação</string>
   <string name="textSettingsWebDavTesting">A testar…</string>
   <string name="textSettingsWebDavConnected">Ligado. A pasta está acessível e com permissão de escrita.</string>
-  <string name="textSettingsWebDavErrorAuth">Falha na autenticação. Verifique o nome de utilizador e a palavra-passe.</string>
-  <string name="textSettingsWebDavErrorNotFound">Pasta não encontrada e não foi possível criá-la. Verifique o URL.</string>
-  <string name="textSettingsWebDavErrorTls">Não foi possível estabelecer uma ligação segura. O certificado do servidor não é fidedigno.</string>
-  <string name="textSettingsWebDavErrorUnreachable">Não foi possível contactar o servidor. Verifique o endereço e a sua ligação.</string>
-  <string name="textSettingsWebDavErrorUnexpected">O servidor respondeu de forma inesperada.</string>
   <string name="errorNotificationSettingsUnavailable">Não foi possível abrir as definições de notificações.</string>
 </resources>

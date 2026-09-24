@@ -12,6 +12,7 @@ import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupMoviesV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupSchemeV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupShowV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupShowsV2
+import xyz.stignarnia.uiBackup.features.imports.model.BackupImportText
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedEpisode
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedItem
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedList
@@ -85,8 +86,8 @@ class BackupMigrationV2
         orphanShowLegacyIds.map { orphanId ->
           UnmatchedLegacyEntry(
             legacyId = orphanId,
-            title = "Serie TV non archiviata (ID: $orphanId)",
-            reason = "Serie TV presente nella cronologia ma non nel catalogo TMDB.",
+            title = BackupImportText.of(BackupImportText.Message.SHOW_LEGACY_ID, orphanId),
+            reason = BackupImportText.of(BackupImportText.Message.ORPHAN_SHOW),
           )
         }
 
@@ -107,12 +108,12 @@ class BackupMigrationV2
                   BackupUnmatchedEpisode(
                     episodeNumber = ep.episodeNumber,
                     seasonNumber = sNum,
-                    reason = "Serie TV non disponibile su TMDB.",
+                    reason = BackupImportText.of(BackupImportText.Message.SHOW_UNAVAILABLE),
                   )
                 }
               BackupUnmatchedSeason(
                 seasonNumber = sNum,
-                reason = if (episodes.isEmpty()) "Stagione non disponibile su TMDB." else null,
+                reason = if (episodes.isEmpty()) BackupImportText.of(BackupImportText.Message.SEASON_UNAVAILABLE) else null,
                 unmatchedEpisodes = episodes.sortedBy { it.episodeNumber },
               )
             }
@@ -202,7 +203,7 @@ class BackupMigrationV2
 
             is CatalogMatchResult.Unmatched -> {
               Timber.w("No TMDB id for \"$title\". Dropping it: ${result.reason}")
-              unmatched += UnmatchedLegacyEntry(legacyId = legacyId, title = title, reason = result.reason)
+              unmatched += UnmatchedLegacyEntry(legacyId = legacyId, title = BackupImportText.verbatim(title), reason = result.reason)
             }
           }
         }
@@ -365,7 +366,7 @@ class BackupMigrationV2
                   unmatchedItems +=
                     BackupUnmatchedItem(
                       title = unmatchedListItemTitle(item),
-                      reason = "Elemento senza ID TMDB e non presente nella collezione.",
+                      reason = BackupImportText.of(BackupImportText.Message.NOT_IN_COLLECTION),
                     )
                   return@mapNotNull null
                 }
@@ -400,15 +401,15 @@ class BackupMigrationV2
     // A v2 list item carries no title, and the collection entry that would have named it is the thing that is missing.
     private fun unmatchedListItemTitle(item: BackupListItemV2) =
       when (item.type) {
-        "show" -> "Serie TV non archiviata (ID: ${item.legacyId})"
-        "movie" -> "Film non archiviato (ID: ${item.legacyId})"
-        else -> "Elemento non archiviato (ID: ${item.legacyId})"
+        "show" -> BackupImportText.of(BackupImportText.Message.SHOW_LEGACY_ID, item.legacyId)
+        "movie" -> BackupImportText.of(BackupImportText.Message.MOVIE_LEGACY_ID, item.legacyId)
+        else -> BackupImportText.of(BackupImportText.Message.ITEM_LEGACY_ID, item.legacyId)
       }
 
     private data class UnmatchedLegacyEntry(
       val legacyId: Long,
-      val title: String,
-      val reason: String,
+      val title: BackupImportText,
+      val reason: BackupImportText,
     )
 
     private data class ResolvedIds(

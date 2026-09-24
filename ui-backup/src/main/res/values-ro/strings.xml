@@ -39,6 +39,12 @@
   <string name="textSyncNotificationSuccessContent">Sincronizare finalizată cu succes.</string>
   <string name="textSyncNotificationErrorTitle">Sincronizare WebDAV eșuată</string>
   <string name="textSyncNotificationErrorContent">Sincronizare eșuată: %s</string>
+  <string name="textSyncNotificationInterruptedContent">Întreruptă înainte de a se putea încheia.</string>
+  <string name="textWebDavErrorAuth">Autentificare eșuată. Verificați numele de utilizator și parola.</string>
+  <string name="textWebDavErrorNotFound">Folderul nu a fost găsit și nu a putut fi creat. Verificați URL-ul.</string>
+  <string name="textWebDavErrorTls">Nu s-a putut stabili o conexiune securizată. Certificatul serverului nu este de încredere.</string>
+  <string name="textWebDavErrorUnreachable">Serverul nu a putut fi contactat. Verificați adresa și conexiunea.</string>
+  <string name="textWebDavErrorUnexpected">Serverul a răspuns neașteptat.</string>
   <string name="textBackupNotificationErrorTitle">Copie de rezervă eșuată</string>
 
   <string name="textBackupImportResultTitle">Rezumat import</string>
@@ -75,4 +81,42 @@
     <item quantity="few">%d elemente nepotrivite</item>
     <item quantity="other">%d de elemente nepotrivite</item>
   </plurals>
+
+  <string name="textBackupErrorUnexpected">A apărut o eroare neașteptată.</string>
+  <string name="textBackupErrorNoServer">Nu este configurat niciun server WebDAV.</string>
+  <string name="textBackupErrorRead">Fișierul copiei de rezervă nu a putut fi citit.</string>
+  <string name="textBackupErrorWrite">Fișierul copiei de rezervă nu a putut fi scris.</string>
+  <string name="textBackupExportValidationFailed">Fișierul exportat nu a putut fi verificat. Încearcă din nou.</string>
+  <string name="textBackupImportUnsupportedVersion">Această copie de rezervă folosește un format neacceptat (versiunea %1$d).</string>
+  <string name="textBackupImportInvalidFile">Acest fișier nu este o copie de rezervă validă.</string>
+  <string name="textBackupImportInitializing">Se importă…</string>
+  <string name="textBackupReasonTitleBlank">Titlul din copia de rezervă este gol.</string>
+  <string name="textBackupReasonNoResults">Niciun rezultat găsit pe TMDB.</string>
+  <string name="textBackupReasonOnlyMoviesFound">Pe TMDB s-au găsit doar filme, niciun serial.</string>
+  <string name="textBackupReasonOnlyShowsFound">Pe TMDB s-au găsit doar seriale, niciun film.</string>
+  <string name="textBackupReasonNoExactMatch">Nicio potrivire exactă a titlului pe TMDB (găsite: %1$s).</string>
+  <string name="textBackupReasonInvalidTmdbId">Intrarea TMDB are un ID lipsă sau invalid.</string>
+  <string name="textBackupReasonLookupFailed">Acest titlu nu a putut fi căutat pe TMDB.</string>
+  <string name="textBackupReasonTmdbApiError">Eroare API TMDB (HTTP %1$s).</string>
+  <string name="textBackupReasonTmdbNetworkError">Eroare de rețea la conectarea la TMDB.</string>
+  <string name="textBackupReasonDetailsNotFound">Detaliile nu au fost găsite pe TMDB (HTTP 404).</string>
+  <string name="textBackupReasonDetailsFailed">Detaliile nu au putut fi obținute de pe TMDB.</string>
+  <string name="textBackupReasonSeasonsNotFound">Sezoanele nu au fost găsite pe TMDB (HTTP 404).</string>
+  <string name="textBackupReasonSeasonsFailed">Sezoanele nu au putut fi încărcate de pe TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFound">Episodul nu a fost găsit pe TMDB.</string>
+  <string name="textBackupReasonSeasonNotFoundAnywhere">Sezonul nu a fost găsit nici local, nici pe TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFoundAnywhere">Episodul nu a fost găsit nici local, nici pe TMDB.</string>
+  <string name="textBackupReasonShowUnavailable">Serialul nu este disponibil pe TMDB.</string>
+  <string name="textBackupReasonSeasonUnavailable">Sezonul nu este disponibil pe TMDB.</string>
+  <string name="textBackupReasonOrphanShow">Este în istoric, dar în nicio colecție, așa că nu a putut fi asociat pe TMDB.</string>
+  <string name="textBackupReasonNotInCollection">Nu are ID TMDB și nu este în nicio colecție.</string>
+  <string name="textBackupReasonListCreateFailed">Lista nu a putut fi creată.</string>
+  <string name="textBackupReasonListMerged">Combinată cu lista existentă cu același nume.</string>
+  <string name="textBackupReasonAddToListFailed">Nu a putut fi adăugat în listă.</string>
+  <string name="textBackupTitleShowLegacyId">Serial în afara colecției (ID: %1$s)</string>
+  <string name="textBackupTitleMovieLegacyId">Film în afara colecției (ID: %1$s)</string>
+  <string name="textBackupTitleItemLegacyId">Element în afara colecției (ID: %1$s)</string>
+  <string name="textBackupTitleShowTmdbId">Serial (ID TMDB: %1$s)</string>
+  <string name="textBackupTitleMovieTmdbId">Film (ID TMDB: %1$s)</string>
+  <string name="textBackupTitleItemTmdbId">ID TMDB: %1$s</string>
 </resources>

@@ -131,4 +131,16 @@
   <string name="errorNoInternetConnection">Немає доступу до інтернету. Перевірте підключення до мережі.</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">Догори</string>
+
+  <string name="textNotificationChannelGeneral">Загальна інформація</string>
+  <string name="textNotificationChannelGeneralDescription">Загальна інформація та оголошення</string>
+  <string name="textNotificationChannelShows">Інформація про серіали</string>
+  <string name="textNotificationChannelShowsDescription">Інформація про ваші серіали</string>
+  <string name="textNotificationChannelEpisodes">Анонси епізодів</string>
+  <string name="textNotificationChannelEpisodesDescription">Анонси епізодів і сезонів</string>
+  <string name="textNotificationChannelMovies">Анонси фільмів</string>
+  <string name="textNotificationChannelMoviesDescription">Оголошення про фільми</string>
+  <string name="textNotificationChannelSync">Синхронізація та резервне копіювання</string>
+  <string name="textNotificationChannelSyncDescription">Сповіщення про синхронізацію та резервне копіювання</string>
+  <string name="textShareTitle">Поділитися: %1$s</string>
 </resources>

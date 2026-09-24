@@ -129,10 +129,5 @@
   <string name="textSettingsWebDavTest">Testare conexiune</string>
   <string name="textSettingsWebDavTesting">Se testează…</string>
   <string name="textSettingsWebDavConnected">Conectat. Folderul este accesibil și se poate scrie în el.</string>
-  <string name="textSettingsWebDavErrorAuth">Autentificare eșuată. Verificați numele de utilizator și parola.</string>
-  <string name="textSettingsWebDavErrorNotFound">Folderul nu a fost găsit și nu a putut fi creat. Verificați URL-ul.</string>
-  <string name="textSettingsWebDavErrorTls">Nu s-a putut stabili o conexiune securizată. Certificatul serverului nu este de încredere.</string>
-  <string name="textSettingsWebDavErrorUnreachable">Serverul nu a putut fi contactat. Verificați adresa și conexiunea.</string>
-  <string name="textSettingsWebDavErrorUnexpected">Serverul a răspuns neașteptat.</string>
   <string name="errorNotificationSettingsUnavailable">Nu s-au putut deschide setările de notificări.</string>
 </resources>

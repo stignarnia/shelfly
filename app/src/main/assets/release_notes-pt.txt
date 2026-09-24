@@ -1,0 +1,7 @@
+Shelfly 4.0.9
+
+• Corrigido o ícone de idioma na tela de boas-vindas, que aparecia como uma forma preta.
+• A restauração pelo WebDAV agora lista os backups pela data em que foram feitos, no formato de data escolhido, em vez do nome do arquivo.
+• Quando um backup ou uma sincronização WebDAV é interrompido, por exemplo porque a conexão cai, a notificação agora informa isso claramente em vez de mostrar "Job was cancelled".
+• Textos que apareciam em inglês ou italiano independentemente do seu idioma agora estão traduzidos: erros de backup, sincronização e restauração, o resumo da importação, as categorias de notificação nas configurações do Android, os nomes dos países, o menu de compartilhamento e esta tela de novidades.
+• Remover um item de uma lista deslizando agora exige um gesto mais longo e deliberado: um fundo vermelho com um ícone de lixeira aparece atrás do item, o celular vibra quando você desliza o suficiente e, ao soltar, o item só é removido se você não tiver voltado. Um deslize rápido não remove mais nada.

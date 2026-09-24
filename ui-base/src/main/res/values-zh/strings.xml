@@ -116,4 +116,16 @@
   <string name="errorNoInternetConnection">无互联网连接。请检查您的网络。</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">返回顶部</string>
+
+  <string name="textNotificationChannelGeneral">常规信息</string>
+  <string name="textNotificationChannelGeneralDescription">常规信息和公告</string>
+  <string name="textNotificationChannelShows">剧集信息</string>
+  <string name="textNotificationChannelShowsDescription">与您的剧集相关的信息</string>
+  <string name="textNotificationChannelEpisodes">剧集更新通知</string>
+  <string name="textNotificationChannelEpisodesDescription">新剧集和新剧季的通知</string>
+  <string name="textNotificationChannelMovies">电影通知</string>
+  <string name="textNotificationChannelMoviesDescription">与电影相关的通知</string>
+  <string name="textNotificationChannelSync">同步和备份</string>
+  <string name="textNotificationChannelSyncDescription">同步和备份通知</string>
+  <string name="textShareTitle">分享 %1$s</string>
 </resources>

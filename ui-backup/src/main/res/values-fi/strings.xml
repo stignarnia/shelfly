@@ -38,6 +38,12 @@
   <string name="textSyncNotificationSuccessContent">Synkronointi suoritettu onnistuneesti.</string>
   <string name="textSyncNotificationErrorTitle">WebDAV-synkronointi epäonnistui</string>
   <string name="textSyncNotificationErrorContent">Synkronointi epäonnistui: %s</string>
+  <string name="textSyncNotificationInterruptedContent">Keskeytyi ennen kuin se ehti valmistua.</string>
+  <string name="textWebDavErrorAuth">Todennus epäonnistui. Tarkista käyttäjätunnus ja salasana.</string>
+  <string name="textWebDavErrorNotFound">Kansiota ei löytynyt eikä sitä voitu luoda. Tarkista URL.</string>
+  <string name="textWebDavErrorTls">Suojattua yhteyttä ei voitu muodostaa. Palvelimen varmenteeseen ei luoteta.</string>
+  <string name="textWebDavErrorUnreachable">Palvelimeen ei saatu yhteyttä. Tarkista osoite ja verkkoyhteys.</string>
+  <string name="textWebDavErrorUnexpected">Palvelin vastasi odottamattomasti.</string>
   <string name="textBackupNotificationErrorTitle">Varmuuskopiointi epäonnistui</string>
 
   <string name="textBackupImportResultTitle">Tuonnin yhteenveto</string>
@@ -71,4 +77,42 @@
     <item quantity="one">%d vastaamaton kohde</item>
     <item quantity="other">%d vastaamatonta kohdetta</item>
   </plurals>
+
+  <string name="textBackupErrorUnexpected">Tapahtui odottamaton virhe.</string>
+  <string name="textBackupErrorNoServer">WebDAV-palvelinta ei ole määritetty.</string>
+  <string name="textBackupErrorRead">Varmuuskopiotiedostoa ei voitu lukea.</string>
+  <string name="textBackupErrorWrite">Varmuuskopiotiedostoa ei voitu kirjoittaa.</string>
+  <string name="textBackupExportValidationFailed">Vietyä tiedostoa ei voitu tarkistaa. Yritä uudelleen.</string>
+  <string name="textBackupImportUnsupportedVersion">Tämä varmuuskopio käyttää muotoa, jota ei tueta (versio %1$d).</string>
+  <string name="textBackupImportInvalidFile">Tämä tiedosto ei ole kelvollinen varmuuskopio.</string>
+  <string name="textBackupImportInitializing">Tuodaan…</string>
+  <string name="textBackupReasonTitleBlank">Varmuuskopion nimi on tyhjä.</string>
+  <string name="textBackupReasonNoResults">TMDB:stä ei löytynyt tuloksia.</string>
+  <string name="textBackupReasonOnlyMoviesFound">TMDB:stä löytyi vain elokuvia, ei sarjoja.</string>
+  <string name="textBackupReasonOnlyShowsFound">TMDB:stä löytyi vain sarjoja, ei elokuvia.</string>
+  <string name="textBackupReasonNoExactMatch">TMDB:stä ei löytynyt täsmälleen samaa nimeä (löytyi: %1$s).</string>
+  <string name="textBackupReasonInvalidTmdbId">TMDB-merkinnän tunnus puuttuu tai on virheellinen.</string>
+  <string name="textBackupReasonLookupFailed">Nimeä ei voitu hakea TMDB:stä.</string>
+  <string name="textBackupReasonTmdbApiError">TMDB-rajapinnan virhe (HTTP %1$s).</string>
+  <string name="textBackupReasonTmdbNetworkError">Verkkovirhe yhdistettäessä TMDB:hen.</string>
+  <string name="textBackupReasonDetailsNotFound">Tietoja ei löytynyt TMDB:stä (HTTP 404).</string>
+  <string name="textBackupReasonDetailsFailed">Tietoja ei voitu hakea TMDB:stä.</string>
+  <string name="textBackupReasonSeasonsNotFound">Kausia ei löytynyt TMDB:stä (HTTP 404).</string>
+  <string name="textBackupReasonSeasonsFailed">Kausia ei voitu ladata TMDB:stä.</string>
+  <string name="textBackupReasonEpisodeNotFound">Jaksoa ei löytynyt TMDB:stä.</string>
+  <string name="textBackupReasonSeasonNotFoundAnywhere">Kautta ei löytynyt laitteelta eikä TMDB:stä.</string>
+  <string name="textBackupReasonEpisodeNotFoundAnywhere">Jaksoa ei löytynyt laitteelta eikä TMDB:stä.</string>
+  <string name="textBackupReasonShowUnavailable">Sarja ei ole saatavilla TMDB:ssä.</string>
+  <string name="textBackupReasonSeasonUnavailable">Kausi ei ole saatavilla TMDB:ssä.</string>
+  <string name="textBackupReasonOrphanShow">Katseluhistoriassa mutta ei missään kokoelmassa, joten sitä ei voitu yhdistää TMDB:ssä.</string>
+  <string name="textBackupReasonNotInCollection">Ei TMDB-tunnusta eikä ole missään kokoelmassa.</string>
+  <string name="textBackupReasonListCreateFailed">Listaa ei voitu luoda.</string>
+  <string name="textBackupReasonListMerged">Yhdistetty samannimiseen olemassa olevaan listaan.</string>
+  <string name="textBackupReasonAddToListFailed">Ei voitu lisätä listaan.</string>
+  <string name="textBackupTitleShowLegacyId">Sarja kokoelman ulkopuolella (tunnus: %1$s)</string>
+  <string name="textBackupTitleMovieLegacyId">Elokuva kokoelman ulkopuolella (tunnus: %1$s)</string>
+  <string name="textBackupTitleItemLegacyId">Kohde kokoelman ulkopuolella (tunnus: %1$s)</string>
+  <string name="textBackupTitleShowTmdbId">Sarja (TMDB-tunnus: %1$s)</string>
+  <string name="textBackupTitleMovieTmdbId">Elokuva (TMDB-tunnus: %1$s)</string>
+  <string name="textBackupTitleItemTmdbId">TMDB-tunnus: %1$s</string>
 </resources>

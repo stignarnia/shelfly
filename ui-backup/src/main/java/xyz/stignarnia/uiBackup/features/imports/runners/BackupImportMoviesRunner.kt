@@ -17,6 +17,7 @@ import xyz.stignarnia.repository.PinnedItemsRepository
 import xyz.stignarnia.repository.movies.MoviesRepository
 import xyz.stignarnia.repository.movies.ratings.MoviesRatingsRepository
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Importing
+import xyz.stignarnia.uiBackup.features.imports.model.BackupImportText
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedItem
 import xyz.stignarnia.uiBackup.model.BackupMovie
 import xyz.stignarnia.uiBackup.model.BackupMovies
@@ -228,13 +229,13 @@ internal class BackupImportMoviesRunner
         rethrowCancellation(error) {
           val reason =
             when {
-              error is HttpException && error.code() == 404 -> "Details not found on TMDB (HTTP 404)."
-              error is HttpException -> "TMDB API error (${error.code()} ${error.message()})."
-              error is java.io.IOException -> "Network error fetching TMDB details (${error.message ?: "timeout"})."
-              else -> "Failed to fetch details: ${error.message ?: error.javaClass.simpleName}."
+              error is HttpException && error.code() == 404 -> BackupImportText.of(BackupImportText.Message.DETAILS_NOT_FOUND)
+              error is HttpException -> BackupImportText.of(BackupImportText.Message.TMDB_API_ERROR, error.code())
+              error is java.io.IOException -> BackupImportText.of(BackupImportText.Message.TMDB_NETWORK_ERROR)
+              else -> BackupImportText.of(BackupImportText.Message.DETAILS_FAILED)
             }
           Timber.w("Failed to fetch movie: ${movie.tmdbId} ${movie.title} - $reason")
-          failedMovies += BackupUnmatchedItem(title = movie.title, reason = reason, tmdbId = movie.tmdbId)
+          failedMovies += BackupUnmatchedItem(title = BackupImportText.verbatim(movie.title), reason = reason, tmdbId = movie.tmdbId)
         }
         false
       }

@@ -1,0 +1,7 @@
+Shelfly 4.0.9
+
+• Das Sprachsymbol auf dem Willkommensbildschirm wurde als schwarze Form angezeigt, das ist behoben.
+• Beim Wiederherstellen von WebDAV werden Backups jetzt nach ihrem Erstellungsdatum im gewählten Datumsformat aufgelistet statt nach Dateinamen.
+• Wird ein WebDAV-Backup oder eine Synchronisierung unterbrochen, etwa weil die Verbindung abbricht, sagt die Benachrichtigung das jetzt klar, statt „Job was cancelled“ anzuzeigen.
+• Texte, die unabhängig von deiner Sprache auf Englisch oder Italienisch erschienen, sind jetzt übersetzt: Fehler bei Backup, Synchronisierung und Wiederherstellung, die Importübersicht, die Benachrichtigungskategorien in den Android-Einstellungen, Ländernamen, das Teilen-Menü und dieser Neuigkeiten-Bildschirm.
+• Zum Entfernen eines Eintrags aus einer Liste per Wischgeste ist jetzt eine längere, bewusste Bewegung nötig: Hinter dem Eintrag erscheint ein roter Hintergrund mit einem Papierkorbsymbol, das Telefon vibriert, sobald du weit genug gewischt hast, und beim Loslassen wird der Eintrag nur entfernt, wenn du nicht zurückgezogen hast. Ein kurzes Wischen entfernt nichts mehr.

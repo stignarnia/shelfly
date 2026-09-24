@@ -24,7 +24,10 @@ import xyz.stignarnia.common.extensions.nowUtcMillis
 import xyz.stignarnia.dataWebdav.WebDavClient
 import xyz.stignarnia.dataWebdav.WebDavCredentials
 import xyz.stignarnia.repository.settings.SettingsWebDavRepository
+import xyz.stignarnia.uiBackup.BackupException
+import xyz.stignarnia.uiBackup.BackupFailure
 import xyz.stignarnia.uiBackup.R
+import xyz.stignarnia.uiBackup.describe
 import xyz.stignarnia.uiBackup.features.export.BackupFileName
 import xyz.stignarnia.uiBackup.features.export.cases.CreateBackupJsonUseCase
 import xyz.stignarnia.uiBackup.features.export.cases.CreateBackupSchemeFromJsonUseCase
@@ -40,6 +43,7 @@ import xyz.stignarnia.uiBackup.features.sync.SyncEngine
 import xyz.stignarnia.uiBase.notifications.SyncNotificationManager
 import xyz.stignarnia.uiModel.BackupTarget
 import javax.inject.Named
+import kotlin.coroutines.cancellation.CancellationException
 
 /**
  * Creates a backup on a schedule, on behalf of the user.
@@ -166,6 +170,10 @@ class BackupExportScheduleWorker
 
     /**
      * Creating a backup matters more than tidying old ones away, so a failed prune is logged and still reports success.
+     *
+     * Every step rethrows [CancellationException] ahead of its generic handler, so an interrupted run is reported once, below, rather than per step.
+     * WorkManager cancels the coroutine when it stops the work - lost network, the execution limit, a cancelled request - and the exception's own message is the coroutine library's untranslated "Job was cancelled", so it is reported as [BackupFailure.INTERRUPTED] instead.
+     * It is still rethrown after notifying, because swallowing it would report the stopped run to WorkManager as finished.
      */
     override suspend fun doWork(): Result {
       Timber.i("Exporting automatic backup")
@@ -182,12 +190,14 @@ class BackupExportScheduleWorker
         val destination =
           try {
             resolveDestination().also { report(BackupSyncStage.DESTINATION_RESOLVED) }
+          } catch (exception: CancellationException) {
+            throw exception
           } catch (exception: Exception) {
             Timber.w(exception, "Backup destination is not configured")
             if (isWebDav) {
               syncNotificationManager.showError(
                 title = applicationContext.getString(R.string.textBackupNotificationErrorTitle),
-                message = exception.localizedMessage ?: exception.message ?: "Backup destination is not configured",
+                message = exception.describe(applicationContext),
               )
             }
             return Result.failure()
@@ -196,12 +206,14 @@ class BackupExportScheduleWorker
         try {
           exportNewBackup(destination)
           Timber.i("Exporting automatic backup successful")
+        } catch (exception: CancellationException) {
+          throw exception
         } catch (exception: Exception) {
           Timber.w(exception, "Exporting automatic backup failed")
           if (isWebDav) {
             syncNotificationManager.showError(
               title = applicationContext.getString(R.string.textBackupNotificationErrorTitle),
-              message = exception.localizedMessage ?: exception.message ?: "Exporting automatic backup failed",
+              message = exception.describe(applicationContext),
             )
           }
           return Result.failure()
@@ -210,6 +222,8 @@ class BackupExportScheduleWorker
         try {
           pruneOldBackups(destination)
           Timber.i("Cleaning up old backups successful")
+        } catch (exception: CancellationException) {
+          throw exception
         } catch (exception: Exception) {
           Timber.w(exception, "Cleaning up of old backups failed")
         }
@@ -226,19 +240,29 @@ class BackupExportScheduleWorker
               title = applicationContext.getString(R.string.textSyncNotificationSuccessTitle),
               message = applicationContext.getString(R.string.textSyncNotificationSuccessContent),
             )
+          } catch (exception: CancellationException) {
+            throw exception
           } catch (exception: Exception) {
             // Reported rather than swallowed: the snapshot above is safe either way, but a device that quietly stops syncing drifts from the others and nothing says so.
             Timber.w(exception, "Sync failed")
-            val errorMsg = exception.localizedMessage ?: exception.message ?: "Sync failed"
             syncNotificationManager.showError(
               title = applicationContext.getString(R.string.textSyncNotificationErrorTitle),
-              message = applicationContext.getString(R.string.textSyncNotificationErrorContent, errorMsg),
+              message = applicationContext.getString(R.string.textSyncNotificationErrorContent, exception.describe(applicationContext)),
             )
             return Result.failure()
           }
         }
 
         return Result.success()
+      } catch (exception: CancellationException) {
+        Timber.w(exception, "Backup interrupted")
+        if (isWebDav) {
+          syncNotificationManager.showError(
+            title = applicationContext.getString(R.string.textSyncNotificationErrorTitle),
+            message = applicationContext.getString(BackupFailure.INTERRUPTED.messageRes),
+          )
+        }
+        throw exception
       } finally {
         if (isWebDav) {
           syncNotificationManager.cancelProgress()
@@ -261,8 +285,7 @@ class BackupExportScheduleWorker
     private fun resolveDestination(): BackupDestination =
       when (webDavRepository.backupTarget) {
         BackupTarget.WEBDAV -> {
-          val credentials = webDavCredentials()
-          require(credentials != null) { "WebDAV backup is selected but no server is configured." }
+          val credentials = webDavCredentials() ?: throw BackupException(R.string.textBackupErrorNoServer)
           WebDavBackupDestination(webDavClient, credentials)
         }
 

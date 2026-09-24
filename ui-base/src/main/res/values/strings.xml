@@ -149,4 +149,16 @@
   <string name="textRatingsRottenTomatoes" translatable="false">R. Tomatoes</string>
   <!-- A runtime and its unit; the unit itself is translated as textMinutesShort. -->
   <string name="textRuntimeMinutes" translatable="false">%1$d %2$s</string>
+
+  <string name="textNotificationChannelGeneral">General info</string>
+  <string name="textNotificationChannelGeneralDescription">General information and announcements</string>
+  <string name="textNotificationChannelShows">TV show info</string>
+  <string name="textNotificationChannelShowsDescription">Information related to your TV shows</string>
+  <string name="textNotificationChannelEpisodes">Episode announcements</string>
+  <string name="textNotificationChannelEpisodesDescription">Episode and season announcements</string>
+  <string name="textNotificationChannelMovies">Movie announcements</string>
+  <string name="textNotificationChannelMoviesDescription">Announcements about movies</string>
+  <string name="textNotificationChannelSync">Sync &amp; backup</string>
+  <string name="textNotificationChannelSyncDescription">Sync and backup notifications</string>
+  <string name="textShareTitle">Share %1$s</string>
 </resources>

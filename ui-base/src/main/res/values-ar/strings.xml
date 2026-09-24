@@ -141,4 +141,16 @@
   <string name="errorNoInternetConnection">لا يوجد إتصال بالإنترنت. رجاءً تحقق من إتصالك.</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">العودة إلى الأعلى</string>
+
+  <string name="textNotificationChannelGeneral">معلومات عامة</string>
+  <string name="textNotificationChannelGeneralDescription">معلومات وإعلانات عامة</string>
+  <string name="textNotificationChannelShows">معلومات المسلسلات</string>
+  <string name="textNotificationChannelShowsDescription">معلومات متعلقة بمسلسلاتك</string>
+  <string name="textNotificationChannelEpisodes">إعلانات الحلقات</string>
+  <string name="textNotificationChannelEpisodesDescription">إعلانات الحلقات والمواسم</string>
+  <string name="textNotificationChannelMovies">إعلانات الأفلام</string>
+  <string name="textNotificationChannelMoviesDescription">إعلانات حول الأفلام</string>
+  <string name="textNotificationChannelSync">المزامنة والنسخ الاحتياطي</string>
+  <string name="textNotificationChannelSyncDescription">إشعارات المزامنة والنسخ الاحتياطي</string>
+  <string name="textShareTitle">مشاركة %1$s</string>
 </resources>

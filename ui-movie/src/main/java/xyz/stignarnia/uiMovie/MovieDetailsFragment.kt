@@ -420,7 +420,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
         type = "text/plain"
       }
 
-    val shareIntent = Intent.createChooser(intent, "Share ${movie.title}")
+    val shareIntent = Intent.createChooser(intent, getString(R.string.textShareTitle, movie.title))
     startActivity(shareIntent)
   }
 

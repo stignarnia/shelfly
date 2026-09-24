@@ -1,0 +1,7 @@
+Shelfly 4.0.9
+
+• Pictograma limbii de pe ecranul de bun venit, care apărea ca o formă neagră, a fost corectată.
+• Restaurarea din WebDAV listează acum copiile de rezervă după data la care au fost făcute, în formatul de dată ales, în loc de numele fișierului.
+• Când o copie de rezervă sau o sincronizare WebDAV este întreruptă, de exemplu pentru că se pierde conexiunea, notificarea spune acum clar acest lucru în loc să afișeze „Job was cancelled”.
+• Textele care apăreau în engleză sau italiană indiferent de limba ta sunt acum traduse: erorile de copie de rezervă, sincronizare și restaurare, rezumatul importului, categoriile de notificări din setările Android, numele țărilor, meniul de distribuire și acest ecran cu noutăți.
+• Eliminarea unui element dintr-o listă prin glisare necesită acum un gest mai lung și deliberat: în spatele elementului apare un fundal roșu cu o pictogramă de coș de gunoi, telefonul vibrează când ai glisat suficient, iar la eliberare elementul este eliminat doar dacă nu ai tras înapoi. O glisare rapidă nu mai elimină nimic.

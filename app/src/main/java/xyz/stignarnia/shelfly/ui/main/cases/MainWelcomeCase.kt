@@ -163,9 +163,25 @@ class MainWelcomeCase
       miscPreferences.edit { putString(KEY_LANGUAGE_SUGGESTED, language.code) }
     }
 
-    private fun readReleaseNotes(): String =
-      context.assets
-        .open(RELEASE_NOTES_ASSET)
-        .bufferedReader()
-        .use { it.readText() }
+    /**
+     * The English notes are [RELEASE_NOTES_ASSET]; each translation sits beside it with the language code appended, as release_notes-it.txt.
+     * A language without a file is left out and falls back to English.
+     */
+    private fun readReleaseNotes(): Map<AppLanguage, String> {
+      val translated =
+        context.assets
+          .list("")
+          .orEmpty()
+          .toSet()
+      return AppLanguage.entries
+        .associateWith { language ->
+          if (language == AppLanguage.ENGLISH) RELEASE_NOTES_ASSET else "release_notes-${language.code}.txt"
+        }.filterValues { it in translated }
+        .mapValues { (_, asset) ->
+          context.assets
+            .open(asset)
+            .bufferedReader()
+            .use { it.readText() }
+        }
+    }
   }

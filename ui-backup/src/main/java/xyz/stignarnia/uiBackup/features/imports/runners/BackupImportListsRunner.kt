@@ -14,6 +14,7 @@ import xyz.stignarnia.repository.mappers.Mappers
 import xyz.stignarnia.repository.movies.MoviesRepository
 import xyz.stignarnia.repository.shows.ShowsRepository
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Importing
+import xyz.stignarnia.uiBackup.features.imports.model.BackupImportText
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedItem
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedList
 import xyz.stignarnia.uiBackup.model.BackupList
@@ -108,7 +109,7 @@ internal class BackupImportListsRunner
           ?.takeIf { it > 0 }
       if (listId == null) {
         Timber.w("Failed to create list ${backupList.name}")
-        failedLists += BackupUnmatchedList(title = backupList.name, reason = "Could not create the list in the local database.")
+        failedLists += BackupUnmatchedList(title = backupList.name, reason = BackupImportText.of(BackupImportText.Message.LIST_CREATE_FAILED))
         return currentItem
       }
 
@@ -145,7 +146,7 @@ internal class BackupImportListsRunner
 
         importItem(localList.id, item)?.let { failedItems += it }
       }
-      val reason = if (isMatchedByName) "Merged into the existing list with the same name." else null
+      val reason = if (isMatchedByName) BackupImportText.of(BackupImportText.Message.LIST_MERGED) else null
       reportList(backupList, failedItems, reason)
       return currentItem
     }
@@ -173,10 +174,10 @@ internal class BackupImportListsRunner
         rethrowCancellation(error)
         val reason =
           when {
-            error is HttpException && error.code() == 404 -> "Details not found on TMDB (HTTP 404)."
-            error is HttpException -> "TMDB API error (${error.code()} ${error.message()})."
-            error is IOException -> "Network error fetching TMDB details (${error.message ?: "timeout"})."
-            else -> "Failed to add to list: ${error.message ?: error.javaClass.simpleName}."
+            error is HttpException && error.code() == 404 -> BackupImportText.of(BackupImportText.Message.DETAILS_NOT_FOUND)
+            error is HttpException -> BackupImportText.of(BackupImportText.Message.TMDB_API_ERROR, error.code())
+            error is IOException -> BackupImportText.of(BackupImportText.Message.TMDB_NETWORK_ERROR)
+            else -> BackupImportText.of(BackupImportText.Message.ADD_TO_LIST_FAILED)
           }
         Timber.w("Failed to add ${item.type} ${item.tmdbId} to list $listId - $reason")
         BackupUnmatchedItem(title = itemTitle(item), reason = reason, tmdbId = item.tmdbId)
@@ -185,7 +186,7 @@ internal class BackupImportListsRunner
     /**
      * A backup list item carries no title, so the one cached locally is used when there is one.
      */
-    private suspend fun itemTitle(item: BackupListItem): String {
+    private suspend fun itemTitle(item: BackupListItem): BackupImportText {
       val localTitle =
         when (item.type) {
           "show" -> localSource.shows.getById(item.tmdbId)?.title
@@ -193,19 +194,19 @@ internal class BackupImportListsRunner
           else -> null
         }
       if (!localTitle.isNullOrBlank()) {
-        return localTitle
+        return BackupImportText.verbatim(localTitle)
       }
       return when (item.type) {
-        "show" -> "Show (TMDB ID: ${item.tmdbId})"
-        "movie" -> "Movie (TMDB ID: ${item.tmdbId})"
-        else -> "TMDB ID: ${item.tmdbId}"
+        "show" -> BackupImportText.of(BackupImportText.Message.SHOW_TMDB_ID, item.tmdbId)
+        "movie" -> BackupImportText.of(BackupImportText.Message.MOVIE_TMDB_ID, item.tmdbId)
+        else -> BackupImportText.of(BackupImportText.Message.ITEM_TMDB_ID, item.tmdbId)
       }
     }
 
     private fun reportList(
       backupList: BackupList,
       failedItems: List<BackupUnmatchedItem>,
-      reason: String? = null,
+      reason: BackupImportText? = null,
     ) {
       if (reason != null || failedItems.isNotEmpty()) {
         failedLists += BackupUnmatchedList(title = backupList.name, reason = reason, unmatchedItems = failedItems)

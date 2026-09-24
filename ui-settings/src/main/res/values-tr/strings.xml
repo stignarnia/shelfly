@@ -128,10 +128,5 @@
   <string name="textSettingsWebDavTest">Bağlantıyı test et</string>
   <string name="textSettingsWebDavTesting">Test ediliyor…</string>
   <string name="textSettingsWebDavConnected">Bağlandı. Klasöre erişilebilir ve yazılabilir.</string>
-  <string name="textSettingsWebDavErrorAuth">Kimlik doğrulama başarısız. Kullanıcı adını ve şifreyi kontrol edin.</string>
-  <string name="textSettingsWebDavErrorNotFound">Klasör bulunamadı ve oluşturulamadı. URL\'yi kontrol edin.</string>
-  <string name="textSettingsWebDavErrorTls">Güvenli bağlantı kurulamadı. Sunucu sertifikasına güvenilmiyor.</string>
-  <string name="textSettingsWebDavErrorUnreachable">Sunucuya ulaşılamadı. Adresi ve bağlantınızı kontrol edin.</string>
-  <string name="textSettingsWebDavErrorUnexpected">Sunucu beklenmedik bir yanıt verdi.</string>
   <string name="errorNotificationSettingsUnavailable">Bildirim ayarları açılamadı.</string>
 </resources>

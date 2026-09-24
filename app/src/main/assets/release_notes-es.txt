@@ -1,0 +1,7 @@
+Shelfly 4.0.9
+
+• Se ha corregido el icono de idioma de la pantalla de bienvenida, que aparecía como una forma negra.
+• Al restaurar desde WebDAV, las copias de seguridad ahora se muestran por la fecha en que se crearon, en el formato de fecha que elegiste, en lugar de por nombre de archivo.
+• Cuando una copia de seguridad o una sincronización de WebDAV se interrumpe, por ejemplo porque se pierde la conexión, la notificación ahora lo indica claramente en lugar de mostrar "Job was cancelled".
+• Los textos que aparecían en inglés o en italiano sin importar tu idioma ahora están traducidos: errores de copia de seguridad, sincronización y restauración, el resumen de importación, las categorías de notificaciones en los ajustes de Android, los nombres de países, el menú de compartir y esta pantalla de novedades.
+• Quitar un elemento de una lista deslizando ahora requiere un gesto más largo y deliberado: aparece un fondo rojo con un icono de papelera detrás del elemento, el teléfono vibra cuando has deslizado lo suficiente y, al soltar, el elemento solo se quita si no has vuelto atrás. Un deslizamiento rápido ya no quita nada.

@@ -25,6 +25,12 @@
   <string name="textSyncNotificationSuccessContent">Senkronizasyon başarıyla tamamlandı.</string>
   <string name="textSyncNotificationErrorTitle">WebDAV Senkronizasyonu Başarısız</string>
   <string name="textSyncNotificationErrorContent">Senkronizasyon başarısız: %s</string>
+  <string name="textSyncNotificationInterruptedContent">Tamamlanamadan yarıda kesildi.</string>
+  <string name="textWebDavErrorAuth">Kimlik doğrulama başarısız. Kullanıcı adını ve şifreyi kontrol edin.</string>
+  <string name="textWebDavErrorNotFound">Klasör bulunamadı ve oluşturulamadı. URL\'yi kontrol edin.</string>
+  <string name="textWebDavErrorTls">Güvenli bağlantı kurulamadı. Sunucu sertifikasına güvenilmiyor.</string>
+  <string name="textWebDavErrorUnreachable">Sunucuya ulaşılamadı. Adresi ve bağlantınızı kontrol edin.</string>
+  <string name="textWebDavErrorUnexpected">Sunucu beklenmedik bir yanıt verdi.</string>
   <string name="textBackupNotificationErrorTitle">Yedekleme Başarısız</string>
 
   <string name="textBackupExportSchedule">Zamanlama</string>
@@ -72,4 +78,42 @@
     <item quantity="one">%d eşleşmeyen öğe</item>
     <item quantity="other">%d eşleşmeyen öğe</item>
   </plurals>
+
+  <string name="textBackupErrorUnexpected">Beklenmeyen bir hata oluştu.</string>
+  <string name="textBackupErrorNoServer">Yapılandırılmış bir WebDAV sunucusu yok.</string>
+  <string name="textBackupErrorRead">Yedek dosyası okunamadı.</string>
+  <string name="textBackupErrorWrite">Yedek dosyası yazılamadı.</string>
+  <string name="textBackupExportValidationFailed">Dışa aktarılan dosya doğrulanamadı. Lütfen tekrar deneyin.</string>
+  <string name="textBackupImportUnsupportedVersion">Bu yedek desteklenmeyen bir biçim kullanıyor (sürüm %1$d).</string>
+  <string name="textBackupImportInvalidFile">Bu dosya geçerli bir yedek değil.</string>
+  <string name="textBackupImportInitializing">İçe aktarılıyor…</string>
+  <string name="textBackupReasonTitleBlank">Yedekteki başlık boş.</string>
+  <string name="textBackupReasonNoResults">TMDB\'de sonuç bulunamadı.</string>
+  <string name="textBackupReasonOnlyMoviesFound">TMDB\'de yalnızca film bulundu, dizi yok.</string>
+  <string name="textBackupReasonOnlyShowsFound">TMDB\'de yalnızca dizi bulundu, film yok.</string>
+  <string name="textBackupReasonNoExactMatch">TMDB\'de tam başlık eşleşmesi yok (bulunanlar: %1$s).</string>
+  <string name="textBackupReasonInvalidTmdbId">TMDB kaydının kimliği eksik veya geçersiz.</string>
+  <string name="textBackupReasonLookupFailed">Bu başlık TMDB\'de aranamadı.</string>
+  <string name="textBackupReasonTmdbApiError">TMDB API hatası (HTTP %1$s).</string>
+  <string name="textBackupReasonTmdbNetworkError">TMDB\'ye bağlanırken ağ hatası.</string>
+  <string name="textBackupReasonDetailsNotFound">Ayrıntılar TMDB\'de bulunamadı (HTTP 404).</string>
+  <string name="textBackupReasonDetailsFailed">Ayrıntılar TMDB\'den alınamadı.</string>
+  <string name="textBackupReasonSeasonsNotFound">Sezonlar TMDB\'de bulunamadı (HTTP 404).</string>
+  <string name="textBackupReasonSeasonsFailed">Sezonlar TMDB\'den yüklenemedi.</string>
+  <string name="textBackupReasonEpisodeNotFound">Bölüm TMDB\'de bulunamadı.</string>
+  <string name="textBackupReasonSeasonNotFoundAnywhere">Sezon ne cihazda ne de TMDB\'de bulundu.</string>
+  <string name="textBackupReasonEpisodeNotFoundAnywhere">Bölüm ne cihazda ne de TMDB\'de bulundu.</string>
+  <string name="textBackupReasonShowUnavailable">Dizi TMDB\'de mevcut değil.</string>
+  <string name="textBackupReasonSeasonUnavailable">Sezon TMDB\'de mevcut değil.</string>
+  <string name="textBackupReasonOrphanShow">İzleme geçmişinde var ancak hiçbir koleksiyonda yok, bu yüzden TMDB\'de eşleştirilemedi.</string>
+  <string name="textBackupReasonNotInCollection">TMDB kimliği yok ve hiçbir koleksiyonda değil.</string>
+  <string name="textBackupReasonListCreateFailed">Liste oluşturulamadı.</string>
+  <string name="textBackupReasonListMerged">Aynı adlı mevcut listeyle birleştirildi.</string>
+  <string name="textBackupReasonAddToListFailed">Listeye eklenemedi.</string>
+  <string name="textBackupTitleShowLegacyId">Koleksiyonda olmayan dizi (Kimlik: %1$s)</string>
+  <string name="textBackupTitleMovieLegacyId">Koleksiyonda olmayan film (Kimlik: %1$s)</string>
+  <string name="textBackupTitleItemLegacyId">Koleksiyonda olmayan öğe (Kimlik: %1$s)</string>
+  <string name="textBackupTitleShowTmdbId">Dizi (TMDB kimliği: %1$s)</string>
+  <string name="textBackupTitleMovieTmdbId">Film (TMDB kimliği: %1$s)</string>
+  <string name="textBackupTitleItemTmdbId">TMDB kimliği: %1$s</string>
 </resources>

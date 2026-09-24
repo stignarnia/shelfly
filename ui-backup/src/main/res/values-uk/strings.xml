@@ -40,6 +40,12 @@
   <string name="textSyncNotificationSuccessContent">Синхронізацію успішно завершено.</string>
   <string name="textSyncNotificationErrorTitle">Помилка синхронізації WebDAV</string>
   <string name="textSyncNotificationErrorContent">Помилка синхронізації: %s</string>
+  <string name="textSyncNotificationInterruptedContent">Перервано до завершення.</string>
+  <string name="textWebDavErrorAuth">Помилка автентифікації. Перевірте ім\'я користувача та пароль.</string>
+  <string name="textWebDavErrorNotFound">Папку не знайдено і не вдалося створити. Перевірте URL.</string>
+  <string name="textWebDavErrorTls">Не вдалося встановити захищене з\'єднання. Сертифікат сервера не є довіреним.</string>
+  <string name="textWebDavErrorUnreachable">Не вдалося підключитися до сервера. Перевірте адресу та з\'єднання.</string>
+  <string name="textWebDavErrorUnexpected">Сервер повернув неочікувану відповідь.</string>
   <string name="textBackupNotificationErrorTitle">Помилка резервного копіювання</string>
 
   <string name="textBackupImportResultTitle">Підсумок імпорту</string>
@@ -79,4 +85,42 @@
     <item quantity="many">%d невідповідних елементів</item>
     <item quantity="other">%d невідповідних елементів</item>
   </plurals>
+
+  <string name="textBackupErrorUnexpected">Сталася неочікувана помилка.</string>
+  <string name="textBackupErrorNoServer">Сервер WebDAV не налаштовано.</string>
+  <string name="textBackupErrorRead">Не вдалося прочитати файл резервної копії.</string>
+  <string name="textBackupErrorWrite">Не вдалося записати файл резервної копії.</string>
+  <string name="textBackupExportValidationFailed">Не вдалося перевірити експортований файл. Спробуйте ще раз.</string>
+  <string name="textBackupImportUnsupportedVersion">Ця резервна копія має непідтримуваний формат (версія %1$d).</string>
+  <string name="textBackupImportInvalidFile">Цей файл не є резервною копією.</string>
+  <string name="textBackupImportInitializing">Імпорт…</string>
+  <string name="textBackupReasonTitleBlank">Назва в резервній копії порожня.</string>
+  <string name="textBackupReasonNoResults">На TMDB нічого не знайдено.</string>
+  <string name="textBackupReasonOnlyMoviesFound">На TMDB знайдено лише фільми, серіалів немає.</string>
+  <string name="textBackupReasonOnlyShowsFound">На TMDB знайдено лише серіали, фільмів немає.</string>
+  <string name="textBackupReasonNoExactMatch">На TMDB немає точного збігу назви (знайдено: %1$s).</string>
+  <string name="textBackupReasonInvalidTmdbId">Запис на TMDB має відсутній або недійсний ID.</string>
+  <string name="textBackupReasonLookupFailed">Не вдалося знайти цю назву на TMDB.</string>
+  <string name="textBackupReasonTmdbApiError">Помилка API TMDB (HTTP %1$s).</string>
+  <string name="textBackupReasonTmdbNetworkError">Помилка мережі під час з’єднання з TMDB.</string>
+  <string name="textBackupReasonDetailsNotFound">Відомості не знайдено на TMDB (HTTP 404).</string>
+  <string name="textBackupReasonDetailsFailed">Не вдалося отримати відомості з TMDB.</string>
+  <string name="textBackupReasonSeasonsNotFound">Сезони не знайдено на TMDB (HTTP 404).</string>
+  <string name="textBackupReasonSeasonsFailed">Не вдалося завантажити сезони з TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFound">Епізод не знайдено на TMDB.</string>
+  <string name="textBackupReasonSeasonNotFoundAnywhere">Сезон не знайдено ні на пристрої, ні на TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFoundAnywhere">Епізод не знайдено ні на пристрої, ні на TMDB.</string>
+  <string name="textBackupReasonShowUnavailable">Серіал недоступний на TMDB.</string>
+  <string name="textBackupReasonSeasonUnavailable">Сезон недоступний на TMDB.</string>
+  <string name="textBackupReasonOrphanShow">Є в історії, але в жодній колекції, тому його не вдалося зіставити на TMDB.</string>
+  <string name="textBackupReasonNotInCollection">Не має ID TMDB і не входить до жодної колекції.</string>
+  <string name="textBackupReasonListCreateFailed">Не вдалося створити список.</string>
+  <string name="textBackupReasonListMerged">Об’єднано з наявним списком з такою ж назвою.</string>
+  <string name="textBackupReasonAddToListFailed">Не вдалося додати до списку.</string>
+  <string name="textBackupTitleShowLegacyId">Серіал поза колекцією (ID: %1$s)</string>
+  <string name="textBackupTitleMovieLegacyId">Фільм поза колекцією (ID: %1$s)</string>
+  <string name="textBackupTitleItemLegacyId">Елемент поза колекцією (ID: %1$s)</string>
+  <string name="textBackupTitleShowTmdbId">Серіал (ID TMDB: %1$s)</string>
+  <string name="textBackupTitleMovieTmdbId">Фільм (ID TMDB: %1$s)</string>
+  <string name="textBackupTitleItemTmdbId">ID TMDB: %1$s</string>
 </resources>

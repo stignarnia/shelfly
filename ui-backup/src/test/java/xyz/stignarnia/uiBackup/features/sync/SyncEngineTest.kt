@@ -14,7 +14,9 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import xyz.stignarnia.dataWebdav.WebDavCredentials
+import xyz.stignarnia.dataWebdav.WebDavError
 import xyz.stignarnia.repository.settings.SettingsSyncRepository
+import xyz.stignarnia.uiBackup.BackupFailure
 import xyz.stignarnia.uiBackup.features.export.workers.BackupExportWorker
 import xyz.stignarnia.uiBackup.features.imports.workers.BackupImportWorker
 import xyz.stignarnia.uiBackup.features.sync.model.SyncEntity
@@ -23,6 +25,7 @@ import xyz.stignarnia.uiBackup.features.sync.model.SyncTombstoneEntry
 import xyz.stignarnia.uiBackup.model.BackupScheme
 import xyz.stignarnia.uiBackup.model.BackupShow
 import xyz.stignarnia.uiBackup.model.BackupShows
+import java.io.IOException
 
 class SyncEngineTest {
   @RelaxedMockK lateinit var exportWorker: BackupExportWorker
@@ -161,7 +164,17 @@ class SyncEngineTest {
 
       runCatching { SUT.sync(CREDENTIALS) }
 
-      coVerify(exactly = 1) { settingsSyncRepository.lastError = "offline" }
+      coVerify(exactly = 1) { settingsSyncRepository.lastError = BackupFailure.UNEXPECTED.name }
+    }
+
+  @Test
+  fun `Should record a WebDAV failure as the reason it can be explained by`() =
+    runTest {
+      coEvery { remoteSource.upload(any(), any()) } returns Result.failure(WebDavError.Unreachable(IOException("timeout")))
+
+      runCatching { SUT.sync(CREDENTIALS) }
+
+      coVerify(exactly = 1) { settingsSyncRepository.lastError = BackupFailure.UNREACHABLE.name }
     }
 
   @Test

@@ -121,4 +121,16 @@
   <string name="textDisabled">Deaktiviert</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">Zurück nach oben</string>
+
+  <string name="textNotificationChannelGeneral">Allgemeine Infos</string>
+  <string name="textNotificationChannelGeneralDescription">Allgemeine Informationen und Ankündigungen</string>
+  <string name="textNotificationChannelShows">Serien-Infos</string>
+  <string name="textNotificationChannelShowsDescription">Informationen zu deinen Serien</string>
+  <string name="textNotificationChannelEpisodes">Folgen-Ankündigungen</string>
+  <string name="textNotificationChannelEpisodesDescription">Ankündigungen neuer Folgen und Staffeln</string>
+  <string name="textNotificationChannelMovies">Film-Ankündigungen</string>
+  <string name="textNotificationChannelMoviesDescription">Ankündigungen zu Filmen</string>
+  <string name="textNotificationChannelSync">Synchronisierung &amp; Backup</string>
+  <string name="textNotificationChannelSyncDescription">Benachrichtigungen zu Synchronisierung und Backup</string>
+  <string name="textShareTitle">%1$s teilen</string>
 </resources>

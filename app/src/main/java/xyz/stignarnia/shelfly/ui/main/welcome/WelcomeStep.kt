@@ -102,12 +102,18 @@ sealed interface WelcomeStep {
     override val secondaryButton = R.string.textNotNow
   }
 
+  /**
+   * [notes] holds every translation, because the language step earlier in the same flow can switch language after this step was built.
+   */
   data class WhatsNew(
     val version: String,
-    val notes: String,
+    val notes: Map<AppLanguage, String>,
   ) : WelcomeStep {
     override val id = ID
     override val primaryButton = R.string.textClose
+
+    /** The notes in [language], or in English when they have not been translated into it. */
+    fun notesIn(language: AppLanguage) = notes[language] ?: notes.getValue(AppLanguage.ENGLISH)
 
     companion object {
       const val ID = "WHATS_NEW"

@@ -121,4 +121,16 @@
   <string name="errorNoInternetConnection">Ingen internetforbindelse. Tjek venligst din forbindelse.</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">Tilbage til toppen</string>
+
+  <string name="textNotificationChannelGeneral">Generel info</string>
+  <string name="textNotificationChannelGeneralDescription">Generel information og meddelelser</string>
+  <string name="textNotificationChannelShows">Serieinfo</string>
+  <string name="textNotificationChannelShowsDescription">Information om dine serier</string>
+  <string name="textNotificationChannelEpisodes">Afsnitsmeddelelser</string>
+  <string name="textNotificationChannelEpisodesDescription">Meddelelser om afsnit og sæsoner</string>
+  <string name="textNotificationChannelMovies">Filmmeddelelser</string>
+  <string name="textNotificationChannelMoviesDescription">Meddelelser om film</string>
+  <string name="textNotificationChannelSync">Synkronisering og sikkerhedskopi</string>
+  <string name="textNotificationChannelSyncDescription">Notifikationer om synkronisering og sikkerhedskopi</string>
+  <string name="textShareTitle">Del %1$s</string>
 </resources>

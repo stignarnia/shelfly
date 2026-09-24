@@ -132,10 +132,5 @@
   <string name="textSettingsWebDavTest">اختبار الاتصال</string>
   <string name="textSettingsWebDavTesting">جارٍ الاختبار…</string>
   <string name="textSettingsWebDavConnected">متصل. المجلد متاح وقابل للكتابة.</string>
-  <string name="textSettingsWebDavErrorAuth">فشلت المصادقة. تحقق من اسم المستخدم وكلمة المرور.</string>
-  <string name="textSettingsWebDavErrorNotFound">المجلد غير موجود، ولم يمكن إنشاؤه. تحقق من عنوان URL.</string>
-  <string name="textSettingsWebDavErrorTls">تعذر إنشاء اتصال آمن. لم يتم الوثوق بشهادة الخادم.</string>
-  <string name="textSettingsWebDavErrorUnreachable">تعذر الوصول إلى الخادم. تحقق من العنوان واتصالك.</string>
-  <string name="textSettingsWebDavErrorUnexpected">استجاب الخادم بشكل غير متوقع.</string>
   <string name="errorNotificationSettingsUnavailable">تعذّر فتح إعدادات الإشعارات.</string>
 </resources>

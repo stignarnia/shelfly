@@ -1,0 +1,7 @@
+Shelfly 4.0.9
+
+• Karşılama ekranındaki dil simgesinin siyah bir şekil olarak görünmesi düzeltildi.
+• WebDAV'dan geri yükleme artık yedekleri dosya adına göre değil, oluşturuldukları tarihe göre ve seçtiğiniz tarih biçiminde listeliyor.
+• Bir WebDAV yedeklemesi veya senkronizasyonu kesintiye uğradığında, örneğin bağlantı koptuğu için, bildirim artık "Job was cancelled" göstermek yerine bunu açıkça belirtiyor.
+• Dilinizden bağımsız olarak İngilizce veya İtalyanca görünen metinler artık çevrildi: yedekleme, senkronizasyon ve geri yükleme hataları, içe aktarma özeti, Android ayarlarındaki bildirim kategorileri, ülke adları, paylaşım menüsü ve bu yenilikler ekranı.
+• Bir öğeyi listeden kaydırarak kaldırmak artık daha uzun ve bilinçli bir hareket gerektiriyor: öğenin arkasında çöp kutusu simgeli kırmızı bir arka plan belirir, yeterince kaydırdığınızda telefon titrer ve bıraktığınızda öğe yalnızca geri çekmediyseniz kaldırılır. Hızlı bir kaydırma artık hiçbir şeyi kaldırmaz.

@@ -121,4 +121,16 @@
   <string name="errorNoInternetConnection">Ei Internet-yhteyttä. Tarkista yhteys.</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">Takaisin ylös</string>
+
+  <string name="textNotificationChannelGeneral">Yleiset tiedot</string>
+  <string name="textNotificationChannelGeneralDescription">Yleiset tiedot ja ilmoitukset</string>
+  <string name="textNotificationChannelShows">Sarjatiedot</string>
+  <string name="textNotificationChannelShowsDescription">Sarjoihisi liittyvät tiedot</string>
+  <string name="textNotificationChannelEpisodes">Jaksoilmoitukset</string>
+  <string name="textNotificationChannelEpisodesDescription">Ilmoitukset jaksoista ja kausista</string>
+  <string name="textNotificationChannelMovies">Elokuvailmoitukset</string>
+  <string name="textNotificationChannelMoviesDescription">Ilmoitukset elokuvista</string>
+  <string name="textNotificationChannelSync">Synkronointi ja varmuuskopiointi</string>
+  <string name="textNotificationChannelSyncDescription">Synkronoinnin ja varmuuskopioinnin ilmoitukset</string>
+  <string name="textShareTitle">Jaa %1$s</string>
 </resources>

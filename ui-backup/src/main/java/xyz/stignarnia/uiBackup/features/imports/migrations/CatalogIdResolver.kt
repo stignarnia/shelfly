@@ -1,8 +1,11 @@
 package xyz.stignarnia.uiBackup.features.imports.migrations
 
+import retrofit2.HttpException
 import timber.log.Timber
 import xyz.stignarnia.dataRemote.RemoteDataSource
+import xyz.stignarnia.uiBackup.features.imports.model.BackupImportText
 import xyz.stignarnia.uiBase.utilities.extensions.rethrowCancellation
+import java.io.IOException
 import javax.inject.Inject
 
 /**
@@ -11,7 +14,7 @@ import javax.inject.Inject
 sealed interface CatalogMatchResult {
   data class Matched(val tmdbId: Long) : CatalogMatchResult
 
-  data class Unmatched(val reason: String) : CatalogMatchResult
+  data class Unmatched(val reason: BackupImportText) : CatalogMatchResult
 }
 
 /**
@@ -33,7 +36,7 @@ internal class TmdbCatalogIdResolver
     override suspend fun findShowByTitle(title: String): CatalogMatchResult {
       val trimmed = title.trim()
       if (trimmed.isEmpty()) {
-        return CatalogMatchResult.Unmatched("Title in backup is blank.")
+        return CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.TITLE_BLANK))
       }
       val results =
         try {
@@ -42,22 +45,16 @@ internal class TmdbCatalogIdResolver
           rethrowCancellation(error) {
             Timber.w(error, "Failed to look up \"$trimmed\" by title.")
           }
-          val message =
-            when (error) {
-              is retrofit2.HttpException -> "TMDB API error (${error.code()} ${error.message()})."
-              is java.io.IOException -> "Network error connecting to TMDB (${error.message ?: "timeout"})."
-              else -> error.message ?: error.javaClass.simpleName
-            }
-          return CatalogMatchResult.Unmatched(message)
+          return CatalogMatchResult.Unmatched(lookupFailure(error))
         }
 
       if (results.isEmpty()) {
-        return CatalogMatchResult.Unmatched("No results found on TMDB.")
+        return CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.NO_RESULTS))
       }
 
       val shows = results.mapNotNull { it.show }
       if (shows.isEmpty()) {
-        return CatalogMatchResult.Unmatched("Only movies found on TMDB, no TV shows.")
+        return CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.ONLY_MOVIES_FOUND))
       }
 
       val exactMatch = shows.firstOrNull { it.title.equals(trimmed, ignoreCase = true) }
@@ -68,12 +65,12 @@ internal class TmdbCatalogIdResolver
             .distinct()
             .take(2)
             .joinToString(", ") { "\"$it\"" }
-        return CatalogMatchResult.Unmatched("No exact title match on TMDB (found: $foundTitles).")
+        return CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.NO_EXACT_MATCH, foundTitles))
       }
 
       val tmdbId = exactMatch.ids?.tmdb
       if (tmdbId == null || tmdbId <= 0) {
-        return CatalogMatchResult.Unmatched("TMDB entry has missing or invalid ID ($tmdbId).")
+        return CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.INVALID_TMDB_ID))
       }
 
       return CatalogMatchResult.Matched(tmdbId)
@@ -82,7 +79,7 @@ internal class TmdbCatalogIdResolver
     override suspend fun findMovieByTitle(title: String): CatalogMatchResult {
       val trimmed = title.trim()
       if (trimmed.isEmpty()) {
-        return CatalogMatchResult.Unmatched("Title in backup is blank.")
+        return CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.TITLE_BLANK))
       }
       val results =
         try {
@@ -91,22 +88,16 @@ internal class TmdbCatalogIdResolver
           rethrowCancellation(error) {
             Timber.w(error, "Failed to look up \"$trimmed\" by title.")
           }
-          val message =
-            when (error) {
-              is retrofit2.HttpException -> "TMDB API error (${error.code()} ${error.message()})."
-              is java.io.IOException -> "Network error connecting to TMDB (${error.message ?: "timeout"})."
-              else -> error.message ?: error.javaClass.simpleName
-            }
-          return CatalogMatchResult.Unmatched(message)
+          return CatalogMatchResult.Unmatched(lookupFailure(error))
         }
 
       if (results.isEmpty()) {
-        return CatalogMatchResult.Unmatched("No results found on TMDB.")
+        return CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.NO_RESULTS))
       }
 
       val movies = results.mapNotNull { it.movie }
       if (movies.isEmpty()) {
-        return CatalogMatchResult.Unmatched("Only TV shows found on TMDB, no movies.")
+        return CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.ONLY_SHOWS_FOUND))
       }
 
       val exactMatch = movies.firstOrNull { it.title.equals(trimmed, ignoreCase = true) }
@@ -117,14 +108,21 @@ internal class TmdbCatalogIdResolver
             .distinct()
             .take(2)
             .joinToString(", ") { "\"$it\"" }
-        return CatalogMatchResult.Unmatched("No exact title match on TMDB (found: $foundTitles).")
+        return CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.NO_EXACT_MATCH, foundTitles))
       }
 
       val tmdbId = exactMatch.ids?.tmdb
       if (tmdbId == null || tmdbId <= 0) {
-        return CatalogMatchResult.Unmatched("TMDB entry has missing or invalid ID ($tmdbId).")
+        return CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.INVALID_TMDB_ID))
       }
 
       return CatalogMatchResult.Matched(tmdbId)
     }
+
+    private fun lookupFailure(error: Throwable) =
+      when (error) {
+        is HttpException -> BackupImportText.of(BackupImportText.Message.TMDB_API_ERROR, error.code())
+        is IOException -> BackupImportText.of(BackupImportText.Message.TMDB_NETWORK_ERROR)
+        else -> BackupImportText.of(BackupImportText.Message.LOOKUP_FAILED)
+      }
   }

@@ -80,7 +80,7 @@ class WelcomeView : FrameLayout {
 
     // Only reinflate on an actual step or language change, so typing does not cost the body view its focus and the keyboard.
     if (languageChanged || renderedStep?.let { it::class } != state.step::class) {
-      bindContent(state.step)
+      bindContent(state.step, state.displayLanguage)
       renderedStep = state.step
     }
 
@@ -129,7 +129,10 @@ class WelcomeView : FrameLayout {
     }
   }
 
-  private fun bindContent(step: WelcomeStep) {
+  private fun bindContent(
+    step: WelcomeStep,
+    language: AppLanguage,
+  ) {
     val inflater = LayoutInflater.from(context)
     val container = binding.viewWelcomeContent
     container.removeAllViews()
@@ -187,7 +190,7 @@ class WelcomeView : FrameLayout {
         ViewWelcomeStepWhatsNewBinding.inflate(inflater, container, true).apply {
           viewWelcomeStepWhatsNewTitle.text = strings.getText(R.string.textWhatsNewTitle)
           viewWelcomeStepWhatsNewSubtitle.text = strings.getString(R.string.textWhatsNewSubtitle, step.version)
-          viewWelcomeStepWhatsNewMessage.text = step.notes
+          viewWelcomeStepWhatsNewMessage.text = step.notesIn(language)
         }
       }
     }

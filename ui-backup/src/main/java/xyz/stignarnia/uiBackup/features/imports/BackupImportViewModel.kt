@@ -19,6 +19,8 @@ import xyz.stignarnia.dataWebdav.WebDavCredentials
 import xyz.stignarnia.dataWebdav.WebDavFile
 import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.uiBackup.BackupConfig.SCHEME_VERSION
+import xyz.stignarnia.uiBackup.BackupException
+import xyz.stignarnia.uiBackup.R
 import xyz.stignarnia.uiBackup.features.export.BackupFileName
 import xyz.stignarnia.uiBackup.features.imports.migrations.BackupMigrationResult
 import xyz.stignarnia.uiBackup.features.imports.migrations.BackupMigrationV2
@@ -202,13 +204,13 @@ class BackupImportViewModel
           }
 
           else -> {
-            errorState.update { Error("Backup scheme v$version is not supported.") }
+            errorState.update { BackupException(R.string.textBackupImportUnsupportedVersion, version) }
             null
           }
         }
       } catch (error: Throwable) {
         rethrowCancellation(error) {
-          errorState.update { Error("Invalid backup file.\n${error.localizedMessage}") }
+          errorState.update { BackupException(R.string.textBackupImportInvalidFile, cause = error) }
         }
         return null
       }

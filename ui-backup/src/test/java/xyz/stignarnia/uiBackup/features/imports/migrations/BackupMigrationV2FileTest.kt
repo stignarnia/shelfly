@@ -9,6 +9,7 @@ import xyz.stignarnia.commonTest.UnconfinedCoroutineDispatchers
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupMoviesV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupSchemeV2
 import xyz.stignarnia.uiBackup.features.imports.migrations.model.BackupShowsV2
+import xyz.stignarnia.uiBackup.features.imports.model.BackupImportText
 import java.io.File
 
 /**
@@ -28,10 +29,10 @@ class BackupMigrationV2FileTest {
       resolver =
         object : CatalogIdResolver {
           override suspend fun findShowByTitle(title: String): CatalogMatchResult =
-            CatalogMatchResult.Unmatched("Offline test")
+            CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.NO_RESULTS))
 
           override suspend fun findMovieByTitle(title: String): CatalogMatchResult =
-            CatalogMatchResult.Unmatched("Offline test")
+            CatalogMatchResult.Unmatched(BackupImportText.of(BackupImportText.Message.NO_RESULTS))
         },
     )
 

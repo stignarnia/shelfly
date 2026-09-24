@@ -47,7 +47,7 @@ class BackupUnmatchedSeasonsFragment : Fragment(R.layout.fragment_backup_unmatch
     val show = resultHolder.result?.unmatchedShows?.getOrNull(showIndex)
 
     with(binding) {
-      toolbar.title = show?.title ?: getString(R.string.textBackupUnmatchedShowsTitle)
+      toolbar.title = show?.title?.resolve(requireContext()) ?: getString(R.string.textBackupUnmatchedShowsTitle)
       toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
 
       recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -58,7 +58,7 @@ class BackupUnmatchedSeasonsFragment : Fragment(R.layout.fragment_backup_unmatch
           if (season.isEntireSeasonUnmatched) {
             BackupUnmatchedRowUi(
               title = getString(R.string.textBackupUnmatchedSeasonSingle, season.seasonNumber),
-              reason = season.reason ?: getString(R.string.textBackupUnmatchedSeasonMissing),
+              reason = season.reason?.resolve(requireContext()) ?: getString(R.string.textBackupUnmatchedSeasonMissing),
               isClickable = false,
             )
           } else {

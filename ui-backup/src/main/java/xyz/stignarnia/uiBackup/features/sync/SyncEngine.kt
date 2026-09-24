@@ -4,6 +4,7 @@ import timber.log.Timber
 import xyz.stignarnia.common.extensions.nowUtcMillis
 import xyz.stignarnia.dataWebdav.WebDavCredentials
 import xyz.stignarnia.repository.settings.SettingsSyncRepository
+import xyz.stignarnia.uiBackup.BackupFailure
 import xyz.stignarnia.uiBackup.features.export.workers.BackupExportWorker
 import xyz.stignarnia.uiBackup.features.imports.workers.BackupImportWorker
 import xyz.stignarnia.uiBackup.features.sync.model.SyncPayload
@@ -54,7 +55,8 @@ class SyncEngine
           settingsSyncRepository.lastPeers = it.peerIds
         }
       } catch (error: Throwable) {
-        settingsSyncRepository.lastError = error.message ?: error::class.java.simpleName
+        // Stored by name rather than as the exception's message, which is English and would be shown on the backup screen as it is.
+        settingsSyncRepository.lastError = BackupFailure.of(error).name
         throw error
       }
 

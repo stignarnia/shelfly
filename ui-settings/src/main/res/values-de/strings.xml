@@ -128,10 +128,5 @@
   <string name="textSettingsWebDavTest">Verbindung testen</string>
   <string name="textSettingsWebDavTesting">Wird getestet…</string>
   <string name="textSettingsWebDavConnected">Verbunden. Der Ordner ist erreichbar und beschreibbar.</string>
-  <string name="textSettingsWebDavErrorAuth">Authentifizierung fehlgeschlagen. Überprüfen Sie Benutzername und Passwort.</string>
-  <string name="textSettingsWebDavErrorNotFound">Ordner nicht gefunden und konnte nicht erstellt werden. Überprüfen Sie die URL.</string>
-  <string name="textSettingsWebDavErrorTls">Sichere Verbindung konnte nicht hergestellt werden. Dem Serverzertifikat wird nicht vertraut.</string>
-  <string name="textSettingsWebDavErrorUnreachable">Server nicht erreichbar. Überprüfen Sie Adresse und Internetverbindung.</string>
-  <string name="textSettingsWebDavErrorUnexpected">Der Server hat unerwartet geantwortet.</string>
   <string name="errorNotificationSettingsUnavailable">Benachrichtigungseinstellungen konnten nicht geöffnet werden.</string>
 </resources>

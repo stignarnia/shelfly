@@ -8,5 +8,5 @@ data class BackupUnmatchedEpisode(
   val episodeNumber: Int,
   val seasonNumber: Int,
   val title: String? = null,
-  val reason: String,
+  val reason: BackupImportText,
 ) : Serializable

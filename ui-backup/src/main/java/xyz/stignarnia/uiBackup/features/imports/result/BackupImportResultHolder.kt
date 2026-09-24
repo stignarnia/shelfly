@@ -5,6 +5,7 @@ import com.squareup.moshi.Moshi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import timber.log.Timber
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportResult
+import xyz.stignarnia.uiBackup.features.imports.model.BackupImportText
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,7 +16,11 @@ class BackupImportResultHolder
   constructor(
     @ApplicationContext private val context: Context,
   ) {
-    private val moshi: Moshi = Moshi.Builder().build()
+    private val moshi: Moshi =
+      Moshi
+        .Builder()
+        .add(BackupImportText.LegacyAdapter)
+        .build()
     private val adapter = moshi.adapter(BackupImportResult::class.java)
 
     private val reportFile: File

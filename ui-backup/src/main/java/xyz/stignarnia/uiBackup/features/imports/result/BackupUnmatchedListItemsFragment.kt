@@ -56,8 +56,8 @@ class BackupUnmatchedListItemsFragment : Fragment(R.layout.fragment_backup_unmat
       val items =
         list?.unmatchedItems.orEmpty().map { item ->
           BackupUnmatchedRowUi(
-            title = item.title,
-            reason = item.reason,
+            title = item.title.resolve(requireContext()),
+            reason = item.reason.resolve(requireContext()),
             isClickable = false,
           )
         }

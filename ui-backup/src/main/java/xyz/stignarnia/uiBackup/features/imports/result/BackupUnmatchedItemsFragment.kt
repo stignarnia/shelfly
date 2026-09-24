@@ -75,8 +75,8 @@ class BackupUnmatchedItemsFragment : Fragment(R.layout.fragment_backup_unmatched
   private fun movieRows() =
     resultHolder.result?.unmatchedMovies.orEmpty().map { item ->
       BackupUnmatchedRowUi(
-        title = item.title,
-        reason = item.reason,
+        title = item.title.resolve(requireContext()),
+        reason = item.reason.resolve(requireContext()),
         isClickable = false,
       )
     }
@@ -86,7 +86,7 @@ class BackupUnmatchedItemsFragment : Fragment(R.layout.fragment_backup_unmatched
       if (list.unmatchedItems.isEmpty()) {
         BackupUnmatchedRowUi(
           title = list.title,
-          reason = list.reason.orEmpty(),
+          reason = list.reason?.resolve(requireContext()).orEmpty(),
           isClickable = false,
         )
       } else {
@@ -99,7 +99,7 @@ class BackupUnmatchedItemsFragment : Fragment(R.layout.fragment_backup_unmatched
           )
         BackupUnmatchedRowUi(
           title = list.title,
-          reason = if (list.reason != null) "${list.reason} • $subtitle" else subtitle,
+          reason = if (list.reason != null) "${list.reason.resolve(requireContext())} • $subtitle" else subtitle,
           isClickable = true,
           onClick = {
             if (findNavController().currentDestination?.id == R.id.backupUnmatchedItemsFragment) {
@@ -119,8 +119,8 @@ class BackupUnmatchedItemsFragment : Fragment(R.layout.fragment_backup_unmatched
       val hasSeasons = show.unmatchedSeasons.isNotEmpty()
       if (!hasSeasons) {
         BackupUnmatchedRowUi(
-          title = show.title,
-          reason = show.reason ?: getString(R.string.textBackupUnmatchedSeasonMissing),
+          title = show.title.resolve(requireContext()),
+          reason = show.reason?.resolve(requireContext()) ?: getString(R.string.textBackupUnmatchedSeasonMissing),
           isClickable = false,
         )
       } else {
@@ -133,12 +133,12 @@ class BackupUnmatchedItemsFragment : Fragment(R.layout.fragment_backup_unmatched
           )
         val reasonText =
           if (show.reason != null) {
-            "${show.reason} • $subtitle"
+            "${show.reason.resolve(requireContext())} • $subtitle"
           } else {
             subtitle
           }
         BackupUnmatchedRowUi(
-          title = show.title,
+          title = show.title.resolve(requireContext()),
           reason = reasonText,
           isClickable = true,
           onClick = {

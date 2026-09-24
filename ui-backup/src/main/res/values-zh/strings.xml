@@ -37,6 +37,12 @@
   <string name="textSyncNotificationSuccessContent">同步成功完成。</string>
   <string name="textSyncNotificationErrorTitle">WebDAV 同步失败</string>
   <string name="textSyncNotificationErrorContent">同步失败：%s</string>
+  <string name="textSyncNotificationInterruptedContent">在完成前被中断。</string>
+  <string name="textWebDavErrorAuth">身份认证失败。请检查用户名和密码。</string>
+  <string name="textWebDavErrorNotFound">找不到该文件夹且无法创建。请检查 URL。</string>
+  <string name="textWebDavErrorTls">无法建立安全连接。服务器证书不受信任。</string>
+  <string name="textWebDavErrorUnreachable">无法连接到服务器。请检查地址和网络连接。</string>
+  <string name="textWebDavErrorUnexpected">服务器返回了意外响应。</string>
   <string name="textBackupNotificationErrorTitle">备份失败</string>
 
   <string name="textBackupImportResultTitle">导入摘要</string>
@@ -67,4 +73,42 @@
   <plurals name="textBackupUnmatchedListItemsSubtitle">
     <item quantity="other">%d 个未匹配项目</item>
   </plurals>
+
+  <string name="textBackupErrorUnexpected">发生了意外错误。</string>
+  <string name="textBackupErrorNoServer">尚未配置 WebDAV 服务器。</string>
+  <string name="textBackupErrorRead">无法读取备份文件。</string>
+  <string name="textBackupErrorWrite">无法写入备份文件。</string>
+  <string name="textBackupExportValidationFailed">无法验证导出的文件，请重试。</string>
+  <string name="textBackupImportUnsupportedVersion">此备份使用了不受支持的格式（版本 %1$d）。</string>
+  <string name="textBackupImportInvalidFile">此文件不是有效的备份。</string>
+  <string name="textBackupImportInitializing">正在导入…</string>
+  <string name="textBackupReasonTitleBlank">备份中的标题为空。</string>
+  <string name="textBackupReasonNoResults">在 TMDB 上未找到结果。</string>
+  <string name="textBackupReasonOnlyMoviesFound">在 TMDB 上只找到电影，没有剧集。</string>
+  <string name="textBackupReasonOnlyShowsFound">在 TMDB 上只找到剧集，没有电影。</string>
+  <string name="textBackupReasonNoExactMatch">TMDB 上没有完全匹配的标题（找到：%1$s）。</string>
+  <string name="textBackupReasonInvalidTmdbId">TMDB 条目的 ID 缺失或无效。</string>
+  <string name="textBackupReasonLookupFailed">无法在 TMDB 上搜索此标题。</string>
+  <string name="textBackupReasonTmdbApiError">TMDB API 错误（HTTP %1$s）。</string>
+  <string name="textBackupReasonTmdbNetworkError">连接 TMDB 时出现网络错误。</string>
+  <string name="textBackupReasonDetailsNotFound">在 TMDB 上未找到详细信息（HTTP 404）。</string>
+  <string name="textBackupReasonDetailsFailed">无法从 TMDB 获取详细信息。</string>
+  <string name="textBackupReasonSeasonsNotFound">在 TMDB 上未找到剧季（HTTP 404）。</string>
+  <string name="textBackupReasonSeasonsFailed">无法从 TMDB 加载剧季。</string>
+  <string name="textBackupReasonEpisodeNotFound">在 TMDB 上未找到该集。</string>
+  <string name="textBackupReasonSeasonNotFoundAnywhere">在本地和 TMDB 上都未找到该剧季。</string>
+  <string name="textBackupReasonEpisodeNotFoundAnywhere">在本地和 TMDB 上都未找到该集。</string>
+  <string name="textBackupReasonShowUnavailable">该剧集在 TMDB 上不可用。</string>
+  <string name="textBackupReasonSeasonUnavailable">该剧季在 TMDB 上不可用。</string>
+  <string name="textBackupReasonOrphanShow">在观看历史中，但不在任何收藏中，因此无法在 TMDB 上匹配。</string>
+  <string name="textBackupReasonNotInCollection">没有 TMDB ID，也不在任何收藏中。</string>
+  <string name="textBackupReasonListCreateFailed">无法创建列表。</string>
+  <string name="textBackupReasonListMerged">已合并到同名的现有列表中。</string>
+  <string name="textBackupReasonAddToListFailed">无法添加到列表。</string>
+  <string name="textBackupTitleShowLegacyId">不在收藏中的剧集（ID：%1$s）</string>
+  <string name="textBackupTitleMovieLegacyId">不在收藏中的电影（ID：%1$s）</string>
+  <string name="textBackupTitleItemLegacyId">不在收藏中的项目（ID：%1$s）</string>
+  <string name="textBackupTitleShowTmdbId">剧集（TMDB ID：%1$s）</string>
+  <string name="textBackupTitleMovieTmdbId">电影（TMDB ID：%1$s）</string>
+  <string name="textBackupTitleItemTmdbId">TMDB ID：%1$s</string>
 </resources>

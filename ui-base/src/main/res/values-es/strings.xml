@@ -126,4 +126,16 @@
   <string name="errorNoInternetConnection">Sin Internet. Por favor compruebe su conexión.</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">Volver arriba</string>
+
+  <string name="textNotificationChannelGeneral">Información general</string>
+  <string name="textNotificationChannelGeneralDescription">Información general y anuncios</string>
+  <string name="textNotificationChannelShows">Información de series</string>
+  <string name="textNotificationChannelShowsDescription">Información relacionada con tus series</string>
+  <string name="textNotificationChannelEpisodes">Anuncios de episodios</string>
+  <string name="textNotificationChannelEpisodesDescription">Anuncios de episodios y temporadas</string>
+  <string name="textNotificationChannelMovies">Anuncios de películas</string>
+  <string name="textNotificationChannelMoviesDescription">Anuncios sobre películas</string>
+  <string name="textNotificationChannelSync">Sincronización y copia de seguridad</string>
+  <string name="textNotificationChannelSyncDescription">Notificaciones de sincronización y copia de seguridad</string>
+  <string name="textShareTitle">Compartir %1$s</string>
 </resources>

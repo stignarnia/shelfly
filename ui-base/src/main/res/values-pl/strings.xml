@@ -131,4 +131,16 @@
   <string name="errorNoInternetConnection">Brak Internetu. Sprawdź swoje połączenie.</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">Powrót na górę</string>
+
+  <string name="textNotificationChannelGeneral">Informacje ogólne</string>
+  <string name="textNotificationChannelGeneralDescription">Informacje ogólne i ogłoszenia</string>
+  <string name="textNotificationChannelShows">Informacje o serialach</string>
+  <string name="textNotificationChannelShowsDescription">Informacje dotyczące twoich seriali</string>
+  <string name="textNotificationChannelEpisodes">Zapowiedzi odcinków</string>
+  <string name="textNotificationChannelEpisodesDescription">Zapowiedzi odcinków i sezonów</string>
+  <string name="textNotificationChannelMovies">Zapowiedzi filmów</string>
+  <string name="textNotificationChannelMoviesDescription">Ogłoszenia dotyczące filmów</string>
+  <string name="textNotificationChannelSync">Synchronizacja i kopia zapasowa</string>
+  <string name="textNotificationChannelSyncDescription">Powiadomienia o synchronizacji i kopii zapasowej</string>
+  <string name="textShareTitle">Udostępnij %1$s</string>
 </resources>

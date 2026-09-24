@@ -121,4 +121,16 @@
   <string name="errorNoInternetConnection">İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">Başa dön</string>
+
+  <string name="textNotificationChannelGeneral">Genel bilgiler</string>
+  <string name="textNotificationChannelGeneralDescription">Genel bilgiler ve duyurular</string>
+  <string name="textNotificationChannelShows">Dizi bilgileri</string>
+  <string name="textNotificationChannelShowsDescription">Dizilerinizle ilgili bilgiler</string>
+  <string name="textNotificationChannelEpisodes">Bölüm duyuruları</string>
+  <string name="textNotificationChannelEpisodesDescription">Bölüm ve sezon duyuruları</string>
+  <string name="textNotificationChannelMovies">Film duyuruları</string>
+  <string name="textNotificationChannelMoviesDescription">Filmlerle ilgili duyurular</string>
+  <string name="textNotificationChannelSync">Senkronizasyon ve yedekleme</string>
+  <string name="textNotificationChannelSyncDescription">Senkronizasyon ve yedekleme bildirimleri</string>
+  <string name="textShareTitle">Paylaş: %1$s</string>
 </resources>

@@ -15,6 +15,9 @@ import kotlinx.coroutines.launch
 import xyz.stignarnia.common.extensions.nowUtcMillis
 import xyz.stignarnia.repository.settings.SettingsSyncRepository
 import xyz.stignarnia.repository.settings.SettingsWebDavRepository
+import xyz.stignarnia.uiBackup.BackupException
+import xyz.stignarnia.uiBackup.BackupFailure
+import xyz.stignarnia.uiBackup.R
 import xyz.stignarnia.uiBackup.features.export.cases.CreateBackupJsonUseCase
 import xyz.stignarnia.uiBackup.features.export.cases.CreateBackupSchemeFromJsonUseCase
 import xyz.stignarnia.uiBackup.features.export.model.BackupExportSchedule
@@ -92,7 +95,7 @@ class BackupExportViewModel
      * @return A [Result] object containing the parsed [BackupScheme] on success, or an [Error] on failure.
      */
     fun validateExportData(jsonInput: String): Result<BackupScheme> {
-      val jsonError = Error("Failed to validate export file. Please try again or contact us if this keeps happening.")
+      val jsonError = BackupException(R.string.textBackupExportValidationFailed)
       return createBackupSchemeFromJsonUseCase(jsonInput).fold(
         onSuccess = {
           if (it != null) {
@@ -137,7 +140,7 @@ class BackupExportViewModel
           deviceId = syncRepository.deviceId,
           lastSyncedAt = syncRepository.lastSyncedAt,
           peers = syncRepository.lastPeers,
-          error = syncRepository.lastError,
+          error = BackupFailure.fromName(syncRepository.lastError),
         )
     }
 

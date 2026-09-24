@@ -26,6 +26,7 @@ import xyz.stignarnia.repository.mappers.Mappers
 import xyz.stignarnia.repository.shows.ShowsRepository
 import xyz.stignarnia.repository.shows.ratings.ShowsRatingsRepository
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Importing
+import xyz.stignarnia.uiBackup.features.imports.model.BackupImportText
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedEpisode
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedSeason
 import xyz.stignarnia.uiBackup.features.imports.model.BackupUnmatchedShow
@@ -399,7 +400,7 @@ internal class BackupImportShowsRunner
                 BackupUnmatchedEpisode(
                   episodeNumber = importEpisode.episodeNumber,
                   seasonNumber = importEpisode.seasonNumber,
-                  reason = "Episodio non trovato localmente o su TMDB.",
+                  reason = BackupImportText.of(BackupImportText.Message.EPISODE_NOT_FOUND_ANYWHERE),
                 ),
               )
           }
@@ -418,7 +419,7 @@ internal class BackupImportShowsRunner
             allFailedSeasons +=
               BackupUnmatchedSeason(
                 seasonNumber = bs.seasonNumber,
-                reason = if (eps.isEmpty()) "Stagione non trovata localmente o su TMDB." else null,
+                reason = if (eps.isEmpty()) BackupImportText.of(BackupImportText.Message.SEASON_NOT_FOUND_ANYWHERE) else null,
                 unmatchedEpisodes = eps.sortedBy { it.episodeNumber },
               )
           }
@@ -437,7 +438,7 @@ internal class BackupImportShowsRunner
         if (allFailedSeasons.isNotEmpty()) {
           failedShows +=
             BackupUnmatchedShow(
-              title = show.title,
+              title = BackupImportText.verbatim(show.title),
               tmdbId = show.tmdbId,
               unmatchedSeasons = allFailedSeasons.sortedBy { it.seasonNumber },
             )
@@ -454,17 +455,19 @@ internal class BackupImportShowsRunner
           try {
             remoteSource.tmdb.fetchSeasons(show.tmdbId)
           } catch (error: Throwable) {
-            Timber.w("Failed to fetch seasons for show ${show.tmdbId}: ${error.message}")
+            rethrowCancellation(error) {
+              Timber.w(error, "Failed to fetch seasons for show ${show.tmdbId}")
+            }
             val reason =
               when {
-                error is HttpException && error.code() == 404 -> "Stagioni non trovate su TMDB (HTTP 404)."
-                error is HttpException -> "Errore API TMDB (${error.code()})."
-                error is IOException -> "Errore di rete su TMDB."
-                else -> "Errore caricamento stagioni: ${error.message ?: error.javaClass.simpleName}."
+                error is HttpException && error.code() == 404 -> BackupImportText.of(BackupImportText.Message.SEASONS_NOT_FOUND)
+                error is HttpException -> BackupImportText.of(BackupImportText.Message.TMDB_API_ERROR, error.code())
+                error is IOException -> BackupImportText.of(BackupImportText.Message.TMDB_NETWORK_ERROR)
+                else -> BackupImportText.of(BackupImportText.Message.SEASONS_FAILED)
               }
             failedShows +=
               BackupUnmatchedShow(
-                title = show.title,
+                title = BackupImportText.verbatim(show.title),
                 reason = reason,
                 tmdbId = show.tmdbId,
               )
@@ -487,7 +490,7 @@ internal class BackupImportShowsRunner
             unmatchedSeasonsList +=
               BackupUnmatchedSeason(
                 seasonNumber = bs.seasonNumber,
-                reason = "Stagione non trovata su TMDB.",
+                reason = BackupImportText.of(BackupImportText.Message.SEASON_NOT_FOUND),
               )
           }
         }
@@ -500,7 +503,7 @@ internal class BackupImportShowsRunner
               unmatchedSeasonsList +=
                 BackupUnmatchedSeason(
                   seasonNumber = seasonNum,
-                  reason = "Stagione non trovata su TMDB.",
+                  reason = BackupImportText.of(BackupImportText.Message.SEASON_NOT_FOUND),
                 )
             }
           } else {
@@ -516,7 +519,7 @@ internal class BackupImportShowsRunner
                   BackupUnmatchedEpisode(
                     episodeNumber = be.episodeNumber,
                     seasonNumber = seasonNum,
-                    reason = "Episodio non trovato su TMDB.",
+                    reason = BackupImportText.of(BackupImportText.Message.EPISODE_NOT_FOUND),
                   )
               }
             }
@@ -533,7 +536,7 @@ internal class BackupImportShowsRunner
         if (unmatchedSeasonsList.isNotEmpty()) {
           failedShows +=
             BackupUnmatchedShow(
-              title = show.title,
+              title = BackupImportText.verbatim(show.title),
               tmdbId = show.tmdbId,
               unmatchedSeasons = unmatchedSeasonsList.sortedBy { it.seasonNumber },
             )
@@ -600,15 +603,15 @@ internal class BackupImportShowsRunner
         rethrowCancellation(error) {
           val reason =
             when {
-              error is HttpException && error.code() == 404 -> "Details not found on TMDB (HTTP 404)."
-              error is HttpException -> "TMDB API error (${error.code()} ${error.message()})."
-              error is IOException -> "Network error fetching TMDB details (${error.message ?: "timeout"})."
-              else -> "Failed to fetch details: ${error.message ?: error.javaClass.simpleName}."
+              error is HttpException && error.code() == 404 -> BackupImportText.of(BackupImportText.Message.DETAILS_NOT_FOUND)
+              error is HttpException -> BackupImportText.of(BackupImportText.Message.TMDB_API_ERROR, error.code())
+              error is IOException -> BackupImportText.of(BackupImportText.Message.TMDB_NETWORK_ERROR)
+              else -> BackupImportText.of(BackupImportText.Message.DETAILS_FAILED)
             }
           Timber.w("Failed to fetch show: ${show.tmdbId} ${show.title} - $reason")
           failedShows +=
             BackupUnmatchedShow(
-              title = show.title,
+              title = BackupImportText.verbatim(show.title),
               reason = reason,
               tmdbId = show.tmdbId,
             )

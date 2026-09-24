@@ -44,6 +44,12 @@
   <string name="textSyncNotificationSuccessContent">Sync completed successfully.</string>
   <string name="textSyncNotificationErrorTitle">WebDAV Sync Failed</string>
   <string name="textSyncNotificationErrorContent">Sync failed: %s</string>
+  <string name="textSyncNotificationInterruptedContent">Interrupted before it could finish.</string>
+  <string name="textWebDavErrorAuth">Authentication failed. Check the username and password.</string>
+  <string name="textWebDavErrorNotFound">Folder not found, and it could not be created. Check the URL.</string>
+  <string name="textWebDavErrorTls">Could not establish a secure connection. The server\'s certificate was rejected.</string>
+  <string name="textWebDavErrorUnreachable">Could not reach the server. Check the address and your connection.</string>
+  <string name="textWebDavErrorUnexpected">The server responded unexpectedly.</string>
   <string name="textBackupNotificationErrorTitle">Backup Failed</string>
 
   <string name="textBackupImportResultTitle">Import Summary</string>
@@ -77,4 +83,42 @@
     <item quantity="other">%d unmatched items</item>
   </plurals>
   <string name="textBackupImportUnmatchedEmpty">No unmatched items in this category.</string>
+
+  <string name="textBackupErrorUnexpected">An unexpected error occurred.</string>
+  <string name="textBackupErrorNoServer">No WebDAV server is configured.</string>
+  <string name="textBackupErrorRead">Could not read the backup file.</string>
+  <string name="textBackupErrorWrite">Could not write the backup file.</string>
+  <string name="textBackupExportValidationFailed">The exported file could not be verified. Please try again.</string>
+  <string name="textBackupImportUnsupportedVersion">This backup uses a format that is not supported (version %1$d).</string>
+  <string name="textBackupImportInvalidFile">This file is not a valid backup.</string>
+  <string name="textBackupImportInitializing">Importing…</string>
+  <string name="textBackupReasonTitleBlank">The title in the backup is blank.</string>
+  <string name="textBackupReasonNoResults">No results found on TMDB.</string>
+  <string name="textBackupReasonOnlyMoviesFound">Only movies found on TMDB, no TV shows.</string>
+  <string name="textBackupReasonOnlyShowsFound">Only TV shows found on TMDB, no movies.</string>
+  <string name="textBackupReasonNoExactMatch">No exact title match on TMDB (found: %1$s).</string>
+  <string name="textBackupReasonInvalidTmdbId">The TMDB entry has a missing or invalid ID.</string>
+  <string name="textBackupReasonLookupFailed">Could not search TMDB for this title.</string>
+  <string name="textBackupReasonTmdbApiError">TMDB API error (HTTP %1$s).</string>
+  <string name="textBackupReasonTmdbNetworkError">Network error connecting to TMDB.</string>
+  <string name="textBackupReasonDetailsNotFound">Details not found on TMDB (HTTP 404).</string>
+  <string name="textBackupReasonDetailsFailed">Could not fetch the details from TMDB.</string>
+  <string name="textBackupReasonSeasonsNotFound">Seasons not found on TMDB (HTTP 404).</string>
+  <string name="textBackupReasonSeasonsFailed">Could not load the seasons from TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFound">Episode not found on TMDB.</string>
+  <string name="textBackupReasonSeasonNotFoundAnywhere">Season not found locally or on TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFoundAnywhere">Episode not found locally or on TMDB.</string>
+  <string name="textBackupReasonShowUnavailable">TV show not available on TMDB.</string>
+  <string name="textBackupReasonSeasonUnavailable">Season not available on TMDB.</string>
+  <string name="textBackupReasonOrphanShow">In the watch history but not in any collection, so it could not be matched on TMDB.</string>
+  <string name="textBackupReasonNotInCollection">Has no TMDB ID and is not in any collection.</string>
+  <string name="textBackupReasonListCreateFailed">Could not create the list.</string>
+  <string name="textBackupReasonListMerged">Merged into the existing list with the same name.</string>
+  <string name="textBackupReasonAddToListFailed">Could not add it to the list.</string>
+  <string name="textBackupTitleShowLegacyId">TV show not in collection (ID: %1$s)</string>
+  <string name="textBackupTitleMovieLegacyId">Movie not in collection (ID: %1$s)</string>
+  <string name="textBackupTitleItemLegacyId">Item not in collection (ID: %1$s)</string>
+  <string name="textBackupTitleShowTmdbId">TV show (TMDB ID: %1$s)</string>
+  <string name="textBackupTitleMovieTmdbId">Movie (TMDB ID: %1$s)</string>
+  <string name="textBackupTitleItemTmdbId">TMDB ID: %1$s</string>
 </resources>

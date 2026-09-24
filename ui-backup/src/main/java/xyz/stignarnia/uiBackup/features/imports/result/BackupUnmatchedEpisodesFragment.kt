@@ -56,7 +56,7 @@ class BackupUnmatchedEpisodesFragment : Fragment(R.layout.fragment_backup_unmatc
         } else {
           getString(R.string.textBackupUnmatchedShowsTitle)
         }
-      toolbar.subtitle = show?.title
+      toolbar.subtitle = show?.title?.resolve(requireContext())
       toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
 
       recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -66,7 +66,7 @@ class BackupUnmatchedEpisodesFragment : Fragment(R.layout.fragment_backup_unmatc
         season?.unmatchedEpisodes.orEmpty().map { episode ->
           BackupUnmatchedRowUi(
             title = episode.title ?: getString(R.string.textBackupUnmatchedEpisodeSingle, episode.episodeNumber),
-            reason = episode.reason,
+            reason = episode.reason.resolve(requireContext()),
             isClickable = false,
           )
         }

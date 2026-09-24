@@ -12,8 +12,10 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import xyz.stignarnia.uiBackup.BackupException
 import xyz.stignarnia.uiBackup.R
 import xyz.stignarnia.uiBackup.databinding.FragmentBackupImportBinding
+import xyz.stignarnia.uiBackup.describe
 import xyz.stignarnia.uiBackup.features.export.cases.ReadBackupJsonFromFileUseCase
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Idle
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Importing
@@ -100,7 +102,7 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
     readBackupJsonFromFileUseCase(requireContext(), uri).fold(
       onSuccess = { viewModel.runImport(it) },
       onFailure = {
-        showErrorSnack(it)
+        showErrorSnack(BackupException(R.string.textBackupErrorRead, cause = it))
         Timber.e(it)
       },
     )
@@ -113,7 +115,7 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
     val host = (requireActivity() as SnackbarHost).provideSnackbarLayout()
     snackbar =
       host.showErrorSnackbar(
-        message = error.localizedMessage ?: getString(R.string.errorGeneral),
+        message = error.describe(requireContext()),
       )
   }
 
@@ -204,7 +206,7 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
           }
 
           is Initializing -> {
-            "Importing..."
+            getString(R.string.textBackupImportInitializing)
           }
 
           is Importing -> {

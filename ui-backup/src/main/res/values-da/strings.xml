@@ -25,6 +25,12 @@
   <string name="textSyncNotificationSuccessContent">Synkronisering fuldført.</string>
   <string name="textSyncNotificationErrorTitle">WebDAV-synkronisering mislykkedes</string>
   <string name="textSyncNotificationErrorContent">Synkronisering mislykkedes: %s</string>
+  <string name="textSyncNotificationInterruptedContent">Afbrudt, før den kunne blive færdig.</string>
+  <string name="textWebDavErrorAuth">Godkendelse mislykkedes. Tjek brugernavn og adgangskode.</string>
+  <string name="textWebDavErrorNotFound">Mappe ikke fundet, og den kunne ikke oprettes. Tjek URL.</string>
+  <string name="textWebDavErrorTls">Kunne ikke etablere en sikker forbindelse. Serverens certifikat blev ikke betroet.</string>
+  <string name="textWebDavErrorUnreachable">Kunne ikke nå serveren. Tjek adressen og din forbindelse.</string>
+  <string name="textWebDavErrorUnexpected">Serveren svarede uventet.</string>
   <string name="textBackupNotificationErrorTitle">Sikkerhedskopiering mislykkedes</string>
   <string name="textBackupExportSchedule">Tidsplan</string>
   <string name="textBackupExportOptionOff">Fra</string>
@@ -71,4 +77,42 @@
     <item quantity="one">%d ikke-matchet element</item>
     <item quantity="other">%d ikke-matchede elementer</item>
   </plurals>
+
+  <string name="textBackupErrorUnexpected">Der opstod en uventet fejl.</string>
+  <string name="textBackupErrorNoServer">Der er ikke konfigureret nogen WebDAV-server.</string>
+  <string name="textBackupErrorRead">Sikkerhedskopifilen kunne ikke læses.</string>
+  <string name="textBackupErrorWrite">Sikkerhedskopifilen kunne ikke skrives.</string>
+  <string name="textBackupExportValidationFailed">Den eksporterede fil kunne ikke bekræftes. Prøv igen.</string>
+  <string name="textBackupImportUnsupportedVersion">Denne sikkerhedskopi bruger et format, der ikke understøttes (version %1$d).</string>
+  <string name="textBackupImportInvalidFile">Denne fil er ikke en gyldig sikkerhedskopi.</string>
+  <string name="textBackupImportInitializing">Importerer…</string>
+  <string name="textBackupReasonTitleBlank">Titlen i sikkerhedskopien er tom.</string>
+  <string name="textBackupReasonNoResults">Ingen resultater fundet på TMDB.</string>
+  <string name="textBackupReasonOnlyMoviesFound">Kun film fundet på TMDB, ingen serier.</string>
+  <string name="textBackupReasonOnlyShowsFound">Kun serier fundet på TMDB, ingen film.</string>
+  <string name="textBackupReasonNoExactMatch">Intet præcist titelmatch på TMDB (fundet: %1$s).</string>
+  <string name="textBackupReasonInvalidTmdbId">TMDB-posten har et manglende eller ugyldigt ID.</string>
+  <string name="textBackupReasonLookupFailed">Kunne ikke søge efter titlen på TMDB.</string>
+  <string name="textBackupReasonTmdbApiError">TMDB API-fejl (HTTP %1$s).</string>
+  <string name="textBackupReasonTmdbNetworkError">Netværksfejl ved forbindelse til TMDB.</string>
+  <string name="textBackupReasonDetailsNotFound">Detaljer ikke fundet på TMDB (HTTP 404).</string>
+  <string name="textBackupReasonDetailsFailed">Kunne ikke hente detaljerne fra TMDB.</string>
+  <string name="textBackupReasonSeasonsNotFound">Sæsoner ikke fundet på TMDB (HTTP 404).</string>
+  <string name="textBackupReasonSeasonsFailed">Kunne ikke indlæse sæsonerne fra TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFound">Afsnit ikke fundet på TMDB.</string>
+  <string name="textBackupReasonSeasonNotFoundAnywhere">Sæson hverken fundet lokalt eller på TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFoundAnywhere">Afsnit hverken fundet lokalt eller på TMDB.</string>
+  <string name="textBackupReasonShowUnavailable">Serien er ikke tilgængelig på TMDB.</string>
+  <string name="textBackupReasonSeasonUnavailable">Sæsonen er ikke tilgængelig på TMDB.</string>
+  <string name="textBackupReasonOrphanShow">Findes i historikken, men ikke i nogen samling, så den kunne ikke matches på TMDB.</string>
+  <string name="textBackupReasonNotInCollection">Har intet TMDB-ID og er ikke i nogen samling.</string>
+  <string name="textBackupReasonListCreateFailed">Listen kunne ikke oprettes.</string>
+  <string name="textBackupReasonListMerged">Flettet med den eksisterende liste med samme navn.</string>
+  <string name="textBackupReasonAddToListFailed">Kunne ikke føjes til listen.</string>
+  <string name="textBackupTitleShowLegacyId">Serie uden for samlingen (ID: %1$s)</string>
+  <string name="textBackupTitleMovieLegacyId">Film uden for samlingen (ID: %1$s)</string>
+  <string name="textBackupTitleItemLegacyId">Element uden for samlingen (ID: %1$s)</string>
+  <string name="textBackupTitleShowTmdbId">Serie (TMDB-ID: %1$s)</string>
+  <string name="textBackupTitleMovieTmdbId">Film (TMDB-ID: %1$s)</string>
+  <string name="textBackupTitleItemTmdbId">TMDB-ID: %1$s</string>
 </resources>

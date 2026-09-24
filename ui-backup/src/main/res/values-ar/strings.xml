@@ -29,6 +29,12 @@
   <string name="textSyncNotificationSuccessContent">اكتملت المزامنة بنجاح.</string>
   <string name="textSyncNotificationErrorTitle">فشلت مزامنة WebDAV</string>
   <string name="textSyncNotificationErrorContent">فشلت المزامنة: %s</string>
+  <string name="textSyncNotificationInterruptedContent">توقفت قبل أن تكتمل.</string>
+  <string name="textWebDavErrorAuth">فشلت المصادقة. تحقق من اسم المستخدم وكلمة المرور.</string>
+  <string name="textWebDavErrorNotFound">المجلد غير موجود، ولم يمكن إنشاؤه. تحقق من عنوان URL.</string>
+  <string name="textWebDavErrorTls">تعذر إنشاء اتصال آمن. لم يتم الوثوق بشهادة الخادم.</string>
+  <string name="textWebDavErrorUnreachable">تعذر الوصول إلى الخادم. تحقق من العنوان واتصالك.</string>
+  <string name="textWebDavErrorUnexpected">استجاب الخادم بشكل غير متوقع.</string>
   <string name="textBackupNotificationErrorTitle">فشل النسخ الاحتياطي</string>
   <string name="textBackupExportSchedule">الجدول الزمني</string>
   <string name="textBackupExportOptionOff">إيقاف</string>
@@ -87,4 +93,42 @@
     <item quantity="many">%d عنصراً غير متطابق</item>
     <item quantity="other">%d عنصر غير متطابق</item>
   </plurals>
+
+  <string name="textBackupErrorUnexpected">حدث خطأ غير متوقع.</string>
+  <string name="textBackupErrorNoServer">لم يتم إعداد أي خادم WebDAV.</string>
+  <string name="textBackupErrorRead">تعذرت قراءة ملف النسخة الاحتياطية.</string>
+  <string name="textBackupErrorWrite">تعذرت كتابة ملف النسخة الاحتياطية.</string>
+  <string name="textBackupExportValidationFailed">تعذر التحقق من الملف المُصدَّر. يرجى المحاولة مرة أخرى.</string>
+  <string name="textBackupImportUnsupportedVersion">تستخدم هذه النسخة الاحتياطية تنسيقًا غير مدعوم (الإصدار %1$d).</string>
+  <string name="textBackupImportInvalidFile">هذا الملف ليس نسخة احتياطية صالحة.</string>
+  <string name="textBackupImportInitializing">جارٍ الاستيراد…</string>
+  <string name="textBackupReasonTitleBlank">العنوان في النسخة الاحتياطية فارغ.</string>
+  <string name="textBackupReasonNoResults">لم يتم العثور على نتائج في TMDB.</string>
+  <string name="textBackupReasonOnlyMoviesFound">تم العثور على أفلام فقط في TMDB، دون مسلسلات.</string>
+  <string name="textBackupReasonOnlyShowsFound">تم العثور على مسلسلات فقط في TMDB، دون أفلام.</string>
+  <string name="textBackupReasonNoExactMatch">لا يوجد تطابق تام للعنوان في TMDB (تم العثور على: %1$s).</string>
+  <string name="textBackupReasonInvalidTmdbId">معرّف إدخال TMDB مفقود أو غير صالح.</string>
+  <string name="textBackupReasonLookupFailed">تعذر البحث عن هذا العنوان في TMDB.</string>
+  <string name="textBackupReasonTmdbApiError">خطأ في واجهة TMDB البرمجية (HTTP %1$s).</string>
+  <string name="textBackupReasonTmdbNetworkError">خطأ في الشبكة أثناء الاتصال بـ TMDB.</string>
+  <string name="textBackupReasonDetailsNotFound">لم يتم العثور على التفاصيل في TMDB (HTTP 404).</string>
+  <string name="textBackupReasonDetailsFailed">تعذر جلب التفاصيل من TMDB.</string>
+  <string name="textBackupReasonSeasonsNotFound">لم يتم العثور على المواسم في TMDB (HTTP 404).</string>
+  <string name="textBackupReasonSeasonsFailed">تعذر تحميل المواسم من TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFound">الحلقة غير موجودة على TMDB.</string>
+  <string name="textBackupReasonSeasonNotFoundAnywhere">الموسم غير موجود على الجهاز ولا على TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFoundAnywhere">الحلقة غير موجودة على الجهاز ولا على TMDB.</string>
+  <string name="textBackupReasonShowUnavailable">المسلسل غير متوفر على TMDB.</string>
+  <string name="textBackupReasonSeasonUnavailable">الموسم غير متوفر على TMDB.</string>
+  <string name="textBackupReasonOrphanShow">موجود في سجل المشاهدة لكنه ليس في أي مجموعة، لذا تعذرت مطابقته على TMDB.</string>
+  <string name="textBackupReasonNotInCollection">ليس له معرّف TMDB وليس في أي مجموعة.</string>
+  <string name="textBackupReasonListCreateFailed">تعذر إنشاء القائمة.</string>
+  <string name="textBackupReasonListMerged">تم دمجها مع القائمة الموجودة التي تحمل الاسم نفسه.</string>
+  <string name="textBackupReasonAddToListFailed">تعذرت إضافته إلى القائمة.</string>
+  <string name="textBackupTitleShowLegacyId">مسلسل خارج المجموعة (المعرّف: %1$s)</string>
+  <string name="textBackupTitleMovieLegacyId">فيلم خارج المجموعة (المعرّف: %1$s)</string>
+  <string name="textBackupTitleItemLegacyId">عنصر خارج المجموعة (المعرّف: %1$s)</string>
+  <string name="textBackupTitleShowTmdbId">مسلسل (معرّف TMDB: %1$s)</string>
+  <string name="textBackupTitleMovieTmdbId">فيلم (معرّف TMDB: %1$s)</string>
+  <string name="textBackupTitleItemTmdbId">معرّف TMDB: %1$s</string>
 </resources>

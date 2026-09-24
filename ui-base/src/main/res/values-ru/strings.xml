@@ -131,4 +131,16 @@
   <string name="textReleaseDay">День премьеры</string>
   <string name="textPercentage">%1$d%%</string>
   <string name="textBackToTop">Наверх</string>
+
+  <string name="textNotificationChannelGeneral">Общая информация</string>
+  <string name="textNotificationChannelGeneralDescription">Общая информация и объявления</string>
+  <string name="textNotificationChannelShows">Информация о сериалах</string>
+  <string name="textNotificationChannelShowsDescription">Информация о ваших сериалах</string>
+  <string name="textNotificationChannelEpisodes">Анонсы эпизодов</string>
+  <string name="textNotificationChannelEpisodesDescription">Анонсы эпизодов и сезонов</string>
+  <string name="textNotificationChannelMovies">Анонсы фильмов</string>
+  <string name="textNotificationChannelMoviesDescription">Объявления о фильмах</string>
+  <string name="textNotificationChannelSync">Синхронизация и резервное копирование</string>
+  <string name="textNotificationChannelSyncDescription">Уведомления о синхронизации и резервном копировании</string>
+  <string name="textShareTitle">Поделиться: %1$s</string>
 </resources>

@@ -6,7 +6,7 @@ import java.io.Serializable
 @JsonClass(generateAdapter = true)
 data class BackupUnmatchedSeason(
   val seasonNumber: Int,
-  val reason: String? = null,
+  val reason: BackupImportText? = null,
   val unmatchedEpisodes: List<BackupUnmatchedEpisode> = emptyList(),
 ) : Serializable {
   val isEntireSeasonUnmatched: Boolean

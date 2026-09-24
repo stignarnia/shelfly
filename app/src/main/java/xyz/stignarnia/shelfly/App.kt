@@ -110,11 +110,11 @@ class App :
           // id =
           channel.name,
           // name =
-          channel.displayName,
+          getString(channel.displayName),
           // importance =
           channel.importance,
         ).apply {
-          description = channel.description
+          description = getString(channel.description)
         }
 
       notificationManager().run {

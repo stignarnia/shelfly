@@ -1,61 +1,78 @@
 package xyz.stignarnia.uiBase.common
 
+import android.content.Context
+import androidx.core.os.ConfigurationCompat
+import java.util.Locale
+
 enum class AppCountry(
   val code: String,
-  val displayName: String,
   val justWatchQuery: String = "search",
 ) {
-  ARGENTINA("ar", "Argentina", "buscar"),
-  AUSTRALIA("au", "Australia"),
-  AUSTRIA("at", "Austria", "Suche"),
-  BELGIUM("be", "Belgium", "recherche"),
-  BRAZIL("br", "Brazil", "busca"),
-  BULGARIA("bg", "Bulgaria"),
-  CANADA("ca", "Canada"),
-  CHILE("cl", "Chile", "buscar"),
-  COLOMBIA("co", "Colombia", "buscar"),
-  CZECH_REP("cz", "Czech Republic", "vyhledání"),
-  DENMARK("dk", "Denmark"),
-  ECUADOR("ec", "Ecuador", "buscar"),
-  ESTONIA("ee", "Estonia", "otsing"),
-  FINLAND("fi", "Finland", "etsi"),
-  FRANCE("fr", "France", "recherche"),
-  GERMANY("de", "Germany", "Suche"),
-  GREECE("gr", "Greece"),
-  HONGKONG("hk", "Hong Kong"),
-  HUNGARY("hu", "Hungary"),
-  INDIA("in", "India"),
-  INDONESIA("id", "Indonesia"),
-  IRELAND("ie", "Ireland"),
-  ITALY("it", "Italy", "cerca"),
-  JAPAN("jp", "Japan", "検索"),
-  LATVIA("lv", "Latvia"),
-  LITHUANIA("lt", "Lithuania"),
-  MALAYSIA("my", "Malaysia"),
-  MEXICO("mx", "Mexico", "buscar"),
-  NETHERLANDS("nl", "Netherlands"),
-  NEW_ZEALAND("nz", "New Zealand"),
-  NORWAY("no", "Norway"),
-  PERU("pe", "Peru", "buscar"),
-  PHILIPPINES("ph", "Philippines"),
-  POLAND("pl", "Poland"),
-  PORTUGAL("pt", "Portugal", "busca"),
-  ROMANIA("ro", "Romania"),
-  RUSSIA("ru", "Russia", "поиск"),
-  SINGAPORE("sg", "Singapore"),
-  SOUTH_AFRICA("za", "South Africa"),
-  SOUTH_KOREA("kr", "South Korea", "검색"),
-  SPAIN("es", "Spain", "buscar"),
-  SWEDEN("se", "Sweden"),
-  SWITZERLAND("ch", "Switzerland", "Suche"),
-  THAILAND("th", "Thailand"),
-  TAIWAN("tw", "Taiwan"),
-  TURKEY("tr", "Turkey", "arama"),
-  UKRAINE("ua", "Ukraine", "пошук"),
-  UNITED_KINGDOM("uk", "United Kingdom"),
-  UNITED_STATES("us", "United States"),
-  VENEZUELA("ve", "Venezuela", "buscar"),
+  ARGENTINA("ar", "buscar"),
+  AUSTRALIA("au"),
+  AUSTRIA("at", "Suche"),
+  BELGIUM("be", "recherche"),
+  BRAZIL("br", "busca"),
+  BULGARIA("bg"),
+  CANADA("ca"),
+  CHILE("cl", "buscar"),
+  COLOMBIA("co", "buscar"),
+  CZECH_REP("cz", "vyhledání"),
+  DENMARK("dk"),
+  ECUADOR("ec", "buscar"),
+  ESTONIA("ee", "otsing"),
+  FINLAND("fi", "etsi"),
+  FRANCE("fr", "recherche"),
+  GERMANY("de", "Suche"),
+  GREECE("gr"),
+  HONGKONG("hk"),
+  HUNGARY("hu"),
+  INDIA("in"),
+  INDONESIA("id"),
+  IRELAND("ie"),
+  ITALY("it", "cerca"),
+  JAPAN("jp", "検索"),
+  LATVIA("lv"),
+  LITHUANIA("lt"),
+  MALAYSIA("my"),
+  MEXICO("mx", "buscar"),
+  NETHERLANDS("nl"),
+  NEW_ZEALAND("nz"),
+  NORWAY("no"),
+  PERU("pe", "buscar"),
+  PHILIPPINES("ph"),
+  POLAND("pl"),
+  PORTUGAL("pt", "busca"),
+  ROMANIA("ro"),
+  RUSSIA("ru", "поиск"),
+  SINGAPORE("sg"),
+  SOUTH_AFRICA("za"),
+  SOUTH_KOREA("kr", "검색"),
+  SPAIN("es", "buscar"),
+  SWEDEN("se"),
+  SWITZERLAND("ch", "Suche"),
+  THAILAND("th"),
+  TAIWAN("tw"),
+  TURKEY("tr", "arama"),
+  UKRAINE("ua", "пошук"),
+  UNITED_KINGDOM("uk"),
+  UNITED_STATES("us"),
+  VENEZUELA("ve", "buscar"),
   ;
+
+  /**
+   * The country's name in the language the app is displayed in, taken from the platform's locale data rather than translated here.
+   * [code] is the app's own key, which differs from ISO 3166 for the United Kingdom.
+   */
+  fun displayName(context: Context): String {
+    val region = if (this == UNITED_KINGDOM) "GB" else code.uppercase(Locale.ROOT)
+    val displayLocale = ConfigurationCompat.getLocales(context.resources.configuration)[0] ?: Locale.getDefault()
+    return Locale
+      .Builder()
+      .setRegion(region)
+      .build()
+      .getDisplayCountry(displayLocale)
+  }
 
   companion object {
     fun fromCode(code: String) = values().first { it.code == code }

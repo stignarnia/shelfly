@@ -379,7 +379,7 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
         type = "text/plain"
       }
 
-    val shareIntent = Intent.createChooser(intent, "Share ${show.title}")
+    val shareIntent = Intent.createChooser(intent, getString(R.string.textShareTitle, show.title))
     startActivity(shareIntent)
   }
 

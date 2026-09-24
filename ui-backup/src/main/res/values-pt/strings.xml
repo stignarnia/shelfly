@@ -39,6 +39,12 @@
   <string name="textSyncNotificationSuccessContent">Sincronização concluída com sucesso.</string>
   <string name="textSyncNotificationErrorTitle">Falha na sincronização WebDAV</string>
   <string name="textSyncNotificationErrorContent">Falha na sincronização: %s</string>
+  <string name="textSyncNotificationInterruptedContent">Interrompida antes de poder terminar.</string>
+  <string name="textWebDavErrorAuth">Falha na autenticação. Verifique o nome de utilizador e a palavra-passe.</string>
+  <string name="textWebDavErrorNotFound">Pasta não encontrada e não foi possível criá-la. Verifique o URL.</string>
+  <string name="textWebDavErrorTls">Não foi possível estabelecer uma ligação segura. O certificado do servidor não é fidedigno.</string>
+  <string name="textWebDavErrorUnreachable">Não foi possível contactar o servidor. Verifique o endereço e a sua ligação.</string>
+  <string name="textWebDavErrorUnexpected">O servidor respondeu de forma inesperada.</string>
   <string name="textBackupNotificationErrorTitle">Falha no backup</string>
 
   <string name="textBackupImportResultTitle">Resumo da importação</string>
@@ -75,4 +81,42 @@
     <item quantity="many">%d itens não associados</item>
     <item quantity="other">%d itens não associados</item>
   </plurals>
+
+  <string name="textBackupErrorUnexpected">Ocorreu um erro inesperado.</string>
+  <string name="textBackupErrorNoServer">Nenhum servidor WebDAV está configurado.</string>
+  <string name="textBackupErrorRead">Não foi possível ler o arquivo de backup.</string>
+  <string name="textBackupErrorWrite">Não foi possível gravar o arquivo de backup.</string>
+  <string name="textBackupExportValidationFailed">Não foi possível verificar o arquivo exportado. Tente novamente.</string>
+  <string name="textBackupImportUnsupportedVersion">Este backup usa um formato não suportado (versão %1$d).</string>
+  <string name="textBackupImportInvalidFile">Este arquivo não é um backup válido.</string>
+  <string name="textBackupImportInitializing">Importando…</string>
+  <string name="textBackupReasonTitleBlank">O título no backup está vazio.</string>
+  <string name="textBackupReasonNoResults">Nenhum resultado encontrado no TMDB.</string>
+  <string name="textBackupReasonOnlyMoviesFound">Apenas filmes encontrados no TMDB, nenhuma série.</string>
+  <string name="textBackupReasonOnlyShowsFound">Apenas séries encontradas no TMDB, nenhum filme.</string>
+  <string name="textBackupReasonNoExactMatch">Nenhuma correspondência exata de título no TMDB (encontrados: %1$s).</string>
+  <string name="textBackupReasonInvalidTmdbId">A entrada do TMDB tem um ID ausente ou inválido.</string>
+  <string name="textBackupReasonLookupFailed">Não foi possível pesquisar este título no TMDB.</string>
+  <string name="textBackupReasonTmdbApiError">Erro da API do TMDB (HTTP %1$s).</string>
+  <string name="textBackupReasonTmdbNetworkError">Erro de rede ao conectar ao TMDB.</string>
+  <string name="textBackupReasonDetailsNotFound">Detalhes não encontrados no TMDB (HTTP 404).</string>
+  <string name="textBackupReasonDetailsFailed">Não foi possível obter os detalhes do TMDB.</string>
+  <string name="textBackupReasonSeasonsNotFound">Temporadas não encontradas no TMDB (HTTP 404).</string>
+  <string name="textBackupReasonSeasonsFailed">Não foi possível carregar as temporadas do TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFound">Episódio não encontrado no TMDB.</string>
+  <string name="textBackupReasonSeasonNotFoundAnywhere">Temporada não encontrada localmente nem no TMDB.</string>
+  <string name="textBackupReasonEpisodeNotFoundAnywhere">Episódio não encontrado localmente nem no TMDB.</string>
+  <string name="textBackupReasonShowUnavailable">Série não disponível no TMDB.</string>
+  <string name="textBackupReasonSeasonUnavailable">Temporada não disponível no TMDB.</string>
+  <string name="textBackupReasonOrphanShow">Está no histórico, mas em nenhuma coleção, por isso não pôde ser correspondida no TMDB.</string>
+  <string name="textBackupReasonNotInCollection">Não tem ID do TMDB e não está em nenhuma coleção.</string>
+  <string name="textBackupReasonListCreateFailed">Não foi possível criar a lista.</string>
+  <string name="textBackupReasonListMerged">Mesclada com a lista existente de mesmo nome.</string>
+  <string name="textBackupReasonAddToListFailed">Não foi possível adicionar à lista.</string>
+  <string name="textBackupTitleShowLegacyId">Série fora da coleção (ID: %1$s)</string>
+  <string name="textBackupTitleMovieLegacyId">Filme fora da coleção (ID: %1$s)</string>
+  <string name="textBackupTitleItemLegacyId">Item fora da coleção (ID: %1$s)</string>
+  <string name="textBackupTitleShowTmdbId">Série (ID do TMDB: %1$s)</string>
+  <string name="textBackupTitleMovieTmdbId">Filme (ID do TMDB: %1$s)</string>
+  <string name="textBackupTitleItemTmdbId">ID do TMDB: %1$s</string>
 </resources>

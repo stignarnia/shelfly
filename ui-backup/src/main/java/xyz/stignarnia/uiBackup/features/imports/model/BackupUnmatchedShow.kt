@@ -5,8 +5,8 @@ import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class BackupUnmatchedShow(
-  val title: String,
-  val reason: String? = null,
+  val title: BackupImportText,
+  val reason: BackupImportText? = null,
   val tmdbId: Long? = null,
   val unmatchedSeasons: List<BackupUnmatchedSeason> = emptyList(),
 ) : Serializable {
