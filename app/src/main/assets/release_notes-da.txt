@@ -9,3 +9,4 @@ Shelfly 4.0.9
 • Mens en sikkerhedskopi gendannes, fra en fil eller fra WebDAV, minder skærmen dig nu om ikke at forlade appen, før den er færdig.
 • Når du sætter en WebDAV-server op, bliver den nu også destination for sikkerhedskopier, så træk for at synkronisere virker med det samme uden at ændre destinationen manuelt.
 • Et tryk på WebDAV-synkroniseringsnotifikationen åbner nu appen.
+• Tip-ikonet på skærmen Fremskridt sidder nu på afsnitsnummeret for det første program og ruller med det i stedet for at svæve et andet sted på skærmen.

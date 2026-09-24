@@ -9,3 +9,4 @@ Shelfly 4.0.9
 • Durante o restauro de uma cópia de segurança, a partir de um ficheiro ou do WebDAV, o ecrã lembra-o agora de não sair da aplicação até terminar.
 • Configurar um servidor WebDAV define-o agora também como destino das cópias de segurança, por isso puxar para sincronizar funciona de imediato sem alterar o destino manualmente.
 • Tocar na notificação de sincronização WebDAV abre agora a aplicação.
+• O ícone de dica no ecrã de Progresso fica agora sobre o número do episódio da primeira série e desloca-se com ele, em vez de flutuar noutro ponto do ecrã.

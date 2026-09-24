@@ -9,3 +9,4 @@ Shelfly 4.0.9
 • Podczas przywracania kopii zapasowej, z pliku lub z WebDAV, ekran przypomina teraz, aby nie opuszczać aplikacji, dopóki się nie zakończy.
 • Skonfigurowanie serwera WebDAV ustawia go teraz także jako miejsce docelowe kopii zapasowych, więc synchronizacja przez przeciągnięcie działa od razu, bez ręcznej zmiany miejsca docelowego.
 • Dotknięcie powiadomienia o synchronizacji WebDAV otwiera teraz aplikację.
+• Ikona wskazówki na ekranie Postęp znajduje się teraz na numerze odcinka pierwszego serialu i przewija się razem z nim, zamiast unosić się w innym miejscu ekranu.

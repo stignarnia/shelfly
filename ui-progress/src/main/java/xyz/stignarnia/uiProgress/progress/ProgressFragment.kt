@@ -3,7 +3,9 @@ package xyz.stignarnia.uiProgress.progress
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.core.view.updateMargins
 import androidx.core.view.updatePadding
 import androidx.fragment.app.setFragmentResultListener
@@ -17,9 +19,9 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import xyz.stignarnia.repository.settings.SettingsViewModeRepository
+import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.uiBase.BaseFragment
 import xyz.stignarnia.uiBase.common.OnScrollResetListener
-import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.uiBase.common.OnSearchClickListener
 import xyz.stignarnia.uiBase.common.WidgetsProvider
 import xyz.stignarnia.uiBase.common.sheets.sortOrder.SortOrderBottomSheet
@@ -76,10 +78,10 @@ class ProgressFragment :
 
   @Inject lateinit var settings: SettingsViewModeRepository
 
-  override val navigationId = R.id.progressMainFragment
-  private val binding by viewBinding(FragmentProgressBinding::bind)
   @Inject lateinit var webDavSettings: SettingsWebDavRepository
 
+  override val navigationId = R.id.progressMainFragment
+  private val binding by viewBinding(FragmentProgressBinding::bind)
 
   private val parentViewModel by viewModels<ProgressMainViewModel>({ requireParentFragment() })
   override val viewModel by viewModels<ProgressViewModel>()
@@ -88,6 +90,12 @@ class ProgressFragment :
   private var layoutManager: LayoutManager? = null
   private var statusBarHeight = 0
   private var isSearching = false
+  private var isTipWanted = false
+  private val tipPositioner =
+    ViewTreeObserver.OnPreDrawListener {
+      positionTip()
+      true
+    }
 
   override fun onViewCreated(
     view: View,
@@ -97,6 +105,7 @@ class ProgressFragment :
     setupView()
     setupRecycler()
     setupInsets()
+    setupTipPositioner()
 
     viewLifecycleOwner.lifecycleScope.launch {
       viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -118,7 +127,12 @@ class ProgressFragment :
       progressEmptyView.progressEmptyDiscoverButton.onClick {
         (requireActivity() as NavigationHost).navigateToDiscover()
       }
+      progressEmptyView.progressEmptySyncButton.run {
+        visibleIf(webDavSettings.url.isNotBlank())
+        onClick { requireMainFragment().openWebDavSync() }
+      }
       progressTipItem.onClick {
+        isTipWanted = false
         it.gone()
         showTip(Tip.WATCHLIST_ITEM_PIN)
       }
@@ -127,10 +141,6 @@ class ProgressFragment :
         upcomingChipClicked = viewModel::setUpcomingFilter
         onHoldChipClicked = viewModel::setOnHoldFilter
         // The header tabs scroll away under a behaviour in the parent screen's layout, and the chips have to go with them.
-      progressEmptyView.progressEmptySyncButton.run {
-        visibleIf(webDavSettings.url.isNotBlank())
-        onClick { requireMainFragment().openWebDavSync() }
-      }
         // While searching the chips also move down with the list, clear of the search field.
         followTranslationY(requireMainFragment().tabs) {
           if (isSearching) dimenToPx(R.dimen.progressSearchLocalOffset).toFloat() else 0F
@@ -299,7 +309,8 @@ class ProgressFragment :
           adapter?.setItems(it, resetScroll)
           renderFiltersEmpty(uiState)
           progressEmptyView.root.visibleIf(it.isEmpty() && filters == null && !isLoading && !isSearching)
-          progressTipItem.visibleIf(it.count() >= 2 && !isTipShown(Tip.WATCHLIST_ITEM_PIN))
+          isTipWanted = it.count() >= 2 && !isTipShown(Tip.WATCHLIST_ITEM_PIN)
+          positionTip()
           progressRecycler
             .fadeIn(
               duration = 200,
@@ -337,6 +348,52 @@ class ProgressFragment :
     val hasActiveFilter = uiState.filters?.hasActiveFilters() == true
     val isFilterEmpty = hasActiveFilter && items.filterIsInstance<ProgressListItem.Episode>().isEmpty()
     binding.progressEmptyFilterView.fadeIf(isFilterEmpty, duration = 200)
+  }
+
+  /**
+   * Registers the per-frame positioning only while the view is in the window.
+   * A detached view hands out its own observer, which is merged into the window's on attach, so one registered in onViewCreated could not be removed again and outlived the view.
+   */
+  private fun setupTipPositioner() {
+    binding.progressRoot.addOnAttachStateChangeListener(
+      object : View.OnAttachStateChangeListener {
+        override fun onViewAttachedToWindow(view: View) = view.viewTreeObserver.addOnPreDrawListener(tipPositioner)
+
+        override fun onViewDetachedFromWindow(view: View) = view.viewTreeObserver.removeOnPreDrawListener(tipPositioner)
+      },
+    )
+  }
+
+  /**
+   * Puts the tip on the episode badge of the first show, and keeps it there through scrolling, the overscroll pull and item animations, since it runs before every frame.
+   * It is hidden whenever that badge is not in the visible part of the list, rather than left floating over the chips or another row.
+   */
+  private fun positionTip() {
+    if (view == null) return
+    with(binding) {
+      val index = adapter?.getItems()?.indexOfFirst { it is ProgressListItem.Episode } ?: -1
+      val badge =
+        progressRecycler
+          .takeIf { isTipWanted && it.isVisible && index >= 0 }
+          ?.findViewHolderForAdapterPosition(index)
+          ?.itemView
+          ?.findViewById<View>(R.id.progressItemSubtitle)
+
+      val listLocation = IntArray(2).also { progressRecycler.getLocationInWindow(it) }
+      val badgeLocation = IntArray(2).also { badge?.getLocationInWindow(it) }
+      val listTop = listLocation[1] + progressRecycler.paddingTop
+      val listBottom = listLocation[1] + progressRecycler.height - progressRecycler.paddingBottom
+      val isBadgeShown = badge != null && badge.isShown && badgeLocation[1] >= listTop && badgeLocation[1] + badge.height <= listBottom
+      progressTipItem.visibleIf(isBadgeShown)
+      if (badge == null || !isBadgeShown) return
+
+      val rootLocation = IntArray(2).also { progressRoot.getLocationInWindow(it) }
+      val isRtl = progressRoot.layoutDirection == View.LAYOUT_DIRECTION_RTL
+      val left = if (isRtl) badgeLocation[0] + badge.width - progressTipItem.width else badgeLocation[0]
+      val top = badgeLocation[1] + (badge.height - progressTipItem.height) / 2
+      progressTipItem.translationX = (left - rootLocation[0] - progressTipItem.left).toFloat()
+      progressTipItem.translationY = (top - rootLocation[1] - progressTipItem.top).toFloat()
+    }
   }
 
   override fun onScrollReset() {

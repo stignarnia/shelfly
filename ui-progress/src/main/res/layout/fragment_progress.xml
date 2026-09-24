@@ -61,12 +61,13 @@
     tools:visibility="visible"
   />
 
+  <!--
+    Placed over the episode badge of the first show at runtime, following the row as it scrolls, since no fixed offset survives a change to the list's top padding.
+  -->
   <xyz.stignarnia.uiBase.common.views.tips.TipView
     android:id="@+id/progressTipItem"
     android:layout_width="@dimen/tutorialTipSize"
     android:layout_height="@dimen/tutorialTipSize"
-    android:layout_marginStart="110dp"
-    android:layout_marginTop="254dp"
     android:visibility="gone"
   />
 

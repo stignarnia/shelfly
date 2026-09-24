@@ -9,3 +9,4 @@ Shelfly 4.0.9
 • Kun varmuuskopiota palautetaan tiedostosta tai WebDAVista, näkymä muistuttaa nyt, ettei sovelluksesta pidä poistua ennen kuin palautus on valmis.
 • WebDAV-palvelimen määrittäminen asettaa sen nyt myös varmuuskopioiden kohteeksi, joten synkronointi alas vetämällä toimii heti ilman kohteen vaihtamista käsin.
 • WebDAV-synkronoinnin ilmoituksen napauttaminen avaa nyt sovelluksen.
+• Edistyminen-näkymän vihjekuvake on nyt ensimmäisen sarjan jakson numeron päällä ja vierii sen mukana sen sijaan, että se leijuisi muualla näytöllä.

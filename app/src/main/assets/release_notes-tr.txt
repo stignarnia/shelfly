@@ -9,3 +9,4 @@ Shelfly 4.0.9
 • Bir yedek geri yüklenirken, dosyadan veya WebDAV üzerinden, ekran artık işlem bitene kadar uygulamadan çıkmamanızı hatırlatıyor.
 • Bir WebDAV sunucusu ayarlamak artık onu yedekleme hedefi de yapıyor; böylece aşağı çekerek senkronizasyon, hedefi elle değiştirmeden hemen çalışıyor.
 • WebDAV senkronizasyon bildirimine dokunmak artık uygulamayı açıyor.
+• İlerleme ekranındaki ipucu simgesi artık ilk dizinin bölüm numarasının üzerinde duruyor ve onunla birlikte kayıyor; ekranın başka bir yerinde süzülmüyor.

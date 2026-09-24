@@ -9,3 +9,4 @@ Shelfly 4.0.9
 • Durante il ripristino di un backup, da file o da WebDAV, la schermata ora ti ricorda di non uscire dall'app finché non è terminato.
 • Configurare un server WebDAV ora lo imposta anche come destinazione dei backup, così trascina per sincronizzare funziona subito senza dover cambiare la destinazione a mano.
 • Toccare la notifica di sincronizzazione WebDAV ora apre l'app.
+• L'icona del suggerimento nella schermata Progressi ora si trova sul numero dell'episodio del primo show e scorre insieme a esso, invece di fluttuare altrove sullo schermo.

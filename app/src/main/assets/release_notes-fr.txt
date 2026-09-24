@@ -9,3 +9,4 @@ Shelfly 4.0.9
 • Pendant la restauration d'une sauvegarde, depuis un fichier ou depuis WebDAV, l'écran vous rappelle désormais de ne pas quitter l'application avant la fin.
 • Configurer un serveur WebDAV en fait désormais aussi la destination des sauvegardes, donc tirer pour synchroniser fonctionne tout de suite sans changer la destination à la main.
 • Toucher la notification de synchronisation WebDAV ouvre désormais l'application.
+• L'icône d'astuce de l'écran Progression se place désormais sur le numéro d'épisode de la première série et défile avec lui, au lieu de flotter ailleurs sur l'écran.
