@@ -15,3 +15,4 @@ Shelfly 4.0.9
 • Trecerea la limba telefonului din ecranul de bun venit schimbă acum și titlurile și descrierile serialelor și filmelor, iar widgeturile se actualizează imediat după orice schimbare de limbă.
 • După schimbarea limbii, widgeturile își descarcă acum singure posterele și titlurile traduse. Înainte rămâneau fără postere, sau în limba veche, până deschideai aceeași listă în aplicație.
 • Numele widgeturilor din lista de widgeturi a ecranului principal sunt acum traduse. Înainte erau în engleză indiferent de limba ta.
+• Paginile serialelor și filmelor nu mai afișează „-1 min” când durata este necunoscută; aceasta este omisă.

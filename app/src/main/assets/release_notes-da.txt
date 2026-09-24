@@ -15,3 +15,4 @@ Shelfly 4.0.9
 • Skifter du til telefonens sprog fra velkomstskærmen, skifter titler og beskrivelser af serier og film nu også, og widgets opdateres med det samme efter enhver sprogændring.
 • Når du skifter sprog, henter widgets nu selv deres plakater og oversatte titler. Før var de uden plakater eller på det gamle sprog, indtil du åbnede den samme liste i appen.
 • Navnene på widgets i startskærmens widgetliste er nu oversat. Før var de på engelsk uanset dit sprog.
+• Sider for serier og film viser ikke længere "-1 min", når spilletiden er ukendt; den udelades i stedet.

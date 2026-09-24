@@ -15,3 +15,4 @@ Shelfly 4.0.9
 • Karşılama ekranından telefonunuzun diline geçmek artık dizi ve film adlarını ve açıklamalarını da değiştiriyor; widget'lar da her dil değişikliğinden hemen sonra güncelleniyor.
 • Dil değiştirdikten sonra widget'lar artık afişlerini ve çevrilmiş başlıklarını kendileri indiriyor. Daha önce, aynı listeyi uygulamada açana kadar afişsiz ya da eski dilde kalıyorlardı.
 • Ana ekranın widget listesindeki widget adları artık çevrildi. Daha önce diliniz ne olursa olsun İngilizceydiler.
+• Dizi ve film sayfaları süre bilinmediğinde artık "-1 dk" göstermiyor; bunun yerine süre gösterilmiyor.

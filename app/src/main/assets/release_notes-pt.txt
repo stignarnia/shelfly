@@ -15,3 +15,4 @@ Shelfly 4.0.9
 • Mudar para o idioma do celular na tela de boas-vindas agora também muda os títulos e descrições de séries e filmes, e os widgets se atualizam na hora após qualquer mudança de idioma.
 • Depois de mudar o idioma, os widgets agora baixam sozinhos os pôsteres e os títulos traduzidos. Antes ficavam sem pôsteres, ou no idioma anterior, até você abrir a mesma lista no app.
 • Os nomes dos widgets na lista de widgets da tela inicial agora estão traduzidos. Antes apareciam em inglês qualquer que fosse o seu idioma.
+• As páginas de séries e filmes não mostram mais "-1 min" quando a duração é desconhecida; ela é omitida.

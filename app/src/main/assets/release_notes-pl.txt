@@ -15,3 +15,4 @@ Shelfly 4.0.9
 • Przełączenie na język telefonu na ekranie powitalnym zmienia teraz także tytuły i opisy seriali i filmów, a widżety aktualizują się od razu po każdej zmianie języka.
 • Po zmianie języka widżety same pobierają teraz plakaty i przetłumaczone tytuły. Wcześniej pozostawały bez plakatów lub w poprzednim języku, dopóki nie otworzyłeś tej samej listy w aplikacji.
 • Nazwy widżetów na liście widżetów ekranu głównego są teraz przetłumaczone. Wcześniej były po angielsku niezależnie od języka.
+• Strony seriali i filmów nie pokazują już „-1 min”, gdy czas trwania jest nieznany; jest on teraz pomijany.

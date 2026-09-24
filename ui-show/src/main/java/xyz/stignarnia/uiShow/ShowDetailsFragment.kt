@@ -291,22 +291,11 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
         .mapNotNull { Genre.fromSlug(it) }
         .joinToString(", ") { getString(it.displayName) }
 
-    var extraInfoText =
-      getString(
-        R.string.textShowExtraInfo,
-        show.network,
-        year,
-        country.uppercase(),
-        "⏲ ${show.runtime}",
-        getString(R.string.textMinutesShort),
-        genres,
-      )
+    // TMDB has no episode runtime for many shows, which is stored as -1, so any part it does not know is left out rather than printed.
+    val runtime = if (show.runtime > 0) "⏲ ${show.runtime} ${getString(R.string.textMinutesShort)}" else ""
+    val origin = listOf(show.network, year, country.uppercase()).filter { it.isNotBlank() }.joinToString(" ")
 
-    if (genres.isEmpty()) {
-      extraInfoText = extraInfoText.trim().removeSuffix("|")
-    }
-
-    binding.showDetailsExtraInfo.text = extraInfoText
+    binding.showDetailsExtraInfo.text = listOf(origin, runtime, genres).filter { it.isNotBlank() }.joinToString(" | ")
   }
 
   private fun renderRating(rating: RatingState) {

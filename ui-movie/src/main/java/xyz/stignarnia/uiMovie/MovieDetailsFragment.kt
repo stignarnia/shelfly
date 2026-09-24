@@ -312,21 +312,11 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
         .mapNotNull { Genre.fromSlug(it) }
         .joinToString(", ") { getString(it.displayName) }
 
-    var extraInfoText =
-      getString(
-        R.string.textMovieExtraInfo,
-        releaseDate,
-        country.uppercase(ROOT),
-        "⏲ ${movie.runtime}",
-        getString(R.string.textMinutesShort),
-        genres,
-      )
+    // Any part TMDB does not know is left out rather than printed, a missing runtime included.
+    val runtime = if (movie.runtime > 0) "⏲ ${movie.runtime} ${getString(R.string.textMinutesShort)}" else ""
+    val origin = listOf(releaseDate, country.uppercase(ROOT)).filter { it.isNotBlank() }.joinToString(" ")
 
-    if (genres.isEmpty()) {
-      extraInfoText = extraInfoText.trim().removeSuffix("|")
-    }
-
-    binding.movieDetailsExtraInfo.text = extraInfoText
+    binding.movieDetailsExtraInfo.text = listOf(origin, runtime, genres).filter { it.isNotBlank() }.joinToString(" | ")
   }
 
   private fun renderRating(rating: RatingState) {

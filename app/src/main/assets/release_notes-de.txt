@@ -15,3 +15,4 @@ Shelfly 4.0.9
 • Wechselst du auf dem Willkommensbildschirm zur Sprache deines Telefons, wechseln jetzt auch Titel und Beschreibungen von Serien und Filmen, und Widgets aktualisieren sich nach jedem Sprachwechsel sofort.
 • Nach einem Sprachwechsel laden Widgets ihre Poster und übersetzten Titel jetzt selbst. Bisher blieben sie ohne Poster oder in der alten Sprache, bis du dieselbe Liste in der App geöffnet hast.
 • Die Namen der Widgets in der Widget-Liste des Startbildschirms sind jetzt übersetzt. Bisher waren sie unabhängig von deiner Sprache englisch.
+• Serien- und Filmseiten zeigen nicht mehr "-1 Min.", wenn die Laufzeit unbekannt ist; sie wird stattdessen weggelassen.

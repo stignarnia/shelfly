@@ -15,3 +15,4 @@ Shelfly 4.0.9
 • Switching to your phone's language from the welcome screen now switches show and movie titles and descriptions too, and widgets update right away after any language change.
 • After you change language, widgets now fetch their posters and translated titles themselves. They used to stay without posters, or in the old language, until you opened the same list in the app.
 • Widget names in your home screen's widget list are now translated. They used to be in English whatever your language.
+• Show and movie pages no longer say "-1 min" when the runtime is unknown; it is left out instead.

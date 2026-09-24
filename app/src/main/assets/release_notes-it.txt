@@ -15,3 +15,4 @@ Shelfly 4.0.9
 • Passare alla lingua del telefono dalla schermata di benvenuto ora cambia anche titoli e descrizioni di serie e film, e i widget si aggiornano subito dopo ogni cambio di lingua.
 • Dopo un cambio di lingua, i widget ora scaricano da soli copertine e titoli tradotti. Prima restavano senza copertine, o nella lingua precedente, finché non aprivi lo stesso elenco nell'app.
 • I nomi dei widget nell'elenco dei widget della schermata Home ora sono tradotti. Prima erano in inglese qualunque fosse la lingua.
+• Le pagine di serie e film non mostrano più "-1 min" quando la durata è sconosciuta: ora viene omessa.
