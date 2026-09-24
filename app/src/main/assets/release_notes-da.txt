@@ -7,3 +7,4 @@ Shelfly 4.0.9
 • Det kræver nu et længere, bevidst stryg at fjerne et element fra en liste: en rød baggrund med et skraldespandsikon vises bag elementet, telefonen vibrerer, når du har strøget langt nok, og når du slipper, fjernes elementet kun, hvis du ikke har trukket tilbage. Et hurtigt svirp fjerner ikke længere noget.
 • Når dit bibliotek er tomt, og en WebDAV-server er sat op, viser skærmen Fremskridt nu en Synkroniser-knap, der gendanner din seneste sikkerhedskopi med ét tryk.
 • Mens en sikkerhedskopi gendannes, fra en fil eller fra WebDAV, minder skærmen dig nu om ikke at forlade appen, før den er færdig.
+• Når du sætter en WebDAV-server op, bliver den nu også destination for sikkerhedskopier, så træk for at synkronisere virker med det samme uden at ændre destinationen manuelt.

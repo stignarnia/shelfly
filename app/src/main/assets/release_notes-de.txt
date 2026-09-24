@@ -7,3 +7,4 @@ Shelfly 4.0.9
 • Zum Entfernen eines Eintrags aus einer Liste per Wischgeste ist jetzt eine längere, bewusste Bewegung nötig: Hinter dem Eintrag erscheint ein roter Hintergrund mit einem Papierkorbsymbol, das Telefon vibriert, sobald du weit genug gewischt hast, und beim Loslassen wird der Eintrag nur entfernt, wenn du nicht zurückgezogen hast. Ein kurzes Wischen entfernt nichts mehr.
 • Wenn deine Bibliothek leer ist und ein WebDAV-Server eingerichtet ist, zeigt der Fortschritt-Bildschirm jetzt eine Schaltfläche Synchronisieren, die deine neueste Sicherung mit einem Tippen wiederherstellt.
 • Während eine Sicherung wiederhergestellt wird, aus einer Datei oder von WebDAV, erinnert dich der Bildschirm jetzt daran, die App erst nach Abschluss zu verlassen.
+• Wenn du einen WebDAV-Server einrichtest, wird er jetzt auch zum Sicherungsziel, sodass Ziehen zum Synchronisieren sofort funktioniert, ohne das Ziel von Hand zu ändern.

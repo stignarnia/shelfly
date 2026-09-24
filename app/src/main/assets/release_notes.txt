@@ -7,3 +7,4 @@ Shelfly 4.0.9
 • Removing an item from a list by swiping now takes a longer, deliberate swipe: a red background with a bin icon shows behind the item, and the phone vibrates once you are far enough, and letting go only removes the item if you have not pulled back. A quick flick no longer removes anything.
 • When your library is empty and a WebDAV server is set up, the Progress screen now shows a Sync button that restores your latest backup in one tap.
 • While a backup is being restored, from a file or from WebDAV, the screen now reminds you not to leave the app until it has finished.
+• Setting up a WebDAV server now also makes it the backup destination, so pull to sync works straight away without changing the backup target by hand.

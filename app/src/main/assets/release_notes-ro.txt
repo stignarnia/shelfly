@@ -7,3 +7,4 @@ Shelfly 4.0.9
 • Eliminarea unui element dintr-o listă prin glisare necesită acum un gest mai lung și deliberat: în spatele elementului apare un fundal roșu cu o pictogramă de coș de gunoi, telefonul vibrează când ai glisat suficient, iar la eliberare elementul este eliminat doar dacă nu ai tras înapoi. O glisare rapidă nu mai elimină nimic.
 • Când biblioteca ta este goală și ai configurat un server WebDAV, ecranul Progres afișează acum un buton Sincronizează care restaurează cea mai recentă copie de rezervă cu o singură atingere.
 • În timpul restaurării unei copii de rezervă, dintr-un fișier sau din WebDAV, ecranul îți amintește acum să nu părăsești aplicația până la final.
+• Configurarea unui server WebDAV îl setează acum și ca destinație pentru copiile de rezervă, așa că tragerea în jos pentru sincronizare funcționează imediat, fără să schimbi destinația manual.

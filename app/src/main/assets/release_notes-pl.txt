@@ -7,3 +7,4 @@ Shelfly 4.0.9
 • Usunięcie elementu z listy przesunięciem wymaga teraz dłuższego, celowego gestu: za elementem pojawia się czerwone tło z ikoną kosza, telefon wibruje, gdy przesuniesz wystarczająco daleko, a po puszczeniu element zostaje usunięty tylko wtedy, gdy nie cofnąłeś palca. Szybkie machnięcie niczego już nie usuwa.
 • Gdy Twoja biblioteka jest pusta, a serwer WebDAV jest skonfigurowany, ekran Postęp pokazuje teraz przycisk Synchronizuj, który jednym dotknięciem przywraca najnowszą kopię zapasową.
 • Podczas przywracania kopii zapasowej, z pliku lub z WebDAV, ekran przypomina teraz, aby nie opuszczać aplikacji, dopóki się nie zakończy.
+• Skonfigurowanie serwera WebDAV ustawia go teraz także jako miejsce docelowe kopii zapasowych, więc synchronizacja przez przeciągnięcie działa od razu, bez ręcznej zmiany miejsca docelowego.

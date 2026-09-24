@@ -7,3 +7,4 @@ Shelfly 4.0.9
 • Kohteen poistaminen listalta pyyhkäisemällä vaatii nyt pidemmän, harkitun eleen: kohteen taakse ilmestyy punainen tausta ja roskakorikuvake, puhelin värisee, kun olet pyyhkäissyt tarpeeksi pitkälle, ja irrottaessa kohde poistetaan vain, jos et ole vetänyt takaisin. Nopea sipaisu ei enää poista mitään.
 • Kun kirjastosi on tyhjä ja WebDAV-palvelin on määritetty, Edistyminen-näkymässä on nyt Synkronoi-painike, joka palauttaa uusimman varmuuskopiosi yhdellä napautuksella.
 • Kun varmuuskopiota palautetaan tiedostosta tai WebDAVista, näkymä muistuttaa nyt, ettei sovelluksesta pidä poistua ennen kuin palautus on valmis.
+• WebDAV-palvelimen määrittäminen asettaa sen nyt myös varmuuskopioiden kohteeksi, joten synkronointi alas vetämällä toimii heti ilman kohteen vaihtamista käsin.

@@ -49,7 +49,11 @@ class SettingsBackupViewModel
       if (password.isNotBlank()) {
         webDavRepository.password = password
       }
-      // Selecting a server is not the same as choosing to use it; the target is switched deliberately, so a saved server does not silently redirect backups away from the folder the user already picked.
+      // Configuring a server is taken as choosing to use it, otherwise pull to sync stays inert until the user also finds the target setting.
+      // Local folder can still be picked afterwards.
+      if (webDavRepository.url.isNotBlank()) {
+        webDavRepository.backupTarget = BackupTarget.WEBDAV
+      }
       refresh()
     }
 

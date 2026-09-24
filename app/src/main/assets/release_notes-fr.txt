@@ -7,3 +7,4 @@ Shelfly 4.0.9
 • Retirer un élément d'une liste par balayage demande désormais un geste plus long et délibéré : un fond rouge avec une icône de corbeille apparaît derrière l'élément, le téléphone vibre une fois que vous êtes allé assez loin, et l'élément n'est retiré au relâchement que si vous n'êtes pas revenu en arrière. Un balayage rapide ne retire plus rien.
 • Lorsque votre bibliothèque est vide et qu'un serveur WebDAV est configuré, l'écran Progression affiche désormais un bouton Synchroniser qui restaure votre dernière sauvegarde en un geste.
 • Pendant la restauration d'une sauvegarde, depuis un fichier ou depuis WebDAV, l'écran vous rappelle désormais de ne pas quitter l'application avant la fin.
+• Configurer un serveur WebDAV en fait désormais aussi la destination des sauvegardes, donc tirer pour synchroniser fonctionne tout de suite sans changer la destination à la main.
