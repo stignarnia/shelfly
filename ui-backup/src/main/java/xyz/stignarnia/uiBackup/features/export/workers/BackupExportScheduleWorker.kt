@@ -338,6 +338,6 @@ class BackupExportScheduleWorker
 
     /** Recognises backups written before the rename too, so they are pruned rather than left to pile up. */
     private fun BackupEntry.isBackup(): Boolean =
-      (name.startsWith(BackupFileName.prefix) || name.startsWith(BackupFileName.legacyPrefix)) &&
-        name.endsWith(BackupFileName.fileType)
+      (name.startsWith(BackupFileName.PREFIX) || name.startsWith(BackupFileName.LEGACY_PREFIX)) &&
+        name.endsWith(BackupFileName.FILE_TYPE)
   }

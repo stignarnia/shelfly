@@ -1,4 +1,5 @@
 Shelfly 4.0.9
 
 • Fixed the language icon on the welcome screen showing as a black shape.
+• Restoring from WebDAV now lists backups by the date they were made, in your chosen date format, instead of by file name.
 • Removing an item from a list by swiping now takes a longer, deliberate swipe: a red background with a bin icon shows behind the item, and the phone vibrates once you are far enough, and letting go only removes the item if you have not pulled back. A quick flick no longer removes anything.

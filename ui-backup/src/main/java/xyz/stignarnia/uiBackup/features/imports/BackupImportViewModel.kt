@@ -12,6 +12,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import xyz.stignarnia.common.extensions.dateFromMillis
+import xyz.stignarnia.common.extensions.toLocalZone
 import xyz.stignarnia.dataWebdav.WebDavClient
 import xyz.stignarnia.dataWebdav.WebDavCredentials
 import xyz.stignarnia.dataWebdav.WebDavFile
@@ -23,12 +25,16 @@ import xyz.stignarnia.uiBackup.features.imports.migrations.BackupMigrationV2
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportResult
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Idle
 import xyz.stignarnia.uiBackup.features.imports.model.BackupImportStatus.Initializing
+import xyz.stignarnia.uiBackup.features.imports.model.WebDavBackup
 import xyz.stignarnia.uiBackup.features.imports.model.WebDavBackups
 import xyz.stignarnia.uiBackup.features.imports.result.BackupImportResultHolder
 import xyz.stignarnia.uiBackup.features.imports.workers.BackupImportWorker
 import xyz.stignarnia.uiBackup.model.BackupScheme
+import xyz.stignarnia.uiBase.dates.DateFormatProvider
 import xyz.stignarnia.uiBase.utilities.extensions.SUBSCRIBE_STOP_TIMEOUT
+import xyz.stignarnia.uiBase.utilities.extensions.capitalizeWords
 import xyz.stignarnia.uiBase.utilities.extensions.rethrowCancellation
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
@@ -41,6 +47,7 @@ class BackupImportViewModel
     private val webDavRepository: SettingsWebDavRepository,
     private val webDavClient: WebDavClient,
     private val backupImportResultHolder: BackupImportResultHolder,
+    private val dateFormatProvider: DateFormatProvider,
   ) : ViewModel() {
     private val initialState =
       BackupImportUiState(hasLastReport = backupImportResultHolder.hasReport())
@@ -78,17 +85,36 @@ class BackupImportViewModel
         webDavClient
           .list(credentials())
           .onSuccess { files ->
+            val dateFormat = dateFormatProvider.loadFullHourFormat()
             val backups =
               files
-                .filter { it.name.startsWith(BackupFileName.prefix) || it.name.startsWith(BackupFileName.legacyPrefix) }
+                .filter { it.name.startsWith(BackupFileName.PREFIX) || it.name.startsWith(BackupFileName.LEGACY_PREFIX) }
                 .sortedWith(compareByDescending<WebDavFile> { it.lastModifiedMillis }.thenByDescending { it.name })
-                .map { it.name }
+                .map { WebDavBackup(fileName = it.name, label = describeBackup(it, dateFormat)) }
             webDavBackupsState.update { WebDavBackups.Loaded(backups) }
           }.onFailure { error ->
             webDavBackupsState.update { WebDavBackups.Idle }
             errorState.update { error }
           }
       }
+    }
+
+    /**
+     * When the backup was made, in the user's date format.
+     * The time stamped into the name comes first because it is when the backup was written, where the server's modification time can move when files are copied around.
+     * The raw name is the last resort for a file neither can date.
+     */
+    private fun describeBackup(
+      file: WebDavFile,
+      dateFormat: DateTimeFormatter,
+    ): String {
+      val date =
+        BackupFileName.parseDate(file.name)
+          ?: file.lastModifiedMillis
+            .takeIf { it > 0 }
+            ?.let { dateFromMillis(it).toLocalZone().toLocalDateTime() }
+          ?: return file.name
+      return dateFormat.format(date).capitalizeWords()
     }
 
     /** Downloads the chosen backup and hands it to the same import path as a local file. */

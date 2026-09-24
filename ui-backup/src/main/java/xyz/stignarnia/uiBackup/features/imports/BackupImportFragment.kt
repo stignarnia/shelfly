@@ -181,15 +181,15 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
     if (backups !is WebDavBackups.Loaded) return
 
     viewModel.clearWebDavBackups()
-    if (backups.fileNames.isEmpty()) {
+    if (backups.backups.isEmpty()) {
       showSnack(MessageEvent.Info(R.string.textBackupWebDavNoBackups))
       return
     }
 
     modal()
       .setTitle(R.string.textBackupWebDavPick)
-      .setItems(backups.fileNames) { index ->
-        viewModel.runWebDavImport(backups.fileNames[index])
+      .setItems(backups.backups.map { it.label }) { index ->
+        viewModel.runWebDavImport(backups.backups[index].fileName)
       }.setNegativeButton(R.string.textCancel)
       .show()
   }

@@ -39,7 +39,7 @@ internal class LocalFolderBackupDestination(
         DocumentsContract.createDocument(
           context.contentResolver,
           childDocumentsUri,
-          BackupFileName.memeType,
+          BackupFileName.MIME_TYPE,
           fileName,
         ) ?: throw IllegalStateException("Could not create $fileName in the backup folder.")
 
