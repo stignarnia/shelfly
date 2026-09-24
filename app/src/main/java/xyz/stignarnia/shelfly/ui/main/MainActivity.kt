@@ -33,6 +33,7 @@ import timber.log.Timber
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.common.Mode.MOVIES
 import xyz.stignarnia.common.Mode.SHOWS
+import xyz.stignarnia.shelfly.BuildConfig
 import xyz.stignarnia.shelfly.R
 import xyz.stignarnia.shelfly.databinding.ActivityMainBinding
 import xyz.stignarnia.shelfly.ui.BaseActivity
@@ -82,6 +83,9 @@ class MainActivity :
     private const val ARG_SHORTCUT_DISCOVER = "extraShortcutDiscover"
     private const val ARG_SHORTCUT_COLLECTION = "extraShortcutCollection"
     private const val ARG_SHORTCUT_SEARCH = "extraShortcutSearch"
+
+    // Debug builds only - see handleDebugDestination.
+    private const val ARG_DEBUG_DESTINATION = "extraDebugDestination"
   }
 
   private val viewModel by viewModels<MainViewModel>()
@@ -160,6 +164,7 @@ class MainActivity :
       return
     }
     handleAppShortcut(intent)
+    handleDebugDestination(intent)
     handleNotification(intent) { hideNavigation(false) }
     handleDeepLink(intent)
   }
@@ -571,6 +576,37 @@ class MainActivity :
       extras.containsKey(ARG_SHORTCUT_SEARCH) -> {
         intent.removeExtra(ARG_SHORTCUT_SEARCH)
         navigateToSearch()
+      }
+    }
+  }
+
+  /**
+   * Opens a screen named by [ARG_DEBUG_DESTINATION], so a debug build can be driven with `adb shell am start` rather than by tapping - for screenshots, say.
+   * Covers the screens no shortcut, widget or notification reaches: `lists` and `statistics`.
+   * Release builds ignore it.
+   */
+  private fun handleDebugDestination(intent: Intent?) {
+    if (!BuildConfig.DEBUG) return
+    val destination = intent?.getStringExtra(ARG_DEBUG_DESTINATION) ?: return
+    intent.removeExtra(ARG_DEBUG_DESTINATION)
+    when (destination) {
+      "lists" -> {
+        navigateToTab(R.id.actionNavigateListsFragment)
+      }
+
+      "statistics" -> {
+        navigateToTab(getMenuCollectionAction())
+        hideNavigation(false)
+        findNavControl()?.navigate(
+          when (viewModel.getMode()) {
+            SHOWS -> R.id.actionFollowedShowsFragmentToStatisticsFragment
+            MOVIES -> R.id.actionFollowedMoviesFragmentToStatisticsFragment
+          },
+        )
+      }
+
+      else -> {
+        Timber.w("Unknown debug destination: $destination")
       }
     }
   }
