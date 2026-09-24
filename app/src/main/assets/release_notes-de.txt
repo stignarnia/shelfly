@@ -8,3 +8,4 @@ Shelfly 4.0.9
 • Wenn deine Bibliothek leer ist und ein WebDAV-Server eingerichtet ist, zeigt der Fortschritt-Bildschirm jetzt eine Schaltfläche Synchronisieren, die deine neueste Sicherung mit einem Tippen wiederherstellt.
 • Während eine Sicherung wiederhergestellt wird, aus einer Datei oder von WebDAV, erinnert dich der Bildschirm jetzt daran, die App erst nach Abschluss zu verlassen.
 • Wenn du einen WebDAV-Server einrichtest, wird er jetzt auch zum Sicherungsziel, sodass Ziehen zum Synchronisieren sofort funktioniert, ohne das Ziel von Hand zu ändern.
+• Ein Tippen auf die WebDAV-Synchronisierungsbenachrichtigung öffnet jetzt die App.

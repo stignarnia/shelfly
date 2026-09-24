@@ -8,3 +8,4 @@ Shelfly 4.0.9
 • Când biblioteca ta este goală și ai configurat un server WebDAV, ecranul Progres afișează acum un buton Sincronizează care restaurează cea mai recentă copie de rezervă cu o singură atingere.
 • În timpul restaurării unei copii de rezervă, dintr-un fișier sau din WebDAV, ecranul îți amintește acum să nu părăsești aplicația până la final.
 • Configurarea unui server WebDAV îl setează acum și ca destinație pentru copiile de rezervă, așa că tragerea în jos pentru sincronizare funcționează imediat, fără să schimbi destinația manual.
+• Atingerea notificării de sincronizare WebDAV deschide acum aplicația.

@@ -8,3 +8,4 @@ Shelfly 4.0.9
 • Kitaplığınız boşken ve bir WebDAV sunucusu ayarlanmışsa, İlerleme ekranı artık en son yedeğinizi tek dokunuşla geri yükleyen bir Senkronize et düğmesi gösteriyor.
 • Bir yedek geri yüklenirken, dosyadan veya WebDAV üzerinden, ekran artık işlem bitene kadar uygulamadan çıkmamanızı hatırlatıyor.
 • Bir WebDAV sunucusu ayarlamak artık onu yedekleme hedefi de yapıyor; böylece aşağı çekerek senkronizasyon, hedefi elle değiştirmeden hemen çalışıyor.
+• WebDAV senkronizasyon bildirimine dokunmak artık uygulamayı açıyor.

@@ -8,3 +8,4 @@ Shelfly 4.0.9
 • Quando la libreria è vuota e hai configurato un server WebDAV, la schermata Progressi mostra un pulsante Sincronizza che ripristina il backup più recente con un tocco.
 • Durante il ripristino di un backup, da file o da WebDAV, la schermata ora ti ricorda di non uscire dall'app finché non è terminato.
 • Configurare un server WebDAV ora lo imposta anche come destinazione dei backup, così trascina per sincronizzare funziona subito senza dover cambiare la destinazione a mano.
+• Toccare la notifica di sincronizzazione WebDAV ora apre l'app.

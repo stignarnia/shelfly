@@ -8,3 +8,4 @@ Shelfly 4.0.9
 • Når dit bibliotek er tomt, og en WebDAV-server er sat op, viser skærmen Fremskridt nu en Synkroniser-knap, der gendanner din seneste sikkerhedskopi med ét tryk.
 • Mens en sikkerhedskopi gendannes, fra en fil eller fra WebDAV, minder skærmen dig nu om ikke at forlade appen, før den er færdig.
 • Når du sætter en WebDAV-server op, bliver den nu også destination for sikkerhedskopier, så træk for at synkronisere virker med det samme uden at ændre destinationen manuelt.
+• Et tryk på WebDAV-synkroniseringsnotifikationen åbner nu appen.

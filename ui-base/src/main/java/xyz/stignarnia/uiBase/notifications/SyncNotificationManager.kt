@@ -50,6 +50,7 @@ class SyncNotificationManager
           .setContentTitle(title)
           .setContentText(message)
           .setProgress(0, 0, true)
+          .setContentIntent(createOpenAppIntent())
           .setAutoCancel(false)
           .setCategory(NotificationCompat.CATEGORY_SERVICE)
           .setPriority(NotificationCompat.PRIORITY_LOW)
@@ -78,6 +79,7 @@ class SyncNotificationManager
           .setSmallIcon(R.drawable.ic_notification)
           .setContentTitle(title)
           .setContentText(message)
+          .setContentIntent(createOpenAppIntent())
           .setAutoCancel(true)
           .setTimeoutAfter(3000)
           .setPriority(NotificationCompat.PRIORITY_LOW)
@@ -137,6 +139,20 @@ class SyncNotificationManager
 
     fun cancelError() {
       notificationManager.cancel(SYNC_ERROR_NOTIFICATION_ID)
+    }
+
+    /**
+     * Opens the app the way its launcher icon does, so a task already running comes back where the user left it instead of being sent somewhere.
+     * Unlike the error notification there is nothing to act on, so no screen is chosen for the user.
+     */
+    private fun createOpenAppIntent(): PendingIntent? {
+      val launchIntent = context.packageManager.getLaunchIntentForPackage(context.packageName) ?: return null
+      return PendingIntent.getActivity(
+        context,
+        SYNC_PROGRESS_NOTIFICATION_ID,
+        launchIntent,
+        FLAG_IMMUTABLE or FLAG_UPDATE_CURRENT,
+      )
     }
 
     private fun createSettingsIntent(): PendingIntent {

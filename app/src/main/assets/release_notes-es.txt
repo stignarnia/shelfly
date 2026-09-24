@@ -8,3 +8,4 @@ Shelfly 4.0.9
 • Cuando tu biblioteca está vacía y hay un servidor WebDAV configurado, la pantalla de Progreso muestra ahora un botón Sincronizar que restaura tu copia de seguridad más reciente con un toque.
 • Mientras se restaura una copia de seguridad, desde un archivo o desde WebDAV, la pantalla ahora te recuerda que no salgas de la aplicación hasta que termine.
 • Configurar un servidor WebDAV ahora también lo establece como destino de las copias de seguridad, así que deslizar para sincronizar funciona al momento sin cambiar el destino a mano.
+• Tocar la notificación de sincronización WebDAV ahora abre la aplicación.

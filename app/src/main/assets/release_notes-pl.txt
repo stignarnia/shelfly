@@ -8,3 +8,4 @@ Shelfly 4.0.9
 • Gdy Twoja biblioteka jest pusta, a serwer WebDAV jest skonfigurowany, ekran Postęp pokazuje teraz przycisk Synchronizuj, który jednym dotknięciem przywraca najnowszą kopię zapasową.
 • Podczas przywracania kopii zapasowej, z pliku lub z WebDAV, ekran przypomina teraz, aby nie opuszczać aplikacji, dopóki się nie zakończy.
 • Skonfigurowanie serwera WebDAV ustawia go teraz także jako miejsce docelowe kopii zapasowych, więc synchronizacja przez przeciągnięcie działa od razu, bez ręcznej zmiany miejsca docelowego.
+• Dotknięcie powiadomienia o synchronizacji WebDAV otwiera teraz aplikację.
