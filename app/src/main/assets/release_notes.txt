@@ -1,15 +1,3 @@
-Shelfly 4.0.8
+Shelfly 4.0.9
 
-• Fixed an issue where the text cursor and selection handles were invisible in dark mode.
-• Enabled pull-to-sync on the Progress screens only when WebDAV is configured.
-• Fixed vertical alignment on the backup export screen.
-• Improved styling of the WebDAV import button on the backup import screen.
-• Fixed deleting a list leaving you on the deleted list's screen.
-• Updated the long-press shortcut icons on the app launcher to the Shelfly blue.
-• Moved the filter chips on the Progress screens into the header, so they hide and come back with it while scrolling, like in Discover.
-• Placed the pull-to-sync indicator on the Progress screens under the filter chips, and removed the message shown when a sync starts.
-• The import summary now shows lists and list items that could not be imported, with the reason for each.
-• Hid the WebDAV import button while an import is running.
-• Fixed importing a backup adding a list's items to a different, unrelated list. Lists from older backups are matched by name, and the import summary says when that happens.
-• Fixed sync combining unrelated lists created on different devices.
-• Added "Merge into another list" to a list's menu, which moves all of its items into another list and deletes it.
+• Fixed the language icon on the welcome screen showing as a black shape.
