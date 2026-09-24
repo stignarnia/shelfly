@@ -129,7 +129,10 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
             R.id.progressWidgetNightRoot,
             R.id.progressWidgetLabel,
             R.id.progressWidgetLabelText,
+            context.getString(R.string.textWidgetShowsProgress),
           )
+          setTextViewText(R.id.progressWidgetEmptyViewTitle, context.getString(R.string.menuProgress))
+          setTextViewText(R.id.progressWidgetEmptyViewSubtitle, context.getString(R.string.textProgressEmpty))
           palette.let {
             setTextColor(R.id.progressWidgetEmptyViewTitle, it.textPrimary)
             setTextColor(R.id.progressWidgetEmptyViewSubtitle, it.textSecondary)

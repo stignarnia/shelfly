@@ -10,3 +10,4 @@ Shelfly 4.0.9
 • Configurer un serveur WebDAV en fait désormais aussi la destination des sauvegardes, donc tirer pour synchroniser fonctionne tout de suite sans changer la destination à la main.
 • Toucher la notification de synchronisation WebDAV ouvre désormais l'application.
 • L'icône d'astuce de l'écran Progression se place désormais sur le numéro d'épisode de la première série et défile avec lui, au lieu de flotter ailleurs sur l'écran.
+• Les widgets de l'écran d'accueil utilisent désormais partout la langue choisie pour l'application. Leurs titres, les messages de liste vide et la ligne « plus » s'affichaient auparavant dans la langue du téléphone.

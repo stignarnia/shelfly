@@ -10,3 +10,4 @@ Shelfly 4.0.9
 • Configurare un server WebDAV ora lo imposta anche come destinazione dei backup, così trascina per sincronizzare funziona subito senza dover cambiare la destinazione a mano.
 • Toccare la notifica di sincronizzazione WebDAV ora apre l'app.
 • L'icona del suggerimento nella schermata Progressi ora si trova sul numero dell'episodio del primo show e scorre insieme a esso, invece di fluttuare altrove sullo schermo.
+• I widget della schermata Home ora usano ovunque la lingua scelta per l'app. Titoli, messaggi vuoti e la riga "altro" prima comparivano nella lingua del telefono.

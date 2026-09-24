@@ -53,17 +53,22 @@ abstract class BaseWidgetProvider : AppWidgetProvider() {
 
   /**
    * The frame every list widget shares: the rounded ground and the label bar over it.
+   *
+   * The launcher inflates widget layouts in its own process, so an `android:text` in the XML resolves against the system locale and ignores the per-app language.
+   * Every string a widget shows is therefore set from code, where the context carries the app's locale - the label included.
    */
   protected fun RemoteViews.applyWidgetChrome(
     palette: WidgetPalette,
     rootId: Int,
     labelId: Int,
     labelTextId: Int,
+    labelText: String,
   ) {
     setInt(rootId, "setBackgroundResource", R.drawable.bg_widget)
     setBackgroundTint(rootId, palette.background)
     setBackground(labelId, R.drawable.bg_widget_toolbar_tintable, palette.statusBackground)
     setTextColor(labelTextId, palette.statusText)
+    setTextViewText(labelTextId, labelText)
   }
 
   /**

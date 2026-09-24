@@ -10,3 +10,4 @@ Shelfly 4.0.9
 • Setting up a WebDAV server now also makes it the backup destination, so pull to sync works straight away without changing the backup target by hand.
 • Tapping the WebDAV sync notification now opens the app.
 • The tip icon on the Progress screen now sits on the first show's episode number and scrolls with it, instead of floating somewhere else on the screen.
+• Home screen widgets now use the language you chose for the app everywhere. Their titles, empty messages and the "more" row used to appear in the phone's language instead.

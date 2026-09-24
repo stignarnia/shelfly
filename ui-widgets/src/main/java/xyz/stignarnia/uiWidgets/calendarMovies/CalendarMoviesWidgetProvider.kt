@@ -137,7 +137,9 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
             R.id.calendarWidgetMoviesNightRoot,
             R.id.calendarWidgetMoviesLabel,
             R.id.calendarWidgetMoviesLabelText,
+            context.getString(R.string.textWidgetMoviesCalendar),
           )
+          setTextViewText(R.id.calendarWidgetMoviesEmptyViewTitle, context.getString(R.string.menuCalendar))
           palette.let {
             setTextColor(R.id.calendarWidgetMoviesEmptyViewTitle, it.textPrimary)
             setTextColor(R.id.calendarWidgetMoviesEmptyViewSubtitle, it.textSecondary)

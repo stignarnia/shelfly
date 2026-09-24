@@ -10,3 +10,4 @@ Shelfly 4.0.9
 • Wenn du einen WebDAV-Server einrichtest, wird er jetzt auch zum Sicherungsziel, sodass Ziehen zum Synchronisieren sofort funktioniert, ohne das Ziel von Hand zu ändern.
 • Ein Tippen auf die WebDAV-Synchronisierungsbenachrichtigung öffnet jetzt die App.
 • Das Tipp-Symbol auf dem Fortschritt-Bildschirm sitzt jetzt auf der Episodennummer der ersten Serie und scrollt mit ihr, statt irgendwo anders auf dem Bildschirm zu schweben.
+• Startbildschirm-Widgets verwenden jetzt überall die Sprache, die du für die App gewählt hast. Titel, Hinweise bei leeren Listen und die Zeile "mehr" erschienen zuvor in der Sprache des Telefons.

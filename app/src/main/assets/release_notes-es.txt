@@ -10,3 +10,4 @@ Shelfly 4.0.9
 • Configurar un servidor WebDAV ahora también lo establece como destino de las copias de seguridad, así que deslizar para sincronizar funciona al momento sin cambiar el destino a mano.
 • Tocar la notificación de sincronización WebDAV ahora abre la aplicación.
 • El icono de consejo de la pantalla de Progreso ahora está sobre el número de episodio de la primera serie y se desplaza con él, en lugar de flotar en otra parte de la pantalla.
+• Los widgets de la pantalla de inicio ahora usan en todas partes el idioma que elegiste para la app. Sus títulos, mensajes de lista vacía y la fila "más" aparecían antes en el idioma del teléfono.

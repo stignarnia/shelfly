@@ -81,6 +81,7 @@ class SearchWidgetProvider : AppWidgetProvider() {
           }
         val pendingIntent = PendingIntent.getActivity(context, 2, intent, FLAG_IMMUTABLE or FLAG_UPDATE_CURRENT)
         setOnClickPendingIntent(R.id.searchWidgetRoot, pendingIntent)
+        setTextViewText(R.id.searchWidgetText, context.getString(R.string.textSearchFor))
 
         palette.let {
           setBackgroundTint(R.id.searchWidgetRoot, it.searchBackground)

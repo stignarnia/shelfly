@@ -10,3 +10,4 @@ Shelfly 4.0.9
 • Bir WebDAV sunucusu ayarlamak artık onu yedekleme hedefi de yapıyor; böylece aşağı çekerek senkronizasyon, hedefi elle değiştirmeden hemen çalışıyor.
 • WebDAV senkronizasyon bildirimine dokunmak artık uygulamayı açıyor.
 • İlerleme ekranındaki ipucu simgesi artık ilk dizinin bölüm numarasının üzerinde duruyor ve onunla birlikte kayıyor; ekranın başka bir yerinde süzülmüyor.
+• Ana ekran widget'ları artık her yerde uygulama için seçtiğiniz dili kullanıyor. Başlıkları, boş liste mesajları ve "daha fazla" satırı daha önce telefonun dilinde görünüyordu.

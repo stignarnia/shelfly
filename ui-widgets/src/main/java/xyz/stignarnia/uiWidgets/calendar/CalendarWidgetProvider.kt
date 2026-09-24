@@ -130,7 +130,9 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
             R.id.calendarWidgetNightRoot,
             R.id.calendarWidgetLabel,
             R.id.calendarWidgetLabelText,
+            context.getString(R.string.textWidgetShowsCalendar),
           )
+          setTextViewText(R.id.calendarWidgetEmptyViewTitle, context.getString(R.string.menuCalendar))
           palette.let {
             setTextColor(R.id.calendarWidgetEmptyViewTitle, it.textPrimary)
             setTextColor(R.id.calendarWidgetEmptyViewSubtitle, it.textSecondary)

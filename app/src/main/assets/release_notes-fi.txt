@@ -10,3 +10,4 @@ Shelfly 4.0.9
 • WebDAV-palvelimen määrittäminen asettaa sen nyt myös varmuuskopioiden kohteeksi, joten synkronointi alas vetämällä toimii heti ilman kohteen vaihtamista käsin.
 • WebDAV-synkronoinnin ilmoituksen napauttaminen avaa nyt sovelluksen.
 • Edistyminen-näkymän vihjekuvake on nyt ensimmäisen sarjan jakson numeron päällä ja vierii sen mukana sen sijaan, että se leijuisi muualla näytöllä.
+• Aloitusnäytön widgetit käyttävät nyt kaikkialla sovellukselle valitsemaasi kieltä. Niiden otsikot, tyhjän listan viestit ja "lisää"-rivi näkyivät aiemmin puhelimen kielellä.

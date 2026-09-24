@@ -119,7 +119,10 @@ class ProgressMoviesWidgetProvider : BaseWidgetProvider() {
             R.id.progressWidgetMoviesNightRoot,
             R.id.progressWidgetMoviesLabel,
             R.id.progressWidgetMoviesLabelText,
+            context.getString(R.string.textWidgetMoviesProgress),
           )
+          setTextViewText(R.id.progressWidgetMoviesEmptyViewTitle, context.getString(R.string.menuProgress))
+          setTextViewText(R.id.progressWidgetMoviesEmptyViewSubtitle, context.getString(R.string.textMoviesProgressEmpty))
           palette.let {
             setTextColor(R.id.progressWidgetMoviesEmptyViewTitle, it.textPrimary)
             setTextColor(R.id.progressWidgetMoviesEmptyViewSubtitle, it.textSecondary)

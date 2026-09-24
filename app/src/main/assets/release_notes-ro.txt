@@ -10,3 +10,4 @@ Shelfly 4.0.9
 • Configurarea unui server WebDAV îl setează acum și ca destinație pentru copiile de rezervă, așa că tragerea în jos pentru sincronizare funcționează imediat, fără să schimbi destinația manual.
 • Atingerea notificării de sincronizare WebDAV deschide acum aplicația.
 • Pictograma de sfat din ecranul Progres stă acum pe numărul episodului primului serial și se derulează odată cu el, în loc să plutească în altă parte a ecranului.
+• Widgeturile de pe ecranul principal folosesc acum peste tot limba aleasă pentru aplicație. Titlurile, mesajele pentru liste goale și rândul „mai mult” apăreau înainte în limba telefonului.

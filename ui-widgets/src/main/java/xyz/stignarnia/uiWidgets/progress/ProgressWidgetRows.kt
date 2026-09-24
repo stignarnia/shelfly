@@ -146,6 +146,7 @@ class ProgressWidgetRows(
         setTextViewText(R.id.progressWidgetItemSubtitle, subtitle)
         setTextViewText(R.id.progressWidgetItemSubtitle2, subtitle2)
         setTextViewText(R.id.progressWidgetItemProgressText, progressText)
+        setTextViewText(R.id.progressWidgetItemBadge, context.getString(R.string.textNew))
         setViewVisibility(R.id.progressWidgetItemBadge, if (item.isNew()) VISIBLE else GONE)
         setProgressBar(R.id.progressWidgetItemProgress, item.totalCount, item.watchedCount, false)
         if (hasAired) {
@@ -245,6 +246,7 @@ class ProgressWidgetRows(
   /** The row that stands in for everything that did not fit, opening the app where the widget's header does. */
   fun moreView(): RemoteViews =
     RemoteViews(context.packageName, R.layout.widget_more_item).apply {
+      setTextViewText(R.id.widgetMoreItemText, context.getString(R.string.textWidgetMore))
       palette?.let { setTextColor(R.id.widgetMoreItemText, it.textSecondary) }
       setOnClickFillInIntent(
         R.id.widgetMoreItem,
