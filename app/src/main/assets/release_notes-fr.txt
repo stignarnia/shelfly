@@ -14,3 +14,4 @@ Shelfly 4.0.9
 • Choisir une langue pour Shelfly dans les paramètres d'Android change désormais aussi les titres et descriptions des séries et films, pas seulement les menus. Choisir « Paramètre système par défaut » fait suivre à Shelfly la langue du téléphone.
 • Passer à la langue du téléphone depuis l'écran d'accueil change désormais aussi les titres et descriptions des séries et films, et les widgets se mettent à jour immédiatement après tout changement de langue.
 • Après un changement de langue, les widgets récupèrent désormais eux-mêmes leurs affiches et leurs titres traduits. Ils restaient auparavant sans affiches, ou dans l'ancienne langue, jusqu'à l'ouverture de la même liste dans l'application.
+• Les noms des widgets dans la liste des widgets de l'écran d'accueil sont désormais traduits. Ils étaient auparavant en anglais quelle que soit votre langue.

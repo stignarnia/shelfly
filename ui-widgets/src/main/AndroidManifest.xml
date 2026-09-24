@@ -9,7 +9,7 @@
     <receiver
       android:name="xyz.stignarnia.uiWidgets.progress.ProgressWidgetProvider"
       android:exported="true"
-      android:label="Shows Progress"
+      android:label="@string/textWidgetShowsProgress"
     >
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -24,7 +24,7 @@
     <receiver
       android:name="xyz.stignarnia.uiWidgets.progressMovies.ProgressMoviesWidgetProvider"
       android:exported="true"
-      android:label="Movies Progress"
+      android:label="@string/textWidgetMoviesProgress"
     >
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -39,7 +39,7 @@
     <receiver
       android:name="xyz.stignarnia.uiWidgets.calendar.CalendarWidgetProvider"
       android:exported="true"
-      android:label="Shows Calendar"
+      android:label="@string/textWidgetShowsCalendar"
     >
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -54,7 +54,7 @@
     <receiver
       android:name="xyz.stignarnia.uiWidgets.calendarMovies.CalendarMoviesWidgetProvider"
       android:exported="true"
-      android:label="Movies Calendar"
+      android:label="@string/textWidgetMoviesCalendar"
     >
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -69,7 +69,7 @@
     <receiver
       android:name="xyz.stignarnia.uiWidgets.search.SearchWidgetProvider"
       android:exported="true"
-      android:label="Search"
+      android:label="@string/textSearchFor"
     >
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

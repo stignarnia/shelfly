@@ -14,3 +14,4 @@ Shelfly 4.0.9
 • Wybranie języka Shelfly w ustawieniach Androida zmienia teraz także tytuły i opisy seriali i filmów, a nie tylko menu. Wybranie tam „Domyślny systemowy” sprawia, że Shelfly używa języka telefonu.
 • Przełączenie na język telefonu na ekranie powitalnym zmienia teraz także tytuły i opisy seriali i filmów, a widżety aktualizują się od razu po każdej zmianie języka.
 • Po zmianie języka widżety same pobierają teraz plakaty i przetłumaczone tytuły. Wcześniej pozostawały bez plakatów lub w poprzednim języku, dopóki nie otworzyłeś tej samej listy w aplikacji.
+• Nazwy widżetów na liście widżetów ekranu głównego są teraz przetłumaczone. Wcześniej były po angielsku niezależnie od języka.

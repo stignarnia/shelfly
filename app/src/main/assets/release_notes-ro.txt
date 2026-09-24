@@ -14,3 +14,4 @@ Shelfly 4.0.9
 • Alegerea unei limbi pentru Shelfly în setările Android schimbă acum și titlurile și descrierile serialelor și filmelor, nu doar meniurile. Alegerea „Prestabilită de sistem” face ca Shelfly să urmeze limba telefonului.
 • Trecerea la limba telefonului din ecranul de bun venit schimbă acum și titlurile și descrierile serialelor și filmelor, iar widgeturile se actualizează imediat după orice schimbare de limbă.
 • După schimbarea limbii, widgeturile își descarcă acum singure posterele și titlurile traduse. Înainte rămâneau fără postere, sau în limba veche, până deschideai aceeași listă în aplicație.
+• Numele widgeturilor din lista de widgeturi a ecranului principal sunt acum traduse. Înainte erau în engleză indiferent de limba ta.

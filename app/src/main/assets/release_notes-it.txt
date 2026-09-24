@@ -14,3 +14,4 @@ Shelfly 4.0.9
 • Scegliere una lingua per Shelfly nelle impostazioni di Android ora cambia anche titoli e descrizioni di serie e film, non solo i menu. Scegliere "Predefinita di sistema" fa seguire a Shelfly la lingua del telefono.
 • Passare alla lingua del telefono dalla schermata di benvenuto ora cambia anche titoli e descrizioni di serie e film, e i widget si aggiornano subito dopo ogni cambio di lingua.
 • Dopo un cambio di lingua, i widget ora scaricano da soli copertine e titoli tradotti. Prima restavano senza copertine, o nella lingua precedente, finché non aprivi lo stesso elenco nell'app.
+• I nomi dei widget nell'elenco dei widget della schermata Home ora sono tradotti. Prima erano in inglese qualunque fosse la lingua.

@@ -14,3 +14,4 @@ Shelfly 4.0.9
 • Kun valitset Shelflylle kielen Androidin asetuksissa, myös sarjojen ja elokuvien nimet ja kuvaukset vaihtuvat nyt, eivät vain valikot. Valitsemalla sieltä "Järjestelmän oletus" Shelfly seuraa puhelimen kieltä.
 • Kun vaihdat puhelimen kieleen tervetulonäytössä, myös sarjojen ja elokuvien nimet ja kuvaukset vaihtuvat nyt, ja widgetit päivittyvät heti jokaisen kielenvaihdon jälkeen.
 • Kielen vaihdon jälkeen widgetit hakevat nyt julisteensa ja käännetyt nimet itse. Aiemmin ne jäivät ilman julisteita tai vanhalle kielelle, kunnes avasit saman listan sovelluksessa.
+• Widgetien nimet aloitusnäytön widgetluettelossa on nyt käännetty. Aiemmin ne olivat englanniksi kielestäsi riippumatta.

@@ -14,3 +14,4 @@ Shelfly 4.0.9
 • Wenn du in den Android-Einstellungen eine Sprache für Shelfly wählst, wechseln jetzt auch Titel und Beschreibungen von Serien und Filmen, nicht nur die Menüs. Mit "Systemstandard" folgt Shelfly der Sprache deines Telefons.
 • Wechselst du auf dem Willkommensbildschirm zur Sprache deines Telefons, wechseln jetzt auch Titel und Beschreibungen von Serien und Filmen, und Widgets aktualisieren sich nach jedem Sprachwechsel sofort.
 • Nach einem Sprachwechsel laden Widgets ihre Poster und übersetzten Titel jetzt selbst. Bisher blieben sie ohne Poster oder in der alten Sprache, bis du dieselbe Liste in der App geöffnet hast.
+• Die Namen der Widgets in der Widget-Liste des Startbildschirms sind jetzt übersetzt. Bisher waren sie unabhängig von deiner Sprache englisch.
