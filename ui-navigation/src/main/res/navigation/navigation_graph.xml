@@ -221,6 +221,13 @@
       app:popExitAnim="@anim/anim_fade_out"
     />
     <action
+      android:id="@+id/actionProgressFragmentToBackupImport"
+      app:destination="@id/backupImportFragment"
+      app:enterAnim="@anim/anim_fade_in"
+      app:launchSingleTop="true"
+      app:popExitAnim="@anim/anim_fade_out"
+    />
+    <action
       android:id="@+id/actionProgressFragmentToEpisodeDetails"
       app:destination="@id/episodeDetailsDialog"
       app:launchSingleTop="true"
@@ -279,6 +286,13 @@
     <action
       android:id="@+id/actionProgressMoviesFragmentToSettingsFragment"
       app:destination="@id/settingsFragment"
+      app:enterAnim="@anim/anim_fade_in"
+      app:launchSingleTop="true"
+      app:popExitAnim="@anim/anim_fade_out"
+    />
+    <action
+      android:id="@+id/actionProgressMoviesFragmentToBackupImport"
+      app:destination="@id/backupImportFragment"
       app:enterAnim="@anim/anim_fade_in"
       app:launchSingleTop="true"
       app:popExitAnim="@anim/anim_fade_out"
@@ -775,6 +789,14 @@
     android:name="xyz.stignarnia.uiBackup.features.imports.BackupImportFragment"
     android:label="fragmentBackupImport"
   >
+    <!--
+      Set by the empty Progress screen's sync button, which restores the newest WebDAV backup rather than asking which one.
+    -->
+    <argument
+      android:name="importLatestWebDav"
+      android:defaultValue="false"
+      app:argType="boolean"
+    />
     <action
       android:id="@+id/actionBackupImportToResult"
       app:destination="@id/backupImportResultFragment"

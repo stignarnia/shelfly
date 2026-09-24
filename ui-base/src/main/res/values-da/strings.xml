@@ -133,4 +133,5 @@
   <string name="textNotificationChannelSync">Synkronisering og sikkerhedskopi</string>
   <string name="textNotificationChannelSyncDescription">Notifikationer om synkronisering og sikkerhedskopi</string>
   <string name="textShareTitle">Del %1$s</string>
+  <string name="textSyncWebDav">Synkroniser</string>
 </resources>

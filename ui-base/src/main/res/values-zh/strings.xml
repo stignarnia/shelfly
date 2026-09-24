@@ -128,4 +128,5 @@
   <string name="textNotificationChannelSync">同步和备份</string>
   <string name="textNotificationChannelSyncDescription">同步和备份通知</string>
   <string name="textShareTitle">分享 %1$s</string>
+  <string name="textSyncWebDav">同步</string>
 </resources>

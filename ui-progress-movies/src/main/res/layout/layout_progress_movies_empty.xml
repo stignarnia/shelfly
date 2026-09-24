@@ -42,5 +42,19 @@
     app:strokeColor="?android:attr/textColorPrimary"
   />
 
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/progressMoviesEmptySyncButton"
+    style="@style/RoundMaterialButton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="@dimen/spaceSmall"
+    android:text="@string/textSyncWebDav"
+    android:textColor="?attr/textColorOnSurface"
+    android:visibility="gone"
+    app:backgroundTint="?attr/colorAccent"
+    app:rippleColor="?android:attr/textColorPrimary"
+    app:strokeColor="?android:attr/textColorPrimary"
+  />
 
 </LinearLayout>

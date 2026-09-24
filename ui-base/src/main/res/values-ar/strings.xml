@@ -153,4 +153,5 @@
   <string name="textNotificationChannelSync">المزامنة والنسخ الاحتياطي</string>
   <string name="textNotificationChannelSyncDescription">إشعارات المزامنة والنسخ الاحتياطي</string>
   <string name="textShareTitle">مشاركة %1$s</string>
+  <string name="textSyncWebDav">مزامنة</string>
 </resources>

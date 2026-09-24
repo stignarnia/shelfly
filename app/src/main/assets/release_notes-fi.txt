@@ -5,3 +5,4 @@ Shelfly 4.0.9
 • Kun WebDAV-varmuuskopiointi tai -synkronointi keskeytyy esimerkiksi yhteyden katketessa, ilmoitus kertoo sen nyt selvästi sen sijaan, että näyttäisi "Job was cancelled".
 • Tekstit, jotka näkyivät englanniksi tai italiaksi kielestäsi riippumatta, on nyt käännetty: varmuuskopioinnin, synkronoinnin ja palautuksen virheet, tuonnin yhteenveto, Androidin asetusten ilmoitusluokat, maiden nimet, jakovalikko ja tämä uutuusnäkymä.
 • Kohteen poistaminen listalta pyyhkäisemällä vaatii nyt pidemmän, harkitun eleen: kohteen taakse ilmestyy punainen tausta ja roskakorikuvake, puhelin värisee, kun olet pyyhkäissyt tarpeeksi pitkälle, ja irrottaessa kohde poistetaan vain, jos et ole vetänyt takaisin. Nopea sipaisu ei enää poista mitään.
+• Kun kirjastosi on tyhjä ja WebDAV-palvelin on määritetty, Edistyminen-näkymässä on nyt Synkronoi-painike, joka palauttaa uusimman varmuuskopiosi yhdellä napautuksella.

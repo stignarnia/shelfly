@@ -5,3 +5,4 @@ Shelfly 4.0.9
 • When a WebDAV backup or sync is interrupted, for example because the connection drops, the notification now says so clearly instead of showing "Job was cancelled".
 • Text that used to appear in English or Italian whatever your language is now translated: backup, sync and restore errors, the import summary, notification categories in Android settings, country names, the share menu and this What's New screen.
 • Removing an item from a list by swiping now takes a longer, deliberate swipe: a red background with a bin icon shows behind the item, and the phone vibrates once you are far enough, and letting go only removes the item if you have not pulled back. A quick flick no longer removes anything.
+• When your library is empty and a WebDAV server is set up, the Progress screen now shows a Sync button that restores your latest backup in one tap.

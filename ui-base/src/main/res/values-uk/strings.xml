@@ -143,4 +143,5 @@
   <string name="textNotificationChannelSync">Синхронізація та резервне копіювання</string>
   <string name="textNotificationChannelSyncDescription">Сповіщення про синхронізацію та резервне копіювання</string>
   <string name="textShareTitle">Поділитися: %1$s</string>
+  <string name="textSyncWebDav">Синхронізувати</string>
 </resources>

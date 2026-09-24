@@ -138,4 +138,5 @@
   <string name="textNotificationChannelSync">Sincronização e backup</string>
   <string name="textNotificationChannelSyncDescription">Notificações de sincronização e backup</string>
   <string name="textShareTitle">Compartilhar %1$s</string>
+  <string name="textSyncWebDav">Sincronizar</string>
 </resources>

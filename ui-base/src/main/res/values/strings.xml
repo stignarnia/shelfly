@@ -161,4 +161,5 @@
   <string name="textNotificationChannelSync">Sync &amp; backup</string>
   <string name="textNotificationChannelSyncDescription">Sync and backup notifications</string>
   <string name="textShareTitle">Share %1$s</string>
+  <string name="textSyncWebDav">Sync</string>
 </resources>

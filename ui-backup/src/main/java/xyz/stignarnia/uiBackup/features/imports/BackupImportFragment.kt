@@ -37,6 +37,11 @@ import kotlin.coroutines.cancellation.CancellationException
 
 @AndroidEntryPoint
 class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragment_backup_import) {
+  companion object {
+    /** Matches the argument declared on backupImportFragment in the navigation graph. */
+    const val ARG_IMPORT_LATEST_WEB_DAV = "importLatestWebDav"
+  }
+
   @Inject
   lateinit var readBackupJsonFromFileUseCase: ReadBackupJsonFromFileUseCase
 
@@ -65,6 +70,18 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
     )
 
     activity?.window?.addFlags(FLAG_KEEP_SCREEN_ON)
+    importLatestWebDavIfRequested()
+  }
+
+  /**
+   * The empty home screen's sync button sends the user here to restore the newest WebDAV backup, so start it for them instead of asking them to pick one.
+   * The flag is cleared once consumed, otherwise the import would start again on every rotation.
+   */
+  private fun importLatestWebDavIfRequested() {
+    val arguments = arguments ?: return
+    if (!arguments.getBoolean(ARG_IMPORT_LATEST_WEB_DAV, false)) return
+    arguments.putBoolean(ARG_IMPORT_LATEST_WEB_DAV, false)
+    if (viewModel.isWebDavConfigured()) viewModel.importLatestWebDavBackup()
   }
 
   private fun setupView() {

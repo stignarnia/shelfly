@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import xyz.stignarnia.repository.settings.SettingsViewModeRepository
 import xyz.stignarnia.uiBase.BaseFragment
 import xyz.stignarnia.uiBase.common.OnScrollResetListener
+import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.uiBase.common.OnSearchClickListener
 import xyz.stignarnia.uiBase.common.WidgetsProvider
 import xyz.stignarnia.uiBase.common.sheets.sortOrder.SortOrderBottomSheet
@@ -77,6 +78,8 @@ class ProgressFragment :
 
   override val navigationId = R.id.progressMainFragment
   private val binding by viewBinding(FragmentProgressBinding::bind)
+  @Inject lateinit var webDavSettings: SettingsWebDavRepository
+
 
   private val parentViewModel by viewModels<ProgressMainViewModel>({ requireParentFragment() })
   override val viewModel by viewModels<ProgressViewModel>()
@@ -124,6 +127,10 @@ class ProgressFragment :
         upcomingChipClicked = viewModel::setUpcomingFilter
         onHoldChipClicked = viewModel::setOnHoldFilter
         // The header tabs scroll away under a behaviour in the parent screen's layout, and the chips have to go with them.
+      progressEmptyView.progressEmptySyncButton.run {
+        visibleIf(webDavSettings.url.isNotBlank())
+        onClick { requireMainFragment().openWebDavSync() }
+      }
         // While searching the chips also move down with the list, clear of the search field.
         followTranslationY(requireMainFragment().tabs) {
           if (isSearching) dimenToPx(R.dimen.progressSearchLocalOffset).toFloat() else 0F

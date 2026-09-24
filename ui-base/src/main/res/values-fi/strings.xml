@@ -133,4 +133,5 @@
   <string name="textNotificationChannelSync">Synkronointi ja varmuuskopiointi</string>
   <string name="textNotificationChannelSyncDescription">Synkronoinnin ja varmuuskopioinnin ilmoitukset</string>
   <string name="textShareTitle">Jaa %1$s</string>
+  <string name="textSyncWebDav">Synkronoi</string>
 </resources>

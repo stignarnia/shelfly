@@ -138,4 +138,5 @@
   <string name="textNotificationChannelSync">Synchronisation et sauvegarde</string>
   <string name="textNotificationChannelSyncDescription">Notifications de synchronisation et de sauvegarde</string>
   <string name="textShareTitle">Partager %1$s</string>
+  <string name="textSyncWebDav">Synchroniser</string>
 </resources>

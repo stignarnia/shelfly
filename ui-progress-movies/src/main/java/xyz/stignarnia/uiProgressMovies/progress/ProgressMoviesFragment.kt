@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import xyz.stignarnia.repository.settings.SettingsViewModeRepository
+import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.uiBase.BaseFragment
 import xyz.stignarnia.uiBase.common.OnScrollResetListener
 import xyz.stignarnia.uiBase.common.OnSearchClickListener
@@ -73,6 +74,8 @@ class ProgressMoviesFragment :
 
   @Inject lateinit var settings: SettingsViewModeRepository
 
+  @Inject lateinit var webDavSettings: SettingsWebDavRepository
+
   private val parentViewModel by viewModels<ProgressMoviesMainViewModel>({ requireParentFragment() })
   override val viewModel by viewModels<ProgressMoviesViewModel>()
 
@@ -111,6 +114,10 @@ class ProgressMoviesFragment :
     with(binding) {
       progressMoviesEmptyView.progressMoviesEmptyDiscoverButton.onClick {
         (requireActivity() as NavigationHost).navigateToDiscover()
+      }
+      progressMoviesEmptyView.progressMoviesEmptySyncButton.run {
+        visibleIf(webDavSettings.url.isNotBlank())
+        onClick { requireMainFragment().openWebDavSync() }
       }
       progressMoviesFiltersView.run {
         onSortChipClicked = ::openSortOrderDialog

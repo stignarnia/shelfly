@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import xyz.stignarnia.uiBackup.features.imports.BackupImportFragment
 import xyz.stignarnia.uiBase.BaseFragment
 import xyz.stignarnia.uiBase.common.OnScrollResetListener
 import xyz.stignarnia.uiBase.common.OnSearchClickListener
@@ -306,6 +307,16 @@ class ProgressMainFragment :
     hideNavigation()
     exitSearch()
     navigateToSafe(R.id.actionProgressFragmentToSettingsFragment)
+  }
+
+  /** Restores the newest WebDAV backup, offered from the empty screen when a server is configured. */
+  fun openWebDavSync() {
+    hideNavigation()
+    exitSearch()
+    navigateToSafe(
+      R.id.actionProgressFragmentToBackupImport,
+      Bundle().apply { putBoolean(BackupImportFragment.ARG_IMPORT_LATEST_WEB_DAV, true) },
+    )
   }
 
   private fun enterSearch() {

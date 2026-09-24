@@ -84,15 +84,10 @@ class BackupImportViewModel
       if (importingState.value != Idle) return
       viewModelScope.launch {
         webDavBackupsState.update { WebDavBackups.Loading }
-        webDavClient
-          .list(credentials())
+        listWebDavBackups()
           .onSuccess { files ->
             val dateFormat = dateFormatProvider.loadFullHourFormat()
-            val backups =
-              files
-                .filter { it.name.startsWith(BackupFileName.PREFIX) || it.name.startsWith(BackupFileName.LEGACY_PREFIX) }
-                .sortedWith(compareByDescending<WebDavFile> { it.lastModifiedMillis }.thenByDescending { it.name })
-                .map { WebDavBackup(fileName = it.name, label = describeBackup(it, dateFormat)) }
+            val backups = files.map { WebDavBackup(fileName = it.name, label = describeBackup(it, dateFormat)) }
             webDavBackupsState.update { WebDavBackups.Loaded(backups) }
           }.onFailure { error ->
             webDavBackupsState.update { WebDavBackups.Idle }
@@ -100,6 +95,39 @@ class BackupImportViewModel
           }
       }
     }
+
+    /**
+     * Restores the newest backup on the server without asking which one.
+     * This is the empty home screen's sync button, where there is no library yet for an older backup to be preferred over.
+     */
+    fun importLatestWebDavBackup() {
+      if (importingState.value != Idle) return
+      viewModelScope.launch {
+        webDavBackupsState.update { WebDavBackups.Loading }
+        listWebDavBackups()
+          .onSuccess { files ->
+            webDavBackupsState.update { WebDavBackups.Idle }
+            val latest = files.firstOrNull()
+            if (latest == null) {
+              errorState.update { BackupException(R.string.textBackupWebDavNoBackups) }
+            } else {
+              runWebDavImport(latest.name)
+            }
+          }.onFailure { error ->
+            webDavBackupsState.update { WebDavBackups.Idle }
+            errorState.update { error }
+          }
+      }
+    }
+
+    private suspend fun listWebDavBackups() =
+      webDavClient
+        .list(credentials())
+        .map { files ->
+          files
+            .filter { it.name.startsWith(BackupFileName.PREFIX) || it.name.startsWith(BackupFileName.LEGACY_PREFIX) }
+            .sortedWith(compareByDescending<WebDavFile> { it.lastModifiedMillis }.thenByDescending { it.name })
+        }
 
     /**
      * When the backup was made, in the user's date format.
