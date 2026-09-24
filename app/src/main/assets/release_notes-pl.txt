@@ -11,3 +11,5 @@ Shelfly 4.0.9
 • Dotknięcie powiadomienia o synchronizacji WebDAV otwiera teraz aplikację.
 • Ikona wskazówki na ekranie Postęp znajduje się teraz na numerze odcinka pierwszego serialu i przewija się razem z nim, zamiast unosić się w innym miejscu ekranu.
 • Widżety na ekranie głównym używają teraz wszędzie języka wybranego w aplikacji. Ich tytuły, komunikaty o pustej liście i wiersz „więcej” były wcześniej wyświetlane w języku telefonu.
+• Wybranie języka Shelfly w ustawieniach Androida zmienia teraz także tytuły i opisy seriali i filmów, a nie tylko menu. Wybranie tam „Domyślny systemowy” sprawia, że Shelfly używa języka telefonu.
+• Przełączenie na język telefonu na ekranie powitalnym zmienia teraz także tytuły i opisy seriali i filmów, a widżety aktualizują się od razu po każdej zmianie języka.

@@ -11,3 +11,5 @@ Shelfly 4.0.9
 • Et tryk på WebDAV-synkroniseringsnotifikationen åbner nu appen.
 • Tip-ikonet på skærmen Fremskridt sidder nu på afsnitsnummeret for det første program og ruller med det i stedet for at svæve et andet sted på skærmen.
 • Widgets på startskærmen bruger nu det sprog, du har valgt til appen, overalt. Deres titler, tomme beskeder og rækken "mere" blev før vist på telefonens sprog.
+• Når du vælger et sprog til Shelfly i Androids indstillinger, skifter titler og beskrivelser af serier og film nu også, ikke kun menuerne. Vælger du "Systemstandard" dér, følger Shelfly telefonens sprog.
+• Skifter du til telefonens sprog fra velkomstskærmen, skifter titler og beskrivelser af serier og film nu også, og widgets opdateres med det samme efter enhver sprogændring.

@@ -11,3 +11,5 @@ Shelfly 4.0.9
 • Atingerea notificării de sincronizare WebDAV deschide acum aplicația.
 • Pictograma de sfat din ecranul Progres stă acum pe numărul episodului primului serial și se derulează odată cu el, în loc să plutească în altă parte a ecranului.
 • Widgeturile de pe ecranul principal folosesc acum peste tot limba aleasă pentru aplicație. Titlurile, mesajele pentru liste goale și rândul „mai mult” apăreau înainte în limba telefonului.
+• Alegerea unei limbi pentru Shelfly în setările Android schimbă acum și titlurile și descrierile serialelor și filmelor, nu doar meniurile. Alegerea „Prestabilită de sistem” face ca Shelfly să urmeze limba telefonului.
+• Trecerea la limba telefonului din ecranul de bun venit schimbă acum și titlurile și descrierile serialelor și filmelor, iar widgeturile se actualizează imediat după orice schimbare de limbă.

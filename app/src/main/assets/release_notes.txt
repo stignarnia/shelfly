@@ -11,3 +11,5 @@ Shelfly 4.0.9
 • Tapping the WebDAV sync notification now opens the app.
 • The tip icon on the Progress screen now sits on the first show's episode number and scrolls with it, instead of floating somewhere else on the screen.
 • Home screen widgets now use the language you chose for the app everywhere. Their titles, empty messages and the "more" row used to appear in the phone's language instead.
+• Picking a language for Shelfly in Android's settings now switches show and movie titles and descriptions too, not just the menus. Picking "System default" there makes Shelfly follow your phone's language.
+• Switching to your phone's language from the welcome screen now switches show and movie titles and descriptions too, and widgets update right away after any language change.

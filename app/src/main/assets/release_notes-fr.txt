@@ -11,3 +11,5 @@ Shelfly 4.0.9
 • Toucher la notification de synchronisation WebDAV ouvre désormais l'application.
 • L'icône d'astuce de l'écran Progression se place désormais sur le numéro d'épisode de la première série et défile avec lui, au lieu de flotter ailleurs sur l'écran.
 • Les widgets de l'écran d'accueil utilisent désormais partout la langue choisie pour l'application. Leurs titres, les messages de liste vide et la ligne « plus » s'affichaient auparavant dans la langue du téléphone.
+• Choisir une langue pour Shelfly dans les paramètres d'Android change désormais aussi les titres et descriptions des séries et films, pas seulement les menus. Choisir « Paramètre système par défaut » fait suivre à Shelfly la langue du téléphone.
+• Passer à la langue du téléphone depuis l'écran d'accueil change désormais aussi les titres et descriptions des séries et films, et les widgets se mettent à jour immédiatement après tout changement de langue.

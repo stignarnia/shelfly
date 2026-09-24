@@ -134,7 +134,7 @@ class MainViewModel
       val state = welcomeState.value ?: return
       when (val step = state.step) {
         is WelcomeStep.Language -> {
-          welcomeCase.setLanguage(step.suggested)
+          welcomeCase.setLanguage(step.suggested, viewModelScope)
         }
 
         is WelcomeStep.ApiKey -> {
@@ -166,7 +166,7 @@ class MainViewModel
       when (val step = state.step) {
         // Declining still has to pin the current language explicitly: with no app locale applied, the device language would win at resource lookup.
         is WelcomeStep.Language -> {
-          welcomeCase.setLanguage(step.current)
+          welcomeCase.setLanguage(step.current, viewModelScope)
         }
 
         // Declining is itself the answer; the step just needs to be recorded.

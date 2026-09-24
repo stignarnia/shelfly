@@ -111,4 +111,19 @@ class PreferencesModule {
       "PREFERENCES_SYNC",
       Context.MODE_PRIVATE,
     )
+
+  /**
+   * What the system settings say about this app's language on this device.
+   * Left out of backup_rules and data_extraction_rules on purpose: restored onto another device it would describe settings that device does not have.
+   */
+  @Provides
+  @Singleton
+  @Named("localePreferences")
+  fun providesLocalePreferences(
+    @ApplicationContext context: Context,
+  ): SharedPreferences =
+    context.applicationContext.getSharedPreferences(
+      "PREFERENCES_LOCALE",
+      Context.MODE_PRIVATE,
+    )
 }

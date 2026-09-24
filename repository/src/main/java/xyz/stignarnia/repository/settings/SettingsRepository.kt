@@ -58,7 +58,6 @@ class SettingsRepository
       private const val PROGRESS_ON_HOLD_COLLAPSED = "PROGRESS_ON_HOLD_COLLAPSED"
       private const val PROGRESS_NEXT_EPISODE_TYPE = "PROGRESS_NEXT_EPISODE_TYPE"
       private const val PROGRESS_DATE_SELECTION_TYPE = "PROGRESS_DATE_SELECTION_TYPE"
-      private const val LOCALE_INITIALISED = "LOCALE_INITIALISED"
     }
 
     suspend fun isInitialized() =
@@ -120,7 +119,6 @@ class SettingsRepository
       ALWAYS_ASK,
       ProgressDateSelectionType::class.java,
     )
-    var isLocaleInitialised by BooleanPreference(preferences, LOCALE_INITIALISED, false)
 
     var mode: Mode
       get() {

@@ -11,3 +11,5 @@ Shelfly 4.0.9
 • WebDAV-synkronoinnin ilmoituksen napauttaminen avaa nyt sovelluksen.
 • Edistyminen-näkymän vihjekuvake on nyt ensimmäisen sarjan jakson numeron päällä ja vierii sen mukana sen sijaan, että se leijuisi muualla näytöllä.
 • Aloitusnäytön widgetit käyttävät nyt kaikkialla sovellukselle valitsemaasi kieltä. Niiden otsikot, tyhjän listan viestit ja "lisää"-rivi näkyivät aiemmin puhelimen kielellä.
+• Kun valitset Shelflylle kielen Androidin asetuksissa, myös sarjojen ja elokuvien nimet ja kuvaukset vaihtuvat nyt, eivät vain valikot. Valitsemalla sieltä "Järjestelmän oletus" Shelfly seuraa puhelimen kieltä.
+• Kun vaihdat puhelimen kieleen tervetulonäytössä, myös sarjojen ja elokuvien nimet ja kuvaukset vaihtuvat nyt, ja widgetit päivittyvät heti jokaisen kielenvaihdon jälkeen.

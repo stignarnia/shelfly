@@ -1,6 +1,7 @@
 package xyz.stignarnia.uiSettings.helpers
 
 import androidx.annotation.StringRes
+import androidx.core.os.LocaleListCompat
 import timber.log.Timber
 import xyz.stignarnia.uiSettings.R
 
@@ -30,6 +31,18 @@ enum class AppLanguage(
     fun fromCode(code: String): AppLanguage {
       Timber.d("Looking for AppLanguage with code: $code")
       return entries.firstOrNull { it.code == code } ?: ENGLISH
+    }
+
+    /**
+     * The first of these locales the app has a translation for, which is the one resource lookup settles on too.
+     * Null when there is none.
+     */
+    fun fromLocales(locales: LocaleListCompat): AppLanguage? {
+      for (index in 0 until locales.size()) {
+        val language = locales[index]?.language?.lowercase() ?: continue
+        entries.firstOrNull { it.code == language }?.let { return it }
+      }
+      return null
     }
   }
 }

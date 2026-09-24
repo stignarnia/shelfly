@@ -1,7 +1,6 @@
 package xyz.stignarnia.uiSettings.sections.general.cases
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatDelegate
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.withContext
 import xyz.stignarnia.common.Config
@@ -12,11 +11,11 @@ import xyz.stignarnia.uiBase.common.AppCountry
 import xyz.stignarnia.uiBase.common.WidgetsProvider
 import xyz.stignarnia.uiBase.dates.AppDateFormat
 import xyz.stignarnia.uiBase.notifications.AnnouncementManager
-import xyz.stignarnia.uiBase.utilities.AndroidVersion
 import xyz.stignarnia.uiModel.ProgressDateSelectionType
 import xyz.stignarnia.uiModel.ProgressNextEpisodeType
 import xyz.stignarnia.uiModel.Settings
 import xyz.stignarnia.uiSettings.helpers.AppLanguage
+import xyz.stignarnia.uiSettings.helpers.AppLanguageSwitcher
 import xyz.stignarnia.uiSettings.helpers.AppTheme
 import javax.inject.Inject
 
@@ -27,6 +26,7 @@ class SettingsGeneralMainCase
     private val dispatchers: CoroutineDispatchers,
     private val settingsRepository: SettingsRepository,
     private val announcementManager: AnnouncementManager,
+    private val languageSwitcher: AppLanguageSwitcher,
   ) {
     suspend fun getSettings(): Settings =
       withContext(dispatchers.IO) {
@@ -71,32 +71,10 @@ class SettingsGeneralMainCase
       }
     }
 
-    suspend fun getLanguage(): AppLanguage {
-      if (AndroidVersion.isAtLeastAndroid13) {
-        val locales = AppCompatDelegate.getApplicationLocales()
-        if (!locales.isEmpty) {
-          val locale = locales.get(0)!!.language
-          val language = AppLanguage.fromCode(locale)
-          if (settingsRepository.language != locale) {
-            setLanguage(language)
-          }
-          return language
-        }
-      }
-      return AppLanguage.fromCode(settingsRepository.language)
-    }
+    /** The system settings' choice has already been adopted by the time this runs - see AppLanguageSwitcher. */
+    fun getLanguage(): AppLanguage = AppLanguage.fromCode(settingsRepository.language)
 
-    suspend fun setLanguage(language: AppLanguage) {
-      settingsRepository.run {
-        this.language = language.code
-        val unused =
-          AppLanguage.entries
-            .filter { it.code != Config.DEFAULT_LANGUAGE && it != language }
-            .map { it.code }
-        clearUnusedTranslations(unused)
-        clearLanguageLogs()
-      }
-    }
+    suspend fun setLanguage(language: AppLanguage) = languageSwitcher.switchTo(language)
 
     fun getTheme() = AppTheme.fromId(settingsRepository.themeId)
 

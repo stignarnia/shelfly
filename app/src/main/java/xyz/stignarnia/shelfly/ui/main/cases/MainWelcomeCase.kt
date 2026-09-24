@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.CoroutineScope
 import xyz.stignarnia.dataRemote.apikey.ApiKeyProvider
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.repository.settings.SettingsWebDavRepository
@@ -117,7 +118,10 @@ class MainWelcomeCase
       }
     }
 
-    fun setLanguage(language: AppLanguage) = initialsCase.setLanguage(language)
+    fun setLanguage(
+      language: AppLanguage,
+      scope: CoroutineScope,
+    ) = initialsCase.setLanguage(language, scope)
 
     fun setTmdbApiKey(key: String) = apiKeyProvider.setTmdbApiKey(key)
 

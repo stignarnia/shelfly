@@ -5,8 +5,6 @@ import android.app.NotificationChannel
 import android.content.ComponentName
 import android.content.pm.PackageManager
 import android.os.StrictMode
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import com.jakewharton.processphoenix.ProcessPhoenix
@@ -23,6 +21,7 @@ import xyz.stignarnia.uiBase.notifications.SyncNotificationManager
 import xyz.stignarnia.uiBase.utilities.AndroidVersion
 import xyz.stignarnia.uiBase.utilities.extensions.notificationManager
 import xyz.stignarnia.uiModel.Settings
+import xyz.stignarnia.uiSettings.helpers.AppLanguageSwitcher
 import xyz.stignarnia.uiWidgets.calendar.CalendarWidgetProvider
 import xyz.stignarnia.uiWidgets.calendarMovies.CalendarMoviesWidgetProvider
 import xyz.stignarnia.uiWidgets.progress.ProgressWidgetProvider
@@ -45,6 +44,8 @@ class App :
 
   @Inject lateinit var syncNotificationManager: SyncNotificationManager
 
+  @Inject lateinit var languageSwitcher: AppLanguageSwitcher
+
   /** The night mode the widgets were last drawn against - see [onConfigurationChanged]. */
   private var lastNightMode = android.content.res.Configuration.UI_MODE_NIGHT_UNDEFINED
 
@@ -64,17 +65,13 @@ class App :
       }
 
     /**
-     * Pin the stored language, which is the app's own source of truth for it.
-     * Applied unconditionally: re-applying the language already in force is a no-op, whereas reading back the current one this early is not reliable.
-     *
-     * Note this only takes effect from the following launch on API 33+, where it goes through the system LocaleManager asynchronously.
-     * The welcome flow therefore does not depend on it - see WelcomeState.displayLanguage.
+     * Keeps the stored language, which is the app's own source of truth for it, and the system's per-app language in step - see AppLanguageSwitcher.
+     * A choice made in the system settings is adopted; otherwise the stored language is pinned.
+     * The welcome flow does not depend on it - see WelcomeState.displayLanguage.
      */
     fun setupLanguage() {
-      settingsRepository.isLocaleInitialised = true
-      AppCompatDelegate.setApplicationLocales(
-        LocaleListCompat.forLanguageTags(settingsRepository.language),
-      )
+      if (adoptSystemLanguage()) return
+      languageSwitcher.pin(this)
     }
 
     fun setupStrictMode() {
@@ -172,6 +169,20 @@ class App :
     }
   }
 
+  /**
+   * Makes the language the system settings ask for the stored one, so the content translations follow the UI - see [AppLanguageSwitcher.systemOverride].
+   * The language is stored before returning, so everything read during this launch already uses it; only clearing the other languages' translations runs afterwards.
+   *
+   * Returns false when there is nothing to adopt.
+   */
+  private fun adoptSystemLanguage(): Boolean {
+    val language = languageSwitcher.systemOverride(this) ?: return false
+    Timber.d("Adopting ${language.code} from the system language settings.")
+    settingsRepository.language = language.code
+    appScope.launch { languageSwitcher.switchTo(language) }
+    return true
+  }
+
   override fun requestShowsWidgetsUpdate() {
     appScope.launch {
       ProgressWidgetProvider.requestUpdate(applicationContext)
@@ -201,6 +212,8 @@ class App :
    */
   override fun onConfigurationChanged(newConfig: android.content.res.Configuration) {
     super.onConfigurationChanged(newConfig)
+    // A language picked in the system settings while the app is running arrives here.
+    if (newConfig.locales[0]?.language != settingsRepository.language) adoptSystemLanguage()
     val nightMode = newConfig.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
     if (nightMode == lastNightMode) return
     lastNightMode = nightMode

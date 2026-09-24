@@ -9,6 +9,8 @@ import androidx.core.content.edit
 import androidx.core.os.LocaleListCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.extensions.nowUtc
@@ -18,6 +20,7 @@ import xyz.stignarnia.shelfly.BuildConfig
 import xyz.stignarnia.uiBase.common.AppCountry
 import xyz.stignarnia.uiBase.utilities.AndroidVersion
 import xyz.stignarnia.uiSettings.helpers.AppLanguage
+import xyz.stignarnia.uiSettings.helpers.AppLanguageSwitcher
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -27,6 +30,7 @@ class MainInitialsCase
   constructor(
     @param:ApplicationContext private val context: Context,
     private val settingsRepository: SettingsRepository,
+    private val languageSwitcher: AppLanguageSwitcher,
     @param:Named("miscPreferences") private var miscPreferences: SharedPreferences,
   ) {
     companion object {
@@ -76,8 +80,19 @@ class MainInitialsCase
       }
     }
 
-    fun setLanguage(appLanguage: AppLanguage) {
-      settingsRepository.language = appLanguage.code
+    /**
+     * The language is stored before returning, because the next welcome step reads it back straight away to render in it.
+     * Switching to it for the content translations runs afterwards in [scope] - see AppLanguageSwitcher.switchTo.
+     * Keeping the language already stored only pins it, and leaves the translations alone.
+     */
+    fun setLanguage(
+      appLanguage: AppLanguage,
+      scope: CoroutineScope,
+    ) {
+      if (appLanguage.code != settingsRepository.language) {
+        settingsRepository.language = appLanguage.code
+        scope.launch { languageSwitcher.switchTo(appLanguage) }
+      }
       val locales = LocaleListCompat.forLanguageTags(appLanguage.code)
       AppCompatDelegate.setApplicationLocales(locales)
     }
@@ -89,16 +104,7 @@ class MainInitialsCase
      * Null when the device is set to a language the app has no translation for.
      * That is not the same as English, and answering it with English would offer a user running the app in Italian on a Japanese phone a switch to English they never asked about.
      */
-    fun detectSystemLanguage(): AppLanguage? {
-      val locales = LocaleManagerCompat.getSystemLocales(context)
-      for (index in 0 until locales.size()) {
-        val language = locales[index]?.language?.lowercase() ?: continue
-        AppLanguage.entries
-          .firstOrNull { it.code == language }
-          ?.let { return it }
-      }
-      return null
-    }
+    fun detectSystemLanguage(): AppLanguage? = AppLanguage.fromLocales(LocaleManagerCompat.getSystemLocales(context))
 
     /**
      * When the notes are due to be shown the version stamp is deliberately left alone: [setWhatsNewSeen] writes it once the user has actually closed them, so an upgrade whose notes were never read is offered again.

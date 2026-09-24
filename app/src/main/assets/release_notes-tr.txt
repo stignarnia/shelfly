@@ -11,3 +11,5 @@ Shelfly 4.0.9
 • WebDAV senkronizasyon bildirimine dokunmak artık uygulamayı açıyor.
 • İlerleme ekranındaki ipucu simgesi artık ilk dizinin bölüm numarasının üzerinde duruyor ve onunla birlikte kayıyor; ekranın başka bir yerinde süzülmüyor.
 • Ana ekran widget'ları artık her yerde uygulama için seçtiğiniz dili kullanıyor. Başlıkları, boş liste mesajları ve "daha fazla" satırı daha önce telefonun dilinde görünüyordu.
+• Android ayarlarında Shelfly için bir dil seçmek artık yalnızca menüleri değil, dizi ve film adlarını ve açıklamalarını da değiştiriyor. Orada "Sistem varsayılanı"nı seçmek Shelfly'ın telefonunuzun dilini izlemesini sağlar.
+• Karşılama ekranından telefonunuzun diline geçmek artık dizi ve film adlarını ve açıklamalarını da değiştiriyor; widget'lar da her dil değişikliğinden hemen sonra güncelleniyor.
