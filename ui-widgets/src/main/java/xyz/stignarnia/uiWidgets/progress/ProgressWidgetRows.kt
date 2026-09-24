@@ -9,11 +9,15 @@ import android.widget.RemoteViews
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import xyz.stignarnia.common.Config
+import xyz.stignarnia.repository.TranslationsRepository
+import xyz.stignarnia.repository.images.ShowImagesProvider
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.uiBase.utilities.DurationPrinter
 import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
 import xyz.stignarnia.uiBase.utilities.extensions.replace
 import xyz.stignarnia.uiModel.ImageStatus
+import xyz.stignarnia.uiModel.ImageType
 import xyz.stignarnia.uiModel.Season
 import xyz.stignarnia.uiProgress.progress.cases.ProgressItemsCase
 import xyz.stignarnia.uiProgress.progress.recycler.ProgressListItem
@@ -22,6 +26,7 @@ import xyz.stignarnia.uiWidgets.BaseWidgetProvider.Companion.EXTRA_SHOW_ID
 import xyz.stignarnia.uiWidgets.R
 import xyz.stignarnia.uiWidgets.progress.ProgressWidgetProvider.Companion.EXTRA_EPISODE_ID
 import xyz.stignarnia.uiWidgets.progress.ProgressWidgetProvider.Companion.EXTRA_SEASON_ID
+import xyz.stignarnia.uiWidgets.theme.WidgetLookUp
 import xyz.stignarnia.uiWidgets.theme.WidgetPalette
 import xyz.stignarnia.uiWidgets.theme.WidgetPalettes
 import xyz.stignarnia.uiWidgets.theme.WidgetPosters
@@ -42,6 +47,8 @@ class ProgressWidgetRows(
   private val widgetId: Int,
   private val context: Context,
   private val itemsCase: ProgressItemsCase,
+  private val imagesProvider: ShowImagesProvider,
+  private val translationsRepository: TranslationsRepository,
   private val settingsRepository: SettingsRepository,
 ) {
   private val imageCorner by lazy { context.dimenToPx(R.dimen.mediaTileCorner) }
@@ -80,6 +87,26 @@ class ProgressWidgetRows(
           idOf(item)?.let { it to image.fullFileUrl }
         }.toMap()
     posters = WidgetPosters.fetch(context, imageWidth, imageHeight, imageCorner, urls)
+  }
+
+  /**
+   * Looks up the posters and translations the first [upTo] rows are missing - see [WidgetLookUp].
+   * A translation is only ever missing in a language other than English, the one the catalogue comes in.
+   */
+  suspend fun lookUpMissing(upTo: Int): Boolean {
+    val language = translationsRepository.getLanguage()
+    val translated = language != Config.DEFAULT_LANGUAGE
+    val rows = adapterItems.take(upTo).filterIsInstance<ProgressListItem.Episode>()
+    return WidgetLookUp.any(rows) {
+      val poster =
+        it.image.status == ImageStatus.UNKNOWN &&
+          imagesProvider.loadRemoteImage(it.show, ImageType.POSTER).status == ImageStatus.AVAILABLE
+      val translation =
+        translated &&
+          it.translations?.show == null &&
+          translationsRepository.loadTranslation(it.show, language)?.let { found -> found.hasTitle || found.overview.isNotBlank() } == true
+      poster || translation
+    }
   }
 
   suspend fun load() {

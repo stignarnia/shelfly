@@ -18,6 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.Mode
+import xyz.stignarnia.repository.TranslationsRepository
+import xyz.stignarnia.repository.images.ShowImagesProvider
 import xyz.stignarnia.uiBase.utilities.AndroidVersion
 import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
 import xyz.stignarnia.uiModel.CalendarMode
@@ -34,6 +36,10 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
   @Inject lateinit var calendarFutureCase: CalendarFutureCase
 
   @Inject lateinit var calendarRecentsCase: CalendarRecentsCase
+
+  @Inject lateinit var imagesProvider: ShowImagesProvider
+
+  @Inject lateinit var translationsRepository: TranslationsRepository
 
   companion object {
     fun requestUpdate(context: Context) {
@@ -100,7 +106,7 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
     val listIntent = PendingIntent.getBroadcast(context, 0, listClickIntent, FLAG_MUTABLE or FLAG_UPDATE_CURRENT)
 
     context.updateAsync {
-      val rows = CalendarWidgetRows(widgetId, context, calendarFutureCase, calendarRecentsCase, settingsRepository)
+      val rows = CalendarWidgetRows(widgetId, context, calendarFutureCase, calendarRecentsCase, imagesProvider, translationsRepository, settingsRepository)
       rows.load()
       // First pass: no posters yet, so it costs nothing to wait for. This is what decides how many rows fit.
       val (placeholders, taken) =
@@ -169,6 +175,9 @@ class CalendarWidgetProvider : BaseWidgetProvider() {
           rows::moreView,
         )
       appWidgetManager.updateAppWidget(widgetId, remoteViews(withPosters))
+
+      // What is looked up now cannot join the rows just sent, whose number was decided without it, so the widget is built again.
+      if (rows.lookUpMissing(taken)) requestUpdate(context)
     }
   }
 

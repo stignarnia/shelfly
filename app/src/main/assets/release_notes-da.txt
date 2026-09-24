@@ -13,3 +13,4 @@ Shelfly 4.0.9
 • Widgets på startskærmen bruger nu det sprog, du har valgt til appen, overalt. Deres titler, tomme beskeder og rækken "mere" blev før vist på telefonens sprog.
 • Når du vælger et sprog til Shelfly i Androids indstillinger, skifter titler og beskrivelser af serier og film nu også, ikke kun menuerne. Vælger du "Systemstandard" dér, følger Shelfly telefonens sprog.
 • Skifter du til telefonens sprog fra velkomstskærmen, skifter titler og beskrivelser af serier og film nu også, og widgets opdateres med det samme efter enhver sprogændring.
+• Når du skifter sprog, henter widgets nu selv deres plakater og oversatte titler. Før var de uden plakater eller på det gamle sprog, indtil du åbnede den samme liste i appen.

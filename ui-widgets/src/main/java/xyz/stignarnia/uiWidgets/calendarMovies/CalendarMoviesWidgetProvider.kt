@@ -18,6 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.Mode
+import xyz.stignarnia.repository.TranslationsRepository
+import xyz.stignarnia.repository.images.MovieImagesProvider
 import xyz.stignarnia.uiBase.utilities.AndroidVersion
 import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
 import xyz.stignarnia.uiModel.CalendarMode
@@ -34,6 +36,10 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
   @Inject lateinit var calendarMoviesFutureCase: CalendarMoviesFutureCase
 
   @Inject lateinit var calendarMoviesRecentsCase: CalendarMoviesRecentsCase
+
+  @Inject lateinit var imagesProvider: MovieImagesProvider
+
+  @Inject lateinit var translationsRepository: TranslationsRepository
 
   companion object {
     fun requestUpdate(context: Context) {
@@ -107,6 +113,8 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
           context,
           calendarMoviesFutureCase,
           calendarMoviesRecentsCase,
+          imagesProvider,
+          translationsRepository,
           settingsRepository,
         )
       rows.load()
@@ -182,6 +190,9 @@ class CalendarMoviesWidgetProvider : BaseWidgetProvider() {
           rows::moreView,
         )
       appWidgetManager.updateAppWidget(widgetId, remoteViews(withPosters))
+
+      // What is looked up now cannot join the rows just sent, whose number was decided without it, so the widget is built again.
+      if (rows.lookUpMissing(taken)) requestUpdate(context)
     }
   }
 

@@ -13,3 +13,4 @@ Shelfly 4.0.9
 • Home screen widgets now use the language you chose for the app everywhere. Their titles, empty messages and the "more" row used to appear in the phone's language instead.
 • Picking a language for Shelfly in Android's settings now switches show and movie titles and descriptions too, not just the menus. Picking "System default" there makes Shelfly follow your phone's language.
 • Switching to your phone's language from the welcome screen now switches show and movie titles and descriptions too, and widgets update right away after any language change.
+• After you change language, widgets now fetch their posters and translated titles themselves. They used to stay without posters, or in the old language, until you opened the same list in the app.

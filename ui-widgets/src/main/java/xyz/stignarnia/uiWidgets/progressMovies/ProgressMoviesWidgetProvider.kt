@@ -19,6 +19,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.stignarnia.common.Config
+import xyz.stignarnia.repository.TranslationsRepository
+import xyz.stignarnia.repository.images.MovieImagesProvider
 import xyz.stignarnia.uiBase.common.WidgetsProvider
 import xyz.stignarnia.uiBase.utilities.AndroidVersion
 import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
@@ -35,6 +37,10 @@ class ProgressMoviesWidgetProvider : BaseWidgetProvider() {
   @Inject lateinit var progressMoviesItemsCase: ProgressMoviesItemsCase
 
   @Inject lateinit var progressMoviesCase: ProgressMoviesMainCase
+
+  @Inject lateinit var imagesProvider: MovieImagesProvider
+
+  @Inject lateinit var translationsRepository: TranslationsRepository
 
   companion object {
     const val EXTRA_CHECK_MOVIE_ID = "EXTRA_CHECK_MOVIE_ID"
@@ -90,7 +96,7 @@ class ProgressMoviesWidgetProvider : BaseWidgetProvider() {
     val listIntent = PendingIntent.getBroadcast(context, 0, listClickIntent, FLAG_MUTABLE or FLAG_UPDATE_CURRENT)
 
     context.updateAsync {
-      val rows = ProgressMoviesWidgetRows(widgetId, context, progressMoviesItemsCase, settingsRepository)
+      val rows = ProgressMoviesWidgetRows(widgetId, context, progressMoviesItemsCase, imagesProvider, translationsRepository, settingsRepository)
       rows.load()
       // First pass: no posters yet, so it costs nothing to wait for. This is what decides how many rows fit.
       val (placeholders, taken) =
@@ -144,6 +150,9 @@ class ProgressMoviesWidgetProvider : BaseWidgetProvider() {
           rows::moreView,
         )
       appWidgetManager.updateAppWidget(widgetId, remoteViews(withPosters))
+
+      // What is looked up now cannot join the rows just sent, whose number was decided without it, so the widget is built again.
+      if (rows.lookUpMissing(taken)) requestUpdate(context)
     }
   }
 

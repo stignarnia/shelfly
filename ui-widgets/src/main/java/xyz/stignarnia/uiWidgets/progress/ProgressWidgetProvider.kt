@@ -24,6 +24,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.stignarnia.common.Config.HOST_ACTIVITY_NAME
 import xyz.stignarnia.repository.EpisodesManager
+import xyz.stignarnia.repository.TranslationsRepository
+import xyz.stignarnia.repository.images.ShowImagesProvider
 import xyz.stignarnia.uiBase.common.WidgetsProvider
 import xyz.stignarnia.uiBase.utilities.AndroidVersion
 import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
@@ -39,6 +41,10 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
   @Inject lateinit var progressItemsCase: ProgressItemsCase
 
   @Inject lateinit var episodesManager: EpisodesManager
+
+  @Inject lateinit var imagesProvider: ShowImagesProvider
+
+  @Inject lateinit var translationsRepository: TranslationsRepository
 
   companion object {
     const val EXTRA_SEASON_ID = "EXTRA_SEASON_ID"
@@ -100,7 +106,7 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
       )
 
     context.updateAsync {
-      val rows = ProgressWidgetRows(widgetId, context, progressItemsCase, settingsRepository)
+      val rows = ProgressWidgetRows(widgetId, context, progressItemsCase, imagesProvider, translationsRepository, settingsRepository)
       rows.load()
       // First pass: no posters yet, so it costs nothing to wait for. This is what decides how many rows fit.
       val (placeholders, taken) =
@@ -154,6 +160,9 @@ class ProgressWidgetProvider : BaseWidgetProvider() {
           rows::moreView,
         )
       appWidgetManager.updateAppWidget(widgetId, remoteViews(withPosters))
+
+      // What is looked up now cannot join the rows just sent, whose number was decided without it, so the widget is built again.
+      if (rows.lookUpMissing(taken)) requestUpdate(context)
     }
   }
 

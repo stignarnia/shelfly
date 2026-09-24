@@ -8,16 +8,21 @@ import android.widget.RemoteViews
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import xyz.stignarnia.common.Config
+import xyz.stignarnia.repository.TranslationsRepository
+import xyz.stignarnia.repository.images.MovieImagesProvider
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
 import xyz.stignarnia.uiBase.utilities.extensions.replace
 import xyz.stignarnia.uiModel.ImageStatus
+import xyz.stignarnia.uiModel.ImageType
 import xyz.stignarnia.uiProgressMovies.progress.cases.ProgressMoviesItemsCase
 import xyz.stignarnia.uiProgressMovies.progress.recycler.ProgressMovieListItem
 import xyz.stignarnia.uiWidgets.BaseWidgetProvider
 import xyz.stignarnia.uiWidgets.BaseWidgetProvider.Companion.EXTRA_MOVIE_ID
 import xyz.stignarnia.uiWidgets.R
 import xyz.stignarnia.uiWidgets.progressMovies.ProgressMoviesWidgetProvider.Companion.EXTRA_CHECK_MOVIE_ID
+import xyz.stignarnia.uiWidgets.theme.WidgetLookUp
 import xyz.stignarnia.uiWidgets.theme.WidgetPalette
 import xyz.stignarnia.uiWidgets.theme.WidgetPalettes
 import xyz.stignarnia.uiWidgets.theme.WidgetPosters
@@ -34,6 +39,8 @@ class ProgressMoviesWidgetRows(
   private val widgetId: Int,
   private val context: Context,
   private val loadItemsCase: ProgressMoviesItemsCase,
+  private val imagesProvider: MovieImagesProvider,
+  private val translationsRepository: TranslationsRepository,
   private val settingsRepository: SettingsRepository,
 ) {
   private val imageCorner by lazy { context.dimenToPx(R.dimen.mediaTileCorner) }
@@ -65,6 +72,26 @@ class ProgressMoviesWidgetRows(
           idOf(item)?.let { it to image.fullFileUrl }
         }.toMap()
     posters = WidgetPosters.fetch(context, imageWidth, imageHeight, imageCorner, urls)
+  }
+
+  /**
+   * Looks up the posters and translations the first [upTo] rows are missing - see [WidgetLookUp].
+   * A translation is only ever missing in a language other than English, the one the catalogue comes in.
+   */
+  suspend fun lookUpMissing(upTo: Int): Boolean {
+    val language = translationsRepository.getLanguage()
+    val translated = language != Config.DEFAULT_LANGUAGE
+    val rows = adapterItems.take(upTo).filterIsInstance<ProgressMovieListItem.MovieItem>()
+    return WidgetLookUp.any(rows) {
+      val poster =
+        it.image.status == ImageStatus.UNKNOWN &&
+          imagesProvider.loadRemoteImage(it.movie, ImageType.POSTER).status == ImageStatus.AVAILABLE
+      val translation =
+        translated &&
+          it.translation == null &&
+          translationsRepository.loadTranslation(it.movie, language)?.let { found -> found.hasTitle || found.overview.isNotBlank() } == true
+      poster || translation
+    }
   }
 
   suspend fun load() {

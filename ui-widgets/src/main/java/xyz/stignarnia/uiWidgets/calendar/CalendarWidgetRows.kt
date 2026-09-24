@@ -9,8 +9,11 @@ import android.widget.RemoteViews
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import xyz.stignarnia.common.Config
 import xyz.stignarnia.common.Mode
 import xyz.stignarnia.common.extensions.toLocalZone
+import xyz.stignarnia.repository.TranslationsRepository
+import xyz.stignarnia.repository.images.ShowImagesProvider
 import xyz.stignarnia.repository.settings.SettingsRepository
 import xyz.stignarnia.uiBase.utilities.extensions.capitalizeWords
 import xyz.stignarnia.uiBase.utilities.extensions.dimenToPx
@@ -18,6 +21,7 @@ import xyz.stignarnia.uiBase.utilities.extensions.replace
 import xyz.stignarnia.uiModel.CalendarMode.PRESENT_FUTURE
 import xyz.stignarnia.uiModel.CalendarMode.RECENTS
 import xyz.stignarnia.uiModel.ImageStatus
+import xyz.stignarnia.uiModel.ImageType
 import xyz.stignarnia.uiProgress.calendar.cases.items.CalendarFutureCase
 import xyz.stignarnia.uiProgress.calendar.cases.items.CalendarRecentsCase
 import xyz.stignarnia.uiProgress.calendar.recycler.CalendarListItem
@@ -25,6 +29,7 @@ import xyz.stignarnia.uiWidgets.BaseWidgetProvider
 import xyz.stignarnia.uiWidgets.BaseWidgetProvider.Companion.EXTRA_MODE_CLICK
 import xyz.stignarnia.uiWidgets.BaseWidgetProvider.Companion.EXTRA_SHOW_ID
 import xyz.stignarnia.uiWidgets.R
+import xyz.stignarnia.uiWidgets.theme.WidgetLookUp
 import xyz.stignarnia.uiWidgets.theme.WidgetPalette
 import xyz.stignarnia.uiWidgets.theme.WidgetPalettes
 import xyz.stignarnia.uiWidgets.theme.WidgetPosters
@@ -44,6 +49,8 @@ class CalendarWidgetRows(
   private val context: Context,
   private val calendarFutureCase: CalendarFutureCase,
   private val calendarRecentsCase: CalendarRecentsCase,
+  private val imagesProvider: ShowImagesProvider,
+  private val translationsRepository: TranslationsRepository,
   private val settingsRepository: SettingsRepository,
 ) {
   private val imageCorner by lazy { context.dimenToPx(R.dimen.mediaTileCorner) }
@@ -78,6 +85,26 @@ class CalendarWidgetRows(
   }
 
   private val adapterItems = mutableListOf<CalendarListItem>()
+
+  /**
+   * Looks up the posters and translations the first [upTo] rows are missing - see [WidgetLookUp].
+   * A translation is only ever missing in a language other than English, the one the catalogue comes in.
+   */
+  suspend fun lookUpMissing(upTo: Int): Boolean {
+    val language = translationsRepository.getLanguage()
+    val translated = language != Config.DEFAULT_LANGUAGE
+    val rows = adapterItems.take(upTo).filterIsInstance<CalendarListItem.Episode>()
+    return WidgetLookUp.any(rows) {
+      val poster =
+        it.image.status == ImageStatus.UNKNOWN &&
+          imagesProvider.loadRemoteImage(it.show, ImageType.POSTER).status == ImageStatus.AVAILABLE
+      val translation =
+        translated &&
+          it.translations?.show == null &&
+          translationsRepository.loadTranslation(it.show, language)?.let { found -> found.hasTitle || found.overview.isNotBlank() } == true
+      poster || translation
+    }
+  }
 
   suspend fun load() {
     palette = WidgetPalettes.resolve(context, widgetId, settingsRepository)

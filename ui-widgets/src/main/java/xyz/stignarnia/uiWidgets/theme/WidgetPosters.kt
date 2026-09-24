@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit
  * A poster that does not arrive in time is left out and the row keeps its placeholder; the next update picks it up, by which point Glide has it cached.
  */
 object WidgetPosters {
-  private const val CONCURRENCY = 8
-  private const val TIMEOUT_SECONDS = 4L
+  const val CONCURRENCY = 8
+  const val TIMEOUT_SECONDS = 4L
 
   /** What a poster of this size costs the widget's bitmap budget, whether or not it has arrived yet. */
   fun costOf(
