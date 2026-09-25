@@ -1,0 +1,1 @@
+• Lisätty laitenimet ja synkronoitujen laitteiden näkymä Asetukset → Varmuuskopiointi ja palautus -kohtaan WebDAV-palvelimeen synkronoivien laitteiden hallintaan ja hylättyjen laitteiden tiedostojen poistamiseen.

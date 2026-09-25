@@ -4,15 +4,16 @@
 # CLAUDE.md treats release_notes.txt as part of "done" rather than a release-time chore, but nothing enforced that until now.
 # A stale heading ships the previous version's notes to users, which is silent - the app renders whatever the file says.
 #
-# Verifies three things:
+# Verifies:
 #   - the first line is "Shelfly <versionName>", with versionName read from gradle/libs.versions.toml.
 #   - at least one note follows the heading, so a version bump cannot ship an empty list.
 #   - every locale in androidResources.localeFilters has a release_notes-<locale>.txt beside the English file, with the same heading and the same number of notes.
 #     The count is what catches a note added in English and never translated: the app would otherwise show that language the previous, shorter list without complaint.
+#   - Fastlane and F-Droid changelogs exist under fastlane/metadata/android/<locale>/changelogs/<versionCode>.txt and stay within the 500-character limit.
 #
 #   scripts/check-release-notes.sh
 #
-# Exits non-zero with an explanation when either check fails.
+# Exits non-zero with an explanation when any check fails.
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -30,6 +31,12 @@ done
 version="$(sed -n 's/^versionName[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' "$versions_file" | head -n 1)"
 if [[ -z "$version" ]]; then
   echo "error: could not read versionName from $versions_file" >&2
+  exit 1
+fi
+
+code="$(sed -n 's/^versionCode[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' "$versions_file" | head -n 1)"
+if [[ -z "$code" ]]; then
+  echo "error: could not read versionCode from $versions_file" >&2
   exit 1
 fi
 
@@ -82,10 +89,45 @@ for locale in $locales; do
   fi
 done
 
+declare -A fastlane_locales=(
+  ["en"]="en-US"
+  ["ar"]="ar"
+  ["da"]="da-DK"
+  ["de"]="de-DE"
+  ["es"]="es-ES"
+  ["fi"]="fi-FI"
+  ["fr"]="fr-FR"
+  ["it"]="it-IT"
+  ["pl"]="pl-PL"
+  ["pt"]="pt-BR"
+  ["ro"]="ro"
+  ["ru"]="ru-RU"
+  ["tr"]="tr-TR"
+  ["uk"]="uk"
+  ["zh"]="zh-CN"
+)
+
+all_locales="en $locales"
+for loc in $all_locales; do
+  fl="${fastlane_locales[$loc]:-$loc}"
+  cl_file="$root/fastlane/metadata/android/$fl/changelogs/$code.txt"
+  if [[ ! -f "$cl_file" ]]; then
+    echo "error: Fastlane changelog missing: fastlane/metadata/android/$fl/changelogs/$code.txt" >&2
+    failed=1
+    continue
+  fi
+  char_count="$(wc -m < "$cl_file" | tr -d ' ')"
+  if [[ "$char_count" -gt 500 ]]; then
+    echo "error: fastlane/metadata/android/$fl/changelogs/$code.txt exceeds 500 characters ($char_count chars)." >&2
+    failed=1
+  fi
+done
+
 if [[ "$failed" -ne 0 ]]; then
   echo "" >&2
   echo "Every language shows its own release_notes-<locale>.txt in the What's New screen, so each one has to be updated alongside the English file." >&2
+  echo "Run ./gradlew :app:exportFastlaneChangelogs to export them to fastlane changelogs." >&2
   exit 1
 fi
 
-echo "release notes OK: $expected ($notes_count line(s), $(wc -w <<< "$locales") translation(s))"
+echo "release notes and fastlane changelogs OK: $expected (code $code, $notes_count line(s), $(wc -w <<< "$locales") translation(s))"

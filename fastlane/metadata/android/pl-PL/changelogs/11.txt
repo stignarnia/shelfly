@@ -1,0 +1,1 @@
+• Dodano nazwy urządzeń oraz ekran zsynchronizowanych urządzeń w Ustawienia → Kopia zapasowa i przywracanie, aby zarządzać urządzeniami synchronizującymi się z serwerem WebDAV i usuwać pliki opuszczonych urządzeń.

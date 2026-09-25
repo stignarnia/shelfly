@@ -1,0 +1,1 @@
+• S-au adăugat numele dispozitivului și un ecran pentru dispozitive sincronizate în Setări → Copiere de rezervă și restaurare pentru gestionarea dispozitivelor sincronizate cu serverul WebDAV și ștergerea fișierelor dispozitivelor abandonate.

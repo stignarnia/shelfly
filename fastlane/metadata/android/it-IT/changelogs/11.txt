@@ -1,0 +1,1 @@
+• Aggiunti il nome dispositivo e una schermata per i dispositivi sincronizzati in Impostazioni → Backup & Ripristino per gestire i dispositivi sincronizzati con il server WebDAV e rimuovere i file dei dispositivi abbandonati.

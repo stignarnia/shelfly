@@ -1,0 +1,1 @@
+• WebDAV sunucusuyla senkronize olan cihazları yönetmek ve kullanılmayan cihaz dosyalarını silmek için Ayarlar → Yedekleme ve Geri Yükleme altına cihaz adları ve senkronize edilen cihazlar ekranı eklendi.

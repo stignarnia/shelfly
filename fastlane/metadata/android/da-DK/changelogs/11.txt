@@ -1,0 +1,1 @@
+• Tilføjet enhedsnavne og en skærm for synkroniserede enheder under Indstillinger → Sikkerhedskopiering og gendannelse til at administrere enheder, der synkroniserer med WebDAV-serveren, og fjerne filer fra forladte enheder.

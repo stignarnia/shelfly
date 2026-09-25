@@ -1,0 +1,1 @@
+• Added device names and a synced devices screen under Settings → Backup & Restore to manage devices syncing to your WebDAV server and remove abandoned device files.

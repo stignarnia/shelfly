@@ -1,0 +1,1 @@
+• Se añadió el nombre del dispositivo y una pantalla de dispositivos sincronizados en Ajustes → Copia de seguridad y restauración para administrar los dispositivos sincronizados con el servidor WebDAV y eliminar los archivos de dispositivos abandonados.

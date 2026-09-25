@@ -1,0 +1,1 @@
+• Ajout du nom d'appareil et d'un écran pour les appareils synchronisés dans Paramètres → Sauvegarde et restauration afin de gérer les appareils synchronisés avec le serveur WebDAV et supprimer les fichiers des appareils abandonnés.

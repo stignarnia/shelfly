@@ -5,11 +5,13 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.ValueSource
 import org.gradle.api.provider.ValueSourceParameters
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
+import java.io.File
 import java.util.Properties
 
 plugins {
@@ -178,6 +180,68 @@ abstract class GenerateShortcutsTask : DefaultTask() {
   }
 }
 
+// Generates Fastlane and F-Droid changelogs under fastlane/metadata/android/<locale>/changelogs/<versionCode>.txt from app/src/main/assets/release_notes*.txt.
+// The in-app release notes assets remain the single source of truth.
+// The first line with the version heading is stripped so store changelogs stay within character limits.
+abstract class ExportFastlaneChangelogsTask : DefaultTask() {
+  @get:InputDirectory
+  @get:PathSensitive(PathSensitivity.RELATIVE)
+  abstract val assetsDirectory: DirectoryProperty
+
+  @get:Input
+  abstract val versionCode: Property<String>
+
+  @get:OutputDirectory
+  abstract val fastlaneMetadataDirectory: DirectoryProperty
+
+  @TaskAction
+  fun export() {
+    val code = versionCode.get()
+    val localeMapping =
+      mapOf(
+        "release_notes.txt" to "en-US",
+        "release_notes-ar.txt" to "ar",
+        "release_notes-da.txt" to "da-DK",
+        "release_notes-de.txt" to "de-DE",
+        "release_notes-es.txt" to "es-ES",
+        "release_notes-fi.txt" to "fi-FI",
+        "release_notes-fr.txt" to "fr-FR",
+        "release_notes-it.txt" to "it-IT",
+        "release_notes-pl.txt" to "pl-PL",
+        "release_notes-pt.txt" to "pt-BR",
+        "release_notes-ro.txt" to "ro",
+        "release_notes-ru.txt" to "ru-RU",
+        "release_notes-tr.txt" to "tr-TR",
+        "release_notes-uk.txt" to "uk",
+        "release_notes-zh.txt" to "zh-CN",
+      )
+
+    val assetsDir = assetsDirectory.get().asFile
+    val metadataDir = fastlaneMetadataDirectory.get().asFile
+
+    localeMapping.forEach { (assetName, fastlaneLocale) ->
+      val assetFile = File(assetsDir, assetName)
+      check(assetFile.exists()) { "Missing release notes asset: ${assetFile.path}" }
+      val lines = assetFile.readLines()
+      val changelogContent =
+        lines
+          .drop(1)
+          .dropWhile { it.isBlank() }
+          .joinToString("\n")
+          .trim()
+      check(changelogContent.isNotEmpty()) { "No changelog notes found in ${assetFile.path}" }
+      check(changelogContent.length <= 500) {
+        "Changelog for $fastlaneLocale exceeds 500 characters (${changelogContent.length} chars) in ${assetFile.path}"
+      }
+
+      val changelogDir = File(metadataDir, "$fastlaneLocale/changelogs")
+      changelogDir.mkdirs()
+      val targetFile = File(changelogDir, "$code.txt")
+      targetFile.writeText(changelogContent + "\n")
+    }
+  }
+}
+
 extensions.configure<com.android.build.api.variant.ApplicationAndroidComponentsExtension>("androidComponents") {
   onVariants(selector().withBuildType("debug")) { variant ->
     val releaseName = libs.versions.versionName.get()
@@ -196,6 +260,17 @@ extensions.configure<com.android.build.api.variant.ApplicationAndroidComponentsE
       }
     variant.sources.res?.addGeneratedSourceDirectory(generateShortcuts, GenerateShortcutsTask::outputDirectory)
   }
+}
+
+val exportFastlaneChangelogs =
+  tasks.register<ExportFastlaneChangelogsTask>("exportFastlaneChangelogs") {
+    assetsDirectory.set(layout.projectDirectory.dir("src/main/assets"))
+    versionCode.set(libs.versions.versionCode)
+    fastlaneMetadataDirectory.set(layout.projectDirectory.dir("../fastlane/metadata/android"))
+  }
+
+tasks.named("preBuild").configure {
+  dependsOn(exportFastlaneChangelogs)
 }
 
 dependencies {

@@ -1,0 +1,1 @@
+• Gerätenamen und eine Übersicht synchronisierter Geräte unter Einstellungen → Backup & Wiederherstellung hinzugefügt, um mit dem WebDAV-Server synchronisierende Geräte zu verwalten und Dateien verlassener Geräte zu entfernen.
