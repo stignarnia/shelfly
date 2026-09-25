@@ -3,10 +3,10 @@ name: Deploy to Google Play
 on:
   workflow_dispatch:
     inputs:
-      release_tag:
-        description: "GitHub Release tag for AAB (or 'none' for metadata-only)"
-        type: string
-        default: 'none'
+      upload_latest_release_bundle:
+        description: 'Upload latest release bundle (AAB)'
+        type: boolean
+        default: false
       track:
         description: 'Google Play track'
         type: choice
@@ -34,18 +34,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Download Release Bundle (AAB)
-        if: ${{ inputs.release_tag != '' && inputs.release_tag != 'none' }}
+      - name: Download Latest Release Bundle (AAB)
+        if: ${{ inputs.upload_latest_release_bundle }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p /tmp/release-bundle
-          TAG="${{ inputs.release_tag }}"
-          if [ "$TAG" = "latest" ]; then
-            gh release download --repo ${{ github.repository }} --pattern "*.aab" --dir /tmp/release-bundle
-          else
-            gh release download "$TAG" --repo ${{ github.repository }} --pattern "*.aab" --dir /tmp/release-bundle
-          fi
+          gh release download --repo ${{ github.repository }} --pattern "*.aab" --dir /tmp/release-bundle
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -70,10 +65,13 @@ jobs:
           VERSION_CODE="$(sed -n 's/^versionCode[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' gradle/libs.versions.toml | head -n 1)"
 
           AAB_ARG=""
-          if [ -d "/tmp/release-bundle" ]; then
+          if [ "${{ inputs.upload_latest_release_bundle }}" = "true" ]; then
             AAB_PATH="$(ls /tmp/release-bundle/*.aab 2>/dev/null | head -n 1 || true)"
             if [ -n "$AAB_PATH" ] && [ -f "$AAB_PATH" ]; then
               AAB_ARG="aab:$AAB_PATH"
+            else
+              echo "::error::No AAB bundle found in the latest release."
+              exit 1
             fi
           fi
 
