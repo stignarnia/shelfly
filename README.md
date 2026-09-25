@@ -1,10 +1,10 @@
 # Shelfly
 
-<img src="fastlane/metadata/android/en-US/images/icon.png" align="left" width="130" hspace="16" vspace="6" alt="Shelfly Logo" />
+<img src="fastlane/metadata/android/en-US/images/icon.png" align="left" width="180" hspace="16" vspace="6" alt="Shelfly Logo" />
 
 Shelfly is a TV shows and movies tracker for Android that syncs to infrastructure you control.
 
-<a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22xyz.stignarnia.shelfly%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2Fstignarnia%2Fshelfly%22%2C%22author%22%3A%22stignarnia%22%2C%22name%22%3A%22Shelfly%22%2C%22preferredApkIndex%22%3A0%2C%22additionalSettings%22%3A%22%7B%5C%22includePrereleases%5C%22%3Afalse%2C%5C%22fallbackToOlderReleases%5C%22%3Atrue%2C%5C%22verifyLatestTag%5C%22%3Afalse%2C%5C%22autoApkFilterByArch%5C%22%3Atrue%2C%5C%22appName%5C%22%3A%5C%22Shelfly%5C%22%7D%22%7D"><img alt="Get it on Obtainium" height="48" src="https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png" /></a>
+<a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22xyz.stignarnia.shelfly%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2Fstignarnia%2Fshelfly%22%2C%22author%22%3A%22stignarnia%22%2C%22name%22%3A%22Shelfly%22%2C%22preferredApkIndex%22%3A0%2C%22additionalSettings%22%3A%22%7B%5C%22includePrereleases%5C%22%3Afalse%2C%5C%22fallbackToOlderReleases%5C%22%3Atrue%2C%5C%22verifyLatestTag%5C%22%3Afalse%2C%5C%22autoApkFilterByArch%5C%22%3Atrue%2C%5C%22appName%5C%22%3A%5C%22Shelfly%5C%22%7D%22%7D"><img alt="Get it on Obtainium" height="80" src="https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png" /></a>
 &nbsp;&nbsp;
 
 <br clear="left" />
@@ -14,6 +14,23 @@ Shelfly is a TV shows and movies tracker for Android that syncs to infrastructur
 > **Heads up:** this fork was built almost entirely by an AI coding agent, with a human directing it and reviewing the results. Read the code before you trust it with anything you care about, and keep your own backups.
 
 Shelfly is a fork of [Showly](https://github.com/trakt/showly) (a TV shows and movies tracker for Android) that syncs to infrastructure you control. Obtainium tracks this repository's GitHub releases and updates the app as new ones are published. You can also grab the APK straight from the [latest release](https://github.com/stignarnia/shelfly/releases/latest).
+
+## Screenshots
+
+<p align="center">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/01.png" width="19%" alt="Shelfly screenshot 1" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/02.png" width="19%" alt="Shelfly screenshot 2" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/03.png" width="19%" alt="Shelfly screenshot 3" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/04.png" width="19%" alt="Shelfly screenshot 4" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/05.png" width="19%" alt="Shelfly screenshot 5" />
+</p>
+<p align="center">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/06.png" width="19%" alt="Shelfly screenshot 6" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/07.png" width="19%" alt="Shelfly screenshot 7" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/08.png" width="19%" alt="Shelfly screenshot 8" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/09.png" width="19%" alt="Shelfly screenshot 9" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/10.png" width="19%" alt="Shelfly screenshot 10" />
+</p>
 
 ## Why this exists
 
