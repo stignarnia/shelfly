@@ -3,10 +3,6 @@ name: Deploy to Google Play
 on:
   workflow_dispatch:
     inputs:
-      upload_latest_release_bundle:
-        description: 'Upload latest release bundle (AAB)'
-        type: boolean
-        default: false
       track:
         description: 'Google Play track'
         type: choice
@@ -16,6 +12,10 @@ on:
           - 'internal'
           - 'beta'
           - 'production'
+      upload_latest_release_bundle:
+        description: 'Upload latest release bundle (AAB)'
+        type: boolean
+        default: false
       upload_images:
         description: 'Upload screenshots and icon'
         type: boolean
