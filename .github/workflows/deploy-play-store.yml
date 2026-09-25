@@ -1,10 +1,14 @@
-name: Play Store - Nuova Release
+name: Deploy to Google Play
 
 on:
   workflow_dispatch:
     inputs:
+      include_release_bundle:
+        description: 'Build and upload release bundle (AAB)'
+        type: boolean
+        default: false
       track:
-        description: 'Traccia Google Play'
+        description: 'Google Play track'
         type: choice
         default: 'alpha'
         options:
@@ -12,17 +16,18 @@ on:
           - 'internal'
           - 'beta'
           - 'production'
-      upload_metadata:
-        description: 'Aggiorna anche descrizioni e scheda store'
+      upload_images:
+        description: 'Upload screenshots and icon'
         type: boolean
         default: true
       validate_only:
-        description: 'Sola convalida (dry run senza pubblicare)'
+        description: 'Validate only (dry run without applying changes)'
         type: boolean
         default: false
 
 jobs:
-  deploy-release:
+  deploy:
+    name: Deploy to Google Play
     runs-on: ubuntu-latest
 
     steps:
@@ -30,15 +35,18 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up JDK 21
+        if: ${{ inputs.include_release_bundle }}
         uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
           java-version: '21'
 
       - name: Setup Gradle
+        if: ${{ inputs.include_release_bundle }}
         uses: gradle/actions/setup-gradle@v6
 
       - name: Configure Keystore
+        if: ${{ inputs.include_release_bundle }}
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -57,6 +65,7 @@ jobs:
           EOF
 
       - name: Build Release Bundle (AAB)
+        if: ${{ inputs.include_release_bundle }}
         run: ./gradlew :app:bundleRelease
 
       - name: Set up Ruby
@@ -67,7 +76,7 @@ jobs:
       - name: Install Fastlane
         run: gem install fastlane --no-document
 
-      - name: Deploy Release to Google Play
+      - name: Run Fastlane Supply
         env:
           PLAY_STORE_JSON_KEY: ${{ secrets.PLAY_STORE_JSON_KEY }}
         run: |
@@ -76,19 +85,23 @@ jobs:
             exit 1
           fi
 
-          aab_path="$(ls app/build/outputs/bundle/release/*.aab | head -n 1)"
-          if [ ! -f "$aab_path" ]; then
-            echo "::error::Release bundle not found."
-            exit 1
-          fi
-
           echo "$PLAY_STORE_JSON_KEY" > /tmp/play-store-key.json
           export SUPPLY_JSON_KEY=/tmp/play-store-key.json
 
-          fastlane android deploy_release \
-            aab:"$aab_path" \
+          AAB_ARG=""
+          if [ "${{ inputs.include_release_bundle }}" = "true" ]; then
+            AAB_PATH="$(ls app/build/outputs/bundle/release/*.aab | head -n 1)"
+            if [ ! -f "$AAB_PATH" ]; then
+              echo "::error::Release bundle not found."
+              exit 1
+            fi
+            AAB_ARG="aab:$AAB_PATH"
+          fi
+
+          fastlane android deploy \
             track:${{ inputs.track }} \
-            upload_metadata:${{ inputs.upload_metadata }} \
+            $AAB_ARG \
+            upload_images:${{ inputs.upload_images }} \
             validate_only:${{ inputs.validate_only }}
 
           rm -f /tmp/play-store-key.json

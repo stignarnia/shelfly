@@ -1,33 +1,24 @@
+opt_out_usage
+
 default_platform(:android)
 
 platform :android do
-  desc "Upload only metadata, changelogs, and store listings to Google Play"
-  lane :deploy_metadata do |options|
+  desc "Deploy metadata and optional release bundle to Google Play"
+  lane :deploy do |options|
+    target_track = options.fetch(:track, "alpha")
+    aab_file = options[:aab]
+    has_bundle = !aab_file.nil? && !aab_file.empty?
+
     supply(
       package_name: "xyz.stignarnia.shelfly",
       metadata_path: "fastlane/metadata/android",
       json_key: options[:json_key] || ENV["SUPPLY_JSON_KEY"],
+      aab: aab_file,
+      track: target_track,
       skip_upload_apk: true,
-      skip_upload_aab: true,
+      skip_upload_aab: !has_bundle,
       skip_upload_images: !options.fetch(:upload_images, true),
       skip_upload_screenshots: !options.fetch(:upload_images, true),
-      skip_upload_changelogs: false,
-      validate_only: options.fetch(:validate_only, false)
-    )
-  end
-
-  desc "Upload a release AAB and changelogs to Google Play"
-  lane :deploy_release do |options|
-    supply(
-      package_name: "xyz.stignarnia.shelfly",
-      metadata_path: "fastlane/metadata/android",
-      json_key: options[:json_key] || ENV["SUPPLY_JSON_KEY"],
-      aab: options[:aab],
-      track: options.fetch(:track, "alpha"),
-      skip_upload_apk: true,
-      skip_upload_metadata: !options.fetch(:upload_metadata, true),
-      skip_upload_images: !options.fetch(:upload_images, false),
-      skip_upload_screenshots: !options.fetch(:upload_images, false),
       skip_upload_changelogs: false,
       validate_only: options.fetch(:validate_only, false)
     )
