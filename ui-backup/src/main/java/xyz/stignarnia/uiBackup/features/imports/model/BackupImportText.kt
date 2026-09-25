@@ -2,14 +2,15 @@ package xyz.stignarnia.uiBackup.features.imports.model
 
 import android.content.Context
 import androidx.annotation.StringRes
-import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
-import com.squareup.moshi.ToJson
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import xyz.stignarnia.uiBackup.R
 import java.io.Serializable
+import java.lang.reflect.Type
 
 /**
  * A title or reason in the import report, kept as a message and its arguments rather than as finished text.
@@ -83,23 +84,29 @@ data class BackupImportText(
   /**
    * Reads a report saved before its text was stored this way, when every title and reason was a plain string.
    * Such a string is kept verbatim: the language it was written in is unknown, so there is nothing to translate it from.
+   *
+   * Implemented as [JsonAdapter.Factory] instead of reflective @FromJson/@ToJson methods so R8 minification
+   * cannot strip generic signatures at runtime.
    */
-  object LegacyAdapter {
-    @FromJson
-    fun fromJson(
-      reader: JsonReader,
-      delegate: JsonAdapter<BackupImportText>,
-    ): BackupImportText? =
-      when (reader.peek()) {
-        JsonReader.Token.STRING -> verbatim(reader.nextString())
-        else -> delegate.fromJson(reader)
-      }
+  object LegacyAdapter : JsonAdapter.Factory {
+    override fun create(
+      type: Type,
+      annotations: Set<Annotation>,
+      moshi: Moshi,
+    ): JsonAdapter<*>? {
+      if (Types.getRawType(type) != BackupImportText::class.java) return null
+      val delegate = moshi.nextAdapter<BackupImportText>(this, type, annotations)
+      return object : JsonAdapter<BackupImportText>() {
+        override fun fromJson(reader: JsonReader): BackupImportText? =
+          when (reader.peek()) {
+            JsonReader.Token.STRING -> verbatim(reader.nextString())
+            else -> delegate.fromJson(reader)
+          }
 
-    @ToJson
-    fun toJson(
-      writer: JsonWriter,
-      value: BackupImportText?,
-      delegate: JsonAdapter<BackupImportText>,
-    ) = delegate.toJson(writer, value)
+        override fun toJson(writer: JsonWriter, value: BackupImportText?) {
+          delegate.toJson(writer, value)
+        }
+      }
+    }
   }
 }

@@ -1,3 +1,1 @@
-Shelfly 4.0.11
-
 • Korjattu kaatuminen avattaessa tuontinäkymää Varmuuskopiointi ja palautus -kohdassa.

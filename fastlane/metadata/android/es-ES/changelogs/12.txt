@@ -1,3 +1,1 @@
-Shelfly 4.0.11
-
 • Se solucionó un cierre inesperado al abrir la pantalla de importación en Copia de seguridad y restauración.

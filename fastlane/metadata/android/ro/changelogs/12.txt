@@ -1,3 +1,1 @@
-Shelfly 4.0.11
-
 • S-a remediat o oprire neașteptată la deschiderea ecranului de import din Copiere de rezervă și restaurare.

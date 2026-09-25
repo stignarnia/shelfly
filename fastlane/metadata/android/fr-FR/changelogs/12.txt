@@ -1,3 +1,1 @@
-Shelfly 4.0.11
-
 • Correction d'un plantage lors de l'ouverture de l'écran d'importation dans Sauvegarde et restauration.
