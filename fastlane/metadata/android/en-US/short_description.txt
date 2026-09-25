@@ -1,1 +1,1 @@
-a TV Shows &amp; Movies tracker that backs up to your own WebDAV server
+A TV shows & movies tracker that backs up to your own WebDAV server
