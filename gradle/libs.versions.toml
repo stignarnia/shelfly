@@ -111,15 +111,15 @@ android-test-truth = { group = "androidx.test.ext", name = "truth", version.ref 
 
 [bundles]
 
-android-navigation = [\"android-navigation-fragment\", \"android-navigation-ui\"]
-android-lifecycle = [\"android-lifecycle-common\", \"android-lifecycle-runtime\", \"android-lifecycle-viewmodel\"]
-testing = [\"junit\", \"mockk\", \"truth\", \"coroutinesTest\", \"android-test-core\"]
+android-navigation = ["android-navigation-fragment", "android-navigation-ui"]
+android-lifecycle = ["android-lifecycle-common", "android-lifecycle-runtime", "android-lifecycle-viewmodel"]
+testing = ["junit", "mockk", "truth", "coroutinesTest", "android-test-core"]
 
 [plugins]
-android-application = { id = \"com.android.application\", version.ref = \"agp\" }
-android-library = { id = \"com.android.library\", version.ref = \"agp\" }
-android-room = { id = \"androidx.room\", version.ref = \"androidRoom\" }
-devtools-ksp = { id = \"com.google.devtools.ksp\", version.ref = \"devtools\" }
-hilt-android = { id = \"com.google.dagger.hilt.android\", version.ref = \"hilt\" }
-kotlin-android = { id = \"org.jetbrains.kotlin.android\", version.ref = \"kotlin\" }
-kotlin-parcelize = { id = \"org.jetbrains.kotlin.plugin.parcelize\", version.ref = \"kotlin\" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+android-room = { id = "androidx.room", version.ref = "androidRoom" }
+devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "devtools" }
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
