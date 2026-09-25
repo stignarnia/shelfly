@@ -18,18 +18,16 @@ Shelfly is a fork of [Showly](https://github.com/trakt/showly) (a TV shows and m
 ## Screenshots
 
 <p align="center">
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/01.png" width="19%" alt="Shelfly screenshot 1" />
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/02.png" width="19%" alt="Shelfly screenshot 2" />
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/03.png" width="19%" alt="Shelfly screenshot 3" />
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/04.png" width="19%" alt="Shelfly screenshot 4" />
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/05.png" width="19%" alt="Shelfly screenshot 5" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/01.png" width="24%" alt="Shelfly screenshot 1" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/02.png" width="24%" alt="Shelfly screenshot 2" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/03.png" width="24%" alt="Shelfly screenshot 3" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/04.png" width="24%" alt="Shelfly screenshot 4" />
 </p>
 <p align="center">
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/06.png" width="19%" alt="Shelfly screenshot 6" />
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/07.png" width="19%" alt="Shelfly screenshot 7" />
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/08.png" width="19%" alt="Shelfly screenshot 8" />
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/09.png" width="19%" alt="Shelfly screenshot 9" />
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/10.png" width="19%" alt="Shelfly screenshot 10" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/05.png" width="24%" alt="Shelfly screenshot 5" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/06.png" width="24%" alt="Shelfly screenshot 6" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/07.png" width="24%" alt="Shelfly screenshot 7" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/08.png" width="24%" alt="Shelfly screenshot 8" />
 </p>
 
 ## Why this exists
