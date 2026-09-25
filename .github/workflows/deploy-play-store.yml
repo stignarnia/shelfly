@@ -3,10 +3,10 @@ name: Deploy to Google Play
 on:
   workflow_dispatch:
     inputs:
-      include_release_bundle:
-        description: 'Build and upload release bundle (AAB)'
-        type: boolean
-        default: false
+      release_tag:
+        description: "GitHub Release tag for AAB (or 'none' for metadata-only)"
+        type: string
+        default: 'none'
       track:
         description: 'Google Play track'
         type: choice
@@ -34,39 +34,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Set up JDK 21
-        if: ${{ inputs.include_release_bundle }}
-        uses: actions/setup-java@v6
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-
-      - name: Setup Gradle
-        if: ${{ inputs.include_release_bundle }}
-        uses: gradle/actions/setup-gradle@v6
-
-      - name: Configure Keystore
-        if: ${{ inputs.include_release_bundle }}
+      - name: Download Release Bundle (AAB)
+        if: ${{ inputs.release_tag != '' && inputs.release_tag != 'none' }}
         env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [ -z "$KEYSTORE_BASE64" ]; then
-            echo "::error::KEYSTORE_BASE64 secret is not configured."
-            exit 1
+          mkdir -p /tmp/release-bundle
+          TAG="${{ inputs.release_tag }}"
+          if [ "$TAG" = "latest" ]; then
+            gh release download --repo ${{ github.repository }} --pattern "*.aab" --dir /tmp/release-bundle
+          else
+            gh release download "$TAG" --repo ${{ github.repository }} --pattern "*.aab" --dir /tmp/release-bundle
           fi
-          echo "$KEYSTORE_BASE64" | base64 -d > app/keystore
-          cat > app/keystore.properties <<EOF
-          storePassword=$STORE_PASSWORD
-          keyAlias=$KEY_ALIAS
-          keyPassword=$KEY_PASSWORD
-          EOF
-
-      - name: Build Release Bundle (AAB)
-        if: ${{ inputs.include_release_bundle }}
-        run: ./gradlew :app:bundleRelease
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -88,20 +67,22 @@ jobs:
           echo "$PLAY_STORE_JSON_KEY" > /tmp/play-store-key.json
           export SUPPLY_JSON_KEY=/tmp/play-store-key.json
 
+          VERSION_CODE="$(sed -n 's/^versionCode[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' gradle/libs.versions.toml | head -n 1)"
+
           AAB_ARG=""
-          if [ "${{ inputs.include_release_bundle }}" = "true" ]; then
-            AAB_PATH="$(ls app/build/outputs/bundle/release/*.aab | head -n 1)"
-            if [ ! -f "$AAB_PATH" ]; then
-              echo "::error::Release bundle not found."
-              exit 1
+          if [ -d "/tmp/release-bundle" ]; then
+            AAB_PATH="$(ls /tmp/release-bundle/*.aab 2>/dev/null | head -n 1 || true)"
+            if [ -n "$AAB_PATH" ] && [ -f "$AAB_PATH" ]; then
+              AAB_ARG="aab:$AAB_PATH"
             fi
-            AAB_ARG="aab:$AAB_PATH"
           fi
 
           fastlane android deploy \
             track:${{ inputs.track }} \
+            version_code:$VERSION_CODE \
             $AAB_ARG \
             upload_images:${{ inputs.upload_images }} \
             validate_only:${{ inputs.validate_only }}
 
           rm -f /tmp/play-store-key.json
+          rm -rf /tmp/release-bundle

@@ -8,12 +8,12 @@ platform :android do
     target_track = options.fetch(:track, "alpha")
     aab_file = options[:aab]
     has_bundle = !aab_file.nil? && !aab_file.empty?
+    version_code = options[:version_code]
 
-    supply(
+    supply_args = {
       package_name: "xyz.stignarnia.shelfly",
       metadata_path: "fastlane/metadata/android",
       json_key: options[:json_key] || ENV["SUPPLY_JSON_KEY"],
-      aab: aab_file,
       track: target_track,
       skip_upload_apk: true,
       skip_upload_aab: !has_bundle,
@@ -21,6 +21,11 @@ platform :android do
       skip_upload_screenshots: !options.fetch(:upload_images, true),
       skip_upload_changelogs: false,
       validate_only: options.fetch(:validate_only, false)
-    )
+    }
+
+    supply_args[:aab] = aab_file if has_bundle
+    supply_args[:version_code] = version_code.to_i if version_code && !version_code.empty?
+
+    supply(supply_args)
   end
 end
