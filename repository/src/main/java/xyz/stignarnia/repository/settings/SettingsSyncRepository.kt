@@ -25,6 +25,7 @@ class SettingsSyncRepository
   ) {
     companion object Key {
       private const val DEVICE_ID = "SYNC_DEVICE_ID"
+      private const val DEVICE_NAME = "SYNC_DEVICE_NAME"
       private const val LAST_SYNCED_AT = "SYNC_LAST_SYNCED_AT"
       private const val LAST_ATTEMPT_AT = "SYNC_LAST_ATTEMPT_AT"
       private const val LAST_ERROR = "SYNC_LAST_ERROR"
@@ -35,6 +36,24 @@ class SettingsSyncRepository
        * A device offline for longer than this may re-add items it never learned were deleted, which is the standard trade against tombstones accumulating forever.
        */
       const val TOMBSTONE_RETENTION_DAYS = 90L
+
+      fun defaultDeviceName(): String {
+        val manufacturer =
+          android.os.Build.MANUFACTURER
+            .orEmpty()
+            .trim()
+        val model =
+          android.os.Build.MODEL
+            .orEmpty()
+            .trim()
+        return when {
+          model.isBlank() && manufacturer.isBlank() -> "Android Device"
+          model.isBlank() -> manufacturer.replaceFirstChar { it.uppercase() }
+          manufacturer.isBlank() -> model
+          model.startsWith(manufacturer, ignoreCase = true) -> model
+          else -> "${manufacturer.replaceFirstChar { it.uppercase() }} $model"
+        }
+      }
     }
 
     /** Created on first read and stable for the life of the install. */
@@ -45,6 +64,29 @@ class SettingsSyncRepository
           .toString()
           .take(12)
           .also { generated -> preferences.edit { putString(DEVICE_ID, generated) } }
+
+    /**
+     * Friendly, human-readable name identifying this device to peers.
+     * Automatically populated from the Android device model if not explicitly set.
+     */
+    var deviceName: String
+      get() =
+        preferences
+          .getString(DEVICE_NAME, null)
+          ?.takeIf { it.isNotBlank() }
+          ?: defaultDeviceName().also { generated ->
+            preferences.edit { putString(DEVICE_NAME, generated) }
+          }
+      set(value) {
+        val trimmed = value.trim()
+        preferences.edit {
+          if (trimmed.isBlank()) {
+            remove(DEVICE_NAME)
+          } else {
+            putString(DEVICE_NAME, trimmed)
+          }
+        }
+      }
 
     /**
      * When a cycle last completed, upload included.

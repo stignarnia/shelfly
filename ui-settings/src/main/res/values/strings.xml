@@ -161,6 +161,26 @@
     <item quantity="other">%1$d most recent</item>
   </plurals>
   <string name="textSettingsBackupRetentionInvalid">Enter a whole number of 0 or more.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Device name</string>
+  <string name="textSettingsBackupDeviceNameDescription">Name used to identify this device when syncing.</string>
+  <string name="textSettingsBackupDeviceNameHint">Device name</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Enter a name for this device so other devices can recognize it.</string>
+  <string name="textSettingsBackupDeviceNameReset">Reset to default</string>
+  <string name="textSettingsBackupDeviceNameDisabled">Requires WebDAV</string>
+
+  <string name="textSettingsBackupDevicesTitle">Synced devices</string>
+  <string name="textSettingsBackupDevicesDescription">Manage devices syncing to this WebDAV server.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Synced devices</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Devices syncing with this server. Deleting a device removes its sync file from the server, but does not delete data from that device itself.</string>
+  <string name="textSettingsBackupDevicesEmpty">No synced devices found on this server.</string>
+  <string name="textSettingsBackupDevicesThisDevice">This device</string>
+  <string name="textSettingsBackupDevicesLastSynced">Last synced: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Never synced</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">Delete sync file?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">Delete the sync file for \"%1$s\" from the server?\n\nData is not deleted from that device itself.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">Delete this device\'s sync file from the server?\n\nData is not deleted from this device itself. It will re-upload on the next sync.</string>
+
   <string name="errorNotificationSettingsUnavailable">Couldn\'t open notification settings.</string>
   <string name="textVersionFormat" translatable="false">v%1$s (%2$d)</string>
 </resources>

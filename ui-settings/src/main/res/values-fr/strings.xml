@@ -129,5 +129,24 @@
   <string name="textSettingsWebDavTest">Tester la connexion</string>
   <string name="textSettingsWebDavTesting">Test en cours…</string>
   <string name="textSettingsWebDavConnected">Connecté. Le dossier est accessible et modifiable.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Nom de l\'appareil</string>
+  <string name="textSettingsBackupDeviceNameDescription">Nom utilisé pour identifier cet appareil lors de la synchronisation.</string>
+  <string name="textSettingsBackupDeviceNameHint">Nom de l\'appareil</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Entrez un nom pour cet appareil afin que les autres appareils puissent le reconnaître.</string>
+  <string name="textSettingsBackupDeviceNameReset">Rétablir par défaut</string>
+  <string name="textSettingsBackupDeviceNameDisabled">Nécessite WebDAV</string>
+  <string name="textSettingsBackupDevicesTitle">Appareils synchronisés</string>
+  <string name="textSettingsBackupDevicesDescription">Gérer les appareils synchronisés avec ce serveur WebDAV.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Appareils synchronisés</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Appareils synchronisés avec ce serveur. Supprimer un appareil efface son fichier de synchronisation du serveur, mais ne supprime pas les données de l\'appareil lui-même.</string>
+  <string name="textSettingsBackupDevicesEmpty">Aucun appareil synchronisé trouvé sur ce serveur.</string>
+  <string name="textSettingsBackupDevicesThisDevice">Cet appareil</string>
+  <string name="textSettingsBackupDevicesLastSynced">Dernière synchronisation : %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Jamais synchronisé</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">Supprimer le fichier de synchronisation ?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">Supprimer le fichier de synchronisation de \"%1$s\" du serveur ?\n\nLes données ne sont pas supprimées de l\'appareil lui-même.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">Supprimer le fichier de synchronisation de cet appareil du serveur ?\n\nLes données ne sont pas supprimées de cet appareil. Il sera téléversé à nouveau lors de la prochaine synchronisation.</string>
+
   <string name="errorNotificationSettingsUnavailable">Impossible d\'ouvrir les paramètres de notification.</string>
 </resources>

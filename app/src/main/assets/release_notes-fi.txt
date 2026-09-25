@@ -1,18 +1,3 @@
-Shelfly 4.0.9
+Shelfly 4.0.10
 
-• Korjattu tervetulonäkymän kielikuvake, joka näkyi mustana muotona.
-• WebDAV-palautus listaa nyt varmuuskopiot niiden luontipäivän mukaan valitsemassasi päivämäärämuodossa tiedostonimen sijaan.
-• Kun WebDAV-varmuuskopiointi tai -synkronointi keskeytyy esimerkiksi yhteyden katketessa, ilmoitus kertoo sen nyt selvästi sen sijaan, että näyttäisi "Job was cancelled".
-• Tekstit, jotka näkyivät englanniksi tai italiaksi kielestäsi riippumatta, on nyt käännetty: varmuuskopioinnin, synkronoinnin ja palautuksen virheet, tuonnin yhteenveto, Androidin asetusten ilmoitusluokat, maiden nimet, jakovalikko ja tämä uutuusnäkymä.
-• Kohteen poistaminen listalta pyyhkäisemällä vaatii nyt pidemmän, harkitun eleen: kohteen taakse ilmestyy punainen tausta ja roskakorikuvake, puhelin värisee, kun olet pyyhkäissyt tarpeeksi pitkälle, ja irrottaessa kohde poistetaan vain, jos et ole vetänyt takaisin. Nopea sipaisu ei enää poista mitään.
-• Kun kirjastosi on tyhjä ja WebDAV-palvelin on määritetty, Edistyminen-näkymässä on nyt Synkronoi-painike, joka palauttaa uusimman varmuuskopiosi yhdellä napautuksella.
-• Kun varmuuskopiota palautetaan tiedostosta tai WebDAVista, näkymä muistuttaa nyt, ettei sovelluksesta pidä poistua ennen kuin palautus on valmis.
-• WebDAV-palvelimen määrittäminen asettaa sen nyt myös varmuuskopioiden kohteeksi, joten synkronointi alas vetämällä toimii heti ilman kohteen vaihtamista käsin.
-• WebDAV-synkronoinnin ilmoituksen napauttaminen avaa nyt sovelluksen.
-• Edistyminen-näkymän vihjekuvake on nyt ensimmäisen sarjan jakson numeron päällä ja vierii sen mukana sen sijaan, että se leijuisi muualla näytöllä.
-• Aloitusnäytön widgetit käyttävät nyt kaikkialla sovellukselle valitsemaasi kieltä. Niiden otsikot, tyhjän listan viestit ja "lisää"-rivi näkyivät aiemmin puhelimen kielellä.
-• Kun valitset Shelflylle kielen Androidin asetuksissa, myös sarjojen ja elokuvien nimet ja kuvaukset vaihtuvat nyt, eivät vain valikot. Valitsemalla sieltä "Järjestelmän oletus" Shelfly seuraa puhelimen kieltä.
-• Kun vaihdat puhelimen kieleen tervetulonäytössä, myös sarjojen ja elokuvien nimet ja kuvaukset vaihtuvat nyt, ja widgetit päivittyvät heti jokaisen kielenvaihdon jälkeen.
-• Kielen vaihdon jälkeen widgetit hakevat nyt julisteensa ja käännetyt nimet itse. Aiemmin ne jäivät ilman julisteita tai vanhalle kielelle, kunnes avasit saman listan sovelluksessa.
-• Widgetien nimet aloitusnäytön widgetluettelossa on nyt käännetty. Aiemmin ne olivat englanniksi kielestäsi riippumatta.
-• Sarjojen ja elokuvien sivuilla ei enää lue "-1 min", kun kesto on tuntematon; se jätetään pois.
+• Lisätty laitenimet ja synkronoitujen laitteiden näkymä Asetukset → Varmuuskopiointi ja palautus -kohtaan WebDAV-palvelimeen synkronoivien laitteiden hallintaan ja hylättyjen laitteiden tiedostojen poistamiseen.

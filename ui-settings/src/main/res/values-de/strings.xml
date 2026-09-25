@@ -128,5 +128,24 @@
   <string name="textSettingsWebDavTest">Verbindung testen</string>
   <string name="textSettingsWebDavTesting">Wird getestet…</string>
   <string name="textSettingsWebDavConnected">Verbunden. Der Ordner ist erreichbar und beschreibbar.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Gerätename</string>
+  <string name="textSettingsBackupDeviceNameDescription">Name, der zur Identifizierung dieses Geräts bei der Synchronisierung verwendet wird.</string>
+  <string name="textSettingsBackupDeviceNameHint">Gerätename</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Gib einen Namen für dieses Gerät ein, damit andere Geräte es erkennen können.</string>
+  <string name="textSettingsBackupDeviceNameReset">Auf Standard zurücksetzen</string>
+  <string name="textSettingsBackupDeviceNameDisabled">Erfordert WebDAV</string>
+  <string name="textSettingsBackupDevicesTitle">Synchronisierte Geräte</string>
+  <string name="textSettingsBackupDevicesDescription">Geräte verwalten, die mit diesem WebDAV-Server synchronisiert werden.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Synchronisierte Geräte</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Geräte, die mit diesem Server synchronisieren. Das Löschen eines Geräts entfernt dessen Synchronisierungsdatei vom Server, löscht jedoch keine Daten auf dem Gerät selbst.</string>
+  <string name="textSettingsBackupDevicesEmpty">Keine synchronisierten Geräte auf diesem Server gefunden.</string>
+  <string name="textSettingsBackupDevicesThisDevice">Dieses Gerät</string>
+  <string name="textSettingsBackupDevicesLastSynced">Zuletzt synchronisiert: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Nie synchronisiert</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">Synchronisierungsdatei löschen?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">Synchronisierungsdatei für \"%1$s\" vom Server löschen?\n\nDaten auf dem Gerät selbst werden nicht gelöscht.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">Synchronisierungsdatei dieses Geräts vom Server löschen?\n\nDaten auf diesem Gerät werden nicht gelöscht. Sie wird bei der nächsten Synchronisierung erneut hochgeladen.</string>
+
   <string name="errorNotificationSettingsUnavailable">Benachrichtigungseinstellungen konnten nicht geöffnet werden.</string>
 </resources>

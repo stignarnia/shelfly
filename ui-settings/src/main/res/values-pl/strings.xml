@@ -130,5 +130,24 @@
   <string name="textSettingsWebDavTest">Testuj połączenie</string>
   <string name="textSettingsWebDavTesting">Testowanie…</string>
   <string name="textSettingsWebDavConnected">Połączono. Folder jest dostępny z prawem do zapisu.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Nazwa urządzenia</string>
+  <string name="textSettingsBackupDeviceNameDescription">Nazwa używana do identyfikacji tego urządzenia podczas synchronizacji.</string>
+  <string name="textSettingsBackupDeviceNameHint">Nazwa urządzenia</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Wprowadź nazwę dla tego urządzenia, aby inne urządzenia mogły je rozpoznać.</string>
+  <string name="textSettingsBackupDeviceNameReset">Przywróć domyślne</string>
+  <string name="textSettingsBackupDeviceNameDisabled">Wymaga WebDAV</string>
+  <string name="textSettingsBackupDevicesTitle">Zsynchronizowane urządzenia</string>
+  <string name="textSettingsBackupDevicesDescription">Zarządzaj urządzeniami synchronizującymi się z tym serwerem WebDAV.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Zsynchronizowane urządzenia</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Urządzenia synchronizujące się z tym serwerem. Usunięcie urządzenia usuwa jego plik synchronizacji z serwera, ale nie usuwa danych z samego urządzenia.</string>
+  <string name="textSettingsBackupDevicesEmpty">Brak zsynchronizowanych urządzeń na tym serwerze.</string>
+  <string name="textSettingsBackupDevicesThisDevice">To urządzenie</string>
+  <string name="textSettingsBackupDevicesLastSynced">Ostatnia synchronizacja: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Nigdy nie zsynchronizowano</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">Usunąć plik synchronizacji?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">Usunąć plik synchronizacji dla \"%1$s\" z serwera?\n\nDane nie zostaną usunięte z samego urządzenia.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">Usunąć plik synchronizacji tego urządzenia z serwera?\n\nDane nie zostaną usunięte z tego urządzenia. Zostanie on ponownie przesłany przy następnej synchronizacji.</string>
+
   <string name="errorNotificationSettingsUnavailable">Nie można otworzyć ustawień powiadomień.</string>
 </resources>

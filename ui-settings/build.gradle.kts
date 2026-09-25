@@ -60,5 +60,8 @@ dependencies {
 
   api(libs.phoenix)
 
+  testImplementation(project(":common-test"))
+  testImplementation(libs.bundles.testing)
+
   coreLibraryDesugaring(libs.android.desugar)
 }

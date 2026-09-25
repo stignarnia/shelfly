@@ -128,5 +128,24 @@
   <string name="textSettingsWebDavTest">Testaa yhteys</string>
   <string name="textSettingsWebDavTesting">Testataan…</string>
   <string name="textSettingsWebDavConnected">Yhdistetty. Kansio on tavoitettavissa ja kirjoitettavissa.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Laitteen nimi</string>
+  <string name="textSettingsBackupDeviceNameDescription">Nimi, jota käytetään tämän laitteen tunnistamiseen synkronoitaessa.</string>
+  <string name="textSettingsBackupDeviceNameHint">Laitteen nimi</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Anna tälle laitteelle nimi, jotta muut laitteet voivat tunnistaa sen.</string>
+  <string name="textSettingsBackupDeviceNameReset">Palauta oletusarvo</string>
+  <string name="textSettingsBackupDeviceNameDisabled">Vaatii WebDAV:n</string>
+  <string name="textSettingsBackupDevicesTitle">Synkronoidut laitteet</string>
+  <string name="textSettingsBackupDevicesDescription">Hallinnoi tähän WebDAV-palvelimeen synkronoivia laitteita.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Synkronoidut laitteet</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Tähän palvelimeen synkronoivat laitteet. Laitteen poistaminen poistaa sen synkronointitiedoston palvelimelta, mutta ei poista tietoja itse laitteelta.</string>
+  <string name="textSettingsBackupDevicesEmpty">Tältä palvelimelta ei löytynyt synkronoituja laitteita.</string>
+  <string name="textSettingsBackupDevicesThisDevice">Tämä laite</string>
+  <string name="textSettingsBackupDevicesLastSynced">Viimeksi synkronoitu: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Ei koskaan synkronoitu</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">Poistetaanko synkronointitiedosto?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">Poistetaanko laitteen \"%1$s\" synkronointitiedosto palvelimelta?\n\nTietoja ei poisteta itse laitteelta.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">Poistetaanko tämän laitteen synkronointitiedosto palvelimelta?\n\nTietoja ei poisteta tältä laitteelta. Se lähetetään uudelleen seuraavassa synkronoinnissa.</string>
+
   <string name="errorNotificationSettingsUnavailable">Ilmoitusasetuksia ei voitu avata.</string>
 </resources>

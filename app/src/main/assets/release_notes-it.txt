@@ -1,18 +1,3 @@
-Shelfly 4.0.9
+Shelfly 4.0.10
 
-• Corretta l'icona della lingua nella schermata di benvenuto, che appariva come una forma nera.
-• Il ripristino da WebDAV ora elenca i backup in base alla data in cui sono stati creati, nel formato data che hai scelto, invece che per nome del file.
-• Quando un backup o una sincronizzazione WebDAV vengono interrotti, ad esempio perché cade la connessione, la notifica ora lo dice chiaramente invece di mostrare "Job was cancelled".
-• I testi che comparivano in inglese o in italiano qualunque fosse la tua lingua ora sono tradotti: errori di backup, sincronizzazione e ripristino, il riepilogo dell'importazione, le categorie di notifica nelle impostazioni di Android, i nomi dei paesi, il menu di condivisione e questa schermata delle novità.
-• Per rimuovere un elemento da una lista con uno scorrimento ora serve un gesto più lungo e deliberato: dietro l'elemento compare uno sfondo rosso con l'icona di un cestino, il telefono vibra quando sei andato abbastanza lontano e, al rilascio, l'elemento viene rimosso solo se non sei tornato indietro. Uno scorrimento rapido non rimuove più nulla.
-• Quando la libreria è vuota e hai configurato un server WebDAV, la schermata Progressi mostra un pulsante Sincronizza che ripristina il backup più recente con un tocco.
-• Durante il ripristino di un backup, da file o da WebDAV, la schermata ora ti ricorda di non uscire dall'app finché non è terminato.
-• Configurare un server WebDAV ora lo imposta anche come destinazione dei backup, così trascina per sincronizzare funziona subito senza dover cambiare la destinazione a mano.
-• Toccare la notifica di sincronizzazione WebDAV ora apre l'app.
-• L'icona del suggerimento nella schermata Progressi ora si trova sul numero dell'episodio del primo show e scorre insieme a esso, invece di fluttuare altrove sullo schermo.
-• I widget della schermata Home ora usano ovunque la lingua scelta per l'app. Titoli, messaggi vuoti e la riga "altro" prima comparivano nella lingua del telefono.
-• Scegliere una lingua per Shelfly nelle impostazioni di Android ora cambia anche titoli e descrizioni di serie e film, non solo i menu. Scegliere "Predefinita di sistema" fa seguire a Shelfly la lingua del telefono.
-• Passare alla lingua del telefono dalla schermata di benvenuto ora cambia anche titoli e descrizioni di serie e film, e i widget si aggiornano subito dopo ogni cambio di lingua.
-• Dopo un cambio di lingua, i widget ora scaricano da soli copertine e titoli tradotti. Prima restavano senza copertine, o nella lingua precedente, finché non aprivi lo stesso elenco nell'app.
-• I nomi dei widget nell'elenco dei widget della schermata Home ora sono tradotti. Prima erano in inglese qualunque fosse la lingua.
-• Le pagine di serie e film non mostrano più "-1 min" quando la durata è sconosciuta: ora viene omessa.
+• Aggiunti il nome dispositivo e una schermata per i dispositivi sincronizzati in Impostazioni → Backup & Ripristino per gestire i dispositivi sincronizzati con il server WebDAV e rimuovere i file dei dispositivi abbandonati.

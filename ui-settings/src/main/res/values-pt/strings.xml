@@ -129,5 +129,24 @@
   <string name="textSettingsWebDavTest">Testar ligação</string>
   <string name="textSettingsWebDavTesting">A testar…</string>
   <string name="textSettingsWebDavConnected">Ligado. A pasta está acessível e com permissão de escrita.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Nome do dispositivo</string>
+  <string name="textSettingsBackupDeviceNameDescription">Nome usado para identificar este dispositivo ao sincronizar.</string>
+  <string name="textSettingsBackupDeviceNameHint">Nome do dispositivo</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Insira um nome para este dispositivo para que outros dispositivos possam reconhecê-lo.</string>
+  <string name="textSettingsBackupDeviceNameReset">Restaurar padrão</string>
+  <string name="textSettingsBackupDeviceNameDisabled">Requer WebDAV</string>
+  <string name="textSettingsBackupDevicesTitle">Dispositivos sincronizados</string>
+  <string name="textSettingsBackupDevicesDescription">Gerenciar dispositivos sincronizados com este servidor WebDAV.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Dispositivos sincronizados</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Dispositivos que sincronizam com este servidor. Excluir um dispositivo remove seu arquivo de sincronização do servidor, mas não exclui os dados do próprio dispositivo.</string>
+  <string name="textSettingsBackupDevicesEmpty">Nenhum dispositivo sincronizado encontrado neste servidor.</string>
+  <string name="textSettingsBackupDevicesThisDevice">Este dispositivo</string>
+  <string name="textSettingsBackupDevicesLastSynced">Última sincronização: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Nunca sincronizado</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">Excluir arquivo de sincronização?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">Excluir o arquivo de sincronização de \"%1$s\" do servidor?\n\nOs dados não serão excluídos do próprio dispositivo.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">Excluir o arquivo de sincronização deste dispositivo do servidor?\n\nOs dados não serão excluídos deste dispositivo. Ele será enviado novamente na próxima sincronização.</string>
+
   <string name="errorNotificationSettingsUnavailable">Não foi possível abrir as definições de notificações.</string>
 </resources>

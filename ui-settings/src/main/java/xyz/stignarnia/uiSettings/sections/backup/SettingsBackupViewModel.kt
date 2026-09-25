@@ -9,8 +9,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import xyz.stignarnia.dataWebdav.WebDavClient
 import xyz.stignarnia.dataWebdav.WebDavCredentials
+import xyz.stignarnia.repository.settings.SettingsSyncRepository
 import xyz.stignarnia.repository.settings.SettingsWebDavRepository
 import xyz.stignarnia.uiBackup.BackupFailure
+import xyz.stignarnia.uiBackup.features.sync.SyncDevicesUseCase
 import xyz.stignarnia.uiModel.BackupTarget
 import javax.inject.Inject
 
@@ -20,19 +22,31 @@ class SettingsBackupViewModel
   constructor(
     private val webDavRepository: SettingsWebDavRepository,
     private val webDavClient: WebDavClient,
+    private val syncRepository: SettingsSyncRepository,
+    private val syncDevicesUseCase: SyncDevicesUseCase,
   ) : ViewModel() {
     private val state = MutableStateFlow(SettingsBackupUiState())
     val uiState = state.asStateFlow()
 
     fun refresh() {
-      state.value =
-        SettingsBackupUiState(
+      state.update { current ->
+        current.copy(
           webDavUrl = webDavRepository.url,
           webDavUsername = webDavRepository.username,
           hasWebDavPassword = webDavRepository.password.isNotBlank(),
           backupTarget = webDavRepository.backupTarget,
           backupRetention = webDavRepository.backupRetention,
+          deviceName = syncRepository.deviceName,
         )
+      }
+    }
+
+    /**
+     * Updates the human-readable name identifying this device to peers.
+     */
+    fun setDeviceName(name: String) {
+      syncRepository.deviceName = name
+      refresh()
     }
 
     /**
@@ -102,5 +116,47 @@ class SettingsBackupViewModel
 
     fun clearConnectionTest() {
       state.update { it.copy(connectionTest = ConnectionTest.Idle) }
+    }
+
+    private fun webDavCredentials(): WebDavCredentials? {
+      val url = webDavRepository.url.trim()
+      if (url.isBlank()) return null
+      return WebDavCredentials(
+        url = url,
+        username = webDavRepository.username.trim(),
+        password = webDavRepository.password,
+      )
+    }
+
+    fun loadDevices() {
+      val credentials = webDavCredentials() ?: return
+      viewModelScope.launch {
+        state.update { it.copy(devicesLoadState = DevicesLoadState.Loading) }
+        val result = syncDevicesUseCase.listDevices(credentials)
+        state.update {
+          it.copy(
+            devicesLoadState =
+              result.fold(
+                onSuccess = { list -> DevicesLoadState.Loaded(list) },
+                onFailure = { error -> DevicesLoadState.Error(BackupFailure.of(error).messageRes) },
+              ),
+          )
+        }
+      }
+    }
+
+    fun deleteDevice(
+      deviceId: String,
+      onComplete: (Boolean) -> Unit = {},
+    ) {
+      val credentials = webDavCredentials() ?: return
+      viewModelScope.launch {
+        val result = syncDevicesUseCase.deleteDevice(credentials, deviceId)
+        val success = result.isSuccess
+        if (success) {
+          loadDevices()
+        }
+        onComplete(success)
+      }
     }
   }

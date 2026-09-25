@@ -130,5 +130,24 @@
   <string name="textSettingsWebDavTest">Перевірити підключення</string>
   <string name="textSettingsWebDavTesting">Перевірка…</string>
   <string name="textSettingsWebDavConnected">Підключено. Папка доступна для запису.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Назва пристрою</string>
+  <string name="textSettingsBackupDeviceNameDescription">Назва для ідентифікації цього пристрою під час синхронізації.</string>
+  <string name="textSettingsBackupDeviceNameHint">Назва пристрою</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Введіть назву для цього пристрою, щоб інші пристрої могли його розпізнати.</string>
+  <string name="textSettingsBackupDeviceNameReset">Скинути до стандартних</string>
+  <string name="textSettingsBackupDeviceNameDisabled">Потрібен WebDAV</string>
+  <string name="textSettingsBackupDevicesTitle">Синхронізовані пристрої</string>
+  <string name="textSettingsBackupDevicesDescription">Керування пристроями, що синхронізуються з цим сервером WebDAV.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Синхронізовані пристрої</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Пристрої, які синхронізуються з цим сервером. Видалення пристрою видаляє його файл синхронізації із сервера, але не видаляє дані з самого пристрою.</string>
+  <string name="textSettingsBackupDevicesEmpty">На цьому сервері не знайдено синхронізованих пристроїв.</string>
+  <string name="textSettingsBackupDevicesThisDevice">Цей пристрій</string>
+  <string name="textSettingsBackupDevicesLastSynced">Остання синхронізація: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Ніколи не синхронізувався</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">Видалити файл синхронізації?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">Видалити файл синхронізації для \"%1$s\" із сервера?\n\nДані не буде видалено з самого пристрою.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">Видалити файл синхронізації цього пристрою із сервера?\n\nДані не буде видалено з цього пристрою. Його буде знову завантажено під час наступної синхронізації.</string>
+
   <string name="errorNotificationSettingsUnavailable">Не вдалося відкрити налаштування сповіщень.</string>
 </resources>

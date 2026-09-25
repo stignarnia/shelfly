@@ -1,18 +1,3 @@
-Shelfly 4.0.9
+Shelfly 4.0.10
 
-• Karşılama ekranındaki dil simgesinin siyah bir şekil olarak görünmesi düzeltildi.
-• WebDAV'dan geri yükleme artık yedekleri dosya adına göre değil, oluşturuldukları tarihe göre ve seçtiğiniz tarih biçiminde listeliyor.
-• Bir WebDAV yedeklemesi veya senkronizasyonu kesintiye uğradığında, örneğin bağlantı koptuğu için, bildirim artık "Job was cancelled" göstermek yerine bunu açıkça belirtiyor.
-• Dilinizden bağımsız olarak İngilizce veya İtalyanca görünen metinler artık çevrildi: yedekleme, senkronizasyon ve geri yükleme hataları, içe aktarma özeti, Android ayarlarındaki bildirim kategorileri, ülke adları, paylaşım menüsü ve bu yenilikler ekranı.
-• Bir öğeyi listeden kaydırarak kaldırmak artık daha uzun ve bilinçli bir hareket gerektiriyor: öğenin arkasında çöp kutusu simgeli kırmızı bir arka plan belirir, yeterince kaydırdığınızda telefon titrer ve bıraktığınızda öğe yalnızca geri çekmediyseniz kaldırılır. Hızlı bir kaydırma artık hiçbir şeyi kaldırmaz.
-• Kitaplığınız boşken ve bir WebDAV sunucusu ayarlanmışsa, İlerleme ekranı artık en son yedeğinizi tek dokunuşla geri yükleyen bir Senkronize et düğmesi gösteriyor.
-• Bir yedek geri yüklenirken, dosyadan veya WebDAV üzerinden, ekran artık işlem bitene kadar uygulamadan çıkmamanızı hatırlatıyor.
-• Bir WebDAV sunucusu ayarlamak artık onu yedekleme hedefi de yapıyor; böylece aşağı çekerek senkronizasyon, hedefi elle değiştirmeden hemen çalışıyor.
-• WebDAV senkronizasyon bildirimine dokunmak artık uygulamayı açıyor.
-• İlerleme ekranındaki ipucu simgesi artık ilk dizinin bölüm numarasının üzerinde duruyor ve onunla birlikte kayıyor; ekranın başka bir yerinde süzülmüyor.
-• Ana ekran widget'ları artık her yerde uygulama için seçtiğiniz dili kullanıyor. Başlıkları, boş liste mesajları ve "daha fazla" satırı daha önce telefonun dilinde görünüyordu.
-• Android ayarlarında Shelfly için bir dil seçmek artık yalnızca menüleri değil, dizi ve film adlarını ve açıklamalarını da değiştiriyor. Orada "Sistem varsayılanı"nı seçmek Shelfly'ın telefonunuzun dilini izlemesini sağlar.
-• Karşılama ekranından telefonunuzun diline geçmek artık dizi ve film adlarını ve açıklamalarını da değiştiriyor; widget'lar da her dil değişikliğinden hemen sonra güncelleniyor.
-• Dil değiştirdikten sonra widget'lar artık afişlerini ve çevrilmiş başlıklarını kendileri indiriyor. Daha önce, aynı listeyi uygulamada açana kadar afişsiz ya da eski dilde kalıyorlardı.
-• Ana ekranın widget listesindeki widget adları artık çevrildi. Daha önce diliniz ne olursa olsun İngilizceydiler.
-• Dizi ve film sayfaları süre bilinmediğinde artık "-1 dk" göstermiyor; bunun yerine süre gösterilmiyor.
+• WebDAV sunucusuyla senkronize olan cihazları yönetmek ve kullanılmayan cihaz dosyalarını silmek için Ayarlar → Yedekleme ve Geri Yükleme altına cihaz adları ve senkronize edilen cihazlar ekranı eklendi.

@@ -1,18 +1,3 @@
-Shelfly 4.0.9
+Shelfly 4.0.10
 
-• Sprogikonet på velkomstskærmen, der blev vist som en sort form, er rettet.
-• Gendannelse fra WebDAV viser nu sikkerhedskopier efter den dato, de blev lavet, i dit valgte datoformat, i stedet for efter filnavn.
-• Når en WebDAV-sikkerhedskopi eller -synkronisering afbrydes, for eksempel fordi forbindelsen falder ud, siger notifikationen det nu tydeligt i stedet for at vise "Job was cancelled".
-• Tekst, der blev vist på engelsk eller italiensk uanset dit sprog, er nu oversat: fejl ved sikkerhedskopiering, synkronisering og gendannelse, importoversigten, notifikationskategorierne i Android-indstillingerne, landenavne, delingsmenuen og denne skærm med nyheder.
-• Det kræver nu et længere, bevidst stryg at fjerne et element fra en liste: en rød baggrund med et skraldespandsikon vises bag elementet, telefonen vibrerer, når du har strøget langt nok, og når du slipper, fjernes elementet kun, hvis du ikke har trukket tilbage. Et hurtigt svirp fjerner ikke længere noget.
-• Når dit bibliotek er tomt, og en WebDAV-server er sat op, viser skærmen Fremskridt nu en Synkroniser-knap, der gendanner din seneste sikkerhedskopi med ét tryk.
-• Mens en sikkerhedskopi gendannes, fra en fil eller fra WebDAV, minder skærmen dig nu om ikke at forlade appen, før den er færdig.
-• Når du sætter en WebDAV-server op, bliver den nu også destination for sikkerhedskopier, så træk for at synkronisere virker med det samme uden at ændre destinationen manuelt.
-• Et tryk på WebDAV-synkroniseringsnotifikationen åbner nu appen.
-• Tip-ikonet på skærmen Fremskridt sidder nu på afsnitsnummeret for det første program og ruller med det i stedet for at svæve et andet sted på skærmen.
-• Widgets på startskærmen bruger nu det sprog, du har valgt til appen, overalt. Deres titler, tomme beskeder og rækken "mere" blev før vist på telefonens sprog.
-• Når du vælger et sprog til Shelfly i Androids indstillinger, skifter titler og beskrivelser af serier og film nu også, ikke kun menuerne. Vælger du "Systemstandard" dér, følger Shelfly telefonens sprog.
-• Skifter du til telefonens sprog fra velkomstskærmen, skifter titler og beskrivelser af serier og film nu også, og widgets opdateres med det samme efter enhver sprogændring.
-• Når du skifter sprog, henter widgets nu selv deres plakater og oversatte titler. Før var de uden plakater eller på det gamle sprog, indtil du åbnede den samme liste i appen.
-• Navnene på widgets i startskærmens widgetliste er nu oversat. Før var de på engelsk uanset dit sprog.
-• Sider for serier og film viser ikke længere "-1 min", når spilletiden er ukendt; den udelades i stedet.
+• Tilføjet enhedsnavne og en skærm for synkroniserede enheder under Indstillinger → Sikkerhedskopiering og gendannelse til at administrere enheder, der synkroniserer med WebDAV-serveren, og fjerne filer fra forladte enheder.

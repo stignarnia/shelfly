@@ -1,18 +1,3 @@
-Shelfly 4.0.9
+Shelfly 4.0.10
 
-• Fixed the language icon on the welcome screen showing as a black shape.
-• Restoring from WebDAV now lists backups by the date they were made, in your chosen date format, instead of by file name.
-• When a WebDAV backup or sync is interrupted, for example because the connection drops, the notification now says so clearly instead of showing "Job was cancelled".
-• Text that used to appear in English or Italian whatever your language is now translated: backup, sync and restore errors, the import summary, notification categories in Android settings, country names, the share menu and this What's New screen.
-• Removing an item from a list by swiping now takes a longer, deliberate swipe: a red background with a bin icon shows behind the item, and the phone vibrates once you are far enough, and letting go only removes the item if you have not pulled back. A quick flick no longer removes anything.
-• When your library is empty and a WebDAV server is set up, the Progress screen now shows a Sync button that restores your latest backup in one tap.
-• While a backup is being restored, from a file or from WebDAV, the screen now reminds you not to leave the app until it has finished.
-• Setting up a WebDAV server now also makes it the backup destination, so pull to sync works straight away without changing the backup target by hand.
-• Tapping the WebDAV sync notification now opens the app.
-• The tip icon on the Progress screen now sits on the first show's episode number and scrolls with it, instead of floating somewhere else on the screen.
-• Home screen widgets now use the language you chose for the app everywhere. Their titles, empty messages and the "more" row used to appear in the phone's language instead.
-• Picking a language for Shelfly in Android's settings now switches show and movie titles and descriptions too, not just the menus. Picking "System default" there makes Shelfly follow your phone's language.
-• Switching to your phone's language from the welcome screen now switches show and movie titles and descriptions too, and widgets update right away after any language change.
-• After you change language, widgets now fetch their posters and translated titles themselves. They used to stay without posters, or in the old language, until you opened the same list in the app.
-• Widget names in your home screen's widget list are now translated. They used to be in English whatever your language.
-• Show and movie pages no longer say "-1 min" when the runtime is unknown; it is left out instead.
+• Added device names and a synced devices screen under Settings → Backup & Restore to manage devices syncing to your WebDAV server and remove abandoned device files.

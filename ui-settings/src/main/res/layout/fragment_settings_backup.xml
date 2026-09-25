@@ -215,4 +215,79 @@
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/settingsBackupDeviceName"
+    style="@style/Settings.ItemLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/settingsBackupRetention"
+  >
+
+    <TextView
+      android:id="@+id/settingsBackupDeviceNameTitle"
+      style="@style/Settings.Title"
+      android:text="@string/textSettingsBackupDeviceNameTitle"
+      app:layout_constraintBottom_toTopOf="@id/settingsBackupDeviceNameDescription"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+    />
+
+    <TextView
+      android:id="@+id/settingsBackupDeviceNameDescription"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceSmall"
+      android:text="@string/textSettingsBackupDeviceNameDescription"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toTopOf="@id/settingsBackupDeviceNameValue"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsBackupDeviceNameTitle"
+    />
+
+    <TextView
+      android:id="@+id/settingsBackupDeviceNameValue"
+      style="@style/Settings.Summary"
+      android:textColor="?android:attr/textColorPrimary"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsBackupDeviceNameDescription"
+      tools:text="Pixel 8"
+    />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/settingsBackupDevices"
+    style="@style/Settings.ItemLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/settingsBackupDeviceName"
+  >
+
+    <TextView
+      android:id="@+id/settingsBackupDevicesTitle"
+      style="@style/Settings.Title"
+      android:text="@string/textSettingsBackupDevicesTitle"
+      app:layout_constraintBottom_toTopOf="@id/settingsBackupDevicesDescription"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+    />
+
+    <TextView
+      android:id="@+id/settingsBackupDevicesDescription"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceSmall"
+      android:text="@string/textSettingsBackupDevicesDescription"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsBackupDevicesTitle"
+    />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -127,5 +127,24 @@
   <string name="textSettingsWebDavTest">测试连接</string>
   <string name="textSettingsWebDavTesting">正在测试…</string>
   <string name="textSettingsWebDavConnected">已连接。该文件夹可访问且可写入。</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">设备名称</string>
+  <string name="textSettingsBackupDeviceNameDescription">同步时用于识别此设备的名称。</string>
+  <string name="textSettingsBackupDeviceNameHint">设备名称</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">为此设备输入一个名称，以便其他设备可以识别它。</string>
+  <string name="textSettingsBackupDeviceNameReset">恢复默认</string>
+  <string name="textSettingsBackupDeviceNameDisabled">需要 WebDAV</string>
+  <string name="textSettingsBackupDevicesTitle">已同步设备</string>
+  <string name="textSettingsBackupDevicesDescription">管理同步到此 WebDAV 服务器的设备。</string>
+  <string name="textSettingsBackupDevicesDialogTitle">已同步设备</string>
+  <string name="textSettingsBackupDevicesDialogMessage">与此服务器同步的设备。删除设备会从服务器中移除其同步文件，但不会删除该设备本身的数据。</string>
+  <string name="textSettingsBackupDevicesEmpty">在此服务器上未找到已同步的设备。</string>
+  <string name="textSettingsBackupDevicesThisDevice">此设备</string>
+  <string name="textSettingsBackupDevicesLastSynced">上次同步：%1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">从未同步</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">删除同步文件？</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">从服务器删除“%1$s”的同步文件？\n\n不会删除该设备本身的数据。</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">从服务器删除此设备的同步文件？\n\n不会删除此设备本身的数据。下次同步时将重新上传。</string>
+
   <string name="errorNotificationSettingsUnavailable">无法打开通知设置。</string>
 </resources>

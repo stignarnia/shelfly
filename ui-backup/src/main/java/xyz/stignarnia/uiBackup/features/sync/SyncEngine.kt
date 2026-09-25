@@ -103,7 +103,7 @@ class SyncEngine
 
       // Publish what this device actually ended up with, not what the merge asked for.
       // The import can legitimately fall short - a show whose details will not fetch is skipped - and this file is the baseline the next cycle diffs against.
-      // Publishing the intent instead would make the next diff read those gaps as deletions and propagate them to every other device.
+      // Publishing the intent would make the next diff read those gaps as deletions and propagate them to every other device.
       val applied = exportWorker.run()
       val syncedAt = nowUtcMillis()
 
@@ -113,6 +113,7 @@ class SyncEngine
           payload =
             SyncPayload(
               deviceId = deviceId,
+              deviceName = settingsSyncRepository.deviceName,
               updatedAt = syncedAt,
               state = applied,
               tombstones = merged.tombstones,

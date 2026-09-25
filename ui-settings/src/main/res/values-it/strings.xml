@@ -129,5 +129,24 @@
   <string name="textSettingsWebDavTest">Testa connessione</string>
   <string name="textSettingsWebDavTesting">Test in corso…</string>
   <string name="textSettingsWebDavConnected">Connesso. La cartella è raggiungibile e scrivibile.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Nome dispositivo</string>
+  <string name="textSettingsBackupDeviceNameDescription">Nome utilizzato per identificare questo dispositivo durante la sincronizzazione.</string>
+  <string name="textSettingsBackupDeviceNameHint">Nome dispositivo</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Inserisci un nome per questo dispositivo in modo che gli altri dispositivi possano riconoscerlo.</string>
+  <string name="textSettingsBackupDeviceNameReset">Ripristina predefinito</string>
+  <string name="textSettingsBackupDeviceNameDisabled">Richiede WebDAV</string>
+  <string name="textSettingsBackupDevicesTitle">Dispositivi sincronizzati</string>
+  <string name="textSettingsBackupDevicesDescription">Gestisci i dispositivi sincronizzati con questo server WebDAV.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Dispositivi sincronizzati</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Dispositivi che si sincronizzano con questo server. Eliminando un dispositivo si rimuove il suo file di sincronizzazione dal server, ma non vengono eliminati i dati dal dispositivo stesso.</string>
+  <string name="textSettingsBackupDevicesEmpty">Nessun dispositivo sincronizzato trovato su questo server.</string>
+  <string name="textSettingsBackupDevicesThisDevice">Questo dispositivo</string>
+  <string name="textSettingsBackupDevicesLastSynced">Ultima sincronizzazione: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Mai sincronizzato</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">Eliminare file di sincronizzazione?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">Eliminare il file di sincronizzazione di \"%1$s\" dal server?\n\nI dati non verranno eliminati dal dispositivo stesso.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">Eliminare il file di sincronizzazione di questo dispositivo dal server?\n\nI dati non verranno eliminati da questo dispositivo. Verranno caricati nuovamente alla prossima sincronizzazione.</string>
+
   <string name="errorNotificationSettingsUnavailable">Impossibile aprire le impostazioni delle notifiche.</string>
 </resources>

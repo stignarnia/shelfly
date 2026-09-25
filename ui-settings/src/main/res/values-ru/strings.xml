@@ -130,5 +130,24 @@
   <string name="textSettingsWebDavTest">Проверить подключение</string>
   <string name="textSettingsWebDavTesting">Проверка…</string>
   <string name="textSettingsWebDavConnected">Подключено. Папка доступна для записи.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Имя устройства</string>
+  <string name="textSettingsBackupDeviceNameDescription">Имя, используемое для идентификации этого устройства при синхронизации.</string>
+  <string name="textSettingsBackupDeviceNameHint">Имя устройства</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Введите имя этого устройства, чтобы другие устройства могли его распознать.</string>
+  <string name="textSettingsBackupDeviceNameReset">Сбросить по умолчанию</string>
+  <string name="textSettingsBackupDeviceNameDisabled">Требуется WebDAV</string>
+  <string name="textSettingsBackupDevicesTitle">Синхронизированные устройства</string>
+  <string name="textSettingsBackupDevicesDescription">Управление устройствами, синхронизируемыми с этим сервером WebDAV.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Синхронизированные устройства</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Устройства, синхронизируемые с этим сервером. Удаление устройства удаляет его файл синхронизации с сервера, но не удаляет данные с самого устройства.</string>
+  <string name="textSettingsBackupDevicesEmpty">На этом сервере нет синхронизированных устройств.</string>
+  <string name="textSettingsBackupDevicesThisDevice">Это устройство</string>
+  <string name="textSettingsBackupDevicesLastSynced">Последняя синхронизация: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Никогда не синхронизировалось</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">Удалить файл синхронизации?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">Удалить файл синхронизации для \"%1$s\" с сервера?\n\nДанные с самого устройства удалены не будут.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">Удалить файл синхронизации этого устройства с сервера?\n\nДанные с этого устройства удалены не будут. Он будет повторно загружен при следующей синхронизации.</string>
+
   <string name="errorNotificationSettingsUnavailable">Не удалось открыть настройки уведомлений.</string>
 </resources>

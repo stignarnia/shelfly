@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingStart="@dimen/spaceNormal"
+  android:paddingTop="@dimen/spaceSmall"
+  android:paddingEnd="@dimen/spaceNormal"
+  android:paddingBottom="@dimen/spaceSmall"
+>
+
+  <ImageView
+    android:id="@+id/itemDeviceIcon"
+    android:layout_width="24dp"
+    android:layout_height="24dp"
+    android:importantForAccessibility="no"
+    android:src="@drawable/ic_phone"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:tint="?android:attr/textColorPrimary"
+  />
+
+  <TextView
+    android:id="@+id/itemDeviceName"
+    style="@style/Settings.Title"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spaceNormal"
+    android:layout_marginEnd="@dimen/spaceSmall"
+    android:ellipsize="end"
+    android:maxLines="1"
+    app:layout_constraintBottom_toTopOf="@id/itemDeviceSubtitle"
+    app:layout_constraintEnd_toStartOf="@id/itemDeviceDelete"
+    app:layout_constraintStart_toEndOf="@id/itemDeviceIcon"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_chainStyle="packed"
+    tools:text="Pixel 8 Pro (This device)"
+  />
+
+  <TextView
+    android:id="@+id/itemDeviceSubtitle"
+    style="@style/Settings.Summary"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spaceNormal"
+    android:layout_marginEnd="@dimen/spaceSmall"
+    android:ellipsize="end"
+    android:maxLines="1"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/itemDeviceDelete"
+    app:layout_constraintStart_toEndOf="@id/itemDeviceIcon"
+    app:layout_constraintTop_toBottomOf="@id/itemDeviceName"
+    tools:text="Last synced: Oct 12, 14:30"
+  />
+
+  <ImageButton
+    android:id="@+id/itemDeviceDelete"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:background="?android:attr/selectableItemBackgroundBorderless"
+    android:contentDescription="@string/textSettingsBackupDevicesDeleteTitle"
+    android:src="@drawable/ic_delete"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:tint="?android:attr/textColorSecondary"
+  />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

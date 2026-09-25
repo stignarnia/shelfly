@@ -28,17 +28,23 @@ import xyz.stignarnia.uiBackup.model.BackupShows
 import java.io.IOException
 
 class SyncEngineTest {
-  @RelaxedMockK lateinit var exportWorker: BackupExportWorker
+  @RelaxedMockK
+  lateinit var exportWorker: BackupExportWorker
 
-  @RelaxedMockK lateinit var importWorker: BackupImportWorker
+  @RelaxedMockK
+  lateinit var importWorker: BackupImportWorker
 
-  @RelaxedMockK internal lateinit var applier: SyncStateApplier
+  @RelaxedMockK
+  internal lateinit var applier: SyncStateApplier
 
-  @RelaxedMockK internal lateinit var remoteSource: SyncRemoteSource
+  @RelaxedMockK
+  internal lateinit var remoteSource: SyncRemoteSource
 
-  @RelaxedMockK internal lateinit var tombstoneStore: SyncTombstoneStore
+  @RelaxedMockK
+  internal lateinit var tombstoneStore: SyncTombstoneStore
 
-  @MockK lateinit var settingsSyncRepository: SettingsSyncRepository
+  @MockK
+  lateinit var settingsSyncRepository: SettingsSyncRepository
 
   private lateinit var SUT: SyncEngine
 
@@ -48,6 +54,7 @@ class SyncEngineTest {
     clearAllMocks()
 
     every { settingsSyncRepository.deviceId } returns DEVICE
+    every { settingsSyncRepository.deviceName } returns "Pixel 8"
     every { settingsSyncRepository.lastSyncedAt } returns PREVIOUS_SYNC
     every { settingsSyncRepository.lastSyncedAt = any() } returns Unit
     every { settingsSyncRepository.lastAttemptAt = any() } returns Unit
@@ -170,7 +177,12 @@ class SyncEngineTest {
   @Test
   fun `Should record a WebDAV failure as the reason it can be explained by`() =
     runTest {
-      coEvery { remoteSource.upload(any(), any()) } returns Result.failure(WebDavError.Unreachable(IOException("timeout")))
+      coEvery {
+        remoteSource.upload(
+          any(),
+          any(),
+        )
+      } returns Result.failure(WebDavError.Unreachable(IOException("timeout")))
 
       runCatching { SUT.sync(CREDENTIALS) }
 

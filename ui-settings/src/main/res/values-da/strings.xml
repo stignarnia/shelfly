@@ -128,5 +128,24 @@
   <string name="textSettingsWebDavTest">Test forbindelse</string>
   <string name="textSettingsWebDavTesting">Tester…</string>
   <string name="textSettingsWebDavConnected">Forbundet. Mappen kan nås og er skrivbar.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Enhedsnavn</string>
+  <string name="textSettingsBackupDeviceNameDescription">Navn brugt til at identificere denne enhed ved synkronisering.</string>
+  <string name="textSettingsBackupDeviceNameHint">Enhedsnavn</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Indtast et navn til denne enhed, så andre enheder kan genkende den.</string>
+  <string name="textSettingsBackupDeviceNameReset">Nulstil til standard</string>
+  <string name="textSettingsBackupDeviceNameDisabled">Kræver WebDAV</string>
+  <string name="textSettingsBackupDevicesTitle">Synkroniserede enheder</string>
+  <string name="textSettingsBackupDevicesDescription">Administrer enheder, der synkroniserer med denne WebDAV-server.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Synkroniserede enheder</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Enheder, der synkroniserer med denne server. Sletning af en enhed fjerner dens synkroniseringsfil fra serveren, men sletter ikke data fra selve enheden.</string>
+  <string name="textSettingsBackupDevicesEmpty">Ingen synkroniserede enheder fundet på denne server.</string>
+  <string name="textSettingsBackupDevicesThisDevice">Denne enhed</string>
+  <string name="textSettingsBackupDevicesLastSynced">Sidst synkroniseret: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Aldrig synkroniseret</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">Slet synkroniseringsfil?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">Slet synkroniseringsfilen for \"%1$s\" fra serveren?\n\nData slettes ikke fra selve enheden.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">Slet denne enheds synkroniseringsfil fra serveren?\n\nData slettes ikke fra denne enhed. Den overføres igen ved næste synkronisering.</string>
+
   <string name="errorNotificationSettingsUnavailable">Kunne ikke åbne notifikationsindstillingerne.</string>
 </resources>

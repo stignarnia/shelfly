@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+>
+
+  <ProgressBar
+    android:id="@+id/devicesLoading"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="@dimen/spaceNormal"
+    android:layout_marginBottom="@dimen/spaceNormal"
+    android:visibility="gone"
+    tools:visibility="visible"
+  />
+
+  <TextView
+    android:id="@+id/devicesEmpty"
+    style="@style/Settings.Summary"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spaceNormal"
+    android:layout_marginTop="@dimen/spaceSmall"
+    android:layout_marginEnd="@dimen/spaceNormal"
+    android:layout_marginBottom="@dimen/spaceNormal"
+    android:gravity="center"
+    android:text="@string/textSettingsBackupDevicesEmpty"
+    android:visibility="gone"
+    tools:visibility="gone"
+  />
+
+  <TextView
+    android:id="@+id/devicesError"
+    style="@style/Settings.Summary"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spaceNormal"
+    android:layout_marginTop="@dimen/spaceSmall"
+    android:layout_marginEnd="@dimen/spaceNormal"
+    android:layout_marginBottom="@dimen/spaceNormal"
+    android:gravity="center"
+    android:textColor="?attr/colorError"
+    android:visibility="gone"
+    tools:visibility="gone"
+  />
+
+  <LinearLayout
+    android:id="@+id/devicesList"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+  />
+
+</LinearLayout>

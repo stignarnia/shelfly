@@ -128,5 +128,24 @@
   <string name="textSettingsWebDavTest">Bağlantıyı test et</string>
   <string name="textSettingsWebDavTesting">Test ediliyor…</string>
   <string name="textSettingsWebDavConnected">Bağlandı. Klasöre erişilebilir ve yazılabilir.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Cihaz adı</string>
+  <string name="textSettingsBackupDeviceNameDescription">Senkronizasyon sırasında bu cihazı tanımlamak için kullanılan ad.</string>
+  <string name="textSettingsBackupDeviceNameHint">Cihaz adı</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Diğer cihazların tanıyabilmesi için bu cihaza bir ad girin.</string>
+  <string name="textSettingsBackupDeviceNameReset">Varsayılana sıfırla</string>
+  <string name="textSettingsBackupDeviceNameDisabled">WebDAV gereklidir</string>
+  <string name="textSettingsBackupDevicesTitle">Senkronize edilen cihazlar</string>
+  <string name="textSettingsBackupDevicesDescription">Bu WebDAV sunucusuyla senkronize olan cihazları yönetin.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Senkronize edilen cihazlar</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Bu sunucuyla senkronize olan cihazlar. Bir cihazı silmek senkronizasyon dosyasını sunucudan kaldırır ancak cihazın kendisindeki verileri silmez.</string>
+  <string name="textSettingsBackupDevicesEmpty">Bu sunucuda senkronize edilmiş cihaz bulunamadı.</string>
+  <string name="textSettingsBackupDevicesThisDevice">Bu cihaz</string>
+  <string name="textSettingsBackupDevicesLastSynced">Son senkronizasyon: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Hiç senkronize edilmedi</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">Senkronizasyon dosyası silinsin mi?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">\"%1$s\" için senkronizasyon dosyası sunucudan silinsin mi?\n\nVeriler cihazın kendisinden silinmez.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">Bu cihazın senkronizasyon dosyası sunucudan silinsin mi?\n\nVeriler bu cihazdan silinmez. Bir sonraki senkronizasyonda tekrar yüklenecektir.</string>
+
   <string name="errorNotificationSettingsUnavailable">Bildirim ayarları açılamadı.</string>
 </resources>

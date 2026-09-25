@@ -1,18 +1,3 @@
-Shelfly 4.0.9
+Shelfly 4.0.10
 
-• Correction de l'icône de langue de l'écran d'accueil, qui s'affichait comme une forme noire.
-• La restauration depuis WebDAV liste désormais les sauvegardes par date de création, dans le format de date choisi, au lieu du nom de fichier.
-• Lorsqu'une sauvegarde ou une synchronisation WebDAV est interrompue, par exemple à cause d'une perte de connexion, la notification l'indique désormais clairement au lieu d'afficher « Job was cancelled ».
-• Les textes qui s'affichaient en anglais ou en italien quelle que soit votre langue sont désormais traduits : erreurs de sauvegarde, de synchronisation et de restauration, résumé de l'importation, catégories de notifications dans les paramètres Android, noms de pays, menu de partage et cet écran des nouveautés.
-• Retirer un élément d'une liste par balayage demande désormais un geste plus long et délibéré : un fond rouge avec une icône de corbeille apparaît derrière l'élément, le téléphone vibre une fois que vous êtes allé assez loin, et l'élément n'est retiré au relâchement que si vous n'êtes pas revenu en arrière. Un balayage rapide ne retire plus rien.
-• Lorsque votre bibliothèque est vide et qu'un serveur WebDAV est configuré, l'écran Progression affiche désormais un bouton Synchroniser qui restaure votre dernière sauvegarde en un geste.
-• Pendant la restauration d'une sauvegarde, depuis un fichier ou depuis WebDAV, l'écran vous rappelle désormais de ne pas quitter l'application avant la fin.
-• Configurer un serveur WebDAV en fait désormais aussi la destination des sauvegardes, donc tirer pour synchroniser fonctionne tout de suite sans changer la destination à la main.
-• Toucher la notification de synchronisation WebDAV ouvre désormais l'application.
-• L'icône d'astuce de l'écran Progression se place désormais sur le numéro d'épisode de la première série et défile avec lui, au lieu de flotter ailleurs sur l'écran.
-• Les widgets de l'écran d'accueil utilisent désormais partout la langue choisie pour l'application. Leurs titres, les messages de liste vide et la ligne « plus » s'affichaient auparavant dans la langue du téléphone.
-• Choisir une langue pour Shelfly dans les paramètres d'Android change désormais aussi les titres et descriptions des séries et films, pas seulement les menus. Choisir « Paramètre système par défaut » fait suivre à Shelfly la langue du téléphone.
-• Passer à la langue du téléphone depuis l'écran d'accueil change désormais aussi les titres et descriptions des séries et films, et les widgets se mettent à jour immédiatement après tout changement de langue.
-• Après un changement de langue, les widgets récupèrent désormais eux-mêmes leurs affiches et leurs titres traduits. Ils restaient auparavant sans affiches, ou dans l'ancienne langue, jusqu'à l'ouverture de la même liste dans l'application.
-• Les noms des widgets dans la liste des widgets de l'écran d'accueil sont désormais traduits. Ils étaient auparavant en anglais quelle que soit votre langue.
-• Les pages des séries et films n'affichent plus « -1 min » quand la durée est inconnue ; elle est désormais omise.
+• Ajout du nom d'appareil et d'un écran pour les appareils synchronisés dans Paramètres → Sauvegarde et restauration afin de gérer les appareils synchronisés avec le serveur WebDAV et supprimer les fichiers des appareils abandonnés.

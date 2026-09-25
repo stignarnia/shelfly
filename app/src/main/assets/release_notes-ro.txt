@@ -1,18 +1,3 @@
-Shelfly 4.0.9
+Shelfly 4.0.10
 
-• Pictograma limbii de pe ecranul de bun venit, care apărea ca o formă neagră, a fost corectată.
-• Restaurarea din WebDAV listează acum copiile de rezervă după data la care au fost făcute, în formatul de dată ales, în loc de numele fișierului.
-• Când o copie de rezervă sau o sincronizare WebDAV este întreruptă, de exemplu pentru că se pierde conexiunea, notificarea spune acum clar acest lucru în loc să afișeze „Job was cancelled”.
-• Textele care apăreau în engleză sau italiană indiferent de limba ta sunt acum traduse: erorile de copie de rezervă, sincronizare și restaurare, rezumatul importului, categoriile de notificări din setările Android, numele țărilor, meniul de distribuire și acest ecran cu noutăți.
-• Eliminarea unui element dintr-o listă prin glisare necesită acum un gest mai lung și deliberat: în spatele elementului apare un fundal roșu cu o pictogramă de coș de gunoi, telefonul vibrează când ai glisat suficient, iar la eliberare elementul este eliminat doar dacă nu ai tras înapoi. O glisare rapidă nu mai elimină nimic.
-• Când biblioteca ta este goală și ai configurat un server WebDAV, ecranul Progres afișează acum un buton Sincronizează care restaurează cea mai recentă copie de rezervă cu o singură atingere.
-• În timpul restaurării unei copii de rezervă, dintr-un fișier sau din WebDAV, ecranul îți amintește acum să nu părăsești aplicația până la final.
-• Configurarea unui server WebDAV îl setează acum și ca destinație pentru copiile de rezervă, așa că tragerea în jos pentru sincronizare funcționează imediat, fără să schimbi destinația manual.
-• Atingerea notificării de sincronizare WebDAV deschide acum aplicația.
-• Pictograma de sfat din ecranul Progres stă acum pe numărul episodului primului serial și se derulează odată cu el, în loc să plutească în altă parte a ecranului.
-• Widgeturile de pe ecranul principal folosesc acum peste tot limba aleasă pentru aplicație. Titlurile, mesajele pentru liste goale și rândul „mai mult” apăreau înainte în limba telefonului.
-• Alegerea unei limbi pentru Shelfly în setările Android schimbă acum și titlurile și descrierile serialelor și filmelor, nu doar meniurile. Alegerea „Prestabilită de sistem” face ca Shelfly să urmeze limba telefonului.
-• Trecerea la limba telefonului din ecranul de bun venit schimbă acum și titlurile și descrierile serialelor și filmelor, iar widgeturile se actualizează imediat după orice schimbare de limbă.
-• După schimbarea limbii, widgeturile își descarcă acum singure posterele și titlurile traduse. Înainte rămâneau fără postere, sau în limba veche, până deschideai aceeași listă în aplicație.
-• Numele widgeturilor din lista de widgeturi a ecranului principal sunt acum traduse. Înainte erau în engleză indiferent de limba ta.
-• Paginile serialelor și filmelor nu mai afișează „-1 min” când durata este necunoscută; aceasta este omisă.
+• S-au adăugat numele dispozitivului și un ecran pentru dispozitive sincronizate în Setări → Copiere de rezervă și restaurare pentru gestionarea dispozitivelor sincronizate cu serverul WebDAV și ștergerea fișierelor dispozitivelor abandonate.

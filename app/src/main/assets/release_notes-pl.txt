@@ -1,18 +1,3 @@
-Shelfly 4.0.9
+Shelfly 4.0.10
 
-• Naprawiono ikonę języka na ekranie powitalnym, która wyświetlała się jako czarny kształt.
-• Przywracanie z WebDAV wyświetla teraz kopie zapasowe według daty ich utworzenia, w wybranym formacie daty, zamiast według nazwy pliku.
-• Gdy kopia zapasowa lub synchronizacja WebDAV zostanie przerwana, na przykład z powodu utraty połączenia, powiadomienie mówi teraz o tym wyraźnie zamiast wyświetlać „Job was cancelled”.
-• Teksty, które pojawiały się po angielsku lub po włosku niezależnie od twojego języka, są teraz przetłumaczone: błędy kopii zapasowej, synchronizacji i przywracania, podsumowanie importu, kategorie powiadomień w ustawieniach Androida, nazwy krajów, menu udostępniania i ten ekran nowości.
-• Usunięcie elementu z listy przesunięciem wymaga teraz dłuższego, celowego gestu: za elementem pojawia się czerwone tło z ikoną kosza, telefon wibruje, gdy przesuniesz wystarczająco daleko, a po puszczeniu element zostaje usunięty tylko wtedy, gdy nie cofnąłeś palca. Szybkie machnięcie niczego już nie usuwa.
-• Gdy Twoja biblioteka jest pusta, a serwer WebDAV jest skonfigurowany, ekran Postęp pokazuje teraz przycisk Synchronizuj, który jednym dotknięciem przywraca najnowszą kopię zapasową.
-• Podczas przywracania kopii zapasowej, z pliku lub z WebDAV, ekran przypomina teraz, aby nie opuszczać aplikacji, dopóki się nie zakończy.
-• Skonfigurowanie serwera WebDAV ustawia go teraz także jako miejsce docelowe kopii zapasowych, więc synchronizacja przez przeciągnięcie działa od razu, bez ręcznej zmiany miejsca docelowego.
-• Dotknięcie powiadomienia o synchronizacji WebDAV otwiera teraz aplikację.
-• Ikona wskazówki na ekranie Postęp znajduje się teraz na numerze odcinka pierwszego serialu i przewija się razem z nim, zamiast unosić się w innym miejscu ekranu.
-• Widżety na ekranie głównym używają teraz wszędzie języka wybranego w aplikacji. Ich tytuły, komunikaty o pustej liście i wiersz „więcej” były wcześniej wyświetlane w języku telefonu.
-• Wybranie języka Shelfly w ustawieniach Androida zmienia teraz także tytuły i opisy seriali i filmów, a nie tylko menu. Wybranie tam „Domyślny systemowy” sprawia, że Shelfly używa języka telefonu.
-• Przełączenie na język telefonu na ekranie powitalnym zmienia teraz także tytuły i opisy seriali i filmów, a widżety aktualizują się od razu po każdej zmianie języka.
-• Po zmianie języka widżety same pobierają teraz plakaty i przetłumaczone tytuły. Wcześniej pozostawały bez plakatów lub w poprzednim języku, dopóki nie otworzyłeś tej samej listy w aplikacji.
-• Nazwy widżetów na liście widżetów ekranu głównego są teraz przetłumaczone. Wcześniej były po angielsku niezależnie od języka.
-• Strony seriali i filmów nie pokazują już „-1 min”, gdy czas trwania jest nieznany; jest on teraz pomijany.
+• Dodano nazwy urządzeń oraz ekran zsynchronizowanych urządzeń w Ustawienia → Kopia zapasowa i przywracanie, aby zarządzać urządzeniami synchronizującymi się z serwerem WebDAV i usuwać pliki opuszczonych urządzeń.

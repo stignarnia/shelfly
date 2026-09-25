@@ -129,5 +129,24 @@
   <string name="textSettingsWebDavTest">Probar conexión</string>
   <string name="textSettingsWebDavTesting">Probando…</string>
   <string name="textSettingsWebDavConnected">Conectado. La carpeta es accesible y tiene permisos de escritura.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">Nombre del dispositivo</string>
+  <string name="textSettingsBackupDeviceNameDescription">Nombre utilizado para identificar este dispositivo al sincronizar.</string>
+  <string name="textSettingsBackupDeviceNameHint">Nombre del dispositivo</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">Introduce un nombre para este dispositivo para que otros dispositivos puedan reconocerlo.</string>
+  <string name="textSettingsBackupDeviceNameReset">Restablecer valores predeterminados</string>
+  <string name="textSettingsBackupDeviceNameDisabled">Requiere WebDAV</string>
+  <string name="textSettingsBackupDevicesTitle">Dispositivos sincronizados</string>
+  <string name="textSettingsBackupDevicesDescription">Administrar dispositivos sincronizados con este servidor WebDAV.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">Dispositivos sincronizados</string>
+  <string name="textSettingsBackupDevicesDialogMessage">Dispositivos que se sincronizan con este servidor. Eliminar un dispositivo borra su archivo de sincronización del servidor, pero no elimina los datos del dispositivo en sí.</string>
+  <string name="textSettingsBackupDevicesEmpty">No se encontraron dispositivos sincronizados en este servidor.</string>
+  <string name="textSettingsBackupDevicesThisDevice">Este dispositivo</string>
+  <string name="textSettingsBackupDevicesLastSynced">Última sincronización: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">Nunca sincronizado</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">¿Eliminar archivo de sincronización?</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">¿Eliminar el archivo de sincronización de \"%1$s\" del servidor?\n\nLos datos no se eliminarán del dispositivo en sí.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">¿Eliminar el archivo de sincronización de este dispositivo del servidor?\n\nLos datos no se eliminarán de este dispositivo. Se volverá a subir en la próxima sincronización.</string>
+
   <string name="errorNotificationSettingsUnavailable">No se pudieron abrir los ajustes de notificaciones.</string>
 </resources>

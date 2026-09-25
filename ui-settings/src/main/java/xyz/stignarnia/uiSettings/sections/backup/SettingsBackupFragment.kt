@@ -4,29 +4,46 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import xyz.stignarnia.common.extensions.dateFromMillis
+import xyz.stignarnia.common.extensions.toLocalZone
 import xyz.stignarnia.repository.settings.SettingsWebDavRepository
+import xyz.stignarnia.uiBackup.features.sync.model.SyncDeviceInfo
 import xyz.stignarnia.uiBase.BaseFragment
+import xyz.stignarnia.uiBase.dates.DateFormatProvider
+import xyz.stignarnia.uiBase.utilities.extensions.capitalizeWords
+import xyz.stignarnia.uiBase.utilities.extensions.gone
 import xyz.stignarnia.uiBase.utilities.extensions.launchAndRepeatStarted
 import xyz.stignarnia.uiBase.utilities.extensions.onClick
+import xyz.stignarnia.uiBase.utilities.extensions.visible
 import xyz.stignarnia.uiBase.utilities.extensions.visibleIf
 import xyz.stignarnia.uiBase.utilities.viewBinding
 import xyz.stignarnia.uiModel.BackupTarget
 import xyz.stignarnia.uiSettings.R
 import xyz.stignarnia.uiSettings.databinding.FragmentSettingsBackupBinding
+import xyz.stignarnia.uiSettings.databinding.ItemSyncedDeviceBinding
+import xyz.stignarnia.uiSettings.databinding.ViewDeviceNameInputBinding
 import xyz.stignarnia.uiSettings.databinding.ViewRetentionInputBinding
+import xyz.stignarnia.uiSettings.databinding.ViewSyncedDevicesBinding
 import xyz.stignarnia.uiSettings.databinding.ViewWebdavInputBinding
 import java.util.Locale
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fragment_settings_backup) {
   companion object {
     /** Matches the argument declared on settingsFragment in the navigation graph. */
     const val ARG_OPEN_WEB_DAV = "openWebDav"
+    private const val DISABLED_ALPHA = 0.5F
   }
 
   override val viewModel by viewModels<SettingsBackupViewModel>()
   private val binding by viewBinding(FragmentSettingsBackupBinding::bind)
+
+  @Inject
+  lateinit var dateFormatProvider: DateFormatProvider
 
   override fun onViewCreated(
     view: View,
@@ -65,6 +82,16 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
       settingsBackupWebDav.onClick { showWebDavDialog() }
       settingsBackupTarget.onClick { showTargetDialog() }
       settingsBackupRetention.onClick { showRetentionDialog() }
+      settingsBackupDeviceName.onClick {
+        if (viewModel.uiState.value.isWebDavConfigured) {
+          showDeviceNameDialog()
+        }
+      }
+      settingsBackupDevices.onClick {
+        if (viewModel.uiState.value.isWebDavConfigured) {
+          showDevicesDialog()
+        }
+      }
     }
   }
 
@@ -92,7 +119,160 @@ class SettingsBackupFragment : BaseFragment<SettingsBackupViewModel>(R.layout.fr
         }
       // Choosing a destination is meaningless with nowhere to send it.
       settingsBackupTarget.visibleIf(uiState.isWebDavConfigured)
+
+      // Device Name Setting
+      val configured = uiState.isWebDavConfigured
+      settingsBackupDeviceName.isEnabled = configured
+      settingsBackupDeviceName.alpha = if (configured) 1.0f else DISABLED_ALPHA
+      settingsBackupDeviceNameValue.text =
+        if (configured) {
+          uiState.deviceName
+        } else {
+          getString(R.string.textSettingsBackupDeviceNameDisabled)
+        }
+
+      // Synced Devices Setting
+      settingsBackupDevices.isEnabled = configured
+      settingsBackupDevices.alpha = if (configured) 1.0f else DISABLED_ALPHA
     }
+  }
+
+  private fun showDeviceNameDialog() {
+    val currentName = viewModel.uiState.value.deviceName
+    val inputBinding = ViewDeviceNameInputBinding.inflate(LayoutInflater.from(requireContext()))
+    inputBinding.deviceNameInput.setText(currentName)
+    inputBinding.deviceNameInput.setSelection(currentName.length)
+
+    modal()
+      .setTitle(R.string.textSettingsBackupDeviceNameTitle)
+      .setMessage(R.string.textSettingsBackupDeviceNameDialogMessage)
+      .setView(inputBinding.root)
+      .setNeutralButton(R.string.textSettingsBackupDeviceNameReset) {
+        viewModel.setDeviceName("")
+        val defaultName = viewModel.uiState.value.deviceName
+        inputBinding.deviceNameInput.setText(defaultName)
+        inputBinding.deviceNameInput.setSelection(defaultName.length)
+      }.setPositiveButton(R.string.textOk) { modal ->
+        val newName =
+          inputBinding.deviceNameInput.text
+            ?.toString()
+            ?.trim()
+            .orEmpty()
+        viewModel.setDeviceName(newName)
+        modal.dismiss()
+      }.setNegativeButton(R.string.textCancel)
+      .show()
+  }
+
+  private fun showDevicesDialog() {
+    val dialogBinding = ViewSyncedDevicesBinding.inflate(LayoutInflater.from(requireContext()))
+    modal()
+      .setTitle(R.string.textSettingsBackupDevicesDialogTitle)
+      .setMessage(R.string.textSettingsBackupDevicesDialogMessage)
+      .setView(dialogBinding.root)
+      .setPositiveButton(xyz.stignarnia.uiBase.R.string.textClose) { it.dismiss() }
+      .show()
+
+    viewModel.loadDevices()
+
+    viewLifecycleOwner.lifecycleScope.launch {
+      viewModel.uiState.collect { state ->
+        when (val loadState = state.devicesLoadState) {
+          is DevicesLoadState.Loading -> {
+            dialogBinding.devicesLoading.visible()
+            dialogBinding.devicesError.gone()
+            dialogBinding.devicesEmpty.gone()
+            dialogBinding.devicesList.gone()
+          }
+
+          is DevicesLoadState.Error -> {
+            dialogBinding.devicesLoading.gone()
+            dialogBinding.devicesError.visible()
+            dialogBinding.devicesEmpty.gone()
+            dialogBinding.devicesList.gone()
+            dialogBinding.devicesError.setText(loadState.messageRes)
+          }
+
+          is DevicesLoadState.Loaded -> {
+            dialogBinding.devicesLoading.gone()
+            dialogBinding.devicesError.gone()
+            if (loadState.devices.isEmpty()) {
+              dialogBinding.devicesEmpty.visible()
+              dialogBinding.devicesList.gone()
+            } else {
+              dialogBinding.devicesEmpty.gone()
+              dialogBinding.devicesList.visible()
+              renderDeviceList(dialogBinding, loadState.devices)
+            }
+          }
+
+          is DevicesLoadState.Idle -> {
+            dialogBinding.devicesLoading.gone()
+            dialogBinding.devicesError.gone()
+            dialogBinding.devicesEmpty.gone()
+            dialogBinding.devicesList.gone()
+          }
+        }
+      }
+    }
+  }
+
+  private fun renderDeviceList(
+    containerBinding: ViewSyncedDevicesBinding,
+    devices: List<SyncDeviceInfo>,
+  ) {
+    containerBinding.devicesList.removeAllViews()
+    val inflater = LayoutInflater.from(requireContext())
+
+    devices.forEach { device ->
+      val itemBinding = ItemSyncedDeviceBinding.inflate(inflater, containerBinding.devicesList, false)
+      itemBinding.itemDeviceName.text =
+        if (device.isCurrentDevice) {
+          val thisDevice = getString(R.string.textSettingsBackupDevicesThisDevice)
+          "${device.deviceName} ($thisDevice)"
+        } else {
+          device.deviceName
+        }
+
+      itemBinding.itemDeviceSubtitle.text =
+        if (device.updatedAt > 0L) {
+          getString(
+            R.string.textSettingsBackupDevicesLastSynced,
+            formatDate(device.updatedAt),
+          )
+        } else {
+          getString(R.string.textSettingsBackupDevicesNeverSynced)
+        }
+
+      itemBinding.itemDeviceDelete.onClick {
+        confirmDeleteDevice(device)
+      }
+
+      containerBinding.devicesList.addView(itemBinding.root)
+    }
+  }
+
+  private fun confirmDeleteDevice(device: SyncDeviceInfo) {
+    val message =
+      if (device.isCurrentDevice) {
+        getString(R.string.textSettingsBackupDevicesDeleteOwnMessage)
+      } else {
+        getString(R.string.textSettingsBackupDevicesDeleteMessage, device.deviceName)
+      }
+
+    modal()
+      .setTitle(R.string.textSettingsBackupDevicesDeleteTitle)
+      .setMessage(message)
+      .setPositiveButton(xyz.stignarnia.uiBase.R.string.textRemove) { modal ->
+        viewModel.deleteDevice(device.deviceId)
+        modal.dismiss()
+      }.setNegativeButton(R.string.textCancel)
+      .show()
+  }
+
+  private fun formatDate(timestamp: Long): String {
+    val date = dateFromMillis(timestamp).toLocalZone()
+    return dateFormatProvider.loadFullHourFormat().format(date).capitalizeWords()
   }
 
   private fun showWebDavDialog() {

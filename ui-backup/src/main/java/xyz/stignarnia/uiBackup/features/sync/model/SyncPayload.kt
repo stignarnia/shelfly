@@ -12,6 +12,7 @@ import xyz.stignarnia.uiBackup.model.BackupScheme
 data class SyncPayload(
   val version: Int = SYNC_SCHEME_VERSION,
   val deviceId: String,
+  val deviceName: String? = null,
   val updatedAt: Long,
   val state: BackupScheme,
   val tombstones: List<SyncTombstoneEntry> = emptyList(),

@@ -132,5 +132,24 @@
   <string name="textSettingsWebDavTest">اختبار الاتصال</string>
   <string name="textSettingsWebDavTesting">جارٍ الاختبار…</string>
   <string name="textSettingsWebDavConnected">متصل. المجلد متاح وقابل للكتابة.</string>
+
+  <string name="textSettingsBackupDeviceNameTitle">اسم الجهاز</string>
+  <string name="textSettingsBackupDeviceNameDescription">الاسم المستخدم للتعرف على هذا الجهاز أثناء المزامنة.</string>
+  <string name="textSettingsBackupDeviceNameHint">اسم الجهاز</string>
+  <string name="textSettingsBackupDeviceNameDialogMessage">أدخل اسماً لهذا الجهاز حتى تتمكن الأجهزة الأخرى من التعرف عليه.</string>
+  <string name="textSettingsBackupDeviceNameReset">إعادة التعيين إلى الافتراضي</string>
+  <string name="textSettingsBackupDeviceNameDisabled">يتطلب WebDAV</string>
+  <string name="textSettingsBackupDevicesTitle">الأجهزة المتزامنة</string>
+  <string name="textSettingsBackupDevicesDescription">إدارة الأجهزة التي تتم مزامنتها مع خادم WebDAV هذا.</string>
+  <string name="textSettingsBackupDevicesDialogTitle">الأجهزة المتزامنة</string>
+  <string name="textSettingsBackupDevicesDialogMessage">الأجهزة التي تتم مزامنتها مع هذا الخادم. يؤدي حذف جهاز إلى إزالة ملف المزامنة الخاص به من الخادم، ولكنه لا يحذف البيانات من الجهاز نفسه.</string>
+  <string name="textSettingsBackupDevicesEmpty">لم يتم العثور على أجهزة متزامنة على هذا الخادم.</string>
+  <string name="textSettingsBackupDevicesThisDevice">هذا الجهاز</string>
+  <string name="textSettingsBackupDevicesLastSynced">آخر مزامنة: %1$s</string>
+  <string name="textSettingsBackupDevicesNeverSynced">لم تتم المزامنة أبداً</string>
+  <string name="textSettingsBackupDevicesDeleteTitle">هل تريد حذف ملف المزامنة؟</string>
+  <string name="textSettingsBackupDevicesDeleteMessage">هل تريد حذف ملف المزامنة الخاص بـ \"%1$s\" من الخادم؟\n\nلن يتم حذف البيانات من الجهاز نفسه.</string>
+  <string name="textSettingsBackupDevicesDeleteOwnMessage">هل تريد حذف ملف المزامنة لهذا الجهاز من الخادم؟\n\nلن يتم حذف البيانات من هذا الجهاز. ستتم إعادة رفعه في المزامنة التالية.</string>
+
   <string name="errorNotificationSettingsUnavailable">تعذّر فتح إعدادات الإشعارات.</string>
 </resources>
