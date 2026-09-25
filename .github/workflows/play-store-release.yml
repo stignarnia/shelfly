@@ -1,0 +1,94 @@
+name: Play Store - Nuova Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      track:
+        description: 'Traccia Google Play'
+        type: choice
+        default: 'alpha'
+        options:
+          - 'alpha'
+          - 'internal'
+          - 'beta'
+          - 'production'
+      upload_metadata:
+        description: 'Aggiorna anche descrizioni e scheda store'
+        type: boolean
+        default: true
+      validate_only:
+        description: 'Sola convalida (dry run senza pubblicare)'
+        type: boolean
+        default: false
+
+jobs:
+  deploy-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v6
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Configure Keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+        run: |
+          if [ -z "$KEYSTORE_BASE64" ]; then
+            echo "::error::KEYSTORE_BASE64 secret is not configured."
+            exit 1
+          fi
+          echo "$KEYSTORE_BASE64" | base64 -d > app/keystore
+          cat > app/keystore.properties <<EOF
+          storePassword=$STORE_PASSWORD
+          keyAlias=$KEY_ALIAS
+          keyPassword=$KEY_PASSWORD
+          EOF
+
+      - name: Build Release Bundle (AAB)
+        run: ./gradlew :app:bundleRelease
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 'ruby'
+
+      - name: Install Fastlane
+        run: gem install fastlane --no-document
+
+      - name: Deploy Release to Google Play
+        env:
+          PLAY_STORE_JSON_KEY: ${{ secrets.PLAY_STORE_JSON_KEY }}
+        run: |
+          if [ -z "$PLAY_STORE_JSON_KEY" ]; then
+            echo "::error::PLAY_STORE_JSON_KEY secret is not set in repository secrets."
+            exit 1
+          fi
+
+          aab_path="$(ls app/build/outputs/bundle/release/*.aab | head -n 1)"
+          if [ ! -f "$aab_path" ]; then
+            echo "::error::Release bundle not found."
+            exit 1
+          fi
+
+          echo "$PLAY_STORE_JSON_KEY" > /tmp/play-store-key.json
+          export SUPPLY_JSON_KEY=/tmp/play-store-key.json
+
+          fastlane android deploy_release \
+            aab:"$aab_path" \
+            track:${{ inputs.track }} \
+            upload_metadata:${{ inputs.upload_metadata }} \
+            validate_only:${{ inputs.validate_only }}
+
+          rm -f /tmp/play-store-key.json

@@ -20,3 +20,4 @@
 *export*.json
 showly_export*.json
 *.backup
+/*.json
