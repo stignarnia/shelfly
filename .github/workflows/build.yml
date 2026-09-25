@@ -93,7 +93,7 @@ jobs:
           retention-days: 7
 
   build:
-    name: Build APK
+    name: Build Release
     needs: [lint, test]
     runs-on: ubuntu-latest
     steps:
@@ -109,7 +109,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       # Optional.
-      # Without these secrets the release APK still builds, just unsigned.
+      # Without these secrets the release artifacts still build, just unsigned.
       # The guard lives in the shell because the secrets context is not available to a step-level "if", which fails the workflow at parse time.
       - name: Decode signing keystore
         env:
@@ -119,7 +119,7 @@ jobs:
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
         run: |
           if [ -z "$KEYSTORE_BASE64" ]; then
-            echo "No signing secrets configured; the release APK will be unsigned."
+            echo "No signing secrets configured; the release artifacts will be unsigned."
             exit 0
           fi
           echo "$KEYSTORE_BASE64" | base64 -d > app/keystore
@@ -129,14 +129,16 @@ jobs:
           keyPassword=$KEY_PASSWORD
           EOF
 
-      - name: Build release APK
-        run: ./gradlew :app:assembleRelease
+      - name: Build release APK and AAB
+        run: ./gradlew :app:assembleRelease :app:bundleRelease
 
-      - name: Upload release APK
+      - name: Upload release artifacts
         uses: actions/upload-artifact@v7
         with:
           name: app-release-${{ github.sha }}
-          path: app/build/outputs/apk/release/*.apk
+          path: |
+            app/build/outputs/apk/release/*.apk
+            app/build/outputs/bundle/release/*.aab
           retention-days: 30
 
       - name: Github Release
@@ -145,7 +147,9 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ github.ref_name }}
-          files: app/build/outputs/apk/release/*.apk
+          files: |
+            app/build/outputs/apk/release/*.apk
+            app/build/outputs/bundle/release/*.aab
           body_path: app/src/main/assets/release_notes.txt
           # Appends the commit log beneath the hand-written notes, so a release is never published with an empty description.
           generate_release_notes: true
