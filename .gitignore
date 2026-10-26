@@ -21,3 +21,4 @@
 showly_export*.json
 *.backup
 /*.json
+/skills/
